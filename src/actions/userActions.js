@@ -83,10 +83,10 @@ export const getAllBookings = (days) => async dispatch => {
 }
 
 export const getSolutionInsights = () => async dispatch => {
-  //let token = localStorage.getItem('token');
-  let token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODUxMjE3Mzh9.NzWdxrlVF3Q5DMp_4_4yYP7D0HblbMG9M1G_18e0ILE"
+  let token = localStorage.getItem('token');
+  //let token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODUxMjE3Mzh9.NzWdxrlVF3Q5DMp_4_4yYP7D0HblbMG9M1G_18e0ILE"
   //console.log(token)
-  return await axios.get("http://localhost:5000" + '/analytics/solutionSearch', { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + '/analytics/solutionSearch', { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         dispatch({
