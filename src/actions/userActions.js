@@ -8,6 +8,23 @@ import axios from 'axios';
 //let baseUrl = 'http://localhost:5000'
 let baseUrl = "http://3.6.212.85/v4"
 
+export const updateRealPrice = (uData) => async dispatch => {
+  let obj = {
+    "solutionId": uData.solutionId,
+    "serviceId": uData.serviceId,
+    "updatedPrice": uData.newPrice
+  }
+  //  solutionId,
+  //serviceId,
+  //updatedPrice
+  let token = localStorage.getItem('token');
+  return await axios.put("http://localhost:5000" + '/solution', obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res.data, 'data')
+      }
+    })
+}
 export const getMonthWiseUsers = (days) => async dispatch => {
     let token = localStorage.getItem('token');
     //console.log(token, 'monthWise')
@@ -30,8 +47,8 @@ export const getMonthWiseUsers = (days) => async dispatch => {
                   result[month] = count;
                   //console.log(result, 'result')
                 }
-                for (var i = nextMonth ;  i < result.length ; i++){
-                    result[i] = null
+                for (var j = nextMonth ;  j < result.length ; j++){
+                    result[j] = null
                 }
                 dispatch({
                   type: SOLUTION_USERS,
@@ -86,7 +103,7 @@ export const getSolutionInsights = () => async dispatch => {
   let token = localStorage.getItem('token');
   //let token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODUxMjE3Mzh9.NzWdxrlVF3Q5DMp_4_4yYP7D0HblbMG9M1G_18e0ILE"
   //console.log(token)
-  return await axios.get(baseUrl + '/analytics/solutionSearch', { 'headers': { 'Authorization': token } })
+  return await axios.get("http://localhost:5000" + '/analytics/solutionSearch', { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         dispatch({

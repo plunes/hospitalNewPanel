@@ -10,6 +10,7 @@ import { sendUpdateData } from '../../actions/userActions'
 import { getSolutionInsights } from '../../actions/userActions'
 import { getAllBookings } from '../../actions/userActions'
 import { getMonthWiseUsers } from '../../actions/userActions'
+import { updateRealPrice } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import './Dashboard.css';
@@ -59,7 +60,11 @@ class DashboardComponent extends Component {
         await this.props.getAllBookings(days)
     }
 
-    handleRealPrice(select) {
+    async handleRealPrice(select) {
+        console.log(select, 'select');
+
+        await this.props.updateRealPrice(select);
+        await this.props.getSolutionInsights();
 
     }
 
@@ -115,8 +120,8 @@ class DashboardComponent extends Component {
     async componentDidMount() {
         //await this.props.getBooking();
         let defaulteDays = 15
-        // await this.props.getAllBookings(defaulteDays);
-        // await this.props.getInsights();
+        await this.props.getAllBookings(defaulteDays);
+        await this.props.getInsights();
         await this.props.getSolutionInsights();
         await this.props.getMonthWiseUsers();
         this.setState({
@@ -207,10 +212,10 @@ class DashboardComponent extends Component {
                                                     </div>
                                                     <div className='col-md-2'>
                                                         {
-                                                            s.negotiating ?
+                                                            !s.negotiating ?
                                                                 <div>
                                                                     <Timer
-                                                                        initialTime={s.timeRemaining}
+                                                                        initialTime={60000}
                                                                         direction="backward"
                                                                     >
                                                                         {() => (
@@ -317,5 +322,5 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps, { getAllBookings, getInsights, sendUpdateData, getSolutionInsights, getMonthWiseUsers })(DashboardComponent);
+export default connect(mapStateToProps, { getAllBookings, getInsights, sendUpdateData, getSolutionInsights, getMonthWiseUsers, updateRealPrice })(DashboardComponent);
 // Call userdetails from
