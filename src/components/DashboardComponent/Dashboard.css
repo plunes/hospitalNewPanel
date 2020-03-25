@@ -1,0 +1,267 @@
+.AllComponents{margin-top: 116px;
+  margin-left: -33px;}
+.DashboardBody{background-color: #efefef; height: -webkit-fill-available;}
+.Header{width: 100%; position: fixed;     background-color: white;     background: white;
+  z-index: 999;}
+.fixed-top {
+  background-color: white;}
+.HeaderProfileimg{
+  box-shadow: none !important;}
+.HeaderLink{padding: 1rem !important; background-color: white !important;}
+.HeaderArrowDown{ width: 4%;
+  margin-left: 25px;}
+.top-img{margin-left: 5px;}
+hr{border-top: 1px solid rgba(0,0,0,.1);
+  margin: 0px !important;}
+@media(max-width:576px){
+    .dashbord-input {
+        border-radius: 35px;
+        outline: none;
+        background-color: white;
+        border: 1px solid #707070;
+        height: 27px !important;
+        width: 196px !important;
+        background-image: url(/search.png);
+        background-position-x: 1px;
+        background-position-y: 1px;
+        background-position: 93%;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        margin-left: 1px !important;
+    }
+    .logo{
+          margin-left: 1px !important;
+         }
+} 
+ .dashbord-input
+{
+    border-radius: 35px;
+    outline: none;
+    background-color: white;
+    border: 1px solid #707070;
+    height: 44px;
+    width: 420px;
+    background-image: url(/search.png);
+    background-position-x: 1px;
+    background-position-y: 1px;
+    background-position: 93%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    margin-left: 185px; padding: 15px;
+}
+.logo{margin-left: 68px; width: 200px;}
+.sol-img{
+height: 35px;
+width: 35px !important;
+}
+.nav2{
+    font-size: 12px;
+}
+.sol-img2{height: 40px;
+  width: 40px;
+  margin-right: 11px;
+  border-radius: 50%;}
+    .sol-img3{
+        height: 35px;
+        width: 35px !important;   
+    }
+    .navbar-collapse{
+        margin-right: 75px;
+    }
+    .dropdown-align{
+    width: 110%;
+    outline: none ;
+    margin-left: -5%;
+    background-color: white !important;
+    color:  grey !important;
+    font-size: 12px !important;
+    padding: 8px 8px !important;
+}
+    .dropdown-align:focus{
+      box-shadow: none !important;  
+    }     
+    .profile-font{
+      font-size: 12px !important; 
+      
+    }
+    .dash-dropdown{
+        width: 22px;
+        height: auto;
+        margin-left: 15px;
+    }
+    .sidenav {
+      width: 250px;
+      position: fixed;
+      z-index: 1;
+      display:'inline';
+      background-color:none;
+      overflow-x: hidden;
+      top: 115px;
+  left: 30px;    font-size: 15px;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;     margin-left: 54px;      background-color: white;
+    }
+      
+      /* Style the sidenav links and the dropdown button */
+      .sidenav a, .sidenav div,.dropdown-btn {
+        padding: 15px 0px 15px 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: #818181;
+        display: block;
+        border: none;
+        background: none;
+        width:100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+      }
+      
+      /* On mouse-over */
+      .sidenav a:hover, .dropdown-btn:hover {
+        color: #f1f1f1;
+      }
+      a:hover {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: black !important;}
+      .sidebaricon{width: 26px;     margin-right: 18px;}
+        
+        .arrowdesign
+        {
+          margin-top: 6px;
+          position: absolute;
+          left: 220px;     width: 8px;
+        }
+        .pointer {
+          cursor: pointer;
+        }
+        .list-group:hover {
+          background-color:#D7DBDD;
+        }
+
+        .list-group .list-group-item:first-child {
+          border-top-left-radius: 9px !important;
+          border-top-right-radius: 9px !important;}
+          .list-group .list-group-item:last-child {
+            border-bottom-right-radius: 9px !important;
+            border-bottom-left-radius: 9px !important;}
+
+       .container {
+        /* border: 1px solid grey; */
+        margin-top: 20px;
+        top: 185px;
+        left: 441px;
+        width: 896px;
+        height: 408px;
+        /* background: transparent url('img/surgeons-interacting-with-each-other-operation-room_1170-2283 (1).png') 0% 0% no-repeat padding-box; */
+        opacity: 1;
+
+       }
+          
+        
+      /* .img1 {
+        width: 50%;
+        height: 100%;
+        margin-top: 20px;
+      } */
+
+      .imgPreview {
+        text-align: center;
+        height: 200px;
+        width:300px;
+  
+        
+      }
+      .submitButton{
+        padding: 12px;
+        margin-left: 10px;
+        background: white;
+        border: 4px solid lightgray;
+        border-radius: 15px;
+        font-weight: 700;
+        font-size: 10pt;
+        cursor: pointer;
+        
+    }    
+    .fileInput {
+      border-bottom: 4px solid lightgray;
+      border-right: 4px solid lightgray;
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+      padding: 10px;
+      margin: 15px;
+      cursor: pointer;
+    }
+
+    /* DASHBOARD CSS */
+    hr{width: 100%;}
+    .dashboardsection{background: #FFFFFF 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px #00000029;
+      border-radius: 7px;
+      opacity: 1;}
+    .dashrow1{margin-bottom: 18px;
+      font-size: 27px;
+      font-weight: normal;
+      padding: 25px;}
+    .dashrow2col1{margin-right: 18px;max-width: 47.666667% !important;}
+    .DashboardHospitalName{margin-top: 0; margin-bottom: 0;}
+    .Dashboardsec1{font-size: 21px;
+      letter-spacing: 0;
+      color: #333333;
+      text-transform: uppercase;
+      font-weight: normal;
+      padding: 14px;}  .dashboardUserInfo{padding: 14px;}
+    .dashboardUserName{font-weight: 500;}
+    .DashboardBookingStatus{text-align: right;
+      font-weight: 500;
+      color: #01D35A;}
+    .DashboardInsight{text-transform: none;
+      font-size: 18px;
+      text-align: justify;
+      margin-top: 30px;
+      margin-bottom: 30px;} .Insightdiv{font-weight: 300;}
+    .DashboardViewMore{background: #01D35A 0% 0% no-repeat padding-box;
+      border-radius: 35px !important;
+      width: 50%;
+      color: white;
+      font-size: 15px;
+      padding: 8px;
+      border: none;}
+    .NotificationViewMore{border: none;
+      background-color: white;
+      color: #01D35A;
+      font-size: 19px;
+      margin-bottom: 10px;
+      font-weight: 400;} .InsightUpdate{overflow: visible;
+        background: white;
+        border: none;
+        margin: 0px 10px;
+        color: #01D35A;}
+    .NotifyNum
+        {position: absolute;
+        margin-left: -15px;
+        border-radius: 50% !important;
+        font-size: 13px !important;}
+
+      /* Payment CSS */
+    
+    .Payment{margin-top: 40px;}
+    .redeemBtn{border: none;
+      background: white;
+      color: #01D35A;
+      font-size: 20px;}
+    .PaymentUN{font-size: 20px;
+      font-weight: 400;}
+    .redeemModal{    position: absolute;
+      left: 50%;
+      right: auto;
+      bottom: auto;     width: 33%;
+      border: 1px solid rgb(204, 204, 204);
+      background: rgb(255, 255, 255);
+      overflow: auto;
+      border-radius: 15px;
+      outline: none;
+      padding: 20px;
+      transform: translate(-50%, -50%);}
+    .redeemCross{border: none; background: white;} .PaymentHR{margin-top: 1rem !important; margin-bottom: 1rem !important;}

@@ -1,0 +1,34 @@
+.HospitalProfileBody{height: 2691px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    opacity: 1;}
+.HospitalCoverImg{width: 911px;
+    margin-left: 21px;
+    margin-top: 5px; height:500px;}
+.HospitalCover{position: relative;     width: 99%;}
+.greendot {position: absolute; margin: 357px 0px 0px 795px;}
+.bigedit {position: absolute;   margin: 384px 0px 0px 822px;}
+.blackdot{    margin-left: 68px;
+    width: 115px;
+    border-radius: 50%;
+    height: 109px;
+    border: 1px solid darkgrey;}
+.ExpertsDetails{width: 50%; display: inline-flex !important;     margin-bottom: 25px;}
+.ExpertImg{border: 1px solid darkgrey;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;}
+.AddExpert{border: none;
+    background-color: white;
+    color: rgb(1, 211, 90);
+    font-size: 19px;}
+.ExpertRow{margin-bottom: 25px;
+    width: 100%; margin-left: 0px !important; margin-right: 0px !important;}
+.HospitalBio{width: 92%;
+    text-align: justify;
+    margin-left: 35px !important;} .Hospitalhr{margin: 35px !important; width: 92%;}
+.HospitalProfileRow1{margin-top: 25px;}
+.AddExpertForm{padding: 25px;} .AddExpertBtn{width: 93%; border-radius: 4.125rem; 
+    background-color: #01D35A !important; height: 47px; color: white; border: none;}
+.AddExInput{border: none; border-bottom: 1px solid darkgrey;}

@@ -1,0 +1,53 @@
+.payment{
+    margin-top: 120px ;
+}
+
+.helppage{margin-top: 115px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;}
+.helppageBody{margin: 40px;}
+.bookappoint {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;
+    margin-top: 25px;
+    opacity: 1;}
+.helptype {
+    margin: 20px 0px 20px 0px !important;
+    font-size: 14px;}
+.bookappointhead{margin-top: 20px;}
+.helprow1{text-align: center;
+    font-size: 24px;
+    font-weight: bolder;}
+.helpinput{background-color: #DFDFDF !important;}
+
+/* ABOUT CSS */
+.AboutHospital{margin-top: 115px; background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;}
+.About{text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-bottom: 30px;}
+.AboutHospitalBody{margin: 40px;}  .Aboutplunes{text-align: justify;}
+
+
+/* NOTIFICATION CSS */
+.Notification{    margin-top: 120px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DCDCDC;
+    border-radius: 10px;} 
+.Notify{text-align: center;  font-weight: 400; margin: 25px;}
+.NotifierName{margin-bottom: 0px !important;     font-weight: 500;
+    font-size: 18px;}
+.NotifyImg{
+    background-color: #888888;
+    width: 71px;
+    height: 71px;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 50%;
+} 
+.PaymentHR{margin-top: 1rem !important; margin-bottom: 1rem !important;}

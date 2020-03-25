@@ -1,0 +1,208 @@
+.AllComponents{
+  margin-top: 116px !important;
+  margin-left: -33px !important;
+}
+.AvailableTime{
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #DCDCDC;
+opacity: 1;  border-radius: 10px; 
+}
+.Avail{text-align: center;     font-size: 24px;  font-weight: bolder;}
+.AvailTime{padding: 25px;}
+form{    margin: 35px 15px 40px 15px;}
+.Availrow{margin: 20px 0px 20px 0px;}
+.day{text-align: center;
+    width: 35px;
+    height: 35px;
+    background: #EBEBEB 0% 0% no-repeat padding-box;
+    font-size: 15px;
+    padding: 28px;
+    border-radius: 50%;}
+.Timerow{margin-bottom: 9px;}
+.Availputtime{margin: 0px 25px 0px 25px;}
+.AvailHeadrow{font-weight: 400;}
+
+/* The container */
+.contain {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .contain input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;     border-radius: 50%;
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .contain:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .contain input:checked ~ .checkmark {
+    background-color: #01D35A;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .contain input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .contain .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  /* MANAGE PAYMENT CSS */
+  .ManagePayForm{background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #DCDCDC;
+    opacity: 1;
+    letter-spacing: 0px;     text-align: center;
+    border-radius: 12px;}
+  
+  .editbankdetailfield {
+      border: none !important;
+      border-bottom: 1px solid #B5B3B3 !important;
+      border-radius: 0px !important;     margin: 35px 0px;}
+  .managePay{margin: 30px;}
+  .proceedbtn {
+    background: #01D35A 0% 0% no-repeat padding-box;
+    border-radius: 35px !important;
+    opacity: 1;
+    width: 57%;
+    height: 47px;
+    font-size: 17px !important;
+}
+
+/* APPOINTMENTS */
+.Appoint{background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #DCDCDC;
+  border-radius: 10px;} .AppointBody{margin: 25px;}
+.AppointBodyrow1{text-align: center;      font-size: 24px;   font-weight: bolder;     margin-bottom: 20px;}
+.AppointBodyrow2{margin-top: 10px;}
+.Appointimg{    width: 50px;
+  height: 50px;
+  background: #888888 0% 0% no-repeat padding-box;
+  padding: 12px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: initial;
+  color: white;
+  font-size: 18px;}    .Appointimgrow{    text-align: -webkit-right;} .AppointNameBold{font-weight: 500;}
+  .AppointStatus{letter-spacing: 0;
+    color: #01D35A;
+    opacity: 1;
+    font-weight: 500;} .appointBookId{color: darkgrey;}
+
+    /* SETTING CSS */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 30px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color:#DFDFDF;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 32px;
+      width: 32px;
+      left: 0px;
+      bottom: 0px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s; box-shadow: 1px 1px 1px 1px darkgrey;
+    }
+    
+    input:checked + .slider {
+      background-color: #01D35A;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #01D35A;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .settingpage{    margin-top: 115px;
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      border: 1px solid #DCDCDC;
+      border-radius: 10px;}
+    .settingpageBody{margin: 40px;}   
+    .accset {
+      border: 1px solid #DCDCDC;
+      margin-top: 20px; margin-bottom: 20px;
+      border-radius: 10px;}
+    .settingtopic {text-align: center;
+      font-size: 24px;
+      font-weight: bolder;}   
+    .accsetrow {margin: 23px 0px 16px 0px !important;}
+    
