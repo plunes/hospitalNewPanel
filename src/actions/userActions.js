@@ -10,18 +10,16 @@ let baseUrl = "http://3.6.212.85/v4"
 
 export const updateRealPrice = (uData) => async dispatch => {
   let obj = {
-    "solutionId": uData.solutionId,
-    "serviceId": uData.serviceId,
-    "updatedPrice": uData.newPrice
+    "solutionId": uData.realUpdateData.solutionId,
+    "serviceId": uData.realUpdateData.serviceId,
+    "updatedPrice": uData.realUpdatePrice
   }
-  //  solutionId,
-  //serviceId,
-  //updatedPrice
+  //console.log(uData, 'data')
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/solution', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
-        console.log(res.data, 'data')
+        //console.log(res.data, 'data')
       }
     })
 }
