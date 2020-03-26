@@ -38,13 +38,16 @@ class DashboardComponent extends Component {
         this.state = {
             rowsToDisplay: 5,
             modalIsOpen: false,
+            realModalIsOpen : false,
             updatePrice: 0,
             updateData: {},
             serviceName: '',
             days: 0,
             loader: true,
-            percent: 0
-
+            percent: 0,
+            realServiceName:'',
+            realUpdatePrice:0,
+            realUpdateData: {}
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -53,6 +56,8 @@ class DashboardComponent extends Component {
         this.handleUpdatePrice = this.handleUpdatePrice.bind(this);
         this.handleRealPrice = this.handleRealPrice.bind(this);
         this.handleDaysChange = this.handleDaysChange.bind(this);
+        this.handleRealModal = this.handleRealModal.bind(this);
+        this.handleRealSubmit = this.handleRealSubmit.bind(this);
     }
 
     async handleDaysChange(e) {
@@ -62,15 +67,26 @@ class DashboardComponent extends Component {
 
     async handleRealPrice(select) {
         console.log(select, 'select');
-
+        this.setState({
+            realModalIsOpen :  true,
+            realServiceName: select.serviceName,
+            realUpdatePrice : select.userPrice,
+            realUpdateData : select
+        })
         //await this.props.updateRealPrice(select);
         //await this.props.getSolutionInsights();
 
     }
 
+    handleRealModal() {
+        this.setState({
+            realModalIsOpen: false,
+        })
+    }
+
     handleModal() {
         this.setState({
-            modalIsOpen: false
+            modalIsOpen: false,
         })
     }
 
@@ -81,6 +97,18 @@ class DashboardComponent extends Component {
             updateData: this.state.updateData
         }
         await this.props.sendUpdateData(data);
+        //console.log('Anshul')
+        this.setState({
+            modalIsOpen: false,
+        })
+    }
+    async handleRealSubmit(e) {
+        e.preventDefault();
+        let data = {
+            realUpdatePrice: this.state.realUpdatePrice,
+            realUpdateData: this.state.realUpdateData
+        }
+        await this.props.updateRealPrice(data);
         //console.log('Anshul')
         this.setState({
             modalIsOpen: false,
@@ -304,9 +332,21 @@ class DashboardComponent extends Component {
                                         <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
                                         <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.serviceName}</div>
-
                                         <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br>
                                         <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+                                    </Modal>
+                                    <Modal
+                                        isOpen={this.state.realModalIsOpen}
+                                        onAfterOpen={this.afterOpenModal}
+                                        onRequestClose={this.closeModal}
+                                        style={customStyles}
+                                        ariaHideApp={false}
+                                        contentLabel="Example Modal" className='redeemModal'>
+                                        <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
+                                        <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                        <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.realServiceName}</div>
+                                        <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br>
+                                        <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                 </div>
                             </div>
