@@ -63,8 +63,8 @@ class DashboardComponent extends Component {
     async handleRealPrice(select) {
         console.log(select, 'select');
 
-        await this.props.updateRealPrice(select);
-        await this.props.getSolutionInsights();
+        //await this.props.updateRealPrice(select);
+        //await this.props.getSolutionInsights();
 
     }
 
@@ -215,7 +215,7 @@ class DashboardComponent extends Component {
                                                             !s.negotiating ?
                                                                 <div>
                                                                     <Timer
-                                                                        initialTime={60000}
+                                                                        initialTime={600000}
                                                                         direction="backward"
                                                                     >
                                                                         {() => (
