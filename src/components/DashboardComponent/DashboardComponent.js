@@ -187,8 +187,8 @@ class DashboardComponent extends Component {
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
                             </div>
                             <div className='row'>
-                                <div className='col-md-6 col-6  '>
-                                    <div className='dashboardsection dashrow2col1'>
+                                <div className='col-md-6 col-6 Leftpaddingremove'>
+                                    <div className='dashboardsection'>
                                         <p className='Dashboardsec1'>Real Time Insights</p>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) => (
@@ -235,14 +235,14 @@ class DashboardComponent extends Component {
                                             )) : false
                                         }
                                     </div>
-                                    <br></br>
                                     <div className='dashboardsection'>
                                         <div className='row'>
-                                            <div className='col'>
-                                                <p className='Dashboardsec1'>Business</p>
+                                            <div className='col businessrow1col1'>
+                                                   <img src="/business.svg" className="businessicon"></img>
+                                                   <p className='business'>Business</p>
                                             </div>
-                                            <div className='col'>
-                                                <select onChange={this.handleDaysChange} name="days">
+                                            <div className='col selectBusinessPeriod'>
+                                                <select onChange={this.handleDaysChange} name="days" className="selectBusiness">
                                                     <option value=''>Select</option>
                                                     <option value='1'>Today</option>
                                                     <option value='7'>Weekly</option>
@@ -253,19 +253,24 @@ class DashboardComponent extends Component {
                                         </div>
                                         <div className='row'>
                                             <div className='col text-center'>
-                                                {this.props.businessEarn}
+                                                <p className="businessPrice businessEarn">&#8377;{this.props.businessEarn}</p>
+                                                <p className="Earn">Business <br></br>Earned</p>
                                             </div>
                                             <div className='col text-center'>
-                                                {this.props.businessLost}
+                                                <p className="businessPrice businessLost">&#8377;{this.props.businessLost}</p>
+                                                <p className="Earn">Business<br></br> Lost</p>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div class="businessWarn">
                                             Please take action on real time insights to increase your business
                                         </div>
 
                                     </div>
                                     <div className='dashboardsection'>
-                                        <p className='Dashboardsec1'>Number of Users</p>
+                                        <span className='businessrow1col1 width'>
+                                        <img src="/nouser.svg" className="businessicon"></img>
+                                        <p className='business'>Number of Users</p>
+                                        </span>
                                         <HighchartsReact
                                             highcharts={Highcharts}
                                             options={options}
