@@ -189,11 +189,12 @@ class DashboardComponent extends Component {
                             <div className='row'>
                                 <div className='col-md-6 col-6 Leftpaddingremove'>
                                     <div className='dashboardsection'>
-                                        <p className='Dashboardsec1'>Real Time Insights</p>
+                                        <span className='businessrow1col1 width'><img src="/realtime.svg" className="businessicon"></img><p className='business'>Real Time Insights</p></span>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) => (
                                                 <div className='row' key={index}>
                                                     <div className='col-md-2'>
+                                                        <img src="/realtimerows.svg"></img>
                                                     </div>
                                                     <div className='col-md-8'>
                                                         <div>
@@ -280,7 +281,9 @@ class DashboardComponent extends Component {
                                 </div>
                                 <div className='col-md-6 col-6 dashboardsection dashrow2col2 Dashboardsec1'>
                                     <div>
-                                        <p>Actionable Insights</p>
+                                       <span className='businessrow1col1 width'>
+                                       <img src="/Outline.svg" className="businessicon"></img><p className='business'>Actionable Insights</p>
+                                       </span>
                                         {
                                             this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
                                                 <div className="DashboardInsight" key={index}>{i.serviceName} <span className="Insightdiv">were</span> {i.percent}<span>%</span><span className="Insightdiv"> higher than the booked price</span>
