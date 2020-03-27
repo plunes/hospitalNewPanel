@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
     case GET_INSIGHTS:
       return {
         ...state,
-        insightData: state.insightData.concat(action.payload)
+        insightData: action.payload
       }
     case GET_NOTIFICATIONS:
       return {

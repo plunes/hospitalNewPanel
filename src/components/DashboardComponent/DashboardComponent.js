@@ -41,6 +41,7 @@ class DashboardComponent extends Component {
             modalIsOpen: false,
             realModalIsOpen : false,
             updatePrice: 0,
+            actionUpdatedPrice : 0,
             updateData: {},
             serviceName: '',
             days: 0,
@@ -48,24 +49,42 @@ class DashboardComponent extends Component {
             percent: 0,
             realServiceName:'',
             realUpdatePrice:0,
+            solUpdatedPrice : 0,
             realUpdateData: {},
-            value: 40,
+            value: 10,
+            solValue: 10,
             distance: 30
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUpdatePrice = this.handleUpdatePrice.bind(this);
         this.handleRealPrice = this.handleRealPrice.bind(this);
         this.handleDaysChange = this.handleDaysChange.bind(this);
         this.handleRealModal = this.handleRealModal.bind(this);
         this.handleRealSubmit = this.handleRealSubmit.bind(this);
+        this.handleSliderChange = this.handleSliderChange.bind(this);
+        this.handleSolutionSliderChange = this.handleSolutionSliderChange.bind(this);
     }
-    
-    handleChange = value => {
+
+    handleSolutionSliderChange(value){
+       // console.log(value, 'value')
+        const { realUpdatePrice } = this.state
+        let newPrice = realUpdatePrice - realUpdatePrice * value /100
+
         this.setState({
-          value: value 
+            solValue : value,
+            solUpdatedPrice : newPrice
+        })
+    }
+
+    handleSliderChange(value){
+        const { updatePrice } = this.state
+        let newPrice = updatePrice - updatePrice * value /100
+        this.setState({
+          value: value,
+          actionUpdatedPrice : newPrice
         })
       };
 
@@ -102,7 +121,7 @@ class DashboardComponent extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         let data = {
-            updatePrice: this.state.updatePrice,
+            updatePrice: this.state.actionUpdatedPrice,
             updateData: this.state.updateData
         }
         await this.props.sendUpdateData(data);
@@ -114,7 +133,7 @@ class DashboardComponent extends Component {
     async handleRealSubmit(e) {
         e.preventDefault();
         let data = {
-            realUpdatePrice: this.state.realUpdatePrice,
+            realUpdatePrice: this.state.solUpdatedPrice,
             realUpdateData: this.state.realUpdateData
         }
         await this.props.updateRealPrice(data);
@@ -124,13 +143,13 @@ class DashboardComponent extends Component {
         })
     }
 
-    handleChange(e) {
-        console.log(typeof (e.target.value), 'value')
+    // handleChange(e) {
+    //     console.log(typeof (e.target.value), 'value')
         
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
 
     handleUpdatePrice(updateData) {
@@ -168,6 +187,7 @@ class DashboardComponent extends Component {
     }
 
     render() {
+        // console.log(this.props.insight, 'insight')
         let { percent } = this.state
         //    let timer = Date.now() + 100000
         const options = {
@@ -242,7 +262,7 @@ class DashboardComponent extends Component {
                                                             is looking for {s.serviceName}
                                                         </div><br></br>
                                                         {
-                                                            !s.negotiating ?
+                                                            s.negotiating ?
                                                                 <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
                                                                 : null
                                                         }
@@ -251,10 +271,10 @@ class DashboardComponent extends Component {
                                                     </div>
                                                     <div className='col-md-2'>
                                                         {
-                                                            !s.negotiating ?
+                                                            s.negotiating ?
                                                                 <div>
                                                                     <Timer
-                                                                        initialTime={600000}
+                                                                        initialTime={s.timeRemaining}
                                                                         direction="backward"
                                                                     >
                                                                         {() => (
@@ -351,10 +371,11 @@ class DashboardComponent extends Component {
                                             min={0}
                                             max={50}
                                             value={this.state.value}
-                                            onChange={this.handleChange}
+                                            onChange={this.handleSliderChange}
                                             onValueChange={value => this.setState({ value })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100}></input></div><br></br>
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text'   value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100} readOnly></input></div><br></br>
+                                            {/* <div>{this.state.actionUpdatedPrice}</div> */}
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
@@ -375,27 +396,25 @@ class DashboardComponent extends Component {
                                         <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
                                         <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.realServiceName}</div>
-
-
                                         <div>           
                                             <div style={ { width: '50%', textAlign: 'center'} }>
-                                               <b>{Math.floor( this.state.value )} % </b>
+                                               <b>{Math.floor( this.state.solValue )} % </b>
                                             </div>    
                                             <Slider
                                             min={0}
                                             max={50}
-                                            value={this.state.value}
-                                            onChange={this.handleChange}
-                                            onValueChange={value => this.setState({ value })} 
+                                            value={this.state.solValue}
+                                            onChange={this.handleSolutionSliderChange}
+                                            onValueChange={solValue => this.setState({ solValue })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.value / 100}></input></div><br></br>
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text'  value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.solValue / 100} readOnly></input></div><br></br>
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
                                             <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
                                             <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
                                         </div>
-                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p></div>
+                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p></div>
                                         {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br> */}
                                         <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>

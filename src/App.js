@@ -3,7 +3,6 @@ import './App.css';
 import history from './history';
 import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
-
 import RegistrationContainer from './components/RegistrationComponent/RegistrationContainer';
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import DashboardComponent from './components/DashboardComponent/DashboardComponent';
@@ -27,7 +26,7 @@ import NotificationComponent from './components/DashboardComponent/NotificationC
 import PaymentComponent from './components/DashboardComponent/PaymentComponent';
 import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
 import { getNotifications } from "../src/actions/userActions";
-import { Redirect } from 'react-router-dom';
+import { getSolutionInsights } from "../src/actions/userActions";
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -62,8 +61,8 @@ class App extends Component {
         }
         await this.props.getNotifications()
         toast(<Greet message={obj} />)
+        await this.props.getSolutionInsights()
       }
-    
       //this.props.countNewNotification()
     }
     );
@@ -102,5 +101,5 @@ class App extends Component {
   }
 }
 
-export default connect(null, { getUserDetails, getNotifications})(App)
+export default connect(null, { getUserDetails, getNotifications, getSolutionInsights})(App)
 
