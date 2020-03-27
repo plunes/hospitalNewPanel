@@ -14,7 +14,7 @@ export const updateRealPrice = (uData) => async dispatch => {
     "serviceId": uData.realUpdateData.serviceId,
     "updatedPrice": Number(uData.realUpdatePrice)
   }
-  console.log(typeof obj.updatedPrice, obj.updatedPrice)
+  //console.log(typeof obj.updatedPrice, obj.updatedPrice)
 
   //console.log(uData, 'data')
   let token = localStorage.getItem('token');

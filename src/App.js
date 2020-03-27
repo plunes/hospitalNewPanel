@@ -58,9 +58,9 @@ class App extends Component {
           body: message.data.firebaseMessaging.payload.notification.body,
           title: message.data.firebaseMessaging.payload.notification.title
         }
+        await this.props.getSolutionInsights()
         await this.props.getNotifications()
         toast(<Greet message={obj} />)
-        await this.props.getSolutionInsights()
       }
       //this.props.countNewNotification()
     }
@@ -89,7 +89,7 @@ class App extends Component {
             <Route exact path='/editProfile' component={EditProfileComponent} />
           </Switch>
         </div>
-        <ToastContainer />
+        <ToastContainer  position={toast.POSITION.TOP_LEFT} />
       </Router>
     )
     return (

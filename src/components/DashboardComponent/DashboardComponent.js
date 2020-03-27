@@ -53,7 +53,8 @@ class DashboardComponent extends Component {
             realUpdateData: {},
             value: 10,
             solValue: 10,
-            distance: 30
+            distance: 30,
+            showBusiness :  true
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -66,6 +67,13 @@ class DashboardComponent extends Component {
         this.handleRealSubmit = this.handleRealSubmit.bind(this);
         this.handleSliderChange = this.handleSliderChange.bind(this);
         this.handleSolutionSliderChange = this.handleSolutionSliderChange.bind(this);
+        this.setTimer = this.setTimer.bind(this);
+    }
+    
+    setTimer(time){
+        setTimeout(async () => {
+            await this.props.getSolutionInsights();
+        }, time)
     }
 
     handleSolutionSliderChange(value){
@@ -89,8 +97,14 @@ class DashboardComponent extends Component {
       };
 
     async handleDaysChange(e) {
+        this.setState({
+            showBusiness : false
+        })
         let days = e.target.value
         await this.props.getAllBookings(days)
+        this.setState({
+            showBusiness : true
+        })
     }
 
     async handleRealPrice(select) {
@@ -139,7 +153,7 @@ class DashboardComponent extends Component {
         await this.props.updateRealPrice(data);
         //console.log('Anshul')
         this.setState({
-            modalIsOpen: false,
+            realModalIsOpen: false,
         })
     }
 
@@ -285,6 +299,7 @@ class DashboardComponent extends Component {
                                                                             </React.Fragment>
                                                                         )}
                                                                     </Timer>
+                                                                    {this.setTimer.call(this, 5000)}
                                                                 </div>
                                                                 : <div>
                                                                     00:00
@@ -311,7 +326,7 @@ class DashboardComponent extends Component {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div className='row'>
+                                        { this.state.showBusiness ? <div className='row'>
                                             <div className='col text-center'>
                                                 <p className="businessPrice businessEarn">&#8377;{this.props.businessEarn}</p>
                                                 <p className="Earn">Business <br></br>Earned</p>
@@ -320,7 +335,7 @@ class DashboardComponent extends Component {
                                                 <p className="businessPrice businessLost">&#8377;{this.props.businessLost}</p>
                                                 <p className="Earn">Business<br></br> Lost</p>
                                             </div>
-                                        </div>
+                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
                                         <div className="businessWarn">
                                             Please take action on real time insights to increase your business
                                         </div>
