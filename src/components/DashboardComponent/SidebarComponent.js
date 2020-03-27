@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./Dashboard.css";
 import { logout } from '../../actions/userActions';
 import { connect } from 'react-redux';
-import { Link, Redirect} from 'react-router-dom'
-import history from "../../history";
-import { ListGroup, ListGroupItem, Collapse } from "reactstrap";
+// import { Link, Redirect} from 'react-router-dom'
+// import history from "../../history";
+// import { ListGroup, ListGroupItem, Collapse } from "reactstrap";
 
 class SidebarComponent extends Component {
   constructor(props) {
@@ -27,19 +27,19 @@ class SidebarComponent extends Component {
               // onClick={this.handledashboardClick}
             >
               <span>
-                <img className="sidebaricon" src="/dashboard.svg"></img>
+                <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
                 Dashboard
-              <img className="arrowdesign" src="arrow.svg"></img></span>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img></span>
             </a> <hr></hr>
             <a href="/profile"
               className="list-group"
               // onClick={this.handleprofileClick}
             > 
                <span>
-                <img className="sidebaricon" src="/profile.png"></img>
+                <img className="sidebaricon" src="/profile.png" alt=""></img>
               </span>
               Profile
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
             {/* <a href="/availability"
               className="list-group"
@@ -56,10 +56,10 @@ class SidebarComponent extends Component {
               // onClick={this.handleappointmentClick}
             >
               <span>
-                <img className="sidebaricon" src="/a2.png"></img>
+                <img className="sidebaricon" src="/a2.png" alt=""></img>
               </span>
               Appointments
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
             {/* <a href="/settings"
               className="list-group"
@@ -75,10 +75,10 @@ class SidebarComponent extends Component {
               // onClick={this.handlemanageClick}
             >
               <span>
-                <img className="sidebaricon" src="/m1.png"></img>
+                <img className="sidebaricon" src="/m1.png" alt=""></img>
               </span>
               Manage Payment
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
             {/* <a href="#"
               className="list-group"
@@ -95,20 +95,20 @@ class SidebarComponent extends Component {
               // onClick={this.handleaboutClick}
             >
               <span>
-                <img className="sidebaricon" src="/about-us.png"></img>
+                <img className="sidebaricon" src="/about-us.png" alt=""></img>
               </span>
               About Us
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
             <div 
-              className="list-group"
+              className="list-group log"
               onClick={this.handlelogoutClick}
             >
               <span>
-                <img className="sidebaricon" src="/Logout.png"></img>
+                <img className="sidebaricon" src="/Logout.png" alt=""></img>
               </span>
               LogOut
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </div>
           </div>
         </div>

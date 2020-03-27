@@ -27,7 +27,7 @@ import NotificationComponent from './components/DashboardComponent/NotificationC
 import PaymentComponent from './components/DashboardComponent/PaymentComponent';
 import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
 import { getNotifications } from "../src/actions/userActions";
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -38,7 +38,6 @@ const Greet = ({ message }) => <div>
 class App extends Component {
 
   async componentDidMount() {
-    console.log('anshul')
     let token = localStorage.getItem('token');
     if (token) {
       await this.props.getUserDetails()

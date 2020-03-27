@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { createUser } from "../../actions/userActions";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Modal from "react-responsive-modal";
 import axios from "axios";
@@ -297,7 +297,7 @@ class HospitalRegistrationForm extends Component {
           <div className="text-center">
             <p className="Plzenter">Please enter at least 8 character Password</p>
           </div>
-          <div className="form-group" className="buttonSignUp">
+          <div className="form-group buttonSignUp">
             <button type="submit" className="btn btn-success text-center signupHosbtn">
               Submit
             </button>

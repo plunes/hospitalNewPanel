@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import DashboardHeader from './DashboardHeader';
 import SidebarComponent from './SidebarComponent';
-import ProfileComponent from './ProfileContainer';
+// import ProfileComponent from './ProfileContainer';
 import { connect } from 'react-redux';
-import { getUserDetails } from "../../actions/userActions";
-import { getBooking } from '../../actions/userActions'
+// import { getUserDetails } from "../../actions/userActions";
+// import { getBooking } from '../../actions/userActions'
 import { getInsights } from '../../actions/userActions'
 import { sendUpdateData } from '../../actions/userActions'
 import { getSolutionInsights } from '../../actions/userActions'
@@ -167,7 +167,7 @@ class DashboardComponent extends Component {
     }
 
     render() {
-        let { percent } = this.state
+        // let { percent } = this.state
         //    let timer = Date.now() + 100000
         const options = {
             // title: {
@@ -226,12 +226,12 @@ class DashboardComponent extends Component {
                             <div className='row'>
                                 <div className='col-md-6 col-6 Leftpaddingremove'>
                                     <div className='dashboardsection'>
-                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon"></img><p className='business'>Real Time Insights</p></span>
+                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) => (
                                                 <div className='row' key={index}>
                                                     <div className='col-md-2 text-right'>
-                                                        <img src="/realtimerows.svg" className="realtimeicon"></img>
+                                                        <img src="/realtimerows.svg" className="realtimeicon" alt=""></img>
                                                     </div>
                                                     <div className='col-md-8'>
                                                         <div className="RealtimeUsername">
@@ -277,7 +277,7 @@ class DashboardComponent extends Component {
                                     <div className='dashboardsection'>
                                         <div className='row'>
                                             <div className='col businessrow1col1'>
-                                                   <img src="/business.svg" className="businessicon"></img>
+                                                   <img src="/business.svg" className="businessicon" alt=""></img>
                                                    <p className='business'>Business</p>
                                             </div>
                                             <div className='col selectBusinessPeriod'>
@@ -300,14 +300,14 @@ class DashboardComponent extends Component {
                                                 <p className="Earn">Business<br></br> Lost</p>
                                             </div>
                                         </div>
-                                        <div class="businessWarn">
+                                        <div className="businessWarn">
                                             Please take action on real time insights to increase your business
                                         </div>
 
                                     </div>
                                     <div className='dashboardsection'>
                                         <span className='businessrow1col1 width'>
-                                        <img src="/nouser.svg" className="businessicon"></img>
+                                        <img src="/nouser.svg" className="businessicon" alt=""></img>
                                         <p className='business'>Number of Users</p>
                                         </span>
                                         <HighchartsReact
@@ -320,7 +320,7 @@ class DashboardComponent extends Component {
                                 <div className='col-md-6 col-6 dashboardsection dashrow2col2'>
                                     <div>
                                        <span className='businessrow1col1 realtimewidth'>
-                                       <img src="/Outline.svg" className="businessicon"></img><p className='business'>Actionable Insights</p>
+                                       <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
                                         {
                                             this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
@@ -339,7 +339,7 @@ class DashboardComponent extends Component {
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal'>
-                                        <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
+                                        <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
                                         <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.serviceName}</div>
                                         <div>           
@@ -371,7 +371,7 @@ class DashboardComponent extends Component {
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal'>
-                                        <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
+                                        <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }} alt=""></img></button></div>
                                         <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.realServiceName}</div>
 

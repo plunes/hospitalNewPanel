@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 import "./AvailabilityComponent.css";
-import history from '../../history';
+// import history from '../../history';
 
 
 export default class SettingsComponent extends Component {
@@ -51,19 +51,19 @@ export default class SettingsComponent extends Component {
                                              </div>
                                         </div>
                                         <div className="row settingfont settingtype">
-                                             <div className="col-sm-1 col settingtypecol1"><img src="Profile-Settings.png"></img></div>
+                                             <div className="col-sm-1 col settingtypecol1"><img src="Profile-Settings.png" alt=""></img></div>
                                              <div className="col-sm-11 col">Privacy Setting</div>
                                         </div>
                                         <div className="accset settingfont">
                                              <div className="row accsetrow">
-                                                  <div className="col-sm-1 col settingcol1"><img src="Change-Password.png"></img></div>
+                                                  <div className="col-sm-1 col settingcol1"><img src="Change-Password.png" alt=""></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting">Change Password</p></div>
-                                                  <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg"></img></div>
+                                                  <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg" alt=""></img></div>
                                              </div><hr></hr>
                                              <div className="row accsetrow">
-                                                  <div className="col-sm-1 col settingcol1"><img src="Logout.png"></img></div>
+                                                  <div className="col-sm-1 col settingcol1"><img src="Logout.png" alt=""></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting">Logout from all devices</p></div>
-                                                  <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg"></img></div>
+                                                  <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg" alt=""></img></div>
                                              </div>
                                         </div>
                                    </div>
