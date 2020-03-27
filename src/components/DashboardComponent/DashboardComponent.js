@@ -116,7 +116,8 @@ class DashboardComponent extends Component {
     }
 
     handleChange(e) {
-        console.log(e.target.value, 'value')
+        console.log(typeof (e.target.value), 'value')
+        
         this.setState({
             [e.target.name]: e.target.value
         })

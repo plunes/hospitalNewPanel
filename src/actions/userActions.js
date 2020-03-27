@@ -119,13 +119,14 @@ export const sendUpdateData = (uData) => async dispatch => {
   let obj = {
     "specialityId": uData.updateData.specialityId,
     "serviceId": uData.updateData.serviceId,
-    "newPrice": uData.updatePrice
+    "newPrice": Number(uData.updatePrice)
   }
   let token = localStorage.getItem('token');
   return await axios.patch(baseUrl + '/admin_panel/updatePrice', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         console.log(res.data, 'data')
+        //dispatch(abc())
       }
     })
 }
