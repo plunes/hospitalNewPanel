@@ -1,3 +1,10 @@
+.Loader{position: fixed;
+        right: 50%;
+        left: 50%;
+        top: 50%;
+        }
+
+
 .AllComponents{margin-top: 116px;
   margin-left: -33px;}
 .Leftpaddingremove{padding-left: 0px !important;}
@@ -272,7 +279,7 @@ width: 35px !important;
     .businessrow1col1
          {display: inline-flex;}
     .businessicon
-         {margin-left: 10%;
+         {margin-left: 6%;
           margin-top: 7%;
           width: 14%;}
     .business
@@ -307,3 +314,58 @@ width: 35px !important;
       font-weight: 400;
       padding: 3%;}
     .width{width: 45%;}
+
+    /* DASHBOARD slider */
+
+    .SliderUpdatedPrice{font-size: 25px; text-align:center; margin-top:42px !important;    font-weight: bold;}
+    .bookingChance{text-align: center;
+      font-size: 20px; }
+    .slidecontainer {
+      width: 100%;
+    }
+    .maxmin
+      {margin-bottom: 60px;
+      margin-top: -88px;}
+    .rangeslider-horizontal {
+        height: 8px !important;
+    }
+    .rangeslider-horizontal .rangeslider__fill {
+      height: 100%;
+      background-color: #01D35A !important;}
+    .rangeslider, .rangeslider .rangeslider__fill {
+        background-color: #01D35A !important;
+        box-shadow: none !important;
+    }
+  
+    .rangeslider .rangeslider__handle {
+      background: #01D35A !important;  border: none !important;
+      box-shadow: none !important;}
+    .rangeslider-horizontal .rangeslider__handle:after {
+      background-color: #ffffff !important;
+      width: 22px !important;
+      height: 22px !important;
+      top: 4px !important;
+      left: 4px !important;
+      box-shadow: none !important;}
+
+      /* Dashboard RealTime Insight Css */
+
+      .realtimewidth{width: 58%;}
+      .realtimeicon
+        {border-radius: 50%;     width: 62%;
+        border: 1px solid darkgrey;
+        padding: 6px;}
+      .RealtimeUsername
+        {font-size: 20px;
+        font-weight: 500;}
+      .kindlyUpdate{font-weight: 400; font-size: 18px;}
+      .RealtimeHr{margin: 20px !important;}
+      .Timer
+        {background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #DCDCDC;
+        border-radius: 5px;
+        color: #01D35A;
+        font-weight: bold;
+        width: 81%;
+        padding-left: 4px;
+        padding-right: 4px;}
