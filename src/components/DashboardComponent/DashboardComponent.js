@@ -301,7 +301,7 @@ class DashboardComponent extends Component {
                                                 <p className="Earn">Business<br></br> Lost</p>
                                             </div>
                                         </div>
-                                        <div class="businessWarn">
+                                        <div className="businessWarn">
                                             Please take action on real time insights to increase your business
                                         </div>
 

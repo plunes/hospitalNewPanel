@@ -14,6 +14,8 @@ export const updateRealPrice = (uData) => async dispatch => {
     "serviceId": uData.realUpdateData.serviceId,
     "updatedPrice": uData.realUpdatePrice
   }
+  console.log(typeof obj.updatedPrice, obj.updatedPrice)
+
   //console.log(uData, 'data')
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/solution', obj, { 'headers': { 'Authorization': token } })
@@ -121,6 +123,7 @@ export const sendUpdateData = (uData) => async dispatch => {
     "serviceId": uData.updateData.serviceId,
     "newPrice": Number(uData.updatePrice)
   }
+  console.log(typeof obj.newPrice, obj.newPrice)
   let token = localStorage.getItem('token');
   return await axios.patch(baseUrl + '/admin_panel/updatePrice', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
