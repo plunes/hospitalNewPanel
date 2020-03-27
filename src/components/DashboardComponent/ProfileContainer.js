@@ -1,7 +1,5 @@
 import React from 'react';
-import AvatarEditor from 'react-avatar-editor';
 import { connect } from 'react-redux';
-import axios from 'axios';
 // import { expertDetails } from '../../actions/userActions';
 import './Profile.css';
 import Modal from "react-responsive-modal";
@@ -113,7 +111,7 @@ class ProfileContainer extends React.Component {
     return (
       <div className="HospitalProfileBody AllComponents">
         <div className="row sur">
-          <p className="HospitalCover"><img className="HospitalCoverImg" src={this.props.user.coverImageUrl || '/democoverimg.svg'}></img></p>
+          <p className="HospitalCover"><img className="HospitalCoverImg" src={this.props.user.coverImageUrl || '/democoverimg.svg'} alt=""></img></p>
         </div>
         {/* <div>
                 <input type="file" onChange={this.handleChange}/>
@@ -121,7 +119,7 @@ class ProfileContainer extends React.Component {
         <div onSubmit={this.handleSubmit}>
           <div className="row HospitalProfileRow1">
             <div className="col-sm-3 col">
-              <div><img className="blackdot" src={this.props.user.imageUrl || '/profile.png'}></img></div>
+              <div><img className="blackdot" src={this.props.user.imageUrl || '/profile.png'} alt=""></img></div>
             </div>
             <div className="col-sm-9 col maxhospitalrow1col2">
               <p className="maxhospital"><b>{this.props.user.name}</b></p>
@@ -239,7 +237,7 @@ class ProfileContainer extends React.Component {
             {
               this.props.user.doctors ? this.props.user.doctors.map((d, index) => (
                 <div key={index} className="row ExpertsDetails">
-                  <div className="col-sm-4 text-right"><img src={d.imageUrl || '/profile.png'} className="ExpertImg"></img></div>
+                  <div className="col-sm-4 text-right"><img src={d.imageUrl || '/profile.png'} className="ExpertImg" alt=""></img></div>
                   <div className="col-sm-8">
                     <div><b>{d.name}</b></div>
                     <div>{d.education}</div>

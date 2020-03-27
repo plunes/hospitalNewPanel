@@ -37,7 +37,6 @@ const Greet = ({ message }) => <div>
 class App extends Component {
 
   async componentDidMount() {
-    console.log('anshul')
     let token = localStorage.getItem('token');
     if (token) {
       await this.props.getUserDetails()

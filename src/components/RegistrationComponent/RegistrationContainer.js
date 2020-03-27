@@ -58,7 +58,7 @@ class RegistrationContainer extends  React.Component {
            <div>
                 <div className='row'>
                     <div className='col-md-6 sidetimgcol'>
-                        <img className="signImage"  src="signup.png" />
+                        <img className="signImage"  src="signup.png" alt="SignUp" />
                     </div>
                     <div className='col-md-6'>
                         <div className='col-md-1'>
