@@ -187,12 +187,8 @@ class DashboardComponent extends Component {
     }
 
     render() {
-<<<<<<< HEAD
         // console.log(this.props.insight, 'insight')
         let { percent } = this.state
-=======
-        // let { percent } = this.state
->>>>>>> 58ed606f4f22839e83711c8bfc5c3176f5d0fdc0
         //    let timer = Date.now() + 100000
         const options = {
             // title: {
