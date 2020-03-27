@@ -170,9 +170,9 @@ class DashboardComponent extends Component {
         let { percent } = this.state
         //    let timer = Date.now() + 100000
         const options = {
-            title: {
-                text: 'My chart'
-            },
+            // title: {
+            //     text: 'My chart'
+            // },
             series: [{
                 data: this.props.solutionUsers
             }],
@@ -203,8 +203,8 @@ class DashboardComponent extends Component {
                     <Loader
                         type="Oval"
                         color="#00BFFF"
-                        height={100}
-                        width={100}
+                        height={200}
+                        width={200}
                     // timeout={3000} //3 secs
                     />
                 </div>
