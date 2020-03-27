@@ -1,6 +1,14 @@
+.Loader{position: fixed;
+        right: 50%;
+        left: 45%;
+        top: 30%;
+        }
+
+
 .AllComponents{margin-top: 116px;
   margin-left: -33px;}
-.DashboardBody{background-color: #efefef; height: -webkit-fill-available;}
+.Leftpaddingremove{padding-left: 0px !important;}
+.DashboardBody{background-color: #efefef;}
 .Header{width: 100%; position: fixed;     background-color: white;     background: white;
   z-index: 999;}
 .fixed-top {
@@ -199,7 +207,7 @@ width: 35px !important;
     .dashboardsection{background: #FFFFFF 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       border-radius: 7px;
-      opacity: 1;}
+      opacity: 1; margin-bottom: 3%;}
     .dashrow1{margin-bottom: 18px;
       font-size: 27px;
       font-weight: normal;
@@ -265,3 +273,99 @@ width: 35px !important;
       padding: 20px;
       transform: translate(-50%, -50%);}
     .redeemCross{border: none; background: white;} .PaymentHR{margin-top: 1rem !important; margin-bottom: 1rem !important;}
+
+    /* DASHBOARD -> BUSINESS section css */
+
+    .businessrow1col1
+         {display: inline-flex;}
+    .businessicon
+         {margin-left: 6%;
+          margin-top: 7%;
+          width: 14%;}
+    .business
+        {text-decoration: underline;
+        letter-spacing: 0;
+        color: #333333;
+        margin-left: 9%;
+        margin-top: 11%;
+        font-weight: bold;
+        font-size: 20px;}
+    .selectBusinessPeriod
+        {text-align: center;
+         margin-top: 5%;}
+    .selectBusiness
+        {background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #DCDCDC;
+        border-radius: 5px;
+        padding: 2%;
+        width: 42%;}
+    .businessPrice
+        {font-size: 40px;
+        font-weight: 700;}
+    .businessEarn{color: #01D35A;}
+    .businessLost{color: #F3E520;}
+    .Earn
+      {color: #676767;
+      font-size: 16px;}
+    .businessWarn
+      {text-align: center;
+      color: #333333;
+      font-size: 18px;
+      font-weight: 400;
+      padding: 3%;}
+    .width{width: 45%;}
+
+    /* DASHBOARD slider */
+
+    .SliderUpdatedPrice{font-size: 25px; text-align:center; margin-top:42px !important;    font-weight: bold;}
+    .bookingChance{text-align: center;
+      font-size: 20px; }
+    .slidecontainer {
+      width: 100%;
+    }
+    .maxmin
+      {margin-bottom: 60px;
+      margin-top: -88px;}
+    .rangeslider-horizontal {
+        height: 8px !important;
+    }
+    .rangeslider-horizontal .rangeslider__fill {
+      height: 100%;
+      background-color: #01D35A !important;}
+    .rangeslider, .rangeslider .rangeslider__fill {
+        background-color: #01D35A !important;
+        box-shadow: none !important;
+    }
+  
+    .rangeslider .rangeslider__handle {
+      background: #01D35A !important;  border: none !important;
+      box-shadow: none !important;}
+    .rangeslider-horizontal .rangeslider__handle:after {
+      background-color: #ffffff !important;
+      width: 22px !important;
+      height: 22px !important;
+      top: 4px !important;
+      left: 4px !important;
+      box-shadow: none !important;}
+
+      /* Dashboard RealTime Insight Css */
+
+      .realtimewidth{width: 58%;}
+      .realtimeicon
+        {border-radius: 50%;     width: 62%;
+        border: 1px solid darkgrey;
+        padding: 6px;}
+      .RealtimeUsername
+        {font-size: 20px;
+        font-weight: 500;}
+      .kindlyUpdate{font-weight: 400; font-size: 18px;}
+      .RealtimeHr{margin: 20px !important;}
+      .Timer
+        {background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #DCDCDC;
+        border-radius: 5px;
+        color: #01D35A;
+        font-weight: bold;
+        width: 81%;
+        padding-left: 4px;
+        padding-right: 4px;}

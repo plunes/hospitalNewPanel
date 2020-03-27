@@ -18,6 +18,7 @@ import Modal from 'react-modal';
 import Loader from 'react-loader-spinner'
 import Slider from 'react-rangeslider'
 import Timer from 'react-compound-timer'
+import 'react-rangeslider/lib/index.css'
 
 
 const customStyles = {
@@ -47,7 +48,9 @@ class DashboardComponent extends Component {
             percent: 0,
             realServiceName:'',
             realUpdatePrice:0,
-            realUpdateData: {}
+            realUpdateData: {},
+            value: 40,
+            distance: 30
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -59,6 +62,12 @@ class DashboardComponent extends Component {
         this.handleRealModal = this.handleRealModal.bind(this);
         this.handleRealSubmit = this.handleRealSubmit.bind(this);
     }
+    
+    handleChange = value => {
+        this.setState({
+          value: value 
+        })
+      };
 
     async handleDaysChange(e) {
         let days = e.target.value
@@ -162,9 +171,9 @@ class DashboardComponent extends Component {
         let { percent } = this.state
         //    let timer = Date.now() + 100000
         const options = {
-            title: {
-                text: 'My chart'
-            },
+            // title: {
+            //     text: 'My chart'
+            // },
             series: [{
                 data: this.props.solutionUsers
             }],
@@ -191,12 +200,12 @@ class DashboardComponent extends Component {
         //console.log(this.props.bookings, 'booking')
         if (this.state.loader) {
             return (
-                <div>
+                <div className="Loader">
                     <Loader
                         type="Oval"
                         color="#00BFFF"
-                        height={100}
-                        width={100}
+                        height={200}
+                        width={200}
                     // timeout={3000} //3 secs
                     />
                 </div>
@@ -216,24 +225,25 @@ class DashboardComponent extends Component {
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
                             </div>
                             <div className='row'>
-                                <div className='col-md-6 col-6  '>
-                                    <div className='dashboardsection dashrow2col1'>
-                                        <p className='Dashboardsec1'>Real Time Insights</p>
+                                <div className='col-md-6 col-6 Leftpaddingremove'>
+                                    <div className='dashboardsection'>
+                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon"></img><p className='business'>Real Time Insights</p></span>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) => (
                                                 <div className='row' key={index}>
-                                                    <div className='col-md-2'>
+                                                    <div className='col-md-2 text-right'>
+                                                        <img src="/realtimerows.svg" className="realtimeicon"></img>
                                                     </div>
                                                     <div className='col-md-8'>
-                                                        <div>
+                                                        <div className="RealtimeUsername">
                                                             {s.userName}
                                                         </div>
                                                         <div>
                                                             is looking for {s.serviceName}
-                                                        </div>
+                                                        </div><br></br>
                                                         {
                                                             !s.negotiating ?
-                                                                <button type="button" className="InsightUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
+                                                                <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
                                                                 : null
                                                         }
                                                         <div>
@@ -249,8 +259,9 @@ class DashboardComponent extends Component {
                                                                     >
                                                                         {() => (
                                                                             <React.Fragment>
-                                                                                <Timer.Minutes /> minutes
-                                                                                <Timer.Seconds /> seconds
+                                                                                <div className="Timer"><Timer.Minutes /> :&nbsp;
+                                                                                     <Timer.Seconds /> 
+                                                                                </div>min sec
                                                                             </React.Fragment>
                                                                         )}
                                                                     </Timer>
@@ -259,19 +270,19 @@ class DashboardComponent extends Component {
                                                                     00:00
                                                                 </div>
                                                         }
-                                                    </div>
+                                                    </div><hr className="RealtimeHr"></hr>
                                                 </div>
                                             )) : false
                                         }
                                     </div>
-                                    <br></br>
                                     <div className='dashboardsection'>
                                         <div className='row'>
-                                            <div className='col'>
-                                                <p className='Dashboardsec1'>Business</p>
+                                            <div className='col businessrow1col1'>
+                                                   <img src="/business.svg" className="businessicon"></img>
+                                                   <p className='business'>Business</p>
                                             </div>
-                                            <div className='col'>
-                                                <select onChange={this.handleDaysChange} name="days">
+                                            <div className='col selectBusinessPeriod'>
+                                                <select onChange={this.handleDaysChange} name="days" className="selectBusiness">
                                                     <option value=''>Select</option>
                                                     <option value='1'>Today</option>
                                                     <option value='7'>Weekly</option>
@@ -282,19 +293,24 @@ class DashboardComponent extends Component {
                                         </div>
                                         <div className='row'>
                                             <div className='col text-center'>
-                                                {this.props.businessEarn}
+                                                <p className="businessPrice businessEarn">&#8377;{this.props.businessEarn}</p>
+                                                <p className="Earn">Business <br></br>Earned</p>
                                             </div>
                                             <div className='col text-center'>
-                                                {this.props.businessLost}
+                                                <p className="businessPrice businessLost">&#8377;{this.props.businessLost}</p>
+                                                <p className="Earn">Business<br></br> Lost</p>
                                             </div>
                                         </div>
-                                        <div>
+                                        <div class="businessWarn">
                                             Please take action on real time insights to increase your business
                                         </div>
 
                                     </div>
                                     <div className='dashboardsection'>
-                                        <p className='Dashboardsec1'>Number of Users</p>
+                                        <span className='businessrow1col1 width'>
+                                        <img src="/nouser.svg" className="businessicon"></img>
+                                        <p className='business'>Number of Users</p>
+                                        </span>
                                         <HighchartsReact
                                             highcharts={Highcharts}
                                             options={options}
@@ -302,9 +318,11 @@ class DashboardComponent extends Component {
                                     </div>
                                     <br></br>
                                 </div>
-                                <div className='col-md-6 col-6 dashboardsection dashrow2col2 Dashboardsec1'>
+                                <div className='col-md-6 col-6 dashboardsection dashrow2col2'>
                                     <div>
-                                        <p>Actionable Insights</p>
+                                       <span className='businessrow1col1 realtimewidth'>
+                                       <img src="/Outline.svg" className="businessicon"></img><p className='business'>Actionable Insights</p>
+                                       </span>
                                         {
                                             this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
                                                 <div className="DashboardInsight" key={index}>{i.serviceName} <span className="Insightdiv">were</span> {i.percent}<span>%</span><span className="Insightdiv"> higher than the booked price</span>
@@ -325,7 +343,26 @@ class DashboardComponent extends Component {
                                         <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
                                         <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.serviceName}</div>
-                                        <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br>
+                                        <div>           
+                                            <div style={ { width: '50%'} }>
+                                                <b>{Math.floor( this.state.value )} % </b>
+                                            </div>    
+                                            <Slider
+                                            min={0}
+                                            max={50}
+                                            value={this.state.value}
+                                            onChange={this.handleChange}
+                                            onValueChange={value => this.setState({ value })} 
+                                            />
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100}></input></div><br></br>
+                                            {/* <input className='value' value={this.state.value}></input> */}
+                                        </div> 
+                                        <div className="row maxmin">
+                                            <div className="col-sm-6"><h4>&#8377;{this.state.updatePrice}</h4></div>
+                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.updatePrice / 2}</h4></div>
+                                        </div>
+                                        {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br> */}
+                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p></div>
                                         <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                     <Modal
@@ -338,7 +375,28 @@ class DashboardComponent extends Component {
                                         <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }}></img></button></div>
                                         <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.realServiceName}</div>
-                                        <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br>
+
+
+                                        <div>           
+                                            <div style={ { width: '50%', textAlign: 'center'} }>
+                                               <b>{Math.floor( this.state.value )} % </b>
+                                            </div>    
+                                            <Slider
+                                            min={0}
+                                            max={50}
+                                            value={this.state.value}
+                                            onChange={this.handleChange}
+                                            onValueChange={value => this.setState({ value })} 
+                                            />
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.value / 100}></input></div><br></br>
+                                            {/* <input className='value' value={this.state.value}></input> */}
+                                        </div> 
+                                        <div className="row maxmin">
+                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
+                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
+                                        </div>
+                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p></div>
+                                        {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br> */}
                                         <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                 </div>
