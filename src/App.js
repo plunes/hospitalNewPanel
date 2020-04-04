@@ -14,6 +14,7 @@ import SettingsComponent from './components/DashboardComponent/SettingsComponent
 import ManagePaymentComponent from './components/DashboardComponent/ManagePaymentComponent';
 import HelpComponent from './components/DashboardComponent/HelpComponent';
 import AboutUsComponent from './components/DashboardComponent/AboutUsComponent';
+import MyCatalogueComponent from './components/DashboardComponent/MyCatalogueComponent';
 //import LogoutComponent from './components/DashboardComponent/LogoutComponent';
 // import { connect } from 'react-redux';
 import { getUserDetails } from "../src/actions/userActions";
@@ -87,6 +88,7 @@ class App extends Component {
             <Route exact path='/notification' component={NotificationComponent} />
             <Route exact path='/payment' component={PaymentComponent} />
             <Route exact path='/editProfile' component={EditProfileComponent} />
+            <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
           </Switch>
         </div>
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />

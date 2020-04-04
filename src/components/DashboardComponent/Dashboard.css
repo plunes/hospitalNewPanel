@@ -255,7 +255,13 @@ width: 35px !important;
       color: #01D35A;
       font-size: 19px;
       margin-bottom: 10px;
-      font-weight: 400;} .InsightUpdate{overflow: visible;
+      font-weight: 400;} 
+      .InsightUpdateDisable{overflow: visible;
+        background: white;
+        border: none;
+        margin: 0px 10px;
+        color: grey;}
+      .InsightUpdate{overflow: visible;
         background: white;
         border: none;
         margin: 0px 10px;

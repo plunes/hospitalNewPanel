@@ -1,5 +1,7 @@
 
-import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS} from '../actions/types';
+import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
+   UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, 
+   BUSINESS_LOST, SOLUTION_USERS, GET_CATALOGUE} from '../actions/types';
 
 const initialState = {
   userDetail: {},
@@ -12,7 +14,8 @@ const initialState = {
   solInsights: [],
   businessEarn: null,
   businessLost: null,
-  solutionUsers: []
+  solutionUsers: [],
+  catalogues:[]
 };
 
 export default function (state = initialState, action) {
@@ -71,7 +74,12 @@ export default function (state = initialState, action) {
         return {
           ...state,
           solutionUsers: action.payload
-        }  
+        }
+        case GET_CATALOGUE:
+        return {
+          ...state,
+          catalogues: action.payload
+        }   
     default:
       return state;
   }

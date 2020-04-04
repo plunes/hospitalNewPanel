@@ -61,6 +61,15 @@ class SidebarComponent extends Component {
               Appointments
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
+            <a href="/my-catalogue"
+              className="list-group"
+            >
+              <span>
+                <img className="sidebaricon" src="" alt='No Image'></img>
+              </span>
+              My catalogue
+              <img className="arrowdesign" src="arrow.svg"></img>
+            </a> <hr></hr>
             {/* <a href="/settings"
               className="list-group"
             >

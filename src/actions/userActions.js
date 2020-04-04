@@ -1,18 +1,39 @@
-import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS} from './types';
+import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, UNREAD_LENGTH, UNREAD_NOTIFICATION,
+   GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS,
+   GET_CATALOGUE
+  } from './types';
 import history from '../history';
 import axios from 'axios';
 // import { connect } from 'react-redux';
 
-//let baseUrl = "https://devapi.plunes.com"
-//let baseUrl = 'https://plunes.co/v4'
-//let baseUrl = 'http://localhost:5000'
-let baseUrl = "http://3.6.212.85/v4"
+let baseUrl = "https://devapi.plunes.com/v4"
+// let baseUrl = "https://plunes.co/v4"
+// let baseUrl = "http://localhost:5000"
+// let baseUrl = "http://3.6.212.85/v4"
+
+export const getUserCatalogue = () => async dispatch => {
+  let token = localStorage.getItem('token');
+  return await axios.get(baseUrl + '/analytics/getServices', { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data')
+        if(res.data.data && res.data.data.length > 0){
+          dispatch({
+            type : GET_CATALOGUE,
+            payload : res.data.data
+          })
+        }
+      }
+    })
+}
+
 
 export const updateRealPrice = (uData) => async dispatch => {
   let obj = {
     "solutionId": uData.realUpdateData.solutionId,
     "serviceId": uData.realUpdateData.serviceId,
-    "updatedPrice": Number(uData.realUpdatePrice)
+    "updatedPrice": Math.round(Number(uData.realUpdatePrice))
   }
   //console.log(typeof obj.updatedPrice, obj.updatedPrice)
 
@@ -26,6 +47,8 @@ export const updateRealPrice = (uData) => async dispatch => {
       }
     })
 }
+
+
 export const getMonthWiseUsers = (days) => async dispatch => {
     let token = localStorage.getItem('token');
     //console.log(token, 'monthWise')
@@ -265,62 +288,50 @@ export const getUserDetails = () => async dispatch => {
     })
 }
 
-export const createUser = userData => dispatch => {
-  fetch(baseUrl + '/user/register', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
-    .then(res => res.json())
+  export const createUser = userData => dispatch => {
+    fetch(baseUrl + '/user/register', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(userData)
+      })
+      .then(res => res.json())
+      .then(res => {
+        //console.log(res, 'dsa')
+        if (res.success === true) {
+          dispatch({
+            type: NEW_USER,
+            payload: res.user
+          })
+          localStorage.setItem('token', res.token)
+          localStorage.setItem('userId', res.user._id)
+          history.push('/dashboard');
+        }
+        if (!res.success) {
+          alert('User is already registered')
+          return res.message
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+
+  };
+
+export const createLogin = loginData => async dispatch => {
+  console.log(loginData, "login data")
+  return await axios.post(baseUrl + '/user/login', loginData)
     .then(res => {
-      //console.log(res, 'dsa')
-      if (res.success === true) {
+      console.log(res.data.success , 'data')
+      if (res.data.success === true) {
         dispatch({
           type: NEW_USER,
-          payload: res.user
+          payload: res.data.user
         })
-        localStorage.setItem('token', res.token)
-        localStorage.setItem('userId', res.user._id)
+        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('userId', res.data.user._id)
         history.push('/dashboard');
-      }
-      if (!res.success) {
-        alert('User is already registered')
-        return res.message
-      }
-    })
-    .catch((e) => {
-      console.log(e);
-
-    })
-
-};
-
-export const createLogin = loginData => dispatch => {
-  fetch(baseUrl + '/user/login', {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify(loginData)
-  })
-    .then(res => res.json())
-    .then(res => {
-      if (res.success === true) {
-        dispatch({
-          type: NEW_USER,
-          payload: res.user
-        })
-        localStorage.setItem('token', res.token)
-        localStorage.setItem('userId', res.user._id)
-        history.push('/dashboard');
-      }
-
-      else {
-        this.setState({
-          redirect: false
-        })
       }
     }
     )
