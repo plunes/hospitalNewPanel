@@ -14,13 +14,16 @@ export const updateRealPrice = (uData) => async dispatch => {
   let obj = {
     "solutionId": uData.realUpdateData.solutionId,
     "serviceId": uData.realUpdateData.serviceId,
-    "updatedPrice": uData.realUpdatePrice
+    "updatedPrice": Number(uData.realUpdatePrice)
   }
+  //console.log(typeof obj.updatedPrice, obj.updatedPrice)
+
   //console.log(uData, 'data')
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/solution', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
+        dispatch(getSolutionInsights())
         //console.log(res.data, 'data')
       }
     })
@@ -121,13 +124,16 @@ export const sendUpdateData = (uData) => async dispatch => {
   let obj = {
     "specialityId": uData.updateData.specialityId,
     "serviceId": uData.updateData.serviceId,
-    "newPrice": uData.updatePrice
+    "newPrice": Number(uData.updatePrice)
   }
+  //console.log(typeof obj.newPrice, obj.newPrice)
   let token = localStorage.getItem('token');
   return await axios.patch(baseUrl + '/admin_panel/updatePrice', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 201) {
-        console.log(res.data, 'data')
+      //console.log(res.data)
+      if (res.data.status === 1) {
+        //console.log(res.data, 'data')
+        dispatch(getInsights())
       }
     })
 }
@@ -393,7 +399,7 @@ export const getInsights = () => async dispatch => {
   return await axios.get(baseUrl + '/analytics/insight', { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
-        //console.log(res.data, 'Insights')
+        console.log(res.data, 'Insights')
         //console.log(res.data.data, 'data');
         dispatch({
           type: GET_INSIGHTS,

@@ -3,7 +3,6 @@ import './App.css';
 import history from './history';
 import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
-
 import RegistrationContainer from './components/RegistrationComponent/RegistrationContainer';
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import DashboardComponent from './components/DashboardComponent/DashboardComponent';
@@ -28,7 +27,7 @@ import PaymentComponent from './components/DashboardComponent/PaymentComponent';
 import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
 import CatalogueComponent from './components/DashboardComponent/CatalogueComponent';
 import { getNotifications } from "../src/actions/userActions";
-// import { Redirect } from 'react-router-dom';
+import { getSolutionInsights } from "../src/actions/userActions";
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -60,10 +59,10 @@ class App extends Component {
           body: message.data.firebaseMessaging.payload.notification.body,
           title: message.data.firebaseMessaging.payload.notification.title
         }
+        await this.props.getSolutionInsights()
         await this.props.getNotifications()
         toast(<Greet message={obj} />)
       }
-    
       //this.props.countNewNotification()
     }
     );
@@ -92,7 +91,7 @@ class App extends Component {
             <Route exact path='/myCatalogue' component={CatalogueComponent} />
           </Switch>
         </div>
-        <ToastContainer />
+        <ToastContainer  position={toast.POSITION.TOP_LEFT} />
       </Router>
     )
     return (
@@ -103,5 +102,5 @@ class App extends Component {
   }
 }
 
-export default connect(null, { getUserDetails, getNotifications})(App)
+export default connect(null, { getUserDetails, getNotifications, getSolutionInsights})(App)
 
