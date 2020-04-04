@@ -386,19 +386,11 @@ class DashboardComponent extends Component {
                                             min={0}
                                             max={50}
                                             value={this.state.value}
-<<<<<<< HEAD
                                             onChange={this.handleChange}
                                             onValueChange={value => this.setState({ value })}
                                             valueLabelDisplay="on"
                                             />
                                             <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100}></input></div><br></br>
-=======
-                                            onChange={this.handleSliderChange}
-                                            onValueChange={value => this.setState({ value })} 
-                                            />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text'   value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100} readOnly></input></div><br></br>
-                                            {/* <div>{this.state.actionUpdatedPrice}</div> */}
->>>>>>> 0e1a2938b21555c4daf8242756f6268bed9adb5d
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
@@ -430,11 +422,7 @@ class DashboardComponent extends Component {
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
-<<<<<<< HEAD
                                             <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.value / 100}></input></div><br></br>
-=======
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text'  value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.solValue / 100} readOnly></input></div><br></br>
->>>>>>> 0e1a2938b21555c4daf8242756f6268bed9adb5d
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
