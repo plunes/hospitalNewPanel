@@ -6,45 +6,37 @@
   } */
 @media(max-width: 576px){
 
-.loginImage{
+.loginImage
+      {width:325px !important;}
 
-  width:325px !important;
-}
-.inputLogin{
+.inputLogin
+      {width: 100% !important;}
 
-  width: 100% !important;
+.form-controlll
+      {width: 100% !important ;}
 }
-.form-controlll{
-  width: 100% !important ;
-}
-
-}
-  .box1{
-      
+  
+.box1{
       padding:10px 0px 10px 35px;
       width: 100%;
       height: auto;
       overflow: hidden;
-  }
-  ._app{
+      }
+
+._app{
+      background-color: #41cb52;
+     }  
   
-    background-color: #41cb52;
-  }
-  
-  .nav1 {
-    list-style-type: none;
+.nav1 
+   {list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    
-  }
+    overflow: hidden;}
   
-  .nav2 {
-    float: right;
-    
-  }
+.nav2 {
+    float: right;}
   
-  .nav2 .nav3 {
+.nav2 .nav3 {
     display: block;
     text-align: center;
     padding: 3px 18px;
@@ -55,12 +47,11 @@
     margin-left: 20px;
     font-size: 14px;
     height: 31px;
-      padding-right: 18px !important;
-      padding-left: 18px !important;
-  }
+    padding-right: 18px !important;
+    padding-left: 18px !important;}
   
-  .nav33 {
-    display: block;
+.nav33 
+   {display: block;
     text-align: center;
     padding: 5px ;
     color:white !important;
@@ -70,33 +61,32 @@
     margin-left: 20px;
     font-size: 14px;
     width: 197px;
-      height: 34px;
-  }
-  .nav333
+    height: 34px;}
+
+.nav333
+    {position: relative;
+    bottom: 2px;}
+
+@media (min-width: 992px)
   {
-    
-  position: relative;
-  bottom: 2px;
+   .navbar-expand-lg .navbar-nav .nav-link 
+        {padding-right: 1.5rem;
+          padding-left: 1.5rem;}
   }
-  @media (min-width: 992px){
-  .navbar-expand-lg .navbar-nav .nav-link {
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
-      }}
-  @media (max-width: 767px){
-  .nav2 {
-      float: right;
-      margin-bottom: 15px;
-  }}
-  
-  
-  .nav2 .nav3:hover {
-    background-color: #01de5a;
-      color: #fff;
-      border-color: #01de5a;
+@media (max-width: 767px)
+  {
+    .nav2 
+        {float: right;
+        margin-bottom: 15px;}
   }
-  .button-login{
-      margin-top: 21px;
+
+.nav2 .nav3:hover 
+    {background-color: #01de5a;
+    color: #fff;
+    border-color: #01de5a;}
+
+.button-login
+    {margin-top: 21px;
       width: 270px;
       text-transform: none;
       height: 38px;
@@ -104,42 +94,32 @@
       background-color: #01de5a;
       border: thin;
       color: white;
-       outline: none !important;
-  }
-  .login-text{
-      
-      
-      font-size: 1.5rem;
-      margin-top: 150px;
-      
-  }
+       outline: none !important;}
+
+.login-text
+      {font-size: 1.5rem;
+      margin-top: 150px;}
     
-  .bg-light
-  {
-      background-color: white !important;
-  }
-  .inputLogin{
+.bg-light 
+      {background-color: white !important;}
 
-    border: none !important;
-    border-radius: 0px !important;
-    border-bottom: 1px solid #B2B2B2 !important;
-    background-color: white !important;
-    
-  }
-  .forgotPassword{
-   padding-left: 80px;
-  }
-  .signupClass{
+.inputLogin
+      {border: none !important;
+        border-radius: 0px !important;
+        border-bottom: 1px solid #B2B2B2 !important;
+        background-color: white !important;}
 
-    font-size: 15px;
-    padding-left: 33px;
-    margin-top: 23px;
-  }
-  .form-controlll{
-    width: 120% ;
-    outline: none;
+.forgotPassword
+      {padding-left: 80px;}
 
-  }
-  .loginImage{
-    margin-top: 80px;
-  }
+.signupClass
+      {font-size: 15px;
+        padding-left: 33px;
+        margin-top: 23px;}
+
+.form-controlll
+      {width: 120% ;
+        outline: none;}
+
+.loginImage
+      {margin-top: 80px;}

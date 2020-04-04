@@ -61,6 +61,18 @@ class SidebarComponent extends Component {
               Appointments
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
+
+            <a href="/myCatalogue"
+              className="list-group"
+              // onClick={this.handleappointmentClick}
+            >
+              <span>
+                <img className="sidebaricon" src="/a2.png" alt=""></img>
+              </span>
+              My Catalogue
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
+            </a> <hr></hr>
+
             {/* <a href="/settings"
               className="list-group"
             >

@@ -226,12 +226,12 @@ class DashboardComponent extends Component {
                             <div className='row'>
                                 <div className='col-md-6 col-6 Leftpaddingremove'>
                                     <div className='dashboardsection'>
-                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span>
+                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span><br></br>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) => (
                                                 <div className='row' key={index}>
-                                                    <div className='col-md-2 text-right'>
-                                                        <img src="/realtimerows.svg" className="realtimeicon" alt=""></img>
+                                                    <div className='col-md-2 text-right realtime'>
+                                                        <span className="realtimeicon1"><img src="/realtimerows.svg" className="realtimeicon" alt=""></img></span>
                                                     </div>
                                                     <div className='col-md-8'>
                                                         <div className="RealtimeUsername">
@@ -351,9 +351,10 @@ class DashboardComponent extends Component {
                                             max={50}
                                             value={this.state.value}
                                             onChange={this.handleChange}
-                                            onValueChange={value => this.setState({ value })} 
+                                            onValueChange={value => this.setState({ value })}
+                                            valueLabelDisplay="on"
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100}></input></div><br></br>
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100}></input></div><br></br>
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
@@ -387,7 +388,7 @@ class DashboardComponent extends Component {
                                             onChange={this.handleChange}
                                             onValueChange={value => this.setState({ value })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'center',border: 'none', width: '16%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.value / 100}></input></div><br></br>
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.value / 100}></input></div><br></br>
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">

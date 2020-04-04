@@ -26,6 +26,7 @@ import { toast } from 'react-toastify';
 import NotificationComponent from './components/DashboardComponent/NotificationComponent';
 import PaymentComponent from './components/DashboardComponent/PaymentComponent';
 import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
+import CatalogueComponent from './components/DashboardComponent/CatalogueComponent';
 import { getNotifications } from "../src/actions/userActions";
 // import { Redirect } from 'react-router-dom';
 
@@ -88,6 +89,7 @@ class App extends Component {
             <Route exact path='/notification' component={NotificationComponent} />
             <Route exact path='/payment' component={PaymentComponent} />
             <Route exact path='/editProfile' component={EditProfileComponent} />
+            <Route exact path='/myCatalogue' component={CatalogueComponent} />
           </Switch>
         </div>
         <ToastContainer />

@@ -1,4 +1,6 @@
-import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS} from './types';
+import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
+         UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, 
+         BUSINESS_LOST, SOLUTION_USERS,GET_SERVICES} from './types';
 import history from '../history';
 import axios from 'axios';
 // import { connect } from 'react-redux';
@@ -6,7 +8,7 @@ import axios from 'axios';
 //let baseUrl = "https://devapi.plunes.com"
 //let baseUrl = 'https://plunes.co/v4'
 //let baseUrl = 'http://localhost:5000'
-let baseUrl = "http://3.6.212.85/v4"
+let baseUrl = "https://devapi.plunes.com/v4"
 
 export const updateRealPrice = (uData) => async dispatch => {
   let obj = {

@@ -11,4 +11,5 @@ export const GET_SOL_INSIGHTS = 'GET_SOL_INSIGHTS'
 export const BUSINESS_EARN = 'BUSINESS_EARN'
 export const BUSINESS_LOST = 'BUSINESS_LOST'
 export const SOLUTION_USERS = 'SOLUTION_USERS'
+export const GET_SERVICES = 'GET_SERVICES'
 // export const LOGIN = 'LOGIN';
