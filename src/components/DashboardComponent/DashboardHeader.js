@@ -33,6 +33,7 @@ class DashboardHeader extends Component {
               {/* <div>
                 <input className="dashbord-input" name="search" type="search" placeholder="Search" aria-label="Search" autoComplete="off" id="mytInput" onChange={this.onSearchQuery} />
               </div> */}
+
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>

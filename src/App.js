@@ -26,6 +26,7 @@ import { toast } from 'react-toastify';
 import NotificationComponent from './components/DashboardComponent/NotificationComponent';
 import PaymentComponent from './components/DashboardComponent/PaymentComponent';
 import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
+import CatalogueComponent from './components/DashboardComponent/CatalogueComponent';
 import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
 
