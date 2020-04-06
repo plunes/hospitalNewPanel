@@ -13,14 +13,21 @@ class MyCatalogueComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loader : true
+            loader : true,
+            rowsToDisplay: 20,
         }
+        this.handleClick = this.handleClick.bind(this);
     }
 
     async componentDidMount() {
         await this.props.getUserCatalogue()
     }
-
+    
+    handleClick() {
+        this.setState({
+            rowsToDisplay: this.state.rowsToDisplay + 5
+        })
+    }
 
     render() {
         return (
@@ -34,10 +41,10 @@ class MyCatalogueComponent extends Component {
                     </div>
                     <div className='col-md-6 catalogueComponent'>
                         <div className='row justify-content-center'>
-                            <h3>Catalogue</h3>
-                            <h4>Search(Don't design)</h4>
+                            <p className='catalogue'>Catalogue</p>
                         </div>
-                        <div className='row'>
+                        <div className='listOfService'>
+                        <div className='row listOfServiceHeading'>
                             <div className='col-md-6'>
                                 Test Name
                                 </div>
@@ -48,29 +55,39 @@ class MyCatalogueComponent extends Component {
                                 Variance
                             </div>
                         </div>
+                        </div>
                         {
-                            this.props.catalogues.length > 0 ? this.props.catalogues.map( (c, i) => (
-                            <div className = 'row' key = {i}>
+                            this.props.catalogues.length > 0 ? this.props.catalogues.slice(0, this.state.rowsToDisplay).map( (c, i) => (
+                            <div>
+                            <div className = 'row listOfService' key = {i}>
                                 <div className='col-md-6'>{c.service}</div>
-                                <div className='col-md-3'>{c.price[0]}</div>
-                                <div className='col-md-3'>{c.variance}</div>
+                                <div className='col-md-3'>Rs. {c.price[0]}</div>
+                                <div className='col-md-3 catalogueVariance'>{c.variance}%</div>
+                            </div>
+                            <div className = 'row listOfService'>
+                                 <div className='col-md-8'><hr></hr></div>
+                                 <div className='col-md-4'></div>
+                            </div>
                             </div>
                             )) : 
                             <div>
                                  {
-                                this.state.loader ? <div className="Loader">
-                                <Loader
-                                    type="Oval"
-                                    color="#00BFFF"
-                                    height={200}
-                                    width={200}
-                                // timeout={3000} //3 secs
-                                />
-                            </div> : <div>No Catalogue</div>
-                            }
+                                   this.state.loader ? <div className="Loader">
+                                                            <Loader
+                                                                type="Oval"
+                                                                color="#00BFFF"
+                                                                height={200}
+                                                                width={200}
+                                                            // timeout={3000} //3 secs
+                                                            />
+                                                    </div> : <div>No Catalogue</div>
+                                 }
                             </div>
                            
                         }
+                        <div className='text-center'>
+                            <button onClick={this.handleClick} className="catalogueViewMore">View more</button>
+                        </div>
                     </div>
                     <div className='col-md-3'></div>
                 </div>
