@@ -390,7 +390,7 @@ class DashboardComponent extends Component {
                                             onValueChange={value => this.setState({ value })}
                                             valueLabelDisplay="on"
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice - this.state.updatePrice * this.state.value / 100}></input></div><br></br>
+                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)}></input></div><br></br>
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
