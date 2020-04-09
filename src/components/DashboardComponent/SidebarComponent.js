@@ -65,7 +65,7 @@ class SidebarComponent extends Component {
               className="list-group"
             >
               <span>
-                <img className="sidebaricon" src="" alt='No Image'></img>
+                <img className="sidebaricon" src="" alt=''></img>
               </span>
               My catalogue
               <img className="arrowdesign" src="arrow.svg"></img>
