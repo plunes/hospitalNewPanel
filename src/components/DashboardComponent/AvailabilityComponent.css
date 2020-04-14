@@ -1,6 +1,14 @@
 .AllComponents
-       {margin-top: 116px !important;
-        margin-left: -33px !important;}
+       {
+        margin-top: 116px !important;
+        margin-left: -33px !important;
+        background: transparent !important;
+        }
+.ReactModal__Content--after-open{
+        background: #FFFFFF 0% 0% no-repeat padding-box !important;
+        box-shadow: 5px 5px 10px #00000029 !important;
+        border-radius: 20px !important;
+}
 .AvailableTime
         {background: #FFFFFF 0% 0% no-repeat padding-box;
         border: 1px solid #DCDCDC;
@@ -131,7 +139,8 @@ form
 .Appoint
     {background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;} 
+    border-radius: 10px;
+    } 
 
 .AppointBody
      {margin: 25px;}
@@ -216,6 +225,37 @@ input:checked + .slider:before
       -ms-transform: translateX(26px);
       transform: translateX(26px);}
 
+.idea{
+    display: inline-flex;
+    border: none;
+    background: transparent;
+    color: #01D35A;
+    font-weight: 400;
+}
+.ideaDiv{
+    background-color: #FBFBFB;
+    color: #01D35A;
+    font-weight: 500;
+    margin: 2%;
+}
+.tip{
+    margin-top: 27px;
+}
+.tipsrow {
+    margin: 1% 12% !important;
+}
+.appointCreateP{
+    text-decoration: underline;
+    letter-spacing: 0px;
+    color: #01D35A;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.cross{
+    border: none;
+    background-color: white;
+}
+
 /* Rounded sliders */
 
 .slider.round 
@@ -245,3 +285,72 @@ input:checked + .slider:before
 
 .accsetrow 
     {margin: 23px 0px 16px 0px !important;}
+
+/* PAYMENT STATUS PROGRESS BAR */
+.progres{
+      height: 114px;
+}
+.progressbar{
+  counter-reset: step;
+}
+.progressbar li{
+  list-style-type:none;
+  float: left;
+  width:20%;
+  position:relative;
+  text-align:center;
+}
+.progressbar li:before{
+  content: counter(step);
+  counter-increment: step;
+  width: 50px;
+  height: 50px;
+  border: 1px solid darkgrey;
+  display: block;
+  text-align:center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  line-height:50px;
+  background-color:white;
+}
+.progressbar li:after{
+  content: '';
+  position:absolute;
+  width:100%;
+  height:3px;
+  background-color:#F1F1F1;
+  top:25px;
+  left:-50%;
+  z-index:-1;
+}
+.progressbar li:first-child:after{
+  content:none;
+}
+.progressbar li.active{
+  color:#01D35A;
+}
+.progressbar li.active:before{
+  border-color: #01D35A;
+}
+
+/* Progress */
+
+/* .progres li{
+  width:20%;
+}
+ul{
+  text-align:center;
+}
+ul li{
+  display: inline-block;
+}
+ul li .fa{
+    background-color:#01D35A;
+    color:white;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+.fa-check:before {
+    line-height: 50px;
+} */

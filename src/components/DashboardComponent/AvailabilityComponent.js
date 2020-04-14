@@ -33,7 +33,8 @@ class AvailabilityComponent extends Component {
                               <div className= 'col-md-1 day'><p style={{marginTop:"-10px"}}>{t.day}</p></div>
                               <div className= 'col-md-5 text-center' style={{padding:"12px"}}>{t.slots[0]}</div>
                               <div className= 'col-md-5 text-center' style={{padding:"12px"}}>{t.slots[1]}</div>
-                              <div className='col-md-1' style={{padding:"12px"}}><input type="checkbox" name={t.closed}></input></div> 
+                              <div className='col-md-1' style={{padding:"12px"}}><label class="contain">
+                                <input type="checkbox" name={t.closed}></input><span class="checkmark"></span></label></div> 
                            </div>
                       ))
                    }

@@ -43,18 +43,35 @@ class MyCatalogueComponent extends Component {
                         <div className='row justify-content-center'>
                             <p className='catalogue'>Catalogue</p>
                         </div>
-                        <div className='listOfService'>
-                        <div className='row listOfServiceHeading'>
-                            <div className='col-md-6'>
-                                Test Name
-                                </div>
-                            <div className='col-md-3'>
-                                Price
-                            </div>
-                            <div className='col-md-3'>
-                                Variance
-                            </div>
+                        <div className='row listOfService'>
+                              <div className='col-md-4 text-center'>
+                                 <a href=""><img src="./upload.svg" alt=""></img>
+                                 <p className="uploadCata">Upload File</p></a>
+                              </div>
+                              <div className='col-md-4 text-center'>
+                                 <a href=""><img src="./down.svg" alt=""></img>
+                                 <p className="uploadCata">Download Sample</p></a>
+                              </div>
+                              <div className='col-md-4 text-center'>
+                                 <a href=""><img src="./edit.svg" alt=""></img>
+                                 <p className="uploadCata">Edit Catalogue</p></a>
+                              </div>
                         </div>
+                        <div className="text-center">
+                            <input type="text" placeholder="Name the procedure or test here." name="search" className='catalogueSearchbar'></input>
+                        </div>
+                        <div className='listOfService'>
+                            <div className='row listOfServiceHeading'>
+                                <div className='col-md-6'>
+                                    Test Name
+                                    </div>
+                                <div className='col-md-3'>
+                                    Price
+                                </div>
+                                <div className='col-md-3'>
+                                    Variance
+                                </div>
+                            </div>
                         </div>
                         {
                             this.props.catalogues.length > 0 ? this.props.catalogues.slice(0, this.state.rowsToDisplay).map( (c, i) => (

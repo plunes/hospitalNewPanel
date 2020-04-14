@@ -35,46 +35,46 @@ export default class HelpComponent extends Component {
                     </div>
 
                     <div className="bookappoint">
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
+                        <button className='helpBtn'><div className="row helptype">
+                            <div className="col-sm-11 col-11 text-left">
                                 Booking Failure
                             </div>
                             <div className="col-sm-1 col-1">
                                 <img src="arrow.svg" alt=""></img>
                             </div>
-                        </div><hr></hr>
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
+                        </div></button><hr></hr>
+                        <button className='helpBtn'><div className="row helptype">
+                            <div className="col-sm-11 col-11 text-left">
                                 Wrong lab/contact details
                             </div>
                             <div className="col-sm-1 col-1">
                                 <img src="arrow.svg" alt=""></img>
                             </div>
-                        </div> <hr></hr>
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
+                        </div></button> <hr></hr>
+                        <button className='helpBtn'><div className="row helptype">
+                            <div className="col-sm-11 col-11 text-left">
                                 Appointment delayed or canceled
                             </div>
                             <div className="col-sm-1 col-1">
                                 <img src="arrow.svg" alt=""></img>
                             </div>
-                        </div> <hr></hr>
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
+                        </div></button> <hr></hr>
+                        <button className='helpBtn'><div className="row helptype">
+                            <div className="col-sm-11 col-11 text-left">
                                 Cancelling/rescheduling an appointment
                             </div>
                             <div className="col-sm-1 col-1">
                                 <img src="arrow.svg" alt=""></img>
                             </div>
-                        </div> <hr></hr>
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
+                        </div> </button><hr></hr>
+                        <button className='helpBtn'><div className="row helptype">
+                            <div className="col-sm-11 col-11 text-left">
                                 SMS/OTP issues
                             </div>
                             <div className="col-sm-1 col-1">
                                 <img src="arrow.svg" alt=""></img>
                             </div>
-                        </div>    
+                        </div></button>    
                     </div>
 
                     <div className="row bookappointhead">
@@ -87,30 +87,34 @@ export default class HelpComponent extends Component {
                     </div>
 
                     <div className="onlinesolution bookappoint">
-                            <div className="row helptype">
-                                <div className="col-sm-11 col-11">
+                            <button className='helpBtn'><div className="row helptype">
+                                <div className="col-sm-11 col-11 text-left">
                                     Questions not answered
                                 </div>
                                 <div className="col-sm-1 col-1">
                                     <img src="arrow.svg" alt=""></img>
                                 </div>
-                            </div><hr></hr>
-                            <div className="row helptype">
-                            <div className="col-sm-11 col-11">
-                                    Not happy with response
-                            </div>
-                            <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
-                            </div>
-                        </div> <hr></hr>
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
-                                    Payment issues
-                            </div>
-                            <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
-                            </div>
-                        </div> 
+                            </div></button><hr></hr>
+                            <button className='helpBtn'>
+                                <div className="row helptype">
+                                    <div className="col-sm-11 col-11 text-left">
+                                            Not happy with response
+                                    </div>
+                                    <div className="col-sm-1 col-1">
+                                        <img src="arrow.svg" alt=""></img>
+                                    </div>
+                               </div>
+                            </button> <hr></hr>
+                            <button className='helpBtn'>
+                                <div className="row helptype">
+                                    <div className="col-sm-11 col-11 text-left">
+                                            Payment issues
+                                    </div>
+                                    <div className="col-sm-1 col-1">
+                                        <img src="arrow.svg" alt=""></img>
+                                    </div>
+                               </div> 
+                            </button>
                     </div>
 
                     <div className="row bookappointhead">
@@ -123,38 +127,38 @@ export default class HelpComponent extends Component {
                     </div>
 
                     <div className="feedback bookappoint">
-                        <div className="row helptype">
-                            <div className="col-sm-11 col-11">
+                        <button className='helpBtn'><div className="row helptype">
+                            <div className="col-sm-11 col-11 text-left">
                                 My feedback in not getting published
                             </div>
                             <div className="col-sm-1 col-1">
                                 <img src="arrow.svg" alt=""></img>
                             </div>
-                        </div><hr></hr>
-                        <div className="row helptype">
-                        <div className="col-sm-11 col-11">
-                                Unable to write a feedback
-                        </div>
-                        <div className="col-sm-1 col-1">
-                            <img src="arrow.svg" alt=""></img>
-                        </div>
-                    </div> <hr></hr>
-                    <div className="row helptype">
-                        <div className="col-sm-11 col-11">
+                        </div></button><hr></hr>
+                        <button className='helpBtn'><div className="row helptype">
+                                <div className="col-sm-11 col-11 text-left">
+                                        Unable to write a feedback
+                                </div>
+                                <div className="col-sm-1 col-1">
+                                    <img src="arrow.svg" alt=""></img>
+                                </div>
+                        </div></button><hr></hr>
+                        <button className='helpBtn'><div className="row helptype">
+                        <div className="col-sm-11 col-11 text-left">
                             Booking failure
                         </div>
                         <div className="col-sm-1 col-1">
                             <img src="arrow.svg" alt=""></img>
                         </div>
-                    </div> <hr></hr>
-                    <div className="row helptype">
-                        <div className="col-sm-11 col-11">
+                    </div></button> <hr></hr>
+                    <button className='helpBtn'><div className="row helptype">
+                        <div className="col-sm-11 col-11 text-left">
                             I want to edit my feedback
                         </div>
                         <div className="col-sm-1 col-1">
                             <img src="arrow.svg" alt=""></img>
                         </div>
-                    </div>
+                    </div></button>
                     </div>
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">

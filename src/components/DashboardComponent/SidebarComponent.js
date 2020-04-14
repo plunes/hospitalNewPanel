@@ -41,7 +41,7 @@ class SidebarComponent extends Component {
               Profile
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
-            {/* <a href="/availability"
+            <a href="/availability"
               className="list-group"
               // onClick={this.handleavailabilityClick}
             >
@@ -50,7 +50,7 @@ class SidebarComponent extends Component {
               </span>
               My Availability
               <img className="arrowdesign" src="arrow.svg"></img>
-            </a> <hr></hr> */}
+            </a> <hr></hr>
             <a href="/appointments"
               className="list-group"
               // onClick={this.handleappointmentClick}
@@ -61,7 +61,7 @@ class SidebarComponent extends Component {
               Appointments
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
-            <a href="/my-catalogue"
+            {/* <a href="/my-catalogue"
               className="list-group"
             >
               <span>
@@ -69,8 +69,8 @@ class SidebarComponent extends Component {
               </span>
               My catalogue
               <img className="arrowdesign" src="arrow.svg"></img>
-            </a> <hr></hr>
-            {/* <a href="/settings"
+            </a> <hr></hr> */}
+            <a href="/settings"
               className="list-group"
             >
               <span>
@@ -78,7 +78,7 @@ class SidebarComponent extends Component {
               </span>
               Settings
               <img className="arrowdesign" src="arrow.svg"></img>
-            </a> <hr></hr> */}
+            </a> <hr></hr>
             <a href="/manage"
               className="list-group"
               // onClick={this.handlemanageClick}
@@ -89,16 +89,16 @@ class SidebarComponent extends Component {
               Manage Payment
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </a> <hr></hr>
-            {/* <a href="#"
+            <a href="/help"
               className="list-group"
-              onClick={this.handlehelpClick}
+              // onClick={this.handlehelpClick}
             >
               <span>
                 <img className="sidebaricon" src="/Help.png"></img>
               </span>
               Help
               <img className="arrowdesign" src="arrow.svg"></img>
-            </a> <hr></hr> */}
+            </a> <hr></hr>
             <a href="/aboutus"
               className="list-group"
               // onClick={this.handleaboutClick}

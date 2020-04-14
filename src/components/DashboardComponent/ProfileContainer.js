@@ -126,12 +126,18 @@ class ProfileContainer extends React.Component {
               <p className="maxhospitaladd">{this.props.user.address}</p>
             </div>
           </div>
-          {/* <div class="achivementlogo text-center">
-                  <img src="/achivement.png"></img>
-              </div>
-              <div class="achivement text-center">
-                  <p>Achievement</p>
-              </div> */}
+          <div className="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4 achivementlogo text-center">
+                        <a><img src="/achivement.png"></img></a>
+                        <p><b>Achievement</b></p>
+                </div>
+                <div class="col-md-4 achivementlogo text-center">
+                        <a href="/my-catalogue"><img src="/cata.svg" className='catalogueImg'></img></a><br></br>
+                        <p><b>Catalogue</b></p>
+                </div>
+                <div class="col-md-2"></div>
+          </div>
           {/* <div class="row mainBodyMaxHospitalrow4">
                     <div class="col-xs-1 col-sm-1 col">
                         <img src="Location.png"></img>
