@@ -6,9 +6,9 @@
         opacity: 1;}
 
 .HospitalCoverImg
-        {width: 911px;
+        {width: inherit;
         margin-left: 21px;
-        margin-top: 5px; height:500px;}
+        margin-top: 5px; height:auto;}
 
 .HospitalCover
         {position: relative;     
