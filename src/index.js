@@ -11,6 +11,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
+import { ToastProvider } from 'react-toast-notifications'
+
 
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker
@@ -26,9 +28,11 @@ if ("serviceWorker" in navigator) {
 
 ReactDOM.render(
     <Provider store = {store}>
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>
+      <BrowserRouter>
+        <ToastProvider>
+          <App/>
+        </ToastProvider>
+      </BrowserRouter>
     </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

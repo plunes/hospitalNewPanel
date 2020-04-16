@@ -30,6 +30,7 @@ import CatalogueComponent from './components/DashboardComponent/CatalogueCompone
 import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
 
+
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
   <div>{message.body}</div>

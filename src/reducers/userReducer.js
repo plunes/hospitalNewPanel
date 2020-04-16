@@ -1,7 +1,8 @@
 
 import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, 
-   BUSINESS_LOST, SOLUTION_USERS, GET_CATALOGUE} from '../actions/types';
+   BUSINESS_LOST, SOLUTION_USERS, GET_CATALOGUE, CLEAR_SUBMIT_PROFILE_RET,
+   SUBMIT_PROFILE_RET} from '../actions/types';
 
 const initialState = {
   userDetail: {},
@@ -15,11 +16,24 @@ const initialState = {
   businessEarn: null,
   businessLost: null,
   solutionUsers: [],
-  catalogues:[]
+  catalogues:[],
+  submitProfileRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case SUBMIT_PROFILE_RET:
+      return {
+        ...state,
+        submitProfileRet: action.payload
+      };
+
+    case CLEAR_SUBMIT_PROFILE_RET:
+      return {
+        ...state,
+        submitProfileRet: false
+      };
+
     case NEW_USER:
       return {
         ...state,

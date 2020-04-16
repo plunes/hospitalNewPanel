@@ -1,9 +1,77 @@
 import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
+import { getUserDetails , submitProfileDetails, clearSubmitProfileRet} from "../../actions/userActions"
+import { connect } from 'react-redux';
+import {notify} from "../../utils/notification"
+import EditProfileForm from "../functional/EditProfile"
+import redux from "redux"
 
-class EditProfileComponent extends Component {
+class EditProfileComponent extends React.PureComponent {
+    constructor(props){
+        super(props)
+        this.state = {
+            valid:true,
+            phone:'',
+            email:'',
+            fullname:'',
+            location:'',
+            initRen:true,
+            errorText:false,
+            successText:false
+        }
+    }
+
+   async componentDidMount(){  
+        // if(!!this.props.user){
+        //     this.setState({
+        //         fullname:this.props.user.name,
+        //         email:this.props.user.email,
+        //         phone:this.props.user.mobileNumber,
+        //         location:this.props.user.address,
+        //         initRen:false
+        //     })
+        // }
+        await this.props.getUserDetails()
+   }
+    handleChange = (e)=>{
+        console.log(e.target.name)
+        console.log(e.target.value)
+        console.log("Inside handleChange")
+        this.setState({
+            [e.target.name]: e.target.value
+          });
+    }
+    componentWillReceiveProps(nextProps){
+        if(!!this.state.initRen){
+            this.setState({
+                fullname:nextProps.user.name,
+                email:nextProps.user.email,
+                phone:nextProps.user.mobileNumber,
+                location:nextProps.user.address,
+                initRen:false
+            })
+        }
+    }
+
+    clearNotif = () =>{
+        this.setState({
+            errorText:false,
+            successText:false
+        })
+    }
+
+    submitdetails = () => {
+        if(this.state.fullname === '' ||this.state.email==='' || this.state.phone==="" || this.state.location==="" ){
+            notify("Enter all the details",'success')
+        }else{
+            notify("All Details have been entered", 'success')
+        }
+    }
+
     render() {
+        console.log(this.state," this.state in Edit Profile Component")
+        console.log(this.props," this.props in Edit Profile Component")
         return (
             <div>
                 <div className='row'>
@@ -14,8 +82,26 @@ class EditProfileComponent extends Component {
                         <SidebarComponent />
                     </div>
                     <div className='col-md-7'>
-                        <div className = 'editProfileComponent'>
-                            Edit Profile
+                        <div className = 'settingpage'>
+                           <div className="settingpageBody">
+                               <div className='settingtopic'>
+                                    <p>Edit Profile</p>
+                               </div>
+                               <EditProfileForm 
+                                fullname = {this.state.fullname}
+                                email = {this.state.email}
+                                phone = {this.state.phone}
+                                location = {this.state.location}
+                                handleChange = {this.handleChange}
+                                errorText = {this.state.errorText}
+                                successText = {this.state.successText}
+                                clearNotif = {this.clearNotif}
+                                submitProfileDetails = {this.props.submitProfileDetails}
+                                submitProfileRet = {this.props.submitProfileRet}
+                                clearSubmitProfileRet = {this.props.clearSubmitProfileRet}
+                            
+                               />
+                               </div>
                         </div>
                     </div>
                 </div>
@@ -24,4 +110,22 @@ class EditProfileComponent extends Component {
     }
 }
 
-export default EditProfileComponent;
+const mapStateToProps = state => ({
+     user: state.user.userDetail,
+     submitProfileRet:state.user.submitProfileRet
+})
+
+
+  export default connect(mapStateToProps, { 
+    getUserDetails,
+    submitProfileDetails,
+    clearSubmitProfileRet
+})(EditProfileComponent);
+
+
+// export default connect(mapStateToProps, {
+//      getUserDetails,
+//      submitProfileDetails,
+//      ...mapDispatchToProps()
+// })(EditProfileComponent);
+// Call userdetails from

@@ -1,10 +1,21 @@
 import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, UNREAD_LENGTH, UNREAD_NOTIFICATION,
    GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS,
-   GET_CATALOGUE
+   GET_CATALOGUE,
+   PROFILE_DATA_RET,
+   SUBMIT_PROFILE_RET,
+   CLEAR_SUBMIT_PROFILE_RET
   } from './types';
 import history from '../history';
 import axios from 'axios';
 // import { connect } from 'react-redux';
+
+export const clearSubmitProfileRet = (data) => dispatch => {
+        return  dispatch({
+            type: CLEAR_SUBMIT_PROFILE_RET,
+            payload:data
+          })
+}
+
 
 let baseUrl = "https://devapi.plunes.com/v4"
 // let baseUrl = "https://plunes.co/v4"
@@ -24,6 +35,60 @@ export const getUserCatalogue = () => async dispatch => {
             payload : res.data.data
           })
         }
+      }
+    })
+}
+
+export const getProfileDetails = () => async dispatch => {
+  let token = localStorage.getItem('token');
+  return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data')
+        if(res.data.data && res.data.data.length > 0){
+          dispatch({
+            type : PROFILE_DATA_RET,
+            payload : res.data.data
+          })
+        }
+      }
+    })
+}
+
+
+export const submitProfileDetails = (uData) => async dispatch => {
+  console.log(uData,"Data in SubmitProfile Action")
+  let obj = {
+    "name": uData.name,
+    "email": uData.email,
+    "address": uData.location,
+    "mobileNumber":uData.phone
+  }
+   
+  console.log()
+  
+  let token = localStorage.getItem('token');
+  return await axios.put(baseUrl + '/user/', obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res.data, 'data iin response')
+        dispatch({
+          type:SUBMIT_PROFILE_RET,
+           payload:{
+            success:true,
+            message:'Profile Successfully Updated!'
+           }
+        })
+        
+      }else{
+        dispatch({
+          type:SUBMIT_PROFILE_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..'
+           }
+        })
       }
     })
 }

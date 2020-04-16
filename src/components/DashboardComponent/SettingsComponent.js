@@ -28,7 +28,7 @@ export default class SettingsComponent extends Component {
                          <div className='col-md-6'>
                               <div className="settingpage">
                                    <div className="settingpageBody">
-                                        <div className="settingtopic"><p>Settings</p></div>
+                                        <div className="settingtopic"><p >Settings</p></div>
                                         <div className="row settingfont settingtype">
                                              <div className="col-xs-3 col-sm-1 col settingtypecol1"><img src="Account-Settings.png" alt=''></img></div>
                                              <div className="col-xs-9 col-sm-11 col">Account Settings</div>
@@ -46,7 +46,7 @@ export default class SettingsComponent extends Component {
                                              </div><hr></hr> */}
                                              <div className="row accsetrow" onClick= {this.handleClick}>
                                                   <div className="col-sm-1 col settingcol1"><img src="Edit-Profile.png" alt=''></img></div>
-                                                  <div className="col-sm-9 col settingcol2"><p className="typeofsetting">Edit Profile</p></div>
+                                                  <div className="col-sm-9 col settingcol2"><p className="typeofsetting cursor-pointer">Edit Profile</p></div>
                                                   <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg" alt=''></img></div>
                                              </div>
                                         </div>
