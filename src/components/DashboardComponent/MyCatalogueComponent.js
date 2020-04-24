@@ -3,9 +3,20 @@ import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 //import "./AvailabilityComponent.css";
 import "./MyCatalogueComponent.css";
-import { getUserCatalogue } from '../../actions/userActions'
+import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
+upload,
+uploadRetClr,
+downloadCatalogueClr,
+downloadCatalogue
+} from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
+import SearchComponent from "../functional/SearchComponent"
+import UploadCatalogue from "../functional/UploadCatalogue"
+import ModalComponent from "../ModalComponent"
+import DownloadCatalogue from "../functional/DownloadCatalogue"
+import Procedure from "../functional/Procedure"
+import EditProcedure from "../functional/editProcedure"
 
 // import history from '../../history';
 
@@ -15,9 +26,13 @@ class MyCatalogueComponent extends Component {
         this.state = {
             loader : true,
             rowsToDisplay: 20,
+            uploadCatalogFlag:false,
+            editFlag:false,
+            editCatalogFlag:false
         }
         this.handleClick = this.handleClick.bind(this);
     }
+
 
     async componentDidMount() {
         await this.props.getUserCatalogue()
@@ -26,6 +41,51 @@ class MyCatalogueComponent extends Component {
     handleClick() {
         this.setState({
             rowsToDisplay: this.state.rowsToDisplay + 5
+        })
+    }
+
+    generateUploadBody = () =>{
+        return(
+            <React.Fragment>
+               <UploadCatalogue
+               uploadProceduresClr ={this.props.uploadProceduresClr}
+               uploadProceduresRet ={this.props.uploadProceduresRet}
+               uploadProcedures = {this.props.uploadProcedures}
+
+               upload = {this.props.upload}
+               uploadRet = {this.props.uploadRet}
+               uploadRetClr = {this.props.uploadRetClr}
+               closeModal = {()=>this.setState({uploadCatalogFlag:false})}
+               />        
+            </React.Fragment>
+          
+        )
+    }
+
+    generateEditCatalogue = () =>{
+        return(
+            <EditProcedure
+
+            closeModal = {()=>this.handleCloseEditModal()}
+            />
+        )
+    }
+
+    handleCloseCataModal = () =>{
+        this.setState({
+            uploadCatalogFlag:false
+        })
+    }
+
+    handleCloseEditModal = () =>{
+        this.setState({
+            editCatalogFlag:false
+        })
+    }
+
+    handleEditInclusion = () =>{
+        this.setState({
+            editCatalogFlag:true
         })
     }
 
@@ -45,20 +105,31 @@ class MyCatalogueComponent extends Component {
                         </div>
                         <div className='row listOfService'>
                               <div className='col-md-4 text-center'>
-                                 <a href=""><img src="./upload.svg" alt=""></img>
+                                 <a onClick={(e)=>{
+                                     e.preventDefault()
+                                     this.setState({uploadCatalogFlag:true})
+                                    }
+                                     } href=""><img src="./upload.svg" alt=""></img>
                                  <p className="uploadCata">Upload File</p></a>
                               </div>
+                             <DownloadCatalogue
+                                downloadCatalogueClr = {this.props.downloadCatalogueClr}
+                                downloadCatalogueRet = {this.props.downloadCatalogueRet}
+                                downloadCatalogue ={this.props.downloadCatalogue}
+                             />
                               <div className='col-md-4 text-center'>
-                                 <a href=""><img src="./down.svg" alt=""></img>
-                                 <p className="uploadCata">Download Sample</p></a>
-                              </div>
-                              <div className='col-md-4 text-center'>
-                                 <a href=""><img src="./edit.svg" alt=""></img>
+                                 <a href="" onClick={(e)=>{
+                                     e.preventDefault()
+                                     this.setState({editFlag:true})
+                                    }}><img src="./edit.svg" alt=""></img>
                                  <p className="uploadCata">Edit Catalogue</p></a>
                               </div>
                         </div>
                         <div className="text-center">
-                            <input type="text" placeholder="Name the procedure or test here." name="search" className='catalogueSearchbar'></input>
+                            <SearchComponent 
+
+                            />
+                            
                         </div>
                         <div className='listOfService'>
                             <div className='row listOfServiceHeading'>
@@ -75,17 +146,13 @@ class MyCatalogueComponent extends Component {
                         </div>
                         {
                             this.props.catalogues.length > 0 ? this.props.catalogues.slice(0, this.state.rowsToDisplay).map( (c, i) => (
-                            <div>
-                            <div className = 'row listOfService' key = {i}>
-                                <div className='col-md-6'>{c.service}</div>
-                                <div className='col-md-3'>Rs. {c.price[0]}</div>
-                                <div className='col-md-3 catalogueVariance'>{c.variance}%</div>
-                            </div>
-                            <div className = 'row listOfService'>
-                                 <div className='col-md-8'><hr></hr></div>
-                                 <div className='col-md-4'></div>
-                            </div>
-                            </div>
+
+                            <Procedure 
+                            id = {i}
+                            data = {c}
+                            editFlag = {this.state.editFlag}
+                            handleEditInclusion = {this.handleEditInclusion}
+                            />
                             )) : 
                             <div>
                                  {
@@ -109,13 +176,33 @@ class MyCatalogueComponent extends Component {
                     <div className='col-md-3'></div>
                 </div>
                 <br />
+            <ModalComponent 
+                open = {this.state.uploadCatalogFlag}
+                handleClose = {this.handleCloseCataModal}
+                modalBody = {this.generateUploadBody}
+            />
+
+            <ModalComponent 
+                open = {this.state.editCatalogFlag}
+                handleClose = {this.handleCloseEditModal}
+                modalBody = {this.generateEditCatalogue}
+                />  
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    catalogues: state.user.catalogues
+    catalogues: state.user.catalogues,
+    uploadProceduresRet:state.user.uploadProceduresRet,
+    uploadProceduresLoading:state.user.uploadProceduresLoading,
+    uploadRet:state.user.uploadRet,
+    uploadLoading:state.user.uploadLoading,
+    downloadCatalogueRet:state.user.downloadCatalogueRet
 })
 
-export default connect(mapStateToProps, { getUserCatalogue })(MyCatalogueComponent);
+export default connect(mapStateToProps, { getUserCatalogue, uploadProcedures, uploadProceduresClr, upload,
+uploadRetClr,
+downloadCatalogue,
+downloadCatalogueClr
+})(MyCatalogueComponent);

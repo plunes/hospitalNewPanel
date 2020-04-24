@@ -3,11 +3,347 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
    GET_CATALOGUE,
    PROFILE_DATA_RET,
    SUBMIT_PROFILE_RET,
-   CLEAR_SUBMIT_PROFILE_RET
+   CLEAR_SUBMIT_PROFILE_RET,
+   RESET_PASS_RET,
+   CLR_RESET_PASS,
+   LOGOUT_DEVICES_RET,
+   LOGOUT_DEVICES,
+   LOGOUT_DEVICES_CLR,
+   UPLOAD,
+   UPLOAD_RET,
+   UPLOAD_RET_CLR,
+
+   UPDATE_IMAGE,
+   UPDATE_IMAGE_RET,
+   UPDATE_IMAGE_CLR,
+
+   // PROCEDURE SEARCH
+  
+   SEARCH_PROCEDURE,
+   SEARCH_PROCEDURE_RET,
+   SEARCH_PROCEDURE_CLR,
+
+   //UPLOAD PROCEDURE
+   UPLOAD_PROCEDURE,
+   UPLOAD_PROCEDURE_RET,
+   UPLOAD_PROCEDURE_CLR,
+
+  //DOWNLOAD CATALOGUE
+  DOWNLOAD_CATALOGUE,
+  DOWNLOAD_CATALOGUE_RET,
+  DOWNLOAD_CATALOGUE_CLR
   } from './types';
 import history from '../history';
 import axios from 'axios';
 // import { connect } from 'react-redux';
+
+let baseUrl = "https://devapi.plunes.com/v5"
+// let baseUrl = "https://plunes.co/v4"
+// let baseUrl = "http://localhost:5000"
+// let baseUrl = "http://3.6.212.85/v4"
+
+
+//DOWNLOAD_CATALOGUE
+
+export const downLoadCatalogueAction = (data) => dispatch => {
+  return  dispatch({
+      type: DOWNLOAD_CATALOGUE,
+      payload:data
+    })
+}
+
+export const downloadCatalogueClr = (data) => dispatch => {
+return  dispatch({
+type: DOWNLOAD_CATALOGUE_CLR,
+payload:data
+})
+}
+
+export const downloadCatalogue = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+    dispatch({
+      type : DOWNLOAD_CATALOGUE,
+      payload : "no-data-required"
+    })
+
+  return await axios.get(baseUrl + '/user/downloadCatalogue', 
+   { 'headers': {
+      'Authorization': token,
+      type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    } ,
+    'responseType': 'blob'
+    })
+    .then((res) => {
+      console.log(res, 'res in downloadCatalog')
+      if (res.status === 200) {
+        console.log(res.data, 'data in upload downloadCatalog')
+        let  file = new Blob([res.data])
+        let fileURL = URL.createObjectURL(file)
+        var element = document.createElement('a');
+        element.setAttribute('href', fileURL);
+        element.setAttribute('download','file.xlsx');
+        document.body.appendChild(element)
+        element.click();
+          dispatch({
+            type : DOWNLOAD_CATALOGUE_RET,
+            payload :{
+              success:true,
+              message:"Catalogue download successfull"
+            }
+          })
+      }else{
+        dispatch({
+          type : DOWNLOAD_CATALOGUE_RET,
+          payload :{
+            success:false,
+            message:"Unable to process your request now. try later"
+          }
+        })
+      }
+    })
+}
+
+
+// UPLOAD PRICEDURE
+export const uploadProceduresAction = (data) => dispatch => {
+  return  dispatch({
+      type: UPLOAD_PROCEDURE,
+      payload:data
+    })
+}
+
+export const uploadProceduresClr = (data) => dispatch => {
+return  dispatch({
+type: UPLOAD_PROCEDURE_CLR,
+payload:data
+})
+}
+
+export const uploadProcedures = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+    dispatch({
+      type : UPLOAD_PROCEDURE,
+      payload : "no-data-required"
+    })
+    const body = new FormData();
+    body.append(data.field, data.file)
+
+  return await axios.post(baseUrl + '/upload/catalogue', body, { 'headers': { 'Authorization': token },'content-type':'multipart/form-data' })
+    .then((res) => {
+      console.log(res, 'res in searchProcedures')
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+          dispatch({
+            type : UPLOAD_PROCEDURE_RET,
+            payload :{
+              success:true,
+              message:"Catalogue successfully uploaded"
+            }
+          })
+      }else{
+        dispatch({
+          type : UPLOAD_PROCEDURE_RET,
+          payload :{
+            success:false,
+            message:"Unable to process your request now. try later"
+          }
+        })
+      }
+    })
+}
+
+
+
+
+// Search Procedures
+
+export const searchProceduresAction = (data) => dispatch => {
+  return  dispatch({
+      type: SEARCH_PROCEDURE,
+      payload:data
+    })
+}
+
+export const searchProceduresClr = (data) => dispatch => {
+return  dispatch({
+type: SEARCH_PROCEDURE_CLR,
+payload:data
+})
+}
+
+export const searchProcedures = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+    dispatch({
+      type : SEARCH_PROCEDURE,
+      payload : "no-data-required"
+    })
+
+  return await axios.put(baseUrl + '/analytics/getServices', data, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in searchProcedures')
+    
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in update Image')
+        if(!!res.data){
+          dispatch({
+            type : SEARCH_PROCEDURE_RET,
+            payload :{
+              success:res.data.success,
+              message:res.data.success?"Search Results":"Unable to process your request now. try later"
+            }
+          })
+        }
+      }
+    })
+}
+
+
+// update Image
+export const updateImageRet = (data) => dispatch => {
+  return  dispatch({
+      type: UPDATE_IMAGE,
+      payload:data
+    })
+}
+
+export const updateImageClr = (data) => dispatch => {
+return  dispatch({
+type: UPDATE_IMAGE_CLR,
+payload:data
+})
+}
+
+export const updateImage = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+    dispatch({
+      type : UPLOAD,
+      payload : "no-data-required"
+    })
+
+  return await axios.put(baseUrl + '/user', data, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in Upload')
+    
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in update Image')
+        if(!!res.data){
+          dispatch({
+            type : UPDATE_IMAGE_RET,
+            payload :{
+              success:res.data.success,
+              message:res.data.success?"Profile Image Updated":"Unable to process your request now. try later"
+            }
+          })
+        }
+      }
+    })
+}
+
+
+// upload Image
+
+export const uploadRet = (data) => dispatch => {
+  return  dispatch({
+      type: UPLOAD_RET,
+      payload:data
+    })
+}
+
+export const uploadRetClr = (data) => dispatch => {
+return  dispatch({
+type: UPLOAD_RET_CLR,
+payload:data
+})
+}
+
+export const upload = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+    dispatch({
+      type : UPLOAD,
+      payload : "no-data-required"
+    })
+    console.log(data,"After Upload")
+  const body = new FormData();
+  body.append(data.field, data.file)
+  console.log(body);
+  
+  
+  return await axios.post(baseUrl + '/upload', body, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in Upload')
+      if (res.status === 200) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in Upload')
+        if(!!res.data){
+          dispatch({
+            type : UPLOAD_RET,
+            payload :{
+              success:true,
+              message:"File successfully uploaded",
+              url:'https://devapi.plunes.com/v4/'+res.data.path
+            }
+          })
+        }
+      }else{
+        dispatch({
+          type : UPLOAD_RET,
+          payload :{
+            success:false,
+            message:"Unable to process your request now. try later"
+          }
+        })
+      }
+    })
+}
+
+
+// Logout from all other devices
+
+export const logoutDevicesRet = (data) => dispatch => {
+  return  dispatch({
+      type: LOGOUT_DEVICES_RET,
+      payload:data
+    })
+}
+
+export const logoutDevicesClr = (data) => dispatch => {
+return  dispatch({
+type: LOGOUT_DEVICES_CLR,
+payload:data
+})
+}
+
+export const logoutOtherDevices = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+  dispatch({
+    type : LOGOUT_DEVICES,
+    payload : "no-data-required"
+  })
+  return await axios.post(baseUrl + '/user/logout_all', {
+    deviceId:data.deviceId
+  }, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in logout All')
+        if(!!res.data){
+          dispatch({
+            type : LOGOUT_DEVICES_RET,
+            payload :{
+              success:res.data.success,
+              message:res.data.success?"Successfully logged out from all other devices":"Unable to process your request now. try later"
+            }
+          })
+        }
+      }
+    })
+}
+
+
+
+// Edit Profile
 
 export const clearSubmitProfileRet = (data) => dispatch => {
         return  dispatch({
@@ -16,15 +352,24 @@ export const clearSubmitProfileRet = (data) => dispatch => {
           })
 }
 
+export const clearResetRet = (data) => dispatch => {
+  return  dispatch({
+      type: CLR_RESET_PASS,
+      payload:data
+    })
+}
 
-let baseUrl = "https://devapi.plunes.com/v4"
-// let baseUrl = "https://plunes.co/v4"
-// let baseUrl = "http://localhost:5000"
-// let baseUrl = "http://3.6.212.85/v4"
+
+
+
 
 export const getUserCatalogue = () => async dispatch => {
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + '/analytics/getServices', { 'headers': { 'Authorization': token } })
+  return await axios.post(baseUrl + '/analytics/getServices', {
+    page:1,
+    searchQuery:'',
+    limit:50
+  },{ 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         //dispatch(getSolutionInsights())
@@ -52,6 +397,38 @@ export const getProfileDetails = () => async dispatch => {
             payload : res.data.data
           })
         }
+      }
+    })
+}
+
+
+export const submitResetDetails = (uData) => async dispatch => {
+  console.log(uData,"Data in submitResetDetails Action")
+  let obj = {
+    "mobileNumber": uData.phone,
+    "password": uData.password
+  }
+  let token = localStorage.getItem('token');
+  return await axios.put(baseUrl + '/user/update_password', obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in submitResetDetails")
+      if (res.data.success === true) {
+        console.log(res.data, 'data iin response')
+        dispatch({
+          type:RESET_PASS_RET,
+           payload:{
+            success:true,
+            message:'Password successfully changed'
+           }
+        })
+      }else{
+        dispatch({
+          type:RESET_PASS_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..'
+           }
+        })
       }
     })
 }
@@ -470,7 +847,7 @@ export const bankDetails = bankData => dispatch => {
 
 export const getInsights = () => async dispatch => {
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + '/analytics/insight', { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + '/analytics/actionableInsight', { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         console.log(res.data, 'Insights')

@@ -7,6 +7,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import  "./AvailabilityComponent.css";
 import Modal from 'react-modal';
 
+
 const customStyles = {
     content : {
       top                   : '50%',

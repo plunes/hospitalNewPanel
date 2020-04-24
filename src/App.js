@@ -29,6 +29,7 @@ import EditProfileComponent from './components/DashboardComponent/EditProfileCom
 import CatalogueComponent from './components/DashboardComponent/CatalogueComponent';
 import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
+import ChangePassword from "./components/ChangePassword"
 
 
 const Greet = ({ message }) => <div>
@@ -46,8 +47,9 @@ class App extends Component {
     }
     messaging.requestPermission()
       .then(async function () {
+        
         const token = await messaging.getToken();
-        //console.log(token)
+        console.log(token,"token In Messaging.request permissions")
         localStorage.setItem('deviceId', token)
       })
       .catch(function (err) {
@@ -91,6 +93,7 @@ class App extends Component {
             <Route exact path='/payment' component={PaymentComponent} />
             <Route exact path='/editProfile' component={EditProfileComponent} />
             <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
+            <Route exact path='/change-password' component={ChangePassword} />
           </Switch>
         </div>
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />

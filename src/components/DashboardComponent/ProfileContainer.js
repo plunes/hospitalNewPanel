@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 // import { expertDetails } from '../../actions/userActions';
 import './Profile.css';
 import Modal from "react-responsive-modal";
-import { expertDetails } from "../../actions/userActions";
+import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr, getProfileDetails } from "../../actions/userActions";
+import ProfileImage from '../functional/ProfileImage';
 
 
 class ProfileContainer extends React.Component {
@@ -119,7 +120,21 @@ class ProfileContainer extends React.Component {
         <div onSubmit={this.handleSubmit}>
           <div className="row HospitalProfileRow1">
             <div className="col-sm-3 col">
-              <div><img className="blackdot" src={this.props.user.imageUrl || '/profile.png'} alt=""></img></div>
+              <div>
+               <ProfileImage
+                user = {this.props.user}
+                upload = {this.props.upload}
+                uploadRetClr = {this.props.uploadRetClr}
+                uploadRet = {this.props.uploadRet}
+
+                updateImage ={this.props.updateImage}
+                updateImageRet ={this.props.updateImageRet}
+                updateImageClr ={this.props.updateImageClr}
+
+                getProfileDetails = {this.props.getProfileDetails}
+
+               />
+                </div>
             </div>
             <div className="col-sm-9 col maxhospitalrow1col2">
               <p className="maxhospital"><b>{this.props.user.name}</b></p>
@@ -138,22 +153,22 @@ class ProfileContainer extends React.Component {
                 </div>
                 <div class="col-md-2"></div>
           </div>
-          {/* <div class="row mainBodyMaxHospitalrow4">
+          <div class="row mainBodyMaxHospitalrow4">
                     <div class="col-xs-1 col-sm-1 col">
                         <img src="Location.png"></img>
                     </div>
                     <div class="col-xs-10 col-sm-10 col mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc"><b>Location :</b></span><span>{this.props.user.address }</span> */}
-          {/* <a href="#" class="editmainbodymaxhospital"> Edit</a> */}
-          {/* </p>
+          <a href="#" class="editmainbodymaxhospital"> Edit</a>
+         </p>
                     </div>
                     <div class="col-xs-1 col-sm-1 col"></div>
-                </div> */}
-          {/* <div class="row">
+                </div>
+         <div class="row">
                   <div class="col-sm-1 col"></div>
                   <div class="col-sm-10 col maxhospitalviewmap"><a href="" class="editmainbodymaxhospital viewmap">View on map</a></div>
                   <div class="col-sm-1 col"></div>
-              </div> */}
+              </div> 
           <hr className="Hospitalhr"></hr>
           <div className="row HospitalBio">
             <p className="intro"><strong>Introduction</strong></p>
@@ -263,7 +278,9 @@ class ProfileContainer extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  user: state.user.userDetail
+  user: state.user.userDetail,
+  uploadRet:state.user.uploadRet,
+  updateImageRet:state.user.updateImageRet
 })
 
-export default connect(mapStateToProps, { expertDetails })(ProfileContainer);
+export default connect(mapStateToProps, { expertDetails, upload, uploadRetClr, updateImage, updateImageClr, getProfileDetails })(ProfileContainer);
