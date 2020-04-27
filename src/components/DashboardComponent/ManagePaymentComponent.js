@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 import { connect } from 'react-redux';
-import { bankDetails } from "../../actions/userActions";
+import { bankDetails, submitBankDetailsClr } from "../../actions/userActions";
+import ManagePayment from "../functional/ManagePayment"
 import  "./AvailabilityComponent.css";
 
 class ManagePaymentComponent extends Component {
@@ -14,7 +15,8 @@ class ManagePaymentComponent extends Component {
             accnumber:  '',
             ifsccode: '',
             pannumber: '',
-            accountname: ''
+            accountname: '',
+            loading:true
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,6 +38,18 @@ class ManagePaymentComponent extends Component {
         this.props.bankDetails(data);
         
     }
+
+    bankDetails = (data) =>{
+        this.setState({
+            loading:true
+        })
+        this.props.bankDetails(data)
+    }
+    loadingOff = () =>{
+        this.setState({
+            loading:false
+        })
+    }
     
     async componentWillReceiveProps(nextProps){
         this.setState({
@@ -47,7 +61,8 @@ class ManagePaymentComponent extends Component {
                     accnumber : this.state.userDetails.bankDetails.accountNumber,
                     ifsccode : this.state.userDetails.bankDetails.ifscCode,
                     pannumber : this.state.userDetails.bankDetails.panNumber,
-                    accountname : this.state.userDetails.bankDetails.name
+                    accountname : this.state.userDetails.bankDetails.name,
+                    loading:false
                 }, () => {
                     console.log(this.state.userDetails.bankDetails.bankName)
                 })
@@ -72,18 +87,20 @@ class ManagePaymentComponent extends Component {
                     <SidebarComponent />
                 </div>
                 <div className='col-md-5'>
-                    
-                    <form onSubmit={this.handleSubmit} className="ManagePayForm AllComponents">
-                        <div className="ManagePay"><h4><b>Manage Payment</b></h4></div>
-                        <div className="managePay">
-                        <input type="text" className="form-control editbankdetailfield" placeholder="Bank Name" name="bankname" onChange={this.handleChange} value = {this.state.bankname}/>
-                        <input type="text" className="form-control editbankdetailfield" placeholder="Account Number" name="accnumber" onChange={this.handleChange} value= {this.state.accnumber }/>
-                        <input type="text" className="form-control editbankdetailfield" placeholder="IFSC Code" name="ifsccode" onChange={this.handleChange} value= {this.state.ifsccode}/>
-                        <input type="text" className="form-control editbankdetailfield" placeholder="Pan Number" name="pannumber" onChange={this.handleChange} value= {this.state.pannumber}/>
-                        <input type="text" className="form-control editbankdetailfield" placeholder="Account Holder's Name" name='accountname' onChange={this.handleChange} value= {this.state.accountname}/>
-                        <button type="submit" className="btn btn-success proceedbtn">Proceed</button>
-                        </div>
-                    </form>
+                    <ManagePayment 
+                     bankName = {this.state.bankName}
+                     accnumber = {this.state.accnumber}
+                     ifsccode = {this.state.ifsccode}
+                     pannumber = {this.state.pannumber}
+                     accountname = {this.state.accountname}
+                     handleSubmit = {this.handleSubmit}
+                     bankDetails = {this.bankDetails}
+                     submitBankDetailsRet = {this.props.submitBankDetailsRet}
+                     loadingOff = {this.loadingOff}
+                     loading = {this.state.loading}
+                     handleChange = {this.handleChange}
+                     submitBankDetailsClr = {this.props.submitBankDetailsClr}
+                    />
                 </div>
                 <div className='col-md-5'></div>
             </div>
@@ -92,7 +109,8 @@ class ManagePaymentComponent extends Component {
     }
 }
 const mapStateToProps = state => ({
-    user : state.user.userDetail
+    user : state.user.userDetail,
+    submitBankDetailsRet:state.user.submitBankDetailsRet
   })
-  export default connect(mapStateToProps, {bankDetails})(ManagePaymentComponent)
+  export default connect(mapStateToProps, {bankDetails, submitBankDetailsClr})(ManagePaymentComponent)
 

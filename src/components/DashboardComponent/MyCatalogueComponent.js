@@ -7,7 +7,9 @@ import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
 upload,
 uploadRetClr,
 downloadCatalogueClr,
-downloadCatalogue
+downloadCatalogue,
+searchProcedures,
+searchProceduresClr
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -17,6 +19,7 @@ import ModalComponent from "../ModalComponent"
 import DownloadCatalogue from "../functional/DownloadCatalogue"
 import Procedure from "../functional/Procedure"
 import EditProcedure from "../functional/editProcedure"
+import LoaderComponent from "../functional/LoaderComponent"
 
 // import history from '../../history';
 
@@ -24,18 +27,46 @@ class MyCatalogueComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loader : true,
+            loading : false,
             rowsToDisplay: 20,
             uploadCatalogFlag:false,
             editFlag:false,
-            editCatalogFlag:false
+            editCatalogFlag:false,
+            limit:50,
+            searchQuery:'',
+            page:1,
+            procedures:[]
         }
         this.handleClick = this.handleClick.bind(this);
     }
 
 
     async componentDidMount() {
-        await this.props.getUserCatalogue()
+        this.setState({
+            loading:true
+        })
+        await this.props.searchProcedures({
+            limit:50,
+            searchQuery:'',
+            page:1
+        })
+    }
+
+
+    componentWillReceiveProps(nextProps){
+            if(!!nextProps.searchProceduresRet){
+                if(nextProps.searchProceduresRet.success){
+                    this.setState({
+                        procedures:nextProps.searchProceduresRet.data,
+                        loading:false
+                    })
+                }else{
+                    this.setState({
+                        loading:false
+                    })
+                }
+                nextProps.searchProceduresClr()
+            }
     }
     
     handleClick() {
@@ -89,6 +120,26 @@ class MyCatalogueComponent extends Component {
         })
     }
 
+    searchProceduresFun = (data) =>{
+        this.setState({
+            loading:true
+        })
+        this.props.searchProcedures(data)
+    }
+
+    viewMore = () =>{
+        this.setState({
+            limit:this.state.limit + 50,
+            loading:true
+        },()=>this.props.searchProcedures(
+          {
+            limit:this.state.limit,
+            page:1,
+            searchQuery:''
+          } 
+        ))
+    }
+
     render() {
         return (
             <div>
@@ -127,6 +178,9 @@ class MyCatalogueComponent extends Component {
                         </div>
                         <div className="text-center">
                             <SearchComponent 
+                                searchProcedures = {this.searchProceduresFun}
+                                searchProceduresClr = {this.props.searchProceduresClr}
+                                searchProceduresRet = {this.props.searchProceduresRet}
 
                             />
                             
@@ -144,9 +198,16 @@ class MyCatalogueComponent extends Component {
                                 </div>
                             </div>
                         </div>
-                        {
-                            this.props.catalogues.length > 0 ? this.props.catalogues.slice(0, this.state.rowsToDisplay).map( (c, i) => (
 
+                        {
+                            this.state.loading &&    <div className="loading-wrapper_ris">
+                              <React.Fragment>
+                                 <LoaderComponent />
+                               </React.Fragment>
+                               </div>
+                        }
+                        {
+                            this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                             <Procedure 
                             id = {i}
                             data = {c}
@@ -154,23 +215,10 @@ class MyCatalogueComponent extends Component {
                             handleEditInclusion = {this.handleEditInclusion}
                             />
                             )) : 
-                            <div>
-                                 {
-                                   this.state.loader ? <div className="Loader">
-                                                            <Loader
-                                                                type="Oval"
-                                                                color="#00BFFF"
-                                                                height={200}
-                                                                width={200}
-                                                            // timeout={3000} //3 secs
-                                                            />
-                                                    </div> : <div>No Catalogue</div>
-                                 }
-                            </div>
-                           
+                           <div className='text-center'>No Procedures</div>
                         }
                         <div className='text-center'>
-                            <button onClick={this.handleClick} className="catalogueViewMore">View more</button>
+                            {this.state.procedures.length !==0 && <button onClick={this.viewMore} className="catalogueViewMore">View more</button> }    
                         </div>
                     </div>
                     <div className='col-md-3'></div>
@@ -198,10 +246,13 @@ const mapStateToProps = state => ({
     uploadProceduresLoading:state.user.uploadProceduresLoading,
     uploadRet:state.user.uploadRet,
     uploadLoading:state.user.uploadLoading,
-    downloadCatalogueRet:state.user.downloadCatalogueRet
+    downloadCatalogueRet:state.user.downloadCatalogueRet,
+    searchProceduresRet:state.user.searchProceduresRet
 })
 
-export default connect(mapStateToProps, { getUserCatalogue, uploadProcedures, uploadProceduresClr, upload,
+export default connect(mapStateToProps, { getUserCatalogue, 
+    uploadProcedures, uploadProceduresClr, upload,
+    searchProcedures, searchProceduresClr,
 uploadRetClr,
 downloadCatalogue,
 downloadCatalogueClr

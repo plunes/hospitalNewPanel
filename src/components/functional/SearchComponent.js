@@ -3,19 +3,24 @@ import {throttle} from 'throttle-debounce';
 
 const SearchComponent = (props) =>{
     const searchRef  = useRef()
-    
-    console.log(searchRef.value,"searchRef  in functional component")
-
     const  searchCall = () =>{
         if(!!searchRef.current){
             if(searchRef.current.value.length!==0){
-                console.log("Search Logic") 
+                 props.searchProcedures({
+                   searchQuery:searchRef.current.value,
+                   page:1,
+                   limit:50
+                 })
               }else{
-                  console.log("Else condition in SearchCall")
+                props.searchProcedures({
+                  searchQuery:searchRef.current.value,
+                  page:1,
+                  limit:50
+                })
               }
               }
         } 
-    const throttleSearch =  throttle(1000, searchCall);
+    const throttleSearch =  throttle(1500, searchCall);
     const  clearSearch = (e)=>{
      
       }

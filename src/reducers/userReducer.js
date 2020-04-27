@@ -23,7 +23,13 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    //DOWNLOAD CATALOGUE
    DOWNLOAD_CATALOGUE,
    DOWNLOAD_CATALOGUE_RET,
-   DOWNLOAD_CATALOGUE_CLR
+   DOWNLOAD_CATALOGUE_CLR,
+
+   SEARCH_PROCEDURE,
+   SEARCH_PROCEDURE_CLR,
+   SEARCH_PROCEDURE_RET,
+   SUBMIT_BANK_DETAILS_RET,
+   SUBMIT_BANK_DETAILS_CLR
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -67,17 +73,50 @@ const initialState = {
   downloadCatalogueClr:false,
 
   submitProfileLoading:false,
-  getUserLoading:false
+  getUserLoading:false,
+
+  searchProcedures:false,
+  searchProceduresRet:false,
+  searchProcedureLoading:false,
+
+  submitBankDetailsRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case SUBMIT_BANK_DETAILS_RET:
+      return {
+        ...state,
+        submitBankDetailsRet:action.payload
+      };
+
+      case SUBMIT_BANK_DETAILS_CLR:
+      return {
+        ...state,
+        submitBankDetailsRet:false
+      };
+  
 
   case DOWNLOAD_CATALOGUE:
     return {
       ...state,
       downloadCatalogue: action.payload,
       downloadCatalogueLoading:true
+    };
+
+    case SEARCH_PROCEDURE_RET:
+    return {
+      ...state,
+      searchProceduresRet: action.payload,
+      searchProcedureLoading:false
+    };
+
+    case SEARCH_PROCEDURE_CLR:
+    return {
+      ...state,
+      searchProceduresRet: false,
+      searchProcedureLoading:false
     };
 
     case GET_USER_DETAILS:

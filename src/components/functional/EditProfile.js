@@ -41,7 +41,7 @@ import React from "react"
 
   return (
     <div className="managePay">
-      {true && <LoaderComponent />}
+      {props.loadingState && <LoaderComponent />}
     <input 
     type="text"
     className="form-control editbankdetailfield input-field-common"

@@ -106,7 +106,7 @@ body {
   display: none;
 }
 .modal-heading_ris{
-  width: 40rem;
+  /* width: 40rem; */
 }
 
 .loader_ris {
@@ -153,4 +153,10 @@ body {
   to {
     transform: rotate(360deg);
 }
+}
+
+
+
+.loading-wrapper_ris{
+  position: relative;
 }

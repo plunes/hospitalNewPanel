@@ -37,7 +37,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   DOWNLOAD_CATALOGUE,
   DOWNLOAD_CATALOGUE_RET,
   DOWNLOAD_CATALOGUE_CLR,
-  GET_USER_DETAILS
+  GET_USER_DETAILS,
+
+  SUBMIT_BANK_DETAILS_RET,
+  SUBMIT_BANK_DETAILS_CLR
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -179,12 +182,17 @@ payload:data
 
 export const searchProcedures = (data) => async dispatch => {
   let token = localStorage.getItem('token');
-    dispatch({
-      type : SEARCH_PROCEDURE,
-      payload : "no-data-required"
-    })
+  let dataObject = {
+    page:data.page,
+    searchQuery:data.searchQuery,
+    limit:data.limit
+  }
+    // dispatch({
+    //   type : SEARCH_PROCEDURE,
+    //   payload : "no-data-required"
+    // })
 
-  return await axios.put(baseUrl + '/analytics/getServices', data, { 'headers': { 'Authorization': token } })
+  return await axios.post(baseUrl + '/analytics/getServices', dataObject, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res, 'res in searchProcedures')
     
@@ -195,8 +203,16 @@ export const searchProcedures = (data) => async dispatch => {
           dispatch({
             type : SEARCH_PROCEDURE_RET,
             payload :{
-              success:res.data.success,
-              message:res.data.success?"Search Results":"Unable to process your request now. try later"
+              success:true,
+              data:res.data.data
+            }
+          })
+        }else{
+          dispatch({
+            type : SEARCH_PROCEDURE_RET,
+            payload :{
+              success:false,
+              data:[]
             }
           })
         }
@@ -834,6 +850,13 @@ export const getBooking = () => async  dispatch => {
 
 
 };
+
+export const submitBankDetailsClr = () => dispatch =>{
+  dispatch({
+    type:SUBMIT_BANK_DETAILS_CLR,
+    payload:{}
+  })
+}
 export const bankDetails = bankData => dispatch => {
   let token = localStorage.getItem('token');
   var body = {
@@ -850,7 +873,21 @@ export const bankDetails = bankData => dispatch => {
     .then(res => res.json())
     .then(res => {
       if (res.success === true) {
-        dispatch(getUserDetails())
+        dispatch({
+          type:SUBMIT_BANK_DETAILS_RET,
+          payload:{
+            success:true,
+            message:"Bank details successfully updated"
+          }
+        })
+      }else{
+        dispatch({
+          type:SUBMIT_BANK_DETAILS_RET,
+          payload:{
+            success:false,
+            message:"Unable to process your request. try again later"
+          }
+        })
       }
     })
     .catch((e) => {

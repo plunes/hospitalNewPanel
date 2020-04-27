@@ -5,15 +5,6 @@ import React, { useLayoutEffect } from "react"
      
  console.log(props,"props in dowmnload Catalogue")  
   const { addToast } = useToasts()
-//   if(!!props.downloadCatalogueRet){
-//     console.log("props.downloadCatalogueRet",props.downLoadCatalogueRet)
-//       if(!!props.downloadCatalogueRet.success){
-//         addToast(props.downloadCatalogueRet.message, {appearance: 'success', autoDismiss:true}) 
-//       }else{
-//         addToast(props.downloadCatalogueRet.message, {appearance: 'error', autoDismiss:true})
-//       }
-//       props.downloadCatalogueClr()
-//   }
 
   const {data} = props
 

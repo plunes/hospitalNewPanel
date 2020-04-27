@@ -30,6 +30,7 @@ import CatalogueComponent from './components/DashboardComponent/CatalogueCompone
 import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
 import ChangePassword from "./components/ChangePassword"
+import Development from './components/Development'
 
 
 const Greet = ({ message }) => <div>
@@ -94,6 +95,7 @@ class App extends Component {
             <Route exact path='/editProfile' component={EditProfileComponent} />
             <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
             <Route exact path='/change-password' component={ChangePassword} />
+            <Route exact path='/dev' component={Development} />
           </Switch>
         </div>
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />
