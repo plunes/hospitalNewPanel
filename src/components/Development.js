@@ -68,6 +68,14 @@ class Development extends Component {
         //     }
         
         // })
+        <div className="add_dr">
+          <h4>Add Doctors</h4>
+          <p>Search for a doctor by name or email</p>
+          <div className="search_b">
+            
+           </div>
+
+        </div>
     }
 
     async componentDidMount(){

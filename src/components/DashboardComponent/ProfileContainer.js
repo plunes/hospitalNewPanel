@@ -191,8 +191,8 @@ class ProfileContainer extends React.Component {
           <label className="speclion">Specialization</label>
           <select className="form-control b-select">
             <option>Cardiologist</option>
-            <option>Male</option>
-            <option>Female</option>
+            <option>Cardiologist</option>
+            <option>Cardiologist</option>
           </select>
         </div>
       </div>
