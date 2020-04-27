@@ -112,14 +112,18 @@ class ProfileContainer extends React.Component {
     return (
       <div className="HospitalProfileBody AllComponents">
         <div className="row sur">
-          <p className="HospitalCover"><img className="HospitalCoverImg" src={this.props.user.coverImageUrl || '/democoverimg.svg'} alt=""></img></p>
+          <p className="HospitalCover"><img className="HospitalCoverImg mas_hos" src={'/maxhos.png'} alt=""></img></p>
+          
         </div>
+        <div className="edit_image">
+           
+            <img className="edit_icn"src={'/pen_editor.svg'}></img></div>
         {/* <div>
                 <input type="file" onChange={this.handleChange}/>
            </div> */}
         <div onSubmit={this.handleSubmit}>
           <div className="row HospitalProfileRow1">
-            <div className="col-sm-3 col">
+            <div className="col-sm-2 col-lg-2">
               <div>
                <ProfileImage
                 user = {this.props.user}
@@ -135,13 +139,16 @@ class ProfileContainer extends React.Component {
 
                />
                 </div>
+                <div className="edit_image2">
+           
+           <img className="edit_icn2"src={'/pen_editor.svg'}></img></div>
             </div>
-            <div className="col-sm-9 col maxhospitalrow1col2">
-              <p className="maxhospital"><b>{this.props.user.name}</b></p>
+            <div className="col-sm-9 col-lg-9 maxhospitalrow1col2 content_pos">
+              <p className="maxhospital max_cnt"><b>{this.props.user.name}</b></p>
               <p className="maxhospitaladd">{this.props.user.address}</p>
             </div>
           </div>
-          <div className="row">
+          <div className="row achimen_pd">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 achivementlogo text-center">
                         <a><img src="/achivement.png"></img></a>
@@ -153,16 +160,19 @@ class ProfileContainer extends React.Component {
                 </div>
                 <div class="col-md-2"></div>
           </div>
-          <div class="row mainBodyMaxHospitalrow4">
-                    <div class="col-xs-1 col-sm-1 col">
+          <div className="bdyhs_mar">
+          <div class="row mainBodyMaxHospitalrow4 ">
+           
+                    <div class="col-xs-1 col-sm-1 col-lg-1">
                         <img src="Location.png"></img>
                     </div>
-                    <div class="col-xs-10 col-sm-10 col mainBodyMaxHospitalrow4col2">
+                    <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc"><b>Location :</b></span><span>{this.props.user.address }</span> */}
           <a href="#" class="editmainbodymaxhospital"> Edit</a>
          </p>
                     </div>
-                    <div class="col-xs-1 col-sm-1 col"></div>
+                    <div class="col-xs-1 col-sm-1 col-lg-1"></div>
+                    </div>
                 </div>
          <div class="row">
                   <div class="col-sm-1 col"></div>
@@ -171,10 +181,60 @@ class ProfileContainer extends React.Component {
               </div> 
           <hr className="Hospitalhr"></hr>
           <div className="row HospitalBio">
-            <p className="intro"><strong>Introduction</strong></p>
+            <p className="intro col-lg-11"><strong>Introduction</strong> </p><span className="edi_intr">Edit</span>
             <p className="loc">{this.props.user.biography}</p>
           </div>
-          <div className="row ExpertRow">
+
+          <div className="col-md-8 col-12 cardio_le">
+        <div className="b-select-wrap">
+      
+          <label className="speclion">Specialization</label>
+          <select className="form-control b-select">
+            <option>Cardiologist</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+      </div>
+      <div className="Service_List">
+        <h6 className="s_list">Service List</h6>
+       <div className="row">
+         <div className="col-lg-6">
+           <p>Abiation </p>
+           </div>
+           <div className="col-lg-6 abito">
+             <p><a href="#">Know More</a></p>
+           </div>
+           <div className="col-lg-6">
+           <p>Cardiac Rehabilitation </p>
+           </div>
+           <div className="col-lg-6">
+             <p><a href="#">Know More</a></p>
+           </div>
+           <div className="col-lg-6">
+           <p>Coronary Artery Bypass Grafting </p>
+           </div>
+           <div className="col-lg-6">
+             <p><a href="#">Know More</a></p>
+           </div>
+           <div className="col-lg-6">
+           <p>Heart Transplant</p>
+           </div>
+           <div className="col-lg-6">
+             <p><a href="#">Know More</a></p>
+           </div>
+           <div className="col-lg-6">
+           <p>Space for text </p>
+           </div>
+           <div className="col-lg-6">
+             <p><a href="#">Know More</a></p>
+           </div> 
+         
+       </div>
+       <div className="vi_m">
+       <a href="#"className="view_more">View More</a></div>
+      </div>
+          {/* <div className="row ExpertRow">
             <div className="col-sm-6">
               <h4><strong>Team of Experts</strong></h4>
             </div>
@@ -187,8 +247,8 @@ class ProfileContainer extends React.Component {
                 Add Expert
                       </button>
             </div>
-          </div>
-          <Modal open={open} onClose={this.onCloseModal}>
+          </div> */}
+          {/* <Modal open={open} onClose={this.onCloseModal}>
             <form onSubmit={this.handleAddExpert} className="AddExpertForm">
               <div>
                 <h2 style={{ textAlign: "center" }}>Add Doctor</h2>
@@ -253,8 +313,8 @@ class ProfileContainer extends React.Component {
               </div>
               <p></p>
             </form>
-          </Modal>
-          <div>
+          </Modal> */}
+          {/* <div>
             {
               this.props.user.doctors ? this.props.user.doctors.map((d, index) => (
                 <div key={index} className="row ExpertsDetails">
@@ -268,9 +328,121 @@ class ProfileContainer extends React.Component {
                 </div>
               )) : false
             }
-          </div>
-          <div>
+          </div> */}
+          <div className="team_sec">
+          <div className="row">
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4">
+            <img src="/drshivani.png"/>
+            <div className="left_ali">
+            <h2>Dr. Seema Mehta</h2>
+            <p>Gynecologist</p>
+            <p>10 years of experience</p>
+            </div>
+
+        </div>
+
+    </div>
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4 timelinebox4_2">
+            <img src="/drrajeev.png"/>
+            <div className="left_ali">
+            <h2>Dr. Rajeev Nair</h2>
+            <p>Gynecologist</p>
+            <p>12 years of experience</p>
+            </div>
+        </div>
+
+    </div>
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4 timelinebox4_3">
+
+            <img src="/drnaman.png"/>
+            <div className="left_ali">
+                <h2>Dr. Sunil Mehta</h2>
+                <p>Gynecologist</p>
+                <p>12 years of experience</p>
+                </div>
+        </div>
+
+    </div>
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4 timelinebox4_4">
+            <img src="/drsachin.png"/>
+            <div className="left_ali">
+                <h2>Dr. Sunil Mehta</h2>
+                <p>Gynecologist</p>
+                <p>12 years of experience</p>
+                </div>
+
+        </div>
+
+    </div>
+</div>
+{/* 1st row end */}
+<div className="row">
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4">
+            <img src="/drshivani2.png"/>
+            <div className="left_ali">
+            <h2>Dr. Neha Gupta</h2>
+            <p>Gynecologist</p>
+            <p>10 years of experience</p>
+            </div>
+
+        </div>
+
+    </div>
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4 timelinebox4_2">
+            <img src="/drrohit.png"/>
+            <div className="left_ali">
+            <h2>Dr. Prakash Rao</h2>
+            <p>Gynecologist</p>
+            <p>12 years of experience</p>
+            </div>
+        </div>
+
+    </div>
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4 timelinebox4_3">
+
+            <img src="/drsuraj.png"/>
+            <div className="left_ali">
+                <h2>Dr. Suresh Tanwar</h2>
+                <p>Gynecologist</p>
+                <p>12 years of experience</p>
+                </div>
+        </div>
+
+    </div>
+    <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className="timelinebox4 timelinebox4_5">
+            <img src="/plus_2.svg"/>
             
+
+        </div>
+
+    </div>
+</div>
+{/* 2nd-end */}
+<div className="se-dr"><a href="#">See more Doctor's</a></div>
+<div className="achivmnt_b">
+  <div className="row">
+  <div className="col-lg-6">
+    <div className="cir_b"><img src="/cross.png" className="croS" /></div>
+  <img src="/ach1.png" className="ach1" />
+  <span className="three">+3</span>
+  <p>Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
+</div>
+<div className="col-lg-6">
+<div className="cir_b"><img src="/cross.png" className="croS" /></div>
+<img src="/ach2.png" className="ach1"/>
+<span className="three">+3</span>
+<p>Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
+</div>
+</div>
+  </div>
           </div>
         </div>
       </div>

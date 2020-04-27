@@ -10,15 +10,17 @@ export default class ProfileComponent extends Component {
             <div className='row'>
                 <DashboardHeader />
             </div>
+    
             <div className='row'>
                 <div className='col-md-3'>
                     <SidebarComponent />
                 </div>
-                <div className='col-md-7'>
+                <div className='col-md-8'>
                     <ProfileContainer />
                 </div>
                 <div className='col-md-2'></div>
             </div>
+           
         </div>
         )
     }

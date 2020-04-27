@@ -5,10 +5,10 @@
         border-radius: 10px;
         opacity: 1;}
 
-.HospitalCoverImg
-        {width: inherit;
+
+   /* .HospitalCoverImg     {width: inherit;
         margin-left: 21px;
-        margin-top: 5px; height:auto;}
+        margin-top: 5px; height:auto;} */
 
 .HospitalCover
         {position: relative;     
@@ -23,7 +23,7 @@
         margin: 384px 0px 0px 822px;}
 
 .blackdot
-        {margin-left: 68px;
+        {margin-left: 10px;
         width: 115px;
         border-radius: 50%;
         height: 109px;
@@ -79,3 +79,96 @@
 .catalogueImg{
         padding: 2%;
 }
+/* alka-css */
+.mas_hos{padding: 13px 19px 10px 28px;width: 100%;}
+.edit_image{background: #01D35A;border-radius: 50%;width: 50px;height: 50px;text-align: center;cursor: pointer;float: right;position: relative;
+        right: 26px;
+        top: -45px;}
+.edit_icn {width:20px;padding-top: 15px;}
+.content_pos{padding-top: 20px;}
+.max_cnt{    margin-bottom: 9px;}
+.achimen_pd{margin-top: 70px;}
+.edit_image2{background: #01D35A;border-radius: 50%;width: 30px;height: 30px;text-align: center;position: relative; left: 81px; top: -24px;}
+.edit_icn2{width: 10px;padding-top: 4px;}
+.bdyhs_mar{margin-top: 40px;margin-left: 20px;}
+.viewmap{color:#01D35A;padding-left: 18px;font-weight: 400;}
+.editmainbodymaxhospital{color: #01D35A;font-weight: 400;}
+.edi_intr{color: #01D35A; font-weight: 400;cursor: pointer;}
+.b-select-wrap {
+        border: none;
+        color: #474747;
+        overflow: hidden;
+        position: relative;
+        border-radius: 3px;
+        font-weight: 400;
+    }
+    
+    .b-select-wrap::after {
+        content: "⌄";
+        position: absolute;
+        right: 0px;
+        top: 10px;
+        z-index: 1;
+        text-align: center;
+        width: 10%;
+        height: 100%;
+        pointer-events: none;
+        font-size: 35px;
+        color: #989393;
+    }
+    
+    .b-select {
+        padding: 5px 15px;
+        background-color: white;
+        border: 0;
+        outline: none;
+        color: #8A8A8A;
+        font-size: 22px;
+        -webkit-appearance: none; /* for webkit browsers */
+        -moz-appearance: none; /* for firefox */
+        appearance: none; /* for modern browsers */
+       
+}
+.cardio_le{margin: 30px 10px 50px 20px;}
+.Service_List{padding-left: 40px;margin-bottom: 40px;}
+.s_list{font-size: 20px;color: #474747;font-weight: 400;}
+.abiatio{font-size: 15px;}
+.Service_List a {color:#474747;}
+.view_more{color: #01D35A !important;text-align: center;font-weight: 400;}
+.vi_m{text-align: center;margin: 20px;}
+.bg_clr{background: #AFAFAF;}
+.bg_clr img{width: 40px;}
+.team_sec{padding: 40px;}
+.timelinebox4 {
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.27);
+        text-align: center;
+        background-color: #AFAFAF;
+        margin-top: 30px;
+        height:auto;
+    }
+    .timelinebox4 img{width: 65px;
+        margin-top: 10px;}
+    .left_ali{text-align: left; color: #fff; padding-bottom: 5px;
+        padding-left: 11px;
+        padding-top: 13px;}
+    .left_ali h2{font-size: 14px;}
+    .left_ali p{font-size: 12px;line-height: 4px;}
+    .timelinebox4_5 {padding: 40px;}
+.se-dr{text-align: center;margin: 46px 20px;}
+.se-dr a{color: #01D35A; font-weight: 400;}
+.se-dr a:hover{color: #01D35A !important;}
+.achivmnt_b{background: #F8FFFB;padding: 40px;}
+.ach1 {width: 348px;
+        height: 250px;}
+        .cir_b{border-radius: 50%;width: 40px; height: 40px;background: #fff;position: absolute;
+                right: 0;
+                top: -16px;text-align: center;}
+        .croS{width: 14px;padding-top: 12px;}
+        span.three {
+                position: relative;
+                float: right;
+                top: -33px;
+                color: #fff;
+                right: 10px;
+            }
+            .achivmnt_b p{padding-top: 16px;}
