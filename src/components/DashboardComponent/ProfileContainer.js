@@ -182,7 +182,10 @@ class ProfileContainer extends React.Component {
           <hr className="Hospitalhr"></hr>
           <div className="row HospitalBio">
             <p className="intro col-lg-11"><strong>Introduction</strong> </p><span className="edi_intr">Edit</span>
-            <p className="loc">{this.props.user.biography}</p>
+            <div className="col-lg-12 text_cmt">
+            <textarea rows="4" cols="90" name="comment" form="usrform">
+            This is max hospital</textarea>
+            </div>
           </div>
 
           <div className="col-md-8 col-12 cardio_le">

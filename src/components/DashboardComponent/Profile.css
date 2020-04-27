@@ -172,3 +172,6 @@
                 right: 10px;
             }
             .achivmnt_b p{padding-top: 16px;}
+.text_cmt textarea{border: 0;
+        border-bottom: 1px solid #ced4da;
+        outline: 0;height: 180px;}
