@@ -1,7 +1,9 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
+import LoaderComponent from "./LoaderComponent"
 import React from "react"
 
  const EditProfileForm= (props) => {
+   console.log(props.loadingState,"props in EditProfileForm")
   const { addToast } = useToasts()
   if(!!props.submitProfileRet){
       if(!!props.submitProfileRet.success){
@@ -9,6 +11,7 @@ import React from "react"
       }else{
         addToast(props.submitProfileRet.message, {appearance: 'success', autoDismiss:true})
       }
+      props.loadingOff()
       props.clearSubmitProfileRet()
   }
 
@@ -22,6 +25,7 @@ import React from "react"
                  email:props.email,
                  location:props.location
             })
+            props.loading()
         }
     }
 
@@ -37,6 +41,7 @@ import React from "react"
 
   return (
     <div className="managePay">
+      {true && <LoaderComponent />}
     <input 
     type="text"
     className="form-control editbankdetailfield input-field-common"

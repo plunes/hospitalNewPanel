@@ -2,13 +2,18 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
    GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS,
    GET_CATALOGUE,
    PROFILE_DATA_RET,
+
+   SUBMIT_PROFILE,
    SUBMIT_PROFILE_RET,
    CLEAR_SUBMIT_PROFILE_RET,
+
    RESET_PASS_RET,
    CLR_RESET_PASS,
+
    LOGOUT_DEVICES_RET,
    LOGOUT_DEVICES,
    LOGOUT_DEVICES_CLR,
+
    UPLOAD,
    UPLOAD_RET,
    UPLOAD_RET_CLR,
@@ -31,7 +36,8 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   //DOWNLOAD CATALOGUE
   DOWNLOAD_CATALOGUE,
   DOWNLOAD_CATALOGUE_RET,
-  DOWNLOAD_CATALOGUE_CLR
+  DOWNLOAD_CATALOGUE_CLR,
+  GET_USER_DETAILS
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -411,9 +417,7 @@ export const submitResetDetails = (uData) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/user/update_password', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res,"res in submitResetDetails")
       if (res.data.success === true) {
-        console.log(res.data, 'data iin response')
         dispatch({
           type:RESET_PASS_RET,
            payload:{
@@ -442,6 +446,11 @@ export const submitProfileDetails = (uData) => async dispatch => {
     "address": uData.location,
     "mobileNumber":uData.phone
   }
+
+  dispatch({
+    type:SUBMIT_PROFILE,
+    payload:{}
+  })
    
   console.log()
   
@@ -449,7 +458,6 @@ export const submitProfileDetails = (uData) => async dispatch => {
   return await axios.put(baseUrl + '/user/', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
-        console.log(res.data, 'data iin response')
         dispatch({
           type:SUBMIT_PROFILE_RET,
            payload:{
@@ -712,6 +720,11 @@ export const getTimeslot = () => async dispatch => {
 }
 
 export const getUserDetails = () => async dispatch => {
+
+  // dispatch({
+  //   type:GET_USER_DETAILS,
+  //   payload:{}
+  // })
   // console.log('asdfasf')
   let token = localStorage.getItem('token')
   return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })

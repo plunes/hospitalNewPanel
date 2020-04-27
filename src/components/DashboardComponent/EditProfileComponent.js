@@ -18,7 +18,8 @@ class EditProfileComponent extends React.PureComponent {
             location:'',
             initRen:true,
             errorText:false,
-            successText:false
+            successText:false,
+            loading:true
         }
     }
 
@@ -32,7 +33,10 @@ class EditProfileComponent extends React.PureComponent {
         //         initRen:false
         //     })
         // }
-        await this.props.getUserDetails()
+        await this.setState({
+            loading:true
+        },()=>this.props.getUserDetails())
+         
    }
     handleChange = (e)=>{
         console.log(e.target.name)
@@ -49,7 +53,8 @@ class EditProfileComponent extends React.PureComponent {
                 email:nextProps.user.email,
                 phone:nextProps.user.mobileNumber,
                 location:nextProps.user.address,
-                initRen:false
+                initRen:false,
+                loading:false
             })
         }
     }
@@ -58,6 +63,17 @@ class EditProfileComponent extends React.PureComponent {
         this.setState({
             errorText:false,
             successText:false
+        })
+    }
+
+    loading = () =>{
+        this.setState({
+            loading:true
+        })
+    }
+    loadingOff = () =>{
+        this.setState({
+            loading:false
         })
     }
 
@@ -99,7 +115,11 @@ class EditProfileComponent extends React.PureComponent {
                                 submitProfileDetails = {this.props.submitProfileDetails}
                                 submitProfileRet = {this.props.submitProfileRet}
                                 clearSubmitProfileRet = {this.props.clearSubmitProfileRet}
-                            
+                                submitProfileLoading = {this.props.submitProfileLoading}
+                                getUserLoading = {this.props.getUserLoading}
+                                loading = {this.loading}
+                                loadingOff = {this.loadingOff}
+                                loadingState = {this.state.loading}
                                />
                                </div>
                         </div>
@@ -112,7 +132,9 @@ class EditProfileComponent extends React.PureComponent {
 
 const mapStateToProps = state => ({
      user: state.user.userDetail,
-     submitProfileRet:state.user.submitProfileRet
+     submitProfileRet:state.user.submitProfileRet,
+     submitProfileLoading:state.user.submitProfileLoading,
+     getUserLoading:state.user.getUserLoading
 })
 
 

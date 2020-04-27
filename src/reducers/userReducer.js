@@ -2,8 +2,10 @@
 import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, 
    BUSINESS_LOST, SOLUTION_USERS, GET_CATALOGUE, CLEAR_SUBMIT_PROFILE_RET,
-   SUBMIT_PROFILE_RET, RESET_PASS_RET, CLR_RESET_PASS,
+   SUBMIT_PROFILE_RET, RESET_PASS_RET, CLR_RESET_PASS, SUBMIT_PROFILE,
    LOGOUT_DEVICES_RET,
+
+   GET_USER_DETAILS,
    LOGOUT_DEVICES,
    LOGOUT_DEVICES_CLR,
    UPLOAD,
@@ -39,6 +41,8 @@ const initialState = {
   businessLost: null,
   solutionUsers: [],
   catalogues:[],
+
+  submitProfile:false,
   submitProfileRet:false,
   resetPassRet:false,
   
@@ -60,7 +64,10 @@ const initialState = {
 
   downloadCatalogue:false,
   downloadCatalogueRet:false,
-  downloadCatalogueClr:false
+  downloadCatalogueClr:false,
+
+  submitProfileLoading:false,
+  getUserLoading:false
 };
 
 export default function (state = initialState, action) {
@@ -72,6 +79,12 @@ export default function (state = initialState, action) {
       downloadCatalogue: action.payload,
       downloadCatalogueLoading:true
     };
+
+    case GET_USER_DETAILS:
+      return {
+        ...state,
+         getUserLoading:true
+      };
 
     case DOWNLOAD_CATALOGUE_RET:
     return {
@@ -185,22 +198,31 @@ export default function (state = initialState, action) {
         resetPassRet: false
       };
 
+      case SUBMIT_PROFILE:
+        return {
+          ...state,
+          submitProfileLoading:true
+        };
+
     case SUBMIT_PROFILE_RET:
       return {
         ...state,
-        submitProfileRet: action.payload
+        submitProfileRet: action.payload,
+        submitProfileLoading:false
       };
 
     case CLEAR_SUBMIT_PROFILE_RET:
       return {
         ...state,
-        submitProfileRet: false
+        submitProfileRet: false,
+        submitProfileLoading:false
       };
 
     case NEW_USER:
       return {
         ...state,
-        userDetail: action.payload
+        userDetail: action.payload,
+        getUserLoading:false
       };
     case GET_BOOKING:
       return {
