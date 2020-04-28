@@ -1,14 +1,11 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import React, { useLayoutEffect } from "react"
 import "./editProcedure.css"
+import SelectComponent from "../SelectComponent"
 
  const Procedure= (props) => {
-     
- console.log(props,"props in dowmnload Catalogue")  
   const { addToast } = useToasts()
-
   const {data} = props
-
   return (
 <React.Fragment>
   
@@ -19,38 +16,27 @@ import "./editProcedure.css"
         <div className='col-md-3 catalogueVariance'>{data.variance}%</div>
         <p onClick={()=>props.handleEditInclusion()} className={`col-md-3 edit-link ${!!props.editFlag?'':'display-none'}`}>Edit Inclusions</p>
     </div> */}
-    <div className="row">
+    {/* <SelectComponent i ={props.id} type='no_float_label' /> */}
+    <div className="row listOfService">
     <div className="col-lg-6">
-<label class="cont_ter">Anglogram of heart
+<label className="cont_ter">Anglogram of heart
   <input type="checkbox"/>
-  <span class="check2"></span>
+  <span className="check2"></span>
 </label>
       </div>
       <div className="col-lg-2">
       <input type="text" value="200" className="btm_bdr" />
       </div>
-      <div class="col-md-4 col-12 icon_p_m">
-       
-        <div class="price_se">
-          <select class="form-control slec_p">
+      <div className="col-md-4 col-12">
+        <div className="price_se">
+          <select className="form-control slec_p">
             <option>30%</option>
           </select>
-         <i class="fa fa-plus" aria-hidden="true"></i>
-          <i class="fa fa-minus" aria-hidden="true"></i>
-          <i class="fa fa-chevron-down" aria-hidden="true"></i>
-        
-        </div>
-        <div className="slect_box_mdl">
-          <ul>
-            <li>10%</li>
-            <li>20%</li>
-            <li>30%</li>
-            <li>40%</li>
-            <li>50%</li>
-            <li>60%</li>
-            
-           </ul>
+          <div className="plu_mi">
+          <i className="fa fa-plus" aria-hidden="true"></i>
+          <i className="fa fa-minus" aria-hidden="true"></i>
           </div>
+        </div>   
       </div>
       </div>
     <div>

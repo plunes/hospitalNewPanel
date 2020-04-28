@@ -3,8 +3,17 @@ import { connect } from 'react-redux';
 // import { expertDetails } from '../../actions/userActions';
 import './Profile.css';
 import Modal from "react-responsive-modal";
-import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr, getProfileDetails } from "../../actions/userActions";
+import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr,
+   getProfileDetails, updateBanner, updateBannerClr, updateAchievement, updateAchievementClr, editBio, editBioClr,
+   getUserDetails } from "../../actions/userActions";
 import ProfileImage from '../functional/ProfileImage';
+import ProfileBanner from '../functional/ProfileBanner';
+import DoctorComponent from "../functional/DoctorComponent"
+import Achievement from "../functional/Achievement"
+import EditBio from '../functional/EditBio';
+import ModalComponent from "../ModalComponent"
+import AddAchievement from '../functional/AddAchievement';
+// import GoogleComponent from "../GoogleMapComponent"
 
 
 class ProfileContainer extends React.Component {
@@ -19,7 +28,13 @@ class ProfileContainer extends React.Component {
       doctor_education : '',
       doctor_designation : '',
       doctor_department : '',
-      doctor_experience : ''
+      doctor_experience : '',
+      loadingBanner:false,
+      loadingProfileImage:false,
+      loading:false,
+      user:'',
+      editBioFlag:false,
+      achievementImage:false
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -28,41 +43,36 @@ class ProfileContainer extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // handleChange(e) {
-  //       console.log(this.props.user.doctor)
-  //         e.preventDefault();
-  //         this.setState({
-  //             file:  e.target.files,
+  componentWillReceiveProps(nextProps){
+    if(nextProps.user){
+      this.setState({
+        user:nextProps.user
+      })
+    }
+  }
 
+  generateAddAchievement = () =>{
+    return(
+        <React.Fragment>
+           <AddAchievement
+           updateAchievement =  {this.props.updateAchievement}
+           updateAchievementRet =  {this.props.updateAchievementRet}
+           updateAchievementClr =  {this.props.updateAchievementClr}
+           achievements = {this.props.user.achievements}
+           upload = {this.props.upload}
+           uploadRet = {this.props.uploadRet}
+           uploadRetClr = {this.props.uploadRetClr}
+           closeModal = {()=>this.setState({addAchievementFlag:false})}
+           achieveTitle = {this.state.achieveTitle}
+           handleAchievementChange = {(e)=>this.setState({achieveTitle:e.target.value})}
 
-  //         }, 
-  //           // async () => {
-
-  //           //   for(let i = 0; i<this.state.file.length; i++){
-  //           //       const data = new FormData();
-  //           //       data.append('file', this.state.file[i])
-  //           //      await axios.post("https://plunes.co/v4/upload", data, {
-  //           //           headers: {
-  //           //               'Content-Type': 'multipart/form-data'
-  //           //           }
-  //           //       }).then(res => {
-  //           //           if (res.status === 200) {
-  //           //               console.log(res);
-  //           //               // let report = {
-  //           //               //     reportUrl : "https://plunes.co/v4/" + res.data.path,
-  //           //               //     reportName : res.data.originalname
-  //           //               // }
-  //           //               // this.setState({
-  //           //               //     report: [...this.state.report, report],
-  //           //               // })
-  //           //           }
-  //           //       });
-  //           //   }
-
-
-  //         // });
-
-  //     };
+           achievementImage = {this.state.achievementImage}
+           toggleAchievementImage = {(data)=>this.setState({achievementImage:data})}
+           />
+        </React.Fragment>
+      
+    )
+}
 
   onOpenModal = () => {
     this.setState({ open: true });
@@ -93,7 +103,18 @@ class ProfileContainer extends React.Component {
     })
   }
 
-
+  removeAchievement = (i) =>{
+    let achievements = JSON.parse(JSON.stringify(this.props.user.achievements))
+  
+    achievements.splice(i, 1);
+    this.setState({
+      removeAchievementLoading:true,
+      selectedAchievement:i
+    },()=>this.props.updateAchievement({
+      achievements:achievements,
+      type:'delete'
+    }))
+  }
   handleSubmit(e) {
     e.preventDefault();
   }
@@ -104,23 +125,56 @@ class ProfileContainer extends React.Component {
     });
   }
 
+  handleBioChange = (e) =>{
+    this.setState({
+      user:{
+        ...this.state.user,
+        biography:e.target.value
+      }
+    })
+  }
+
+  updateBanner = (data) => {
+    this.setState({
+      loadingBanner:true
+    },()=>this.props.updateBanner(data))
+  }
+
+  updateImage = (data) =>{
+    this.setState({
+      loadingProfileImage:true
+    },()=>this.props.updateImage(data))
+  }
+
+  editBio = (data) =>{
+    this.setState({
+      editBioLoading:true
+    },()=> this.props.editBio(data))
+  }
+  
+  addAchievementClose =() =>{
+    this.setState({
+      addAchievementFlag:false
+    })
+  }
+
 
   render() {
-
     const { open } = this.state;
-    // console.log(this.props.user, 'vinay');
     return (
       <div className="HospitalProfileBody AllComponents">
-        <div className="row sur">
-          <p className="HospitalCover"><img className="HospitalCoverImg mas_hos" src={'/maxhos.png'} alt=""></img></p>
-          
-        </div>
-        <div className="edit_image">
-           
-            <img className="edit_icn"src={'/pen_editor.svg'}></img></div>
-        {/* <div>
-                <input type="file" onChange={this.handleChange}/>
-           </div> */}
+       <ProfileBanner
+       user = {this.props.user}
+       updateBanner = {this.updateBanner}
+       updateBannerRet = {this.props.updateBannerRet}
+       updateBannerClr = {this.props.updateBannerClr}
+       upload = {this.props.upload}
+       uploadRetClr = {this.props.uploadRetClr}
+       uploadRet = {this.props.uploadRet}
+       getProfileDetails = {this.props.getProfileDetails}
+       loadingOff = {()=>this.setState({loadingBanner:false})}
+       loading  = {this.state.loadingBanner}
+       />
         <div onSubmit={this.handleSubmit}>
           <div className="row HospitalProfileRow1">
             <div className="col-sm-2 col-lg-2">
@@ -131,11 +185,12 @@ class ProfileContainer extends React.Component {
                 uploadRetClr = {this.props.uploadRetClr}
                 uploadRet = {this.props.uploadRet}
 
-                updateImage ={this.props.updateImage}
+                updateImage ={this.updateImage}
                 updateImageRet ={this.props.updateImageRet}
                 updateImageClr ={this.props.updateImageClr}
-
                 getProfileDetails = {this.props.getProfileDetails}
+                loading  = {this.state.loadingProfileImage}
+                loadingOff = {()=>this.setState({loadingProfileImage:false})}
 
                />
                 </div>
@@ -151,7 +206,7 @@ class ProfileContainer extends React.Component {
           <div className="row achimen_pd">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 achivementlogo text-center">
-                        <a><img src="/achivement.png"></img></a>
+                        <a><img onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
                         <p><b>Achievement</b></p>
                 </div>
                 <div class="col-md-4 achivementlogo text-center">
@@ -167,7 +222,7 @@ class ProfileContainer extends React.Component {
                         <img src="Location.png"></img>
                     </div>
                     <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
-                        <p class="mainBodyMaxHospitalrow4col2para"><span class="loc"><b>Location :</b></span><span>{this.props.user.address }</span> */}
+                        <p class="mainBodyMaxHospitalrow4col2para"><span class="loc"><b>Location :</b></span><span>{this.props.user.address }</span> 
           <a href="#" class="editmainbodymaxhospital"> Edit</a>
          </p>
                     </div>
@@ -180,17 +235,24 @@ class ProfileContainer extends React.Component {
                   <div class="col-sm-1 col"></div>
               </div> 
           <hr className="Hospitalhr"></hr>
-          <div className="row HospitalBio">
-            <p className="intro col-lg-11"><strong>Introduction</strong> </p><span className="edi_intr">Edit</span>
-            <div className="col-lg-12 text_cmt">
-            <textarea rows="4" cols="90" name="comment" form="usrform">
-            This is max hospital</textarea>
-            </div>
-          </div>
+            <EditBio 
+              editBio = {this.editBio}
+              editBioRet = {this.props.editBioRet}
+              editBioClr = {this.props.editBioClr}
+              editBioFlag={this.state.editBioFlag}
+              handleBioChange = {this.handleBioChange}
+              loadingOff = {()=>this.setState({
+                editBioLoading:false
+              })}
+              biography = {this.state.user.biography}
+              toggleEditBio ={()=>this.setState({editBioFlag:!this.state.editBioFlag})}
+              getDetails = {this.props.expertDetails}
+              loading = {this.state.editBioLoading}
+              getUserDetails = {this.props.getUserDetails}
+            />
 
           <div className="col-md-8 col-12 cardio_le">
         <div className="b-select-wrap">
-      
           <label className="speclion">Specialization</label>
           <select className="form-control b-select">
             <option>Cardiologist</option>
@@ -237,194 +299,22 @@ class ProfileContainer extends React.Component {
        <div className="vi_m">
        <a href="#"className="view_more">View More</a></div>
       </div>
-          {/* <div className="row ExpertRow">
-            <div className="col-sm-6">
-              <h4><strong>Team of Experts</strong></h4>
-            </div>
-            <div className="col-sm-6 text-right">
-              <button
-                type="submit"
-                onClick={this.onOpenModal}
-                onChange={this.handleChange}
-                className="AddExpert">
-                Add Expert
-                      </button>
-            </div>
-          </div> */}
-          {/* <Modal open={open} onClose={this.onCloseModal}>
-            <form onSubmit={this.handleAddExpert} className="AddExpertForm">
-              <div>
-                <h2 style={{ textAlign: "center" }}>Add Doctor</h2>
-              </div>
-              <hr />
-              <div style={{ textAlign: "center" }} className="form-group"></div>
-
-              <div className="form-group">
-                <input
-                  className="AddExInput"
-                  name="doctor_name"
-                  value = {this.state.doctor_name}
-                  placeholder="Full Name"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="AddExInput"
-                  name="doctor_education"
-                  value = {this.state.doctor_education}
-                  placeholder="Educational Qualification"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="AddExInput"
-                  name="doctor_designation"
-                  value = {this.state.doctor_designation}
-                  placeholder="Designation"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="AddExInput"
-                  name="doctor_department"
-                  value = {this.state.doctor_department}
-                  placeholder="Department"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="AddExInput"
-                  name="doctor_experience"
-                  value = {this.state.doctor_experience}
-                  placeholder="Experience"
-                  onChange={this.handleChange}
-                  required
-                />
-              </div>
-              <div className="form-group" onSubmit={this.handleSubmit}>
-                <button type="submit" className="AddExpertBtn">
-                  Submit
-                </button>
-              </div>
-              <p></p>
-            </form>
-          </Modal> */}
-          {/* <div>
-            {
-              this.props.user.doctors ? this.props.user.doctors.map((d, index) => (
-                <div key={index} className="row ExpertsDetails">
-                  <div className="col-sm-4 text-right"><img src={d.imageUrl || '/profile.png'} className="ExpertImg" alt=""></img></div>
-                  <div className="col-sm-8">
-                    <div><b>{d.name}</b></div>
-                    <div>{d.education}</div>
-                    <div>{d.designation}</div>
-                    <div>{d.experience} years of experience</div>
-                  </div>
-                </div>
-              )) : false
-            }
-          </div> */}
+  
+  
           <div className="team_sec">
           <div className="row">
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4">
-            <img src="/drshivani.png"/>
-            <div className="left_ali">
-            <h2>Dr. Seema Mehta</h2>
-            <p>Gynecologist</p>
-            <p>10 years of experience</p>
-            </div>
-
-        </div>
-
-    </div>
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_2">
-            <img src="/drrajeev.png"/>
-            <div className="left_ali">
-            <h2>Dr. Rajeev Nair</h2>
-            <p>Gynecologist</p>
-            <p>12 years of experience</p>
-            </div>
-        </div>
-
-    </div>
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_3">
-
-            <img src="/drnaman.png"/>
-            <div className="left_ali">
-                <h2>Dr. Sunil Mehta</h2>
-                <p>Gynecologist</p>
-                <p>12 years of experience</p>
-                </div>
-        </div>
-
-    </div>
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_4">
-            <img src="/drsachin.png"/>
-            <div className="left_ali">
-                <h2>Dr. Sunil Mehta</h2>
-                <p>Gynecologist</p>
-                <p>12 years of experience</p>
-                </div>
-
-        </div>
-
-    </div>
-</div>
-{/* 1st row end */}
-<div className="row">
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4">
-            <img src="/drshivani2.png"/>
-            <div className="left_ali">
-            <h2>Dr. Neha Gupta</h2>
-            <p>Gynecologist</p>
-            <p>10 years of experience</p>
-            </div>
-
-        </div>
-
-    </div>
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_2">
-            <img src="/drrohit.png"/>
-            <div className="left_ali">
-            <h2>Dr. Prakash Rao</h2>
-            <p>Gynecologist</p>
-            <p>12 years of experience</p>
-            </div>
-        </div>
-
-    </div>
-    <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_3">
-
-            <img src="/drsuraj.png"/>
-            <div className="left_ali">
-                <h2>Dr. Suresh Tanwar</h2>
-                <p>Gynecologist</p>
-                <p>12 years of experience</p>
-                </div>
-        </div>
-
-    </div>
-    <div className="col-md-6 col-sm-12 col-lg-3">
+  {this.props.user?!!this.props.user.doctors?this.props.user.doctors.map((item,i) =>{
+    return (<DoctorComponent
+          data = {item}
+          i = {i}
+      />)
+  }):'':''}
+   <div className="col-md-6 col-sm-12 col-lg-3">
         <div className="timelinebox4 timelinebox4_5">
-            <img src="/plus_2.svg"/>
-            
-
-        </div>
+          <a href="/add-doctor"> 
+          <img  src="/plus_2.svg"/>
+          </a>
+   </div>
 
     </div>
 </div>
@@ -432,21 +322,32 @@ class ProfileContainer extends React.Component {
 <div className="se-dr"><a href="#">See more Doctor's</a></div>
 <div className="achivmnt_b">
   <div className="row">
-  <div className="col-lg-6">
-    <div className="cir_b"><img src="/cross.png" className="croS" /></div>
-  <img src="/ach1.png" className="ach1" />
-  <span className="three">+3</span>
-  <p>Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-</div>
-<div className="col-lg-6">
-<div className="cir_b"><img src="/cross.png" className="croS" /></div>
-<img src="/ach2.png" className="ach1"/>
-<span className="three">+3</span>
-<p>Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-</div>
+    {!!this.props.user?!!this.props.user.achievements?this.props.user.achievements.map((item,i)=>{
+      return (
+        <Achievement
+          data = {item}
+          i={i}
+          removeAchievement = {this.removeAchievement}
+          updateAchievementRet = {this.props.updateAchievementRet}
+          loading = {this.props.removeAchievementLoading}
+          selectedAchievement = {this.state.selectedAchievement}
+          updateAchievementClr = {this.props.updateAchievementClr}
+          getUser = {this.props.getProfileDetails}
+          loadingOff = {()=>this.setState({
+            removeAchievementLoading:false
+          })}
+         />
+      )
+    }):'':''}
+ 
 </div>
   </div>
           </div>
+          <ModalComponent 
+                open = {this.state.addAchievementFlag}
+                handleClose = {this.addAchievementClose}
+                modalBody = {this.generateAddAchievement}
+                />  
         </div>
       </div>
     )
@@ -455,7 +356,13 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = state => ({
   user: state.user.userDetail,
   uploadRet:state.user.uploadRet,
-  updateImageRet:state.user.updateImageRet
+  updateImageRet:state.user.updateImageRet,
+  updateBannerRet:state.user.updateBannerRet,
+  updateAchievementRet:state.user.updateAchievementRet,
+  editBioRet:state.user.editBioRet
 })
 
-export default connect(mapStateToProps, { expertDetails, upload, uploadRetClr, updateImage, updateImageClr, getProfileDetails })(ProfileContainer);
+export default connect(mapStateToProps, { expertDetails, 
+  upload, uploadRetClr, updateImage, updateImageClr, 
+  getProfileDetails, updateBannerClr, updateBanner,
+  updateAchievement, updateAchievementClr, editBioClr, editBio, getUserDetails })(ProfileContainer);

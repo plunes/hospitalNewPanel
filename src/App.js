@@ -15,6 +15,7 @@ import ManagePaymentComponent from './components/DashboardComponent/ManagePaymen
 import HelpComponent from './components/DashboardComponent/HelpComponent';
 import AboutUsComponent from './components/DashboardComponent/AboutUsComponent';
 import MyCatalogueComponent from './components/DashboardComponent/MyCatalogueComponent';
+import AddDoctorComponent from "./components/DashboardComponent/AddDoctorComponent"
 //import LogoutComponent from './components/DashboardComponent/LogoutComponent';
 // import { connect } from 'react-redux';
 import { getUserDetails } from "../src/actions/userActions";
@@ -95,7 +96,7 @@ class App extends Component {
             <Route exact path='/editProfile' component={EditProfileComponent} />
             <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
             <Route exact path='/change-password' component={ChangePassword} />
-            <Route exact path='/dev' component={Development} />
+            <Route exact path='/add-doctor' component={AddDoctorComponent} />
           </Switch>
         </div>
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />

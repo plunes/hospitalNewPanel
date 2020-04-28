@@ -54,4 +54,19 @@ export const SUBMIT_BANK_DETAILS = 'App/managePayment/SUBMIT_BANK_DETAILS'
 export const SUBMIT_BANK_DETAILS_RET = 'App/managePayment/SUBMIT_BANK_DETAILS_RET'
 export const SUBMIT_BANK_DETAILS_CLR = 'App/managePayment/SUBMIT_BANK_DETAILS_CLR'
 
+// UPDATE BANNER
+export const UPDATE_BANNER = 'App/managePayment/UPDATE_BANNER'
+export const UPDATE_BANNER_RET = 'App/managePayment/UPDATE_BANNER_RET'
+export const UPDATE_BANNER_CLR = 'App/managePayment/UPDATE_BANNER_CLR'
+
+// REMOVE ACHIEVEMENT
+export const UPDATE_ACHIEVEMENT = 'App/Profile/UPDATE_ACHIEVEMENT'
+export const UPDATE_ACHIEVEMENT_RET = 'App/Profile/UPDATE_ACHIEVEMENT_RET'
+export const UPDATE_ACHIEVEMENT_CLR = 'App/Profile/UPDATE_ACHIEVEMENT_CLR'
+
+// EDIT_BIO
+export const EDIT_BIO = 'App/Profile/EDIT_BIO'
+export const EDIT_BIO_RET = 'App/Profile/EDIT_BIO_RET'
+export const EDIT_BIO_CLR = 'App/Profile/EDIT_BIO_CLR'
+
 // export const LOGIN = 'LOGIN';

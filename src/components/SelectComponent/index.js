@@ -1,22 +1,55 @@
-import React from 'react'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import "./index.css"
 
-const SelectComponent = (props) => {
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    width:'100%',
+    select: {
+        '&:before': {
+            borderColor: 'green',
+        },
+        '&:after': {
+            borderColor: 'green',
+        }
+    }
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
+export default function SimpleSelect() {
+  const classes = useStyles();
+  const [age, setAge] = React.useState('');
 
-    return (
-        <div className="select_ris">
-        <select className="select-text_ris" >
-            <option value="" disabled selected></option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-        </select>
-        <span className="select-highlight_ris"></span>
-        <span className="select-bar_ris"></span>
-        <label className="select-label_ris">Select</label>
-    </div>
-    )
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  return (
+    <div>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          disableUnderline
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          onChange={handleChange}
+          className={classes.select}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+         </div>
+  );
 }
-
-export default SelectComponent

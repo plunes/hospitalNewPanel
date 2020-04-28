@@ -24,19 +24,9 @@ class EditProfileComponent extends React.PureComponent {
     }
 
    async componentDidMount(){  
-        // if(!!this.props.user){
-        //     this.setState({
-        //         fullname:this.props.user.name,
-        //         email:this.props.user.email,
-        //         phone:this.props.user.mobileNumber,
-        //         location:this.props.user.address,
-        //         initRen:false
-        //     })
-        // }
         await this.setState({
             loading:true
         },()=>this.props.getUserDetails())
-         
    }
     handleChange = (e)=>{
         console.log(e.target.name)

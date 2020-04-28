@@ -51,7 +51,7 @@ class MyCatalogueComponent extends Component {
             page:1
         })
     }
-
+    
 
     componentWillReceiveProps(nextProps){
             if(!!nextProps.searchProceduresRet){

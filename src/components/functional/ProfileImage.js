@@ -1,21 +1,30 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
-import React from "react"
+import React, { useRef } from "react"
+import LoaderComponent from "./LoaderComponent"
 
  const ProfileImage= (props) => {
-    console.log(props,"props in Profile Image");
+    const profileImageRef  = useRef()
     
   const { addToast } = useToasts()
-  if(!!props.uploadRet){
-      if(!!props.uploadRet.success){
-        addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
-        props.updateImage({
-            imageUrl:props.uploadRet.url
-        })
-      }else{
-        addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
-      }
-      props.uploadRetClr()
+ 
+  if(!!profileImageRef.current){    
+    if(profileImageRef.current.value.length!==0){
+      if(!!props.uploadRet){
+        if(!!props.uploadRet.success){
+          addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
+          props.updateImage({
+              imageUrl:props.uploadRet.data.imageUrl
+          })
+        }else{
+          addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
+        }
+        props.loadingOff()
+        props.uploadRetClr()
+    }
+    }
   }
+ 
+
 
   if(!!props.updateImageRet){
     if(!!props.updateImageRet.success){
@@ -30,11 +39,9 @@ import React from "react"
   const handleImageClick = ()=>{
       let element = document.getElementById('uploadInput')
       element.click()
-      console.log(element,"element in handleImage Click")
   }
 
   const handleUploadImage = (e) => {
-    console.log("inside handleUploadImage", e)
     e.preventDefault();
     e.stopPropagation()
     var reader = new FileReader();
@@ -42,7 +49,6 @@ import React from "react"
 
     if(!!file){
       if (file.size > 2 * 1024 * 1024) {
-        console.log("File Tooo Big")
         addToast('File size should be less than 2MB', {appearance: 'error', autoDismiss:true})
       } else {
         props.upload({ file: file, field: 'file' })
@@ -78,7 +84,9 @@ import React from "react"
     id="uploadInput"
     type="file" accept="image/jpe ,image/png, image/jpeg" 
     onChange ={(e)=>handleUploadImage(e)}
+    ref = {profileImageRef}
     />
+    {props.loading && <LoaderComponent />}
     <img 
     onClick={(e)=>handleImageClick(e)}
     className="blackdot"

@@ -29,7 +29,17 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    SEARCH_PROCEDURE_CLR,
    SEARCH_PROCEDURE_RET,
    SUBMIT_BANK_DETAILS_RET,
-   SUBMIT_BANK_DETAILS_CLR
+   SUBMIT_BANK_DETAILS_CLR,
+
+   UPDATE_BANNER,
+   UPDATE_BANNER_RET,
+   UPDATE_BANNER_CLR,
+
+   UPDATE_ACHIEVEMENT_RET,
+   UPDATE_ACHIEVEMENT_CLR,
+   UPDATE_ACHIEVEMENT,
+   EDIT_BIO_RET,
+   EDIT_BIO_CLR
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -79,11 +89,55 @@ const initialState = {
   searchProceduresRet:false,
   searchProcedureLoading:false,
 
-  submitBankDetailsRet:false
+  submitBankDetailsRet:false,
+
+  updateBannerRet:false,
+
+  updateAchievementRet:false,
+
+  editBioRet:false
+
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case UPDATE_BANNER_RET:
+      return {
+        ...state,
+        updateBannerRet:action.payload
+      };
+
+      case UPDATE_BANNER_CLR:
+      return {
+        ...state,
+        updateBannerRet:false
+      };
+
+      case EDIT_BIO_RET:
+        return {
+          ...state,
+          editBioRet:action.payload
+        };
+  
+        case EDIT_BIO_CLR:
+        return {
+          ...state,
+          editBioRet:false
+        };
+
+
+      case UPDATE_ACHIEVEMENT_RET:
+      return {
+        ...state,
+        updateAchievementRet:action.payload
+      };
+
+      case UPDATE_ACHIEVEMENT_CLR:
+      return {
+        ...state,
+        updateAchievementRet:false
+      };
 
     case SUBMIT_BANK_DETAILS_RET:
       return {

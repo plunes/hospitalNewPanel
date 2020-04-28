@@ -87,7 +87,7 @@
 .edit_icn {width:20px;padding-top: 15px;}
 .content_pos{padding-top: 20px;}
 .max_cnt{    margin-bottom: 9px;}
-.achimen_pd{margin-top: 70px;}
+.achimen_pd{margin-top: 2rem;}
 .edit_image2{background: #01D35A;border-radius: 50%;width: 30px;height: 30px;text-align: center;position: relative; left: 81px; top: -24px;}
 .edit_icn2{width: 10px;padding-top: 4px;}
 .bdyhs_mar{margin-top: 40px;margin-left: 20px;}
@@ -146,8 +146,12 @@
         margin-top: 30px;
         height:auto;
     }
-    .timelinebox4 img{width: 65px;
-        margin-top: 10px;}
+    .timelinebox4 img{
+        width: 55px;
+        height: 55px;
+        margin-top: 10px;
+        border-radius: 50%;
+}
     .left_ali{text-align: left; color: #fff; padding-bottom: 5px;
         padding-left: 11px;
         padding-top: 13px;}

@@ -40,7 +40,22 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   GET_USER_DETAILS,
 
   SUBMIT_BANK_DETAILS_RET,
-  SUBMIT_BANK_DETAILS_CLR
+  SUBMIT_BANK_DETAILS_CLR,
+
+  // UPDATE BANNER
+  UPDATE_BANNER,
+  UPDATE_BANNER_RET,
+  UPDATE_BANNER_CLR,
+
+  // UPDATE_ACHIEVEMENT
+  UPDATE_ACHIEVEMENT,
+  UPDATE_ACHIEVEMENT_RET,
+  UPDATE_ACHIEVEMENT_CLR,
+
+  //EDIT_BIO
+  EDIT_BIO_RET,
+  EDIT_BIO_CLR
+
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -50,6 +65,122 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "https://plunes.co/v4"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
+
+
+ //EDIT_BIO
+
+ export const editBioClr = () => dispatch =>{
+  return  dispatch({
+    type: EDIT_BIO_CLR,
+    payload:{}
+  })
+}
+
+export const editBio = (obj) => async dispatch => {
+  console.log(obj,"Data in EditBio Action")
+  let token = localStorage.getItem('token');
+  return await axios.put(baseUrl + '/user', obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        dispatch({
+          type:EDIT_BIO_RET,
+           payload:{
+            success:true,
+            message:'Bio successfully updated'
+           }
+        })
+      }else{
+        dispatch({
+          type:EDIT_BIO_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..'
+           }
+        })
+      }
+    })
+}
+
+
+ //UPDATE_ACHIEVEMENTS
+
+ export const updateAchievementClr = () => dispatch =>{
+  return  dispatch({
+    type: UPDATE_ACHIEVEMENT_CLR,
+    payload:{}
+  })
+}
+
+export const updateAchievement = (obj) => async dispatch => {
+  console.log(obj,"Data in updateAchievement Action")
+  let type = obj.type
+  delete obj.type
+  let token = localStorage.getItem('token');
+  return await axios.put(baseUrl + '/user', obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        dispatch({
+          type:UPDATE_ACHIEVEMENT_RET,
+           payload:{
+            success:true,
+            message:'Achievements updated successfully',
+            type:type
+           }
+        })
+      }else{
+        dispatch({
+          type:UPDATE_ACHIEVEMENT_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            type:type
+           }
+        })
+      }
+    })
+}
+
+
+
+// UPDATE_BANNER
+
+export const updateBannerClr = () => dispatch =>{
+  return  dispatch({
+    type: UPDATE_BANNER_CLR,
+    payload:{}
+  })
+}
+
+export const updateBanner = (uData) => async dispatch => {
+  console.log(uData,"Data in UpdateBanner Action")
+let obj = { 
+  coverImageUrl:uData.coverImageUrl
+}
+   
+  console.log()
+  let token = localStorage.getItem('token');
+  return await axios.put(baseUrl + '/user', obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        dispatch({
+          type:UPDATE_BANNER_RET,
+           payload:{
+            success:true,
+            message:'Banner Successfully Updated!'
+           }
+        })
+        
+      }else{
+        dispatch({
+          type:UPDATE_BANNER_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..'
+           }
+        })
+      }
+    })
+}
 
 
 //DOWNLOAD_CATALOGUE
@@ -292,7 +423,7 @@ export const upload = (data) => async dispatch => {
   console.log(body);
   
   
-  return await axios.post(baseUrl + '/upload', body, { 'headers': { 'Authorization': token } })
+  return await axios.post(baseUrl + '/upload/image', body, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res, 'res in Upload')
       if (res.status === 200) {
@@ -304,7 +435,7 @@ export const upload = (data) => async dispatch => {
             payload :{
               success:true,
               message:"File successfully uploaded",
-              url:'https://devapi.plunes.com/v4/'+res.data.path
+              data:res.data
             }
           })
         }
