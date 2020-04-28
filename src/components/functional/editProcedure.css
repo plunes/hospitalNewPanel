@@ -10,6 +10,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    margin-top: 20px;
   }
   
   /* Hide the browser's default checkbox */
@@ -69,26 +70,14 @@
   }
 .btm_bdr[type="text"]{border: 0;
     border-bottom: 2px solid #B2B2B2;
-    outline: 0;width: 83px;}
+    outline: 0;width: 83px;margin-top: 11px;}
+    
     .price_se {
         border: none;
         color: #B2B2B2;
         overflow: hidden;
         position: relative;
         border-radius: 3px;
-    }
-    
-    .price_se::after {
-        content: "\2304";
-        position: absolute;
-        right: 9px;
-        top: -2px;
-        z-index: 1;
-        text-align: center;
-        width: 10%;
-        height: 100%;
-        pointer-events: none;
-        font-size: 25px;
     }
     
     .slec_p {
@@ -101,14 +90,23 @@
         -moz-appearance: none; /* for firefox */
         appearance: none; /* for modern browsers */
         border-radius: 60px !important;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     margin-top: 7px;
     }
-    .plu_mi{
-       }
-        .plu_mi .fa-plus{color: #01D35A;font-size: 12px; position: relative;
+    .icon_p_m {
+      position: relative;
+      top: 9px;
+  }
+        .icon_p_m .fa-plus{color: #01D35A;font-size: 12px; position: relative;
             left: 27px;
-            top: -52px;}
-        .plu_mi .fa-minus{color: #01D35A;font-size: 12px; position: relative;
+            top: -36px;}
+        .icon_p_m .fa-minus{color: #01D35A;font-size: 12px; position: relative;
             left: 17px;
-            top: -44px;}
+            top: -26px;}
+            .icon_p_m .fa-chevron-down{position: absolute;
+              right: 18px;
+              top: 20px;}
+            .slect_box_mdl{background: #fff;box-shadow: 0px 8px 12px #00000029;border-radius: 20px;border: 1px solid #DCDCDC;}
+            .slect_box_mdl li {
+              padding: 11px 0px 10px 0px;
+          }

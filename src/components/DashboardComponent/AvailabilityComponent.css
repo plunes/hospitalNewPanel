@@ -45,10 +45,22 @@ form
 
 /* The container */
 
-.abt_sec{padding-top: 30px;}
-.my_av_sec{margin-bottom: 30px;}
-.my_avl{margin-bottom: 60px;}
-  
+.contain 
+        {display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;}
+
+        .abt_sec{padding-top: 30px;}
+        .my_av_sec{margin-bottom: 30px;}
+        .my_avl{margin-bottom: 30px;}
+          
 
   /* MANAGE PAYMENT CSS */
 .ManagePayForm

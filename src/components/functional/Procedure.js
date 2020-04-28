@@ -29,18 +29,28 @@ import "./editProcedure.css"
       <div className="col-lg-2">
       <input type="text" value="200" className="btm_bdr" />
       </div>
-      <div class="col-md-4 col-12">
+      <div class="col-md-4 col-12 icon_p_m">
+       
         <div class="price_se">
           <select class="form-control slec_p">
             <option>30%</option>
-            <option>20%</option>
-            <option>20%</option>
           </select>
-          <div className="plu_mi">
-          <i class="fa fa-plus" aria-hidden="true"></i>
+         <i class="fa fa-plus" aria-hidden="true"></i>
           <i class="fa fa-minus" aria-hidden="true"></i>
-          </div>
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        
         </div>
+        <div className="slect_box_mdl">
+          <ul>
+            <li>10%</li>
+            <li>20%</li>
+            <li>30%</li>
+            <li>40%</li>
+            <li>50%</li>
+            <li>60%</li>
+            
+           </ul>
+          </div>
       </div>
       </div>
     <div>

@@ -121,7 +121,7 @@
     -moz-appearance: none; /* for firefox */
     appearance: none; /* for modern browsers */
 }
-.form-control,
+.btm_in_bdr,
 .form-group .btm_in_bdr {
     border: 0;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#009688), to(#009688)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2));
