@@ -5,7 +5,9 @@ import { getBooking } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import  "./AvailabilityComponent.css";
+import "./appointment.css"
 import Modal from 'react-modal';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 
 const customStyles = {
@@ -46,6 +48,7 @@ class AppointmentComponent extends Component {
 
 
     render() {
+        
         // console.log(this.props.bookings, 'bookings');
         return (
             
@@ -57,7 +60,7 @@ class AppointmentComponent extends Component {
                 <div className='col-md-3'>
                     <SidebarComponent />
                 </div>
-                <div className='col-md-6'>
+                <div className='col-md-7'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
                                 {/* {
@@ -113,8 +116,181 @@ class AppointmentComponent extends Component {
                                     </div>
                                     )) : false
                                 } */}
+ 
+                          <div className="container">
+                            <Tabs className="tab_pd">
+                                <TabList>
+                                <div className="row upcmg_fnt">
+                                <Tab className="col-lg-4"><a href="#">Upcoming</a></Tab>
+                                <Tab className="col-lg-4"><a href="#">Confirmed</a></Tab>
+                                <Tab className="col-lg-4"><a href="#">Cancelled</a></Tab>
+                                </div>
+                               
+                                </TabList>
+                              <div className="upcoming_bdr"></div>
+                                <TabPanel className="ardee_ci">
+                                <div className="row">
+                                  <div className="col-lg-3 nov_2">
+                                      <h4>NOV 20</h4>
+                                      <p>11 Nov 2019 <br/>09:00 AM</p>
+                                      </div>
+                                      
+                                              <div className="col-lg-2">
+                                                  <img src="/pexel_1.png" />
+                                                  </div>
+                                                  <div className="col-lg-4 nov_2">
+                                                  <h4>Shikha Singh</h4>
+                                                      <p>C9/38, Gate No. 3, Block C, Ardee City, Sector 52, Gurugram, Haryana 122003, India</p> 
+                                                  </div>
+                                        
+                                      <div className="col-lg-2 loc_tab">
+                                      <img src="/loc.png" />
+                                      </div>
+                                </div>
+                                <div className="row confrm_mar_sec">
+                                <div className="col-lg-4">
+                                    <p className="gr_con">Confirmed</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="res_udle">Reschedule</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="con_re">Cancel</p>
+                                 </div>
+                                </div>
+                                {/* 2nd--end */}
+                                <div className="row confrm_mar_sec">
+                                <div className="col-lg-6">
+                                    <p className="brace_m">Dental Braces</p>
+                                 </div>
+                                 <div className="col-lg-6">
+                                 <p className="dental_th">30000</p>
+                                 </div>
+                                </div>
+                                {/* 3rd--end */}
+                                <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
+                                <div className="row">
+                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked in 100</span></div>
+                                
+                                   <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
+                                    <div className="gray_circ">100%<span>30000</span></div>
+                                 </div>
+                                 <div className="grap_bod"></div><div className="grap_bod2"></div>
+                                 <p className="pay_ptint">Payments done by patient</p>
+                                 <p className="pay_green">Create Prescription</p>
+                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                </TabPanel>
+                                <TabPanel className="ardee_ci">
+                                <div className="row">
+                                  <div className="col-lg-3 nov_2">
+                                      <h4>NOV 20</h4>
+                                      <p>11 Nov 2019 <br/>09:00 AM</p>
+                                      </div>
+                                      
+                                              <div className="col-lg-2">
+                                                  <img src="/pexel_1.png" />
+                                                  </div>
+                                                  <div className="col-lg-4 nov_2">
+                                                  <h4>Shikha Singh</h4>
+                                                      <p>C9/38, Gate No. 3, Block C, Ardee City, Sector 52, Gurugram, Haryana 122003, India</p> 
+                                                  </div>
+                                        
+                                      <div className="col-lg-2 loc_tab">
+                                      <img src="/loc.png" />
+                                      </div>
+                                </div>
+                                <div className="row confrm_mar_sec">
+                                <div className="col-lg-4">
+                                    <p className="gr_con">Confirmed</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="res_udle">Reschedule</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="con_re">Cancel</p>
+                                 </div>
+                                </div>
+                                {/* 2nd--end */}
+                                <div className="row confrm_mar_sec">
+                                <div className="col-lg-6">
+                                    <p className="brace_m">Dental Braces</p>
+                                 </div>
+                                 <div className="col-lg-6">
+                                 <p className="dental_th">30000</p>
+                                 </div>
+                                </div>
+                                {/* 3rd--end */}
+                                <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
+                                <div className="row">
+                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked in 100</span></div>
+                                
+                                   <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
+                                    <div className="gray_circ">100%<span>30000</span></div>
+                                 </div>
+                                 <div className="grap_bod"></div><div className="grap_bod2"></div>
+                                 <p className="pay_ptint">Payments done by patient</p>
+                                 <p className="pay_green">Create Prescription</p>
+                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                </TabPanel>
+                                <TabPanel className="ardee_ci">
+                                <div className="row">
+                                  <div className="col-lg-3 nov_2">
+                                      <h4>NOV 20</h4>
+                                      <p>11 Nov 2019 <br/>09:00 AM</p>
+                                      </div>
+                                      
+                                              <div className="col-lg-2">
+                                                  <img src="/pexel_1.png" />
+                                                  </div>
+                                                  <div className="col-lg-4 nov_2">
+                                                  <h4>Shikha Singh</h4>
+                                                      <p>C9/38, Gate No. 3, Block C, Ardee City, Sector 52, Gurugram, Haryana 122003, India</p> 
+                                                  </div>
+                                        
+                                      <div className="col-lg-2 loc_tab">
+                                      <img src="/loc.png" />
+                                      </div>
+                                </div>
+                                <div className="row confrm_mar_sec">
+                                <div className="col-lg-4">
+                                    <p className="gr_con">Confirmed</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="res_udle">Reschedule</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="con_re">Cancel</p>
+                                 </div>
+                                </div>
+                                {/* 2nd--end */}
+                                <div className="row confrm_mar_sec">
+                                <div className="col-lg-6">
+                                    <p className="brace_m">Dental Braces</p>
+                                 </div>
+                                 <div className="col-lg-6">
+                                 <p className="dental_th">30000</p>
+                                 </div>
+                                </div>
+                                {/* 3rd--end */}
+                                <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
+                                <div className="row">
+                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked in 100</span></div>
+                                
+                                   <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
+                                    <div className="gray_circ">100%<span>30000</span></div>
+                                 </div>
+                                 <div className="grap_bod"></div><div className="grap_bod2"></div>
+                                 <p className="pay_ptint">Payments done by patient</p>
+                                 <p className="pay_green">Create Prescription</p>
+                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                </TabPanel>
+                                
+                               
+                            </Tabs>
 
-                    </div>
+                             </div>   
+
+            </div>
        <Modal
           isOpen={this.state.modalIsOpen}
         //   onAfterOpen={afterOpenModal}

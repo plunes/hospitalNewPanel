@@ -31,6 +31,7 @@ const customStyles = {
           <div className="text-right"><button onClick={this.props.handleClose} className="cross no-border"><img src="/cross.png" alt="" className="covidCross"></img></button></div>
             {this.props.modalBody()}
           </Modal>
+          
           )
       }
   }

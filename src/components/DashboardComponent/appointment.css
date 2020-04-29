@@ -1,0 +1,60 @@
+.AppointBodyrow1{padding-top: 40px;}
+.Appoint{height: 980px;}
+.tab_pd{padding: 30px;text-align: center;}
+.upcoming_bdr{border-bottom: 3px solid #B7B7B7;position: relative;
+    top: -19px;
+    z-index: 99;}
+.active { color:#f00;font-weight:bolder; }
+.react-tabs__tab-list{padding-left: 0;}
+.react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9999;}
+.upcmg_fnt a{color: #343434; font-weight: 500;font-size: 14px;}
+.ardee_ci{text-align: left;margin-top: 25px;}
+.nov_2 h4{font-size: 18px; font-weight: 500;color: #474747;}
+.nov_2 p{font-size: 15px;color: #343434;opacity: 1;}
+.loc_tab img{padding-left: 80px;}
+.gr_con{color: #01D35A;font-weight: 500}
+.con_re{color: #D30101; font-weight: 500;text-align: right;}
+.res_udle{text-align: center;}
+.confrm_mar_sec{margin-top: 20px;margin-bottom: 40px;}
+.dental_th{text-align: right;font-weight: 500;}
+.brace_m{color: #474747;font-weight: 400;}
+.py_stu h2{text-align: center;text-decoration: underline;font-weight: 500;font-size: 20px;margin-bottom: 40px;}
+.graph_cir{border-radius: 80px;background-color: #01D35A;width: 60px;height: 60px;}
+img.right_im {
+    position: relative;
+    top: 17px;
+    left: 16px;
+    width: 30px;
+}
+.grap_bod{border-bottom:  3px solid #01D35A;border-bottom: 3px solid #01D35A;
+    width: 70px;
+    position: relative;
+    top: -26px;
+    left: 41px;}
+.righr_side_p{margin-right: 60px;}
+.gray_circ{border-radius: 80px;border: 3px solid #F1F1F1;width: 60px;height: 60px;position: absolute;
+    right: 52px;
+    /* padding-top: 10px; */
+    padding: 13px 10px;}
+    .grap_bod2{border-bottom:  3px solid #F1F1F1;width: 452px;
+        position: relative;
+        left: 165px;
+        top: -30px;}
+
+        .righr_side_p span{font-size: 13px;
+            position: relative;
+            top: 34px; font-weight: 400}
+        .gray_circ span{position: absolute;
+            top: 55px;
+            font-size: 13px;
+            font-weight: 400;}
+        .thousent{font-size: 13px; font-weight: 400;position: relative;
+            top: 59px;
+            right: 13px;}
+.pay_ptint{text-align: center;font-size: 18px;color:#474747;font-weight: 400;padding: 40px 30px;}
+.pay_green{text-decoration: underline;color: #01D35A;font-size: 18px;text-align: center;font-weight: 400;padding-bottom: 35px;}
+.bg_bulb{background: #FBFBFB;height: 65px;}
+.bg_bulb img{width: 44px;
+    position: relative;
+    left: 176px;}
+.bg_bulb p{text-align: center;color: #01D35A;font-size: 18px;position: relative;top: -34px;}

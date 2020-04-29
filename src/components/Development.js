@@ -276,11 +276,15 @@ class Development extends Component {
                    
                     <div className="row text-center">
                       <div className="col-lg-2"><p className="m">M</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
+                      <div className="col-lg-4"><p><span className="time_bor" data-toggle="modal" data-target="#myModal2">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
                       <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
                       <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox" /> <label for="checkbox"></label></div></div>
                     </div>
                    
+                    {/* 1st-end */}
+
+
+                      
                     {/* 1st-end */}
                     <div className="row text-center">
                       <div className="col-lg-2"><p className="m">T</p></div>
@@ -338,13 +342,16 @@ class Development extends Component {
                       <a href="#" className="sub_tm">Add</a>
                       </div>
                 </div>
-
-        </div>
-        </div>
-                </div>
-                <div className='col-md-3'></div>
             </div>
         </div>
+        </div>
+        
+        
+                <div className='col-md-3'></div>
+                
+            </div>
+        </div>
+        
         )
     }
 }
