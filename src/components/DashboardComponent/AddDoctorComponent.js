@@ -2,9 +2,71 @@ import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 import { connect } from 'react-redux';
-import { bankDetails, submitBankDetailsClr } from "../../actions/userActions";
-import SelectComponent from "../SelectComponent"
+import { bankDetails, submitBankDetailsClr, upload,
+   uploadRetClr, getServ, getServClr, getSpecs,
+    getSpecsClr, addDoctor, addDoctorClr } from "../../actions/userActions";
+
+import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
+
+const slots = [
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "monday",
+      "closed" : false
+  },
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "tuesday",
+      "closed" : false
+  },
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "wednesday",
+      "closed" : false
+  },
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "thursday",
+      "closed" : false
+  },
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "friday",
+      "closed" : false
+  },
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "saturday",
+      "closed" : false
+  },
+  {
+      "slots" : [
+          "9:00 AM-1:00 PM",
+          "3:00 PM-8:00 PM"
+      ],
+      "day" : "sunday",
+      "closed" : true
+  }
+]
 
 class AddDoctorComponent extends Component {
     constructor(props){
@@ -16,7 +78,19 @@ class AddDoctorComponent extends Component {
             ifsccode: '',
             pannumber: '',
             accountname: '',
-            loading:true
+            loading:true,
+            specialities:[],
+            services:[],
+            specialitie_chosen:' ',
+            services_chosen:' ',
+            name:'',
+            education:'',
+            designation:'',
+            experience:'',
+            doctorProfileImage:false,
+            doctorImageName:false,
+            consultationFee:3000,
+            addDoctorLoading:false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -51,7 +125,47 @@ class AddDoctorComponent extends Component {
         })
     }
     
-    async componentWillReceiveProps(nextProps){
+     componentWillReceiveProps(nextProps){
+      console.log(this.props,"props in compoentWo")
+      if(nextProps.getSpecsRet){
+        if(nextProps.getSpecsRet.success){
+          console.log(nextProps.getSpecsRet,"nextProps.getSpecsRet")
+          let arr = []
+          let specialities = JSON.parse(JSON.stringify(nextProps.getSpecsRet.data))
+          specialities.forEach((item,i)=>{
+            let obj = {
+              name:item,
+              value:item
+            }
+            arr.push(obj)
+          })
+          this.setState({
+            specialities:arr
+          })
+        }else{
+          console.log("Unable to get Specs")
+        }
+        nextProps.getSpecsClr()
+      }
+
+      if(nextProps.getServRet){
+        if(nextProps.getServRet.success){
+          console.log(nextProps.getServRet,"nextProps.getServRet")
+          let specialities = JSON.parse(JSON.stringify(nextProps.getServRet.data))
+          let   arr = specialities.map((item,i)=>{
+                  item.name = item.service
+                  item.value = item.service
+                  return item
+          })
+          this.setState({
+            services:arr
+          })
+        }else{
+          console.log("Unable to get Specs")
+        }
+        nextProps.getServClr()
+      }
+
         // this.setState({
         //     userDetails : nextProps.user
         // }, () => {
@@ -73,11 +187,86 @@ class AddDoctorComponent extends Component {
     }
 
     async componentDidMount(){
-        // console.log(this.props.user, 'user')
-   
+       this.props.getSpecs()
+    }
+
+    handleChange = (e)=>{
+      this.setState({
+        [e.target.name]:e.target.value
+      })
+    }
+
+    handleSelectChange = (e) =>{
+    console.log(e,"e in handleSelectChange")
+
+      this.setState({
+        [e.target.name]:e.target.value
+      },()=>{
+        if(e.target.name==="specialitie_chosen"){
+          this.setState({
+            services_chosen:[]
+          })
+          this.props.getServ({
+            name:this.state.specialitie_chosen
+          })
+        }
+      })
+    }
+
+    submitdetails = (data) =>{
+      console.log(data,"data in SubmitDetails")
+      let services = JSON.parse(JSON.stringify(this.state.services))
+      let service = services.filter((item,i)=>(
+        item.name = data.services_chosen
+      ))
+      let specialities = [
+        {
+         specialityId:service[0].specialityId,
+         services:[
+           {
+             price:service[0].consultationFee,
+             category:["Consultation"],
+             homeCollection:false,
+             variance:0,
+             serviceId:service[0].serviceId
+           }
+         ]
+        }
+]
+      let obj = {
+        name:data.name,
+        education:data.education,
+        designation:data.designation,
+        department:'',
+        timeSlots:slots,
+        experience:data.experience,
+        imageUrl:data.doctorProfileImage,
+        prescription:{},
+        hospitalName:this.props.user.name,
+        specialities:specialities
+      }
+
+      this.setState({
+        addDoctorLoading:true
+      },()=>this.props.addDoctor(obj))
+      console.log(obj,"Obj submitDoctor")
+    }
+    upload = (data) =>{
+      this.setState({
+        laodingImage:true
+      },()=>this.props.upload(data))
+    }
+
+    setImage = (data) =>{
+     this.setState({
+      doctorProfileImage:data.imageUrl,
+      doctorImageName:data.filename
+     })
     }
 
     render() {
+      console.log(this.state,"this.state in AddComponent")
+      
         return (
             <div>
             <div className='row'>
@@ -94,7 +283,7 @@ class AddDoctorComponent extends Component {
           <h4>Add Doctors</h4>
           <p>Search for a doctor by name or email</p>
           </div>
-          <div className="search_b">
+          {/* <div className="search_b">
           <form action="#" method="get">
               <label className="sech_b">Search</label>
             <input list="browsers" name="browser" placeholder="Dr. Surbhi" className="cus_inp col-lg-12"/>
@@ -107,7 +296,7 @@ class AddDoctorComponent extends Component {
                     <p>Anaesthesia, Fortis Hospital, Mohali</p>
                   </div>
              </div>
-             {/* 1st-row-end */}
+             
              <div className="row botm_bud">
                   <div className="col-lg-2"><img src="/pexel_2.png"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
@@ -115,7 +304,7 @@ class AddDoctorComponent extends Component {
                     <p>Neurology, Fortis Hospital, Jaipur</p>
                   </div>
              </div>
-                 {/* 2nd-row-end */}
+                
                  <div className="row botm_bud">
                   <div className="col-lg-2"><img src="/pexel_3.png"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
@@ -123,8 +312,7 @@ class AddDoctorComponent extends Component {
                     <p>Gynecology, Fortis Hospital, Jaipur</p>
                   </div>
              </div>
-                 {/* 3rd-row-end */}
-                  {/* 2nd-row-end */}
+                
                   <div className="row">
                   <div className="col-lg-2"><img src="/pixel_4.png"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
@@ -132,11 +320,11 @@ class AddDoctorComponent extends Component {
                     <p>Gynecology, Fortis Hospital, Jaipur</p>
                   </div>
              </div>
-                 {/* 4rth-row-end */}
+               
             </div>
             </form>
             </div>
-            {/* form-end */}
+           
               <div className="add_mnu">
                   <div className="aero_dn">
                <a href="#" className="A_nu">Add Manually</a>
@@ -161,7 +349,7 @@ class AddDoctorComponent extends Component {
                   </div>
                   </div>
              </div>
-             {/* 1st-row-end */}
+             
              <div className="row botm_bud">
                   <div className="col-lg-2"><img src="/pexel_2.png"className="pixel" /></div>
                   <div className="col-lg-4 sudha_a">
@@ -174,7 +362,7 @@ class AddDoctorComponent extends Component {
                   </div>
                   </div>
              </div>
-                 {/* 2nd-row-end */}
+                
                  <div className="row">
                   <div className="col-lg-2"><img src="/pexel_3.png"className="pixel" /></div>
                   <div className="col-lg-4 sudha_a">
@@ -187,138 +375,41 @@ class AddDoctorComponent extends Component {
                   </div>
                   </div>
              </div>
-                 {/* 3rd-row-end */}
+               
                
             </div>
           </div>
-          {/* manualy-end */}
-          {/* <profile-start> */}
-             <div className="profile_secti">
-                 <h5 className="pfo_im">Profile Image</h5>
-                <div className="row">
-                  <div className="col-lg-2">
-                      <img src="/account.svg" className="accout"/>
-                      <img src="/camera.svg" className="came" />
-                    </div>
-                    <div className="col-lg-3">
-                    <h6 className="fil_nm">File Name</h6>
-                    <a href="#" className="upld">Upload</a>
-                    </div>
-                </div>
-                <form class="shake" role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
-                      {/* <!-- Name --> */}
-                      <div class="form-group label-floating">
-                        <label class="control-label" for="name">Name</label>
-                        <input class="form-control btm_in_bdr" id="name" type="text" name="name" required data-error="Please enter your name" />
-                        <div class="help-block with-errors"></div>
-                      </div>
-                      {/* <!-- Education --> */}
-                      <div class="form-group label-floating">
-                        <label class="control-label" for="education">Education Qualification</label>
-                        <input class="form-control btm_in_bdr" id="educationqua" type="education" name="education" required data-error="Please enter your education qulification" />
-                        <div class="help-block with-errors"></div>
-                      </div>
-                      {/* <!-- Designation --> */}
-                      <div class="form-group label-floating">
-                        <label class="control-label">Designation</label>
-                        <input class="form-control btm_in_bdr" id="msg_Designation" type="text" name="Designation" required data-error="Please enter your message Designation" />
-                        <div class="help-block with-errors"></div>
-                      </div> 
-                       {/* <!-- select-box --> */}
-                       <div className="row form-group label-floating">
-                       <div class="col-lg-6 col-12">
-                                <SelectComponent />
-                        </div>
-                        <div class="col-lg-6 col-12">
-                                <SelectComponent />
-                        </div>
-                         </div>
-                      {/* <!-- Experience --> */}
-                      <div class="form-group label-floating">
-                          <label for="message" class="control-label">Experience</label>
-                          <input class="form-control btm_in_bdr" id="msg_Experience" type="text" name="Experience" required data-error="Please enter your message Experience" />
-                          <div class="help-block with-errors"></div>
-                      </div>
-                    
-                  </form>
-              </div>
-              {/* <profile-end> */}
-              {/* time-Availability */}
-                <div className="time_she">
-                    <h3 className="abaily text-center">Availability</h3>
-                    <div className="row text-center">
-                      <div className="col-lg-2"><h4>All</h4></div>
-                      <div className="col-lg-4"><h4>From - To</h4></div>
-                      <div className="col-lg-4"><h4>From - To</h4></div>
-                      <div className="col-lg-2"><h4>Closed</h4></div>
-                    </div>
-                    {/* heding-section-end */}
-                   
-                    <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">M</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox" /> <label for="checkbox"></label></div></div>
-                    </div>
-                   
-                    {/* 1st-end */}
-                    <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">T</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox1" /> <label for="checkbox1"></label></div></div>
-                    </div>
-                      {/* 2nd-end */}
-                      <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">W</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox2" /> <label for="checkbox2"></label></div></div>
-                    </div>
-                      {/* 3rd-end */}
-                      <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">T</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox3" /> <label for="checkbox3"></label></div></div>
-                    </div>
-                      {/* 4rth-end */}
-                      <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">F</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox4" /> <label for="checkbox4"></label></div></div>
-                    </div>
-                      {/* 5th-end */}
-                      <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">S</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox5" /> <label for="checkbox5"></label></div></div>
-                    </div>
-                      {/* 6is-end */}
-                      <div className="row text-center">
-                      <div className="col-lg-2"><p className="m">S</p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-                      <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-                      <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox6" /> <label for="checkbox6"></label></div></div>
-                    </div>
-                      {/* 7th-end */}
-                      <div className="time_clo">
-                      <a href="#" className="sub_tm">Submit</a>
-                      </div>
-                </div>
-              {/* time-Availability -end*/}
-                <div className="consul_fee">
-                    <div className="row">
-                      <div className="col-lg-10"><h2 className="fee_cun_ch">Consultation Fee</h2></div>
-                      <div className="col-lg-2"><h2 className="fee_ru">30000</h2></div>
-                    </div>
-                    <div className="time_clo">
-                      <a href="#" className="sub_tm">Add</a>
-                      </div>
-                </div>
-
+           */}
+            <AddDoctorForm   
+              upload = {this.upload}
+              uploadRet = {this.props.uploadRet}
+              uploadRetClr = {this.props.uploadRetClr}
+              specialities = {this.state.specialities}
+              services = {this.state.services}
+              specialitie_chosen = {this.state.specialitie_chosen}
+              services_chosen = {this.state.services_chosen}
+              handleSelectChange = {this.handleSelectChange}
+              name = {this.state.name}
+              education = {this.state.education}
+              designation  = {this.state.designation}
+              experience = {this.state.experience}
+              handleChange = {this.handleChange}
+              submitdetails = {this.submitdetails}
+              laodingImage = {this.state.laodingImage}
+              loadingImageOff = {()=>this.setState({laodingImage:false})}
+              setImage = {this.setImage}
+              doctorProfileImage = {this.state.doctorProfileImage}
+              doctorImageName = {this.state.doctorImageName}
+              addDoctor = {this.props.addDoctor}
+              addDoctorClr = {this.props.addDoctorClr}
+              addDoctorRet = {this.props.addDoctorRet}
+              addDoctorLoading = {this.state.addDoctorLoading}
+              addDoctorLoadingOff = {()=>this.setState({addDoctorLoading:false})}
+              editConsultFlag = {this.state.editConsultFlag}
+              consultationFee= {this.state.consultationFee}
+              submitConsultaion = {()=>this.setState({editConsultFlag:false})}
+              toggleSubmitConultation = {()=>this.setState({editConsultFlag:!this.state.editConsultFlag})}
+            />
         </div>
         </div>
                 </div>
@@ -330,7 +421,21 @@ class AddDoctorComponent extends Component {
 }
 const mapStateToProps = state => ({
     user : state.user.userDetail,
-    submitBankDetailsRet:state.user.submitBankDetailsRet
+    submitBankDetailsRet:state.user.submitBankDetailsRet,
+    getServRet:state.user.getServRet,
+    getSpecsRet:state.user.getSpecsRet,
+    uploadRet:state.user.uploadRet,
+    addDoctorRet:state.user.addDoctorRet
   })
-  export default connect(mapStateToProps, {bankDetails, submitBankDetailsClr})(AddDoctorComponent)
+  export default connect(mapStateToProps, {bankDetails,
+  submitBankDetailsClr,
+  getSpecsClr,
+  getSpecs,
+  getServ,
+  getServClr,
+  upload,
+  uploadRetClr,
+  addDoctor,
+  addDoctorClr
+  })(AddDoctorComponent)
 

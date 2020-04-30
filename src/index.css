@@ -176,3 +176,71 @@ body {
   width: 8rem;
   height: 8rem;
 }
+
+.position-relative{
+  position: relative;
+}
+
+{
+
+}
+
+.no_brdr_input {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: lightgray;
+  width: 70%;
+}
+.no_brdr_input:focus {
+  border-color: lightgray;
+}
+.cdcd_sfd{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 1rem;
+}
+.margin-5{
+  margin: 5px;
+}
+.procedure_price_wrap{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.signup_speciality_name{
+  display: inline;
+  /* position: absolute; */
+  font-weight: 300;
+  left: 10px;
+}
+.signup_speciality_X{
+  display: inline;
+  position: absolute;
+  font-weight: 200;
+  right: 5px;
+  cursor: pointer;
+}
+.signup_speciality{
+  padding: 10px;
+  position: relative;
+}
+
+.signup_registring{
+  font-size: 14px;
+  font-weight: 200;
+  display: inline-block;
+}
+.signup_tos{
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.password_eye {
+  position: absolute;
+  right: 0px;
+  bottom: 6px;
+  cursor: pointer;
+}

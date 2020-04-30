@@ -70,6 +70,8 @@
 /* profile-section-start */
 .accout {
     width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 .came {
     position: relative;
@@ -250,7 +252,10 @@ label.control-label {
     .sub_tm:hover{color:#fff !important;}
 .time_clo{text-align: center;margin-top: 30px;}
 .fee_cun_ch{font-size: 18px; font-weight: 500; color: #5D5D5D;}
-.fee_ru{font-weight: 500; color: #5D5D5D;font-size: 18px;}
+.fee_ru{font-weight: 500; color: #5D5D5D;font-size: 18px;
+    display: flex;
+    flex-direction: row-reverse;
+}
 .consul_fee{margin-top: 64px;border-top: 1px solid #DCDCDC;padding-top: 50px;}
 
 
@@ -319,7 +324,9 @@ ul.report_any {
 
 
 /* sigun-up-header */
-.sigunup_hedr{margin-top: 90px;height: 70px;}
+.sigunup_hedr{
+  height: 70px;
+}
 .d_app{background: #01D35A;border-radius: 34px;color:#fff;padding: 7px 25px 7px 70px !important;}
 .ios_m {
     position: relative;

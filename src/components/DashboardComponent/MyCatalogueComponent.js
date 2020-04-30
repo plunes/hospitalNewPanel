@@ -9,7 +9,9 @@ uploadRetClr,
 downloadCatalogueClr,
 downloadCatalogue,
 searchProcedures,
-searchProceduresClr
+searchProceduresClr,
+editProcedure,
+editProcedureClr
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -35,7 +37,9 @@ class MyCatalogueComponent extends Component {
             limit:50,
             searchQuery:'',
             page:1,
-            procedures:[]
+            procedures:[],
+            selectedProcedure:{},
+            editProcedureLoading:false
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -72,6 +76,27 @@ class MyCatalogueComponent extends Component {
     handleClick() {
         this.setState({
             rowsToDisplay: this.state.rowsToDisplay + 5
+        })
+    }
+    handleSelectedProcedureChange = (e) =>{
+        let arr = []
+        arr.push(e.target.value)
+        console.log(e.target.value,"e in handleSelectedProcedureChange")
+        this.setState({
+            selectedProcedure:{
+                ...this.state.selectedProcedure,
+                price:arr
+            }
+           
+        })
+    }
+
+    handleVarianceChange = (e) =>{
+        this.setState({
+            selectedProcedure:{
+                ...this.state.selectedProcedure,
+                variance:e.target.value
+            }
         })
     }
 
@@ -140,7 +165,24 @@ class MyCatalogueComponent extends Component {
         ))
     }
 
+    handleSubmit = () =>{
+        this.setState({
+            editProcedureLoading:true
+        },()=>this.props.editProcedure(this.state.selectedProcedure)) 
+    }
+
+    onEdit = (data) =>{
+        console.log(data,"data in onEdit ")
+        this.setState({
+            selectedProcedure:{
+                ...data.data,
+                id:data.id
+            }
+        })
+    }
+
     render() {
+        console.log(this.state,"state in Mycatalogue")
         return (
             <div>
                 <div className='row'>
@@ -206,6 +248,7 @@ class MyCatalogueComponent extends Component {
                                </React.Fragment>
                                </div>
                         }
+                        {this.state.editProcedureLoading && <LoaderComponent />}
                         {
                             this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                             <Procedure 
@@ -213,6 +256,15 @@ class MyCatalogueComponent extends Component {
                             data = {c}
                             editFlag = {this.state.editFlag}
                             handleEditInclusion = {this.handleEditInclusion}
+                            onEdit = {this.onEdit}
+                            selectedProcedure = {this.state.selectedProcedure}
+                            handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
+                            handleVarianceChange = {this.handleVarianceChange}
+                            editProcedureRet = {this.props.editProcedureRet}
+                            editProcedureClr = {this.props.editProcedureClr}
+                            editProcedureLoadingOff = {()=>this.setState({
+                                editProcedureLoading:false
+                            })}
                             />
                             )) : 
                            <div className='text-center'>No Procedures</div>
@@ -220,6 +272,11 @@ class MyCatalogueComponent extends Component {
                         <div className='text-center'>
                             {this.state.procedures.length !==0 && <button onClick={this.viewMore} className="catalogueViewMore">View more</button> }    
                         </div>
+
+                        <div className='text-center'>
+                            {(this.state.editFlag && (this.state.selectedProcedure !== {}))  && <button onClick={this.handleSubmit} className="button_common">Submit</button> }    
+                        </div>
+
                     </div>
                     <div className='col-md-3'></div>
                 </div>
@@ -247,7 +304,8 @@ const mapStateToProps = state => ({
     uploadRet:state.user.uploadRet,
     uploadLoading:state.user.uploadLoading,
     downloadCatalogueRet:state.user.downloadCatalogueRet,
-    searchProceduresRet:state.user.searchProceduresRet
+    searchProceduresRet:state.user.searchProceduresRet,
+    editProcedureRet:state.user.editProcedureRet
 })
 
 export default connect(mapStateToProps, { getUserCatalogue, 
@@ -255,5 +313,7 @@ export default connect(mapStateToProps, { getUserCatalogue,
     searchProcedures, searchProceduresClr,
 uploadRetClr,
 downloadCatalogue,
-downloadCatalogueClr
+downloadCatalogueClr,
+editProcedure,
+editProcedureClr
 })(MyCatalogueComponent);

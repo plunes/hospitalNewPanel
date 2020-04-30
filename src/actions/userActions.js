@@ -54,7 +54,25 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
 
   //EDIT_BIO
   EDIT_BIO_RET,
-  EDIT_BIO_CLR
+  EDIT_BIO_CLR,
+
+  GET_SERV_RET,
+  GET_SERV_CLR,
+
+  GET_SPECS_CLR,
+  GET_SPECS_RET,
+
+  ADD_DOCTOR_RET,
+  ADD_DOCTOR_CLR,
+
+  EDIT_PROCEDURE_RET,
+  EDIT_PROCEDURE_CLR,
+
+  
+  REGISTER_USER_RET,
+  REGISTER_USER_CLR,
+  REGISTER_USER
+
 
   } from './types';
 import history from '../history';
@@ -65,6 +83,221 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "https://plunes.co/v4"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
+
+
+// REGISTER_USER
+
+export const registerUserClr = () => dispatch =>{
+  return  dispatch({
+    type: REGISTER_USER_CLR,
+    payload:{}
+  })
+}
+
+export const registerUser = (obj) => async dispatch => {
+  console.log("Inside editProcedure")
+ let type = obj.userType
+  let token = localStorage.getItem('token');
+  return await axios.post(baseUrl + '/user/register', obj,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        dispatch({
+          type:REGISTER_USER_RET,
+           payload:{
+            success:true,
+            message:'Sign up successfull',
+           }
+        })
+      }else{
+        dispatch({
+          type:REGISTER_USER_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{}
+           }
+        })
+      }
+    }).catch(error => {
+      console.log(error.response)
+      dispatch({
+        type:REGISTER_USER_RET,
+         payload:{
+          success:false,
+          message:error.response.data.error,
+          data:{}
+         }
+      })
+  });
+}
+
+
+
+
+//EDIT_PROCEDURE
+export const editProcedureClr = () => dispatch =>{
+  return  dispatch({
+    type: EDIT_PROCEDURE_CLR,
+    payload:{}
+  })
+}
+
+export const editProcedure = (obj) => async dispatch => {
+  console.log("Inside editProcedure")
+  let newObj = {
+    specialityId:obj.specialityId,
+    serviceId:obj.serviceId,
+    newPrice:obj.price[0],
+    newVariance:obj.variance
+  }
+  let token = localStorage.getItem('token');
+  return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate', newObj,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in editProcedure")
+      if (res.status === 200) {
+        dispatch({
+          type:EDIT_PROCEDURE_RET,
+           payload:{
+            success:true,
+            message:'Service successfully updated',
+           }
+        })
+      }else{
+        dispatch({
+          type:EDIT_PROCEDURE_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:res.data
+           }
+        })
+      }
+    })
+}
+
+
+
+// ADD_DOCTOR
+
+export const addDoctorClr = () => dispatch =>{
+  return  dispatch({
+    type: ADD_DOCTOR_CLR,
+    payload:{}
+  })
+}
+
+export const addDoctor = (obj) => async dispatch => {
+  console.log("Inside addDoctor")
+  
+  let token = localStorage.getItem('token');
+  return await axios.patch(baseUrl + '/admin_panel/addHospitalDoctor', obj,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in addDoctor")
+      
+      if (res.status === 200) {
+        dispatch({
+          type:ADD_DOCTOR_RET,
+           payload:{
+            success:true,
+            message:'Doctor successfully added',
+           }
+        })
+      }else{
+        dispatch({
+          type:ADD_DOCTOR_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:res.data
+           }
+        })
+      }
+    })
+}
+
+
+
+//GET_SER
+export const getSpecsClr = () => dispatch =>{
+  return  dispatch({
+    type: GET_SPECS_CLR,
+    payload:{}
+  })
+}
+
+export const getSpecs = (obj) => async dispatch => {
+  console.log("Inside GetSPecs")
+  
+  let token = localStorage.getItem('token');
+  return await axios.get(baseUrl + '/admin_panel/specialities',  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in GetSpecs")
+      
+      if (res.status === 200) {
+        dispatch({
+          type:GET_SPECS_RET,
+           payload:{
+            success:true,
+            message:' successfully updated',
+            data:res.data.data
+           }
+        })
+      }else{
+        dispatch({
+          type:GET_SPECS_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:res.data
+           }
+        })
+      }
+    })
+}
+
+
+//GET_SER
+export const getServClr = () => dispatch =>{
+  return  dispatch({
+    type: GET_SERV_CLR,
+    payload:{}
+  })
+}
+
+export const getServ = (obj) => async dispatch => {
+  console.log(obj,"Data in getServ Action")
+  let token = localStorage.getItem('token');
+  return await axios.get(baseUrl + `/admin_panel/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in getServ")
+      if (res.status === 200) {
+        dispatch({
+          type:GET_SERV_RET,
+           payload:{
+            success:true,
+            message:' successfully updated',
+            data:res.data
+           }
+        })
+      }else{
+        dispatch({
+          type:GET_SERV_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:res.data
+           }
+        })
+      }
+    })
+}
+
+
+
+
+
+
+
 
 
  //EDIT_BIO

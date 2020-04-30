@@ -69,4 +69,32 @@ export const EDIT_BIO = 'App/Profile/EDIT_BIO'
 export const EDIT_BIO_RET = 'App/Profile/EDIT_BIO_RET'
 export const EDIT_BIO_CLR = 'App/Profile/EDIT_BIO_CLR'
 
+
+// GET_SPECS
+export const GET_SPECS = 'App/Profile/GET_SPECS'
+export const GET_SPECS_RET = 'App/Profile/GET_SPECS_RET'
+export const GET_SPECS_CLR = 'App/Profile/GET_SPECS_CLR'
+
+// GET_SERV
+export const GET_SERV = 'App/Profile/GET_SERV'
+export const GET_SERV_RET = 'App/Profile/GET_SERV_RET'
+export const GET_SERV_CLR = 'App/Profile/GET_SERV_CLR'
+
+// ADD_DOCTOR
+export const ADD_DOCTOR = 'App/Profile/ADD_DOCTOR'
+export const ADD_DOCTOR_RET = 'App/Profile/ADD_DOCTOR_RET'
+export const ADD_DOCTOR_CLR = 'App/Profile/ADD_DOCTOR_CLR'
+
+
+// ADD_DOCTOR
+export const EDIT_PROCEDURE = 'App/Profile/EDIT_PROCEDURE'
+export const EDIT_PROCEDURE_RET = 'App/Profile/EDIT_PROCEDURE_RET'
+export const EDIT_PROCEDURE_CLR = 'App/Profile/EDIT_PROCEDURE_CLR'
+
+
+// REGISTER_USER
+export const REGISTER_USER = 'App/Profile/REGISTER_USER'
+export const REGISTER_USER_RET = 'App/Profile/REGISTER_USER_RET'
+export const REGISTER_USER_CLR = 'App/Profile/REGISTER_USER_CLR'
+
 // export const LOGIN = 'LOGIN';

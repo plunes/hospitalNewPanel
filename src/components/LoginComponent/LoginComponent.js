@@ -4,6 +4,7 @@ import { createLogin } from "../../actions/userActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router-dom';
+import AuthHeader from "../functional/AuthHeader"
 
 
 class LoginComponent extends Component {
@@ -61,6 +62,8 @@ class LoginComponent extends Component {
         // Password
         // UserDetails action payload store (Dispatch)
         return (
+          <React.Fragment>
+          <AuthHeader/>
             <div className="container">
             <div className="row">
                 <div className="col-xl-6"><div>
@@ -90,6 +93,7 @@ class LoginComponent extends Component {
             </div>
         </div>
         </div>
+        </React.Fragment>
         )
     }
 }

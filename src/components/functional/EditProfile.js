@@ -29,15 +29,6 @@ import React from "react"
         }
     }
 
-    if(props.successText){
-        addToast(props.successText,{ appearance: 'succcess' })
-        props.clearNotif()
-    }
-    if(props.errorText){
-        addToast(props.errorText,{ appearance: 'errror' })
-        props.clearNotif()
-    }
-
 
   return (
     <div className="managePay">

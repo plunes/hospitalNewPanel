@@ -78,7 +78,6 @@ class App extends Component {
   
     const App = () => (
       <Router history={history}>
-        <div className='container-fluid'>
           <Switch>
             <Route exact path='/' component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
@@ -99,7 +98,6 @@ class App extends Component {
             <Route exact path='/add-doctor' component={AddDoctorComponent} />
             <Route exact path='/devlopment' component={Development} />
           </Switch>
-          </div>
         
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />
       </Router>

@@ -39,7 +39,23 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    UPDATE_ACHIEVEMENT_CLR,
    UPDATE_ACHIEVEMENT,
    EDIT_BIO_RET,
-   EDIT_BIO_CLR
+   EDIT_BIO_CLR,
+
+   
+  GET_SERV_RET,
+  GET_SERV_CLR,
+
+  GET_SPECS_CLR,
+  GET_SPECS_RET,
+  
+  ADD_DOCTOR_RET,
+  ADD_DOCTOR_CLR,
+
+  EDIT_PROCEDURE_RET,
+  EDIT_PROCEDURE_CLR,
+
+  REGISTER_USER_RET,
+  REGISTER_USER_CLR
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -95,12 +111,60 @@ const initialState = {
 
   updateAchievementRet:false,
 
-  editBioRet:false
+  editBioRet:false,
 
+  getServRet:false,
+  getSpecsRet:false,
+  addDoctorRet:false,
+
+  editProcedureRet:false,
+  editProcedureClr:false,
+
+  registerUserRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case REGISTER_USER_RET:
+      return {
+        ...state,
+        registerUserRet:action.payload
+      };
+
+      case REGISTER_USER_CLR:
+      return {
+        ...state,
+        registerUserRet:false
+      };
+
+
+
+    case ADD_DOCTOR_RET:
+      return {
+        ...state,
+        addDoctorRet:action.payload
+      };
+
+      case ADD_DOCTOR_CLR:
+      return {
+        ...state,
+        addDoctorRet:false
+      };
+
+
+      case EDIT_PROCEDURE_RET:
+        return {
+          ...state,
+          editProcedureRet:action.payload
+        };
+  
+        case EDIT_PROCEDURE_CLR:
+        return {
+          ...state,
+          editProcedureRet:false
+        };
+  
 
     case UPDATE_BANNER_RET:
       return {
@@ -113,6 +177,33 @@ export default function (state = initialState, action) {
         ...state,
         updateBannerRet:false
       };
+
+
+      case GET_SPECS_RET:
+      return {
+        ...state,
+        getSpecsRet:action.payload
+      };
+
+      case GET_SPECS_CLR:
+      return {
+        ...state,
+        getSpecsRet:false
+      };
+
+      case GET_SERV_RET:
+      return {
+        ...state,
+        getServRet:action.payload
+      };
+
+      case GET_SERV_CLR:
+      return {
+        ...state,
+        getServRet:false
+      };
+
+
 
       case EDIT_BIO_RET:
         return {
