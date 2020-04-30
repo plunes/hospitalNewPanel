@@ -97,10 +97,13 @@ class App extends Component {
             <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
             <Route exact path='/change-password' component={ChangePassword} />
             <Route exact path='/add-doctor' component={AddDoctorComponent} />
+            <Route exact path='/devlopment' component={Development} />
           </Switch>
-        </div>
+          </div>
+        
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />
       </Router>
+      
     )
     return (
       <Switch>
