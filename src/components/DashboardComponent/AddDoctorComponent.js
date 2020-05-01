@@ -8,7 +8,8 @@ import { bankDetails, submitBankDetailsClr, upload,
 
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
-
+import TimeSlot from '../functional/TimeSlot'
+import ModalComponent from "../ModalComponent"
 const slots = [
   {
       "slots" : [
@@ -16,7 +17,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "monday",
-      "closed" : false
+      "closed" : 'false'
   },
   {
       "slots" : [
@@ -24,7 +25,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "tuesday",
-      "closed" : false
+      "closed" : 'false'
   },
   {
       "slots" : [
@@ -32,7 +33,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "wednesday",
-      "closed" : false
+      "closed" : 'false'
   },
   {
       "slots" : [
@@ -40,7 +41,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "thursday",
-      "closed" : false
+      "closed" : 'false'
   },
   {
       "slots" : [
@@ -48,7 +49,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "friday",
-      "closed" : false
+      "closed" : 'false'
   },
   {
       "slots" : [
@@ -56,7 +57,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "saturday",
-      "closed" : false
+      "closed" : 'false'
   },
   {
       "slots" : [
@@ -64,7 +65,7 @@ const slots = [
           "3:00 PM-8:00 PM"
       ],
       "day" : "sunday",
-      "closed" : true
+      "closed" : 'true'
   }
 ]
 
@@ -90,10 +91,32 @@ class AddDoctorComponent extends Component {
             doctorProfileImage:false,
             doctorImageName:false,
             consultationFee:3000,
-            addDoctorLoading:false
+            addDoctorLoading:false,
+            slots:this.transformData(slots),
+
+            open:false,
+            selectedSlot:{},
+            selectedType:{},
+            selectedshift:{},
+            selectedDay:{}
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    transformData = (data) =>{
+      let arr = []
+      data.forEach((item,i)=>{
+            let obj = {}
+            obj.day =this.getDay(i)
+            obj.closed = item.closed==="false"?false:true
+            obj.slots = {
+            morning: this.stringToTime(item.slots[0]),
+            evening: this.stringToTime(item.slots[1])
+            }
+            arr.push(obj)
+      })
+      return arr
     }
     handleChange(e){
         this.setState({
@@ -124,7 +147,169 @@ class AddDoctorComponent extends Component {
             loading:false
         })
     }
+    onCloseModal = () => {
+      this.setState({ open: false });
+    };
+
+    stringToTime =(str)=>{
+      let arr = str.split('-')
+      let fromMinute = arr[0].split(" ")[0].split(':')[1]
+      let fromHour = arr[0].split(" ")[0].split(':')[0]
+      let fromAmpm = arr[0].split(" ")[1]
+      let toMinutes = arr[1].split(" ")[0].split(':')[1]
+      let toHour = arr[1].split(" ")[0].split(':')[0]
+      let toAmPm = arr[1].split(" ")[1]
+let obj =   {
+          from:{
+            hour:fromAmpm==="PM"?12+parseInt(fromHour,10):parseInt(fromHour,10),
+            minutes:parseInt(fromMinute,10)
+          },
+          to:{
+            hour:toAmPm==="PM"?12+parseInt(toHour,10):parseInt(toHour,10),
+            minutes:parseInt(toMinutes,10)
+          }
+      }
+         return obj
+      }
     
+      timeToString = (time) =>{
+        let  hour =  time.hour>12?time.hour-12:time.hour
+        let minutes = time.minutes===0?"00":time.minutes
+        let timeString = `${hour}:${minutes} ${time.hour>12?'PM':'AM'}`
+        return timeString
+     }
+
+     handleTimeSubmit = (data) =>{
+      console.log(data,"data in handleTimeSubmit")
+        let slot = JSON.parse(JSON.stringify(this.state.slots))
+        let index  = ''
+        let newSlot  = slot.filter((item,i)=>{
+                  if(item.day === this.state.selectedDay.day){
+                    index = i
+                  }
+                return item.day !== this.state.selectedDay.day
+        })
+        let newObject = {
+          ...this.state.selectedDay,
+          slots: {...this.state.selectedDay.slots,
+                [this.state.selectedshift]:{
+                  ...this.state.selectedDay.slots[this.state.selectedshift],[this.state.selectedType]:{
+                    ...data
+                  }
+                }
+          }
+        }
+        newSlot.splice(index,0,newObject)
+        console.log(newSlot,"newSliot in handleTimeSubmit")
+        this.setState({
+          slots:newSlot,
+          selectedSlot:{},
+          selectedType:{},
+          selectedshift:{},
+          selectedDay:{},
+          open:false
+        })
+    }
+   
+    handleCloseDay = (data,i,e) => {
+      e.stopPropagation()
+      let slot = JSON.parse(JSON.stringify(this.state.slots))
+      let index  = ''
+      let newSlot  = slot.filter((item,j)=>{
+                if(item.day === data.day){
+                  index = j
+                }
+              return  item.day !== data.day
+      })
+      let newObject = {
+        ...data,
+        closed:!data.closed
+      }
+      newSlot.splice(i,0,newObject)
+      this.setState({
+        slots:newSlot
+      })
+    }
+
+
+    generateTimeSlot = () =>{
+      return(
+          <React.Fragment>
+              <TimeSlot
+               selectedSlot = {this.state.selectedSlot}
+               selectedType = {this.state.selectedType}
+               selectedshift = {this.state.selectedshift}
+               submit = {this.handleTimeSubmit}
+               setAvailabilityRet = {this.props.setAvailabilityRet}
+               setAvailabilityClr = {this.props.setAvailabilityClr}
+               loadingOff = {()=>this.setLoadingOff()}
+              />
+          </React.Fragment> 
+      )
+  }
+  
+  getDay = (i) =>{
+     switch (i) {
+      case 0:
+        return 'monday'
+        break;
+      case 1:
+        return 'tuesday'
+        break;
+      case 2:
+        return 'wendesday'
+        break;
+      case 3:
+        return 'thursday'
+        break;
+      case 4:
+        return 'friday'
+        break;
+      case 5:
+       return 'saturday'
+       break;
+      case 6:
+       return 'sunday'
+       break;
+     
+       default:
+         break;
+     }
+  }
+  
+  generateSlotsFormat = () =>{
+      let slots = JSON.parse(JSON.stringify(this.state.data))
+      let arr = []
+      slots.forEach((item,i)=>{
+        let obj = {}
+        obj = {
+          closed:item.closed,
+          day:item.day,
+          slots:[`${this.timeToString(item.slots.morning.from)}-${this.timeToString(item.slots.morning.to)}`,`${this.timeToString(item.slots.evening.from)}-${this.timeToString(item.slots.evening.to)}`]
+        }
+        arr.push(obj)
+      })
+      console.log(arr,"arr in generate slot");
+      
+      return arr
+  
+     
+  }
+
+  
+  slotClicked = (slot,a,b,item )  =>{
+    console.log(slot, a, b, item,"SlotClicked")
+    this.setState({
+      selectedSlot:slot,
+      selectedType:b,
+      selectedshift:a,
+      open:true,
+      selectedDay:item
+    })
+  }
+
+  
+
      componentWillReceiveProps(nextProps){
       console.log(this.props,"props in compoentWo")
       if(nextProps.getSpecsRet){
@@ -165,25 +350,6 @@ class AddDoctorComponent extends Component {
         }
         nextProps.getServClr()
       }
-
-        // this.setState({
-        //     userDetails : nextProps.user
-        // }, () => {
-        //     if(this.state.userDetails.bankDetails){
-        //         this.setState({
-        //             bankname : this.state.userDetails.bankDetails.bankName,
-        //             accnumber : this.state.userDetails.bankDetails.accountNumber,
-        //             ifsccode : this.state.userDetails.bankDetails.ifscCode,
-        //             pannumber : this.state.userDetails.bankDetails.panNumber,
-        //             accountname : this.state.userDetails.bankDetails.name,
-        //             loading:false
-        //         }, () => {
-        //             console.log(this.state.userDetails.bankDetails.bankName)
-        //         })
-        //     }
-        
-        // })
-      
     }
 
     async componentDidMount(){
@@ -238,7 +404,7 @@ class AddDoctorComponent extends Component {
         education:data.education,
         designation:data.designation,
         department:'',
-        timeSlots:slots,
+        timeSlots:this.generateSlotsFormat(),
         experience:data.experience,
         imageUrl:data.doctorProfileImage,
         prescription:{},
@@ -409,8 +575,18 @@ class AddDoctorComponent extends Component {
               consultationFee= {this.state.consultationFee}
               submitConsultaion = {()=>this.setState({editConsultFlag:false})}
               toggleSubmitConultation = {()=>this.setState({editConsultFlag:!this.state.editConsultFlag})}
+              timeToString = {this.timeToString}
+              slotClicked = {this.slotClicked}
+              handleCloseDay = {this.handleCloseDay}
+
+              slots ={this.state.slots}
             />
         </div>
+        <ModalComponent 
+                open = {this.state.open}
+                handleClose = {this.onCloseModal}
+                modalBody = {this.generateTimeSlot}
+                />  
         </div>
                 </div>
                 <div className='col-md-3'></div>

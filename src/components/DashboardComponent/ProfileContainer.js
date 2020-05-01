@@ -13,6 +13,7 @@ import Achievement from "../functional/Achievement"
 import EditBio from '../functional/EditBio';
 import ModalComponent from "../ModalComponent"
 import AddAchievement from '../functional/AddAchievement';
+import MapComponent from "../MapComponent"
 // import GoogleComponent from "../GoogleMapComponent"
 
 
@@ -160,9 +161,16 @@ class ProfileContainer extends React.Component {
 
 
   render() {
+    console.log(this.props,"this.props in  Container")
+    
     const { open } = this.state;
     return (
       <div className="HospitalProfileBody AllComponents">
+        <div>
+          <MapComponent
+            location = {this.props.user.geoLocation}
+          />
+        </div>
        <ProfileBanner
        user = {this.props.user}
        updateBanner = {this.updateBanner}

@@ -71,7 +71,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   
   REGISTER_USER_RET,
   REGISTER_USER_CLR,
-  REGISTER_USER
+  REGISTER_USER,
+
+  SET_AVAILABILITY_RET,
+  SET_AVAILABILITY_CLR
 
 
   } from './types';
@@ -83,6 +86,56 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "https://plunes.co/v4"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
+
+// SET_AVAILABILITY
+
+export const setAvailabilityClr = () => dispatch =>{
+  return  dispatch({
+    type: SET_AVAILABILITY_CLR,
+    payload:{}
+  })
+}
+
+export const setAvailability = (obj) => async dispatch => {
+  console.log("Inside setAvailability")
+ let type = obj.userType
+  let token = localStorage.getItem('token');
+  return await axios.put(baseUrl + '/user', obj,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in setResposnibikity")
+      if (res.status === 201) {
+        dispatch({
+          type:SET_AVAILABILITY_RET,
+           payload:{
+            success:true,
+            message:'Availability successfully updated',
+           }
+        })
+      }else{
+        dispatch({
+          type:SET_AVAILABILITY_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{}
+           }
+        })
+      }
+    }).catch(error => {
+      console.log(error.response)
+      dispatch({
+        type:SET_AVAILABILITY_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try again later",
+          data:{}
+         }
+      })
+  });
+}
+
+
+
 
 
 // REGISTER_USER
@@ -146,7 +199,7 @@ export const editProcedure = (obj) => async dispatch => {
   console.log("Inside editProcedure")
   let newObj = {
     specialityId:obj.specialityId,
-    serviceId:obj.serviceId,
+    serviceId:obj._id,
     newPrice:obj.price[0],
     newVariance:obj.variance
   }

@@ -158,57 +158,19 @@ import React, { useRef, useState } from "react"
          <div className="col-lg-2"><h4>Closed</h4></div>
        </div>
      
+       {props.slots.map((item,i)=>(
+                      <div className="row text-center">
+                      <div className="col-lg-2"><p className="m">{item.day.charAt(0).toUpperCase()}</p></div>
+                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.morning,'morning','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.from)}</span><span onClick={()=>props.slotClicked(item.slots.morning,'morning','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.to)}</span></p></div>
+                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.evening,'evening','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.from)}</span><span onClick={()=>props.slotClicked(item.slots.evening,'evening','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.to)}</span></p></div>
+                      <div className="col-lg-2">
+                         <div 
+                      onClick = {(e)=>props.handleCloseDay(item,i,e)} 
+                      className='round'> 
+                    <label className={item.closed?'green-background ':''} for="checkbox"></label></div></div>
+                    </div>
+                   ))}
       
-       <div className="row text-center">
-         <div className="col-lg-2"><p className="m">M</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox" /> <label for="checkbox"></label></div></div>
-       </div>
-      
-      
-       <div className="row text-center">
-         <div className="col-lg-2"><p className="m">T</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox1" /> <label for="checkbox1"></label></div></div>
-       </div>
-   
-         <div className="row text-center">
-         <div className="col-lg-2"><p className="m">W</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox2" /> <label for="checkbox2"></label></div></div>
-       </div>
-       
-         <div className="row text-center">
-         <div className="col-lg-2"><p className="m">T</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox3" /> <label for="checkbox3"></label></div></div>
-       </div>
-  
-         <div className="row text-center">
-         <div className="col-lg-2"><p className="m">F</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox4" /> <label for="checkbox4"></label></div></div>
-       </div>
-    
-         <div className="row text-center">
-         <div className="col-lg-2"><p className="m">S</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox5" /> <label for="checkbox5"></label></div></div>
-       </div>
-        
-         <div className="row text-center">
-         <div className="col-lg-2"><p className="m">S</p></div>
-         <div className="col-lg-4"><p><span className="time_bor">6:00 AM </span><span className="time_bor">11:00 AM</span></p></div>
-         <div className="col-lg-4"><p><span className="time_bor">01:00 PM </span><span className="time_bor">10:00 PM</span></p></div>
-         <div className="col-lg-2"> <div class="round"> <input type="checkbox" id="checkbox6" /> <label for="checkbox6"></label></div></div>
-       </div>
-
        <div className="consul_fee">
     <div className="cdcd_sfd">           
        {props.editConsultFlag && <span onClick={()=>props.submitConsultaion()} className="edi_intr hover_underline margin-5">Save</span> }

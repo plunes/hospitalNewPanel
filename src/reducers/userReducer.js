@@ -55,7 +55,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   EDIT_PROCEDURE_CLR,
 
   REGISTER_USER_RET,
-  REGISTER_USER_CLR
+  REGISTER_USER_CLR,
+
+  SET_AVAILABILITY_RET,
+  SET_AVAILABILITY_CLR
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -120,11 +123,25 @@ const initialState = {
   editProcedureRet:false,
   editProcedureClr:false,
 
-  registerUserRet:false
+  registerUserRet:false,
+
+  setAvailabilityRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case SET_AVAILABILITY_RET:
+      return {
+        ...state,
+        setAvailabilityRet:action.payload
+      };
+
+      case SET_AVAILABILITY_CLR:
+      return {
+        ...state,
+        setAvailabilityRet:false
+      };
 
     case REGISTER_USER_RET:
       return {

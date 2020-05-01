@@ -97,4 +97,8 @@ export const REGISTER_USER = 'App/Profile/REGISTER_USER'
 export const REGISTER_USER_RET = 'App/Profile/REGISTER_USER_RET'
 export const REGISTER_USER_CLR = 'App/Profile/REGISTER_USER_CLR'
 
+export const SET_AVAILABILITY = 'App/Profile/SET_AVAILABILITY'
+export const SET_AVAILABILITY_RET = 'App/Profile/SET_AVAILABILITY_RET'
+export const SET_AVAILABILITY_CLR = 'App/Profile/SET_AVAILABILITY_CLR'
+
 // export const LOGIN = 'LOGIN';

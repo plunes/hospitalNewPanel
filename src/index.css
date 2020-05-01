@@ -244,3 +244,7 @@ body {
   bottom: 6px;
   cursor: pointer;
 }
+
+.green-background {
+    background-color: lightgreen !important;
+}
