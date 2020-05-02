@@ -34,6 +34,7 @@ import ChangePassword from "./components/ChangePassword"
 import Development from './components/Development'
 
 
+
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
   <div>{message.body}</div>
@@ -77,8 +78,11 @@ class App extends Component {
   render() {
   
     const App = () => (
+    
       <Router history={history}>
           <Switch>
+          <div className="container-fluid">
+           
             <Route exact path='/' component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
             <Route exact path='/dashboard' component={DashboardComponent} />
@@ -97,11 +101,13 @@ class App extends Component {
             <Route exact path='/change-password' component={ChangePassword} />
             <Route exact path='/add-doctor' component={AddDoctorComponent} />
             <Route exact path='/devlopment' component={Development} />
+            
+            </div>
           </Switch>
         
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />
       </Router>
-      
+    
     )
     return (
       <Switch>

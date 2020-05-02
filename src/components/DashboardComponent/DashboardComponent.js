@@ -254,7 +254,7 @@ class DashboardComponent extends Component {
                         <div className='col-md-3'>
                             <SidebarComponent />
                         </div>
-                        <div className='col-md-9 Dashboard AllComponents'>
+                        <div className='col-md-8 Dashboard AllComponents'>
                             <div className='row dashboardsection dashrow1'>
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
                             </div>
@@ -436,7 +436,7 @@ class DashboardComponent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-md-2'></div>
+                        <div className='col-md-1'></div>
                     </div>
                 </div>
             )

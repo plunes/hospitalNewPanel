@@ -66,11 +66,11 @@ class LoginComponent extends Component {
           <AuthHeader/>
             <div className="container">
             <div className="row">
-                <div className="col-xl-6"><div>
+                <div className="col-lg-6"><div>
                   <img className="loginImage"  src="/login.png"  alt=".."/>
                     </div>
                 </div>
-                <div className="col-xl-6">
+                <div className="col-lg-6">
                   <div className = 'row'>
                     <div className = 'col-md-1'>
 

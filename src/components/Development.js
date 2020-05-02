@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr } from "../actions/userActions";
 import ManagePayment from "./functional/ManagePayment"
 import "./DEvelopment.css"
+import LandingHeader from './LandingHeader'
 
 class Development extends Component {
     constructor(props){
@@ -81,10 +82,10 @@ class Development extends Component {
         return (
             <div>
             <div className='row'>
-                <DashboardHeader />
+                <LandingHeader />
             </div>
            {/* Signup-header */}
-           <nav className="navbar custom_ha navbar-expand-md custom-navbar sigunup_hedr">
+           {/* <nav className="navbar custom_ha navbar-expand-md custom-navbar sigunup_hedr">
           <div className="container">
               <a className="navbar-brand logo_size col-lg-3 col-md-4 col-6" href="#">
                   <img src="/pluneslogo.png" className="lgo_sigun" />
@@ -108,7 +109,7 @@ class Development extends Component {
                </div>  
           </div>
   </nav>
-              
+               */}
             {/* Signup-header-end */}
           
              <section className="Plunes_india">
@@ -116,7 +117,7 @@ class Development extends Component {
                  <div className="row">
                    <div className="col-lg-12 text-center">
                     <div className="heading_hos">
-                       <h2>PLUNES is India's first AI powered<br/> utility network</h2>
+                       <h2>PLUNES is India's first AI powered utility network</h2>
                        <p>Create your profile for free to get started</p>
                         <a href="#" className="get_startd_h">Get Started for Free</a>
                        </div>
@@ -138,14 +139,14 @@ class Development extends Component {
                         <section className="offers_int">
                           <div className="container text-center">
                            <div className="revenues_heding">
-                            <h3>AI offers intelligent and competitive business <br/>insights to enhance your patient footfall <br/>and revenues.</h3>
+                            <h3>AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h3>
                              <img src="/system.png" className="laptop" />
                             </div>
-                             <div className="row marg_real">
-                                  <div className="col-lg-6">
+                             <div className="row marg_real" id="main">
+                                  <div className="col-lg-6 col-md-6 col-12" id="myRedDIV">
                                     <img src="/realtime.png" className="real_time"/>
                                   </div>
-                                  <div className="col-lg-4 tools_pat">
+                                  <div className="col-lg-4 col-md-4 col-12 tools_pat" id="myPinkDIV">
                                    <h2>Real Time Insights</h2>
                                    <p>AI and Big data tools to monitor the flow of patients, enabling you to take data driven decision for optimizing the revenue.</p>
                                   </div>
@@ -222,7 +223,7 @@ class Development extends Component {
                          <div className="container">
                            <h4 className="solution_emr">An intelligent Cloud Solution for EMR, Integrated with profiles <br />of Users and Hospitals for a seamless experience.</h4>
                          <div className="row">
-                           <div className="col-lg-5 offset-lg-1">
+                           <div className="col-lg-5 offset-lg-1 col-12 col-md-5">
                               <ul className="report_any">
                                 <li>Unlimited cloud storage, access the reports from anywhere</li>
                                 <li>Share reports with patients in one click</li>
@@ -230,7 +231,7 @@ class Development extends Component {
 
                                 </ul>
                              </div>
-                             <div className="col-lg-4">
+                             <div className="col-lg-4 col-md-4 col-12">
                               <img src="/cloud.svg" className="clod_anum" />
                              </div>
                            </div> 

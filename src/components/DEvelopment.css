@@ -263,16 +263,20 @@ label.control-label {
 
 
 /* Landing-page-start */
-.Plunes_india{margin-top: 10%;margin-bottom:10%;}
+.Plunes_india{margin-top: 5%;margin-bottom:10%;}
 .heading_hos{text-align: center;}
-.heading_hos h2{color: #1E1E1E;font-weight: 600;}
+.heading_hos h2{color: #1E1E1E;font-weight: 600;    width: 518px;
+    text-align: center;
+    margin: 0 auto;}
 .heading_hos p{color: #9C9C9C;font-size: 19px; padding: 8px 0px 20px 0px; font-weight: 400;}
 .get_startd_h{background: #01D35A;color: #fff;border-radius: 50px;padding: 12px 20px 10px 20px;font-size: 14px;}
 .video_sec iframe {  width: 640px;  height: 290px; border: 8px solid #fff; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);margin-top: 30px;}
 /* 1st-section-end */
 
-.offers_int{background: #FDF6FF;width: 1348px; height: 1350px; position: relative; left: -14px;top:30px}
-.revenues_heding h3{font-weight: 600;  line-height: 38px;padding-bottom: 40px;}
+.offers_int{background: #FDF6FF;width: 1348px; height: 1350px; position: relative; left: -14px;top:30px;}
+.revenues_heding h3{font-weight: 600;  line-height: 38px;padding-bottom: 40px;width: 572px;
+    text-align: center;
+    margin: 0 auto;}
 .revenues_heding {
     padding-top: 65px;
 }
@@ -322,29 +326,88 @@ ul.report_any {
     padding-top: 80px;
 }
 
+@media (max-width: 767px) and (min-width: 281px) {
+.offers_int{width: 100%;top: -46px;left: 0;height: 780px;}
+.laptop {
+    width: 100%;
+}
+.real_time {
+    width: 100%;
+}
+.video_sec iframe {
+    width: 100%;
+    height: auto;;}
+    .inteljent_cloud{width: 100%;left: 0;
+        top: 0px;}
+    img.clod_anum{width: 268px;
+        height: auto;}
+    .heading_hos h2{width: 100%;font-size: 21px;}
+    .heading_hos p {
+        font-size: 12px;}
+        .get_startd_h {font-size: 13px;padding: 7px 20px 7px 20px;}
+        .Plunes_india {margin-bottom: 0px;}
+        .revenues_heding {
+            padding-top: 31px;
+        }
+        .revenues_heding h3{width: 100%;font-size: 17px;line-height: 21px;}
+      #myRedDIV   {order: 2;}
+       #myPinkDIV  {order: 1;}
+       .tools_pat{margin-left: 0;padding-top: 20px;text-align: center;padding-bottom: 30px;}
+       .tools_pat p{font-size: 15px;}
+       .tools_pat h2 {font-size: 20px;
+       }
+       .why_plunes {
+        margin-top: 0px;
+    }
+    .plunes_brd{text-align: center;}
+    .black_bordr {
+        width: 28%;
+        position: relative;
+        top: 11px;
+        text-align: center;
+    margin: 0 auto !important;
+    }
+    .plunes_brd h2 {font-size: 20px;
+    }
+    .refund_im img {
+        width: 100%;
+        height: 106px;}
+        .refund_pay h2 {font-size: 10px;position: relative;margin-top: 0;top: -11px;}
+        .margin_icn {
+            margin-top: 0;
+            position: relative;
+            top: -19px;
+        }
+        .solution_emr{text-align: center;font-size: 18px;}
+        ul.report_any {
+         padding-top: 0px;
+        }
+        ul.report_any li{font-size: 14px;line-height: 20px;padding-bottom:5px;}
 
-/* sigun-up-header */
-.sigunup_hedr{
-  height: 70px;
+
 }
-.d_app{background: #01D35A;border-radius: 34px;color:#fff;padding: 7px 25px 7px 70px !important;}
-.ios_m {
-    position: relative;
-    top: -35px;
-    left: 13px;
-    width: 20px;
-}
-.andorid_m {
-    position: relative;
-    top: -34px;
-    left: 14px;
-    width: 20px;
-}
-.d_app:hover{color: #fff !important;}
-.sig_lgn{border:1px solid #707070;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;color: #343434;}
-.signup_lgu{border: 1px solid #01D35A;color: #01D35A;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;}
-.signup_lgu:hover{color: #01D35A !important;}
-.lgo_sigun{
-    width: 161px;
-    padding-bottom: 19px;
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+    .offers_int {
+
+        width: 767px;height: 990px;}
+        .laptop {
+            width: 100%;
+        }
+        .inteljent_cloud {width: 768px;}
+        .sig_lgn {
+            font-size: 12px !important;}
+            .real_time {
+                width: 382px;
+            }
+            .tools_pat h2 {font-size: 25px;}
+            .tools_pat {
+                text-align: left;
+                padding-top: 33px;}
+                .tools_pat p {font-size: 17px;}
+                .solution_emr{font-size: 25px;}
+
+
+
 }
