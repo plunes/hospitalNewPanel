@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
-import { getBooking } from '../../actions/userActions'
+import { getBooking, getBookingClr } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import  "./AvailabilityComponent.css";
@@ -26,6 +26,9 @@ class AppointmentComponent extends Component {
         super(props);
         this.state = {
             modalIsOpen : false,
+            upcoming_bookings:[],
+            cancelled_booking:[],
+            confirmed_booking:[]
         };
         
         this.openModal = this.openModal.bind(this);
@@ -46,10 +49,43 @@ class AppointmentComponent extends Component {
         })
     }
 
+    componentWillReceiveProps(nextProps){
+        if(!!nextProps.getBookingRet){
+            if(nextProps.getBookingRet.success){
+               let confirmed_booking = []
+               let cancelled_booking = []
+               let upcoming_bookings = []
+
+               nextProps.getBookingRet.data.forEach(data =>{
+                   if(data.bookingStatus==="Confirmed"){
+                       confirmed_booking.push(data)
+                   }else if(data.bookingStatus==="Cancelled"){
+                       cancelled_booking.push(data)
+                   }else{
+                       upcoming_bookings.push(data)
+                   }
+               })
+               this.setState({
+                confirmed_booking:confirmed_booking,
+                cancelled_booking:cancelled_booking,
+                upcoming_bookings:upcoming_bookings
+               })
+            }else{
+                this.setState({
+                    confirmed_booking:[],
+                    cancelled_booking:[],
+                    upcoming_bookings:[]
+                })
+            }
+            nextProps.getBookingClr()
+        }
+    }
+
 
     render() {
-        
+        // console.log(this.props,"this.props in Appointments")
         // console.log(this.props.bookings, 'bookings');
+        console.log(this.state,"this.state in AppointmentComponent")
         return (
             
             <div>
@@ -129,7 +165,9 @@ class AppointmentComponent extends Component {
                                 </TabList>
                               <div className="upcoming_bdr"></div>
                                 <TabPanel className="ardee_ci">
-                                <div className="row">
+                               {this.state.upcoming_bookings.map((item,i)=>{
+                                   return <React.Fragment>
+                                        <div className="row">
                                   <div className="col-lg-3 nov_2">
                                       <h4>NOV 20</h4>
                                       <p>11 Nov 2019 <br/>09:00 AM</p>
@@ -139,8 +177,8 @@ class AppointmentComponent extends Component {
                                                   <img src="/pexel_1.png" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                  <h4>Shikha Singh</h4>
-                                                      <p>C9/38, Gate No. 3, Block C, Ardee City, Sector 52, Gurugram, Haryana 122003, India</p> 
+                                                    <h4>{item.userName}</h4>
+                                                    <p>{item.professionalAddress}</p> 
                                                   </div>
                                         
                                       <div className="col-lg-2 loc_tab">
@@ -179,9 +217,13 @@ class AppointmentComponent extends Component {
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
                                  <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                   </React.Fragment>
+                               })}
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
-                                <div className="row">
+                                    {this.state.confirmed_booking.map((item,i)=>{
+                                   return <React.Fragment>
+                                        <div className="row">
                                   <div className="col-lg-3 nov_2">
                                       <h4>NOV 20</h4>
                                       <p>11 Nov 2019 <br/>09:00 AM</p>
@@ -191,13 +233,15 @@ class AppointmentComponent extends Component {
                                                   <img src="/pexel_1.png" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                  <h4>Shikha Singh</h4>
-                                                      <p>C9/38, Gate No. 3, Block C, Ardee City, Sector 52, Gurugram, Haryana 122003, India</p> 
-                                                  </div>
+                                                  <h4>{item.userName}</h4>
+                                                  <p>{item.professionalAddress}</p>
+                                                </div> 
                                         
                                       <div className="col-lg-2 loc_tab">
-                                      <img src="/loc.png" />
+                                    <div className="round-image">
+                                      <img src={item.userImageUrl} />
                                       </div>
+                                     </div>
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
@@ -213,27 +257,32 @@ class AppointmentComponent extends Component {
                                 {/* 2nd--end */}
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
-                                    <p className="brace_m">Dental Braces</p>
+                                    <p className="brace_m">{item.serviceName}</p>
                                  </div>
                                  <div className="col-lg-6">
-                                 <p className="dental_th">30000</p>
+                                    <p className="dental_th">{item.totalAmount}</p>
                                  </div>
                                 </div>
                                 {/* 3rd--end */}
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
                                 <div className="row">
-                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked in 100</span></div>
+                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>{`Booked in ${item.totalAmount}`}</span></div>
                                 
-                                   <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
-                                    <div className="gray_circ">100%<span>30000</span></div>
+                                  
+                                    <div className="gray_circ">100%<span>{`${item.totalAmount}`}</span></div>
                                  </div>
                                  <div className="grap_bod"></div><div className="grap_bod2"></div>
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
-                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                 
+                                   </React.Fragment>
+                               })} 
+                               <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
-                                <div className="row">
+                                {this.state.upcoming_bookings.map((item,i)=>{
+                                   return <React.Fragment>
+                                        <div className="row">
                                   <div className="col-lg-3 nov_2">
                                       <h4>NOV 20</h4>
                                       <p>11 Nov 2019 <br/>09:00 AM</p>
@@ -282,8 +331,11 @@ class AppointmentComponent extends Component {
                                  <div className="grap_bod"></div><div className="grap_bod2"></div>
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
-                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
-                                </TabPanel>
+                                   </React.Fragment>
+                               })}                           
+                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
+                                                           
+                                 </TabPanel>
                                 
                                
                             </Tabs>
@@ -329,7 +381,8 @@ class AppointmentComponent extends Component {
 
 const mapStateToProps = state => ({
     bookings: state.user.bookingData,
+    getBookingRet:state.user.getBookingRet
 })
 
-export default connect(mapStateToProps, {getBooking})(AppointmentComponent);
+export default connect(mapStateToProps, {getBooking, getBookingClr})(AppointmentComponent);
 

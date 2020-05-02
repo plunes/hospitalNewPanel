@@ -58,7 +58,16 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   REGISTER_USER_CLR,
 
   SET_AVAILABILITY_RET,
-  SET_AVAILABILITY_CLR
+  SET_AVAILABILITY_CLR,
+  
+  TO_ADD_SERVICES_CLR,
+  TO_ADD_SERVICES_RET,
+
+  ADD_SERVICES_CLR,
+  ADD_SERVICES_RET,
+
+  GET_BOOKING_CLR,
+  GET_BOOKING_RET
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -76,60 +85,86 @@ const initialState = {
   businessLost: null,
   solutionUsers: [],
   catalogues:[],
-
   submitProfile:false,
   submitProfileRet:false,
   resetPassRet:false,
-  
   logoutDevicesRet:false,
   logoutDevices:false,
   logoutDevicesLoading:false,
-
   upload:false,
   uploadRet:false,
   uploadLoading:false,
-
   updateImage:false,
   updateImageRet:false,
   updateImageLoading:false,
-
   uploadProcedures:false,
   uploadProceduresRet:false,
   uploadProceduresLoading:false,
-
   downloadCatalogue:false,
   downloadCatalogueRet:false,
   downloadCatalogueClr:false,
-
   submitProfileLoading:false,
   getUserLoading:false,
-
   searchProcedures:false,
   searchProceduresRet:false,
   searchProcedureLoading:false,
-
   submitBankDetailsRet:false,
-
   updateBannerRet:false,
-
   updateAchievementRet:false,
-
   editBioRet:false,
-
   getServRet:false,
   getSpecsRet:false,
   addDoctorRet:false,
-
   editProcedureRet:false,
   editProcedureClr:false,
-
   registerUserRet:false,
-
-  setAvailabilityRet:false
+  setAvailabilityRet:false,
+  toAddServicesRet:false,
+  addServicesRet:false,
+  getBookingRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case GET_BOOKING_RET:
+      return {
+        ...state,
+        getBookingRet:action.payload
+      };
+
+      case GET_BOOKING_CLR:
+      return {
+        ...state,
+        getBookingRet:false
+      };
+
+
+    case ADD_SERVICES_RET:
+      return {
+        ...state,
+        addServicesRet:action.payload
+      };
+
+      case ADD_SERVICES_CLR:
+      return {
+        ...state,
+        addServicesRet:false
+      };
+
+
+
+    case TO_ADD_SERVICES_RET:
+      return {
+        ...state,
+        toAddServicesRet:action.payload
+      };
+
+      case TO_ADD_SERVICES_CLR:
+      return {
+        ...state,
+        toAddServicesRet:false
+      };
 
     case SET_AVAILABILITY_RET:
       return {

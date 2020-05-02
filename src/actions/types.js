@@ -1,6 +1,8 @@
 export const FETCH_USERS = 'FETCH_USERS';
 export const NEW_USER = 'NEW_USER';
 export const GET_BOOKING = 'GET_BOOKING'
+export const GET_BOOKING_RET = 'GET_BOOKING_RET'
+export const GET_BOOKING_CLR = 'GET_BOOKING_CLR'
 export const GET_USER_DETAILS = 'GET_USER_DETAILS'
 export const GET_INSIGHTS = 'GET_INSIGHTS'
 export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS'
@@ -100,5 +102,14 @@ export const REGISTER_USER_CLR = 'App/Profile/REGISTER_USER_CLR'
 export const SET_AVAILABILITY = 'App/Profile/SET_AVAILABILITY'
 export const SET_AVAILABILITY_RET = 'App/Profile/SET_AVAILABILITY_RET'
 export const SET_AVAILABILITY_CLR = 'App/Profile/SET_AVAILABILITY_CLR'
+
+
+export const TO_ADD_SERVICES = 'App/Profile/TO_ADD_SERVICES'
+export const TO_ADD_SERVICES_RET = 'App/Profile/TO_ADD_SERVICES_RET'
+export const TO_ADD_SERVICES_CLR = 'App/Profile/TO_ADD_SERVICES_CLR'
+
+export const ADD_SERVICES = 'App/Profile/ADD_SERVICES'
+export const ADD_SERVICES_RET = 'App/Profile/ADD_SERVICES_RET'
+export const ADD_SERVICES_CLR = 'App/Profile/ADD_SERVICES_CLR'
 
 // export const LOGIN = 'LOGIN';

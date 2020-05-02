@@ -248,3 +248,12 @@ body {
 .green-background {
     background-color: lightgreen !important;
 }
+
+.speciality-wrapper {
+  width: 65%;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+.round-image {
+  border-radius: 50%;
+}

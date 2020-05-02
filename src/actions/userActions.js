@@ -74,7 +74,17 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   REGISTER_USER,
 
   SET_AVAILABILITY_RET,
-  SET_AVAILABILITY_CLR
+  SET_AVAILABILITY_CLR,
+
+  TO_ADD_SERVICES_RET,
+  TO_ADD_SERVICES_CLR,
+
+  ADD_SERVICES_CLR,
+  ADD_SERVICES_RET,
+
+  GET_BOOKING_CLR,
+  GET_BOOKING_RET
+
 
 
   } from './types';
@@ -86,6 +96,121 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "https://plunes.co/v4"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
+
+
+
+// ADD_SERVICES
+
+export const addServicesClr = () => dispatch =>{
+  return  dispatch({
+    type: ADD_SERVICES_CLR,
+    payload:{}
+  })
+}
+
+export const addServices = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+
+  return await axios.put(baseUrl + '/user/addServices', data, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in addServices')
+    
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in update Image')
+        if(!!res.data){
+          dispatch({
+            type : ADD_SERVICES_RET,
+            payload :{
+              success:true,
+              data:[],
+              message:"Service successfully added"
+            }
+          })
+        }else{
+          dispatch({
+            type : ADD_SERVICES_RET,
+            payload :{
+              success:false,
+              data:[],
+              message:"Something went wrong. try again later"
+            }
+          })
+        }
+      }
+    }).catch(error => {
+      console.log(error.response)
+      dispatch({
+        type:ADD_SERVICES_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try again later",
+          data:{}
+         }
+      })
+  });
+}
+
+
+
+
+// TO_ADD_SERVICES
+
+export const toAddServicesClr = () => dispatch =>{
+  return  dispatch({
+    type: TO_ADD_SERVICES_CLR,
+    payload:{}
+  })
+}
+
+export const toAddServices = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+  let dataObject = {
+    page:data.page,
+    searchQuery:data.searchQuery,
+    limit:data.limit,
+    specialityId:data.specialityId
+  }
+
+  return await axios.post(baseUrl + '/catalogue/getServicesForDoctor', dataObject, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in searchProcedures')
+    
+      if (res.status === 200) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in update Image')
+        if(!!res.data){
+          dispatch({
+            type : TO_ADD_SERVICES_RET,
+            payload :{
+              success:true,
+              data:res.data
+            }
+          })
+        }else{
+          dispatch({
+            type : TO_ADD_SERVICES_RET,
+            payload :{
+              success:false,
+              data:[]
+            }
+          })
+        }
+      }
+    }).catch(error => {
+      console.log(error.response)
+      dispatch({
+        type:TO_ADD_SERVICES_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try again later",
+          data:{}
+         }
+      })
+  });
+}
+
+
 
 // SET_AVAILABILITY
 
@@ -199,7 +324,7 @@ export const editProcedure = (obj) => async dispatch => {
   console.log("Inside editProcedure")
   let newObj = {
     specialityId:obj.specialityId,
-    serviceId:obj._id,
+    serviceId:obj.serviceId,
     newPrice:obj.price[0],
     newVariance:obj.variance
   }
@@ -280,9 +405,15 @@ export const getSpecsClr = () => dispatch =>{
 
 export const getSpecs = (obj) => async dispatch => {
   console.log("Inside GetSPecs")
+  let requestUrl ="/admin_panel/specialities"
+  if(!!obj){
+    if(obj.type === "getUserSpecialities"){
+      requestUrl ="/user/getUserSpecialities"
+    }
+  }
   
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + '/admin_panel/specialities',  { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in GetSpecs")
       
@@ -602,12 +733,9 @@ export const searchProcedures = (data) => async dispatch => {
   let dataObject = {
     page:data.page,
     searchQuery:data.searchQuery,
-    limit:data.limit
+    limit:data.limit,
+    specialityId:data.specialityId
   }
-    // dispatch({
-    //   type : SEARCH_PROCEDURE,
-    //   payload : "no-data-required"
-    // })
 
   return await axios.post(baseUrl + '/analytics/getServices', dataObject, { 'headers': { 'Authorization': token } })
     .then((res) => {
@@ -1228,6 +1356,15 @@ export const createLogin = loginData => async dispatch => {
     })
 
 };
+
+export const getBookingClr = () => dispatch =>{
+  return  dispatch({
+    type: GET_BOOKING_CLR,
+    payload:{}
+  })
+}
+
+
 export const getBooking = () => async  dispatch => {
   let token = localStorage.getItem('token');
   return await axios.get(baseUrl + '/booking', { 'headers': { 'Authorization': token } })
@@ -1253,14 +1390,28 @@ export const getBooking = () => async  dispatch => {
             'restAmount': restAmount,
             'creditsUsed': b.creditsUsed,
             'bookingId': b.referenceId,
-            'redeemStatus': b.redeemStatus || null
+            'redeemStatus': b.redeemStatus || null,
+            'professionalAddress':b.professionalAddress,
+            'userImageUrl':b.userImageUrl
           }
-          // console.log(b._id);
           businessBooking.push(bookDet)
         })
         dispatch({
-          type: GET_BOOKING,
-          payload: businessBooking
+          type : GET_BOOKING_RET,
+          payload :{
+            success:true,
+            data:businessBooking,
+            message:"Bookings successfully retrieved"
+          }
+        })
+      }else{
+        dispatch({
+          type : GET_BOOKING_RET,
+          payload :{
+            success:false,
+            data:[],
+            message:"Something went wrong. try again later"
+          }
         })
       }
     })

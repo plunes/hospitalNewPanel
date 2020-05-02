@@ -40,14 +40,14 @@ class MapComponent extends React.Component {
           <div style={{ height: '100vh', width: '100%' }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyAXz9PuBzPhMjAdUZmlyFdst6J8v6Vx1IU'}}
-              defaultCenter={this.state.location}
+              defaultCenter={this.props.center}
               defaultZoom={this.props.zoom}
             >
-              <AnyReactComponent
+              {/* <AnyReactComponent
                 lat={this.state.location.latitude}
                 lng={this.state.location.longitude}
                 text="My Marker"
-              />
+              /> */}
             </GoogleMapReact>
           </div>
         );

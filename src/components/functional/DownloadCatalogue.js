@@ -2,11 +2,8 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import React, { useLayoutEffect } from "react"
 
  const DownloadCatalogue= (props) => {
-     console.log(props,"props in dowmnload Catalogue")
-     
   const { addToast } = useToasts()
   if(!!props.downloadCatalogueRet){
-    console.log("props.downloadCatalogueRet",props.downLoadCatalogueRet)
       if(!!props.downloadCatalogueRet.success){
         addToast(props.downloadCatalogueRet.message, {appearance: 'success', autoDismiss:true}) 
       }else{
@@ -17,7 +14,7 @@ import React, { useLayoutEffect } from "react"
 
   return (
 <React.Fragment>
-<div className='col-md-4 text-center'>
+<div className='col-md-3 text-center'>
 <a onClick={(e)=>{
     e.preventDefault()
     props.downloadCatalogue()

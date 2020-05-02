@@ -6,27 +6,32 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import "./index.css"
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    minWidth: 120,
-    width:'100%',
-    select: {
-        '&:before': {
-            borderColor: 'green',
-        },
-        '&:after': {
-            borderColor: 'green',
-        }
-    }
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+
 
 export default function SimpleSelect(props) {
+
+  const useStyles = makeStyles((theme) => ({
+    labelClass:{
+     ...props.labelStyles
+    },
+    formControl: {
+      minWidth: 120,
+      width:'100%',
+      borderBottom:'none !important' ,
+      ...props.formControlStyles
+    },
+    select: {
+      ...props.selectStyles
+   },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }))
+
   const classes = useStyles();
   const [age, setAge] = React.useState('');
+  
+ 
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -36,9 +41,9 @@ if(props.multiple===true){
   console.log(props,"props when multiple true")  
 }
   return (
-    <div>
+    <div style ={{...props.wrapperDivStyles}}>
       <FormControl className={classes.formControl}>
-      <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>
+      <InputLabel className={classes.labelClass} id="demo-simple-select-label">{props.label}</InputLabel>
         <Select
           disableUnderline
           labelId="demo-simple-select-label"

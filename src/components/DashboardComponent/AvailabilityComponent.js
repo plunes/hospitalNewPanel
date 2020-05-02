@@ -49,7 +49,7 @@ let obj =   {
          return obj
       }
       componentWillReceiveProps(nextProps){
-        console.log(nextProps,'nextProsp in ComponentWillRE')
+      
         
         if(((!!nextProps.timeSlot) && (this.state.firstRender))){
           let arr = []
@@ -77,7 +77,7 @@ let obj =   {
       }
 
       handleTimeSubmit = (data) =>{
-        console.log(data,"data in handleTimeSubmit")
+       
           let slot = JSON.parse(JSON.stringify(this.state.slots))
           let index  = ''
           let newSlot  = slot.filter((item,i)=>{
@@ -97,7 +97,7 @@ let obj =   {
             }
           }
           newSlot.splice(index,0,newObject)
-          console.log(newSlot,"newSliot in handleTimeSubmit")
+        
           this.setState({
             slots:newSlot,
             selectedSlot:{},
@@ -211,7 +211,7 @@ generateSlotsFormat = () =>{
       }
       arr.push(obj)
     })
-    console.log(arr,"arr in generate slot");
+  
     
     return arr
 
@@ -227,7 +227,7 @@ onCloseModal = () => {
 };
 
 slotClicked = (slot,a,b,item )  =>{
-  console.log(slot, a, b, item,"SlotClicked")
+ 
   this.setState({
     selectedSlot:slot,
     selectedType:b,
@@ -243,7 +243,7 @@ setAvailabilityClr = () =>{
   },()=>this.props.setAvailabilityClr())
 }
     render() {
-      console.log(this.state,"this.state in Availability Container")
+     
         return (
             <div>
             <div className='row'>
@@ -276,7 +276,7 @@ setAvailabilityClr = () =>{
                     </div>
                    ))}
                       <div className="time_clo my_avl text-center">
-                      <button onClick= {()=>this.handleSubmitAvail()} className="sub_tm button-common">Submit</button>
+                      <button onClick= {()=>this.handleSubmitAvail()} className="common-button">Submit</button>
                       </div>
                 </div>
                 </div>
