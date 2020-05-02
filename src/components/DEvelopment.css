@@ -114,6 +114,10 @@
     pointer-events: none;
     font-size: 26px;
 }
+button:focus{outline:  0px !important;}
+button:active {
+    border-style: none !important;
+}
 
 .spec_dr_ser {
     padding: 5px 15px;
@@ -224,7 +228,7 @@ label.control-label {
     content: "";
     height: 6px;
     left: 7px;
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     top: 8px;
     transform: rotate(-45deg);
@@ -245,10 +249,11 @@ label.control-label {
   }
 .time_she h4{color: #343434;font-size: 14px;font-weight: 500;padding-bottom: 40px;}  
 .sub_tm{background-color: #01D35A;color: #fff;border-radius: 40px;display: block;width: 150px;
-    height: 45px;
+    height: 40px;
     text-align: center;
     margin: 0 auto;
-    padding-top: 9px;}
+    border: 1px solid #01D35A;
+  }
     .sub_tm:hover{color:#fff !important;}
 .time_clo{text-align: center;margin-top: 30px;}
 .fee_cun_ch{font-size: 18px; font-weight: 500; color: #5D5D5D;}

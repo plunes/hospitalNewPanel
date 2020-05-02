@@ -3,10 +3,10 @@
 .tab_pd{padding: 30px;text-align: center;}
 .upcoming_bdr{border-bottom: 3px solid #B7B7B7;position: relative;
     top: -19px;
-    z-index: 99;}
+    z-index: 0;}
 .active { color:#f00;font-weight:bolder; }
 .react-tabs__tab-list{padding-left: 0;}
-.react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9999;}
+.react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;}
 .upcmg_fnt a{color: #343434; font-weight: 500;font-size: 14px;}
 .ardee_ci{text-align: left;margin-top: 25px;}
 .nov_2 h4{font-size: 18px; font-weight: 500;color: #474747;}

@@ -122,14 +122,13 @@ class Development extends Component {
                         <a href="#" className="get_startd_h">Get Started for Free</a>
                        </div>
                       <div  id="video-container" className="video_sec">
-                        <iframe 
-                        width="560"
-                        height="315" 
-                        src="https://www.youtube.com/embed/sITYg1awTPE" 
-                        frameBorder="0" 
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                        allowFullScreen>
-                      </iframe>
+
+                      <iframe 
+                      width="560" height="315" 
+                      src="https://www.youtube.com/embed/eEQGGzplZ7w" 
+                      frameborder="0" 
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                      allowfullscreen></iframe>
                         </div>
                         </div>
                         </div>
