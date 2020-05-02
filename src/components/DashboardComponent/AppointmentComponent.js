@@ -208,7 +208,7 @@ class AppointmentComponent extends Component {
                                 {/* 3rd--end */}
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
                                 <div className="row">
-                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked in 100</span></div>
+                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked</span></div>
                                 
                                    <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
                                     <div className="gray_circ">100%<span>30000</span></div>
@@ -230,7 +230,7 @@ class AppointmentComponent extends Component {
                                       </div>
                                       
                                               <div className="col-lg-2">
-                                                  <img src="/pexel_1.png" />
+                                                  <img src="/pexel_1.png" className="frame_de" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
@@ -243,6 +243,7 @@ class AppointmentComponent extends Component {
                                       </div>
                                      </div>
                                 </div>
+                               
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con">Confirmed</p>
@@ -265,7 +266,7 @@ class AppointmentComponent extends Component {
                                 </div>
                                 {/* 3rd--end */}
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
-                                <div className="row">
+                                {/* <div className="row">
                                    <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>{`Booked in ${item.totalAmount}`}</span></div>
                                 
                                   
@@ -273,7 +274,41 @@ class AppointmentComponent extends Component {
                                  </div>
                                  <div className="grap_bod"></div><div className="grap_bod2"></div>
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p>
+                                 <p className="pay_green">Create Prescription</p> */}
+                                   {/* <ProgressBar> */}
+
+                                   <div class="row text-center">
+		
+                                    <div class="col-sm-4">
+                                            <div class="progressbar">
+                                            <div class="second circle" data-percent="50">
+                                            <strong></strong>
+                                            <span>animation <br/> progress</span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-4">
+                                            <div class="progressbar">
+                                            <div class="second circle" data-percent="70">
+                                            <strong></strong>
+                                            <span>animation <br/> progress</span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-sm-4">
+                                            <div class="progressbar">
+                                            <div class="second circle" data-percent="100">
+                                            <strong></strong>
+                                            <span>animation <br/> progress</span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {/* <ProgressBar> */}
+
                                  
                                    </React.Fragment>
                                })} 
