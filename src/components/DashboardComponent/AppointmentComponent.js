@@ -153,7 +153,7 @@ class AppointmentComponent extends Component {
                                     )) : false
                                 } */}
  
-                          <div className="container">
+        
                             <Tabs className="tab_pd">
                                 <TabList>
                                 <div className="row upcmg_fnt">
@@ -213,6 +213,7 @@ class AppointmentComponent extends Component {
                                    <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
                                     <div className="gray_circ">100%<span>30000</span></div>
                                  </div>
+                                 
                                  <div className="grap_bod"></div><div className="grap_bod2"></div>
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
@@ -266,50 +267,25 @@ class AppointmentComponent extends Component {
                                 </div>
                                 {/* 3rd--end */}
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
-                                {/* <div className="row">
+                                {/*
+                                 <div className="row">
                                    <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>{`Booked in ${item.totalAmount}`}</span></div>
-                                
-                                  
-                                    <div className="gray_circ">100%<span>{`${item.totalAmount}`}</span></div>
+                                  <div className="gray_circ">100%<span>{`${item.totalAmount}`}</span></div>
                                  </div>
-                                 <div className="grap_bod"></div><div className="grap_bod2"></div>
-                                 <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p> */}
-                                   {/* <ProgressBar> */}
-
-                                   <div class="row text-center">
-		
-                                    <div class="col-sm-4">
-                                            <div class="progressbar">
-                                            <div class="second circle" data-percent="50">
-                                            <strong></strong>
-                                            <span>animation <br/> progress</span>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-4">
-                                            <div class="progressbar">
-                                            <div class="second circle" data-percent="70">
-                                            <strong></strong>
-                                            <span>animation <br/> progress</span>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-4">
-                                            <div class="progressbar">
-                                            <div class="second circle" data-percent="100">
-                                            <strong></strong>
-                                            <span>animation <br/> progress</span>
-                                            </div>
-                                            </div>
-                                        </div>
+                                 <div className="grap_bod"></div><div className="grap_bod2"></div> */}
+                                 <div className="prog col-lg-12">
+                                 <ul class="progressbar">
+                                            <li class="active">Booked</li>
+                                            <li>6000</li>
+                                            <li>30000</li>
+                                           
+                                    </ul>
                                     </div>
-
-                                {/* <ProgressBar> */}
-
-                                 
+                                    <div className="two_chil">
+                                 <p className="pay_ptint">Payments done by patient</p>
+                                 <p className="pay_green">Create Prescription</p>
+                                 </div>
+                                  
                                    </React.Fragment>
                                })} 
                                <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
@@ -363,6 +339,7 @@ class AppointmentComponent extends Component {
                                    <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
                                     <div className="gray_circ">100%<span>30000</span></div>
                                  </div>
+                               
                                  <div className="grap_bod"></div><div className="grap_bod2"></div>
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
@@ -375,9 +352,9 @@ class AppointmentComponent extends Component {
                                
                             </Tabs>
 
-                             </div>   
+                           
 
-            </div>
+           
        <Modal
           isOpen={this.state.modalIsOpen}
         //   onAfterOpen={afterOpenModal}
@@ -405,6 +382,7 @@ class AppointmentComponent extends Component {
         </div>
          
         </Modal>
+        </div>
                 </div>
                 <div className='col-md-3'></div>
             </div>

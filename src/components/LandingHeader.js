@@ -6,7 +6,7 @@ class LandinHeader extends Component {
     render() {
         return (
           <React.Fragment>
-          <nav className="navbar custom_ha navbar-expand-md custom-navbar sigunup_hedr">
+          <nav className="navbar custom_ha navbar-expand-md custom-navbar landing_hedr">
         <div className="container">
             <a className="navbar-brand logo_size col-lg-3 col-md-3 col-6" href="#">
                 <img src="/pluneslogo.png" className="lgo_sigun" />

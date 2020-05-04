@@ -1,9 +1,11 @@
 .AppointBodyrow1{padding-top: 40px;}
-.Appoint{height: 980px;}
+.Appoint{height: 100%;}
+
 .tab_pd{padding: 30px;text-align: center;}
 .upcoming_bdr{border-bottom: 3px solid #B7B7B7;position: relative;
     top: -19px;
     z-index: 0;}
+    .two_chil{margin-top: 30px; text-align: center;}
 .active { color:#f00;font-weight:bolder; }
 .react-tabs__tab-list{padding-left: 0;}
 .react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;}
@@ -64,39 +66,87 @@ img.right_im {
 
 
 /* progress-bar */
-.circle {
-    width: 200px;
-    margin: 6px 6px 20px;
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    line-height: 1.2;
-  }
+/* .progressbar {
+  counter-reset: step;
   
-  .circle canvas {
-    vertical-align: top;
-    width: 100px !important;
-  }
-  
-  .circle strong {
-    position: absolute;
-    top: 30px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    line-height: 40px;
-    font-size: 30px;
-    color: black;
-  }
-  
-  .circle strong i {
-    font-style: normal;
-    font-size: 0.6em;
-    font-weight: normal;
-  }
-  
-  .circle span {
-    display: block;
-    color: #aaa;
-    margin-top: 12px;
-  }
+}
+.prog{
+}
+.progressbar li {
+  list-style-type: none;
+  width: 25%;
+  float: left;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #7d7d7d;
+}
+.progressbar li:before {
+  width: 60px;
+  height: 60px;
+  content:"	\002714";
+  color: #fff;
+  counter-increment: step;
+  line-height: 30px;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: #01D35A
+}
+.progressbar li:after {
+  width: 100%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #7d7d7d;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+}
+.progressbar li.active:before {
+  border-color: #55b776;
+}
+.progressbar li.active + li:after {
+  background-color: #55b776;
+} */
+.progressbar{padding-left: 0px;}
+.prog {
+  padding-bottom: 76px;
+}
+.progressbar li{list-style: none;width: 33.33%;}
+.progressbar li:before{ width: 60px;
+  height: 60px;line-height: 60px;}
+.progressbar li:first-child:before {
+  width: 60px;
+  height: 60px;
+  content:"	\002714";
+  color: #fff;
+  counter-increment: step;
+  line-height: 60px;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: #01D35A;
+  font-size: 33px;
+}
+.progressbar li:nth-child(2):before{
+  background-color: #01D35A;
+  font-size: 33px;
+  content:"	\002714";
+  color: #fff;
+  border: 0px;
+ 
+}
+.progressbar li:nth-child(3):before{ content:"	100%"; border:2px solid #ccc;}
+.progressbar li.active:first-child:before {
+  border-color: #01D35A;
+}

@@ -1,5 +1,5 @@
 .HospitalProfileBody
-        {height: 2691px;
+        {height: 100%;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         border: 1px solid #DCDCDC;
         border-radius: 10px;
@@ -151,6 +151,7 @@
         height: 55px;
         margin-top: 10px;
         border-radius: 50%;
+        object-fit: cover;
 }
     .left_ali{text-align: left; color: #fff; padding-bottom: 5px;
         padding-left: 11px;
@@ -163,7 +164,7 @@
 .se-dr a:hover{color: #01D35A !important;}
 .achivmnt_b{background: #F8FFFB;padding: 40px;}
 .ach1 {width: 348px;
-        height: 250px;}
+        height: 250px;object-fit: contain;}
         .cir_b{border-radius: 50%;width: 40px; height: 40px;background: #fff;position: absolute;
                 right: 0;
                 top: -16px;text-align: center;}
