@@ -11,7 +11,8 @@ import LoaderComponent from "./LoaderComponent"
     if(bannerImageRef.current.value.length!==0){
       if(!!props.uploadRet){
           if(!!props.uploadRet.success){
-            addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
+            bannerImageRef.current.value = ''
+            // addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
             props.updateBanner({
                 coverImageUrl:props.uploadRet.data.imageUrl
             })
@@ -27,6 +28,7 @@ import LoaderComponent from "./LoaderComponent"
 
   if(!!props.updateBannerRet){
     if(!!props.updateBannerRet.success){
+      console.log("inside update bAnner ret")
       addToast(props.updateBannerRet.message, {appearance: 'success', autoDismiss:true}) 
       props.getProfileDetails()
       props.loadingOff()

@@ -112,4 +112,7 @@ export const ADD_SERVICES = 'App/Profile/ADD_SERVICES'
 export const ADD_SERVICES_RET = 'App/Profile/ADD_SERVICES_RET'
 export const ADD_SERVICES_CLR = 'App/Profile/ADD_SERVICES_CLR'
 
+export const NEW_USER_RET = 'App/Auth/NEW_USER_RET'
+export const NEW_USER_CLR = 'App/Profile/NEW_USER_CLR'
+
 // export const LOGIN = 'LOGIN';

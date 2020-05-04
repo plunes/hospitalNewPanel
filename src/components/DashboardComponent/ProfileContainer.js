@@ -17,7 +17,7 @@ import MapComponent from "../MapComponent"
 // import GoogleComponent from "../GoogleMapComponent"
 
 
-class ProfileContainer extends React.Component {
+class ProfileContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,6 +45,7 @@ class ProfileContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    console.log(nextProps,"nextProps in Profile Container")
     if(nextProps.user){
       this.setState({
         user:nextProps.user
@@ -158,11 +159,25 @@ class ProfileContainer extends React.Component {
       addAchievementFlag:false
     })
   }
+  upload = (data) =>{
+    this.setState({
+      loadingBanner:true
+    })
+    this.props.upload(data)
+  }
+
+  uploadProfleImage = (data) =>{
+    this.setState({
+      loadingProfileImage:true
+    },()=>{
+      this.props.upload(data)
+    })
+  }
 
 
   render() {
-    console.log(this.props,"this.props in  Container")
-    
+    console.log(this.props,"this.props in  ProfileContainer")
+    console.log(this.state,"this.state in ProfileContainer")
     const { open } = this.state;
     return (
       <div className="HospitalProfileBody AllComponents">
@@ -176,10 +191,10 @@ class ProfileContainer extends React.Component {
        updateBanner = {this.updateBanner}
        updateBannerRet = {this.props.updateBannerRet}
        updateBannerClr = {this.props.updateBannerClr}
-       upload = {this.props.upload}
+       upload = {this.upload}
        uploadRetClr = {this.props.uploadRetClr}
        uploadRet = {this.props.uploadRet}
-       getProfileDetails = {this.props.getProfileDetails}
+       getProfileDetails = {this.props.getUserDetails}
        loadingOff = {()=>this.setState({loadingBanner:false})}
        loading  = {this.state.loadingBanner}
        />
@@ -189,14 +204,14 @@ class ProfileContainer extends React.Component {
               <div>
                <ProfileImage
                 user = {this.props.user}
-                upload = {this.props.upload}
+                upload = {this.uploadProfleImage}
                 uploadRetClr = {this.props.uploadRetClr}
                 uploadRet = {this.props.uploadRet}
 
                 updateImage ={this.updateImage}
                 updateImageRet ={this.props.updateImageRet}
                 updateImageClr ={this.props.updateImageClr}
-                getProfileDetails = {this.props.getProfileDetails}
+                getProfileDetails = {this.props.getUserDetails}
                 loading  = {this.state.loadingProfileImage}
                 loadingOff = {()=>this.setState({loadingProfileImage:false})}
 
@@ -370,7 +385,18 @@ const mapStateToProps = state => ({
   editBioRet:state.user.editBioRet
 })
 
-export default connect(mapStateToProps, { expertDetails, 
-  upload, uploadRetClr, updateImage, updateImageClr, 
-  getProfileDetails, updateBannerClr, updateBanner,
-  updateAchievement, updateAchievementClr, editBioClr, editBio, getUserDetails })(ProfileContainer);
+export default connect(mapStateToProps, { 
+  expertDetails, 
+  upload, 
+  uploadRetClr, 
+  updateImage, 
+  updateImageClr, 
+  getProfileDetails,
+  updateBannerClr,
+  updateBanner,
+  updateAchievement, 
+  updateAchievementClr,
+  editBioClr, 
+  editBio, 
+  getUserDetails
+ })(ProfileContainer);

@@ -90,8 +90,6 @@ class MyCatalogueComponent extends Component {
             }
             nextProps.toAddServicesClr()
         }
-
-
             if(!!nextProps.searchProceduresRet){
                 if(nextProps.searchProceduresRet.success){
                     if(nextProps.searchProceduresRet.type==="servicestoAdd"){
@@ -109,7 +107,6 @@ class MyCatalogueComponent extends Component {
                 }
                 nextProps.searchProceduresClr()
             }
-
             if(!!nextProps.getSpecsRet){
                 if(nextProps.getSpecsRet.success){
                     let arr = []
@@ -256,7 +253,10 @@ class MyCatalogueComponent extends Component {
                     }
                 ]
             }
-            this.props.addServices(obj)
+            this.setState({
+                addProcedureLoading:true
+            },()=>this.props.addServices(obj))
+            
         }else{
             this.setState({
                 editProcedureLoading:true
@@ -304,7 +304,35 @@ class MyCatalogueComponent extends Component {
                 
     }
 
+    editProcedureLoadingOff(){
+        this.setState({
+            editProcedureLoading:false,
+            editFlag:false,
+            selectedProcedure:{}
+        },()=>{
+            this.props.searchProcedures({
+                limit:50,
+                searchQuery:'',
+                page:1,
+                specialityId:this.state.selected_speciality 
+     })})
+    }
+
+    addProcedureLoadingOff(){
+        this.setState({
+            addProcedureLoading:false,
+            selectedProcedure:{}
+        },()=>{
+            this.props.toAddServices({
+                searchQuery:'',
+                page:'1',
+                limit:'50',
+                specialityId:this.state.selected_speciality
+             })})
+    }
+
     render() {
+        console.log(this.props.addServicesRet,"this.props.addServicesRet")
                 return (
             <div>
                 <div className='row'>
@@ -418,9 +446,7 @@ class MyCatalogueComponent extends Component {
                             handleVarianceChange = {this.handleVarianceChange}
                             ret = {this.props.editProcedureRet}
                             clr = {this.props.editProcedureClr}
-                            loadingOff = {()=>this.setState({
-                                editProcedureLoading:false
-                            })}
+                            loadingOff = {()=>this.editProcedureLoadingOff()}
                             />
                             )) : 
                            <div className='text-center'>No Procedures</div>)
@@ -434,7 +460,7 @@ class MyCatalogueComponent extends Component {
                         </div>}
 
 
-                        {this.state.editProcedureLoading && <LoaderComponent />}
+                        {this.state.addProcedureLoading && <LoaderComponent />}
                         {!!this.state.addProcedureFlag  &&    (this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
                             <Procedure 
                             id = {i}
@@ -445,11 +471,9 @@ class MyCatalogueComponent extends Component {
                             selectedProcedure = {this.state.selectedProcedure}
                             handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
                             handleVarianceChange = {this.handleVarianceChange}
-                            editProcedureRet = {this.props.editProcedureRet}
-                            editProcedureClr = {this.props.editProcedureClr}
-                            editProcedureLoadingOff = {()=>this.setState({
-                                editProcedureLoading:false
-                            })}
+                            ret = {this.props.addServicesRet}
+                            clr = {this.props.addServicesClr}
+                            loadingOff = {()=>this.addProcedureLoadingOff()}
                             />
                             )) : 
                            <div className='text-center'>No Procedures</div>)

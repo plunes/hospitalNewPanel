@@ -83,7 +83,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   ADD_SERVICES_RET,
 
   GET_BOOKING_CLR,
-  GET_BOOKING_RET
+  GET_BOOKING_RET,
+
+  NEW_USER_RET,
+  NEW_USER_CLR
 
 
 
@@ -115,7 +118,7 @@ export const addServices = (data) => async dispatch => {
     .then((res) => {
       console.log(res, 'res in addServices')
     
-      if (res.status === 201) {
+      if (res.status === 200) {
         //dispatch(getSolutionInsights())
         console.log(res.data, 'data in update Image')
         if(!!res.data){
@@ -1281,12 +1284,6 @@ export const getTimeslot = () => async dispatch => {
 }
 
 export const getUserDetails = () => async dispatch => {
-
-  // dispatch({
-  //   type:GET_USER_DETAILS,
-  //   payload:{}
-  // })
-  // console.log('asdfasf')
   let token = localStorage.getItem('token')
   return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
     .then((res) => {
@@ -1335,11 +1332,19 @@ export const getUserDetails = () => async dispatch => {
 
   };
 
+
+  export const newUserClr = () => dispatch =>{
+    return  dispatch({
+      type: NEW_USER_CLR,
+      payload:{}
+    })
+  }
+
 export const createLogin = loginData => async dispatch => {
   console.log(loginData, "login data")
   return await axios.post(baseUrl + '/user/login', loginData)
     .then(res => {
-      console.log(res.data.success , 'data')
+      console.log(res , 'res in create Login')
       if (res.data.success === true) {
         dispatch({
           type: NEW_USER,
@@ -1348,11 +1353,27 @@ export const createLogin = loginData => async dispatch => {
         localStorage.setItem('token', res.data.token)
         localStorage.setItem('userId', res.data.user._id)
         history.push('/dashboard');
+      }else{
+        dispatch({
+          type : NEW_USER_RET,
+          payload :{
+            success:false,
+            data:[],
+            message:"Unable to Login"
+          }
+        })
       }
     }
-    )
-    .catch((e) => {
-
+    ).catch((e) => {
+      console.log(e,"e in Error")
+      dispatch({
+        type : NEW_USER_RET,
+        payload :{
+          success:false,
+          data:[],
+          message:"Invalid Credentials"
+        }
+      })
     })
 
 };
@@ -1514,7 +1535,9 @@ export const expertDetails = expertData => dispatch => {
 export const logout = () => dispatch => {
   let token = localStorage.getItem('token');
   console.log(token, 'token')
-  axios.post(baseUrl + '/user/logout', "", { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" } })
+  axios.post(baseUrl + '/user/logout', {
+    deviceId:localStorage.getItem('deviceId')
+  }, { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" } })
     .then((response) => {
       localStorage.removeItem('token')
       localStorage.removeItem('userId')

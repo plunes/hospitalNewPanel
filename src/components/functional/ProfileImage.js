@@ -11,7 +11,8 @@ import LoaderComponent from "./LoaderComponent"
     if(profileImageRef.current.value.length!==0){
       if(!!props.uploadRet){
         if(!!props.uploadRet.success){
-          addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
+          // addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
+          profileImageRef.current.value = ""
           props.updateImage({
               imageUrl:props.uploadRet.data.imageUrl
           })
@@ -86,7 +87,7 @@ import LoaderComponent from "./LoaderComponent"
     onChange ={(e)=>handleUploadImage(e)}
     ref = {profileImageRef}
     />
-    {props.loading && <LoaderComponent />}
+    {props.loading && <LoaderComponent style={{top:'30%'}} />}
     <img 
     onClick={(e)=>handleImageClick(e)}
     className="blackdot"

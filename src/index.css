@@ -257,3 +257,26 @@ body {
 .round-image {
   border-radius: 50%;
 }
+
+.sign_in_body_wrapper{
+  margin-top: 8rem;
+}
+.sign_in_form_group {
+  margin: 2rem 0rem 3rem 0rem;
+}
+.sign_in_forgot_password{
+  color: #01D35A;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 200;
+}
+.sign_in_forgot_password:hover{
+  text-decoration: underline;
+}
+.sign_in_sign_up{
+  color: #01D35A;
+  cursor: pointer;
+}
+.sign_in_sign_up:hover{
+ text-decoration: underline;
+}

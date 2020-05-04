@@ -6,13 +6,14 @@ import VarianceDropdown from "./varianceDropdown"
  const Procedure= (props) => {
   const { addToast } = useToasts()
   const {data} = props
-
+console.log(props,"props in Procedures")
 
   if(!!props.ret){
     if(props.id === props.selectedProcedure.id){
       if(!!props.ret.success){
         addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
       }else{
+        console.log(props.res,"props.res in procedure")
         addToast(props.ret.message, {appearance: 'error', autoDismiss:true})
       }
       props.loadingOff()
