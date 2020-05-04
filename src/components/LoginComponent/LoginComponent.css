@@ -128,13 +128,13 @@
 
 
 /* sigun-up-header */
-.navbar{width:100%}
+
 .sigunup_hedr{
       height: 70px;
-      position: relative;
-    left: -17px;
-    width: 1351px !important;
     }
+    .header {
+      width: 100%;
+  }
     .d_app{background: #01D35A;border-radius: 34px;color:#fff;padding: 7px 25px 7px 70px !important;}
     .ios_m {
         position: relative;

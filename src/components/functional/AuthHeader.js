@@ -2,7 +2,8 @@ import React from "react"
 
 const AuthHeader = (props) =>{
     return(
-     
+     <div className="header">
+       <div>
         <nav className="navbar custom_ha navbar-expand-md custom-navbar sigunup_hedr">
         <div className="container">
             <a className="navbar-brand logo_size col-lg-3 col-md-4 col-6" href="#">
@@ -27,6 +28,8 @@ const AuthHeader = (props) =>{
              </div>  
         </div>
 </nav>
+</div>
+</div>
             
     )
 }

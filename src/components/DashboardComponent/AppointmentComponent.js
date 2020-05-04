@@ -244,7 +244,6 @@ class AppointmentComponent extends Component {
                                       </div>
                                      </div>
                                 </div>
-                               
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con">Confirmed</p>
@@ -275,9 +274,9 @@ class AppointmentComponent extends Component {
                                  <div className="grap_bod"></div><div className="grap_bod2"></div> */}
                                  <div className="prog col-lg-12">
                                  <ul class="progressbar">
-                                            <li class="active">Booked</li>
-                                            <li>6000</li>
-                                            <li>30000</li>
+                                            <li class="active bokd">Booked</li>
+                                            <li className="sixp"><span>6000</span></li>
+                                            <li className="thirtyp">30000</li>
                                            
                                     </ul>
                                     </div>

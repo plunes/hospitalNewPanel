@@ -187,7 +187,9 @@ class RegistrationContainer extends  React.Component {
         }
         return (
            <div>
+               <div className="row">
                <AuthHeader />
+               </div>
                 <div className='row'>
                     <div className='col-md-6 sidetimgcol'>
                         <img className="signImage"  src="signup.png" alt="SignUp" />

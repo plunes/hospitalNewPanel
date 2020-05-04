@@ -71,7 +71,9 @@ class LoginComponent extends Component {
         // UserDetails action payload store (Dispatch)
         return (
           <React.Fragment>
+          <div className="row">
           <AuthHeader/>
+          </div>
           <div className='row'>
                     <div className='col-md-6 sidetimgcol'>
                         <img className="signImage"  src="Mobile-login.png" alt="SignUp" />
