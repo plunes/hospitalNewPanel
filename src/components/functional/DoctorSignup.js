@@ -97,7 +97,7 @@ import validator from 'validator'
           className="form-control customborder"
           name="mobile"
           placeholder="Mobile Number"
-          onChange={props.handleChange}
+          onChange={props.handlePhoneChangeDoctor}
           required
           value = {props.data.mobile}
         />

@@ -30,7 +30,7 @@ class RegistrationContainer extends  React.Component {
             hospital:{
                 name:'',
                 address:'',
-                mobile:'',
+                mobile:'+91',
                 registrationNo:'',
                 about:'',
                 specialities_selected:[],
@@ -43,7 +43,7 @@ class RegistrationContainer extends  React.Component {
                 address:'',
                 email:'',
                 password:'',
-                mobile:'',
+                mobile:'+91',
                 dob:'',
                 regno:'',
                 experience:'',
@@ -52,6 +52,46 @@ class RegistrationContainer extends  React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.baseUrl = 'http://10.34.18.136:3000/';
+        // this.handlePhoneChange = this.handlePhoneChange.bind(this)
+        this.handlePhoneChangeDHospital = this.handlePhoneChangeDHospital.bind(this)
+        this.handlePhoneChangeDoctor = this.handlePhoneChangeDoctor.bind(this)
+    }
+
+    handlePhoneChangeDoctor(e){
+        let str = e.target.value
+        console.log(str.substring(0,3)," str.substring(0,2) in handlePhoneChange ")
+        if(str.substring(0,3)==='+91'){
+            
+        }else{
+            str = '+91'+e.target.value
+        }
+        this.setState({
+            doctor:{
+                ...this.state.doctor,
+                mobile:str
+            }
+        })
+    }
+
+    handlePhoneChangeDHospital(e){
+        let str = e.target.value
+        console.log(str.substring(0,3)," str.substring(0,2) in handlePhoneChange ")
+        if(str.substring(0,3)==='+91'){
+            
+        }else{
+            str = '+91'+e.target.value
+        }
+        console.log(str.substring(0,3)," handlePhoneChangeDhosptial str.substring(0,2) ")
+        if(str.substring(0,2)==='+91'){
+            str.replace("+91","");
+        }
+        this.setState({
+            hospital:{
+                ...this.state.hospital,
+                mobile:str
+            }
+           
+        })
     }
 
     handleChange(e){
@@ -104,7 +144,7 @@ class RegistrationContainer extends  React.Component {
         })
     }
  componentDidMount() {
-    axios.get(`http://www.plunes.co/v4/catalogue_manager/specialities`)
+    axios.get(`https://devapi.plunes.com/v5/catalogue_manager/specialities`)
       .then(res => {
         const specialities = res.data.data;
         // console.log(specialities);
@@ -240,6 +280,7 @@ class RegistrationContainer extends  React.Component {
                                     loading = {this.state.loading}
                                     successRegister = {this.successRegister}
                                     lab = {this.state.type==="Lab"}
+                                    handlePhoneChangeDHospital = {this.handlePhoneChangeDHospital}
                                 /> : null 
                             }
                             {
@@ -255,6 +296,7 @@ class RegistrationContainer extends  React.Component {
                                 successRegister = {this.successRegister}
                                 registerUserRet = {this.props.registerUserRet}
                                 registerUserClr = {this.props.registerUserClr}
+                                handlePhoneChangeDoctor = {this.handlePhoneChangeDoctor}
                                 />:null
                             }
                         </div>

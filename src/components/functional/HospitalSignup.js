@@ -22,6 +22,8 @@ import {
 }
 
    const submitdetails = () => {  
+     console.log((props.data.mobile.substring(0,2)==="+91"),"props.data.mobile.substring(0,2))===`+91`")
+     console.log(props.data,"props.data in submitdetails")
     if(props.data.name === '' ||props.data.address==='' || props.data.mobile==="" || props.data.about==="" ||   props.data.regno === ''){
         addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
     }else{
@@ -92,7 +94,7 @@ import {
           className="form-control customborder"
           name="mobile"
           placeholder="Mobile Number"
-          onChange={props.handleChange}
+          onChange={props.handlePhoneChangeDHospital}
           value = {props.data.mobile}
           required
         />
