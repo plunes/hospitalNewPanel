@@ -180,7 +180,7 @@ class ProfileContainer extends React.PureComponent {
     console.log(this.state,"this.state in ProfileContainer")
     const { open } = this.state;
     return (
-      <div className="HospitalProfileBody AllComponents">
+      <div className="HospitalProfileBody AllComponents hspital">
         <div>
           <MapComponent
             location = {this.props.user.geoLocation}
@@ -242,7 +242,7 @@ class ProfileContainer extends React.PureComponent {
           <div class="row mainBodyMaxHospitalrow4 ">
            
                     <div class="col-xs-1 col-sm-1 col-lg-1">
-                        <img src="Location.png"></img>
+                        <img src="Location.png" className="lction"></img>
                     </div>
                     <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc"><b>Location :</b></span><span>{this.props.user.address }</span> 

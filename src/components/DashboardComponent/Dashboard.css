@@ -6,7 +6,7 @@
 
 .AllComponents
        {margin-top: 116px;}
-
+.hspital
 .Leftpaddingremove
        {padding-left: 0px !important;}
 
@@ -140,7 +140,7 @@ hr
 .sidenav a, .log,.dropdown-btn 
    {padding: 15px 0px 15px 12px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     color: #818181;
     display: block;
     border: none;
@@ -155,7 +155,7 @@ hr
 
 .sidenav div
       {text-decoration: none;
-       font-size: 18px;
+       font-size: 16px;
        color: #818181;
        display: block;
        border: none;
@@ -251,7 +251,7 @@ hr
       {margin-right: 18px;max-width: 47.666667% !important;}
 
 .DashboardHospitalName
-      {margin-top: 0; margin-bottom: 0;}
+      {margin-top: 0; margin-bottom: 0;font-size: 24px;}
 
 .Dashboardsec1
       {font-size: 21px;
@@ -274,10 +274,14 @@ hr
 
 .DashboardInsight
       {text-transform: none;
-      font-size: 18px;
+      font-size: 16px;
       text-align: justify;
       margin-top: 8px;
-      margin-bottom: 30px;} 
+      margin-bottom: 30px;color: #676767a3;} 
+      b, strong {
+            font-weight: bolder !important;
+            color: #000;
+        }
 
 .Insightdiv
      {font-weight: 300;}
@@ -365,7 +369,7 @@ hr
       margin-left: 9%;
       margin-top: 11%;
       font-weight: bold;
-      font-size: 20px;}
+      font-size: 18px;}
 
 .selectBusinessPeriod
       {text-align: center;
@@ -376,10 +380,10 @@ hr
       border: 1px solid #DCDCDC;
       border-radius: 5px;
       padding: 2%;
-      width: 42%;}
+      width: 68%;}
 
 .businessPrice
-      {font-size: 40px;
+      {font-size: 30px;
       font-weight: 700;}
 
 .businessEarn
@@ -393,11 +397,12 @@ hr
       font-size: 16px;}
 
 .businessWarn
-      {text-align: center;
+      {
       color: #333333;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 400;
       padding: 3%;}
+      .businessWarn p{text-align: left;color: #676767a3;}
 
 .width
      {width: 45%;}
@@ -455,15 +460,16 @@ hr
 
 .realtimeicon1
     {border-radius: 50%;
-    border: 1px solid #BCD3F6;
-    padding: 21%;
-    background-color: #F2F7FF;}
+      border: 1px solid #BCD3F6;
+      padding: 16px 20px 18px 20px;
+      background-color: #F2F7FF;
+      margin-left: 10px;}
 
 .realtimeicon
     {width: 31%;}
 
 .RealtimeUsername
-    {font-size: 20px;
+    {font-size: 18px;
     font-weight: 500;}
 
 .kindlyUpdate
@@ -486,3 +492,7 @@ hr
     margin-left: auto;
     margin-right: auto;
 }
+
+/* alka-css */
+.light_content{ font-size: 1rem;color: #676767a3;}
+.bdr_dash{padding: 10px;}

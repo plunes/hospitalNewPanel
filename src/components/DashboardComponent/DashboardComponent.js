@@ -317,7 +317,7 @@ class DashboardComponent extends Component {
                                                                     {s.userName}
                                                                 </div>
                                                                 <div>
-                                                                    is looking for {s.serviceName}
+                                                                   <p className="light_content"> is looking for {s.serviceName}</p>
                                                                 </div><br></br>
                                                                 {
                                                                    true ?
@@ -362,6 +362,7 @@ class DashboardComponent extends Component {
                                         }
                                     </div>
                                     <div className='dashboardsection'>
+                                        <div className="bdr_dash">
                                         <div className='row'>
                                             <div className='col businessrow1col1'>
                                                    <img src="/business.svg" className="businessicon" alt=""></img>
@@ -378,6 +379,7 @@ class DashboardComponent extends Component {
                                             </div>
                                           
                                         </div>
+                                        </div>
                                         { this.state.showBusiness ? <div className='row'>
                                             <div className='col text-center'>
                                                 <p className="businessPrice businessEarn">&#8377;{this.props.businessEarn}</p>
@@ -389,7 +391,7 @@ class DashboardComponent extends Component {
                                             </div>
                                         </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
                                         <div className="businessWarn">
-                                            Please take action on real time insights to increase your business
+                                            <p>Please take action on real time insights to increase your business</p>
                                         </div>
 
                                     </div>
@@ -412,7 +414,7 @@ class DashboardComponent extends Component {
                                        </span>
                                         {
                                             this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
-                                                <div className="DashboardInsight" key={index}>{i.serviceName} <span className="Insightdiv">were</span> {i.percent}<span>%</span><span className="Insightdiv"> higher than the booked price</span>
+                                                <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
                                                     <button type="button" className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></button>
                                                     <hr></hr>
                                                 </div>
