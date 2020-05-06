@@ -96,7 +96,9 @@ import { messaging } from 'firebase';
         </button>
     </div>
     <div className="text-center sign_in_forgot_password">
-        Forgot Passsword
+        <a className="sign_in_sign_up" href="">
+           Forgot Passsword
+        </a>  
     </div>
 
     <div className="text-center sign_in_no_account margin-top-medium_ris">
@@ -104,7 +106,9 @@ import { messaging } from 'firebase';
     </div>
 
     <div className="text-center margin-top-medium_ris  sign_in_sign_up">
+        <a className="sign_in_sign_up" href="/signup">
         Sign Up
+        </a>
     </div>
     <br />
     </div>

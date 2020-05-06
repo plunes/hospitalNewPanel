@@ -2,6 +2,7 @@ import React, { useRef, userEffect } from 'react'
 import {throttle} from 'throttle-debounce';
 
 const SearchComponent = (props) =>{
+  console.log(props.selected_speciality,"props.selected_speciality")
     const searchRef  = useRef()
     const  searchCall = () =>{
         if(!!searchRef.current){
@@ -9,13 +10,15 @@ const SearchComponent = (props) =>{
                  props.searchProcedures({
                    searchQuery:searchRef.current.value,
                    page:1,
-                   limit:50
+                   limit:50,
+                   specialityId:props.selected_speciality
                  })
               }else{
                 props.searchProcedures({
                   searchQuery:searchRef.current.value,
                   page:1,
-                  limit:50
+                  limit:50,
+                  specialityId:props.selected_speciality
                 })
               }
               }

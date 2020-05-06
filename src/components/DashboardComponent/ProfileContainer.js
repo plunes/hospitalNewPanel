@@ -181,11 +181,11 @@ class ProfileContainer extends React.PureComponent {
     const { open } = this.state;
     return (
       <div className="HospitalProfileBody AllComponents">
-        {/* <div>
+        <div>
           <MapComponent
             location = {this.props.user.geoLocation}
           />
-        </div> */}
+        </div>
        <ProfileBanner
        user = {this.props.user}
        updateBanner = {this.updateBanner}

@@ -275,7 +275,7 @@ body {
   margin: 2rem 0rem 3rem 0rem;
 }
 .sign_in_forgot_password{
-  color: #01D35A;
+  color: #01D35A !important;
   cursor: pointer;
   font-size: 14px;
   font-weight: 200;
@@ -284,7 +284,7 @@ body {
   text-decoration: underline;
 }
 .sign_in_sign_up{
-  color: #01D35A;
+  color: #01D35A !important;
   cursor: pointer;
   font-size: 14px;
 }

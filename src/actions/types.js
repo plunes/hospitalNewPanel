@@ -115,4 +115,8 @@ export const ADD_SERVICES_CLR = 'App/Profile/ADD_SERVICES_CLR'
 export const NEW_USER_RET = 'App/Auth/NEW_USER_RET'
 export const NEW_USER_CLR = 'App/Profile/NEW_USER_CLR'
 
-// export const LOGIN = 'LOGIN';
+export const UPDATE_REAL_PRICE_RET = 'App/Insights/UPDATE_REAL_PRICE_RET'
+export const UPDATE_REAL_PRICE_CLR = 'App/Insights/UPDATE_REAL_PRICE_CLR'
+
+export const UPDATE_PRICE_DATA_RET = 'App/Insights/UPDATE_PRICE_DATA_RET'
+export const CLEAR_UPDATE_PRICE_DATA = 'App/Insights/CLEAR_UPDATE_PRICE_DATA'

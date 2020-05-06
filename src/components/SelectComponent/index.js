@@ -10,7 +10,18 @@ import "./index.css"
 
 export default function SimpleSelect(props) {
 
+  const dropdownMenuProps={
+    menuStyle:{
+      border: "1px solid black",
+      borderRadius: "5%",
+      backgroundColor: 'lightgrey',
+    },
+  }
+
   const useStyles = makeStyles((theme) => ({
+    paper: {
+      border: '5px solid #d3d4d5 !important ',
+    },
     labelClass:{
      ...props.labelStyles
     },
@@ -29,6 +40,12 @@ export default function SimpleSelect(props) {
       borderBottom: '1px solid',
       marginTop: theme.spacing(2),
     },
+    li:{
+      borderBottom:'1px solid red'
+    },
+    list:{
+      backGroundColor:'grey'
+    }
   }))
 
   const classes = useStyles();
@@ -58,12 +75,13 @@ if(props.multiple===true){
           name ={props.name}
           displayEmpty
           multiple ={!!props.multiple?true:false}
+          dropDownMenuProps={dropdownMenuProps}
         >
           <MenuItem value=" " disabled>
             {props.placeholder}
           </MenuItem>
           {props.options.map((item,i)=>(
-            <MenuItem value={item.value}>{item.name}</MenuItem>
+            <MenuItem  value={item.value}>{item.name}</MenuItem>
           ))}
         </Select>
       </FormControl>

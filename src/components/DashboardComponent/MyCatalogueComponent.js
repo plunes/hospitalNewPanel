@@ -408,7 +408,8 @@ class MyCatalogueComponent extends Component {
                                 searchProcedures = {this.searchProceduresFun}
                                 searchProceduresClr = {this.props.searchProceduresClr}
                                 searchProceduresRet = {this.props.searchProceduresRet}
-
+                                selected_speciality = {this.state.selected_speciality}
+                                
                             />     
                         </div>
                         <div className='listOfService'>

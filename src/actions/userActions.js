@@ -86,7 +86,13 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   GET_BOOKING_RET,
 
   NEW_USER_RET,
-  NEW_USER_CLR
+  NEW_USER_CLR,
+
+  UPDATE_REAL_PRICE_RET,
+  UPDATE_REAL_PRICE_CLR,
+
+  UPDATE_PRICE_DATA_RET,
+  CLEAR_UPDATE_PRICE_DATA
 
 
 
@@ -1043,21 +1049,42 @@ export const submitProfileDetails = (uData) => async dispatch => {
 }
 
 
+export const updateRealPriceClr = () => dispatch =>{
+  return  dispatch({
+    type: UPDATE_REAL_PRICE_CLR,
+    payload:{}
+  })
+}
+
 export const updateRealPrice = (uData) => async dispatch => {
   let obj = {
     "solutionId": uData.realUpdateData.solutionId,
     "serviceId": uData.realUpdateData.serviceId,
     "updatedPrice": Math.round(Number(uData.realUpdatePrice))
   }
-  //console.log(typeof obj.updatedPrice, obj.updatedPrice)
-
-  //console.log(uData, 'data')
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/solution', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
+        dispatch({
+          type : UPDATE_REAL_PRICE_RET,
+          payload :{
+            success:true,
+            data:res.data.data,
+            message:'Price successfully updated'
+          }
+        })
         dispatch(getSolutionInsights())
         //console.log(res.data, 'data')
+      }else{
+        dispatch({
+          type : UPDATE_REAL_PRICE_RET,
+          payload :{
+            success:false,
+            data:res,
+            message:'Unable to proccess now try again later'
+          }
+        })
       }
     })
 }
@@ -1155,6 +1182,13 @@ export const getSolutionInsights = () => async dispatch => {
     })
 }
 
+export const clearUpdatePriceData = (data) => dispatch => {
+  return  dispatch({
+      type: CLEAR_UPDATE_PRICE_DATA,
+      payload:data
+    })
+}
+
 export const sendUpdateData = (uData) => async dispatch => {
   let obj = {
     "specialityId": uData.updateData.specialityId,
@@ -1168,8 +1202,32 @@ export const sendUpdateData = (uData) => async dispatch => {
       //console.log(res.data)
       if (res.data.status === 1) {
         //console.log(res.data, 'data')
-        dispatch(getInsights())
+        dispatch({
+          type: UPDATE_PRICE_DATA_RET,
+          payload:{
+            success:true,
+            message:'Price successfully updated'
+          }
+        })
+        // dispatch(getInsights())
+      }else{
+        dispatch({
+          type: UPDATE_PRICE_DATA_RET,
+          payload:{
+            success:false,
+            message:'Something went wrong try again later'
+          }
+        })
       }
+    }).catch(e=>{
+      console.log(e)
+      dispatch({
+        type: UPDATE_PRICE_DATA_RET,
+        payload:{
+          success:false,
+          message:'Something went wrong try again later'
+        }
+      })
     })
 }
 

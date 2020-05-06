@@ -7,7 +7,7 @@ class MapComponent extends React.Component {
   constructor(props){
       super(props)
       this.state = {
-        location:{
+        center:{
           lng:'77.2167',
           lat:'28.6643'
         }
@@ -18,7 +18,7 @@ class MapComponent extends React.Component {
           lat: 28.6643,
           lng: 77.2167
         },
-        zoom: 11
+        zoom: 12
       }
 
       componentWillReceiveProps(nextProps){
@@ -42,6 +42,11 @@ class MapComponent extends React.Component {
               bootstrapURLKeys={{ key: 'AIzaSyAXz9PuBzPhMjAdUZmlyFdst6J8v6Vx1IU'}}
               defaultCenter={this.props.center}
               defaultZoom={this.props.zoom}
+              defaultCenter={this.props.center}
+              center={this.state.center}
+              defaultZoom={this.props.zoom}
+              onChildMouseEnter={()=>console.log()}
+              onChildMouseLeave={()=>console.log()}
             >
               {/* <AnyReactComponent
                 lat={this.state.location.latitude}
