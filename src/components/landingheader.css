@@ -4,7 +4,7 @@
     background-color: #01d35a!important;
     border-radius: 44px!important;
     color: #fff!important;
-    font-size: 14px!important;
+    font-size: 13px!important;
     padding: 6px 18px 5px!important;
     text-transform: initial !important;
     box-shadow: none !important;
@@ -50,9 +50,9 @@
         width: 20px;
     }
     .d_app:hover{color: #fff !important;}
-    .sig_lgn{font-size: 14px;border:1px solid #707070;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;color: #343434;}
-    .signup_lgu{border: 1px solid #01D35A;color: #01D35A;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;}
-    .signup_lgu:hover{color: #01D35A !important;}
+    /* .sig_lgn{font-size: 14px;border:1px solid ;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;color: #343434;}
+    .signup_lgu{border: 1px solid #707070;color: #01D35A;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;}
+    .signup_lgu:hover{color: #01D35A !important;} */
     .lgo_sigun{
         width: 161px;
         padding-bottom: 19px;

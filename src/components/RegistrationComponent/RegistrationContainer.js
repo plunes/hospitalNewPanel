@@ -232,7 +232,7 @@ class RegistrationContainer extends  React.Component {
                </div>
                 <div className='row'>
                     <div className='col-md-6 sidetimgcol'>
-                        <img className="signImage"  src="signup.png" alt="SignUp" />
+                        <img className="sigun_imu"  src="signup.png" alt="SignUp" />
                     </div>
                     <div className='col-md-6'>
                         <div className='col-md-1'>
@@ -250,6 +250,7 @@ class RegistrationContainer extends  React.Component {
                                 {
                                     value:'Hospital',
                                     name:'Hospital'
+                                    
                                 },
                                 {
                                     value:'Lab',

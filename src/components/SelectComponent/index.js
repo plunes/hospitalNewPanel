@@ -21,9 +21,12 @@ export default function SimpleSelect(props) {
       ...props.formControlStyles
     },
     select: {
+     
       ...props.selectStyles
+      
    },
     selectEmpty: {
+      borderBottom: '1px solid',
       marginTop: theme.spacing(2),
     },
   }))

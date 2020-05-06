@@ -9,7 +9,7 @@ class LandinHeader extends Component {
           <nav className="navbar custom_ha navbar-expand-md custom-navbar landing_hedr">
         <div className="container">
             <a className="navbar-brand logo_size col-lg-3 col-md-3 col-6" href="#">
-                <img src="/pluneslogo.png" className="lgo_sigun" />
+                <img src="/logo.png" className="lgo_sigun" />
             </a>
            <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <i className="fa fa-bars" aria-hidden="true"></i>
