@@ -29,7 +29,7 @@ class DashboardHeader extends Component {
         return <div className="Header">
           <div>
             <nav className="navbar navbar-expand-lg navbar-light">
-              <a className="navbar-brand" href=""><img className="logo" src="/pluneslogo.png"  alt='Not available'/></a>
+              <a className="navbar-brand" href=""><img className="logo" src="/logo.png"  alt='Not available'/></a>
               {/* <div>
                 <input className="dashbord-input" name="search" type="search" placeholder="Search" aria-label="Search" autoComplete="off" id="mytInput" onChange={this.onSearchQuery} />
               </div> */}

@@ -367,7 +367,7 @@ class DashboardComponent extends Component {
                                                    <img src="/business.svg" className="businessicon" alt=""></img>
                                                    <p className='business'>Business</p>
                                             </div>
-                                            {/* <div className='col selectBusinessPeriod'>
+                                            <div className='col selectBusinessPeriod'>
                                                 <select onChange={this.handleDaysChange} name="days" className="selectBusiness">
                                                     <option value=''>Select</option>
                                                     <option value='1'>Today</option>
@@ -375,7 +375,7 @@ class DashboardComponent extends Component {
                                                     <option value='30'>Monthly</option>
                                                     <option value='365'>Yearly</option>
                                                 </select>
-                                            </div> */}
+                                            </div>
                                           
                                         </div>
                                         { this.state.showBusiness ? <div className='row'>
