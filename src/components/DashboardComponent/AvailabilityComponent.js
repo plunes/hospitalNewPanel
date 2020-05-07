@@ -245,8 +245,12 @@ setAvailabilityClr = () =>{
     render() {
      
         return (
-           <React.Fragment>        
-                <div className= 'col-md-8 AvailableTime AllComponents my_av_sec'>
+           <React.Fragment> 
+             <NotifFunc
+                      ret = {this.props.setAvailabilityRet}
+                      retClr = {this.setAvailabilityClr}
+                  />       
+                <div className= 'col-md-7 AvailableTime AllComponents my_av_sec'>
                 <div className= 'text-center'><h4 className="abt_sec"><b>My Availability</b></h4></div>
                   <div className="time_she">
                   {this.state.loading &&  <LoaderComponent />}
@@ -273,13 +277,8 @@ setAvailabilityClr = () =>{
                       </div>
                 </div>
                 </div>
-                <div className='col-md-3'>
-                  <NotifFunc
-                      ret = {this.props.setAvailabilityRet}
-                      retClr = {this.setAvailabilityClr}
-                  />
+                <div className='col-md-2'>
                 </div>
-            
             <ModalComponent 
                 open = {this.state.open}
                 handleClose = {this.onCloseModal}

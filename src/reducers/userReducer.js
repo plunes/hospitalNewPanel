@@ -76,7 +76,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   UPDATE_REAL_PRICE_CLR,
   
   UPDATE_PRICE_DATA_RET,
-  CLEAR_UPDATE_PRICE_DATA
+  CLEAR_UPDATE_PRICE_DATA,
+
+  GET_ENTITY_CLR,
+  GET_ENTITY_RET
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -133,11 +136,25 @@ const initialState = {
   getBookingRet:false,
   newUserRet:false,
   updateRealPriceRet:false,
-  updatePriceDataRet:false
+  updatePriceDataRet:false,
+  getEntityRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case GET_ENTITY_CLR:
+      return {
+        ...state,
+        getEntityRet:false
+      };
+
+      case GET_ENTITY_RET:
+      return {
+        ...state,
+        getEntityRet:action.payload
+      };
+
 
     case UPDATE_REAL_PRICE_CLR:
       return {

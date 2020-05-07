@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import  { logoutOtherDevices , logoutDevicesClr} from "../../actions/userActions"
 // import {notify} from "../../utils/notification"
 import LogoutOther from "../functional/LogoutOther"
+import { Link } from "react-router-dom"
 
 import "./AvailabilityComponent.css";
 // import history from '../../history';
@@ -18,7 +19,7 @@ import "./AvailabilityComponent.css";
                errorText:false,
                successText:false
           }
-          this.handleClick = this.handleClick.bind(this);
+          // this.handleClick = this.handleClick.bind(this);
      }
      componentDidMount(){
           this.setState({
@@ -46,9 +47,9 @@ import "./AvailabilityComponent.css";
           }
      }
 
-     handleClick(){
-          this.props.history.push('/editProfile')
-     }
+     // handleClick(){
+     //      this.props.history.push('/editProfile')
+     // }
 
   
      clearNotif = () =>{
@@ -82,9 +83,16 @@ import "./AvailabilityComponent.css";
                                                        </label>
                                                   </div>
                                              </div><hr></hr>
-                                             <div className="row accsetrow" onClick= {this.handleClick}>
+                                             <div className="row accsetrow" >
                                                   <div className="col-sm-1 col settingcol1"><img src="Edit-Profile.png" alt=''></img></div>
-                                                  <div className="col-sm-9 col settingcol2"><p className="typeofsetting cursor-pointer">Edit Profile</p></div>
+                                                  <div className="col-sm-9 col settingcol2"><p className="typeofsetting cursor-pointer">
+                                                       <Link to="/dashboard/editProfile"
+                                                       role = "button"
+                                                       onClick={()=>this.props.toggleEditProf()}
+                                                       >
+                                                       Edit Profile
+                                                       </Link>
+                                                       </p></div>
                                                   <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg" alt=''></img></div>
                                              </div>
                                         </div>
@@ -95,7 +103,14 @@ import "./AvailabilityComponent.css";
                                         <div className="accset settingfont">
                                              <div className="row accsetrow">
                                                   <div className="col-sm-1 col settingcol1"><img src="Change-Password.png" alt=""></img></div>
-                                                  <div className="col-sm-9 col settingcol2"><p className="typeofsetting">Change Password</p></div>
+                                                  <div className="col-sm-9 col settingcol2"><p className="typeofsetting">
+                                                  <Link to="/dashboard/change-password"
+                                                       role = "button"
+                                                       onClick={()=>this.props.toggleChangePass()}
+                                                       >
+                                                       Change Password
+                                                  </Link>                                                       
+                                                       </p></div>
                                                   <div className="col-sm-2 col settingcol3"><img className="settingcontrolarrow" src="arrow.svg" alt=""></img></div>
                                              </div><hr></hr>
                                              <div className="row accsetrow">

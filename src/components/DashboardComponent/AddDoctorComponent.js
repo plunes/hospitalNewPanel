@@ -4,7 +4,7 @@ import DashboardHeader from './DashboardHeader';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
-    getSpecsClr, addDoctor, addDoctorClr } from "../../actions/userActions";
+    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity } from "../../actions/userActions";
 
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
@@ -93,15 +93,32 @@ class AddDoctorComponent extends Component {
             consultationFee:3000,
             addDoctorLoading:false,
             slots:this.transformData(slots),
-
             open:false,
             selectedSlot:{},
             selectedType:{},
             selectedshift:{},
-            selectedDay:{}
+            selectedDay:{},
+            getUserLoading:false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillMount(){
+      console.log(this.props.location,"Inside compoent Will Mount")
+      const urlParams = new URLSearchParams(this.props.location.search);
+      const id = urlParams.get('id');
+      if(!!id){
+        // console.log("True case in DidMount")
+        this.setState({
+          getUserLoading:true
+        },()=>this.props.getEntity({
+          userId:id
+        }))
+
+      }else{
+        console.log("False case in DidMount")
+      }
     }
 
     transformData = (data) =>{
@@ -311,6 +328,26 @@ let obj =   {
   
 
      componentWillReceiveProps(nextProps){
+
+      if(nextProps.getEntityRet){
+        if(nextProps.getEntityRet.success){
+          console.log(nextProps.getEntityRet,"nextProps.getEntityRet in WillReceiveProps")
+          let data = nextProps.getEntityRet.data
+              this.setState({
+                name:data.name,
+                education:data.qualification,
+                designation:data.designation,
+                experience:data.designation,
+                doctorProfileImage:data.imageUrl,
+                doctorImageName:data.doctorImageName,
+                slots:[]
+              })
+        }else{
+
+        }
+        nextProps.getEntityClr()
+      }
+
       console.log(this.props,"props in compoentWo")
       if(nextProps.getSpecsRet){
         if(nextProps.getSpecsRet.success){
@@ -570,7 +607,6 @@ let obj =   {
               timeToString = {this.timeToString}
               slotClicked = {this.slotClicked}
               handleCloseDay = {this.handleCloseDay}
-
               slots ={this.state.slots}
             />
         </div>
@@ -592,7 +628,8 @@ const mapStateToProps = state => ({
     getServRet:state.user.getServRet,
     getSpecsRet:state.user.getSpecsRet,
     uploadRet:state.user.uploadRet,
-    addDoctorRet:state.user.addDoctorRet
+    addDoctorRet:state.user.addDoctorRet,
+    getEntityRet:state.user.getEntityRet
   })
   export default connect(mapStateToProps, {bankDetails,
   submitBankDetailsClr,
@@ -603,6 +640,8 @@ const mapStateToProps = state => ({
   upload,
   uploadRetClr,
   addDoctor,
-  addDoctorClr
+  addDoctorClr,
+  getEntityClr,
+  getEntity
   })(AddDoctorComponent)
 

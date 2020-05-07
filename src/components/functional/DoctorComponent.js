@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 const DoctorComponent = (props) =>{
+    console.log(props,"props in DoctorComponent")
     return(
         <div className="col-md-6 col-sm-12 col-lg-3">
             <Link to={`add-doctor?id=${props.data._id}`} >

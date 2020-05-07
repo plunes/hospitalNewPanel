@@ -120,3 +120,7 @@ export const UPDATE_REAL_PRICE_CLR = 'App/Insights/UPDATE_REAL_PRICE_CLR'
 
 export const UPDATE_PRICE_DATA_RET = 'App/Insights/UPDATE_PRICE_DATA_RET'
 export const CLEAR_UPDATE_PRICE_DATA = 'App/Insights/CLEAR_UPDATE_PRICE_DATA'
+
+
+export const GET_ENTITY_RET = 'App/Profile/GET_ENTITY_RET'
+export const GET_ENTITY_CLR = 'App/Profile/GET_ENTITY_CLR'

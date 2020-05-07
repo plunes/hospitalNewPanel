@@ -92,7 +92,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   UPDATE_REAL_PRICE_CLR,
 
   UPDATE_PRICE_DATA_RET,
-  CLEAR_UPDATE_PRICE_DATA
+  CLEAR_UPDATE_PRICE_DATA,
+
+  GET_ENTITY_CLR,
+  GET_ENTITY_RET
 
 
 
@@ -106,6 +109,57 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
 
+
+
+
+export const getEntityClr = () => dispatch =>{
+  return  dispatch({
+    type: GET_ENTITY_CLR,
+    payload:{}
+  })
+}
+
+export const getEntity = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+ console.log(data,"data in getEntity")
+  return await axios.get(baseUrl + `/user?userId=${data.userId}`,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in getEntity')
+      if (res.status === 200) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in update Image')
+        if(!!res.data){
+          dispatch({
+            type : GET_ENTITY_RET,
+            payload :{
+              success:true,
+              data:res.data,
+              message:"Service successfully added"
+            }
+          })
+        }else{
+          dispatch({
+            type : GET_ENTITY_RET,
+            payload :{
+              success:false,
+              data:[],
+              message:"Something went wrong. try again later"
+            }
+          })
+        }
+      }
+    }).catch(error => {
+      console.log(error.response)
+      dispatch({
+        type:GET_ENTITY_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try again later",
+          data:{}
+         }
+      })
+  });
+}
 
 
 // ADD_SERVICES

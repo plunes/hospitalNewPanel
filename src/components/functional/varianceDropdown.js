@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select';
 
 export default function VarianceDropdown(props) {
   const [age, setAge] = React.useState('');
-
+  const [open, setOpen] = React.useState(false) 
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -36,7 +36,7 @@ export default function VarianceDropdown(props) {
       marginTop: theme.spacing(2),
     },
     dropdownStyle: {
-      top:'228px !important'
+      // top:'228px !important'
     }
   }));
 
@@ -45,6 +45,16 @@ export default function VarianceDropdown(props) {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
+  const handleOpen = (event) => {
+    setOpen(true);
+  };
+
+  const handleClose = (event) => {
+    setOpen(false);
+  };
+
+
 
 if(props.multiple===true){
   console.log(props,"props when multiple true")  
@@ -61,6 +71,9 @@ if(props.multiple===true){
           value={props.value}
           onChange={props.handleChange}
           className={classes.select}
+          onOpen = {handleOpen}
+          onClose = {handleClose}
+          open = {open}
           name ="variance"
           styles={{
               marginBottom:'0px'

@@ -58,13 +58,8 @@ class ChangePassword extends React.PureComponent {
         console.log(this.state," this.state in Edit Profile Component")
         console.log(this.props,"this.props changePassword")
         return (
-            <div>
-                <div className='row'>
-                    <DashboardHeader />
-                </div>
-                <div className='row'>
-                    <div className="col-md-3"></div>
-                    <div className='col-md-6'>
+                    <React.Fragment>
+                    <div className='col-md-7'>
                         <div className="body-wrap">
                            <div className="settingpageBody">
                                <div className='settingtopic'>
@@ -86,9 +81,7 @@ class ChangePassword extends React.PureComponent {
                         </div>
                     </div>
                     <div className="col-md-3"></div>
-                </div>
-
-            </div>
+                    </React.Fragment>
         );
     }
 }

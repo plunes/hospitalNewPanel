@@ -6,7 +6,6 @@ import SidebarComponent from '../DashboardComponent/SidebarComponent';
 import DashboardComponent from '../DashboardComponent/DashboardComponent';
 import ProfileComponent from '../DashboardComponent/ProfileComponent';
 import ProfileContainer from '../DashboardComponent/ProfileContainer'
-import { addServicesClr } from "../../actions/userActions"
 import AppointmentComponent from '../DashboardComponent/AppointmentComponent';
 import AvailabilityComponent from '../DashboardComponent/AvailabilityComponent';
 import SettingsComponent from '../DashboardComponent/SettingsComponent';
@@ -17,6 +16,10 @@ import MyCatalogueComponent from '../DashboardComponent/MyCatalogueComponent';
 import DoctorComponent from '../functional/DoctorComponent';
 import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
+import { getEntity, getEntityClr } from "../../actions/userActions"
+import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
+import ChangePassword from '../ChangePassword';
+
 const initialState = {
   dash: '',
   prof: '',
@@ -31,7 +34,8 @@ const initialState = {
   editProf: '',
   myCataloge: '',
   addDoc: '',
-  dev: ''
+  dev: '',
+  changePass:''
 }
 export class DashboardPage extends React.PureComponent {
   constructor() {
@@ -50,7 +54,8 @@ export class DashboardPage extends React.PureComponent {
         editProf: '',
         myCataloge: '',
         addDoc: '',
-        dev: ''
+        dev: '',
+        changePass:''
     };
    
   }
@@ -115,8 +120,19 @@ export class DashboardPage extends React.PureComponent {
       ...initialState, dev:'active'
       });
     }
+    else if (this.props.location.pathname == '/dashboard/change-password') {
+      this.setState({
+      ...initialState, changePass:'active'
+      })
+    }
   }
 
+  toggleChangePass =()=>{
+    this.setState({
+     ...initialState,
+     changePass:'active'
+    });
+  }
 
   toggleDash =()=>{
     this.setState({
@@ -238,14 +254,21 @@ export class DashboardPage extends React.PureComponent {
                   />:(this.props.location.pathname == '/dashboard/appointments')?
                   <AppointmentComponent />:(this.props.location.pathname == '/dashboard/availability')?
                   <AvailabilityComponent />:(this.props.location.pathname == '/dashboard/settings')?
-                  <SettingsComponent />:(this.props.location.pathname == '/dashboard/payments')?
+                  <SettingsComponent
+                    toggleEditProf = {this.toggleEditProf}
+                    toggleChangePass = {this.toggleChangePass}
+                  />:(this.props.location.pathname == '/dashboard/payments')?
                   <PaymentComponent />:(this.props.location.pathname == '/dashboard/help')?
                   <HelpComponent />:(this.props.location.pathname == '/dashboard/aboutus')?
                   <AboutUsComponent />:(this.props.location.pathname == '/dashboard/aboutus')?
                   <ProfileContainer />:(this.props.location.pathname == '/dashboard/my-catalogue')?
                   <MyCatalogueComponent />:(this.props.location.pathname == '/dashboard/add-doctor')?
-                  <AddDoctorComponent />:(this.props.location.pathname == '/dashboard/notification')?
-                  <NotificationComponent/>:''}
+                  <AddDoctorComponent
+                    location = {this.props.location}
+                  />:(this.props.location.pathname == '/dashboard/notification')?
+                  <NotificationComponent/>:(this.props.location.pathname == '/dashboard/editProfile')?
+                  <EditProfileComponent />:(this.props.location.pathname == '/dashboard/change-password')?
+                  <ChangePassword />:''}
         </div>
         </div>
     )
@@ -258,6 +281,7 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, { 
-addServicesClr
+getEntity,
+getEntityClr
 })(DashboardPage);
 

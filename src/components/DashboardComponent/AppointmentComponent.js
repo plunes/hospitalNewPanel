@@ -8,6 +8,7 @@ import  "./AvailabilityComponent.css";
 import "./appointment.css"
 import Modal from 'react-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import NotifFunc from '../functional/NotifFunc';
 
 
 const customStyles = {
@@ -88,6 +89,7 @@ class AppointmentComponent extends Component {
         console.log(this.state,"this.state in AppointmentComponent")
         return (
             <React.Fragment>
+                <NotifFunc />
                 <div className='col-md-8'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>

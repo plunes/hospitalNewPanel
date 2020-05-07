@@ -79,14 +79,7 @@ class EditProfileComponent extends React.PureComponent {
         console.log(this.state," this.state in Edit Profile Component")
         console.log(this.props," this.props in Edit Profile Component")
         return (
-            <div>
-                <div className='row'>
-                    <DashboardHeader />
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <SidebarComponent />
-                    </div>
+                <React.Fragment>
                     <div className='col-md-7'>
                         <div className = 'settingpage'>
                            <div className="settingpageBody">
@@ -114,9 +107,8 @@ class EditProfileComponent extends React.PureComponent {
                                </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        );
+                </React.Fragment>
+        )
     }
 }
 

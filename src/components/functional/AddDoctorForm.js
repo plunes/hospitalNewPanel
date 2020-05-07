@@ -1,11 +1,20 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import SelectComponent from "../SelectComponent"
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 
  const AddDoctorForm= (props) => {
-     
-   console.log(props,"props in AddDoctor form")
+  console.log(props,"props in AddDoctor form")
+  const myRef = useRef(null)
+  const executeScroll = () => scrollToRef(myRef)
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+  
+  useEffect(() => {
+    console.log(myRef,"myref")
+    executeScroll(myRef)
+    console.log('mount it!');
+}, [])
+
   const { addToast } = useToasts()
   const doctorImageRef = useRef()
 
@@ -77,6 +86,7 @@ import React, { useRef, useState } from "react"
   return (
     <React.Fragment>
     <div className="profile_secti">
+      <div style={{height:'10px',width:'10px',position:'absolute',top:'-10px'}} ref={myRef}></div>
        {props.addDoctorLoading && <LoaderComponent />}
     <h5 className="pfo_im">Profile Image</h5>
    <div className="row">
