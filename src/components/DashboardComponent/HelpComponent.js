@@ -6,15 +6,8 @@ import  "./AboutUs.css";
 export default class HelpComponent extends Component {
     render() {
         return (
-            <div>
-            <div className='row'>
-                <DashboardHeader />
-            </div>
-            <div className='row'>
-                <div className='col-md-3'>
-                    <SidebarComponent />
-                </div>
-                <div className='col-md-6'>
+            <React.Fragment>
+                <div className='col-md-7'>
                     
         
                   <div className="helppage">
@@ -177,8 +170,7 @@ export default class HelpComponent extends Component {
                 </div>
                 </div>
                 <div className='col-md-3'></div>
-            </div> <br />
-        </div>
+            </React.Fragment>
         )
     }
 }

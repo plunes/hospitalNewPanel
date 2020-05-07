@@ -1,6 +1,7 @@
 import React from "react"
 
 const AuthHeader = (props) =>{
+  console.log(window.location,"window.location")
     return(
      <div className="header">
        <div>
@@ -35,10 +36,10 @@ const AuthHeader = (props) =>{
               </div>
                   </li>
                   <li className="nav-item">
-                    <a href="/" className="nav-link sig_lgn">Login</a>
+                    <a href="/" className={`${window.location.pathname==='/'?'active':''} nav-link sig_lgn a `}>Login</a>
                   </li>
                    <li className="nav-item">
-                     <a className="nav-link signup_lgu" href="/signup">Signup</a>
+                     <a   className={`${window.location.pathname==='/signup'?'active':''} nav-link signup_lgu`}  href="/signup">Signup</a>
                    </li>  
                  </ul>
              </div>  

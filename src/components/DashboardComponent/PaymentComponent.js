@@ -46,15 +46,8 @@ class PaymentComponent extends Component {
     render() {
        console.log(this.props.payment, 'payment')
         return (
-            <div>
-                <div className='row'>
-                    <DashboardHeader />
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <SidebarComponent />
-                    </div>
-                    <div className='col-md-6 Payment AllComponents'>
+           <React.Fragment>
+                    <div className='col-md-7 Payment AllComponents'>
                     <div className= 'text-center'><h4><b>Payments</b></h4></div><br></br>
                         {
                             this.props.payment.map((p, index) => (
@@ -90,8 +83,7 @@ class PaymentComponent extends Component {
                         <h5 ref={subtitle => this.subtitle = subtitle} style={{textAlign:"center"}}>Payment has been initiated from our end. You will get the payment within 24 hours.</h5>                        
                     </Modal>
                     <div className='col-md-3'></div>
-                </div>
-            </div>
+         </React.Fragment>
         );
     }
 }

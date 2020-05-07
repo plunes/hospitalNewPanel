@@ -5,38 +5,42 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    borderBottom:"0px !important",
-    minWidth: 120,
-    width:'100%',
-    select: {
-        height:'100px'
-    }
-  },
-  select:{
-    border:'1px solid lightgrey',
-    padding:'3px',
-    borderRadius:'20px',
-    width:'10rem',
-    '&:active':{
-        backgroundColor:'none !important'
-    }
-
-  },
-  input:{
-    textAlign:'center !important'
-  },
-  
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
 export default function VarianceDropdown(props) {
-  const classes = useStyles();
   const [age, setAge] = React.useState('');
+
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      borderBottom:"0px !important",
+      minWidth: 120,
+      width:'100%',
+      select: {
+          height:'100px'
+      }
+    },
+    select:{
+      border:'1px solid lightgrey',
+      padding:'3px',
+      borderRadius:'20px',
+      width:'10rem',
+      '&:active':{
+          backgroundColor:'none !important'
+      }
+  
+    },
+    input:{
+      textAlign:'center !important'
+    },
+    
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+    dropdownStyle: {
+      top:'228px !important'
+    }
+  }));
+
+  const classes = useStyles();
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -61,6 +65,7 @@ if(props.multiple===true){
           styles={{
               marginBottom:'0px'
           }}
+          MenuProps={{ classes: { paper: classes.dropdownStyle } }}
         >
             <MenuItem value="5">5</MenuItem>
             <MenuItem value="10">10</MenuItem>

@@ -9,15 +9,6 @@ import "./index.css"
 
 
 export default function SimpleSelect(props) {
-
-  const dropdownMenuProps={
-    menuStyle:{
-      border: "1px solid black",
-      borderRadius: "5%",
-      backgroundColor: 'lightgrey',
-    },
-  }
-
   const useStyles = makeStyles((theme) => ({
     paper: {
       border: '5px solid #d3d4d5 !important ',
@@ -32,20 +23,20 @@ export default function SimpleSelect(props) {
       ...props.formControlStyles
     },
     select: {
-     
       ...props.selectStyles
       
    },
+   selectMenu:{
+      backgroundColor:'black'
+   },
     selectEmpty: {
       borderBottom: '1px solid',
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(2)
     },
-    li:{
-      borderBottom:'1px solid red'
+    dropdownStyle: {
+      top:'228px !important',
+      ...props.dropdownStyle
     },
-    list:{
-      backGroundColor:'grey'
-    }
   }))
 
   const classes = useStyles();
@@ -61,9 +52,10 @@ if(props.multiple===true){
   console.log(props,"props when multiple true")  
 }
   return (
+    <div style={{position:'relative'}} >
     <div style ={{...props.wrapperDivStyles}}>
       <FormControl className={classes.formControl}>
-      <InputLabel className={classes.labelClass} id="demo-simple-select-label">{props.label}</InputLabel>
+        {props.hidelabel?"":<InputLabel className={classes.labelClass} id="demo-simple-select-label">{props.label}</InputLabel>}
         <Select
           disableUnderline
           labelId="demo-simple-select-label"
@@ -75,7 +67,7 @@ if(props.multiple===true){
           name ={props.name}
           displayEmpty
           multiple ={!!props.multiple?true:false}
-          dropDownMenuProps={dropdownMenuProps}
+          MenuProps={{ classes: { paper: classes.dropdownStyle } }}
         >
           <MenuItem value=" " disabled>
             {props.placeholder}
@@ -85,6 +77,7 @@ if(props.multiple===true){
           ))}
         </Select>
       </FormControl>
+         </div>
          </div>
   );
 }

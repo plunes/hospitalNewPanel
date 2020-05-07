@@ -62,15 +62,8 @@ import "./AvailabilityComponent.css";
           console.log(this.props,"props in SettingsComponent")
           console.log(this.state,"state in SettingsComponent")
           return (
-               <div>
-                    <div className='row'>
-                         <DashboardHeader />
-                    </div>
-                    <div className='row'>
-                         <div className='col-md-3'>
-                              <SidebarComponent />
-                         </div>
-                         <div className='col-md-6'>
+               <React.Fragment>
+                  <div className='col-md-7'>
                               <div className="settingpage">
                                    <div className="settingpageBody">
                                         <div className="settingtopic"><p >Settings</p></div>
@@ -119,10 +112,8 @@ import "./AvailabilityComponent.css";
                                    </div>
                               </div>
                          </div>
-                         <div className='col-md-3'></div>
-                    </div>
-                    <br />
-               </div>
+                  <div className='col-md-3'></div>
+               </React.Fragment>
           )
      }
 }

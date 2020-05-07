@@ -411,7 +411,6 @@ let obj =   {
         hospitalName:this.props.user.name,
         specialities:specialities
       }
-
       this.setState({
         addDoctorLoading:true
       },()=>this.props.addDoctor(obj))
@@ -434,14 +433,7 @@ let obj =   {
       console.log(this.state,"this.state in AddComponent")
       
         return (
-            <div>
-            <div className='row'>
-                <DashboardHeader />
-            </div>
-            <div className='row'>
-                <div className='col-md-3'>
-                    <SidebarComponent />
-                </div>
+           <React.Fragment>
                 <div className='col-md-7'>
                     <div className="border_dev">
                 <div className="add_dr">
@@ -590,8 +582,7 @@ let obj =   {
         </div>
                 </div>
                 <div className='col-md-3'></div>
-            </div>
-        </div>
+           </React.Fragment>
         )
     }
 }

@@ -23,15 +23,8 @@ class NotificationComponent extends Component {
     render() {
         // console.log(this.props.notification)
         return (
-            <div>
-                <div className='row'>
-                    <DashboardHeader />
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <SidebarComponent />
-                    </div>
-                    <div className='col-md-5 Notification'>
+            <React.Fragment>
+                    <div className='col-md-7 Notification'>
                         <h4 className="Notify">Notifications</h4>
                         {
                             this.props.notification ? this.props.notification.slice(0, this.state.rowsToDisplay).map((n, index) => (
@@ -50,10 +43,9 @@ class NotificationComponent extends Component {
                         }
                         <div className="text-center"><button onClick={this.handleClick} className="NotificationViewMore">View more</button></div>
                     </div>
-                    <div className='col-md-4'></div>
-                </div>
-            </div>
-        );
+                    <div className='col-md-3'></div>
+            </React.Fragment>
+        )
     }
 }
 const mapStateToProps = state => ({

@@ -5,7 +5,10 @@
         }
 
 .AllComponents
-       {margin-top: 116px;}
+       {
+             margin-top: 116px;
+             margin-left: -2rem;
+            }
 .hspital
 .Leftpaddingremove
        {padding-left: 0px !important;}
@@ -122,48 +125,53 @@ hr
      margin-left: 15px;}
      
 .sidenav 
-    {width: 250px;
-    position: fixed;
+    {
+    width: 15rem; 
+    margin-top: 7.5rem;
     z-index: 1;
-    display:'inline';
-    background-color:none;
+    display: 'inline';
+    background-color: none;
     overflow-x: hidden;
-    top: 115px;
-    left: 30px;    
-    font-size: 15px;
+    font-size: 1rem;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;     
-    margin-left: 54px;      
-    background-color: white;}
+    border-radius: 10px;
+    background-color: white;
+    }
       
       /* Style the sidenav links and the dropdown button */
 .sidenav a, .log,.dropdown-btn 
-   {padding: 15px 0px 15px 12px;
-    text-decoration: none;
-    font-size: 16px;
-    color: #818181;
-    display: block;
-    border: none;
-    background: none;
-    width:100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;}
-
+   {
+      padding: 0.7rem 0px .7rem 0.8rem;
+      text-decoration: none;
+      font-size: 1rem;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: autoto;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+   }
 .log
-   {padding: 15px !important;}
+   {
+         padding: 15px !important;
+    }
 
 .sidenav div
-      {text-decoration: none;
-       font-size: 16px;
-       color: #818181;
-       display: block;
-       border: none;
-       background: none;
-       width:100%;
-       text-align: left;
-       cursor: pointer;
-       outline: none;}
+      {
+            text-decoration: none;
+            font-size: 1.1rem;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+      }
       
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover 
@@ -175,14 +183,18 @@ a:hover
         color: black !important;}
 
 .sidebaricon
-      {width: 26px;    
-       margin-right: 18px;}
+      {
+            width: 1.3rem;
+            margin-right: .4rem;
+      }
         
 .arrowdesign
-      {margin-top: 6px;
-       position: absolute;
-       left: 220px;     
-       width: 8px;}
+      {
+            margin-top: 6px;
+            position: absolute;
+            left: 11rem;
+            width: 8px;
+      }
 
 .pointer 
       {cursor: pointer;}
@@ -236,22 +248,30 @@ hr
     {width: 100%;}
 
 .dashboardsection
-      {background: #FFFFFF 0% 0% no-repeat padding-box;
+      {
+      background: #FFFFFF 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       border-radius: 7px;
-      opacity: 1; margin-bottom: 3%;}
+      opacity: 1; margin-bottom: 3%;
+}
 
 .dashrow1
-      {margin-bottom: 18px;
-      font-size: 27px;
+{
+      margin-bottom: 1rem;
+      font-size: inherit;
       font-weight: normal;
-      padding: 25px;}
+      padding: .6rem 0.5rem .6rem 0.5rem;
+}
 
 .dashrow2col1
       {margin-right: 18px;max-width: 47.666667% !important;}
 
 .DashboardHospitalName
-      {margin-top: 0; margin-bottom: 0;font-size: 24px;}
+      {
+      margin-top: 0; 
+      margin-bottom: 0;
+      font-size: 1rem;
+}
 
 .Dashboardsec1
       {font-size: 21px;
@@ -304,10 +324,10 @@ hr
       font-weight: 400;} 
 
 .InsightUpdate
-      {overflow: visible;
+      {
+      overflow: visible;
       background: white;
       border: none;
-      margin: 0px 10px;
       color: #01D35A;}
 .NotifyNum
       {position: absolute;
@@ -358,18 +378,22 @@ hr
       {display: inline-flex;}
 
 .businessicon
-      {margin-left: 6%;
-      margin-top: 7%;
-      width: 14%;}
+      {
+            width: 2rem;
+            margin-left: 1rem;
+}
 
 .business
-      {text-decoration: underline;
-      letter-spacing: 0;
-      color: #333333;
-      margin-left: 9%;
-      margin-top: 11%;
-      font-weight: bold;
-      font-size: 18px;}
+      {
+            /* text-decoration: underline; */
+            letter-spacing: 0;
+            color: #333333;
+            margin-left: .5rem;
+            margin-top: 1rem;
+            font-weight: 400;
+            font-size: 1rem;
+            font-size: 1.2rempx;
+}
 
 .selectBusinessPeriod
       {text-align: center;
@@ -452,11 +476,15 @@ hr
 /* Dashboard RealTime Insight Css */
 
 .realtimewidth
-    {width: 58%;
-     margin-bottom: 20px;}
+    {
+          /* width: 58%;
+     margin-bottom: 20px; */
+}
 
 .realtime
-    {padding: 3%;}
+    {
+          padding: .5rem;
+    }
 
 .realtimeicon1
     {border-radius: 50%;
@@ -469,15 +497,21 @@ hr
     {width: 31%;}
 
 .RealtimeUsername
-    {font-size: 18px;
-    font-weight: 500;}
+    {
+      font-size: 1rem;
+      font-weight: 500;
+}
 
 .kindlyUpdate
-    {font-weight: 400; 
-    font-size: 18px;}
+    {
+      font-weight: 400;
+      font-size: .8rem;
+}
 
 .RealtimeHr
-    {margin: 20px !important;}
+    {
+      margin: .9rem !important;
+      }
 
 .Timer
     {
@@ -494,5 +528,8 @@ hr
 }
 
 /* alka-css */
-.light_content{ font-size: 1rem;color: #676767a3;}
+.light_content{ 
+      font-size: .8rem;
+      color: #676767a3;
+}
 .bdr_dash{padding: 10px;}

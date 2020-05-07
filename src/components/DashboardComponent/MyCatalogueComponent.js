@@ -234,7 +234,8 @@ class MyCatalogueComponent extends Component {
           {
             limit:this.state.limit,
             page:1,
-            searchQuery:''
+            searchQuery:'',
+            specialityId:this.state.selected_speciality
           } 
         ))
     }
@@ -334,14 +335,7 @@ class MyCatalogueComponent extends Component {
     render() {
         console.log(this.props.addServicesRet,"this.props.addServicesRet")
                 return (
-            <div>
-                <div className='row'>
-                    <DashboardHeader />
-                </div>
-                <div className='row'>
-                    <div className='col-md-3'>
-                        <SidebarComponent />
-                    </div>
+                    <React.Fragment>
                     <div className='col-md-8 catalogueComponent'>
                         <div className='row justify-content-center'>
                             <p className='catalogue'>Catalogue</p>
@@ -379,7 +373,12 @@ class MyCatalogueComponent extends Component {
                            <SelectComponent
                            options = {this.state.specialities}
                            handleChange = {this.handleSpecialitySelect}
+                           placeholder= "Speciality"
                            value = {this.state.selected_speciality}
+                           hidelabel = {true}
+                           dropdownStyle = {{
+                               top:'290px !important'
+                           }}
                            labelStyles = {{
                                'padding': '6px 0px 0px 12px'
                            }}
@@ -425,7 +424,7 @@ class MyCatalogueComponent extends Component {
                                 </div>
                             </div>
                         </div>
-
+                        <div className="procedures_container_rish">
                         {
                             this.state.loading &&    <div className="loading-wrapper_ris">
                               <React.Fragment>
@@ -487,9 +486,11 @@ class MyCatalogueComponent extends Component {
                             {(((this.state.editFlag) && (!isEmpty(this.state.selectedProcedure))))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
 
+                        </div>
+
                     </div>
                     <div className='col-md-3'></div>
-                </div>
+              
                 <br />
             <ModalComponent 
                 open = {this.state.uploadCatalogFlag}
@@ -502,7 +503,7 @@ class MyCatalogueComponent extends Component {
                 handleClose = {this.handleCloseEditModal}
                 modalBody = {this.generateEditCatalogue}
                 />  
-            </div>
+            </React.Fragment>
         )
     }
 }

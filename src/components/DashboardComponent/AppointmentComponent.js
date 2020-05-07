@@ -87,15 +87,7 @@ class AppointmentComponent extends Component {
         // console.log(this.props.bookings, 'bookings');
         console.log(this.state,"this.state in AppointmentComponent")
         return (
-            
-            <div>
-            <div className='row'>
-                <DashboardHeader />
-            </div>
-            <div className='row'>
-                <div className='col-md-3'>
-                    <SidebarComponent />
-                </div>
+            <React.Fragment>
                 <div className='col-md-7'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
@@ -384,8 +376,7 @@ class AppointmentComponent extends Component {
         </div>
                 </div>
                 <div className='col-md-3'></div>
-            </div>
-        </div>
+            </React.Fragment>
         )
     }
 }

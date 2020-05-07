@@ -32,6 +32,7 @@ import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
 import ChangePassword from "./components/ChangePassword"
 import Development from './components/Development'
+import DashboardPage from './components/DashboardPage'
 
 
 
@@ -85,7 +86,7 @@ class App extends Component {
            
             <Route exact path='/' component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
-            <Route exact path='/dashboard' component={DashboardComponent} />
+            <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
             <Route exact path='/profile' component={ProfileComponent} />
             <Route exact path='/availability' component={AvailabilityComponent} />

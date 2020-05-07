@@ -15,15 +15,8 @@ export default class AboutUsComponent extends Component {
         />
         }else{
             return (
-                <div>
-                    <div className='row'>
-                        <DashboardHeader />
-                    </div>
-                    <div className='row'>
-                        <div className='col-md-3'>
-                            <SidebarComponent />
-                        </div>
-                            <div className='col-md-6'>
+              <React.Fragment>
+                            <div className='col-md-7'>
                                 <div className="AboutHospital">
                                 <div className="AboutHospitalBody">
                                 <div className="About">About Us</div>
@@ -38,9 +31,7 @@ export default class AboutUsComponent extends Component {
                                 </div>
                                 </div>
                         <div className='col-md-3'></div>
-                    </div>
-                    <br />
-                </div>
+           </React.Fragment>
             )
         }    
        

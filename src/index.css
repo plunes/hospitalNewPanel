@@ -292,3 +292,21 @@ body {
 .sign_in_sign_up:hover{
  text-decoration: underline;
 }
+
+.procedures_container_rish{
+  min-height: 20rem !important;
+}
+
+.dateclass {
+  width: 100%;
+}
+
+.dateclass.placeholderclass::before {
+  width: 100%;
+  content: attr(placeholder);
+}
+
+.dateclass.placeholderclass:hover::before {
+  width: 0%;
+  content: "";
+}

@@ -14,6 +14,8 @@ import EditBio from '../functional/EditBio';
 import ModalComponent from "../ModalComponent"
 import AddAchievement from '../functional/AddAchievement';
 import MapComponent from "../MapComponent"
+import { Redirect } from 'react-router-dom';
+import { Link } from "react-router-dom"
 // import GoogleComponent from "../GoogleMapComponent"
 
 
@@ -174,18 +176,25 @@ class ProfileContainer extends React.PureComponent {
     })
   }
 
+  onDoctorClick = (data) =>{
+    console.log(data,"data in addDocotor")
+    return <Redirect to={`add-doctor/${data.__id}`} />
+  }
+
 
   render() {
     console.log(this.props,"this.props in  ProfileContainer")
     console.log(this.state,"this.state in ProfileContainer")
     const { open } = this.state;
     return (
+      <React.Fragment>
+      <div className='col-md-8'>
       <div className="HospitalProfileBody AllComponents hspital">
-        <div>
+        {/* <div>
           <MapComponent
             location = {this.props.user.geoLocation}
           />
-        </div>
+        </div> */} 
        <ProfileBanner
        user = {this.props.user}
        updateBanner = {this.updateBanner}
@@ -233,7 +242,13 @@ class ProfileContainer extends React.PureComponent {
                         <p><b>Achievement</b></p>
                 </div>
                 <div class="col-md-4 achivementlogo text-center">
-                        <a href="/my-catalogue"><img src="/cata.svg" className='catalogueImg'></img></a><br></br>
+                       
+                          <Link to="/dashboard/my-catalogue"
+                          role="button"
+                          onClick={()=>this.props.toggleMyCatalog()} >
+                          <img src="/cata.svg" className='catalogueImg'></img>
+                          </Link>
+                          <br></br>
                         <p><b>Catalogue</b></p>
                 </div>
                 <div class="col-md-2"></div>
@@ -274,7 +289,7 @@ class ProfileContainer extends React.PureComponent {
               getUserDetails = {this.props.getUserDetails}
             />
 
-          <div className="col-md-8 col-12 cardio_le">
+          {/* <div className="col-md-8 col-12 cardio_le">
         <div className="b-select-wrap">
           <label className="speclion">Specialization</label>
           <select className="form-control b-select">
@@ -322,23 +337,25 @@ class ProfileContainer extends React.PureComponent {
        <div className="vi_m">
        <a href="#"className="view_more">View More</a></div>
       </div>
-  
+   */}
   
           <div className="team_sec">
           <div className="row">
   {this.props.user?!!this.props.user.doctors?this.props.user.doctors.map((item,i) =>{
     return (<DoctorComponent
+            onClick = {this.onDoctorClick}
           data = {item}
           i = {i}
       />)
   }):'':''}
    <div className="col-md-6 col-sm-12 col-lg-3">
         <div className="timelinebox4 timelinebox4_5">
-          <a href="/add-doctor"> 
+          <Link to="/dashboard/add-doctor"
+          role="button"
+          onClick = {()=>this.props.toggleAddDoc()}>
           <img  src="/plus_2.svg"/>
-          </a>
+          </Link>
    </div>
-
     </div>
 </div>
 {/* 2nd-end */}
@@ -373,6 +390,9 @@ class ProfileContainer extends React.PureComponent {
                 />  
         </div>
       </div>
+      </div>
+      <div className='col-md-1'></div>
+      </React.Fragment>
     )
   }
 }

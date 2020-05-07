@@ -277,9 +277,8 @@ class DashboardComponent extends Component {
             )
         } else {
             return (
-                <div>
-                    <div className='row'>
-                        <DashboardHeader />
+                <React.Fragment>
+                        <div className='col-md-8 Dashboard AllComponents'>
                         <NotifFunc 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
@@ -288,12 +287,6 @@ class DashboardComponent extends Component {
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
                         />
-                    </div>
-                    <div className='row DashboardBody'>
-                        <div className='col-md-3'>
-                            <SidebarComponent />
-                        </div>
-                        <div className='col-md-8 Dashboard AllComponents'>
                             <div className='row dashboardsection dashrow1'>
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
                             </div>
@@ -317,15 +310,13 @@ class DashboardComponent extends Component {
                                                                     {s.userName}
                                                                 </div>
                                                                 <div>
-                                                                   <p className="light_content"> is looking for {s.serviceName}</p>
-                                                                </div><br></br>
+                                                                   <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {s.serviceName}</p>
+                                                                </div>
                                                                 {
                                                                    true ?
                                                                         <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
                                                                         : null
                                                                 }
-                                                                <div>
-                                                                </div>
                                                             </div>
                                                             <div className='col-md-3'>
                                                                 {
@@ -351,7 +342,6 @@ class DashboardComponent extends Component {
                                                                             </React.Fragment>
                                                                         </div>
                                                                         : <div>
-                                                                           
                                                                         </div>
                                                                 }
                                                             </div><hr className="RealtimeHr"></hr>
@@ -504,8 +494,7 @@ class DashboardComponent extends Component {
                             </div>
                         </div>
                         <div className='col-md-1'></div>
-                    </div>
-                </div>
+                  </React.Fragment>
             )
         }
 

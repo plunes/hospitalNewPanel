@@ -41,9 +41,10 @@ console.log(props,"props in Procedures")
               value={!!props.selectedProcedure.price?props.selectedProcedure.price[0]:props.selectedProcedure.price}
               onChange={props.handleSelectedProcedureChange}
              name="editPrice"
+             style={{marginLeft:'0.3rem'}}
              className="no_brdr_input consultaion_input"
              type="number"
-             />:data.price?data.price[0]:'Not Available'}
+             />:data.price?` ${data.price[0]}`:' 0'}
         </div>
       {/* <input type="text" value="200" className="btm_bdr" /> */}
       </div>

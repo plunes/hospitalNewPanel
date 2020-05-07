@@ -12,7 +12,7 @@ export default class ProfileComponent extends Component {
             </div>
     
             <div className='row'>
-                <div className='col-md-3'>
+                <div className='col-md-3 text-center'>
                     <SidebarComponent />
                 </div>
                 <div className='col-md-8'>

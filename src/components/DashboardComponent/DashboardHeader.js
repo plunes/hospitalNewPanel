@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getNotifications } from "../../actions/userActions";
 import { sendCounterZero } from "../../actions/userActions";
 import history from "../../history";
+import  { Link } from "react-router-dom"
 
 
 class DashboardHeader extends Component {
@@ -52,10 +53,16 @@ class DashboardHeader extends Component {
                       </a>
                     </div>
                   </li>
-                  <li className="nav-item nav2" onClick = {this.handleClick}>
-                    <a>
-                      <div className="nav-link HeaderLink" ><img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.notificationCount}</span><span style={{marginLeft:"8px"}}>Notification</span></span></div>
-                    </a>
+                  <li className="nav-item nav2" >
+                   
+                      <div className="nav-link HeaderLink" >
+                        <Link to= "/dashboard/notification"
+                        role = "button"
+                        onClick = {this.props.toggleNotif()}>
+                        <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.notificationCount}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
+                         </Link>
+                        </div>
+                   
                   </li>
                   <li className="nav-item nav2">
                     <div className="dropdown">

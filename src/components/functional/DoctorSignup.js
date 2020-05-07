@@ -2,11 +2,17 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import SelectComponent from "../SelectComponent"
 import React,  { useState } from "react"
+import { Redirect } from "react-router-dom"
 import {
     isValidPhoneNumber,
   } from 'react-phone-number-input';
 import validator from 'validator'
  const DoctorSignup= (props) => {
+
+  const redirect = () =>{
+    return <Redirect to="/" />
+  }
+
 
   console.log(props.loadingState,"props in EditProfileForm")
   const [password, setPassword] = useState(false);
@@ -14,6 +20,7 @@ import validator from 'validator'
   if(!!props.registerUserRet){
       if(!!props.registerUserRet.success){
         addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true}) 
+        return  <Redirect to="/" />
       }else{
         addToast(props.registerUserRet.message, {appearance: 'error', autoDismiss:true})
       }
@@ -116,12 +123,12 @@ import validator from 'validator'
 
       <div className="form-group">
         <input
-          className="form-control customborder"
+          className="form-control customborder "
           name="dob"
           placeholder="Date of Birth"
           onChange={props.handleChange}
           required
-          type="date"
+          onfocus="(this.type='date')"
           value = {props.data.dob}
         />
       </div>

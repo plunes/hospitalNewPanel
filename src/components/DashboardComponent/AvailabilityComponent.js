@@ -245,14 +245,7 @@ setAvailabilityClr = () =>{
     render() {
      
         return (
-            <div>
-            <div className='row'>
-                <DashboardHeader />
-            </div>
-            <div className='row'>
-                <div className='col-md-3'>
-                    <SidebarComponent />
-                </div>
+           <React.Fragment>        
                 <div className= 'col-md-6 AvailableTime AllComponents my_av_sec'>
                 <div className= 'text-center'><h4 className="abt_sec"><b>My Availability</b></h4></div>
                   <div className="time_she">
@@ -286,13 +279,13 @@ setAvailabilityClr = () =>{
                       retClr = {this.setAvailabilityClr}
                   />
                 </div>
-            </div>
+            
             <ModalComponent 
                 open = {this.state.open}
                 handleClose = {this.onCloseModal}
                 modalBody = {this.generateTimeSlot}
                 />  
-        </div>
+     </React.Fragment>
         )
     }
 }
