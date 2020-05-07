@@ -57,7 +57,7 @@ form
         -ms-user-select: none;
         user-select: none;}
 
-        .abt_sec{padding-top: 30px;}
+        .abt_sec{padding-top: 30px;font-size: 18px;}
         .my_av_sec{margin-bottom: 30px;}
         .my_avl{margin-bottom: 30px;}
           
@@ -307,3 +307,6 @@ ul li .fa{
 .fa-check:before {
     line-height: 50px;
 } */
+
+.ReactModal__Overlay{background-color: rgba(80, 77, 77, 0.21) !important;}
+.persent_md{padding: 40px !important;}

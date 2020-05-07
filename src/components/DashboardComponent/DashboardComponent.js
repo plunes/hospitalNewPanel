@@ -418,13 +418,13 @@ class DashboardComponent extends Component {
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
                                         ariaHideApp={false}
-                                        contentLabel="Example Modal" className='redeemModal'>
+                                        contentLabel="Example Modal" className='redeemModal modal_pdd'>
                                         <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
-                                        <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
-                                        <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.serviceName}</div>
-                                        <div>     
+                                        <h2 className="update_price" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                        <div clasname="dynmic_pra" style={ { color:'#333333',fontSize:'13px',textAlign: 'center', marginTop:'20px'} }>{this.state.serviceName}</div>
+                                        <div className="catlou_sli">     
                                         {this.state.actionablePriceLoading && <LoaderComponent />}      
-                                            <div style={ { width: '50%'} }>
+                                            <div className="valu_fl"style={ { width: '50%'} }>
                                                 <b>{Math.floor( this.state.value )} % </b>
                                             </div>    
                                             <Slider
@@ -436,8 +436,7 @@ class DashboardComponent extends Component {
                                             valueLabelDisplay="on"
                                             />
                                             <div className="SliderUpdatedPrice">&#8377;
-                                            <input 
-                                            style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} 
+                                            <input className="valu_chenge"
                                             type='text' onChange={this.handleChange} 
                                             name='updatePrice' 
                                             value={Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)}>
@@ -453,7 +452,7 @@ class DashboardComponent extends Component {
                                         </div>
                                         {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br> */}
                                         <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p></div>
-                                        <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+                                        <div className="text-center"><button style={{ fontSize: '17px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                     <Modal
                                         isOpen={this.state.realModalIsOpen}
@@ -461,13 +460,13 @@ class DashboardComponent extends Component {
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
                                         ariaHideApp={false}
-                                        contentLabel="Example Modal" className='redeemModal'>
+                                        contentLabel="Example Modal" className='redeemModal secon_modal'>
                                         <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }} alt=""></img></button></div>
-                                        <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
-                                        <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.realServiceName}</div>
+                                        <h2 className="yout_ctl" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                        <div><p className="serv_ces">{this.state.realServiceName}</p></div>
                                         <div>   
                                             {this.state.realUpdatePriceLoading && <LoaderComponent />}        
-                                            <div className="text-center">
+                                            <div className="text-center valu_second">
                                                <b>{Math.floor( this.state.solValue )} % </b>
                                             </div>    
                                             <Slider
@@ -477,7 +476,7 @@ class DashboardComponent extends Component {
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' 
+                                            <div className="SliderUpdatedPrice">&#8377;<input className="price_up" type='text' onChange={this.handleChange} name='updatePrice' 
                                             value={this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice}>
                                                 </input></div><br></br>
                                             {/* <input className='value' value={this.state.value}></input> */}
@@ -488,7 +487,7 @@ class DashboardComponent extends Component {
                                         </div>
                                         <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p></div>
                                         {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br> */}
-                                        <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+                                        <div className="text-center"><button style={{ fontSize: '18px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                 </div>
                             </div>

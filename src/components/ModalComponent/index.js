@@ -10,7 +10,7 @@ const customStyles = {
       transform             : 'translate(-50%, -50%)'
     }
   };
-
+  
 
   class ModalComponent extends React.Component {
       constructor(props){
@@ -21,6 +21,7 @@ const customStyles = {
       }
       render(){
           return(
+           
             <Modal
             isOpen={this.props.open}
           //   onAfterOpen={afterOpenModal}
@@ -29,9 +30,9 @@ const customStyles = {
           //   contentLabel="Example Modal"
          >
           <div className="text-right"><button onClick={this.props.handleClose} className="cross no-border"><img src="/cross.png" alt="" className="covidCross"></img></button></div>
-            {this.props.modalBody()}
+            <div className="bdu_content">{this.props.modalBody()}</div>
           </Modal>
-          
+         
           )
       }
   }
