@@ -88,7 +88,7 @@ class AppointmentComponent extends Component {
         console.log(this.state,"this.state in AppointmentComponent")
         return (
             <React.Fragment>
-                <div className='col-md-7'>
+                <div className='col-md-8'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
                                 {/* {
@@ -232,7 +232,7 @@ class AppointmentComponent extends Component {
                                         
                                       <div className="col-lg-2 loc_tab">
                                     <div className="round-image">
-                                      <img src={item.userImageUrl} />
+                                      <img src={item.userImageUrl} className="rund_im"/>
                                       </div>
                                      </div>
                                 </div>
@@ -267,7 +267,8 @@ class AppointmentComponent extends Component {
                                  <div className="prog col-lg-12">
                                  <ul class="progressbar">
                                             <li class="active bokd">Booked</li>
-                                            <li className="sixp"><span>6000</span></li>
+                                            <li className="sixp active"><span className="sispan">6000</span></li>
+                                            <li className="ten"><span>10000</span></li>
                                             <li className="thirtyp">30000</li>
                                            
                                     </ul>

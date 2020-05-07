@@ -260,7 +260,7 @@ class ProfileContainer extends React.PureComponent {
                         <img src="Location.png" className="lction"></img>
                     </div>
                     <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
-                        <p class="mainBodyMaxHospitalrow4col2para"><span class="loc"><b>Location :</b></span><span>{this.props.user.address }</span> 
+                        <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
           <a href="#" class="editmainbodymaxhospital"> Edit</a>
          </p>
                     </div>
@@ -301,39 +301,21 @@ class ProfileContainer extends React.PureComponent {
       </div>
       <div className="Service_List">
         <h6 className="s_list">Service List</h6>
-       <div className="row">
-         <div className="col-lg-6">
+     
+        
            <p>Abiation </p>
-           </div>
-           <div className="col-lg-6 abito">
-             <p><a href="#">Know More</a></p>
-           </div>
-           <div className="col-lg-6">
+           
            <p>Cardiac Rehabilitation </p>
-           </div>
-           <div className="col-lg-6">
-             <p><a href="#">Know More</a></p>
-           </div>
-           <div className="col-lg-6">
+           
            <p>Coronary Artery Bypass Grafting </p>
-           </div>
-           <div className="col-lg-6">
-             <p><a href="#">Know More</a></p>
-           </div>
-           <div className="col-lg-6">
+          
+          
            <p>Heart Transplant</p>
-           </div>
-           <div className="col-lg-6">
-             <p><a href="#">Know More</a></p>
-           </div>
-           <div className="col-lg-6">
+           
            <p>Space for text </p>
-           </div>
-           <div className="col-lg-6">
-             <p><a href="#">Know More</a></p>
-           </div> 
-         
-       </div>
+          
+       
+       
        <div className="vi_m">
        <a href="#"className="view_more">View More</a></div>
       </div>

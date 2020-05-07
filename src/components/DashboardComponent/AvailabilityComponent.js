@@ -246,7 +246,7 @@ setAvailabilityClr = () =>{
      
         return (
            <React.Fragment>        
-                <div className= 'col-md-6 AvailableTime AllComponents my_av_sec'>
+                <div className= 'col-md-8 AvailableTime AllComponents my_av_sec'>
                 <div className= 'text-center'><h4 className="abt_sec"><b>My Availability</b></h4></div>
                   <div className="time_she">
                   {this.state.loading &&  <LoaderComponent />}

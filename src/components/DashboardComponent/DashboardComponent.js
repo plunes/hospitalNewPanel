@@ -287,7 +287,7 @@ class DashboardComponent extends Component {
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
                         />
-                            <div className='row dashboardsection dashrow1'>
+                            <div className='dashboardsection dashrow1'>
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
                             </div>
                             <div className='row'>

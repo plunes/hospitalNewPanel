@@ -55,9 +55,10 @@
    {margin: 40px;}  
 
 .Aboutplunes
-   {text-align: justify;}
+   {text-align: justify;font-size: 14px;}
+   .Aboutplunes p{color: #474747;opacity: 0.7;line-height: 27px;}
 
-
+.typeofsetting{font-size: 14px;color: #474747;opacity: 0.7;}
 /* NOTIFICATION CSS */
 
 .Notification

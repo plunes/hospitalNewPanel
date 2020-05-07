@@ -27,7 +27,7 @@
         width: 66px;
         border-radius: 50%;
         height: 66px;
-        border: 1px solid darkgrey;}
+        border: 1px solid #ced4da;}
 
 .ExpertsDetails
         {width: 50%; 
@@ -80,12 +80,13 @@
         padding: 2%;
 }
 /* alka-css */
-.mas_hos{padding: 13px 19px 10px 28px;width: 100%;}
+.mas_hos{padding: 13px 19px 10px 28px;width: 100%;height: 400px;}
 .edit_image{background: #01D35A;border-radius: 50%;width: 44px;height: 44px;text-align: center;cursor: pointer;float: right;position: relative;
         right: 26px;
         top: -45px;}
 .edit_icn {width:16px;padding-top: 15px;}
-.content_pos{padding-top: 20px;}
+.content_pos{padding-top: 11px;position: relative;right: 23px;}
+.maxhospitaladd{font-size: 14px;color: #474747;opacity: 0.6;line-height: 12px;}
 .max_cnt{    margin-bottom: 9px;}
 .achimen_pd{margin-top: 2rem;}
 .edit_image2{background: #01D35A;border-radius: 50%;width: 25px;height: 25px;text-align: center;position: relative; left: 55px; top: -24px;}
@@ -140,13 +141,16 @@
 .vi_m{text-align: center;margin: 20px;position: relative;right: 76px;top:34px;}
 .bg_clr{background: #AFAFAF;}
 .bg_clr img{width: 40px;}
-.team_sec{padding: 40px;}
+.team_sec{padding: 0px 15px 0px 15px;}
+
+
 .timelinebox4 {
       
         text-align: center;
         background-color: #AFAFAF;
         margin-top: 30px;
-        height:160px;
+        padding: 10px 0px 10px 0px;
+        height: 160px;
     }
   
     .timelinebox4 img{
@@ -160,7 +164,7 @@
         padding-left: 11px;
         padding-top: 13px;}
         .speclion{font-size: 16px;}
-    .left_ali h2{font-size: 14px;}
+    .left_ali h2{font-size: 13px;}
     .left_ali p{font-size: 12px;line-height: 4px;}
     .timelinebox4_5 {padding: 35px;}
 .se-dr{text-align: center;margin: 46px 20px;}
@@ -185,5 +189,6 @@
             .achivmnt_b p{padding-top: 16px;}
 .text_cmt textarea{border: 0;
         border-bottom: 1px solid #ced4da;
-        outline: 0;height: 180px;}
-        .loc{color: #989393 !important;font-size: 15px;}
+        outline: 0;height: 180px;font-size: 14px;color: #989393;}
+        .loc{color: #989393 !important;font-size: 14px;}
+        .vikas_marg{font-size: 14px;}

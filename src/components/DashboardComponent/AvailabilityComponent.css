@@ -100,9 +100,9 @@ form
 
 .AppointBodyrow1
      {text-align: center;      
-      font-size: 24px;   
+      font-size: 18px;   
       font-weight: bolder;     
-      margin-bottom: 20px;}
+      margin-bottom: 0px;}
 
 .AppointBodyrow2
      {margin-top: 10px;}
@@ -233,7 +233,7 @@ input:checked + .slider:before
 
 .settingtopic 
     {text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bolder;} 
 
 .accsetrow 
