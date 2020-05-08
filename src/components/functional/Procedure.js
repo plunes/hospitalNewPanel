@@ -6,14 +6,13 @@ import VarianceDropdown from "./varianceDropdown"
  const Procedure= (props) => {
   const { addToast } = useToasts()
   const {data} = props
-console.log(props,"props in Procedures")
 
   if(!!props.ret){
     if(props.id === props.selectedProcedure.id){
       if(!!props.ret.success){
         addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
       }else{
-        console.log(props.res,"props.res in procedure")
+        
         addToast(props.ret.message, {appearance: 'error', autoDismiss:true})
       }
       props.loadingOff()
@@ -34,7 +33,7 @@ console.log(props,"props in Procedures")
   
 </label>
       </div>
-      <div className="col-lg-2">
+      <div className="col-lg-3 col-md-3 text-center">
         <div className="procedure_price_wrap">
            &#x20B9;
              {((!!props.editFlag) && (props.id === props.selectedProcedure.id))?<input
@@ -48,9 +47,10 @@ console.log(props,"props in Procedures")
         </div>
       {/* <input type="text" value="200" className="btm_bdr" /> */}
       </div>
-      <div className="col-md-4 col-12">
+      <div className="col-md-3 text-center">
         <div className="price_se">
           < VarianceDropdown 
+            editFlag = {props.editFlag}
             handleChange={(e)=>props.handleVarianceChange(e)}
             value = {(props.id === props.selectedProcedure.id)?props.selectedProcedure.variance:props.data.variance}
           />

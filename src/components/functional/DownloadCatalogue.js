@@ -18,7 +18,7 @@ import React, { useLayoutEffect } from "react"
 <a onClick={(e)=>{
     e.preventDefault()
     props.downloadCatalogue()
-}} href=""><img src="./down.svg" alt=""></img>
+}} href=""><img className="catalogue-img" src="/down.svg" alt=""></img>
 <p className="uploadCata">Download Sample</p></a>
  </div>
 </React.Fragment>

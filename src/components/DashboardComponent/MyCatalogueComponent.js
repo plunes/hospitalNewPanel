@@ -29,6 +29,7 @@ import DownloadCatalogue from "../functional/DownloadCatalogue"
 import Procedure from "../functional/Procedure"
 import EditProcedure from "../functional/editProcedure"
 import LoaderComponent from "../functional/LoaderComponent"
+import NotifFunc from "../functional/NotifFunc"
 
 
  const isEmpty = function(obj) {
@@ -336,9 +337,13 @@ class MyCatalogueComponent extends Component {
         console.log(this.props.addServicesRet,"this.props.addServicesRet")
                 return (
                     <React.Fragment>
+                        <NotifFunc />
                     <div className='col-md-8 catalogueComponent'>
                         <div className='row justify-content-center'>
-                            <p className='catalogue'>Catalogue</p>
+                            {/* <p className='catalogue'>Catalogue</p> */}
+                            <div className='catalogue' >
+                            <h4>Catalogue</h4>
+                            </div>
                         </div>
                         <div className='row listOfService'>
                               <div className='col-md-3 text-center'>
@@ -346,7 +351,7 @@ class MyCatalogueComponent extends Component {
                                      e.preventDefault()
                                      this.setState({uploadCatalogFlag:true})
                                     }
-                                     } href=""><img src="./upload.svg" alt=""></img>
+                                     } href=""><img className="catalogue-img" src="/upload.svg" alt=""></img>
                                  <p className="uploadCata">Upload File</p></a>
                               </div>
                              <DownloadCatalogue
@@ -360,11 +365,11 @@ class MyCatalogueComponent extends Component {
                                      this.setState({
                                         editFlag:true,
                                         addProcedureFlag:false})
-                                    }}><img src="./edit.svg" alt=""></img>
+                                    }}><img className="catalogue-img" src="/edit.svg" alt=""></img>
                                  <p className="uploadCata">Edit Catalogue</p></a>
                               </div>
                               <div className='col-md-3 text-center'>
-                                 <a href="" onClick={(e)=>this.handleAddProcedureClick(e)}><img src="./edit.svg" alt=""></img>
+                                 <a href="" onClick={(e)=>this.handleAddProcedureClick(e)}><img className="catalogue-img" src="/edit.svg" alt=""></img>
                                  <p className="uploadCata">Add Catalogue</p></a>
                               </div>
                         </div>
@@ -377,13 +382,14 @@ class MyCatalogueComponent extends Component {
                            value = {this.state.selected_speciality}
                            hidelabel = {true}
                            dropdownStyle = {{
-                               top:'290px !important'
+                               top:'240px !important'
                            }}
                            labelStyles = {{
                                'padding': '6px 0px 0px 12px'
                            }}
                            wrapperDivStyles = {{
-                                   'width': '65%',
+                                   'width': '40%',
+                                   'marginTop':'1rem',
                                    'marginLeft': 'auto',
                                   'marginRight': 'auto'
                                }}
@@ -413,13 +419,13 @@ class MyCatalogueComponent extends Component {
                         </div>
                         <div className='listOfService'>
                             <div className='row listOfServiceHeading'>
-                                <div className='col-md-6'>
+                                <div className='col-md-6 text-center'>
                                     Test Name
                                     </div>
-                                <div className='col-md-3'>
+                                <div className='col-md-3 text-center'>
                                     Price
                                 </div>
-                                <div className='col-md-3'>
+                                <div className='col-md-3 text-center'>
                                     Variance
                                 </div>
                             </div>

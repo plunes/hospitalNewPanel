@@ -111,7 +111,8 @@ class AddDoctorComponent extends Component {
       if(!!id){
         // console.log("True case in DidMount")
         this.setState({
-          getUserLoading:true
+          getUserLoading:true,
+          doctorProfileFlag:true
         },()=>this.props.getEntity({
           userId:id
         }))
@@ -295,7 +296,7 @@ let obj =   {
   }
   
   generateSlotsFormat = () =>{
-      let slots = JSON.parse(JSON.stringify(this.state.data))
+      let slots = JSON.parse(JSON.stringify(this.state.slots))
       let arr = []
       slots.forEach((item,i)=>{
         let obj = {}
@@ -333,14 +334,27 @@ let obj =   {
         if(nextProps.getEntityRet.success){
           console.log(nextProps.getEntityRet,"nextProps.getEntityRet in WillReceiveProps")
           let data = nextProps.getEntityRet.data
+
+          let arr = []
+          data.timeSlots.forEach((item,i)=>{
+                let obj = {}
+                obj.day =this.getDay(i)
+                obj.closed = item.closed
+                obj.slots = {
+                morning: this.stringToTime(item.slots[0]),
+                evening: this.stringToTime(item.slots[1])
+                }
+                arr.push(obj)
+          })
               this.setState({
                 name:data.name,
-                education:data.qualification,
+                education:data.education,
                 designation:data.designation,
-                experience:data.designation,
+                experience:data.experience,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
-                slots:[]
+                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
+                slots:arr
               })
         }else{
 
@@ -475,8 +489,9 @@ let obj =   {
                     <div className="border_dev">
                 <div className="add_dr">
                     <div className="add_srch_d">
-          <h4>Add Doctors</h4>
-          <p>Search for a doctor by name or email</p>
+                      {this.state.doctorProfileFlag?<h4>Docotr</h4>:<h4>Add Doctor</h4>}
+          
+          {/* <p>Search for a doctor by name or email</p> */}
           </div>
           {/* <div className="search_b">
           <form action="#" method="get">
@@ -607,7 +622,7 @@ let obj =   {
               timeToString = {this.timeToString}
               slotClicked = {this.slotClicked}
               handleCloseDay = {this.handleCloseDay}
-              slots ={this.state.slots}
+              slots ={this.state.slots.length===0?[]:this.state.slots}
             />
         </div>
         <ModalComponent 

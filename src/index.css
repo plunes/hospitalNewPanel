@@ -310,3 +310,7 @@ body {
   width: 0%;
   content: "";
 }
+
+.catalogue-img{
+  width: 3rem;
+}

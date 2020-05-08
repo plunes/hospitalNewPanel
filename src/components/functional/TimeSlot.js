@@ -72,7 +72,6 @@ const TimeSlot = (props) => {
             let slot = props.selectedSlot
             let type = props.selectedType
             let shift = props.selectedshift
-            console.log(slot, type, shift," slot ")
             let test = {}
             let error = false
             let message = ""
@@ -115,9 +114,8 @@ const TimeSlot = (props) => {
         <div className ='modal-wrapper-small_ris'>
         <div className="modal-heading_ris set_u_t">Set your Time</div>
         <div className="row modal-p_ris margin-top-small_ris text-center">
-        <div className="modal-p_ris col-lg-12 time_s text-center"><h2>8:30<small>AM</small></h2>
+    <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>12?'PM':'AM'}</small></h2>
         </div>
-        
        <div className="new_scr2">
         <div className="new_scrol">
             {getTimeOptions(props.selectedshift)}

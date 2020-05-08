@@ -4,16 +4,16 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useToasts } from 'react-toast-notifications'
 
 export default function VarianceDropdown(props) {
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false) 
+  const { addToast }  = useToasts()
   const useStyles = makeStyles((theme) => ({
     formControl: {
-      margin: theme.spacing(1),
+      // margin: theme.spacing(1),
       borderBottom:"0px !important",
-      minWidth: 120,
-      width:'100%',
       select: {
           height:'100px'
       }
@@ -47,7 +47,12 @@ export default function VarianceDropdown(props) {
   };
 
   const handleOpen = (event) => {
-    setOpen(true);
+    if(props.editFlag){
+      setOpen(true);
+    }else{
+      // addToast("Select procedure  to change variance", {appearance: 'error', autoDismiss:true})
+    }
+   
   };
 
   const handleClose = (event) => {
@@ -83,7 +88,8 @@ if(props.multiple===true){
             <MenuItem value="5">5</MenuItem>
             <MenuItem value="10">10</MenuItem>
             <MenuItem value="20">20</MenuItem>
-            <MenuItem value="30">30</MenuItem>
+            <MenuItem value="35">35</MenuItem>
+            <MenuItem value="45">45</MenuItem>
         </Select>
       </FormControl>
          </div>

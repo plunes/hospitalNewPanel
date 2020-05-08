@@ -4,22 +4,22 @@
     border-radius: 10px;
 }
 .catalogue{
-    margin-top: 3%;
-    margin-bottom: 4%;
-    font-size: 25px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    /* font-size: 1.6rem; */
     font-weight: 900;
 }
 .catalogueSearchbar{
-    width: 65%;
-    padding: 2%;
+    width: 40%;
+    padding: .7rem;
     border: 1px solid #01D35A;
     border-radius: 39px;
     background-image: url(/search.png);
     background-repeat: no-repeat;
     background-position-x: 93%;
     background-position-y: 50%;
-    margin-bottom: 8%;
-    margin-top: 4%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 .catalogueSearchbar:hover{
     border: none;
@@ -53,6 +53,7 @@
 }
 .uploadCata{
     color: black;
-    font-size: 16px;
+    font-size: .8rem;
+    margin-top: .4rem;
     font-weight: 500;
 }
