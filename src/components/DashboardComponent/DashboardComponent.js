@@ -293,7 +293,7 @@ class DashboardComponent extends Component {
                             </div>
                             <div className='row'>
                                 <div className='col-md-6 col-6 Leftpaddingremove'>
-                                    <div className='dashboardsection'>
+                                    <div className='dashboardsection scrolling_sec'>
                                         <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span><br></br>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
@@ -395,11 +395,12 @@ class DashboardComponent extends Component {
                                     </div>
                                     <br></br>
                                 </div>
-                                <div className='col-md-6 col-6 dashboardsection dashrow2col2'>
+                                <div className='col-md-6 col-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
+                                       
                                         {
                                             this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>

@@ -99,7 +99,17 @@
         right: 2.5rem;
 }
 .maxhospitaladd{font-size: 14px;color: #474747;opacity: 0.6;line-height: 12px;}
-.max_cnt{    margin-bottom: 9px;}
+.max_cnt{   font-size: 18px; margin-bottom: 9px;}
+.team_of{color: #474747;font-size: 15px;position: relative;margin-top: 10px;
+        top: 12px;}
+        .achiment_bk{text-align: center;color: #474747;font-size: 16px;position: relative;
+                top: -23px;}
+        /* .brdr_tm{border: 1px solid #DCDCDC;} */
+        .brdr_tm {
+                width: 793px;
+                position: relative;
+               left: 20px;
+            }
 .achimen_pd
 {
         /* margin-top: 2rem; */
@@ -161,7 +171,7 @@
 .vi_m{text-align: center;margin: 20px;position: relative;right: 76px;top:34px;}
 .bg_clr{background: #AFAFAF;}
 .bg_clr img{width: 40px;}
-.team_sec{padding: 0px 15px 0px 15px;}
+.team_sec{padding: 0px 40px 0px 41px;}
 
 
 .timelinebox4 {
@@ -187,17 +197,17 @@
     .left_ali h2{font-size: 13px;}
     .left_ali p{font-size: 12px;line-height: 4px;}
     .timelinebox4_5 {padding: 35px;}
-.se-dr{text-align: center;margin: 1rem 20px;}
+.se-dr{text-align: center;margin: 2rem 20px;}
 .se-dr a{color: #01D35A; font-weight: 400;}
 .se-dr a:hover{color: #01D35A !important;}
-.achivmnt_b{background: #F8FFFB;padding: 40px;}
+.achivmnt_b{background: #F8FFFB;padding: 40px;margin-top: 35px;}
 .ach1 {width: 288px;
         height: 170px;}
         .lction{width: 31px;position: relative;
                 left: 23px;}
         .cir_b{border-radius: 50%;width: 40px; height: 40px;background: #fff;position: absolute;
                 right: 51px;
-                top: -16px;text-align: center;}
+                top: -16px;text-align: center;border: 1px solid #A8A8A8;}
         .croS{width: 14px;padding-top: 12px;}
         span.three {
                 position: relative;
@@ -208,7 +218,7 @@
             }
             .achivmnt_b p{padding-top: 16px;}
 .text_cmt textarea{border: 0;
-        border-bottom: 1px solid #ced4da;
+      
         outline: 0;height: 180px;font-size: 14px;color: #989393;}
         .loc{color: #989393 !important;font-size: 14px;}
         .vikas_marg{font-size: 14px;}

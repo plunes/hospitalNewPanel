@@ -257,7 +257,12 @@ hr
       border-radius: 7px;
       opacity: 1; margin-bottom: 3%;
 }
-
+.scrolling_sec {
+      width: 420px;
+      overflow: auto;
+      height: 435px;
+      overflow-x: hidden;
+  }
 .dashrow1
 {
       margin-bottom: 1rem;
@@ -265,7 +270,13 @@ hr
       font-weight: normal;
       padding: .6rem 0.5rem .6rem 0.5rem;
       width: 55rem;
+      position: relative;
+      left:15px;
 }
+.second_scro{ width: 420px;
+      overflow: auto;
+      height: 435px;
+      overflow-x: hidden;}
 
 .dashrow2col1
       {margin-right: 18px;max-width: 47.666667% !important;}
@@ -323,9 +334,9 @@ hr
       {border: none;
       background-color: white;
       color: #01D35A;
-      font-size: 19px;
+      font-size: 16px;
       margin-bottom: 10px;
-      font-weight: 400;} 
+      font-weight: 400;padding-top: 12px;} 
 
 .InsightUpdate
       {
@@ -493,9 +504,15 @@ hr
 .realtimeicon1
     {border-radius: 50%;
       border: 1px solid #BCD3F6;
-      padding: 16px 20px 18px 20px;
+      padding: 7px 12px 9px 12px;
       background-color: #F2F7FF;
-      margin-left: 10px;}
+      margin-left: 10px;position: relative;
+      left: 7px;}
+      img.privc_icone {
+            width: 26px;
+            position: relative;
+            left: 13px;
+        }
 
 .realtimeicon
     {width: 31%;}
@@ -529,6 +546,8 @@ hr
     padding-right: 4px;
     margin-left: auto;
     margin-right: auto;
+    font-size: 12px;
+    font-weight: 200;
 }
 
 /* alka-css */

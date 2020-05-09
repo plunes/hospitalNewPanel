@@ -268,7 +268,7 @@ setAvailabilityClr = () =>{
                       <div className="col-lg-2">
                          <div 
                       onClick = {(e)=>this.handleCloseDay(item,i,e)} 
-                      className='round'> 
+                      className='circul_rund'> 
                     <label className={item.closed?'green-background ':''} for="checkbox"></label></div></div>
                     </div>
                    ))}

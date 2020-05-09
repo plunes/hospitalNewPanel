@@ -325,8 +325,10 @@ class ProfileContainer extends React.PureComponent {
        <a href="#"className="view_more">View More</a></div>
       </div>
    */}
-  
+    <hr className="brdr_tm"></hr>
           <div className="team_sec">
+          
+            <h3 className="team_of">Team of Experts</h3>
           <div className="row">
   {this.props.user?!!this.props.user.doctors?this.props.user.doctors.map((item,i) =>{
     return (<DoctorComponent
@@ -348,6 +350,7 @@ class ProfileContainer extends React.PureComponent {
 {/* 2nd-end */}
 <div className="se-dr"><a href="#">See more Doctor's</a></div>
 <div className="achivmnt_b">
+  <h4 className="achiment_bk">Achievement Book</h4>
   <div className="row">
     {!!this.props.user?!!this.props.user.achievements?this.props.user.achievements.map((item,i)=>{
       if(!!item){

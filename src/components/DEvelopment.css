@@ -205,12 +205,12 @@ label.control-label {
     font-weight: 400;
     margin-left: 14px;
 }
-.round {
+.circul_rund {
     position: relative;
     margin-left: 30px;
   }
   
-  .round label {
+  .circul_rund label {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 50%;
@@ -222,7 +222,7 @@ label.control-label {
     width: 28px;
   }
   
-  .round label:after {
+  .circul_rund label:after {
     border: 2px solid #fff;
     border-top: none;
     border-right: none;
@@ -236,16 +236,16 @@ label.control-label {
     width: 12px;
   }
   
-  .round input[type="checkbox"] {
+  .circul_rund input[type="checkbox"] {
     visibility: hidden;
   }
   
-  .round input[type="checkbox"]:checked + label {
+  .circul_rund input[type="checkbox"]:checked + label {
     background-color: #01D35A;
     border-color: #01D35A;
   }
   
-  .round input[type="checkbox"]:checked + label:after {
+  .circul_rund input[type="checkbox"]:checked + label:after {
     opacity: 1;
   }
 .time_she h4{color: #343434;font-size: 14px;font-weight: 600;padding-bottom: 40px;}  

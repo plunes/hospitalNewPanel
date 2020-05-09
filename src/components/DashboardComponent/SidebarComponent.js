@@ -127,7 +127,7 @@ class SidebarComponent extends Component {
               <span>
                 <img className="sidebaricon" src="/Logout.png" alt=""></img>
               </span>
-              LogOut
+              Logout
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </div>
           </div>

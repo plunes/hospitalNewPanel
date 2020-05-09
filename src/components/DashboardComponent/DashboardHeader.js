@@ -76,7 +76,7 @@ class DashboardHeader extends Component {
                         <li><span><img className="dash-dropdown" src="/Settings.png" alt=""/><a href="">Settings</a></span></li><hr width="80%"/>
                         <li><span><img className="dash-dropdown" src="/Help.png" alt=""/><a href="">Help</a></span></li><hr width="80%"/>
                         <li><span><img className="dash-dropdown" src="/about-us.png" alt=""/><a href="">About Us</a></span></li><hr width="80%"/>
-                        <li><span><img className="dash-dropdown" src="/Logout.png" alt=""/><a href="">Log out</a></span></li>
+                        <li><span><img className="dash-dropdown" src="/Logout.png" alt=""/><a href="">Logout</a></span></li>
                       </ul>
                     </div>
                   </li>
