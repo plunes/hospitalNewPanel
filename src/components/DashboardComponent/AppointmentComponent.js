@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
-import { getBooking, getBookingClr } from '../../actions/userActions'
+import { getBooking, getBookingClr, changeAppoint, changeAppointClr } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import  "./AvailabilityComponent.css";
@@ -9,18 +9,62 @@ import "./appointment.css"
 import Modal from 'react-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotifFunc from '../functional/NotifFunc';
+import LoaderComponent from "../functional/LoaderComponent"
+
+const getMonth = (item) =>{
+        switch (item) {
+            case 0:
+                return "JAN"
+                break;
+            case 1:
+                return "FEB"
+                break;
+            case 2:
+                return "MAR"
+                break;
+            case 3:
+                return "APR"
+                break;
+            case 4:
+                return "MAY"
+                break;
+            case 5:
+                return "JUN"
+                break;
+            case 6:
+                return "JUL"
+                break;
+            case 7:
+                return "AUG"
+                break;
+            case 8:
+                return "SEP"
+                break;
+            case 9:
+                return "OCT"
+                break;
+            case 10:
+                return "NOV"
+                break;
+            case 11:
+                return "DEC"
+                break;
+            default:
+                break;
+        }
+}
 
 
 const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)'
     }
-  };
+};
 
 class AppointmentComponent extends Component {
     constructor(props) {
@@ -29,14 +73,18 @@ class AppointmentComponent extends Component {
             modalIsOpen : false,
             upcoming_bookings:[],
             cancelled_booking:[],
-            confirmed_booking:[]
+            confirmed_booking:[],
+            get_bookings_loading:false
         };
         
         this.openModal = this.openModal.bind(this);
         this.closeModal =  this.closeModal.bind(this);
     }
-    async componentDidMount(){
-     await this.props.getBooking();
+     componentDidMount(){
+      this.setState({
+        get_bookings_loading:true
+      },()=>this.props.getBooking())
+      
     }
     openModal(){
         this.setState({
@@ -47,6 +95,30 @@ class AppointmentComponent extends Component {
     closeModal(){
         this.setState({
             modalIsOpen : false
+        })
+    }
+
+    dateTimeObject = (seconds) =>{
+        let date = new Date(parseInt(seconds, 10))
+        console.log(date,"date in dateTimeObject")
+        return  {
+            monthAndDate: `${getMonth(date.getMonth())}  ${date.getDate()>9?date.getDate():"0"+date.getDate()}`,
+            fullDate:  `${date.getDate()>9?date.getDate():"0"+date.getDate()} ${getMonth(date.getMonth())}  ${date.getFullYear()} `,
+            time: `${date.getHours()>9?date.getHours():"0"+date.getHours()}:${date.getMinutes()>9?date.getMinutes():"0"+date.getMinutes()} ${date.getHours()>12?"PM":'AM'}`,
+        }
+    }
+
+    conformBooking = ()=>{
+        this.props.changeAppoint({
+            ...this.state.selected_booking,
+            type:'confirming'
+        })
+    }
+
+    cancellAppointmentSubmit=()=>{
+        this.props.changeAppoint({
+            ...this.state.selected_booking,
+            type:'cancel'
         })
     }
 
@@ -69,7 +141,8 @@ class AppointmentComponent extends Component {
                this.setState({
                 confirmed_booking:confirmed_booking,
                 cancelled_booking:cancelled_booking,
-                upcoming_bookings:upcoming_bookings
+                upcoming_bookings:upcoming_bookings,
+                get_bookings_loading:false
                })
             }else{
                 this.setState({
@@ -82,72 +155,101 @@ class AppointmentComponent extends Component {
         }
     }
 
+    confirmBooking = (item) =>{
+        this.setState({
+            selected_booking:item,
+            confirm_modal_flag:true
+        })
+    }
+
+    cancelBooking = (item) =>{
+        this.setState({
+            selected_booking:item,
+            cancel_modal_flag:true
+        })
+    }
+
+    closeConfirmModal = () =>{
+        this.setState({
+            selected_booking:{},
+            confirm_modal_flag:false,
+            status_change_confirm:false
+        })
+    }
+
+    closeCancelModal = () =>{
+        this.setState({
+            selected_booking:{},
+            cancel_modal_flag:false,
+            status_change_confirm:false
+        })
+    }
+
+    getProgressbar = (item) =>{
+        console.log(item,'item in getProgressbar')
+        if(false){
+            return  <React.Fragment>
+            <div className="prog col-lg-12">
+          <ul class="progressbar">
+                     <li class="active bokd">Booked</li><span className="sispan">100</span>
+                     <li className="ten"><span>{(item.paidAmmount)*0.5}</span></li>
+                     <li className="thirtyp active">{item.totalAmount}</li>
+             </ul>
+           </div>
+          </React.Fragment>
+        }else{
+            return   <React.Fragment>
+             <div className="prog col-lg-12">
+          <ul class="progressbar">
+                     <li class="active bokd">Booked</li><span className="sispan">100</span>
+                     <li className="ten active"><span>{item.paidAmmount}</span></li>
+                     <li className="thirtyp ">{item.totalAmount}</li>
+             </ul>
+           </div>
+        </React.Fragment>
+        }
+    }
+
+    changeAppointClr = ()=>{
+        if(this.props.changeAppointRet.type==="confirming"){
+                console.log("Iniside conforming clear in ChangeAppoint Clear")
+                this.props.changeAppointClr()
+               this.setState({
+                    status_change_confirm:true
+               })
+        }else{
+            console.log("Iniside CancelClear clear in Other Clear")
+            this.props.changeAppointClr()
+           this.setState({
+                status_change_confirm:true
+           })
+        }
+    }
+
 
     render() {
         // console.log(this.props,"this.props in Appointments")
         // console.log(this.props.bookings, 'bookings');
         console.log(this.state,"this.state in AppointmentComponent")
+        if(!!this.state.get_bookings_loading){
+           return   <div className='col-md-8'>
+           <div className="Appoint AllComponents">
+             <div style={{position:'relative', width:'100%',height:'100%'}}>
+           <LoaderComponent />
+       </div>
+       </div>
+       </div>
+        }
         return (
             <React.Fragment>
-                <NotifFunc />
+                <NotifFunc
+                    ret = {this.props.changeAppointRet}
+                    retClr = {this.changeAppointClr}
+                />
                 <div className='col-md-8'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
-                                {/* {
-                                    this.props.bookings  ? this.props.bookings.map((b, index)=>(
-                                    <div className="AppointBody" key = {index}>
-                                        <div className='row AppointBodyrow2'>
-                                            <div className='col-sm-3'>
-                                              
-                                                <div className="AppointNameBold"><b>{b.appointmentTime}</b></div>
-                                            </div>
-                                            <div className='col-sm-2 Appointimgrow'>
-                                               
-                                            </div>
-                                            <div className='col-sm-5'>
-                                                <div className="AppointNameBold">{b.userName}</div>
-                                               
-                                                <div className="AppointStatus">{b.bookingStatus}</div>
-                                            </div>
-                                            <div className='col-sm-2'>
-                                                <img src="./loc.png"></img>
-                                            </div>
-                                        </div>
-                                        <div className="AppointBodyrow2 appointBookId">Booking Id: {b.bookingId}</div>
-                                        <div className="row AppointBodyrow2">
-                                            <div className="col-md-6">
-                                                <div className="">{b.serviceName}</div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="text-center AppointNameBold">&#8377;{b.totalAmount}</div>
-                                               
-                                            </div>
-                                        
-                                        </div>
-                                        <div className="text-center"><u><b>Payment Status</b></u></div>
-                                        <div className='progres'>
-                                            <ul className="progressbar">
-                                                <li class="active">Booked in 100</li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                                <li></li>
-                                            </ul>
-                                        </div>
-                                        <div className="text-center">Payments done by patient</div>
-                                        <div className="text-center tip"><a href="" className='appointCreateP'>Create Prescription</a></div>
-                                        <div className="text-center ideaDiv">
-                                            <button className='idea' onClick={this.openModal}>
-                                                <img src="./idea.svg"></img>
-                                                <p className='tip'>Tips for more Conversions</p>
-                                            </button>
-                                        </div>
-                                            <hr></hr>
-                                    </div>
-                                    )) : false
-                                } */}
- 
-        
+                        
                             <Tabs className="tab_pd">
                                 <TabList>
                                 <div className="row upcmg_fnt">
@@ -160,78 +262,20 @@ class AppointmentComponent extends Component {
                               <div className="upcoming_bdr"></div>
                                 <TabPanel className="ardee_ci">
                                {this.state.upcoming_bookings.map((item,i)=>{
+                                   console.log(item,"item in Appointments")
                                    return <React.Fragment>
                                         <div className="row">
                                   <div className="col-lg-3 nov_2">
-                                      <h4>NOV 20</h4>
-                                      <p>11 Nov 2019 <br/>09:00 AM</p>
+                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
+                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
                                       </div>
-                                      
                                               <div className="col-lg-2">
-                                                  <img src="/pexel_1.png" />
-                                                  </div>
-                                                  <div className="col-lg-4 nov_2">
-                                                    <h4>{item.userName}</h4>
-                                                    <p>{item.professionalAddress}</p> 
-                                                  </div>
-                                        
-                                      <div className="col-lg-2 loc_tab">
-                                      <img src="/loc.png" />
-                                      </div>
-                                </div>
-                                <div className="row confrm_mar_sec">
-                                <div className="col-lg-4">
-                                    <p className="gr_con">Confirmed</p>
-                                 </div>
-                                 <div className="col-lg-4">
-                                 <p className="res_udle">Reschedule</p>
-                                 </div>
-                                 <div className="col-lg-4">
-                                 <p className="con_re">Cancel</p>
-                                 </div>
-                                </div>
-                                {/* 2nd--end */}
-                                <div className="row confrm_mar_sec">
-                                <div className="col-lg-6">
-                                    <p className="brace_m">Dental Braces</p>
-                                 </div>
-                                 <div className="col-lg-6">
-                                 <p className="dental_th">30000</p>
-                                 </div>
-                                </div>
-                                {/* 3rd--end */}
-                                <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
-                                <div className="row">
-                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked</span></div>
-                                
-                                   <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
-                                    <div className="gray_circ">100%<span>30000</span></div>
-                                 </div>
-                                 
-                                 <div className="grap_bod"></div><div className="grap_bod2"></div>
-                                 <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p>
-                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
-                                   </React.Fragment>
-                               })}
-                                </TabPanel>
-                                <TabPanel className="ardee_ci">
-                                    {this.state.confirmed_booking.map((item,i)=>{
-                                   return <React.Fragment>
-                                        <div className="row">
-                                  <div className="col-lg-3 nov_2">
-                                      <h4>NOV 20</h4>
-                                      <p>11 Nov 2019 <br/>09:00 AM</p>
-                                      </div>
-                                      
-                                              <div className="col-lg-2">
-                                                  <img src="/pexel_1.png" className="frame_de" />
+                                                  <img  src={item.professionalImageUrl} className="frame_de" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
-                                        
                                       <div className="col-lg-2 loc_tab">
                                     <div className="round-image">
                                       <img src={item.userImageUrl} className="rund_im"/>
@@ -240,13 +284,13 @@ class AppointmentComponent extends Component {
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con">Confirmed</p>
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item)}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle">Reschedule</p>
+                                 <p className="res_udle underline">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re">Cancel</p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancel</text></p>
                                  </div>
                                 </div>
                                 {/* 2nd--end */}
@@ -260,85 +304,117 @@ class AppointmentComponent extends Component {
                                 </div>
                                 {/* 3rd--end */}
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
-                                {/*
-                                 <div className="row">
-                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>{`Booked in ${item.totalAmount}`}</span></div>
-                                  <div className="gray_circ">100%<span>{`${item.totalAmount}`}</span></div>
-                                 </div>
-                                 <div className="grap_bod"></div><div className="grap_bod2"></div> */}
-                                 <div className="prog col-lg-12">
-                                 <ul class="progressbar">
-                                            <li class="active bokd">Booked</li>
-                                            <li className="sixp active"><span className="sispan">6000</span></li>
-                                            <li className="ten"><span>10000</span></li>
-                                            <li className="thirtyp">30000</li>
-                                           
-                                    </ul>
-                                    </div>
+                                {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
                                  </div>
-                                  
                                    </React.Fragment>
                                })} 
-                               <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
-                                {this.state.upcoming_bookings.map((item,i)=>{
+                                    {this.state.confirmed_booking.map((item,i)=>{
+                                        console.log(item,"item in Appointments in confirmed")
                                    return <React.Fragment>
                                         <div className="row">
-                                  <div className="col-lg-3 nov_2">
-                                      <h4>NOV 20</h4>
-                                      <p>11 Nov 2019 <br/>09:00 AM</p>
+                                        <div className="col-lg-3 nov_2">
+                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
+                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
                                       </div>
-                                      
                                               <div className="col-lg-2">
-                                                  <img src="/pexel_1.png" />
+                                                  <img  src={item.professionalImageUrl} className="frame_de" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                  <h4>Shikha Singh</h4>
-                                                      <p>C9/38, Gate No. 3, Block C, Ardee City, Sector 52, Gurugram, Haryana 122003, India</p> 
-                                                  </div>
-                                        
+                                                  <h4>{item.userName}</h4>
+                                                  <p>{item.professionalAddress}</p>
+                                                </div> 
                                       <div className="col-lg-2 loc_tab">
-                                      <img src="/loc.png" />
+                                    <div className="round-image">
+                                      <img src={item.userImageUrl} className="rund_im"/>
                                       </div>
+                                     </div>
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con">Confirmed</p>
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item)}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle">Reschedule</p>
+                                 <p className="res_udle underline">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re">Cancel</p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancel</text></p>
                                  </div>
                                 </div>
                                 {/* 2nd--end */}
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
-                                    <p className="brace_m">Dental Braces</p>
+                                    <p className="brace_m">{item.serviceName}</p>
                                  </div>
                                  <div className="col-lg-6">
-                                 <p className="dental_th">30000</p>
+                                    <p className="dental_th">{item.totalAmount}</p>
                                  </div>
                                 </div>
                                 {/* 3rd--end */}
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
-                                <div className="row">
-                                   <div className="graph_cir righr_side_p"><img src="/right.svg" className="right_im" /><span>Booked in 100</span></div>
-                                
-                                   <div className="graph_cir"><img src="/right.svg" className="right_im" /><span className="thousent">6000</span></div>
-                                    <div className="gray_circ">100%<span>30000</span></div>
-                                 </div>
-                               
-                                 <div className="grap_bod"></div><div className="grap_bod2"></div>
+                                {this.getProgressbar(item)}                        
+                                    <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
                                  <p className="pay_green">Create Prescription</p>
+                                 </div>
                                    </React.Fragment>
-                               })}                           
+                               })} 
+                               <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                </TabPanel>
+                                <TabPanel className="ardee_ci">
+                                {this.state.cancelled_booking.map((item,i)=>{
+                                  return <React.Fragment>
+                                  <div className="row">
+                                  <div className="col-lg-3 nov_2">
+                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
+                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
+                                      </div>
+                                        <div className="col-lg-2">
+                                            <img  src={item.professionalImageUrl} className="frame_de" />
+                                            </div>
+                                            <div className="col-lg-4 nov_2">
+                                            <h4>{item.userName}</h4>
+                                            <p>{item.professionalAddress}</p>
+                                          </div> 
+                                <div className="col-lg-2 loc_tab">
+                              <div className="round-image">
+                                <img src={item.userImageUrl} className="rund_im"/>
+                                </div>
+                               </div>
+                          </div>
+                          <div className="row confrm_mar_sec">
+                                <div className="col-lg-4">
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item)}>Confirm</text></p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="res_udle underline">Reschedule</p>
+                                 </div>
+                                 <div className="col-lg-4">
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancel</text></p>
+                                 </div>
+                          </div>
+                          {/* 2nd--end */}
+                          <div className="row confrm_mar_sec">
+                          <div className="col-lg-6">
+                              <p className="brace_m">{item.serviceName}</p>
+                           </div>
+                           <div className="col-lg-6">
+                              <p className="dental_th">{item.totalAmount}</p>
+                           </div>
+                          </div>
+                          {/* 3rd--end */}
+                          <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
+                          {this.getProgressbar(item)}                        
+                              <div className="two_chil">
+                           <p className="pay_ptint">Payments done by patient</p>
+                           <p className="pay_green">Create Prescription</p>
+                           </div>
+                             </React.Fragment>
+                         })}                      
                                  <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
                                                            
                                  </TabPanel>
@@ -346,7 +422,53 @@ class AppointmentComponent extends Component {
                                
                             </Tabs>
 
-                           
+                            <Modal
+                            isOpen={this.state.confirm_modal_flag}
+                            onAfterOpen={()=>console.log("On After modall gets called")}
+                            onRequestClose={this.closeConfirmModal}
+                            style={customStyles}
+                            ariaHideApp={false}
+                            contentLabel="Example Modal" className='redeemModal modal_pdd'>
+                            <div className='text-right'><button type='button' onClick={this.closeConfirmModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
+                        <h4 className="update_price" ref={subtitle => this.subtitle = subtitle}>{this.state.status_change_confirm?<b style={{margin:'.5rem'}}>Appointment has been <br></br>successfully confirmed</b>:
+                            <b>Confirm Appointment for <br></br>Patient</b>
+                        }</h4>
+                            <div>
+                            {/* <div style={{position:'relative'}}>
+                            {true && <LoaderComponent />}  
+                            </div> */}
+                      {!this.state.status_change_confirm && <div className="time_clo my_avl text-center">
+                             <button onClick={()=>this.conformBooking()} className="common-button">Yes</button>
+                             <button onClick={()=>this. this.closeConfirmModal()} className="common-button-white  ml-5">No</button>
+                      </div>}
+                           </div>    
+                         </Modal>        
+
+
+
+
+
+                         <Modal
+                            isOpen={this.state.cancel_modal_flag}
+                            onAfterOpen={()=>console.log("On After modall gets called")}
+                            onRequestClose={this.closeCancelModal}
+                            style={customStyles}
+                            ariaHideApp={false}
+                            contentLabel="Example Modal" className='redeemModal modal_pdd'>
+                            <div className='text-right'><button type='button' onClick={this.closeCancelModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
+                        <h4 className="update_price" ref={subtitle => this.subtitle = subtitle}>{this.state.status_change_confirm?<b style={{margin:'.5rem'}}>Appointment has been <br></br>successfully Cancelled</b>:
+                            <b>Cancel Appointment for <br></br>Patient</b>
+                        }</h4>
+                            <div>
+                            {/* <div style={{position:'relative'}}>
+                            {true && <LoaderComponent />}  
+                            </div> */}
+                      {!this.state.status_change_confirm && <div className="time_clo my_avl text-center">
+                             <button onClick={()=>this.cancellAppointmentSubmit()} className="common-button">Yes</button>
+                             <button onClick={()=>this. this.closeCancelModal()} className="common-button-white  ml-5">No</button>
+                      </div>}
+                           </div>    
+                         </Modal>        
 
            
        <Modal
@@ -387,8 +509,9 @@ class AppointmentComponent extends Component {
 
 const mapStateToProps = state => ({
     bookings: state.user.bookingData,
-    getBookingRet:state.user.getBookingRet
+    getBookingRet:state.user.getBookingRet,
+    changeAppointRet:state.user.changeAppointRet
 })
 
-export default connect(mapStateToProps, {getBooking, getBookingClr})(AppointmentComponent);
+export default connect(mapStateToProps, {getBooking, getBookingClr, changeAppoint, changeAppointClr })(AppointmentComponent);
 

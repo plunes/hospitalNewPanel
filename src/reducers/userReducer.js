@@ -79,7 +79,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   CLEAR_UPDATE_PRICE_DATA,
 
   GET_ENTITY_CLR,
-  GET_ENTITY_RET
+  GET_ENTITY_RET,
+
+  CHANGE_APPOINT_RET_CLR,
+  CHANGE_APPOINT_RET
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -137,7 +140,8 @@ const initialState = {
   newUserRet:false,
   updateRealPriceRet:false,
   updatePriceDataRet:false,
-  getEntityRet:false
+  getEntityRet:false,
+  changeAppointRet:false
 };
 
 export default function (state = initialState, action) {
@@ -154,6 +158,19 @@ export default function (state = initialState, action) {
         ...state,
         getEntityRet:action.payload
       };
+
+
+    case CHANGE_APPOINT_RET_CLR:
+    return {
+      ...state,
+      changeAppointRet:false
+    };
+
+    case CHANGE_APPOINT_RET:
+    return {
+      ...state,
+      changeAppointRet:action.payload
+    };
 
 
     case UPDATE_REAL_PRICE_CLR:

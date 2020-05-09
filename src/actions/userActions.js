@@ -95,10 +95,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   CLEAR_UPDATE_PRICE_DATA,
 
   GET_ENTITY_CLR,
-  GET_ENTITY_RET
+  GET_ENTITY_RET,
 
-
-
+  CHANGE_APPOINT_RET_CLR,
+  CHANGE_APPOINT_RET
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -109,6 +109,111 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
 
+
+
+export const changeAppointClr = () => dispatch =>{
+  return  dispatch({
+    type: CHANGE_APPOINT_RET_CLR,
+    payload:{}
+  })
+}
+
+export const changeAppoint = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+  let type = data.type
+
+  let  requestUrl =``
+  if(type==="confirming"){
+        requestUrl = `/booking/confirmBooking?bookingId=${data._id}`
+  }else{
+         requestUrl =`/booking/${data._id}/${type}`
+  }
+ console.log(data,"data in getEntity")
+ if(type==='confirming'){
+  return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': token } })
+  .then((res) => {
+    console.log(res, 'res in changeAppoint')
+    if (res.status === 200) {
+      //dispatch(getSolutionInsights())
+      console.log(res.data, 'data in update Image')
+      if(!!res.data){
+        dispatch({
+          type : CHANGE_APPOINT_RET,
+          payload :{
+            success:true,
+            data:res.data,
+            message:"Appointment status  successfully changed",
+            type:type
+          }
+        })
+      }else{
+        dispatch({
+          type : CHANGE_APPOINT_RET,
+          payload :{
+            success:false,
+            data:[],
+            message:"Something went wrong. try again later",
+            type:type
+          }
+        })
+      }
+    }
+  }).catch(error => {
+    console.log(error.response)
+    dispatch({
+      type:CHANGE_APPOINT_RET,
+       payload:{
+        success:false,
+        message:"Something went wrong. try again later",
+        data:{},
+        type:type
+       }
+    })
+});
+ }else{
+  return await axios.put(baseUrl + requestUrl, {}  ,{ 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in changeAppoint')
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights())
+        console.log(res.data, 'data in update Image')
+        if(!!res.data){
+          dispatch({
+            type : CHANGE_APPOINT_RET,
+            payload :{
+              success:true,
+              data:res.data,
+              message:"Appointment status  successfully changed",
+              type:type
+            }
+          })
+        }else{
+          dispatch({
+            type : CHANGE_APPOINT_RET,
+            payload :{
+              success:false,
+              data:[],
+              message:"Something went wrong. try again later",
+              type:type
+            }
+          })
+        }
+      }
+    }).catch(error => {
+      console.log(error)
+      dispatch({
+        type:CHANGE_APPOINT_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try again later",
+          data:{},
+          type:type
+         }
+      })
+  });
+ }
+  
+}
 
 
 
@@ -1532,7 +1637,8 @@ export const getBooking = () => async  dispatch => {
             'bookingId': b.referenceId,
             'redeemStatus': b.redeemStatus || null,
             'professionalAddress':b.professionalAddress,
-            'userImageUrl':b.userImageUrl
+            'userImageUrl':b.userImageUrl,
+            'professionalImageUrl':b.professionalImageUrl
           }
           businessBooking.push(bookDet)
         })

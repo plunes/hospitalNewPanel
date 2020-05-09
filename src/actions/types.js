@@ -124,3 +124,6 @@ export const CLEAR_UPDATE_PRICE_DATA = 'App/Insights/CLEAR_UPDATE_PRICE_DATA'
 
 export const GET_ENTITY_RET = 'App/Profile/GET_ENTITY_RET'
 export const GET_ENTITY_CLR = 'App/Profile/GET_ENTITY_CLR'
+
+export const CHANGE_APPOINT_RET = 'App/Profile/CHANGE_APPOINT_RET'
+export const CHANGE_APPOINT_RET_CLR = 'App/Profile/CHANGE_APPOINT_RET_CLR'

@@ -36,6 +36,7 @@ class TimerComponent extends React.Component {
     }
     componentDidMount() {
       let timeLeftVar = this.secondsToTime(this.props.seconds());
+      console.log(timeLeftVar,this.props.seconds(),"timeLeftVar in timeer")
       this.setState(
           { time: timeLeftVar,
             seconds: this.props.seconds()}
@@ -51,18 +52,27 @@ class TimerComponent extends React.Component {
     countDown() {
       // Remove one second, set state so a re-render happens.
       let seconds = this.state.seconds - 1;
-      this.setState({
-        time: this.secondsToTime(seconds),
-        seconds: seconds,
-      });
-      
-      // Check if we're at zero.
-      if (seconds == 0) { 
+      if (seconds <= 0) { 
+        this.setState({
+          time:{
+            "h": '00',
+            "m": '00',
+            "s": '00'
+          }
+        })
         clearInterval(this.timer);
+      }else{
+        this.setState({
+          time: this.secondsToTime(seconds),
+          seconds: seconds,
+        });
       }
+      // Check if we're at zero.
+     
     }
   
     render() {
+      console.log(this.state,"state in timerComponent")
         if(!!this.props.seconds){
             return(
                <React.Fragment>

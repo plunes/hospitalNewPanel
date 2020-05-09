@@ -58,9 +58,21 @@ const submitdetails = () => {
     if(props.achieveTitle === ''){
         addToast("Enter title of Achievement",{ appearance: 'error', autoDismiss:true })
     }else{
+      let achievements = JSON.parse(JSON.stringify(props.achievements))
+      let newAchievements = []
+      achievements.forEach((item,j)=>{
+        if(!!item){
+            newAchievements.push(item)
+        }
+      })
+       let obj = {
+        title:props.achieveTitle,
+        imageUrl:props.achievementImage,
+        achievement:''
+       }
+       newAchievements.push(obj)
         props.updateAchievement({
-            title:props.achieveTitle,
-            imageUrl:props.achievementImage,
+            achievements:newAchievements,
             type:'addAchievement'
         })
     }

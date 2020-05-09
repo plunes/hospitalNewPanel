@@ -57,7 +57,8 @@ class DashboardComponent extends Component {
             value: 10,
             solValue: 10,
             distance: 30,
-            showBusiness :  true
+            showBusiness :  true,
+            ro_insight_count:50
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -227,11 +228,11 @@ class DashboardComponent extends Component {
             this.handleModal()
         })
     }
-
     getSecondsDifferent=(sec)=>{
            let newSec = (new Date).getTime()
+        //    console.log(newSec,"newSec in getSeconds Differnce")
            let seconds = (newSec-sec)/1000
-           return seconds>1200?0:seconds
+           return seconds>600?0:600-seconds
     }
 
     render() {
@@ -295,10 +296,7 @@ class DashboardComponent extends Component {
                                     <div className='dashboardsection'>
                                         <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span><br></br>
                                         {
-                                            this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) =>{
-                                                console.log(s,"S in this.props.solInsights")
-                                                let seconds = new Date(s.createdAt).getTime()
-                                                let newSeconds = (new Date).getTime()
+                                            this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
                                                 return (
                                                     (
                                                         <div className='row' key={index}>
@@ -320,7 +318,7 @@ class DashboardComponent extends Component {
                                                             </div>
                                                             <div className='col-md-3'>
                                                                 {
-                                                                    s.negotiating ?
+                                                                   true ?
                                                                         <div className="text-center">
                                                                             <React.Fragment>
                                                                             <TimerComponent 
@@ -410,7 +408,9 @@ class DashboardComponent extends Component {
                                                 </div>
                                             )) : false
                                         }
-                                        <button onClick={this.handleClick} className="DashboardViewMore">View more</button>
+                                        <div className="text-center">
+                                            {this.props.insight.lenght !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
+                                        </div>
                                     </div>
                                     <Modal
                                         isOpen={this.state.modalIsOpen}

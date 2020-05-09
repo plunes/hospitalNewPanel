@@ -16,6 +16,7 @@ import AddAchievement from '../functional/AddAchievement';
 import MapComponent from "../MapComponent"
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom"
+import locationImage from "../../images/Location.png"
 // import GoogleComponent from "../GoogleMapComponent"
 
 
@@ -109,13 +110,17 @@ class ProfileContainer extends React.PureComponent {
 
   removeAchievement = (i) =>{
     let achievements = JSON.parse(JSON.stringify(this.props.user.achievements))
-  
-    achievements.splice(i, 1);
+    let newAchievements = []
+    achievements.forEach((item,j)=>{
+      if(((i!==j) && (!!item))){
+          newAchievements.push(item)
+      }
+    })
     this.setState({
       removeAchievementLoading:true,
       selectedAchievement:i
     },()=>this.props.updateAchievement({
-      achievements:achievements,
+      achievements:newAchievements,
       type:'delete'
     }))
   }
@@ -257,7 +262,7 @@ class ProfileContainer extends React.PureComponent {
           <div class="row mainBodyMaxHospitalrow4 ">
            
                     <div class="col-xs-1 col-sm-1 col-lg-1">
-                        <img src="Location.png" className="lction"></img>
+                        <img src={locationImage} className="lction"></img>
                     </div>
                     <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
@@ -345,21 +350,26 @@ class ProfileContainer extends React.PureComponent {
 <div className="achivmnt_b">
   <div className="row">
     {!!this.props.user?!!this.props.user.achievements?this.props.user.achievements.map((item,i)=>{
-      return (
-        <Achievement
-          data = {item}
-          i={i}
-          removeAchievement = {this.removeAchievement}
-          updateAchievementRet = {this.props.updateAchievementRet}
-          loading = {this.props.removeAchievementLoading}
-          selectedAchievement = {this.state.selectedAchievement}
-          updateAchievementClr = {this.props.updateAchievementClr}
-          getUser = {this.props.getProfileDetails}
-          loadingOff = {()=>this.setState({
-            removeAchievementLoading:false
-          })}
-         />
-      )
+      if(!!item){
+        return (
+          <Achievement
+            data = {item}
+            i={i}
+            removeAchievement = {this.removeAchievement}
+            updateAchievementRet = {this.props.updateAchievementRet}
+            loading = {this.props.removeAchievementLoading}
+            selectedAchievement = {this.state.selectedAchievement}
+            updateAchievementClr = {this.props.updateAchievementClr}
+            getUser = {this.props.getProfileDetails}
+            loadingOff = {()=>this.setState({
+              removeAchievementLoading:false
+            })}
+           />
+        )
+      }else{
+        return ''
+      }
+     
     }):'':''}
  
 </div>
