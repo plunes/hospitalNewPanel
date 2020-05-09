@@ -20,7 +20,7 @@ export default class HelpComponent extends Component {
                     </div>
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="bookingappointments.png" alt=""></img>
+                            <img src="/bookingappointments.png" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11">
                             Booking Appointments
@@ -33,7 +33,7 @@ export default class HelpComponent extends Component {
                                 Booking Failure
                             </div>
                             <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
+                                <img src="/arrow.svg" alt=""></img>
                             </div>
                         </div></button><hr></hr>
                         <button className='helpBtn'><div className="row helptype">
@@ -41,7 +41,7 @@ export default class HelpComponent extends Component {
                                 Wrong lab/contact details
                             </div>
                             <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
+                                <img src="/arrow.svg" alt=""></img>
                             </div>
                         </div></button> <hr></hr>
                         <button className='helpBtn'><div className="row helptype">
@@ -49,7 +49,7 @@ export default class HelpComponent extends Component {
                                 Appointment delayed or canceled
                             </div>
                             <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
+                                <img src="/arrow.svg" alt=""></img>
                             </div>
                         </div></button> <hr></hr>
                         <button className='helpBtn'><div className="row helptype">
@@ -57,7 +57,7 @@ export default class HelpComponent extends Component {
                                 Cancelling/rescheduling an appointment
                             </div>
                             <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
+                                <img src="/arrow.svg" alt=""></img>
                             </div>
                         </div> </button><hr></hr>
                         <button className='helpBtn'><div className="row helptype">
@@ -65,14 +65,14 @@ export default class HelpComponent extends Component {
                                 SMS/OTP issues
                             </div>
                             <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
+                                <img src="/arrow.svg" alt=""></img>
                             </div>
                         </div></button>    
                     </div>
 
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="onlinesolutions.png" alt=""></img>
+                            <img src="/onlinesolutions.png" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11">
                             Online Solutions
@@ -85,7 +85,7 @@ export default class HelpComponent extends Component {
                                     Questions not answered
                                 </div>
                                 <div className="col-sm-1 col-1">
-                                    <img src="arrow.svg" alt=""></img>
+                                    <img src="/arrow.svg" alt=""></img>
                                 </div>
                             </div></button><hr></hr>
                             <button className='helpBtn'>
@@ -94,7 +94,7 @@ export default class HelpComponent extends Component {
                                             Not happy with response
                                     </div>
                                     <div className="col-sm-1 col-1">
-                                        <img src="arrow.svg" alt=""></img>
+                                        <img src="/arrow.svg" alt=""></img>
                                     </div>
                                </div>
                             </button> <hr></hr>
@@ -104,7 +104,7 @@ export default class HelpComponent extends Component {
                                             Payment issues
                                     </div>
                                     <div className="col-sm-1 col-1">
-                                        <img src="arrow.svg" alt=""></img>
+                                        <img src="/arrow.svg" alt=""></img>
                                     </div>
                                </div> 
                             </button>
@@ -112,7 +112,7 @@ export default class HelpComponent extends Component {
 
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="feedbacks.png" alt=""></img>
+                            <img src="/feedbacks.png" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11">
                             Feedbacks
@@ -125,7 +125,7 @@ export default class HelpComponent extends Component {
                                 My feedback in not getting published
                             </div>
                             <div className="col-sm-1 col-1">
-                                <img src="arrow.svg" alt=""></img>
+                                <img src="/arrow.svg" alt=""></img>
                             </div>
                         </div></button><hr></hr>
                         <button className='helpBtn'><div className="row helptype">
@@ -133,7 +133,7 @@ export default class HelpComponent extends Component {
                                         Unable to write a feedback
                                 </div>
                                 <div className="col-sm-1 col-1">
-                                    <img src="arrow.svg" alt=""></img>
+                                    <img src="/arrow.svg" alt=""></img>
                                 </div>
                         </div></button><hr></hr>
                         <button className='helpBtn'><div className="row helptype">
@@ -141,7 +141,7 @@ export default class HelpComponent extends Component {
                             Booking failure
                         </div>
                         <div className="col-sm-1 col-1">
-                            <img src="arrow.svg" alt=""></img>
+                            <img src="/arrow.svg" alt=""></img>
                         </div>
                     </div></button> <hr></hr>
                     <button className='helpBtn'><div className="row helptype">
@@ -149,13 +149,13 @@ export default class HelpComponent extends Component {
                             I want to edit my feedback
                         </div>
                         <div className="col-sm-1 col-1">
-                            <img src="arrow.svg" alt=""></img>
+                            <img src="/arrow.svg" alt=""></img>
                         </div>
                     </div></button>
                     </div>
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="Profile-Settings.png" alt=""></img>
+                            <img src="/Profile-Settings.png" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11">
                             Other issues
