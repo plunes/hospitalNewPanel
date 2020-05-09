@@ -1,7 +1,3 @@
-.AllComponents
-       {
-        background: transparent !important;
-        }
 .ReactModal__Content--after-open{
         background: #FFFFFF 0% 0% no-repeat padding-box !important;
         box-shadow: 5px 5px 10px #00000029 !important;

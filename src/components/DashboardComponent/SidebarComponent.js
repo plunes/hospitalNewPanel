@@ -21,7 +21,7 @@ class SidebarComponent extends Component {
     console.log(this.props,"this.props in Sidebar Component")
     return (
       <div className="container">
-        <div className="sidenav">
+        <div className="sidenav auto-center_ris">
           <div className="pointer">
          <Link to= "/dashboard" 
            className="list-group"

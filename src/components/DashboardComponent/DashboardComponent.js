@@ -292,7 +292,7 @@ class DashboardComponent extends Component {
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
                             </div>
                             <div className='row'>
-                                <div className='col-md-6 col-6 Leftpaddingremove'>
+                                <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
                                     <div className='dashboardsection scrolling_sec'>
                                         <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span><br></br>
                                         {
@@ -395,7 +395,7 @@ class DashboardComponent extends Component {
                                     </div>
                                     <br></br>
                                 </div>
-                                <div className='col-md-6 col-6 dashboardsection dashrow2col2 second_scro'>
+                                <div className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
@@ -410,7 +410,7 @@ class DashboardComponent extends Component {
                                             )) : false
                                         }
                                         <div className="text-center">
-                                            {this.props.insight.lenght !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
+                                            {this.props.insight.length !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
                                         </div>
                                     </div>
                                     <Modal
@@ -469,7 +469,7 @@ class DashboardComponent extends Component {
                                             {this.state.realUpdatePriceLoading && <LoaderComponent />}        
                                             <div className="text-center valu_second">
                                                <b>{Math.floor( this.state.solValue )} % </b>
-                                            </div>    
+                                            </div>
                                             <Slider
                                             min={0}
                                             max={50}
@@ -493,7 +493,7 @@ class DashboardComponent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-md-1'></div>
+                        <div className='col-1 col-sm-1  col-md-1 col-lg-1 col-xl-1'></div>
                   </React.Fragment>
             )
         }

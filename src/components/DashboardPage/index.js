@@ -232,8 +232,8 @@ export class DashboardPage extends React.PureComponent {
                           toggleNotif = {this.toggleNotif}
                         />
                     </div>
-                    <div className='row'>
-                        <div className='col-md-3'>
+                    <div className='row main-body-wrapper'>
+                        <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-2'>
                             <SidebarComponent
                               toggleProfile = {this.toggleProfile}
                               toggleDash = {this.toggleDash}

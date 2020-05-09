@@ -6,9 +6,8 @@
 
 .AllComponents
        {
-             margin-top: 116px;
-             margin-left: 1rem;
-          
+            margin-top: 7.5rem;
+            background: transparent !important;
             }
 .hspital
 .Leftpaddingremove
@@ -137,7 +136,7 @@ hr
     border: 1px solid #DCDCDC;
     border-radius: 10px;
     background-color: white;
-    margin-left: 4rem;
+    /* margin-left: 4rem; */
     }
       
       /* Style the sidenav links and the dropdown button */
@@ -258,7 +257,7 @@ hr
       opacity: 1; margin-bottom: 3%;
 }
 .scrolling_sec {
-      width: 420px;
+      /* width: 420px; */
       overflow: auto;
       height: 435px;
       overflow-x: hidden;
@@ -269,7 +268,7 @@ hr
       font-size: inherit;
       font-weight: normal;
       padding: .6rem 0.5rem .6rem 0.5rem;
-      width: 55rem;
+      /* width: 55rem; */
       position: relative;
       left:15px;
 }

@@ -78,7 +78,7 @@ class TimerComponent extends React.Component {
                <React.Fragment>
                   <div className="Timer">{this.state.time.m }:&nbsp;
                     {this.state.time.s}
-                </div>Mins
+                </div><text style={{fontSize:'.7rem'}}>Mins</text>
                 </React.Fragment>
               )
         }else{
