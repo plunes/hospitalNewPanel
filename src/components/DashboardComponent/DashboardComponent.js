@@ -279,7 +279,7 @@ class DashboardComponent extends Component {
         } else {
             return (
                 <React.Fragment>
-                        <div className='col-md-8 Dashboard AllComponents'>
+                        <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
                         <NotifFunc 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
@@ -287,14 +287,16 @@ class DashboardComponent extends Component {
                         <NotifFunc 
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
-                        />
-                            <div className='row dashboardsection dashrow1'>
+                        /><div className="row">
+                            <div className=' dashboardsection dashrow1'>
+                                
                                 <p className='DashboardHospitalName'>{this.props.user.name}</p>
+                                </div>
                             </div>
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
                                     <div className='dashboardsection scrolling_sec'>
-                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span><br></br>
+                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
                                                 return (
@@ -502,7 +504,7 @@ class DashboardComponent extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-1 col-sm-1  col-md-1 col-lg-1 col-xl-1'></div>
+                      
                   </React.Fragment>
             )
         }

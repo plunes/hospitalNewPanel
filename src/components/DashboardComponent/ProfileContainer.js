@@ -202,7 +202,7 @@ class ProfileContainer extends React.PureComponent {
     const { open } = this.state;
     return (
       <React.Fragment>
-      <div className='col-md-8'>
+      <div className='col-md-8 col-xl-9'>
       <div className="HospitalProfileBody AllComponents hspital">
         {/* <div>
           <MapComponent
@@ -253,7 +253,7 @@ class ProfileContainer extends React.PureComponent {
                 <div class="col-md-2"></div>
                 <div class="col-md-4 achivementlogo text-center">
                         <a><img onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
-                        <p><b>Achievement</b></p>
+                        <p className="ach_mnt">Achievement</p>
                 </div>
                 <div class="col-md-4 achivementlogo text-center">
                        
@@ -263,7 +263,7 @@ class ProfileContainer extends React.PureComponent {
                           <img src="/cata.svg" className='catalogueImg'></img>
                           </Link>
                           <br></br>
-                        <p><b>Catalogue</b></p>
+                        <p className="ach_mnt">Catalogue</p>
                 </div>
                 <div class="col-md-2"></div>
           </div>

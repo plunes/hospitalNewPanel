@@ -223,6 +223,7 @@ body {
 .procedure_price_wrap{
   margin-bottom: 15px;
   margin-top: 15px;
+  font-size: 1.2rem;
 }
 
 .signup_speciality_name{
@@ -319,7 +320,7 @@ body {
 }
 
 .catalogue-img{
-  width: 3rem;
+  width: 5rem;
 }
 .auto-center_ris {
   margin-left: auto;

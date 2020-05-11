@@ -79,7 +79,7 @@ class ManagePaymentComponent extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className='col-md-7 AllComponents'>
+                <div className='col-md-7 col-xl-8 AllComponents'>
                     <ManagePayment 
                      bankName = {this.state.bankName}
                      accnumber = {this.state.accnumber}

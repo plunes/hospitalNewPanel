@@ -16,7 +16,7 @@ export default class AboutUsComponent extends Component {
         }else{
             return (
               <React.Fragment>
-                            <div className='col-md-7'>
+                            <div className='col-md-8 col-xl-9'>
                                 <div className="AboutHospital">
                                 <div className="AboutHospitalBody">
                                 <div className="About">About Us</div>

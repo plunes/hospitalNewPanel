@@ -8,13 +8,14 @@
     .two_chil{margin-top: 30px; text-align: center;}
 .active { color:#f00;font-weight:bolder; }
 .react-tabs__tab-list{padding-left: 0;}
-.react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;}
+.react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;position: relative !important;top:-4px;}
 .frame_de{width: 83px;height:81px;object-fit:cover;border-radius: 50px;position: relative;
   left: 44px;}
   .nov_2 {
     position: relative;
     left: 18px;
 }
+.acnt{font-size: 1.2rem;}
 .upcmg_fnt a{color: #343434; font-weight: 500;font-size: 14px;}
 .ardee_ci{text-align: left;margin-top: 11px;}
 .nov_2 h4{font-size: 15px; font-weight: 500;color: #474747;}

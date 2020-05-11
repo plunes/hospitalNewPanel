@@ -74,7 +74,8 @@ opacity: 1;
       font-weight: 400;
       color: #333333bf;
   }
-  .MuiSelect-select.MuiSelect-select{font-size: 15px; color: #333333bf;}
+  .MuiSelect-select.MuiSelect-select{font-size: 1.2rem; color: #333333bf;text-align: left;
+   padding-left: 0.6rem;}
   
     
 textarea 

@@ -6,8 +6,9 @@
 
 .AllComponents
        {
-            margin-top: 7.5rem;
-            background: transparent !important;
+             margin-top: 7.6rem;
+             margin-left: 6rem;
+          
             }
 .hspital
 .Leftpaddingremove
@@ -126,7 +127,7 @@ hr
      
 .sidenav 
     {
-    width: 15rem; 
+  
     margin-top: 7.5rem;
     z-index: 1;
     display: 'inline';
@@ -136,7 +137,10 @@ hr
     border: 1px solid #DCDCDC;
     border-radius: 10px;
     background-color: white;
-    /* margin-left: 4rem; */
+    position: relative;
+    left: 6rem;
+   /* position: fixed;
+   width: 16vw; */
     }
       
       /* Style the sidenav links and the dropdown button */
@@ -144,7 +148,7 @@ hr
    {
       padding: 0.7rem 0px .7rem 0.8rem;
       text-decoration: none;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #818181;
       display: block;
       border: none;
@@ -157,7 +161,8 @@ hr
    }
 .log
    {
-         padding: 15px !important;
+         padding: 12px !important;
+         font-size: 1.1rem !important;
     }
 
 .sidenav div
@@ -172,6 +177,7 @@ hr
             text-align: left;
             cursor: pointer;
             outline: none;
+           
       }
       .HeaderLink a{color: #000000;}
       
@@ -186,7 +192,7 @@ a:hover
 
 .sidebaricon
       {
-            width: 1.3rem;
+            width: 1.7rem;
             margin-right: .9rem;
       }
         
@@ -194,9 +200,32 @@ a:hover
       {
             margin-top: 6px;
             position: absolute;
-            left: 13rem;
-            width: 8px;
+            left: 14rem;
+            width: 0.6vw;
       }
+      input.query_en[type="text"]
+    {
+        border: 0;
+        border-bottom: 1px solid #DCDCDC;
+        outline: 0;
+        width: 100%;
+    padding-bottom: 7rem;
+    font-size: 1.3rem;
+    padding-top: 1rem;
+    }
+    .sub_que{text-align: center;margin-top: 3rem;}
+    .cal_nu{text-align: center;margin-top: 2rem;}
+    .or_frm{font-size: 1.3rem;margin-bottom: 1.7rem;}
+    .sub_fr{background: #01D35A;
+      border-radius: 26px;
+      color: #fff;
+      width: 10vw;
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+      padding: 6px;
+      font-size: 1.3rem;}
+     
 
 .pointer 
       {cursor: pointer;}
@@ -257,24 +286,24 @@ hr
       opacity: 1; margin-bottom: 3%;
 }
 .scrolling_sec {
-      /* width: 420px; */
       overflow: auto;
-      height: 435px;
+      height: 33vw;
       overflow-x: hidden;
   }
+  .side_br {padding-left: 0 !important;}
 .dashrow1
 {
       margin-bottom: 1rem;
       font-size: inherit;
       font-weight: normal;
-      padding: .6rem 0.5rem .6rem 0.5rem;
-      /* width: 55rem; */
-      position: relative;
-      left:15px;
+      padding: 1.2rem 1.5rem 1.2rem 0.5rem;
+      width:64vw !important;
+      margin-left: 1rem;
+    
 }
-.second_scro{ width: 420px;
+.second_scro{ width: 30vw;
       overflow: auto;
-      height: 435px;
+      height: 33vw;
       overflow-x: hidden;}
 
 .dashrow2col1
@@ -284,7 +313,8 @@ hr
       {
       margin-top: 0; 
       margin-bottom: 0;
-      font-size: 1rem;
+      font-size: 1.8rem;
+      padding-left: 10px;
 }
 
 .Dashboardsec1
@@ -342,7 +372,8 @@ hr
       overflow: visible;
       background: white;
       border: none;
-      color: #01D35A;}
+      color: #01D35A;position: relative;
+      left: -6px;}
 .NotifyNum
       {position: absolute;
       margin-left: -15px;
@@ -396,7 +427,7 @@ hr
             width: 2rem;
             margin-left: 1rem;
 }
-
+.dash_clr{background: #FBFBFB;}
 .business
       {
             /* text-decoration: underline; */
@@ -404,9 +435,10 @@ hr
             color: #333333;
             margin-left: .5rem;
             margin-top: 1rem;
-            font-weight: 400;
-            font-size: 1rem;
-            font-size: 1.2rempx;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-decoration: underline;
+           
 }
 
 .selectBusinessPeriod
@@ -437,7 +469,7 @@ hr
 .businessWarn
       {
       color: #333333;
-      font-size: 16px;
+      font-size: 1.2rem;
       font-weight: 400;
       padding: 3%;}
       .businessWarn p{text-align: left;color: #676767a3;}
@@ -502,14 +534,15 @@ hr
     {
           padding: .5rem;
     }
-
+.maximum_time{font-size: 1.0rem;color: #676767;opacity: 0.6;padding-left: 6rem;}
 .realtimeicon1
-    {border-radius: 50%;
+    {border-radius: 2vw;
       border: 1px solid #BCD3F6;
-      padding: 7px 12px 9px 12px;
+      padding: 0.9rem 0.9rem 0.9rem 0.9rem;
+
       background-color: #F2F7FF;
-      margin-left: 10px;position: relative;
-      left: 7px;}
+      margin-left: 0.6rem;position: relative;
+      left: 0.4rem;}
       img.privc_icone {
             width: 26px;
             position: relative;
@@ -517,18 +550,18 @@ hr
         }
 
 .realtimeicon
-    {width: 31%;}
+    {width: 1vw;}
 
 .RealtimeUsername
     {
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 500;
 }
 
 .kindlyUpdate
     {
       font-weight: 400;
-      font-size: .8rem;
+      font-size: 1.2rem;
 }
 
 .RealtimeHr
@@ -554,7 +587,7 @@ hr
 
 /* alka-css */
 .light_content{ 
-      font-size: .8rem;
+      font-size: 1.2rem;
       color: #676767a3;
 }
 .bdr_dash{padding: 10px;}

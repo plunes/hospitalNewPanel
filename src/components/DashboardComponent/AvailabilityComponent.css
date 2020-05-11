@@ -57,15 +57,17 @@ form
         .my_av_sec{margin-bottom: 30px;}
         .my_avl{margin-bottom: 30px;}
           
-
+.pro_tw{width: 1.8vw;}
   /* MANAGE PAYMENT CSS */
 .ManagePayForm
     {background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
     opacity: 1;
     letter-spacing: 0px;     text-align: center;
-    border-radius: 12px;}
-
+    border-radius: 12px;padding: 40px;}
+.bok_apt{font-size: 1.2rem;font-weight: 600;
+  position: relative;
+  right: 25px;top: 6px;}
   .managePay {
     margin-top: 1rem !important;
   }
@@ -74,18 +76,20 @@ form
     {border: none !important;
     border-bottom: 1px solid #B5B3B3 !important;
     border-radius: 0px !important;     
-    margin: 35px 0px;}
+    margin: 35px 0px;font-size: 1.2rem !important;}
 
 .managePay
     {margin: 30px;}
+    .managePay h4 b{font-size: 1.5rem !important;}
+   
 
 .proceedbtn 
     {background: #01D35A 0% 0% no-repeat padding-box;
     border-radius: 35px !important;
     opacity: 1;
-    width: 57%;
+    width: 26%;
     height: 47px;
-    font-size: 17px !important;}
+    font-size: 17px !important;text-transform: capitalize !important;}
 
 /* APPOINTMENTS */
 
@@ -218,10 +222,10 @@ input:checked + .slider:before
      {border-radius: 50%;}
 
 .settingpage
-    {margin-top: 115px;
+    {margin-top: 93px;
       background: #FFFFFF 0% 0% no-repeat padding-box;
       border: 1px solid #DCDCDC;
-      border-radius: 10px;}
+      border-radius: 10px;margin-left: 5rem;}
 
 .settingpageBody
     {margin: 40px;}  

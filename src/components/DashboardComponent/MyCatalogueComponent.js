@@ -390,15 +390,8 @@ class MyCatalogueComponent extends Component {
         console.log(this.state,"this.state in myCatalogueComponent")
                 return (
                     <React.Fragment>
-                        <NotifFunc
-                             ret = {this.props.addServicesRet}
-                             retClr = {this.addProcedureLoadingOff}
-                        />
-                        <NotifFunc
-                             ret = {this.props.editProcedureRet}
-                             retClr = {this.editProcedureLoadingOff}
-                        />
-                    <div className='col-md-8 catalogueComponent'>
+                        <NotifFunc />
+                    <div className='col-md-8 col-xl-8 catalogueComponent'>
                         <div className='row justify-content-center'>
                             {/* <p className='catalogue'>Catalogue</p> */}
                             <div className='catalogue' >
@@ -469,6 +462,7 @@ class MyCatalogueComponent extends Component {
 
                        }   
                       <div className="text-center">
+                          <img src="/search.png" className="serc_icn"/>
                             <SearchComponent 
                                 searchProcedures = {this.searchProceduresFun}
                                 searchProceduresClr = {this.props.searchProceduresClr}

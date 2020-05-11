@@ -20,7 +20,7 @@ class SidebarComponent extends Component {
   render() {
     console.log(this.props,"this.props in Sidebar Component")
     return (
-      <div className="container">
+     
         <div className="sidenav auto-center_ris">
           <div className="pointer">
          <Link to= "/dashboard" 
@@ -40,7 +40,7 @@ class SidebarComponent extends Component {
            onClick={()=>this.props.toggleProfile()}
             > 
                <span>
-                <img className="sidebaricon" src="/profile.png" alt=""></img>
+                <img className="sidebaricon pro_tw" src="/profile.png" alt=""></img>
               </span>
               Profile
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -128,11 +128,11 @@ class SidebarComponent extends Component {
                 <img className="sidebaricon" src="/Logout.png" alt=""></img>
               </span>
               Logout
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
+            
             </div>
           </div>
         </div>
-      </div>
+     
     );
   }
 }

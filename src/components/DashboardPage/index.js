@@ -231,8 +231,9 @@ export class DashboardPage extends React.PureComponent {
                           toggleNotif = {this.toggleNotif}
                         />
                     </div>
+                    <div className="container-fluid">
                     <div className='row main-body-wrapper'>
-                        <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-2'>
+                        <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-2 side_br'>
                             <SidebarComponent
                               toggleProfile = {this.toggleProfile}
                               toggleDash = {this.toggleDash}
@@ -268,6 +269,7 @@ export class DashboardPage extends React.PureComponent {
                   <NotificationComponent/>:(this.props.location.pathname == '/dashboard/editProfile')?
                   <EditProfileComponent />:(this.props.location.pathname == '/dashboard/change-password')?
                   <ChangePassword />:''}
+        </div>
         </div>
         </div>
     )

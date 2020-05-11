@@ -7,7 +7,7 @@ export default class HelpComponent extends Component {
     render() {
         return (
             <React.Fragment>
-                <div className='col-md-7'>
+                <div className='col-md-8 col-xl-9'>
                     
         
                   <div className="helppage">
@@ -16,13 +16,24 @@ export default class HelpComponent extends Component {
                     <div className="helprow1"><p>Help</p></div>
                     <div className="form-group">
                         <label></label>
+                        <input type="Text" className="form-control query_en" placeholder="Enter your Query"></input>
+                        <div className="sub_que">
+                         <a href="#"className="sub_fr">Submit</a>
+                        </div>
+                    </div>
+                   <div className="cal_nu">
+                    <h6  className="or_frm">OR</h6>
+                    <h5  className="or_frm">Call at : 7701805081</h5>
+                    </div>
+                    {/* <div className="form-group">
+                        <label></label>
                         <input type="Text" className="form-control helpinput helprow2" placeholder="I have an issue with"></input>
                     </div>
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
                             <img src="/bookingappointments.png" alt=""></img>
                         </div>
-                        <div className="col-sm-11 col-11">
+                        <div className="col-sm-11 col-11 bok_apt">
                             Booking Appointments
                         </div>
                     </div>
@@ -74,7 +85,7 @@ export default class HelpComponent extends Component {
                         <div className="col-sm-1 col-1">
                             <img src="/onlinesolutions.png" alt=""></img>
                         </div>
-                        <div className="col-sm-11 col-11">
+                        <div className="col-sm-11 col-11 bok_apt">
                             Online Solutions
                         </div>
                     </div>
@@ -114,7 +125,7 @@ export default class HelpComponent extends Component {
                         <div className="col-sm-1 col-1">
                             <img src="/feedbacks.png" alt=""></img>
                         </div>
-                        <div className="col-sm-11 col-11">
+                        <div className="col-sm-11 col-11 bok_apt">
                             Feedbacks
                         </div>
                     </div>
@@ -155,16 +166,16 @@ export default class HelpComponent extends Component {
                     </div>
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="/Profile-Settings.png" alt=""></img>
+                           
                         </div>
-                        <div className="col-sm-11 col-11">
+                        <div className="col-sm-11 col-11 bok_apt">
                             Other issues
                         </div>
                     </div>
                         <div className="form-group">
                         <label></label>
                         <input type="Text" className="form-control helpinput helprow2" placeholder="Your issues"></input>
-                    </div>
+                    </div> */}
                   </div>
 
                 </div>

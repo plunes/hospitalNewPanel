@@ -98,7 +98,7 @@
         position: relative; */
         right: 2.5rem;
 }
-.maxhospitaladd{font-size: 14px;color: #474747;opacity: 0.6;line-height: 12px;}
+.maxhospitaladd{font-size: 1.2rem;color: #474747;opacity: 0.6;line-height: 12px;}
 .max_cnt{   font-size: 18px; margin-bottom: 9px;}
 .team_of{color: #474747;font-size: 15px;position: relative;margin-top: 10px;
         top: 12px;}
@@ -117,15 +117,18 @@
 .edit_image2{background: #01D35A;border-radius: 50%;width: 25px;height: 25px;text-align: center;position: relative; left: 55px; top: -24px;}
 .edit_icn2{width: 10px;padding-top: 0px;}
 .achivementlogo img{
-        width: 4rem;
+        width: 7rem;
 }
+/* b, strong{    font-size: 1.2rem;} */
 .bdyhs_mar{
         margin-top: 1rem;
         /* margin-left: 20px; */
 }
-.viewmap{color:#01D35A;padding-left: 18px;font-weight: 400;}
-.editmainbodymaxhospital{color: #01D35A;font-weight: 400;}
-.edi_intr{color: #01D35A; font-weight: 400;cursor: pointer;}
+.intro {font-size: 1.2rem;}
+.viewmap{color:#01D35A;padding-left: 18px;font-weight: 400;font-size: 1.2rem;}
+.editmainbodymaxhospital{color: #01D35A;font-weight: 400;font-size: 1.2rem;}
+.ach_mnt{font-size: 1.2rem;}
+.edi_intr{color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.2rem;}
 .b-select-wrap {
         border: none;
         color: #474747;
@@ -198,17 +201,17 @@
     .left_ali p{font-size: 12px;line-height: 4px;}
     .timelinebox4_5 {padding: 35px;}
 .se-dr{text-align: center;margin: 2rem 20px;}
-.se-dr a{color: #01D35A; font-weight: 400;}
+.se-dr a{color: #01D35A; font-weight: 400;font-size: 1.3rem;}
 .se-dr a:hover{color: #01D35A !important;}
 .achivmnt_b{background: #F8FFFB;padding: 40px;margin-top: 35px;}
-.ach1 {width: 288px;
-        height: 170px;}
+.ach1 {width: 23vw;
+        height: 12vw;}
         .lction{width: 31px;position: relative;
                 left: 23px;}
-        .cir_b{border-radius: 50%;width: 40px; height: 40px;background: #fff;position: absolute;
-                right: 51px;
-                top: -16px;text-align: center;border: 1px solid #A8A8A8;}
-        .croS{width: 14px;padding-top: 12px;}
+        .cir_b{border-radius: 50%;width: 3vw; height: 3vw;background: #fff;position: absolute;
+                right: -8rem;
+                top: -1rem;text-align: center;border: 1px solid #A8A8A8;}
+        .croS{width: 1vw;padding-top: 0.9rem;}
         span.three {
                 position: relative;
                 float: right;
@@ -216,7 +219,7 @@
                 color: #fff;
                 right: 10px;
             }
-            .achivmnt_b p{padding-top: 16px;}
+            .achivmnt_b p{padding-top: 16px;font-size: 1.2rem;}
 .text_cmt textarea{border: 0;
       
         outline: 0;height: 180px;font-size: 14px;color: #989393;}

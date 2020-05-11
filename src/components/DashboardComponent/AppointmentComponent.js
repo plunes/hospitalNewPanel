@@ -246,7 +246,7 @@ class AppointmentComponent extends Component {
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
                 />
-                <div className='col-md-8'>
+                <div className='col-md-8 col-xl-9'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
                         
