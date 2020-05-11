@@ -441,7 +441,7 @@ export const registerUserClr = () => dispatch =>{
 }
 
 export const registerUser = (obj) => async dispatch => {
-  console.log("Inside editProcedure")
+  console.log("Inside registerUser")
  let type = obj.userType
   let token = localStorage.getItem('token');
   return dispatch({
@@ -496,15 +496,15 @@ export const editProcedureClr = () => dispatch =>{
 }
 
 export const editProcedure = (obj) => async dispatch => {
-  console.log("Inside editProcedure")
-  let newObj = {
-    specialityId:obj.specialityId,
-    serviceId:obj.serviceId,
-    newPrice:obj.price[0],
-    newVariance:obj.variance
-  }
+  console.log("Inside editProcedure",obj)
+  // let newObj = {
+  //   specialityId:obj.specialityId,
+  //   serviceId:obj.serviceId,
+  //   newPrice:obj.price[0],
+  //   newVariance:obj.variance
+  // }
   let token = localStorage.getItem('token');
-  return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate', newObj,  { 'headers': { 'Authorization': token } })
+  return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate', obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in editProcedure")
       if (res.status === 200) {
@@ -525,7 +525,17 @@ export const editProcedure = (obj) => async dispatch => {
            }
         })
       }
-    })
+    }).catch(error => {
+      console.log(error.response)
+      dispatch({
+        type:EDIT_PROCEDURE_RET,
+         payload:{
+          success:false,
+          message:'Something went wrong try again later..',
+          data:{}
+         }
+      })
+  });
 }
 
 

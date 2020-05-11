@@ -60,7 +60,8 @@ class MyCatalogueComponent extends Component {
             selected_speciality:'',
             specialities:[],
             addProcedureFlag:false,
-            procedures_toAdd:[]
+            procedures_toAdd:[],
+            selected_procedures:[]
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -82,7 +83,8 @@ class MyCatalogueComponent extends Component {
             if(nextProps.toAddServicesRet.success){
                 this.setState({
                     procedures_toAdd:nextProps.toAddServicesRet.data,
-                    loading:false
+                    loading:false,
+                    selected_procedures:[]
                 })
             }else{
                 this.setState({
@@ -97,6 +99,8 @@ class MyCatalogueComponent extends Component {
 
                     }else{
                         this.setState({
+                            editFlag:false,
+                            selected_procedures:[],
                             procedures:nextProps.searchProceduresRet.data,
                             loading:false
                         })
@@ -139,30 +143,61 @@ class MyCatalogueComponent extends Component {
             }
     }
     
-    handleClick() {
+    handleClick =()=> {
         this.setState({
             rowsToDisplay: this.state.rowsToDisplay + 5
         })
     }
-    handleSelectedProcedureChange = (e) =>{
-        let arr = []
-        arr.push(e.target.value)
-        this.setState({
-            selectedProcedure:{
-                ...this.state.selectedProcedure,
-                price:arr
+    handleSelectedProcedureChange = (e, serviceId) =>{
+        let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
+        console.log(arr,"arr in handleSelectedProcedureChage")
+        let obj = {
+        }
+        let id= ''
+     arr.every(function(element, index) {
+            if(element.serviceId===serviceId){
+              obj = {
+                  ...element,
+                  price:[parseInt(e.target.value,10)]
+              }
+              id = index
+              return false
             }
-           
+             return true
+          })
+    let newArr = arr.filter((item,i)=>{
+        return  item.serviceId!==serviceId
+    })
+        newArr.push(obj)
+        this.setState({
+           selected_procedures:newArr
         })
     }
 
-    handleVarianceChange = (e) =>{
-        this.setState({
-            selectedProcedure:{
-                ...this.state.selectedProcedure,
-                variance:e.target.value
+    handleVarianceChange = (e,serviceId) =>{
+        let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
+        console.log(arr,"arr in handleSelectedProcedureChage")
+        let obj = {
+        }
+        let id= ''
+     arr.every(function(element, index) {
+            if(element.serviceId===serviceId){
+              obj = {
+                  ...element,
+                  variance:e.target.value
+              }
+              id = index
+              return false
             }
-        })
+             return true
+          })
+    let newArr = arr.filter((item,i)=>{
+        return  item.serviceId!==serviceId
+    })
+    newArr.push(obj)
+    this.setState({
+       selected_procedures:newArr
+    })
     }
 
     generateUploadBody = () =>{
@@ -186,7 +221,6 @@ class MyCatalogueComponent extends Component {
     generateEditCatalogue = () =>{
         return(
             <EditProcedure
-
             closeModal = {()=>this.handleCloseEditModal()}
             />
         )
@@ -244,35 +278,52 @@ class MyCatalogueComponent extends Component {
     handleSubmit = () =>{
         if(this.state.addProcedureFlag){
             let procedure = this.state.selectedProcedure
+
+            let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
+            let newArr = arr.map((item,i)=>{
+                return {
+                    ...item,
+                    price:parseInt(item.price[0],10)
+                }
+            })
             let obj = {
-                specialityId:procedure.specialityId,
-                services:[
-                    {
-                        serviceId:procedure.serviceId,
-                        price:procedure.price[0],
-                        homeColection:false,
-                        variance:procedure.variance
-                    }
-                ]
+                specialityId:this.state.selected_procedures[0].specialityId,
+                services:newArr
             }
             this.setState({
                 addProcedureLoading:true
             },()=>this.props.addServices(obj))
             
         }else{
+            let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
+            let newArr = arr.map((item,i)=>{
+                return {
+                    ...item,
+                    price:parseInt(item.price[0],10)
+                }
+            })
             this.setState({
                 editProcedureLoading:true
-            },()=>this.props.editProcedure(this.state.selectedProcedure)) 
+            },()=>{
+                let obj = {
+                    specialityId:this.state.selected_procedures[0].specialityId,
+                    services:newArr
+                }
+                this.props.editProcedure(obj)
+            }) 
         }
-        
     }
 
     onEdit = (data) =>{
+        console.log(data,"onEdit In mYcatalogiecomponent")
+        let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
+        arr.push(data.data)
         this.setState({
-            selectedProcedure:{
-                ...data.data,
-                id:data.id
-            }
+            // selectedProcedure:{
+            //     ...data.data,
+            //     id:data.id
+            // }
+            selected_procedures:arr
         })
     }
 
@@ -306,12 +357,13 @@ class MyCatalogueComponent extends Component {
                 
     }
 
-    editProcedureLoadingOff(){
+    editProcedureLoadingOff =()=>{
         this.setState({
             editProcedureLoading:false,
-            editFlag:false,
-            selectedProcedure:{}
+            // editFlag:false,
+            // selected_procedures:this.state.selected_procedures
         },()=>{
+            this.props.editProcedureClr()
             this.props.searchProcedures({
                 limit:50,
                 searchQuery:'',
@@ -320,11 +372,12 @@ class MyCatalogueComponent extends Component {
      })})
     }
 
-    addProcedureLoadingOff(){
+    addProcedureLoadingOff =() =>{
         this.setState({
             addProcedureLoading:false,
-            selectedProcedure:{}
+            // selected_procedures:[]
         },()=>{
+            this.props.addServicesClr()
             this.props.toAddServices({
                 searchQuery:'',
                 page:'1',
@@ -334,10 +387,17 @@ class MyCatalogueComponent extends Component {
     }
 
     render() {
-        console.log(this.props.addServicesRet,"this.props.addServicesRet")
+        console.log(this.state,"this.state in myCatalogueComponent")
                 return (
                     <React.Fragment>
-                        <NotifFunc />
+                        <NotifFunc
+                             ret = {this.props.addServicesRet}
+                             retClr = {this.addProcedureLoadingOff}
+                        />
+                        <NotifFunc
+                             ret = {this.props.editProcedureRet}
+                             retClr = {this.editProcedureLoadingOff}
+                        />
                     <div className='col-md-8 catalogueComponent'>
                         <div className='row justify-content-center'>
                             {/* <p className='catalogue'>Catalogue</p> */}
@@ -448,6 +508,7 @@ class MyCatalogueComponent extends Component {
                             handleEditInclusion = {this.handleEditInclusion}
                             onEdit = {this.onEdit}
                             selectedProcedure = {this.state.selectedProcedure}
+                            selected_procedures = {this.state.selected_procedures}
                             handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
                             handleVarianceChange = {this.handleVarianceChange}
                             ret = {this.props.editProcedureRet}
@@ -460,12 +521,9 @@ class MyCatalogueComponent extends Component {
                         {!this.state.addProcedureFlag && <div className='text-center'>
                             {this.state.procedures.length !==0 && <button onClick={this.viewMore} className="catalogueViewMore">View more</button> }    
                         </div>}
-
                        {!this.state.addProcedureFlag && <div className='text-center'>
-                            {(((this.state.editFlag) && (!isEmpty(this.state.selectedProcedure))))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
+                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
-
-
                         {this.state.addProcedureLoading && <LoaderComponent />}
                         {!!this.state.addProcedureFlag  &&    (this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
                             <Procedure 
@@ -480,6 +538,7 @@ class MyCatalogueComponent extends Component {
                             ret = {this.props.addServicesRet}
                             clr = {this.props.addServicesClr}
                             loadingOff = {()=>this.addProcedureLoadingOff()}
+                            selected_procedures = {this.state.selected_procedures}
                             />
                             )) : 
                            <div className='text-center'>No Procedures</div>)
@@ -489,7 +548,7 @@ class MyCatalogueComponent extends Component {
                         </div>}
 
                         {this.state.addProcedureFlag  && <div className='text-center'>
-                            {(((this.state.editFlag) && (!isEmpty(this.state.selectedProcedure))))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
+                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
 
                         </div>

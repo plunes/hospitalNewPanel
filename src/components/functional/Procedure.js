@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useToasts } from 'react-toast-notifications'
 import "./editProcedure.css"
 import VarianceDropdown from "./varianceDropdown"
@@ -6,18 +6,55 @@ import VarianceDropdown from "./varianceDropdown"
  const Procedure= (props) => {
   const { addToast } = useToasts()
   const {data} = props
+  const [ select , setSelect ] = useState(false)
 
-  if(!!props.ret){
-    if(props.id === props.selectedProcedure.id){
-      if(!!props.ret.success){
-        addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
-      }else{
+//   if(!!props.ret){
+//     if(props.id === props.selectedProcedure.id){
+//       if(!!props.ret.success){
+//         addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
+//       }else{
         
-        addToast(props.ret.message, {appearance: 'error', autoDismiss:true})
-      }
-      props.loadingOff()
-      props.clr()
+//         addToast(props.ret.message, {appearance: 'error', autoDismiss:true})
+//       }
+//       props.loadingOff()
+//       props.clr()
+//     }
+// }
+
+const isSelected = () =>{
+  let flag = false
+  props.selected_procedures.every(function(element, index) {
+    if(element.serviceId===props.data.serviceId){
+      flag = true
+      return false
     }
+     return true
+  })
+  return flag;
+}
+
+const getValue = () =>{
+  let value= ""
+  props.selected_procedures.every(function(element, index) {
+    if(element.serviceId===props.data.serviceId){
+      value = !!element.price?element.price[0]:0
+      return false
+    }
+     return true
+  })
+  return value;
+}
+
+const getVariance = () =>{
+  let value= ""
+  props.selected_procedures.every(function(element, index) {
+    if(element.serviceId===props.data.serviceId){
+      value = element.variance
+      return false
+    }
+     return true
+  })
+  return value;
 }
   return (
 <React.Fragment>
@@ -27,7 +64,7 @@ import VarianceDropdown from "./varianceDropdown"
 <label className="cont_ter">{data.service}
 {
   props.editFlag?<React.Fragment>
-    <input type="checkbox" checked={(props.id === props.selectedProcedure.id)} onClick = {()=>props.onEdit(props)} />
+    <input type="checkbox" checked={isSelected()} onClick = {()=>props.onEdit(props)} />
   <span className="check2"></span></React.Fragment>:''
 }
   
@@ -36,9 +73,9 @@ import VarianceDropdown from "./varianceDropdown"
       <div className="col-lg-3 col-md-3 text-center">
         <div className="procedure_price_wrap">
            &#x20B9;
-             {((!!props.editFlag) && (props.id === props.selectedProcedure.id))?<input
-              value={!!props.selectedProcedure.price?props.selectedProcedure.price[0]:props.selectedProcedure.price}
-              onChange={props.handleSelectedProcedureChange}
+             {((!!props.editFlag) && (isSelected()))?<input
+              value={isSelected()?getValue():props.selectedProcedure.price}
+              onChange={(e)=>props.handleSelectedProcedureChange(e,props.data.serviceId)}
              name="editPrice"
              style={{marginLeft:'0.3rem'}}
              className="no_brdr_input consultaion_input"
@@ -51,8 +88,8 @@ import VarianceDropdown from "./varianceDropdown"
         <div className="price_se">
           < VarianceDropdown 
             editFlag = {props.editFlag}
-            handleChange={(e)=>props.handleVarianceChange(e)}
-            value = {(props.id === props.selectedProcedure.id)?props.selectedProcedure.variance:props.data.variance}
+            handleChange={(e)=>props.handleVarianceChange(e,props.data.serviceId)}
+            value = {isSelected()?getVariance():props.data.variance}
           />
         </div>   
       </div>
