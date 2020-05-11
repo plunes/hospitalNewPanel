@@ -65,6 +65,10 @@ form
     opacity: 1;
     letter-spacing: 0px;     text-align: center;
     border-radius: 12px;}
+
+  .managePay {
+    margin-top: 1rem !important;
+  }
   
 .editbankdetailfield 
     {border: none !important;

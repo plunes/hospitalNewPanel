@@ -78,15 +78,8 @@ class ManagePaymentComponent extends Component {
 
     render() {
         return (
-            <div>
-            <div className='row'>
-                <DashboardHeader />
-            </div>
-            <div className='row'>
-                <div className='col-md-3'>
-                    <SidebarComponent />
-                </div>
-                <div className='col-md-5'>
+            <React.Fragment>
+                <div className='col-md-7 AllComponents'>
                     <ManagePayment 
                      bankName = {this.state.bankName}
                      accnumber = {this.state.accnumber}
@@ -102,9 +95,8 @@ class ManagePaymentComponent extends Component {
                      submitBankDetailsClr = {this.props.submitBankDetailsClr}
                     />
                 </div>
-                <div className='col-md-5'></div>
-            </div>
-        </div>
+                <div className='col-md-3'></div>
+           </React.Fragment>
         )
     }
 }

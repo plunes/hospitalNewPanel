@@ -19,6 +19,7 @@ import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
+import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
 
 const initialState = {
   dash: '',
@@ -83,7 +84,7 @@ export class DashboardPage extends React.PureComponent {
       this.setState({
       ...initialState, settings:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/manage') {
+    } else if (this.props.location.pathname == '/dashboard/manage-payments') {
       this.setState({
     ...initialState,manage:'active'
       });
@@ -257,8 +258,8 @@ export class DashboardPage extends React.PureComponent {
                   <SettingsComponent
                     toggleEditProf = {this.toggleEditProf}
                     toggleChangePass = {this.toggleChangePass}
-                  />:(this.props.location.pathname == '/dashboard/payments')?
-                  <PaymentComponent />:(this.props.location.pathname == '/dashboard/help')?
+                  />:(this.props.location.pathname == '/dashboard/manage-payment')?
+                  <ManagePaymentComponent />:(this.props.location.pathname == '/dashboard/help')?
                   <HelpComponent />:(this.props.location.pathname == '/dashboard/aboutus')?
                   <AboutUsComponent />:(this.props.location.pathname == '/dashboard/aboutus')?
                   <ProfileContainer />:(this.props.location.pathname == '/dashboard/my-catalogue')?

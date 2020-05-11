@@ -87,7 +87,7 @@ class SidebarComponent extends Component {
               Settings
               <img className="arrowdesign" src="arrow.svg"></img>
             </Link> <hr></hr>
-            <Link to= "/dashboard/payments"
+            <Link to= "/dashboard/manage-payment"
                 className="list-group"
                 role="button" 
                 onClick={()=>this.props.toggleManage()}

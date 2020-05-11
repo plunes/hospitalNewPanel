@@ -83,9 +83,9 @@ class App extends Component {
       <Router history={history}>
           <Switch>
           <div className="container-fluid">
-           
             <Route exact path='/' component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
+            <Route exact path='/home' component={Development} />
             <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
             <Route exact path='/profile' component={ProfileComponent} />
@@ -102,7 +102,6 @@ class App extends Component {
             <Route exact path='/change-password' component={ChangePassword} />
             <Route exact path='/add-doctor' component={AddDoctorComponent} />
             <Route exact path='/devlopment' component={Development} />
-            
             </div>
           </Switch>
         

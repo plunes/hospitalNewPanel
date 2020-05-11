@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom"
 import './landingheader.css'
 
 
@@ -36,7 +37,10 @@ class LandinHeader extends Component {
               </div>
                   </li>
                   <li className="nav-item">
-                    <a href="/" className="nav-link sig_lgn">Login</a>
+                    <Link to="/signup"
+                    className="nav-link sig_lgn"
+                    >Signup</Link>
+                    {/* <a href="/signup" className="nav-link sig_lgn">Signup</a> */}
                   </li> 
                  </ul>
              </div>  

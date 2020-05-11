@@ -437,11 +437,14 @@ class DashboardComponent extends Component {
                                             valueLabelDisplay="on"
                                             />
                                             <div className="SliderUpdatedPrice">&#8377;
-                                            <input className="valu_chenge"
+                                            <span>
+                                            {Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)} 
+                                            </span>
+                                            {/* <input className="valu_chenge"
                                             type='text' onChange={this.handleChange} 
                                             name='updatePrice' 
                                             value={Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)}>
-                                            </input>
+                                            </input> */}
                                             </div>
                                             <br>
                                             </br>
@@ -477,9 +480,15 @@ class DashboardComponent extends Component {
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input className="price_up" type='text' onChange={this.handleChange} name='updatePrice' 
+                                            <div className="SliderUpdatedPrice">&#8377;
+                                            <span>
+                                            {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)} 
+                                            </span>
+                                            {/* <input className="price_up" type='text' onChange={this.handleChange} name='updatePrice' 
                                             value={this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice}>
-                                                </input></div><br></br>
+                                                </input> */}
+                                                
+                                                </div><br></br>
                                             {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">

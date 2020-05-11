@@ -448,10 +448,13 @@ hr
 /* DASHBOARD slider */
 
 .SliderUpdatedPrice
-     {font-size: 18px; 
+     {
+      text-align: center;
+      /* font-size: 18px; 
       text-align:center; 
       margin-top:42px !important;    
-      font-weight: bold;}
+      font-weight: bold; */
+}
 
 .bookingChance
     {text-align: center;
@@ -572,6 +575,9 @@ hr
   .secon_modal{padding: 20px 60px 20px 60px;}
   .yout_ctl{font-size: 16px;text-align: center;}
   .serv_ces{font-size: 14px;margin-top: 20px;text-align: center;}
-  .valu_second{position: relative;right: 83px;
-      top: 5px;}
-      .price_up{text-align: left;border: none;width: 15%;font-weight: bold;font-size: 16px;}
+  .valu_second{
+      position: relative;
+      /* right: 83px;
+      top: 5px; */
+}
+ .price_up{text-align: left;border: none;width: 15%;font-weight: bold;font-size: 16px;}
