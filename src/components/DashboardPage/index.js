@@ -60,8 +60,6 @@ export class DashboardPage extends React.PureComponent {
     };
    
   }
-  componentWillMount() {
-  }
   componentDidMount() {
     if (this.props.location.pathname == '/dashboard') {
       this.setState({

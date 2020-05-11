@@ -1,14 +1,19 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { ToastProvider, useToasts } from 'react-toast-notifications'
+import LoaderComponent from "./LoaderComponent"
 
 
 const AddAchievement = (props) => {
     const achievementRef = useRef()
     const { addToast } = useToasts()
+    const [ loading, setLoading ] = useState(false)
 
     if(!!props.updateAchievementRet){
         if(props.updateAchievementRet.type === 'addAchievement'){
             if(!!props.updateAchievementRet.success){
+               console.log("SetLoading in updateAchhievementRet")
+                props.toggleLoading()
+                props.achievementSuccess()
                 addToast(props.updateAchievementRet.message, {appearance: 'success', autoDismiss:true}) 
               }else{
                 addToast(props.updateAchievementRet.message, {appearance: 'error', autoDismiss:true})
@@ -19,6 +24,8 @@ const AddAchievement = (props) => {
   
     if(!!props.uploadRet){
       if(!!props.uploadRet.success){
+        console.log("SetLoading in updateAchhievementRet")
+        props.toggleLoading()
         addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
         props.toggleAchievementImage(props.uploadRet.data.imageUrl)
       }else{
@@ -43,6 +50,8 @@ const handleUpload = (e) => {
       console.log("File Tooo Big")
       addToast('File size should be less than 2MB', {appearance: 'error', autoDismiss:true})
     } else {
+      console.log("SetLoading in HandleUpload")
+      props.toggleLoading()
       props.upload({ file: file, field: 'file'})
       reader.onloadend = () => {
       reader.readAsDataURL(file);
@@ -71,6 +80,8 @@ const submitdetails = () => {
         achievement:''
        }
        newAchievements.push(obj)
+       console.log("SetLoading in submitDetails")
+       props.toggleLoading()
         props.updateAchievement({
             achievements:newAchievements,
             type:'addAchievement'
@@ -84,6 +95,7 @@ const submitdetails = () => {
     return (
         <div className ='modal-wrapper-medium_ris'>
         <div className="modal-heading_ris">Add Achievement</div>
+        {props.loading && <LoaderComponent/>}
         {!props.achievementImage && <div className='margin-top-small_ris text-center'>
             <button onClick={()=>handleButtonClick()}
          className="common-button">Upload</button>
@@ -108,7 +120,7 @@ const submitdetails = () => {
         {/* </div> */}
        
        <div className='margin-top-small_ris '>
-       <p className="intro col-lg-9"><strong>Tite</strong> </p>
+       <p className="intro col-lg-9"><strong>Title</strong> </p>
        <textarea 
             name="title" 
             ref={achievementRef}

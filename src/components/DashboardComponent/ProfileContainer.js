@@ -45,6 +45,7 @@ class ProfileContainer extends React.PureComponent {
     this.handleAddExpert = this.handleAddExpert.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.achievementSuccess = this.achievementSuccess.bind(this)
   }
 
   componentWillReceiveProps(nextProps){
@@ -56,10 +57,17 @@ class ProfileContainer extends React.PureComponent {
     }
   }
 
+  achievementSuccess = () =>{
+      this.addAchievementClose()
+      this.props.getUserDetails()
+  }
+
   generateAddAchievement = () =>{
     return(
         <React.Fragment>
            <AddAchievement
+           loading = {this.state.achievementLoading}
+           toggleLoading = {()=>this.setState({achievementLoading:!this.state.achievementLoading})}
            updateAchievement =  {this.props.updateAchievement}
            updateAchievementRet =  {this.props.updateAchievementRet}
            updateAchievementClr =  {this.props.updateAchievementClr}
@@ -73,6 +81,7 @@ class ProfileContainer extends React.PureComponent {
 
            achievementImage = {this.state.achievementImage}
            toggleAchievementImage = {(data)=>this.setState({achievementImage:data})}
+           achievementSuccess = {this.achievementSuccess}
            />
         </React.Fragment>
       
@@ -363,7 +372,7 @@ class ProfileContainer extends React.PureComponent {
             loading = {this.props.removeAchievementLoading}
             selectedAchievement = {this.state.selectedAchievement}
             updateAchievementClr = {this.props.updateAchievementClr}
-            getUser = {this.props.getProfileDetails}
+            getUser = {this.props.getUserDetails}
             loadingOff = {()=>this.setState({
               removeAchievementLoading:false
             })}
