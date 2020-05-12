@@ -100,7 +100,6 @@ class AppointmentComponent extends Component {
 
     dateTimeObject = (seconds) =>{
         let date = new Date(parseInt(seconds, 10))
-        console.log(date,"date in dateTimeObject")
         return  {
             monthAndDate: `${getMonth(date.getMonth())}  ${date.getDate()>9?date.getDate():"0"+date.getDate()}`,
             fullDate:  `${date.getDate()>9?date.getDate():"0"+date.getDate()} ${getMonth(date.getMonth())}  ${date.getFullYear()} `,
@@ -128,7 +127,6 @@ class AppointmentComponent extends Component {
                let confirmed_bookings = []
                let cancelled_bookings = []
                let upcoming_bookings = []
-                console.log(nextProps.getBookingRet,"nextProps.getBookingRet in AppointmentComponent")
                nextProps.getBookingRet.data.forEach(data =>{
                    if((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true) ){
                        confirmed_bookings.push(data)
@@ -159,14 +157,17 @@ class AppointmentComponent extends Component {
         this.setState({
             selected_booking:item,
             confirm_modal_flag:true,
-            selected_type:type
+            selected_type:type,
+            toType:'confirmed_bookings'
         })
     }
 
-    cancelBooking = (item) =>{
+    cancelBooking = (item,type) =>{
         this.setState({
             selected_booking:item,
-            cancel_modal_flag:true
+            cancel_modal_flag:true,
+            selected_type:type,
+            toType:'cancelled_bookings'
         })
     }
 
@@ -191,7 +192,7 @@ class AppointmentComponent extends Component {
             return   <React.Fragment>
             <ul className="list-unstyled multi-steps">
                 <li className="not_active_ris">Booked</li>
-                <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
+                <li className="not_active_ris not-paid_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
            </ul>
         </React.Fragment>
         }
@@ -199,8 +200,8 @@ class AppointmentComponent extends Component {
         return  <React.Fragment>
         <ul className="list-unstyled multi-steps">
             <li className="active_ris">Booked</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmmount}</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
+            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i><text className="rish_text">{item.paidAmount}</text></li>
+            <li className="not_active_ris not-paid_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
        </ul>
       </React.Fragment>
     }else if(item.paidAmmount===item.totalAmount){
@@ -215,13 +216,22 @@ class AppointmentComponent extends Component {
         let arr = []
             if(this.state.selected_type==="upcoming_bookings"){
                 arr = JSON.parse(JSON.stringify(this.state.upcoming_bookings))
-            }else if(this.state.selected_type==="cancelled_bookingss"){
-                arr = JSON.parse(JSON.stringify(this.state.cancelled_bookingss))
+            }else if(this.state.selected_type==="cancelled_bookings"){
+                arr = JSON.parse(JSON.stringify(this.state.cancelled_bookings))
+            }else if(this.state.selected_type==="confirmed_bookings"){
+                arr = JSON.parse(JSON.stringify(this.state.confirmed_bookings))
             }
-            let newArr = arr.filter((item,i)=>item._id!==this.state.selected_booking._id) 
-
+            let newArr = arr.filter((item,i)=>item._id!==this.state.selected_booking._id)
+            let toArr = []
+            if(this.state.toType==="cancelled_bookings"){
+                toArr = JSON.parse(JSON.stringify(this.state.cancelled_bookings))
+            }else if(this.state.toType==="confirmed_bookings"){
+                toArr = JSON.parse(JSON.stringify(this.state.confirmed_bookings))
+            }
+            toArr.push(this.state.selected_booking)
             this.setState({
                 [this.state.selected_type]:newArr,
+                [this.state.toType]:toArr,
                 status_change_confirm:true
             },()=>{
                 this.props.changeAppointClr()
@@ -230,8 +240,6 @@ class AppointmentComponent extends Component {
 
 
     render() {
-        // console.log(this.props,"this.props in Appointments")
-        // console.log(this.props.bookings, 'bookings');
         console.log(this.state,"this.state in AppointmentComponent")
         if(!!this.state.get_bookings_loading){
            return   <div className='col-md-8'>
@@ -264,7 +272,6 @@ class AppointmentComponent extends Component {
                               <div className="upcoming_bdr"></div>
                                 <TabPanel className="ardee_ci">
                                {this.state.upcoming_bookings.map((item,i)=>{
-                                   console.log(item,"item in upcomming Appointments")
                                    return <React.Fragment>
                                         <div className="row">
                                   <div className="col-lg-3 nov_2">
@@ -286,13 +293,13 @@ class AppointmentComponent extends Component {
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings")}>Confirm</text></p>
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="res_udle underline">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings")}>Cancel</text></p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings","cancelled_bookings")}>Cancel</text></p>
                                  </div>
                                 </div>
                                 {/* 2nd--end */}
@@ -312,11 +319,10 @@ class AppointmentComponent extends Component {
                                  <p className="pay_green">Create Prescription</p>
                                  </div>
                                    </React.Fragment>
-                               })} 
+                               })}
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
                                     {this.state.confirmed_bookings.map((item,i)=>{
-                                        console.log(item,"item in Appointments in confirmed")
                                    return <React.Fragment>
                                         <div className="row">
                                         <div className="col-lg-3 nov_2">
@@ -338,13 +344,13 @@ class AppointmentComponent extends Component {
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text>Confirmed</text></p>
+                                    <p className="gr_con "><text>Confirmed</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle underline">Reschedule</p>
+                                 <p className="res_udle ">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings')}>Cancel</text></p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings','cancelled_bookings')}>Cancel</text></p>
                                  </div>
                                 </div>
                                 {/* 2nd--end */}
@@ -369,7 +375,6 @@ class AppointmentComponent extends Component {
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
                                 {this.state.cancelled_bookings.map((item,i)=>{
-                                  console.log("item in Appointments in cancelled_bookings")
                                   return <React.Fragment>
                                   <div className="row">
                                   <div className="col-lg-3 nov_2">
@@ -391,13 +396,13 @@ class AppointmentComponent extends Component {
                           </div>
                           <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,'cancelled_bookingss')}>Confirm</text></p>
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,'cancelled_bookings','confirmed_bookings')}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle underline">Reschedule</p>
+                                 <p className="res_udle ">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancelled</text></p>
+                                 <p className="con_re "><text>Cancelled</text></p>
                                  </div>
                           </div>
                           {/* 2nd--end */}

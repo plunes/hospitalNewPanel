@@ -426,3 +426,23 @@ body {
   background-color: #EDEDED;
   border-color: #EDEDED;
 }
+
+
+.multi-steps > li.not-paid_ris:before {
+  display: block;
+  /* content: '100% ' !important; */
+  margin: 0 auto 4px;
+  background-color: #fff;
+  width: 4rem;
+  height: 4rem;
+  /* line-height: 10rem; */
+  text-align: center;
+  font-weight: bold;
+  border-width: 2px;
+  border-style: solid;
+  border-color:#DCDCDC;
+  background-color :white ;
+  border-radius: 50%;
+  font-size: 3rem;
+  color: #fff;
+}
