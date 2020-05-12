@@ -201,9 +201,10 @@ class AppointmentComponent extends Component {
         }else{
             return   <React.Fragment>
             <ul className="list-unstyled multi-steps">
-                                    <li>Booked</li>
-                                    <li><i className="fa fa-rupee-sign"></i>6000</li>
-                                    <li className="is-active"><i className="fa fa-rupee-sign"></i>30000</li>
+                <li className="active_ris">Booked</li>
+                <li className="active_ris" ><i className="fa fa-rupee-sign"></i>6000</li>
+                <li className="active_ris" ><i className="fa fa-rupee-sign"></i>6000</li>
+                <li ><i className="fa fa-rupee-sign"></i>30000</li>
            </ul>
         </React.Fragment>
         }

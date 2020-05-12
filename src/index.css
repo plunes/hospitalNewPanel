@@ -343,3 +343,96 @@ body {
   margin-top: auto;
   margin-bottom: auto;
 }
+
+
+
+.multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
+  content: counter(stepNum);
+  font-family: inherit;
+  font-weight: 700;
+}
+.multi-steps > li.is-active:after, .multi-steps > li.is-active ~ li:after {
+  background-color: #EDEDED;
+}
+.multi-steps {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.multi-steps > li {
+  counter-increment: stepNum;
+  text-align: center;
+  display: table-cell;
+  position: relative;
+  color: #808080;
+  z-index: 0000;
+  font-size: 1.2rem;
+}
+.multi-steps > li:before {
+  content: '\F00C';
+  content: '\2713;';
+  content: '\10003';
+  content: '\10004';
+  content: '\2713';
+  display: block;
+  margin: 0 auto 4px;
+  background-color: #fff;
+  width: 4rem;
+  height: 4rem;
+  /* line-height: 10rem; */
+  text-align: center;
+  font-weight: bold;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #01D35A;
+  background-color: #01D35A;
+  border-radius: 50%;
+  font-size: 3rem;
+  /* padding-top: 1.4rem; */
+  color: #fff;
+}
+.multi-steps > li.active_ris:after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  background-color: #01D35A;
+  position: absolute;
+  top: 2rem;
+  bottom: auto;
+  /* margin-top: auto; */
+  /* margin-bottom: auto; */
+  /* left: 62%; */
+  z-index: 1;
+}
+.multi-steps > li:nth-child(2)::after{ 
+  /* background-color: #DCDCDC; */
+}
+.multi-steps > li.not_active_ris:after {
+  background-color: #DCDCDC;
+  content: '';
+  height: 3px;
+  width: 100%;
+  /* background-color: #01D35A; */
+  position: absolute;
+  top: 2rem;
+  bottom: auto;
+  /* margin-top: auto; */
+  /* margin-bottom: auto; */
+  /* left: 62%; */
+  z-index: 1;
+}
+.multi-steps > li:last-child:after {
+  display: none;
+}
+.multi-steps > li.is-active:before {
+  background-color: #fff;
+  border-color: #01D35A;
+}
+
+.multi-steps > li.is-active ~ li {
+  color: #808080;
+}
+.multi-steps > li.is-active ~ li:before {
+  background-color: #EDEDED;
+  border-color: #EDEDED;
+}
