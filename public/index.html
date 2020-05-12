@@ -10,6 +10,9 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/fav.png">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css" />
   
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -20,10 +23,10 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js" async></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/owl.carousel.min.js"></script>
    
     <title>India's First Utility Network - Plunes</title>
   </head>
@@ -33,7 +36,11 @@
     </noscript>
     <div id="root"></div>
     <script>
-
+$(document).ready(function () {
+$(".profil_achevment .owl-carousel")
+              .owlCarousel({ loop: !0, margin: 20, nav: !0, responsive: { 0: { items: 1 }, 
+                600: { items: 2 }, 1e3: { items: 2 } } });
+              });
       </script>
     <!--
       This HTML file is a template.

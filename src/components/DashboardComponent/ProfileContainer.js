@@ -358,9 +358,59 @@ class ProfileContainer extends React.PureComponent {
 </div>
 {/* 2nd-end */}
 <div className="se-dr"><a href="#">See more Doctor's</a></div>
-<div className="achivmnt_b">
+<div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
-  <div className="row">
+  <div class="row">
+    <div class="owl-carousel owl-theme">
+        <div class="item" data-aos="zoom-in">
+        <a href="#">
+            <div class="trendingBox">
+                <img src="/ach1.png" alt=".." class="image effect_new"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="overlay">
+
+                </div>
+                <div class="card-body ">
+                <p class="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
+    
+            </div>
+            </div>
+            
+            </a>
+           </div>
+           <div class="item">
+        <a href="#">
+            <div class="trendingBox">
+                <img src="/ach2.png" alt="" class="image effect_new"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="overlay">
+
+                </div>
+                <div class="card-body ">
+                <p class="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
+    
+            </div>
+            </div>
+            
+            </a>
+        </div>
+        <div class="item">
+        <a href="#">
+            <div class="trendingBox">
+                <img src="/ach1.png" alt="" class="image effect_new"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="overlay">
+
+                </div>
+                <div class="card-body ">
+                <p class="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
+    
+            </div>
+            </div>
+           
+
+            </a>
+        </div>
+          </div>
+        </div>
+  {/* <div className="row">
     {!!this.props.user?!!this.props.user.achievements?this.props.user.achievements.map((item,i)=>{
       if(!!item){
         return (
@@ -384,7 +434,7 @@ class ProfileContainer extends React.PureComponent {
      
     }):'':''}
  
-</div>
+</div> */}
   </div>
           </div>
           <ModalComponent 

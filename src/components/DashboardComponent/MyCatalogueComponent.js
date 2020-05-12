@@ -426,8 +426,9 @@ class MyCatalogueComponent extends Component {
                                  <p className="uploadCata">Add Catalogue</p></a>
                               </div>
                         </div>
+                        <div className="row gastroent_mar">
                        {
-                           !this.state.addProcedureFlag &&  <div className="text-center  ">
+                           !this.state.addProcedureFlag &&  <div className="text-center col-xl-6">
                            <SelectComponent
                            options = {this.state.specialities}
                            handleChange = {this.handleSpecialitySelect}
@@ -441,7 +442,7 @@ class MyCatalogueComponent extends Component {
                                'padding': '6px 0px 0px 12px'
                            }}
                            wrapperDivStyles = {{
-                                   'width': '40%',
+                                   'width': '100%',
                                    'marginTop':'1rem',
                                    'marginLeft': 'auto',
                                   'marginRight': 'auto'
@@ -461,7 +462,7 @@ class MyCatalogueComponent extends Component {
                        </div>
 
                        }   
-                      <div className="text-center">
+                      <div className="text-center col-xl-6 serc_mar_pad">
                           <img src="/search.png" className="serc_icn"/>
                             <SearchComponent 
                                 searchProcedures = {this.searchProceduresFun}
@@ -471,9 +472,10 @@ class MyCatalogueComponent extends Component {
                                 
                             />     
                         </div>
+                        </div>
                         <div className='listOfService'>
                             <div className='row listOfServiceHeading'>
-                                <div className='col-md-6 text-center'>
+                                <div className='col-md-6 text-center test_tme'>
                                     Test Name
                                     </div>
                                 <div className='col-md-3 text-center'>

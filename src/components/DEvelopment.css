@@ -41,7 +41,7 @@
     min-height: 1.2em;
     padding: 50px;}
     .add_srch_d{text-align: center;margin-bottom: 40px;}
-    .add_srch_d h4 {text-align: center;color:#4B4B4B;font-weight: 500;}
+    .add_srch_d h4 {text-align: center;color:#4B4B4B;font-weight: 500;font-size: 1.8rem;}
     .add_srch_d p{color:#8A8A8A;font-weight: 400;}
     .sech_b{color: #262626; font-weight: 400; font-size: 18px;}
     .aero_dn{text-align: center;}
@@ -89,7 +89,7 @@
 }
 .pfo_im{color: #262626;font-size: 15px; font-weight: 500;padding-bottom: 20px;}
 .fil_nm{color: #262626;font-size: 15px;font-weight: 400;margin-top: 20px;}
-.upld{border:1px solid #B2B2B2;color: #7D7D7D;display: block;
+.upld{color: #fff;display: block;
     width: 110px;
     border-radius: 34px;
     text-align: center;
@@ -183,7 +183,7 @@ label.control-label {
 }
 /* time -shedule -start*/
 .time_she{margin-top: 40px;}
-.abaily{color: #343434;font-size: 15px;font-weight: 500;padding-bottom: 40px;}
+.abaily{color: #343434;font-size: 1.7rem;font-weight: 500;padding-bottom: 40px;}
 .table td, .table th{border: 0px !important;}
 .m {
     background: #EBEBEB;
@@ -261,9 +261,9 @@ label.control-label {
   }
     .sub_tm:hover{color:#fff !important;}
 .time_clo{text-align: center;margin-top: 30px;}
-.fee_cun_ch{font-size: 18px; font-weight: 500; color: #5D5D5D;}
+.fee_cun_ch{font-size: 1.4rem; font-weight: 500; color: #5D5D5D;}
 .fee_ru{font-weight: 500; color: #5D5D5D;font-size: 18px;
-    display: flex;
+    display: block;
     flex-direction: row-reverse;
 }
 .consul_fee{margin-top: 64px;border-top: 1px solid #DCDCDC;padding-top: 50px;}

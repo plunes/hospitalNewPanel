@@ -199,7 +199,7 @@ class AppointmentComponent extends Component {
         return  <React.Fragment>
         <ul className="list-unstyled multi-steps">
             <li className="active_ris">Booked</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmmount}</li>
+            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>10000{item.paidAmmount}</li>
             <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
        </ul>
       </React.Fragment>
@@ -301,7 +301,7 @@ class AppointmentComponent extends Component {
                                     <p className="brace_m">{item.serviceName}</p>
                                  </div>
                                  <div className="col-lg-6">
-                                    <p className="dental_th">{item.totalAmount}</p>
+                                    <p className="dental_th"><i class="fa fa-rupee-sign"></i>{item.totalAmount}</p>
                                  </div>
                                 </div>
                                 {/* 3rd--end */}
@@ -353,7 +353,7 @@ class AppointmentComponent extends Component {
                                     <p className="brace_m">{item.serviceName}</p>
                                  </div>
                                  <div className="col-lg-6">
-                                    <p className="dental_th">{item.totalAmount}</p>
+                                    <p className="dental_th"><i class="fa fa-rupee-sign"></i>{item.totalAmount}</p>
                                  </div>
                                 </div>
                                 {/* 3rd--end */}
@@ -406,7 +406,7 @@ class AppointmentComponent extends Component {
                               <p className="brace_m">{item.serviceName}</p>
                            </div>
                            <div className="col-lg-6">
-                              <p className="dental_th">{item.totalAmount}</p>
+                              <p className="dental_th"><i class="fa fa-rupee-sign"></i>{item.totalAmount}</p>
                            </div>
                           </div>
                           {/* 3rd--end */}

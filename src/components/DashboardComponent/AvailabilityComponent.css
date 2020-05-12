@@ -57,7 +57,7 @@ form
         .my_av_sec{margin-bottom: 30px;}
         .my_avl{margin-bottom: 30px;}
           
-.pro_tw{width: 1.8vw;}
+
   /* MANAGE PAYMENT CSS */
 .ManagePayForm
     {background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -235,9 +235,9 @@ input:checked + .slider:before
     margin-top: 20px; margin-bottom: 20px;
     border-radius: 10px;}
 
-.settingtopic 
+.settingtopic p
     {text-align: center;
-    font-size: 20px;
+    font-size: 1.8rem;
     font-weight: bolder;} 
 
 .accsetrow 

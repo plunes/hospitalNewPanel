@@ -219,12 +219,13 @@ a:hover
     .sub_fr{background: #01D35A;
       border-radius: 26px;
       color: #fff;
-      width: 10vw;
+      width: 13vw;
       display: block;
       text-align: center;
       margin: 0 auto;
-      padding: 6px;
+      padding: 11px;
       font-size: 1.3rem;}
+      .sub_fr:hover { color: #fff !important;} 
      
 
 .pointer 
@@ -287,7 +288,7 @@ hr
 }
 .scrolling_sec {
       overflow: auto;
-      height: 33vw;
+      height: 32vw;
       overflow-x: hidden;
   }
   .side_br {padding-left: 0 !important;}
@@ -389,10 +390,10 @@ hr
       {border: none;
       background: white;
       color: #01D35A;
-      font-size: 20px;}
+      font-size: 1.4rem;}
 
 .PaymentUN
-      {font-size: 20px;
+      {font-size: 1.4rem;
       font-weight: 400;}
 
 .redeemModal
@@ -438,6 +439,8 @@ hr
             font-size: 1.4rem;
             font-weight: bold;
             text-decoration: underline;
+            padding-top: 20px;
+    padding-bottom: 20px;
            
 }
 
@@ -535,10 +538,12 @@ hr
           padding: .5rem;
     }
 .maximum_time{font-size: 1.0rem;color: #676767;opacity: 0.6;padding-left: 6rem;}
+.real_ti_bd{border-bottom: 1px solid #F1F1F1;
+      margin-bottom: 1rem;}
 .realtimeicon1
     {border-radius: 2vw;
       border: 1px solid #BCD3F6;
-      padding: 0.9rem 0.9rem 0.9rem 0.9rem;
+      padding: 10px 12px 12px 13px;
 
       background-color: #F2F7FF;
       margin-left: 0.6rem;position: relative;
@@ -550,7 +555,7 @@ hr
         }
 
 .realtimeicon
-    {width: 1vw;}
+    {width: 1rem;}
 
 .RealtimeUsername
     {

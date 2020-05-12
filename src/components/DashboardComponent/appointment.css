@@ -5,7 +5,7 @@
 .upcoming_bdr{border-bottom: 3px solid #B7B7B7;position: relative;
     top: -19px;
     z-index: 0;}
-    .two_chil{margin-top: 30px; text-align: center;}
+    .two_chil{margin-top: 30px; text-align: center;margin-bottom: 6rem;}
 .active { color:#f00;font-weight:bolder; }
 .react-tabs__tab-list{padding-left: 0;}
 .react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;position: relative !important;top:-4px;}
@@ -23,11 +23,15 @@
 .loc_tab img{padding-left: 0px;position: relative;
   left: 40px;}
 .gr_con{color: #01D35A;font-weight: 500;font-size: 15px;}
-.con_re{color: #D30101; font-weight: 500;text-align: right;}
+.con_re{color: #D30101; font-weight: 500;text-align: right;font-size: 1.3rem;}
 .res_udle{text-align: center;font-size: 15px;}
 .confrm_mar_sec{margin-top: 20px;margin-bottom: 10px;margin-left: 0px !important;}
-.dental_th{text-align: right;font-weight: 500;}
+.dental_th{text-align: right;font-weight: 500;font-size: 1.3rem;}
 .brace_m{color: #474747;font-weight: 400;font-size: 15px;}
+i.fa.fa-rupee-sign {
+  font-size: 13px;
+  padding-right: 3px;
+}
 .py_stu h2{text-align: center;text-decoration: underline;font-weight: 500;font-size: 16px;margin-bottom: 20px;}
 .graph_cir{border-radius: 80px;background-color: #01D35A;width: 60px;height: 60px;}
 img.right_im {
@@ -63,11 +67,14 @@ img.right_im {
             right: 13px;}
 .pay_ptint{text-align: center;font-size: 16px;color:#474747;font-weight: 400;padding: 20px 10px;margin-bottom: 0px;}
 .pay_green{text-decoration: underline;color: #01D35A;font-size: 16px;text-align: center;font-weight: 400;padding-bottom: 20px;}
-.bg_bulb{background: #FBFBFB;height: 65px;}
-.bg_bulb img{width: 44px;
+.bg_bulb{background: #FBFBFB;height: 4rem;width: 33rem;
+  margin: 0 auto;}
+.bg_bulb img{width: 4rem;
     position: relative;
-    left: 176px;}
-.bg_bulb p{text-align: center;color: #01D35A;font-size: 18px;position: relative;top: -34px;}
+    left: 6rem;
+    top: -1rem;}
+.bg_bulb p{text-align: center;color: #01D35A;font-size: 1.4rem;position: relative;top: -3.8rem;
+  left: 2rem;}
 
 .rund_im {
   border-radius: 50%;
