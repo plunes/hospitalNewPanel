@@ -127,3 +127,9 @@ export const GET_ENTITY_CLR = 'App/Profile/GET_ENTITY_CLR'
 
 export const CHANGE_APPOINT_RET = 'App/Profile/CHANGE_APPOINT_RET'
 export const CHANGE_APPOINT_RET_CLR = 'App/Profile/CHANGE_APPOINT_RET_CLR'
+
+export const GET_OTP_RET = 'App/Profile/GET_OTP_RET'
+export const GET_OTP_CLR = 'App/Profile/GET_OTP_CLR'
+
+export const SUBMIT_OTP_RET = 'App/Profile/SUBMIT_OTP_RET'
+export const SUBMIT_OTP_CLR = 'App/Profile/SUBMIT_OTP_CLR'

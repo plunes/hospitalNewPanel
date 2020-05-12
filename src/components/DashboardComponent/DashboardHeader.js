@@ -7,6 +7,7 @@ import history from "../../history";
 import  { Link } from "react-router-dom"
 
 
+
 class DashboardHeader extends Component {
  
   constructor(props) {
@@ -42,9 +43,14 @@ class DashboardHeader extends Component {
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto">
                   <li className="nav2 nav-item">
-                    <a className="nav-link HeaderLink" href = '/payment'>
+                  <div className="nav-link HeaderLink" >
+                  <Link to= "/dashboard/payments"
+                    
+                        role = "button"
+                        onClick = {this.props.togglePayment()}>
                       <img className="sol-img" src="/payment.svg" alt='Not available'></img><span className="top-img">Payment</span> 
-                    </a>
+                   </Link>
+                  </div>
                   </li>
                   <li className="nav2 nav-item">
                     <div>
@@ -65,19 +71,15 @@ class DashboardHeader extends Component {
                    
                   </li>
                   <li className="nav-item nav2">
-                    <div className="dropdown">
-                      <button className="btn dropdown-align HeaderProfileimg" type="button" data-toggle="dropdown">
+                    <div className="nav-link HeaderLink">
+                       <Link
+                          className="link_class"
+                          role = "button"
+                           to="/dashboard/profile"
+                           onClick = {this.props.toggleProfile()}
+                           >
                          <img className="sol-img2" src={this.props.user.imageUrl || '/profile.png'}  alt='Not available'/>{this.props.user.name}
-                         {/* <img className="HeaderArrowDown" src="/ArrowDown.svg"/> */}
-                         </button>
-                        <ul className="dropdown-menu profile-font">
-                        <li><span><img className="dash-dropdown" src="/d1.png" alt=""/><a href="">View profile</a> </span></li><hr width="80%"/>
-                        <li><span><img className="dash-dropdown" src="/dasAppo.png" alt=""/><a href="">Appointments</a></span></li><hr width="80%"/>
-                        <li><span><img className="dash-dropdown" src="/Settings.png" alt=""/><a href="">Settings</a></span></li><hr width="80%"/>
-                        <li><span><img className="dash-dropdown" src="/Help.png" alt=""/><a href="">Help</a></span></li><hr width="80%"/>
-                        <li><span><img className="dash-dropdown" src="/about-us.png" alt=""/><a href="">About Us</a></span></li><hr width="80%"/>
-                        <li><span><img className="dash-dropdown" src="/Logout.png" alt=""/><a href="">Logout</a></span></li>
-                      </ul>
+                         </Link>
                     </div>
                   </li>
                 </ul>

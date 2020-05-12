@@ -1,6 +1,7 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import SelectComponent from "../SelectComponent"
+import { Link } from "react-router-dom"
 import React, { useState } from "react"
 import {
     isValidPhoneNumber,
@@ -96,9 +97,9 @@ import { messaging } from 'firebase';
         </button>
     </div>
     <div className="text-center sign_in_forgot_password">
-        <a className="sign_in_sign_up" href="">
+        <Link className="sign_in_sign_up" to= "/forgotPassword">
            Forgot Passsword
-        </a>  
+        </Link>
     </div>
 
     <div className="text-center sign_in_no_account margin-top-medium_ris">
@@ -106,9 +107,9 @@ import { messaging } from 'firebase';
     </div>
 
     <div className="text-center margin-top-medium_ris  sign_in_sign_up">
-        <a className="sign_in_sign_up" href="/signup">
+    <Link className="sign_in_sign_up" to= "/signup">
         Sign Up
-        </a>
+     </Link>
     </div>
     <br />
     </div>

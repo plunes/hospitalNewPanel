@@ -1,8 +1,12 @@
 /* alka-css */
 
-.border_dev{border:1px solid #DCDCDC;
-    margin-top: 15%;
-    border-radius: 9px;padding: 50px;margin-bottom: 40px;}
+.border_dev{
+    border:1px solid #DCDCDC;
+    /* margin-top: 15%; */
+    border-radius: 9px;
+    padding: 50px;
+    margin-bottom: 40px;
+}
 
 .add_dr{}
 

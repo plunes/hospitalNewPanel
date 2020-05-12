@@ -40,14 +40,14 @@ import React, { useRef } from "react"
 
   return (
     <div className="row HospitalBio">
-    <p className="intro col-lg-9"><strong>Introduction</strong> </p>
-    <p className="intro col-lg-3 save_edit_ris">
-    {props.editBioFlag && <span onClick={()=>submitdetails()} className="edi_intr hover_underline">Save</span> }
+    <p className="intro col-lg-9 auto_center"><strong>Introduction</strong> </p>
+    <p style={{position:'relative'}}  className="intro col-lg-2 save_edit_ris auto_center">
+    {props.editBioFlag && <span style={{position:'absolute',right:'4rem'}} onClick={()=>submitdetails()} className="edi_intr hover_underline">Save</span> }
     <span onClick={()=>props.toggleEditBio()} className="edi_intr hover_underline">{props.editBioFlag?"Cancel":'Edit'}</span>
     </p>
     <div className="col-lg-12 text_cmt">
     {props.loading && <LoaderComponent />}
-   {!props.editBioFlag && <p className="loc">{props.biography}</p>}
+   {((!props.editBioFlag) && (props.biography)) && <p className="loc">{props.biography}</p>}
   {props.editBioFlag &&  <textarea 
    name="biography" 
    ref={textareaRef}

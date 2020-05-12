@@ -236,7 +236,7 @@ class DashboardComponent extends Component {
     }
 
     render() {
-        console.log(this.props.solInsights,"this.props.solInsights akdaskd")
+        console.log(this.props,"this.props  in dashboardComponent")
         console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
         const options = {

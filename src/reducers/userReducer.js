@@ -82,7 +82,13 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   GET_ENTITY_RET,
 
   CHANGE_APPOINT_RET_CLR,
-  CHANGE_APPOINT_RET
+  CHANGE_APPOINT_RET,
+
+  GET_OTP_CLR,
+  GET_OTP_RET,
+
+  SUBMIT_OTP_RET,
+  SUBMIT_OTP_CLR
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -141,11 +147,39 @@ const initialState = {
   updateRealPriceRet:false,
   updatePriceDataRet:false,
   getEntityRet:false,
-  changeAppointRet:false
+  changeAppointRet:false,
+  getOtpRet:false,
+  submitOtpRet:false
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+
+    case SUBMIT_OTP_CLR:
+      return {
+        ...state,
+        submitOtpRet:false
+      };
+
+      case SUBMIT_OTP_RET:
+      return {
+        ...state,
+        submitOtpRet:action.payload
+      };
+
+      case GET_OTP_CLR:
+        return {
+          ...state,
+          getOtpRet:false
+        };
+  
+        case GET_OTP_RET:
+        return {
+          ...state,
+          getOtpRet:action.payload
+        };
+
 
     case GET_ENTITY_CLR:
       return {

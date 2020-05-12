@@ -53,15 +53,23 @@
         margin-right: 0px !important;}
 
 .HospitalBio
-        {width: 92%;
+        {
+         /* margin-left: 2rem;
+         margin-right: 2rem; */
+        min-height: 3rem;
         text-align: justify;
-        margin-left: 35px !important;}
+        margin-left: 1.5rem !important;
+}
 
 .Hospitalhr
         {
-        margin: 1rem !important; 
-        width: 92%;
+                width: 95%;
+                position: relative;
+               left: 2rem;
+               right:2rem;
+               margin-top: 1rem!important;
 }
+.edit
 
 .HospitalProfileRow1
         {
@@ -106,9 +114,10 @@
                 top: -23px;}
         /* .brdr_tm{border: 1px solid #DCDCDC;} */
         .brdr_tm {
-                width: 793px;
+                width: 95%;
                 position: relative;
-               left: 20px;
+               left: 2rem;
+               right:2rem;
             }
 .achimen_pd
 {
@@ -128,7 +137,12 @@
 .viewmap{color:#01D35A;padding-left: 18px;font-weight: 400;font-size: 1.2rem;}
 .editmainbodymaxhospital{color: #01D35A;font-weight: 400;font-size: 1.2rem;}
 .ach_mnt{font-size: 1.2rem;}
-.edi_intr{color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.2rem;}
+.edi_intr{
+        color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.2rem;
+        position: absolute;
+        right: -2rem;
+
+}
 .b-select-wrap {
         border: none;
         color: #474747;

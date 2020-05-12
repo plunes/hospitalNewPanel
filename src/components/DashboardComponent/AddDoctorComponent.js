@@ -485,7 +485,7 @@ let obj =   {
       
         return (
            <React.Fragment>
-                <div className='col-md-7'>
+                <div className='col-md-8 col-xl-9 AllComponents'>
                     <div className="border_dev">
                 <div className="add_dr">
                     <div className="add_srch_d">

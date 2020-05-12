@@ -72,8 +72,8 @@ class AppointmentComponent extends Component {
         this.state = {
             modalIsOpen : false,
             upcoming_bookings:[],
-            cancelled_booking:[],
-            confirmed_booking:[],
+            cancelled_bookings:[],
+            confirmed_bookings:[],
             get_bookings_loading:false
         };
         
@@ -125,29 +125,29 @@ class AppointmentComponent extends Component {
     componentWillReceiveProps(nextProps){
         if(!!nextProps.getBookingRet){
             if(nextProps.getBookingRet.success){
-               let confirmed_booking = []
-               let cancelled_booking = []
+               let confirmed_bookings = []
+               let cancelled_bookings = []
                let upcoming_bookings = []
-
+                console.log(nextProps.getBookingRet,"nextProps.getBookingRet in AppointmentComponent")
                nextProps.getBookingRet.data.forEach(data =>{
-                   if(data.bookingStatus==="Confirmed"){
-                       confirmed_booking.push(data)
+                   if((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true) ){
+                       confirmed_bookings.push(data)
                    }else if(data.bookingStatus==="Cancelled"){
-                       cancelled_booking.push(data)
+                       cancelled_bookings.push(data)
                    }else{
                        upcoming_bookings.push(data)
                    }
                })
                this.setState({
-                confirmed_booking:confirmed_booking,
-                cancelled_booking:cancelled_booking,
+                confirmed_bookings:confirmed_bookings,
+                cancelled_bookings:cancelled_bookings,
                 upcoming_bookings:upcoming_bookings,
                 get_bookings_loading:false
                })
             }else{
                 this.setState({
-                    confirmed_booking:[],
-                    cancelled_booking:[],
+                    confirmed_bookings:[],
+                    cancelled_bookings:[],
                     upcoming_bookings:[]
                 })
             }
@@ -155,10 +155,11 @@ class AppointmentComponent extends Component {
         }
     }
 
-    confirmBooking = (item) =>{
+    confirmBooking = (item,type) =>{
         this.setState({
             selected_booking:item,
-            confirm_modal_flag:true
+            confirm_modal_flag:true,
+            selected_type:type
         })
     }
 
@@ -199,31 +200,30 @@ class AppointmentComponent extends Component {
           </React.Fragment>
         }else{
             return   <React.Fragment>
-             <div className="prog col-lg-12">
-          <ul class="progressbar">
-                     <li class="active bokd">Booked</li><span className="sispan">100</span>
-                     <li className="ten active"><span>{item.paidAmmount}</span></li>
-                     <li className="thirtyp ">{item.totalAmount}</li>
-             </ul>
-           </div>
+            <ul className="list-unstyled multi-steps">
+                                    <li>Booked</li>
+                                    <li><i className="fa fa-rupee-sign"></i>6000</li>
+                                    <li className="is-active"><i className="fa fa-rupee-sign"></i>30000</li>
+           </ul>
         </React.Fragment>
         }
     }
 
     changeAppointClr = ()=>{
-        if(this.props.changeAppointRet.type==="confirming"){
-                console.log("Iniside conforming clear in ChangeAppoint Clear")
-                this.props.changeAppointClr()
-               this.setState({
-                    status_change_confirm:true
-               })
-        }else{
-            console.log("Iniside CancelClear clear in Other Clear")
-            this.props.changeAppointClr()
-           this.setState({
+        let arr = []
+            if(this.state.selected_type==="upcoming_bookings"){
+                arr = JSON.parse(JSON.stringify(this.state.upcoming_bookings))
+            }else if(this.state.selected_type==="cancelled_bookingss"){
+                arr = JSON.parse(JSON.stringify(this.state.cancelled_bookingss))
+            }
+            let newArr = arr.filter((item,i)=>item._id!==this.state.selected_booking._id) 
+
+            this.setState({
+                [this.state.selected_type]:newArr,
                 status_change_confirm:true
-           })
-        }
+            },()=>{
+                this.props.changeAppointClr()
+            })
     }
 
 
@@ -262,7 +262,7 @@ class AppointmentComponent extends Component {
                               <div className="upcoming_bdr"></div>
                                 <TabPanel className="ardee_ci">
                                {this.state.upcoming_bookings.map((item,i)=>{
-                                   console.log(item,"item in Appointments")
+                                   console.log(item,"item in upcomming Appointments")
                                    return <React.Fragment>
                                         <div className="row">
                                   <div className="col-lg-3 nov_2">
@@ -284,13 +284,13 @@ class AppointmentComponent extends Component {
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item)}>Confirm</text></p>
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings")}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="res_udle underline">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancel</text></p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings")}>Cancel</text></p>
                                  </div>
                                 </div>
                                 {/* 2nd--end */}
@@ -313,7 +313,7 @@ class AppointmentComponent extends Component {
                                })} 
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
-                                    {this.state.confirmed_booking.map((item,i)=>{
+                                    {this.state.confirmed_bookings.map((item,i)=>{
                                         console.log(item,"item in Appointments in confirmed")
                                    return <React.Fragment>
                                         <div className="row">
@@ -336,13 +336,13 @@ class AppointmentComponent extends Component {
                                 </div>
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item)}>Confirm</text></p>
+                                    <p className="gr_con underline"><text>Confirmed</text></p>
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="res_udle underline">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancel</text></p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings')}>Cancel</text></p>
                                  </div>
                                 </div>
                                 {/* 2nd--end */}
@@ -366,7 +366,8 @@ class AppointmentComponent extends Component {
                                <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
-                                {this.state.cancelled_booking.map((item,i)=>{
+                                {this.state.cancelled_bookings.map((item,i)=>{
+                                  console.log("item in Appointments in cancelled_bookings")
                                   return <React.Fragment>
                                   <div className="row">
                                   <div className="col-lg-3 nov_2">
@@ -388,13 +389,13 @@ class AppointmentComponent extends Component {
                           </div>
                           <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item)}>Confirm</text></p>
+                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,'cancelled_bookingss')}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="res_udle underline">Reschedule</p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancel</text></p>
+                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item)}>Cancelled</text></p>
                                  </div>
                           </div>
                           {/* 2nd--end */}
@@ -443,11 +444,6 @@ class AppointmentComponent extends Component {
                       </div>}
                            </div>    
                          </Modal>        
-
-
-
-
-
                          <Modal
                             isOpen={this.state.cancel_modal_flag}
                             onAfterOpen={()=>console.log("On After modall gets called")}
@@ -468,9 +464,7 @@ class AppointmentComponent extends Component {
                              <button onClick={()=>this. this.closeCancelModal()} className="common-button-white  ml-5">No</button>
                       </div>}
                            </div>    
-                         </Modal>        
-
-           
+                         </Modal>    
        <Modal
           isOpen={this.state.modalIsOpen}
         //   onAfterOpen={afterOpenModal}

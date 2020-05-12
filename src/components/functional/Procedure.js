@@ -8,18 +8,17 @@ import VarianceDropdown from "./varianceDropdown"
   const {data} = props
   const [ select , setSelect ] = useState(false)
 
-//   if(!!props.ret){
-//     if(props.id === props.selectedProcedure.id){
-//       if(!!props.ret.success){
-//         addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
-//       }else{
-        
-//         addToast(props.ret.message, {appearance: 'error', autoDismiss:true})
-//       }
-//       props.loadingOff()
-//       props.clr()
-//     }
-// }
+  if(!!props.ret){
+    if(props.data.serviceId === props.selected_procedures[0].serviceId){
+      if(!!props.ret.success){
+        addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
+      }else{
+        addToast(props.ret.message, {appearance: 'error', autoDismiss:true})
+      }
+      props.loadingOff()
+      props.clr()
+    }
+}
 
 const isSelected = () =>{
   let flag = false

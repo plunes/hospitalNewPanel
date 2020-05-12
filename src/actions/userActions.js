@@ -98,7 +98,13 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   GET_ENTITY_RET,
 
   CHANGE_APPOINT_RET_CLR,
-  CHANGE_APPOINT_RET
+  CHANGE_APPOINT_RET,
+
+  GET_OTP_CLR,
+  GET_OTP_RET,
+
+  SUBMIT_OTP_CLR,
+  SUBMIT_OTP_RET
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -108,6 +114,107 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "https://plunes.co/v4"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
+
+
+
+export const submitOtpClr = () => dispatch =>{
+  return  dispatch({
+    type: SUBMIT_OTP_CLR,
+    payload:{}
+  })
+}
+
+export const submitOtp = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+ console.log(data,"data in getEntity")
+  return await axios.put(baseUrl + `/user/updatePassword`, data , { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in getOTP')
+      if (res.status === 201) {
+        //dispatch(getSolutionInsights()
+        if(!!res.data.success){
+          dispatch({
+            type : GET_OTP_RET,
+            payload :{
+              success:true,
+              data:res.data,
+              message:"Password Successfully updated"
+            }
+          })
+        }else{
+          dispatch({
+            type : GET_OTP_RET,
+            payload :{
+              success:false,
+              data:[],
+              message:"Something went wrong. try again later"
+            }
+          })
+        }
+      }
+    }).catch(error => {
+      console.log(error,"error in GET")
+      dispatch({
+        type:GET_OTP_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try agian later",
+          data:{}
+         }
+      })
+  });
+}
+
+
+
+export const getOtpClr = () => dispatch =>{
+  return  dispatch({
+    type: GET_OTP_CLR,
+    payload:{}
+  })
+}
+
+export const getOtp = (data) => async dispatch => {
+  let token = localStorage.getItem('token');
+ console.log(data,"data in getEntity")
+  return await axios.get(baseUrl + `/user/forgotPassword?userId=${data.email}`,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res, 'res in getOTP')
+      if (res.status === 200) {
+        //dispatch(getSolutionInsights()
+        if(!!res.data){
+          dispatch({
+            type : GET_OTP_RET,
+            payload :{
+              success:true,
+              data:res.data,
+              message:"An OTP has been sent to your registered mobile number and email."
+            }
+          })
+        }else{
+          dispatch({
+            type : GET_OTP_RET,
+            payload :{
+              success:false,
+              data:[],
+              message:"Something went wrong. try again later"
+            }
+          })
+        }
+      }
+    }).catch(error => {
+      console.log(error,"error in GET")
+      dispatch({
+        type:GET_OTP_RET,
+         payload:{
+          success:false,
+          message:error.response?error.response.data.error:'Something went wrong. try again later',
+          data:{}
+         }
+      })
+  });
+}
+
 
 
 
@@ -142,7 +249,7 @@ export const changeAppoint = (data) => async dispatch => {
           payload :{
             success:true,
             data:res.data,
-            message:"Appointment status  successfully changed",
+            message:"Appointment status successfully changed",
             type:type
           }
         })
@@ -1187,7 +1294,7 @@ export const submitResetDetails = (uData) => async dispatch => {
 export const submitProfileDetails = (uData) => async dispatch => {
   console.log(uData,"Data in SubmitProfile Action")
   let obj = {
-    "name": uData.name,
+    "name": uData.fullname,
     "email": uData.email,
     "address": uData.location,
     "mobileNumber":uData.phone
@@ -1648,7 +1755,8 @@ export const getBooking = () => async  dispatch => {
             'redeemStatus': b.redeemStatus || null,
             'professionalAddress':b.professionalAddress,
             'userImageUrl':b.userImageUrl,
-            'professionalImageUrl':b.professionalImageUrl
+            'professionalImageUrl':b.professionalImageUrl,
+            'doctorConfirmation':b.doctorConfirmation
           }
           businessBooking.push(bookDet)
         })

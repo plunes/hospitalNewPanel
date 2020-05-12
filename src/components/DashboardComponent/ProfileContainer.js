@@ -286,7 +286,7 @@ class ProfileContainer extends React.PureComponent {
                   <div class="col-sm-10 col maxhospitalviewmap"><a href="" class="editmainbodymaxhospital viewmap">View on map</a></div>
                   <div class="col-sm-1 col"></div>
               </div> 
-          <hr className="Hospitalhr"></hr>
+          <hr className="Hospitalhr auto_center"></hr>
             <EditBio 
               editBio = {this.editBio}
               editBioRet = {this.props.editBioRet}

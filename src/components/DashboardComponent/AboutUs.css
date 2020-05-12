@@ -63,10 +63,12 @@
 /* NOTIFICATION CSS */
 
 .Notification
-    {margin-top: 120px;
+{
+    /* margin-top: 120px; */
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;} 
+    border-radius: 10px;
+} 
 
 .Notify
     {text-align: center;  

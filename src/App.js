@@ -6,7 +6,6 @@ import { Router, Route, Switch } from 'react-router-dom';
 import RegistrationContainer from './components/RegistrationComponent/RegistrationContainer';
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import DashboardComponent from './components/DashboardComponent/DashboardComponent';
-import ForgotPasswordComponent from './components/LoginComponent/ForgotPassword';
 import ProfileComponent from './components/DashboardComponent/ProfileComponent';
 import AvailabilityComponent from './components/DashboardComponent/AvailabilityComponent';
 import AppointmentComponent from './components/DashboardComponent/AppointmentComponent';
@@ -16,6 +15,7 @@ import HelpComponent from './components/DashboardComponent/HelpComponent';
 import AboutUsComponent from './components/DashboardComponent/AboutUsComponent';
 import MyCatalogueComponent from './components/DashboardComponent/MyCatalogueComponent';
 import AddDoctorComponent from "./components/DashboardComponent/AddDoctorComponent"
+import ForgotPasswordComponent from "./components/ChangePasswordComponent"
 //import LogoutComponent from './components/DashboardComponent/LogoutComponent';
 // import { connect } from 'react-redux';
 import { getUserDetails } from "../src/actions/userActions";

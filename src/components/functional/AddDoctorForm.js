@@ -176,8 +176,14 @@ import React, { useRef, useState, useEffect } from "react"
                       <div className="col-lg-2">
                          <div 
                       onClick = {(e)=>props.handleCloseDay(item,i,e)} 
-                      className='round'> 
+                      className='circul_rund'> 
                     <label className={item.closed?'green-background ':''} for="checkbox"></label></div></div>
+                     
+                      {/* <div className="col-lg-2">
+                         <div 
+                      onClick = {(e)=>props.handleCloseDay(item,i,e)} 
+                      className='round'> 
+                    <label className={item.closed?'green-background ':''} for="checkbox"></label></div></div> */}
                     </div>
                    ))}
       
