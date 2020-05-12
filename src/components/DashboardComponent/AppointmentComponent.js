@@ -187,27 +187,28 @@ class AppointmentComponent extends Component {
     }
 
     getProgressbar = (item) =>{
-        console.log(item,'item in getProgressbar')
-        if(false){
-            return  <React.Fragment>
-            <div className="prog col-lg-12">
-          <ul class="progressbar">
-                     <li class="active bokd">Booked</li><span className="sispan">100</span>
-                     <li className="ten"><span>{(item.paidAmmount)*0.5}</span></li>
-                     <li className="thirtyp active">{item.totalAmount}</li>
-             </ul>
-           </div>
-          </React.Fragment>
-        }else{
+        if(item.paidAmount===0){
             return   <React.Fragment>
             <ul className="list-unstyled multi-steps">
-                <li className="active_ris">Booked</li>
-                <li className="active_ris" ><i className="fa fa-rupee-sign"></i>6000</li>
-                <li className="active_ris" ><i className="fa fa-rupee-sign"></i>6000</li>
-                <li ><i className="fa fa-rupee-sign"></i>30000</li>
+                <li className="not_active_ris">Booked</li>
+                <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
            </ul>
         </React.Fragment>
         }
+       else if(item.paidAmount<item.totalAmount){
+        return  <React.Fragment>
+        <ul className="list-unstyled multi-steps">
+            <li className="active_ris">Booked</li>
+            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmmount}</li>
+            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
+       </ul>
+      </React.Fragment>
+    }else if(item.paidAmmount===item.totalAmount){
+        <ul className="list-unstyled multi-steps">
+                <li className="active_ris">Booked</li>
+                <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
+           </ul>
+    }
     }
 
     changeAppointClr = ()=>{

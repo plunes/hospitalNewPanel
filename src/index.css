@@ -344,8 +344,6 @@ body {
   margin-bottom: auto;
 }
 
-
-
 .multi-steps > li.is-active:before, .multi-steps > li.is-active ~ li:before {
   content: counter(stepNum);
   font-family: inherit;
@@ -388,7 +386,6 @@ body {
   background-color: #01D35A;
   border-radius: 50%;
   font-size: 3rem;
-  /* padding-top: 1.4rem; */
   color: #fff;
 }
 .multi-steps > li.active_ris:after {
@@ -399,9 +396,6 @@ body {
   position: absolute;
   top: 2rem;
   bottom: auto;
-  /* margin-top: auto; */
-  /* margin-bottom: auto; */
-  /* left: 62%; */
   z-index: 1;
 }
 .multi-steps > li:nth-child(2)::after{ 
@@ -412,14 +406,10 @@ body {
   content: '';
   height: 3px;
   width: 100%;
-  /* background-color: #01D35A; */
   position: absolute;
   top: 2rem;
   bottom: auto;
-  /* margin-top: auto; */
-  /* margin-bottom: auto; */
-  /* left: 62%; */
-  z-index: 1;
+  z-index: -2;
 }
 .multi-steps > li:last-child:after {
   display: none;
