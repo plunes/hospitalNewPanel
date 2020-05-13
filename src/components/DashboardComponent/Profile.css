@@ -156,6 +156,11 @@
                left: 2rem;
                right:2rem;
             }
+            /* payment-screen */
+            .rorpy_im{width: 6rem;height: 6rem;border-radius: 50px;border:1px solid #DCDCDC;}
+            .righside_pad{position: relative;
+                right: 30px;}
+            .ser_nme{font-size: 1.4rem;color: #474747;opacity: 0.5;}
 .achimen_pd
 {
         /* margin-top: 2rem; */

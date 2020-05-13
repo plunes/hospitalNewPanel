@@ -84,36 +84,10 @@ class Development extends Component {
             <div className='row'>
                 <LandingHeader />
             </div>
-           {/* Signup-header */}
-           {/* <nav className="navbar custom_ha navbar-expand-md custom-navbar sigunup_hedr">
-          <div className="container">
-              <a className="navbar-brand logo_size col-lg-3 col-md-4 col-6" href="#">
-                  <img src="/pluneslogo.png" className="lgo_sigun" />
-              </a>
-             <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-              <i className="fa fa-bars" aria-hidden="true"></i>
-             </button>
-               <div className="collapse navbar-collapse col-lg-9 back_color_mo" id="collapsibleNavbar">
-                   <ul className="navbar-nav ml-auto Three_butn dr_lis_mobile">
-                     <li className="nav-item">
-                      <a href="#"className="nav-link d_app">Download App</a>
-                      <img src="/iOS.png" className="ios_m"/> <img src="/Android.png" className="andorid_m"/>
-                    </li>
-                    <li className="nav-item">
-                      <a href="#" className="nav-link sig_lgn">Login</a>
-                    </li>
-                     <li className="nav-item">
-                       <a className="nav-link signup_lgu" href="#">Signup</a>
-                     </li>  
-                   </ul>
-               </div>  
-          </div>
-  </nav>
-               */}
-            {/* Signup-header-end */}
           
+           <div className="row">
              <section className="Plunes_india">
-               <div className="container">
+               <div className="text-center">
                  <div className="row">
                    <div className="col-lg-12 text-center">
                     <div className="heading_hos">
@@ -136,7 +110,7 @@ class Development extends Component {
                         </section>
                         {/* 1st-section-end */}
                         <section className="offers_int">
-                          <div className="container text-center">
+                          <div className="text-center">
                            <div className="revenues_heding">
                             <h3>AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h3>
                              <img src="/system.png" className="laptop" />
@@ -219,7 +193,7 @@ class Development extends Component {
                  
                       {/* 3rd-end */}
                       <section className="inteljent_cloud">
-                         <div className="container">
+                        
                            <h4 className="solution_emr">An intelligent Cloud Solution for EMR, Integrated with profiles <br />of Users and Hospitals for a seamless experience.</h4>
                          <div className="row">
                            <div className="col-lg-5 offset-lg-1 col-12 col-md-5">
@@ -234,11 +208,11 @@ class Development extends Component {
                               <img src="/cloud.svg" className="clod_anum" />
                              </div>
                            </div> 
-                           </div>
+                         
                         </section>
     
 
-           
+           </div>
             
         </div>
         

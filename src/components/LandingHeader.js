@@ -39,7 +39,7 @@ class LandinHeader extends Component {
                   <li className="nav-item">
                     <Link to="/signup"
                     className="nav-link sig_lgn"
-                    >Signup</Link>
+                    > login</Link>
                     {/* <a href="/signup" className="nav-link sig_lgn">Signup</a> */}
                   </li> 
                  </ul>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DashboardHeader from './DashboardHeader';
-import SidebarComponent from './SidebarComponent';
 import { connect } from 'react-redux';
 import { getBooking, getBookingClr } from '../../actions/userActions'
 import { initiatePayment } from '../../actions/userActions'
@@ -117,23 +116,27 @@ class PaymentComponent extends Component {
         return (
            <React.Fragment>
                     <div className='col-md-7 Payment AllComponents'>
-                    <div className= 'text-center'><h4><b>Payments</b></h4></div><br></br>
+                    <div className= 'text-center paymnt_heding'><h4>Payments</h4></div><br></br>
                         {
                             this.state.payments.map((p, index) => (
                                 <div key={index} className='row'>
-                                    <div className='col-md-6'>
+                                     <div className='col-md-2'>
+                                         <a href="#">
+                                          <img src="/doctorpay.png" className="rorpy_im" /></a>
+                                        </div>
+                                    <div className='col-md-4 righside_pad'>
                                         <div className='PaymentUN'>{p.userName}</div>
-                                        <div>{p.serviceName}</div><br></br>
+                                        <div><p className="ser_nme">{p.serviceName}</p></div><br></br>
                                         <div>
                                         <h4>{this.dateTimeObject(p.appointmentTime).monthAndDate}</h4>
-                                    <p>{this.dateTimeObject(p.appointmentTime).fullDate}<br/>{this.dateTimeObject(p.appointmentTime).time}</p>            
+                                    <p className="ser_nme">{this.dateTimeObject(p.appointmentTime).fullDate}<br/>{this.dateTimeObject(p.appointmentTime).time}</p>            
                                   {/* {p.appointmentTime} */}
                                             </div>
                                     </div>
                                     <div className='col-md-6 text-right'>
                                         <div className='PaymentUN'>&#x20b9;{p.totalAmount}</div><br></br>
                                         {
-                                            p.redeemStatus === null ? <button type='button' onClick={() => this.handleClick(p)} className='redeemBtn'><u>Redeem</u></button> : <div>{p.redeemStatus}</div>
+                                            p.redeemStatus === null ? <button type='button' onClick={() => this.handleClick(p)} className='redeemBtn'><u>Redeem</u></button> : <div><p className="ser_nme">{p.redeemStatus}</p></div>
                                         }
                                     </div>
                                     <hr className="PaymentHR"></hr>
