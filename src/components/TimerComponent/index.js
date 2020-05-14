@@ -36,7 +36,7 @@ class TimerComponent extends React.Component {
     }
     componentDidMount() {
       let timeLeftVar = this.secondsToTime(this.props.seconds());
-      console.log(timeLeftVar,this.props.seconds(),"timeLeftVar in timeer")
+      // console.log(timeLeftVar,this.props.seconds(),"timeLeftVar in timeer")
       this.setState(
           { time: timeLeftVar,
             seconds: this.props.seconds()}
@@ -72,7 +72,7 @@ class TimerComponent extends React.Component {
     }
   
     render() {
-      console.log(this.state,"state in timerComponent")
+      // console.log(this.state,"state in timerComponent")
         if(!!this.props.seconds){
             return(
                <React.Fragment>

@@ -10,7 +10,8 @@ import Modal from 'react-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
-
+import MeasureTime from "../MeasureTime"
+let time_flag = false
 const getMonth = (item) =>{
         switch (item) {
             case 0:
@@ -83,7 +84,10 @@ class AppointmentComponent extends Component {
      componentDidMount(){
       this.setState({
         get_bookings_loading:true
-      },()=>this.props.getBooking())
+      },()=>{
+        this.props.getBooking()
+        time_flag =true
+      })
       
     }
     openModal(){
@@ -141,6 +145,8 @@ class AppointmentComponent extends Component {
                 cancelled_bookings:cancelled_bookings,
                 upcoming_bookings:upcoming_bookings,
                 get_bookings_loading:false
+               },()=>{
+                   time_flag=false
                })
             }else{
                 this.setState({
@@ -240,18 +246,26 @@ class AppointmentComponent extends Component {
 
 
     render() {
-        console.log(this.state,"this.state in AppointmentComponent")
+        // console.log(this.state,"this.state in AppointmentComponent")
+        console.log(time_flag,"time_flag in render")
+        console.log(this.state.get_bookings_loading,"this.state.getBookings loading in appointment")
         if(!!this.state.get_bookings_loading){
            return   <div className='col-md-8'>
            <div className="Appoint AllComponents">
              <div style={{position:'relative', width:'100%',height:'100%'}}>
            <LoaderComponent />
+           {/* <MeasureTime  
+                flag = {this.state.get_bookings_loading}
+                /> */}
        </div>
        </div>
        </div>
         }
         return (
             <React.Fragment>
+               
+
+               
                 <NotifFunc
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}

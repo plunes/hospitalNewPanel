@@ -5,12 +5,11 @@ import SidebarComponent from './SidebarComponent';
 import { connect } from 'react-redux';
 // import { getUserDetails } from "../../actions/userActions";
 // import { getBooking } from '../../actions/userActions'
-import { getInsights, updateRealPriceClr, clearUpdatePriceData } from '../../actions/userActions'
+import { getInsights, updateRealPriceClr, clearUpdatePriceData,
+     clearSolInsights, getSolutionInsights, getAllBookings,
+      getMonthWiseUsers, updateRealPrice, setMount,
+      set_dash_data } from '../../actions/userActions'
 import { sendUpdateData } from '../../actions/userActions'
-import { getSolutionInsights } from '../../actions/userActions'
-import { getAllBookings } from '../../actions/userActions'
-import { getMonthWiseUsers } from '../../actions/userActions'
-import { updateRealPrice } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import './Dashboard.css';
@@ -36,7 +35,7 @@ const customStyles = {
 };
 
 
-class DashboardComponent extends Component {
+class DashboardComponent extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,9 +45,10 @@ class DashboardComponent extends Component {
             updatePrice: 0,
             actionUpdatedPrice : 0,
             updateData: {},
+            solInsights:[],
             serviceName: '',
             days: 0,
-            loader: true,
+            loader: false,
             percent: 0,
             realServiceName:'',
             realUpdatePrice:0,
@@ -58,7 +58,8 @@ class DashboardComponent extends Component {
             solValue: 10,
             distance: 30,
             showBusiness :  true,
-            ro_insight_count:50
+            ro_insight_count:50,
+            user_map_loading:false
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -73,7 +74,17 @@ class DashboardComponent extends Component {
         this.handleSolutionSliderChange = this.handleSolutionSliderChange.bind(this);
         this.setTimer = this.setTimer.bind(this);
     }
-    
+
+    // componentWillReceiveProps(nextProps){
+    //     if(!!nextProps.solInsights){
+    //         this.setState({
+    //             solInsights:nextProps.solInsights
+    //         },()=>{
+    //             nextProps.clearSolInsights(),
+    //             nextProps.set_dash_data({...nextProps.data.dash_data, solInsights:nextProps.solInsights})
+    //         })
+    //     }
+    // }   
     setTimer(time){
         setTimeout(async () => {
             await this.props.getSolutionInsights();
@@ -112,7 +123,6 @@ class DashboardComponent extends Component {
     }
 
     async handleRealPrice(select) {
-        console.log(select, 'select');
         this.setState({
             realModalIsOpen :  true,
             realServiceName: select.serviceName,
@@ -201,13 +211,21 @@ class DashboardComponent extends Component {
     async componentDidMount() {
         //await this.props.getBooking();
         let defaulteDays = 15
-        await this.props.getAllBookings(defaulteDays);
-        await this.props.getInsights();
-        await this.props.getSolutionInsights();
-        await this.props.getMonthWiseUsers();
-        this.setState({
-            loader: false
-        })
+       
+        // await this.props.getAllBookings(defaulteDays);
+        // await this.props.getInsights();
+
+        if(!!!this.props.mount.dash_mount){
+            this.setState({
+                loader:true
+            })
+
+            // await this.props.getSolutionInsights();
+            await this.props.getMonthWiseUsers();
+            this.setState({
+                loader: false
+            },()=>this.props.setMount({...this.props.mount,dash_mount:true}))
+        }
     }
 
     updateRealPriceClr = () =>{
@@ -236,7 +254,7 @@ class DashboardComponent extends Component {
     }
 
     render() {
-        console.log(this.props,"this.props  in dashboardComponent")
+        console.log(this.props,"this.props in DashboardComponent")
         console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
         const options = {
@@ -264,7 +282,7 @@ class DashboardComponent extends Component {
             },
         }
        
-        if (this.state.loader) {
+        if (false) {
             return (
                 <div className="Loader">
                     <Loader
@@ -280,6 +298,7 @@ class DashboardComponent extends Component {
             return (
                 <React.Fragment>
                         <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
+                      
                         <NotifFunc 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
@@ -295,7 +314,8 @@ class DashboardComponent extends Component {
                             </div>
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
-                                    <div className='dashboardsection scrolling_sec'>
+                                    <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
+                                    {this.props.real_insight_loader && <LoaderComponent/>}
                                         <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
@@ -399,10 +419,10 @@ class DashboardComponent extends Component {
                                 </div>
                                 <div className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
+                                    {this.props.act_insight_loader && <LoaderComponent/>}
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
-                                       
                                         {
                                             this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
@@ -508,14 +528,13 @@ class DashboardComponent extends Component {
                   </React.Fragment>
             )
         }
-
     }
 }
 const mapStateToProps = state => ({
     //bookings: state.user.bookingData,
     user: state.user.userDetail,
-    insight: state.user.insightData,
-    solInsights: state.user.solInsights,
+    dash_data:state.user.data.dash_data,
+    mount:state.user.mount,
     businessEarn: state.user.businessEarn,
     businessLost: state.user.businessLost,
     solutionUsers: state.user.solutionUsers,
@@ -523,6 +542,14 @@ const mapStateToProps = state => ({
     updatePriceDataRet:state.user.updatePriceDataRet
 })
 
-
-export default connect(mapStateToProps, {updateRealPriceClr, clearUpdatePriceData, getAllBookings, getInsights, sendUpdateData, getSolutionInsights, getMonthWiseUsers, updateRealPrice })(DashboardComponent);
+export default connect(mapStateToProps, {updateRealPriceClr, 
+     clearUpdatePriceData, 
+     getAllBookings,
+     getInsights,
+     sendUpdateData, 
+     getSolutionInsights,
+     getMonthWiseUsers,
+     updateRealPrice,
+     set_dash_data,
+     clearSolInsights, setMount })(DashboardComponent);
 // Call userdetails from

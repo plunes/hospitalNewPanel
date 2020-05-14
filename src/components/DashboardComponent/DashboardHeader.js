@@ -22,11 +22,11 @@ class DashboardHeader extends Component {
     this.props.sendCounterZero(unreadN);
     history.push('/notification')
   }
-  async componentDidMount(){
-    await this.props.getNotifications()
-  }
+  // async componentDidMount(){
+  //   await this.props.getNotifications()
+  // }
   render() {
-    // console.log(this.props.user, 'user');
+    console.log(this.props, 'user');
 
         return <div className="Header">
           <div>
@@ -65,10 +65,9 @@ class DashboardHeader extends Component {
                         <Link to= "/dashboard/notification"
                         role = "button"
                         onClick = {this.props.toggleNotif()}>
-                        <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.notificationCount}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
+                        <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.notificationsData.count!==0?this.props.notificationsData.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
                          </Link>
                         </div>
-                   
                   </li>
                   <li className="nav-item nav2">
                     <div className="nav-link HeaderLink">
@@ -96,9 +95,7 @@ class DashboardHeader extends Component {
 
 //fetch userDetails reducer
 const mapStateToProps = state => ({
-  user : state.user.userDetail,
-  notificationCount : state.user.unreadCounter,
-  unreadNotification: state.user.unreadNotification
+  user : state.user.userDetail
 })
 //export default connect(mapStateToProps, {})(DashboardHeader)
 export default connect(mapStateToProps, {getNotifications, sendCounterZero})(DashboardHeader)

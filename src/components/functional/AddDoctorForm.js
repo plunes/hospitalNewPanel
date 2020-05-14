@@ -110,20 +110,20 @@ import React, { useRef, useState, useEffect } from "react"
    <form class="shake" role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
         
          <div class="form-group label-floating">
-           <label class="control-label" for="name">Name</label>
-           <input class="form-control btm_in_bdr" value= {props.name} onChange={props.handleChange} id="name" type="text" name="name" required data-error="Please enter your name" />
+           <label class="control-label control_label_ris" for="name">Name</label>
+           <input class="form-control no_padding_ris btm_in_bdr" value= {props.name} onChange={props.handleChange} id="name" type="text" name="name" required data-error="Please enter your name" />
            <div class="help-block with-errors"></div>
          </div>
         
          <div class="form-group label-floating">
-           <label class="control-label" for="education">Education Qualification</label>
-           <input class="form-control btm_in_bdr" value= {props.education} onChange={props.handleChange} id="educationqua" type="education" name="education" required data-error="Please enter your education qulification" />
+           <label class="control-label control_label_ris" for="education">Education Qualification</label>
+           <input class="form-control no_padding_ris btm_in_bdr" value= {props.education} onChange={props.handleChange} id="educationqua" type="education" name="education" required data-error="Please enter your education qulification" />
            <div class="help-block with-errors"></div>
          </div>
 
          <div class="form-group label-floating">
-           <label class="control-label">Designation</label>
-           <input class="form-control btm_in_bdr" id="msg_Designation" value= {props.designation} onChange={props.handleChange} type="text" name="designation" required data-error="Please enter your message Designation" />
+           <label class="control-label control_label_ris">Designation</label>
+           <input class="form-control no_padding_ris btm_in_bdr" id="msg_Designation" value= {props.designation} onChange={props.handleChange} type="text" name="designation" required data-error="Please enter your message Designation" />
            <div class="help-block with-errors"></div>
          </div> 
          
@@ -151,8 +151,8 @@ import React, { useRef, useState, useEffect } from "react"
             </div>
         
          <div class="form-group label-floating">
-             <label for="message" class="control-label">Experience</label>
-             <input class="form-control btm_in_bdr" value= {props.experience} onChange={props.handleChange} id="msg_Experience" type="number" name="experience" required data-error="Please enter your message Experience" />
+             <label for="message" class="control-label control_label_ris">Experience</label>
+             <input class="form-control no_padding_ris btm_in_bdr" value= {props.experience} onChange={props.handleChange} id="msg_Experience" type="number" name="experience" required data-error="Please enter your message Experience" />
              <div class="help-block with-errors"></div>
          </div>
        

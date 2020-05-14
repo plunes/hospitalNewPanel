@@ -446,3 +446,11 @@ body {
   font-size: 3rem;
   color: #fff;
 }
+
+
+.control_label_ris {
+  top:12px !important;
+}
+.no_padding_ris {
+  padding: 0px !important;
+}

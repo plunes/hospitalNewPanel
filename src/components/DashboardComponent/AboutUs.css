@@ -78,9 +78,13 @@
      margin: 25px;font-size: 17px;}
 
 .NotifierName
-    {margin-bottom: 0px !important;     
+    {
+    margin-bottom: 0px !important;     
     font-weight: 500;
-    font-size: 15px;padding-top: 5px;}
+    font-size: 15px;
+    padding-top: 5px;
+    color:gray;
+   }
 .intro_di{font-size: 14px;color: #474747;opacity: 0.6;}
 .NotifyImg
     {background-color: #888888;

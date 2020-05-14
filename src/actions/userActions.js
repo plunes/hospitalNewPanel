@@ -1,5 +1,8 @@
 import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, UNREAD_LENGTH, UNREAD_NOTIFICATION,
-   GET_SOL_INSIGHTS, BUSINESS_EARN, BUSINESS_LOST, SOLUTION_USERS,
+   GET_SOL_INSIGHTS,
+   CLEAR_SOL_INSIGHTS,
+   BUSINESS_EARN, BUSINESS_LOST,
+   SOLUTION_USERS,
    GET_CATALOGUE,
    PROFILE_DATA_RET,
 
@@ -104,7 +107,13 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   GET_OTP_RET,
 
   SUBMIT_OTP_CLR,
-  SUBMIT_OTP_RET
+  SUBMIT_OTP_RET,
+  SET_MOUNT,
+  SET_DASH_DATA,
+  CLEAR_ACT_INSIGHT,
+
+  CLEAR_GET_NOTIFICATION,
+  SET_NOTIF_DATA
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -115,6 +124,35 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
 
+export const set_dash_data = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_DASH_DATA,
+    payload:data
+  })
+}
+
+export const set_notif_data = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_NOTIF_DATA,
+    payload:data
+  })
+}
+
+
+
+export const clr_act_insght = (data) => dispatch =>{
+  return  dispatch({
+    type: CLEAR_ACT_INSIGHT,
+    payload:data
+  })
+}
+
+export const setMount = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_MOUNT,
+    payload:data
+  })
+}
 
 
 export const submitOtpClr = () => dispatch =>{
@@ -1447,6 +1485,14 @@ export const getAllBookings = (days) => async dispatch => {
     })
 }
 
+
+export const clearSolInsights = () => dispatch =>{
+  return  dispatch({
+    type: CLEAR_SOL_INSIGHTS,
+    payload:{}
+  })
+}
+
 export const getSolutionInsights = () => async dispatch => {
   let token = localStorage.getItem('token');
   //let token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODUxMjE3Mzh9.NzWdxrlVF3Q5DMp_4_4yYP7D0HblbMG9M1G_18e0ILE"
@@ -1537,11 +1583,18 @@ export const initiatePayment = (pData) => async dispatch => {
       })
   })
 }
+export const clr_get_notif = () => async dispatch => {
+  return dispatch({
+    type:CLEAR_GET_NOTIFICATION,
+    payload:{}
+  })
+}
 
-export const getNotifications = () => async dispatch => {
+
+export const getNotifications = (data) => async dispatch => {
   //  let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODA4MjM5ODZ9.r01FAXk1mEdnsi0aMsmTfHxRTNtthl9oIv0D9_4_0-o'
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + '/notification/0', { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + `/notification/0/${data.page}`, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201 && res.data.success) {
         let notifications = res.data.notifications
@@ -1550,7 +1603,7 @@ export const getNotifications = () => async dispatch => {
         )
         dispatch({
           type: GET_NOTIFICATIONS,
-          payload: res.data.notifications
+          payload: res.data
         })
         console.log(unreadNotifications.length, 'unread notifications')
         if (unreadNotifications.length === 0) {

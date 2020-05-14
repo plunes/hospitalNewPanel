@@ -88,7 +88,7 @@ class App extends Component {
             <Route exact path='/home' component={Development} />
             <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
-            <Route exact path='/profile' component={ProfileComponent} />
+            {/* <Route exact path='/profile' component={ProfileComponent} />
             <Route exact path='/availability' component={AvailabilityComponent} />
             <Route exact path='/appointments' component={AppointmentComponent} />
             <Route exact path='/settings' component={SettingsComponent} />
@@ -100,7 +100,7 @@ class App extends Component {
             <Route exact path='/editProfile' component={EditProfileComponent} />
             <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
             <Route exact path='/change-password' component={ChangePassword} />
-            <Route exact path='/add-doctor' component={AddDoctorComponent} />
+            <Route exact path='/add-doctor' component={AddDoctorComponent} /> */}
             <Route exact path='/devlopment' component={Development} />
             </div>
           </Switch>

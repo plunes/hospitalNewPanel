@@ -4,12 +4,20 @@ export const GET_BOOKING = 'GET_BOOKING'
 export const GET_BOOKING_RET = 'GET_BOOKING_RET'
 export const GET_BOOKING_CLR = 'GET_BOOKING_CLR'
 export const GET_USER_DETAILS = 'GET_USER_DETAILS'
-export const GET_INSIGHTS = 'GET_INSIGHTS'
+
+export const GET_INSIGHTS = 'APP/GET_INSIGHTS'
+export const CLEAR_ACT_INSIGHT = 'APP/GET_INSIGHTS_CLR'
+
 export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS'
+export const CLEAR_GET_NOTIFICATION = 'App/Notification/CLEAR_GET_NOTIFICATION'
+
 export const GET_TIMESLOT = 'GET_TIMESLOT'
 export const UNREAD_NOTIFICATION = 'UNREAD_NOTIFICATION'
 export const UNREAD_LENGTH = 'UNREAD_LENGTH'
-export const GET_SOL_INSIGHTS = 'GET_SOL_INSIGHTS'
+
+export const GET_SOL_INSIGHTS = 'App/Insights/GET_SOL_INSIGHTS'
+export const CLEAR_SOL_INSIGHTS = 'App/Insights/CLEAR_SOL_INSIGHTS'
+
 export const BUSINESS_EARN = 'BUSINESS_EARN'
 export const BUSINESS_LOST = 'BUSINESS_LOST'
 export const SOLUTION_USERS = 'SOLUTION_USERS'
@@ -133,3 +141,12 @@ export const GET_OTP_CLR = 'App/Profile/GET_OTP_CLR'
 
 export const SUBMIT_OTP_RET = 'App/Profile/SUBMIT_OTP_RET'
 export const SUBMIT_OTP_CLR = 'App/Profile/SUBMIT_OTP_CLR'
+
+export const SET_MOUNT = 'App/SET_MOUNT'
+
+export const SET_DASH_DATA = 'App/SET_DASH_DATA'
+export const SET_NOTIF_DATA  = 'App/SET_NOTIF_DATA'
+
+
+
+

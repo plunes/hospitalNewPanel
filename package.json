@@ -16,6 +16,7 @@
     "history": "^4.10.1",
     "mdbreact": "^4.24.0",
     "multiselect-dropdown-react": "^1.0.5",
+    "pretty-ms": "^7.0.0",
     "profile-picture": "git+https://github.com/dsalvagni/react-profile-picture.git",
     "rc-slider": "^9.2.4",
     "react": "^16.12.0",
@@ -41,6 +42,7 @@
     "read-more-react": "^1.0.10",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "socket.io-client": "1.7.0",
     "throttle-debounce": "^2.1.0",
     "validator": "^13.0.0"
   },

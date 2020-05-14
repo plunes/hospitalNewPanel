@@ -489,7 +489,7 @@ let obj =   {
                     <div className="border_dev">
                 <div className="add_dr">
                     <div className="add_srch_d">
-                      {this.state.doctorProfileFlag?<h4>Docotr</h4>:<h4>Add Doctor</h4>}
+                      {this.state.doctorProfileFlag?<h4>Doctor</h4>:<h4>Add Doctor</h4>}
           
           {/* <p>Search for a doctor by name or email</p> */}
           </div>

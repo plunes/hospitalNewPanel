@@ -88,20 +88,29 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   GET_OTP_RET,
 
   SUBMIT_OTP_RET,
-  SUBMIT_OTP_CLR
+  SUBMIT_OTP_CLR,
+
+  CLEAR_SOL_INSIGHTS,
+
+  SET_MOUNT,
+  SET_DASH_DATA,
+  CLEAR_ACT_INSIGHT,
+  CLEAR_GET_NOTIFICATION,
+
+  SET_NOTIF_DATA
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
 
 const initialState = {
   userDetail: {},
-  insightData: [],
+  insightData: false,
   bookingData: [],
-  notificationData: [],
+  notificationData: false,
   timeSlot: [],
   unreadCounter: null,
   unreadNotification: [],
-  solInsights: [],
+  solInsights: false,
   businessEarn: null,
   businessLost: null,
   solutionUsers: [],
@@ -149,11 +158,58 @@ const initialState = {
   getEntityRet:false,
   changeAppointRet:false,
   getOtpRet:false,
-  submitOtpRet:false
+  submitOtpRet:false,
+  mount:{
+    dash_mount:false,
+    prof_mount:false,
+    avail_mount:false,
+    appoint_mount:false,
+    sett_mount:false,
+    manage_pay_mount:false,
+    help_mount:false,
+    about_us_mount:false,
+    payment_mount:false,
+    notif_mount:false,
+    catalogue_mount:false
+  },
+  data:{
+    dash_data:{
+      solInsights:[],
+      insight:[]
+    },
+    notif_data:{
+      count:0,
+      notifications:[]
+    }
+  }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case SET_DASH_DATA:
+      return {
+        ...state,
+        data:{
+          ...state.data,
+          dash_data:action.payload
+        }
+      }
+
+    case SET_NOTIF_DATA:
+      return {
+        ...state,
+        data:{
+          ...state.data,
+          notif_data:action.payload
+        }
+      }
+      
+    case SET_MOUNT:
+      return {
+        ...state,
+        mount:action.payload
+      }
 
 
     case SUBMIT_OTP_CLR:
@@ -588,11 +644,22 @@ export default function (state = initialState, action) {
         ...state,
         insightData: action.payload
       }
+
+    case CLEAR_ACT_INSIGHT:
+      return {
+        ...state,
+        insightData: false
+      }
     case GET_NOTIFICATIONS:
       return {
         ...state,
         notificationData: action.payload
       }
+      case CLEAR_GET_NOTIFICATION:
+      return {
+        ...state,
+        notificationData: false
+      }      
     case GET_TIMESLOT:
       return {
         ...state,
@@ -613,6 +680,14 @@ export default function (state = initialState, action) {
         ...state,
         solInsights: action.payload
       }
+
+      case CLEAR_SOL_INSIGHTS:
+      return {
+        ...state,
+        solInsights: false
+      }
+
+
     case BUSINESS_EARN:
       return {
         ...state,

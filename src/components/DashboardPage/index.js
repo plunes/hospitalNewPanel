@@ -16,10 +16,14 @@ import MyCatalogueComponent from '../DashboardComponent/MyCatalogueComponent';
 import DoctorComponent from '../functional/DoctorComponent';
 import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
-import { getEntity, getEntityClr } from "../../actions/userActions"
+import { getEntity, getEntityClr, clearSolInsights,
+   getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
+   getNotifications, clr_get_notif, setMount, set_notif_data } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
+import io from "socket.io-client"
+import Notify from '../functional/Notify';
 
 const initialState = {
   dash: '',
@@ -56,10 +60,69 @@ export class DashboardPage extends React.PureComponent {
         myCataloge: '',
         addDoc: '',
         dev: '',
-        changePass:''
-    };
-   
+        changePass:'',
+        solInsights:[],
+        insight:[],
+        notificationsData:{
+          count:0,
+          notifications:[]
+        },
+        act_insight_loader:false,
+        real_insight_loader:false,
+        get_notifications_loading:false,
+        Notify:{
+          success:false,
+          error:false
+      }
+    }
   }
+
+  componentWillReceiveProps(nextProps){
+        if(!!nextProps.solInsights){
+          this.setState({
+              solInsights:nextProps.solInsights,
+              real_insight_loader:false
+          },()=>{
+              nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
+              nextProps.clearSolInsights()
+          })
+      }
+        if(!!nextProps.insight){
+          this.setState({
+              insight:nextProps.insight,
+              act_insight_loader:false
+          },()=>{
+              nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.insight})
+              nextProps.clr_act_insght()
+          })
+      }
+
+      if(nextProps.dash_data){
+        this.setState({
+          solInsights:nextProps.dash_data.solInsights,
+          insight:nextProps.dash_data.insight,
+        })
+      }
+
+        if(!!nextProps.notificationData){
+          console.log(nextProps.notificationData,"notoficationData in Will ReceiveProps")
+          this.setState({
+              notificationsData:nextProps.notificationData,
+              get_notifications_loading:false
+          },()=>{
+              nextProps.set_notif_data({...nextProps.notif_data, ...nextProps.notificationData})
+              nextProps.clr_get_notif()
+              nextProps.setMount({...this.props.mount,notif_mount:true})
+          })
+        }
+
+        if(!!nextProps.notif_data){
+          this.setState({
+              notificationsData:nextProps.notif_data
+          })
+        }
+}
+
   componentDidMount() {
     if (this.props.location.pathname == '/dashboard') {
       this.setState({
@@ -124,6 +187,14 @@ export class DashboardPage extends React.PureComponent {
       ...initialState, changePass:'active'
       })
     }
+    this.setState({
+      act_insight_loader:true,
+      real_insight_loader:true
+    })
+    this.props.getSolutionInsights()
+    this.props.getInsights()
+    this.props.getNotifications({page:1})
+    this.socketEmit()
   }
 
   toggleChangePass =()=>{
@@ -222,15 +293,69 @@ export class DashboardPage extends React.PureComponent {
     });
   }
 
+  socketEmit = () => {
+    let data = {
+        userId: localStorage.getItem('userId')
+      }
+    const socket = io.connect(`https://devapi.plunes.com?userId=${data.userId}`)
+    socket.on('connect', (data) => {
+        console.log("Connect event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        console.log(data)
+    });
+    socket.on('realtimeInsight',(data)=>{
+        console.log("RealTimeInsights event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        console.log(data)
+        this.add_insight(data)
+    })
+    socket.on('notification',(data)=>{
+        console.log("Notification event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        console.log(data)
+        this.prompt_success_notify(data)
+    })
+    socket.on('disconnect', (data) => {
+        console.log("Disconnect event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        socket.emit('join', data)
+    })
+    socket.on('error',  (err) => {
+        console.log("Error event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        socket.emit('join', data)
+        console.log('SOCKET ERR : ', err);
+    })
+}
+
+add_insight = (data) =>{
+    this.setState({
+        solInsights:[data[0],...this.state.solInsights]
+    },()=>this.props.set_dash_data({...this.props.dash_data, solInsights:this.state.solInsights}))
+}
+
+prompt_success_notify =(data) =>{
+    this.setState({
+        Notify:{
+            ...this.state.Notify,
+            success:{
+                message:data
+            }
+        }
+    })
+}
+
   render() {
-    console.log(this.props,"props in DasboardPage")
+    console.log(this.state,"this.state in DasboardPage")
+    console.log(this.props,"this.props in DasboardPage")
     return (
              <div>
+                 <Notify  
+                        success={this.state.Notify.success}
+                        error={this.state.Notify.error}
+                        clear = {()=>this.setState({Notify:{success:false,error:false}})}
+                        />
                     <div className='row'>
                         <DashboardHeader
                           toggleNotif = {this.toggleNotif}
                           togglePayment = {this.togglePayment}
                           toggleProfile = {this.toggleProfile}
+                          notificationsData = {this.state.notificationsData}
                         />
                     </div>
                     <div className="container-fluid">
@@ -248,7 +373,12 @@ export class DashboardPage extends React.PureComponent {
                             />
                         </div>
                   {(this.props.location.pathname == '/dashboard')?
-                  <DashboardComponent /> :(this.props.location.pathname == '/dashboard/profile')?
+                  <DashboardComponent
+                  solInsights = {this.state.solInsights}
+                  insight = {this.state.insight}
+                  real_insight_loader = {this.state.real_insight_loader}
+                  act_insight_loader = {this.state.act_insight_loader}                
+                  /> :(this.props.location.pathname == '/dashboard/profile')?
                   <ProfileContainer
                   toggleProfile = {this.toggleProfile}
                   toggleMyCatalog = {this.toggleMyCatalog}
@@ -268,7 +398,10 @@ export class DashboardPage extends React.PureComponent {
                   <AddDoctorComponent
                     location = {this.props.location}
                   />:(this.props.location.pathname == '/dashboard/notification')?
-                  <NotificationComponent/>:(this.props.location.pathname == '/dashboard/editProfile')?
+                  <NotificationComponent
+                  notificationsData = {this.state.notificationsData}
+                  
+                  />:(this.props.location.pathname == '/dashboard/editProfile')?
                   <EditProfileComponent />:(this.props.location.pathname == '/dashboard/change-password')?
                   <ChangePassword />:(this.props.location.pathname == '/dashboard/payments')?
                   <PaymentComponent />:''}
@@ -281,11 +414,26 @@ export class DashboardPage extends React.PureComponent {
 
 
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.user,
+    dash_data:state.user.data.dash_data,
+    mount:state.user.mount,
+    solInsights:state.user.solInsights,
+    insight: state.user.insightData,
+    notificationData: state.user.notificationData,
+    notif_data:state.user.data.notif_data
 })
 
 export default connect(mapStateToProps, { 
 getEntity,
-getEntityClr
+getEntityClr,
+clearSolInsights,
+getInsights,
+set_dash_data,
+clr_act_insght,
+set_notif_data,
+getSolutionInsights,
+getNotifications,
+clr_get_notif,
+setMount
 })(DashboardPage);
 
