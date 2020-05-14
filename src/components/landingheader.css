@@ -58,6 +58,7 @@
         padding-bottom: 19px;
     }
     @media (max-width: 767px) and (min-width: 281px) {
+        .landing_hedr{height: auto;}
         .navbar .container{height: auto;}
         .sigunup_hedr {
             height: 100%;

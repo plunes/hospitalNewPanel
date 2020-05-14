@@ -90,7 +90,7 @@ import React, { useRef, useState, useEffect } from "react"
        {props.addDoctorLoading && <LoaderComponent />}
     <h5 className="pfo_im">Profile Image</h5>
    <div className="row">
-     <div className="col-lg-2 position-relative">
+     <div className="col-lg-2 col-md-4 position-relative">
    {props.laodingImage &&  <LoaderComponent />}
      <input  
     style={{display:'inline',display:'none'}}

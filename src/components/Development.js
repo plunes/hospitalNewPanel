@@ -7,6 +7,13 @@ import ManagePayment from "./functional/ManagePayment"
 import "./DEvelopment.css"
 import LandingHeader from './LandingHeader'
 
+var rootStyle = {
+    backgroundColor : 'green',
+    color : 'white',
+    height : '100%'
+  
+  }
+
 class Development extends Component {
     constructor(props){
         super(props);
@@ -77,15 +84,17 @@ class Development extends Component {
         // console.log(this.props.user, 'user')
    
     }
+    
 
     render() {
+        
         return (
             <div>
             <div className='row'>
                 <LandingHeader />
             </div>
           
-           <div className="row">
+         
              <section className="Plunes_india">
                <div className="text-center">
                  <div className="row">
@@ -109,12 +118,14 @@ class Development extends Component {
                         </div>
                         </section>
                         {/* 1st-section-end */}
+                       <div className="row">
                         <section className="offers_int">
                           <div className="text-center">
                            <div className="revenues_heding">
                             <h3>AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h3>
                              <img src="/system.png" className="laptop" />
                             </div>
+                            <div className="container">
                              <div className="row marg_real" id="main">
                                   <div className="col-lg-6 col-md-6 col-12" id="myRedDIV">
                                     <img src="/realtime.png" className="real_time"/>
@@ -125,14 +136,17 @@ class Development extends Component {
                                   </div>
                                </div>
                             </div>
+                            </div>
                         </section>
+                      </div>
                         {/* 2nd-end */}
                         <section class="why_plunes">
-                            <div className="container">
+                        <div className="container">
                                 <div className="plunes_brd">
                                     <hr className="black_bordr" />
                                     <h2>Why Plunes?</h2>
                                 </div>
+                               
                                 <div className="row text-center">
                                     <div className="col-lg-4 col-4 refund_im">
                                         <div className="bg_colur">
@@ -192,10 +206,11 @@ class Development extends Component {
                         </section>
                  
                       {/* 3rd-end */}
+                      <div className="row">
                       <section className="inteljent_cloud">
-                        
-                           <h4 className="solution_emr">An intelligent Cloud Solution for EMR, Integrated with profiles <br />of Users and Hospitals for a seamless experience.</h4>
-                         <div className="row">
+                         <h4 className="solution_emr">An intelligent Cloud Solution for EMR, Integrated with profiles <br />of Users and Hospitals for a seamless experience.</h4>
+                         <div className="container">
+                             <div className="row">
                            <div className="col-lg-5 offset-lg-1 col-12 col-md-5">
                               <ul className="report_any">
                                 <li>Unlimited cloud storage, access the reports from anywhere</li>
@@ -207,14 +222,14 @@ class Development extends Component {
                              <div className="col-lg-4 col-md-4 col-12">
                               <img src="/cloud.svg" className="clod_anum" />
                              </div>
+                             </div>
                            </div> 
                          
                         </section>
+                        </div>
+                     </div>
+        
     
-
-           </div>
-            
-        </div>
         
         )
     }
