@@ -454,3 +454,7 @@ body {
 .no_padding_ris {
   padding: 0px !important;
 }
+
+.margin_bottom_ris{
+  margin-bottom: 20rem;
+}

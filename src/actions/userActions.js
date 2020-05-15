@@ -117,7 +117,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
 
   REMOVE_NOTIF_COUNT,
   REMOVE_NOTIF_COUNT_RET,
-  SET_NOTIF_COUNT
+  SET_NOTIF_COUNT,
+
+  GET_PROFILE_RET,
+  GET_PROFILE_CLR
 
   } from './types';
 import history from '../history';
@@ -128,6 +131,65 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "https://plunes.co/v4"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
+
+export const Unauth_Logout = () =>{
+  localStorage.removeItem('token')
+  localStorage.removeItem('isAuth')
+  localStorage.removeItem('userId')
+  localStorage.removeItem('deviceId')
+  localStorage.removeItem('auth')
+  localStorage.removeItem('docDetails')
+  localStorage.removeItem('specialities')
+  localStorage.removeItem('uploaderUserId')
+  window.location.reload()
+}
+
+
+export const get_profile_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_PROFILE_CLR,
+    payload:{}
+  })
+}
+
+
+export const get_user_profile = () => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      // console.log(res, 'data');
+      if (res.status === 201) {
+        //console.log(res);
+        dispatch({
+          type: GET_PROFILE_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: GET_PROFILE_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: GET_PROFILE_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
+}
 
 
 export const remove_notif_count_ret = (data) => dispatch =>{
@@ -1558,6 +1620,7 @@ export const getSolutionInsights = () => async dispatch => {
   //console.log(token)
   return await axios.get(baseUrl+ '/analytics/solutionSearch', { 'headers': { 'Authorization': token } })
     .then((res) => {
+      console.log(res,'res in getSolutionInsigts')
       if (res.status === 201) {
         dispatch({
           type: GET_SOL_INSIGHTS,
@@ -1566,6 +1629,10 @@ export const getSolutionInsights = () => async dispatch => {
       }
     })
     .catch((e) => {
+      console.log(e.response,"e.repsonse in SolutionSearcnh")
+        if(e.response.status===401){
+          Unauth_Logout()
+        }
       console.log(e)
     })
 }

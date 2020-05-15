@@ -78,6 +78,25 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
+  componentDidMount(){
+    if(!!this.props.mount.dash_mount){
+      if(this.props.dash_data){
+        this.setState({
+          solInsights:this.props.dash_data.solInsights,
+          insight:this.props.dash_data.insight,
+        })
+      }
+    }
+
+    if(!!this.props.mount.notif_mount){
+          if(!!this.props.notif_data){
+          this.setState({
+              notificationsData:this.props.notif_data
+          })
+        }
+    }
+  }
+
   componentWillReceiveProps(nextProps){
         if(!!nextProps.solInsights){
           this.setState({
@@ -97,29 +116,18 @@ export class DashboardPage extends React.PureComponent {
               nextProps.clr_act_insght()
           })
       }
-
-      if(nextProps.dash_data){
-        this.setState({
-          solInsights:nextProps.dash_data.solInsights,
-          insight:nextProps.dash_data.insight,
-        })
-      }
-
         if(!!nextProps.notificationData){
           console.log(nextProps.notificationData,"notoficationData in Will ReceiveProps")
           this.setState({
-              notificationsData:nextProps.notificationData,
+              notificationsData:{
+                ...this.state.notificationsData,  ...nextProps.notificationData,
+                notifications:[...this.state.notificationsData.notifications,...nextProps.notificationData.notifications ]
+              },
               get_notifs_loading:false
           },()=>{
-              nextProps.set_notif_data({...nextProps.notif_data, ...nextProps.notificationData})
+              nextProps.set_notif_data({...nextProps.notif_data, ...this.state.notificationsData})
               nextProps.clr_get_notif()
               nextProps.setMount({...this.props.mount,notif_mount:true})
-          })
-        }
-
-        if(!!nextProps.notif_data){
-          this.setState({
-              notificationsData:nextProps.notif_data
           })
         }
 }
@@ -350,9 +358,23 @@ set_notif_count = () =>{
   this.props.set_notif_count(this.state.notificationsData.count+1)
 }
 
+getNotifications = (data) =>{
+  this.setState({
+    get_notifs_loading:true
+  },()=>this.props.getNotifications(data))
+}
+
   render() {
     console.log(this.state,"this.state in DasboardPage")
     console.log(this.props,"this.props in DasboardPage")
+
+    if(!!!localStorage.getItem('token')){
+      return <Redirect
+      to={{
+        pathname : '/'
+      }}
+    />
+    }
     return (
              <div>
                  <Notify  
@@ -413,7 +435,8 @@ set_notif_count = () =>{
                   <NotificationComponent
                   notifications = {this.state.notificationsData.notifications}
                   get_notifs_loading = {this.state.get_notifs_loading}
-                  
+                  total_count = {this.props.notif_data.totalCount}
+                  getNotifications = {this.getNotifications}
                   />:(this.props.location.pathname == '/dashboard/editProfile')?
                   <EditProfileComponent />:(this.props.location.pathname == '/dashboard/change-password')?
                   <ChangePassword />:(this.props.location.pathname == '/dashboard/payments')?

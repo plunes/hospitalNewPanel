@@ -38,7 +38,8 @@ class ProfileContainer extends React.PureComponent {
       loading:false,
       user:'',
       editBioFlag:false,
-      achievementImage:false
+      achievementImage:false,
+      get_profile_loading:false
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -50,16 +51,35 @@ class ProfileContainer extends React.PureComponent {
 
   componentWillReceiveProps(nextProps){
     console.log(nextProps,"nextProps in Profile Container")
-    if(nextProps.user){
-      this.setState({
-        user:nextProps.user
-      })
+    if(!!nextProps.profileData){
+       if(!!nextProps.profileData.success){
+         this.setState({
+          user:nextProps.profileData.user,
+          get_profile_loading:false
+         })
+       }else{
+         console.log("/whoami api didn't work")
+       }
     }
   }
 
   achievementSuccess = () =>{
       this.addAchievementClose()
       this.props.getUserDetails()
+  }
+
+  componentDidMount(){
+      if(!!!this.props.mount.prof_mount){
+        this.setState({
+          get_profile_loading:true
+        },()=>{
+
+        })
+      }else{
+        this.setState({
+          user:this.props.prof_data
+        })
+      }
   }
 
   generateAddAchievement = () =>{
@@ -452,11 +472,14 @@ class ProfileContainer extends React.PureComponent {
 }
 const mapStateToProps = state => ({
   user: state.user.userDetail,
+  mount:state.user.mount,
+  prof_data:state.user.data.prof_data,
   uploadRet:state.user.uploadRet,
   updateImageRet:state.user.updateImageRet,
   updateBannerRet:state.user.updateBannerRet,
   updateAchievementRet:state.user.updateAchievementRet,
-  editBioRet:state.user.editBioRet
+  editBioRet:state.user.editBioRet,
+  profileData:state.user.profileData
 })
 
 export default connect(mapStateToProps, { 

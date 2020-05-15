@@ -5,36 +5,16 @@ import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import RegistrationContainer from './components/RegistrationComponent/RegistrationContainer';
 import LoginComponent from './components/LoginComponent/LoginComponent';
-import DashboardComponent from './components/DashboardComponent/DashboardComponent';
-import ProfileComponent from './components/DashboardComponent/ProfileComponent';
-import AvailabilityComponent from './components/DashboardComponent/AvailabilityComponent';
-import AppointmentComponent from './components/DashboardComponent/AppointmentComponent';
-import SettingsComponent from './components/DashboardComponent/SettingsComponent';
-import ManagePaymentComponent from './components/DashboardComponent/ManagePaymentComponent';
-import HelpComponent from './components/DashboardComponent/HelpComponent';
-import AboutUsComponent from './components/DashboardComponent/AboutUsComponent';
-import MyCatalogueComponent from './components/DashboardComponent/MyCatalogueComponent';
-import AddDoctorComponent from "./components/DashboardComponent/AddDoctorComponent"
 import ForgotPasswordComponent from "./components/ChangePasswordComponent"
-//import LogoutComponent from './components/DashboardComponent/LogoutComponent';
-// import { connect } from 'react-redux';
 import { getUserDetails } from "../src/actions/userActions";
-// import { countNewNotification } from "../src/actions/userActions";
 import { messaging } from "./init-fcm";
 import 'react-toastify/dist/ReactToastify.min.css'
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
-import NotificationComponent from './components/DashboardComponent/NotificationComponent';
-import PaymentComponent from './components/DashboardComponent/PaymentComponent';
-import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
-import CatalogueComponent from './components/DashboardComponent/CatalogueComponent';
 import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
-import ChangePassword from "./components/ChangePassword"
 import Development from './components/Development'
 import DashboardPage from './components/DashboardPage'
-
-
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -67,8 +47,8 @@ class App extends Component {
           body: message.data.firebaseMessaging.payload.notification.body,
           title: message.data.firebaseMessaging.payload.notification.title
         }
-        await this.props.getSolutionInsights()
-        await this.props.getNotifications()
+        // await this.props.getSolutionInsights()
+        // await this.props.getNotifications()
         toast(<Greet message={obj} />)
       }
       //this.props.countNewNotification()
@@ -88,19 +68,6 @@ class App extends Component {
             <Route exact path='/home' component={Development} />
             <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
-            {/* <Route exact path='/profile' component={ProfileComponent} />
-            <Route exact path='/availability' component={AvailabilityComponent} />
-            <Route exact path='/appointments' component={AppointmentComponent} />
-            <Route exact path='/settings' component={SettingsComponent} />
-            <Route exact path='/manage' component={ManagePaymentComponent} />
-            <Route exact path='/help' component={HelpComponent} />
-            <Route exact path='/aboutus' component={AboutUsComponent} />
-            <Route exact path='/notification' component={NotificationComponent} />
-            <Route exact path='/payment' component={PaymentComponent} />
-            <Route exact path='/editProfile' component={EditProfileComponent} />
-            <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
-            <Route exact path='/change-password' component={ChangePassword} />
-            <Route exact path='/add-doctor' component={AddDoctorComponent} /> */}
             <Route exact path='/devlopment' component={Development} />
             </div>
           </Switch>

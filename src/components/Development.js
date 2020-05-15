@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import SidebarComponent from './DashboardComponent/SidebarComponent';
-import DashboardHeader from './DashboardComponent/DashboardHeader';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr } from "../actions/userActions";
-import ManagePayment from "./functional/ManagePayment"
 import "./DEvelopment.css"
 import LandingHeader from './LandingHeader'
 
@@ -93,8 +90,6 @@ class Development extends Component {
             <div className='row'>
                 <LandingHeader />
             </div>
-          
-         
              <section className="Plunes_india">
                <div className="text-center">
                  <div className="row">

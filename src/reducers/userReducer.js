@@ -101,7 +101,9 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
 
   REMOVE_NOTIF_COUNT,
   REMOVE_NOTIF_COUNT_RET,
-  SET_NOTIF_COUNT
+  SET_NOTIF_COUNT,
+  GET_PROFILE_RET,
+  GET_PROFILE_CLR
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -164,6 +166,7 @@ const initialState = {
   getOtpRet:false,
   submitOtpRet:false,
   notifCountFlag:false,
+  profileData:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -184,13 +187,29 @@ const initialState = {
     },
     notif_data:{
       count:0,
-      notifications:[]
+      notifications:[],
+      totalCount:0
+    },
+    prof_data:{
+
     }
   }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case GET_PROFILE_RET:
+      return {
+        ...state,
+        profileData:action.payload
+      };
+
+      case GET_PROFILE_CLR:
+      return {
+        ...state,
+        profileData:false
+      };
 
       case REMOVE_NOTIF_COUNT:
         return {

@@ -153,3 +153,7 @@ export const SET_NOTIF_COUNT = 'App/SET_NOTIF_COUNT'
 
 
 
+export const GET_PROFILE_CLR = 'App/Profile/GET_PROFILE_CLR'
+export const GET_PROFILE_RET  = 'App/Profile/GET_PROFILE_RET'
+
+
