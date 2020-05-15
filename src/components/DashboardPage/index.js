@@ -18,7 +18,8 @@ import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
-   getNotifications, clr_get_notif, setMount, set_notif_data } from "../../actions/userActions"
+   getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
+   remove_notif_count_ret } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -69,7 +70,7 @@ export class DashboardPage extends React.PureComponent {
         },
         act_insight_loader:false,
         real_insight_loader:false,
-        get_notifications_loading:false,
+        get_notifs_loading:false,
         Notify:{
           success:false,
           error:false
@@ -108,7 +109,7 @@ export class DashboardPage extends React.PureComponent {
           console.log(nextProps.notificationData,"notoficationData in Will ReceiveProps")
           this.setState({
               notificationsData:nextProps.notificationData,
-              get_notifications_loading:false
+              get_notifs_loading:false
           },()=>{
               nextProps.set_notif_data({...nextProps.notif_data, ...nextProps.notificationData})
               nextProps.clr_get_notif()
@@ -189,7 +190,8 @@ export class DashboardPage extends React.PureComponent {
     }
     this.setState({
       act_insight_loader:true,
-      real_insight_loader:true
+      real_insight_loader:true,
+      get_notifs_loading:true
     })
     this.props.getSolutionInsights()
     this.props.getInsights()
@@ -259,13 +261,16 @@ export class DashboardPage extends React.PureComponent {
     this.setState({
      ...initialState,
      notif:'active'
-    });
+    },()=>{
+      console.log("Inside Remove ToggleNotif")
+     this.props.remove_notif_count()
+    })
   }
   togglePayment =  () => {
     this.setState({
      ...initialState,
      payment:'active'
-    });
+    })
   }
   toggleEditProf =  () => {
     this.setState({
@@ -311,6 +316,7 @@ export class DashboardPage extends React.PureComponent {
         console.log("Notification event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         console.log(data)
         this.prompt_success_notify(data)
+        this.set_notif_count()
     })
     socket.on('disconnect', (data) => {
         console.log("Disconnect event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -340,6 +346,10 @@ prompt_success_notify =(data) =>{
     })
 }
 
+set_notif_count = () =>{
+  this.props.set_notif_count(this.state.notificationsData.count+1)
+}
+
   render() {
     console.log(this.state,"this.state in DasboardPage")
     console.log(this.props,"this.props in DasboardPage")
@@ -356,6 +366,8 @@ prompt_success_notify =(data) =>{
                           togglePayment = {this.togglePayment}
                           toggleProfile = {this.toggleProfile}
                           notificationsData = {this.state.notificationsData}
+                          remove_notif_count_ret = {this.props.remove_notif_count_ret}
+                          notif_count_flag = {this.props.notif_count_flag}
                         />
                     </div>
                     <div className="container-fluid">
@@ -399,7 +411,8 @@ prompt_success_notify =(data) =>{
                     location = {this.props.location}
                   />:(this.props.location.pathname == '/dashboard/notification')?
                   <NotificationComponent
-                  notificationsData = {this.state.notificationsData}
+                  notifications = {this.state.notificationsData.notifications}
+                  get_notifs_loading = {this.state.get_notifs_loading}
                   
                   />:(this.props.location.pathname == '/dashboard/editProfile')?
                   <EditProfileComponent />:(this.props.location.pathname == '/dashboard/change-password')?
@@ -420,7 +433,8 @@ const mapStateToProps = state => ({
     solInsights:state.user.solInsights,
     insight: state.user.insightData,
     notificationData: state.user.notificationData,
-    notif_data:state.user.data.notif_data
+    notif_data:state.user.data.notif_data,
+    notif_count_flag:state.user.notifCountFlag
 })
 
 export default connect(mapStateToProps, { 
@@ -434,6 +448,8 @@ set_notif_data,
 getSolutionInsights,
 getNotifications,
 clr_get_notif,
-setMount
+setMount,
+remove_notif_count,
+remove_notif_count_ret
 })(DashboardPage);
 

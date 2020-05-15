@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
 import { getNotifications } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 import "./AboutUs.css";
+import LoaderComponent from '../functional/LoaderComponent';
 class NotificationComponent extends Component {
     constructor(props) {
         super(props)
@@ -19,18 +18,16 @@ class NotificationComponent extends Component {
             rowsToDisplay: this.state.rowsToDisplay + 5
         })
     }
-    // async componentDidMount() {
-    //     await this.props.getNotifications()
-    // }
     render() {
         console.log(this.props,"this.props in notification component")
         // console.log(this.props.notification)
         return (
             <React.Fragment>
                     <div className='col-md-8 Notification AllComponents'>
+                        {this.props.get_notifs_loading && <LoaderComponent />}
                         <h4 className="Notify">Notifications</h4>
                         {
-                            this.state.notifications ? this.state.notifications.slice(0, this.state.rowsToDisplay).map((n, index) => (
+                            this.props.notifications ? this.props.notifications.slice(0, this.props.notifications.length).map((n, index) => (
                                 <Link
                                     to= {n.notificationScreen==="booking"?'/dashboard/appointments':n.notificationScreen==="insight"?'/dashboard':''}
                                     >

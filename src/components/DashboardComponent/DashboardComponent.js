@@ -54,8 +54,8 @@ class DashboardComponent extends React.PureComponent {
             realUpdatePrice:0,
             solUpdatedPrice : 0,
             realUpdateData: {},
-            value: 10,
-            solValue: 10,
+            value: 0,
+            solValue: 0,
             distance: 30,
             showBusiness :  true,
             ro_insight_count:50,
@@ -138,13 +138,17 @@ class DashboardComponent extends React.PureComponent {
         this.setState({
             realModalIsOpen: false,
             solUpdatedPrice:0,
-            realUpdatePrice:0
+            realUpdatePrice:0,
+            solValue:0,
+            value:0
         })
     }
 
     handleModal() {
         this.setState({
             modalIsOpen: false,
+            solValue:0,
+            value:0
         })
     }
 
@@ -258,7 +262,12 @@ class DashboardComponent extends React.PureComponent {
         console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
         const options = {
+            title: {
+                text: ''
+              },
             series: [{
+                showInLegend: false,             
+                name: "Users",
                 data: this.props.solutionUsers
             }],
             chart: {
@@ -275,7 +284,7 @@ class DashboardComponent extends React.PureComponent {
             plotOptions: {
                 line: {
                     dataLabels: {
-                        enabled: true
+                        enabled: false
                     },
                     enableMouseTracking: false
                 }
@@ -447,9 +456,9 @@ class DashboardComponent extends React.PureComponent {
                                         <div clasname="dynmic_pra" style={ { color:'#333333',fontSize:'13px',textAlign: 'center', marginTop:'20px'} }>{this.state.serviceName}</div>
                                         <div className="catlou_sli">     
                                         {this.state.actionablePriceLoading && <LoaderComponent />}      
-                                            <div className="valu_fl"style={ { width: '50%'} }>
-                                                <b>{Math.floor( this.state.value )} % </b>
-                                            </div>    
+                                        <div className="text-center valu_second">
+                                               <b>{Math.floor( this.state.value )} % </b>
+                                            </div> 
                                             <Slider
                                             min={0}
                                             max={50}
@@ -477,7 +486,9 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="col-sm-6 text-right"><h4>&#8377;{this.state.updatePrice / 2}</h4></div>
                                         </div>
                                         {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br> */}
-                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p></div>
+                                        <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.value===0?
+                                        <p style={{ fontWeight:'bold'}}><b>0%</b></p>:
+                                        <p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p>}</div>
                                         <div className="text-center"><button style={{ fontSize: '17px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                     <Modal
@@ -517,7 +528,9 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
                                             <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
                                         </div>
-                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p></div>
+                                            <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.solValue===0?
+                                             <p style={{ fontWeight:'bold'}}><b>0%</b></p>
+                                            :<p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p>}</div>
                                         {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br> */}
                                         <div className="text-center"><button style={{ fontSize: '18px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>

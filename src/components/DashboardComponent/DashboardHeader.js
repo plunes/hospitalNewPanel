@@ -19,14 +19,21 @@ class DashboardHeader extends Component {
   handleClick(){
     let unreadN = this.props.unreadNotification
     //console.log(this.props.notificationCount, '656')
-    this.props.sendCounterZero(unreadN);
+    // this.props.sendCounterZero(unreadN);
     history.push('/notification')
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(!!nextProps.notif_count_flag){
+      console.log("Nextropsin dashboard header")
+      nextProps.remove_notif_count_ret()
+    }
   }
   // async componentDidMount(){
   //   await this.props.getNotifications()
   // }
   render() {
-    console.log(this.props, 'user');
+    console.log(this.props,'props in HeaderCompoent');
 
         return <div className="Header">
           <div>
@@ -64,7 +71,7 @@ class DashboardHeader extends Component {
                       <div className="nav-link HeaderLink" >
                         <Link to= "/dashboard/notification"
                         role = "button"
-                        onClick = {this.props.toggleNotif()}>
+                        onClick = {()=>this.props.toggleNotif()}>
                         <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.notificationsData.count!==0?this.props.notificationsData.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
                          </Link>
                         </div>

@@ -147,6 +147,9 @@ export const SET_MOUNT = 'App/SET_MOUNT'
 export const SET_DASH_DATA = 'App/SET_DASH_DATA'
 export const SET_NOTIF_DATA  = 'App/SET_NOTIF_DATA'
 
+export const REMOVE_NOTIF_COUNT = 'App/REMOVE_NOTIF_COUNT'
+export const REMOVE_NOTIF_COUNT_RET  = 'App/REMOVE_NOTIF_COUNT_RET'
+export const SET_NOTIF_COUNT = 'App/SET_NOTIF_COUNT'
 
 
 

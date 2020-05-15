@@ -97,7 +97,11 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   CLEAR_ACT_INSIGHT,
   CLEAR_GET_NOTIFICATION,
 
-  SET_NOTIF_DATA
+  SET_NOTIF_DATA,
+
+  REMOVE_NOTIF_COUNT,
+  REMOVE_NOTIF_COUNT_RET,
+  SET_NOTIF_COUNT
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -159,6 +163,7 @@ const initialState = {
   changeAppointRet:false,
   getOtpRet:false,
   submitOtpRet:false,
+  notifCountFlag:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -187,6 +192,38 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
 
+      case REMOVE_NOTIF_COUNT:
+        return {
+          ...state,
+        notifCountFlag:true,
+        data:{
+          ...state.data,
+          notif_data:{
+            ...state.data.notif_data,
+            count:0
+          }
+        }
+        }
+
+      case REMOVE_NOTIF_COUNT_RET:
+      return {
+        ...state,
+        notifCountFlag:false
+      }
+
+      case SET_NOTIF_COUNT:
+        return {
+          ...state,
+        notifCountFlag:true,
+        data:{
+          ...state.data,
+          notif_data:{
+            ...state.data.notif_data,
+            count:action.payload
+          }
+        }
+        }
+
     case SET_DASH_DATA:
       return {
         ...state,
@@ -201,7 +238,10 @@ export default function (state = initialState, action) {
         ...state,
         data:{
           ...state.data,
-          notif_data:action.payload
+          notif_data:{
+            ...state.data.notif_data,
+           ...action.payload
+          }
         }
       }
       

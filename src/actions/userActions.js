@@ -113,7 +113,12 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   CLEAR_ACT_INSIGHT,
 
   CLEAR_GET_NOTIFICATION,
-  SET_NOTIF_DATA
+  SET_NOTIF_DATA,
+
+  REMOVE_NOTIF_COUNT,
+  REMOVE_NOTIF_COUNT_RET,
+  SET_NOTIF_COUNT
+
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -124,6 +129,60 @@ let baseUrl = "https://devapi.plunes.com/v5"
 // let baseUrl = "http://localhost:5000"
 // let baseUrl = "http://3.6.212.85/v4"
 
+
+export const remove_notif_count_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_NOTIF_COUNT_RET,
+    payload:{}
+  })
+}
+
+export const set_notif_count = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_NOTIF_COUNT,
+    payload:data
+  })
+}
+
+export const remove_notif_count = (data) => async dispatch =>{
+  let token = localStorage.getItem('token')
+  return await axios.put(baseUrl + `/notification/`, {} , { 'headers': { 'Authorization': token } })
+     .then((res) => {
+       console.log(res, 'res in getOTP')
+       if (res.status === 201) {
+         //dispatch(getSolutionInsights()
+         if(!!res.data.success){
+           dispatch({
+             type : REMOVE_NOTIF_COUNT,
+             payload :{
+               success:true,
+               data:{},
+               message:"Successfully remove notif count"
+             }
+           })
+         }else{
+           dispatch({
+             type : REMOVE_NOTIF_COUNT,
+             payload :{
+               success:false,
+               data:[],
+               message:"Something went wrong. try again later"
+             }
+           })
+         }
+       }
+     }).catch(error => {
+       console.log(error,"error in GET")
+       dispatch({
+         type:REMOVE_NOTIF_COUNT,
+          payload:{
+           success:false,
+           message:"Something went wrong. try agian later",
+           data:{}
+          }
+       })
+   });
+}
 export const set_dash_data = (data) => dispatch =>{
   return  dispatch({
     type: SET_DASH_DATA,

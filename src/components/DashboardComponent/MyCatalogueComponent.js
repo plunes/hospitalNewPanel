@@ -30,6 +30,7 @@ import Procedure from "../functional/Procedure"
 import EditProcedure from "../functional/editProcedure"
 import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
+import MeasureTime from "../MeasureTime"
 
 
  const isEmpty = function(obj) {
@@ -316,6 +317,9 @@ class MyCatalogueComponent extends Component {
 
     onEdit = (data) =>{
         console.log(data,"onEdit In mYcatalogiecomponent")
+        this.setState({
+            edit_Proc_flag:true
+        })
         let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
         arr.push(data.data)
         this.setState({
@@ -324,7 +328,9 @@ class MyCatalogueComponent extends Component {
             //     id:data.id
             // }
             selected_procedures:arr
-        })
+        },()=>this.setState({
+            edit_Proc_flag:false
+        }))
     }
 
     handleSpecialitySelect = (e) =>{
