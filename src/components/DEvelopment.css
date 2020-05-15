@@ -403,12 +403,11 @@ ul.report_any {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 
     .offers_int {
-
-        width: 767px;height: 990px;}
+}
         .laptop {
             width: 100%;
         }
-        .inteljent_cloud {width: 768px;}
+        .inteljent_cloud {}
         .sig_lgn {
             font-size: 12px !important;}
             .real_time {
