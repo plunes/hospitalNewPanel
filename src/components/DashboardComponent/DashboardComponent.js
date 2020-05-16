@@ -328,6 +328,8 @@ class DashboardComponent extends React.PureComponent {
                                         <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
+                                                
+                                                let seconds_diff = this.getSecondsDifferent(s.createdAt)
                                                 return (
                                                     (
                                                         <div className='row' key={index}>
@@ -342,9 +344,9 @@ class DashboardComponent extends React.PureComponent {
                                                                    <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {s.serviceName}</p>
                                                                 </div>
                                                                 {
-                                                                   true ?
+                                                                   seconds_diff >0 ?
                                                                         <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
-                                                                        : null
+                                                                        : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
                                                                 }
                                                             </div>
                                                             <div className='col-md-3'>
@@ -353,7 +355,7 @@ class DashboardComponent extends React.PureComponent {
                                                                         <div className="text-center">
                                                                             <React.Fragment>
                                                                             <TimerComponent 
-                                                                              seconds = {()=>this.getSecondsDifferent(s.createdAt)}
+                                                                              seconds = {seconds_diff}
                                                                             />
                                                                             {/* <Timer
                                                                                 initialTime={100}

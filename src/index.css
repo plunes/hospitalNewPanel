@@ -458,3 +458,11 @@ body {
 .margin_bottom_ris{
   margin-bottom: 20rem;
 }
+
+.sorry_text{
+  text-align: left;
+  font: Regular 25px/30px Proxima Nova;
+  letter-spacing: 0px;
+  color: #DE7B56;
+  opacity: 1;
+}
