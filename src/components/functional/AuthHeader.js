@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
 const AuthHeader = (props) =>{
   console.log(window.location,"window.location")
@@ -8,9 +9,9 @@ const AuthHeader = (props) =>{
         
 <nav className="navbar custom_ha navbar-expand-md custom-navbar sigunup_hedr">
         <div className="container">
-            <a className="navbar-brand logo_size col-lg-3 col-md-3 col-6" href="#">
+            <Link className="navbar-brand logo_size col-lg-3 col-md-3 col-6" to="/">
                 <img src="/logo.png" className="lgo_sigun" />
-            </a>
+            </Link>
            <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <i className="fa fa-bars" aria-hidden="true"></i>
            </button>
@@ -36,10 +37,10 @@ const AuthHeader = (props) =>{
               </div>
                   </li>
                   <li className="nav-item">
-                    <a href="/" className={`${window.location.pathname==='/'?'active':''} nav-link sig_lgn a `}>Login</a>
+                    <Link to="/signin" className={`${window.location.pathname==='/'?'active':''} nav-link sig_lgn a `} >Login</Link>
                   </li>
                    <li className="nav-item">
-                     <a   className={`${window.location.pathname==='/signup'?'active':''} nav-link signup_lgu`}  href="/signup">Signup</a>
+                     <Link to="/signup"  className={`${window.location.pathname==='/signup'?'active':''} nav-link signup_lgu`}  href="/signup">Signup</Link>
                    </li>  
                  </ul>
              </div>  

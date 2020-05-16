@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
     getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity } from "../../actions/userActions";
-
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'

@@ -223,7 +223,7 @@ class RegistrationContainer extends  React.Component {
         const { showLogin } = this.state
         console.log(this.state,"state in Registration Component")
         if (showLogin) {
-            return <Redirect to='/login' />
+            return <Redirect to='/signin' />
         }
         return (
            <div>

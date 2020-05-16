@@ -10,7 +10,7 @@ export default class AboutUsComponent extends Component {
         if(!isAuth){
         return  <Redirect
           to={{
-            pathname : '/'
+            pathname : '/signin'
           }}
         />
         }else{

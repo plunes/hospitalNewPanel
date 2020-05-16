@@ -157,3 +157,7 @@ export const GET_PROFILE_CLR = 'App/Profile/GET_PROFILE_CLR'
 export const GET_PROFILE_RET  = 'App/Profile/GET_PROFILE_RET'
 
 
+export const SUBMIT_QUERY_RET = 'App/Profile/SUBMIT_QUERY_RET'
+export const SUBMIT_QUERY_CLR  = 'App/Profile/SUBMIT_QUERY_CLR'
+
+

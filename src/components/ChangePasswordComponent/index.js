@@ -61,7 +61,7 @@ class ChangePasswordComponent extends React.Component {
             },()=>{
                 this.props.submitOtpClr()
             })
-           return <Redirect to="/" />
+           return <Redirect to="/signin" />
         }else{
             this.setState({
                 loading:false

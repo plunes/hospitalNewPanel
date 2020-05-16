@@ -288,7 +288,8 @@ hr
 }
 .scrolling_sec {
       overflow: auto;
-      height: 32vw;
+      max-height: 32vw;
+      min-height: 20vw;
       overflow-x: hidden;
   }
   .side_br {padding-left: 0 !important;}
@@ -302,10 +303,14 @@ hr
       margin-left: 1rem;
     
 }
-.second_scro{ width: 30vw;
+.second_scro{ 
+      width: 30vw;
       overflow: auto;
-      height: 33vw;
-      overflow-x: hidden;}
+      overflow: auto;
+      max-height: 32vw;
+      min-height: 20vw;
+      overflow-x: hidden;
+}
 
 .dashrow2col1
       {margin-right: 18px;max-width: 47.666667% !important;}

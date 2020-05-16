@@ -324,11 +324,10 @@ class DashboardComponent extends React.PureComponent {
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
                                     <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
-                                    {this.props.real_insight_loader && <LoaderComponent/>}
+                                    {/* {this.props.real_insight_loader && <LoaderComponent/>} */}
                                         <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
-                                        {
-                                            this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
-                                                
+                                        {this.props.real_insight_loader?<LoaderComponent/>:
+                                            this.props.solInsights.length!==0 ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
                                                 let seconds_diff = this.getSecondsDifferent(s.createdAt)
                                                 return (
                                                     (
@@ -379,7 +378,12 @@ class DashboardComponent extends React.PureComponent {
                                                         </div>
                                                     )
                                                 )
-                                            }) : false
+                                            }) : <div className="no_insights_wrapper_ris">
+                                                <div className="no_insight_image-wrapper">
+                                                <img className="no_isights_image" src="./Group 2053.svg" />
+                                                </div>
+                                                <div className="no_real_insights">No Real Time Insights yet </div>
+                                                </div>
                                         }
                                     </div>
                                     <div className='dashboardsection'>
@@ -430,17 +434,21 @@ class DashboardComponent extends React.PureComponent {
                                 </div>
                                 <div className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
-                                    {this.props.act_insight_loader && <LoaderComponent/>}
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
-                                        {
-                                            this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
+                                        {this.props.act_insight_loader? <LoaderComponent/>:
+                                            this.props.insight.length !==0 ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
                                                     <button type="button" className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></button>
                                                     <hr></hr>
                                                 </div>
-                                            )) : false
+                                            )) :  <div className="no_insights_wrapper_ris">
+                                            <div className="no_insight_image-wrapper">
+                                            <img className="no_isights_image" src="./Group 2055.svg" />
+                                            </div>
+                                            <div className="no_real_insights">No Actionable Insights yet </div>
+                                            </div>
                                         }
                                         <div className="text-center">
                                             {this.props.insight.length !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }

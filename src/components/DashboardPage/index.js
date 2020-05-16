@@ -19,7 +19,7 @@ import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
-   remove_notif_count_ret } from "../../actions/userActions"
+   remove_notif_count_ret, set_notif_count } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -75,25 +75,6 @@ export class DashboardPage extends React.PureComponent {
           success:false,
           error:false
       }
-    }
-  }
-
-  componentDidMount(){
-    if(!!this.props.mount.dash_mount){
-      if(this.props.dash_data){
-        this.setState({
-          solInsights:this.props.dash_data.solInsights,
-          insight:this.props.dash_data.insight,
-        })
-      }
-    }
-
-    if(!!this.props.mount.notif_mount){
-          if(!!this.props.notif_data){
-          this.setState({
-              notificationsData:this.props.notif_data
-          })
-        }
     }
   }
 
@@ -201,6 +182,23 @@ export class DashboardPage extends React.PureComponent {
       real_insight_loader:true,
       get_notifs_loading:true
     })
+
+    if(!!this.props.mount.dash_mount){
+      if(this.props.dash_data){
+        this.setState({
+          solInsights:this.props.dash_data.solInsights,
+          insight:this.props.dash_data.insight,
+        })
+      }
+    }
+
+    if(!!this.props.mount.notif_mount){
+          if(!!this.props.notif_data){
+          this.setState({
+              notificationsData:this.props.notif_data
+          })
+        }
+    }
     this.props.getSolutionInsights()
     this.props.getInsights()
     this.props.getNotifications({page:1})
@@ -473,6 +471,7 @@ getNotifications,
 clr_get_notif,
 setMount,
 remove_notif_count,
-remove_notif_count_ret
+remove_notif_count_ret,
+set_notif_count
 })(DashboardPage);
 

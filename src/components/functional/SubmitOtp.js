@@ -80,7 +80,7 @@ const cancel = ()=>{
              <span onClick={()=>setRePassword(!rePassword)} toggle="#password-field" className=" field-icon toggle-password"> <i className={rePassword?"fa fa-fw fa-eye-slash password_eye":'fa fa-fw fa-eye password_eye'} /> </span>
              </div>
         </div>
-      <Link to="/">
+      <Link to="/signin">
      <button onClick={()=>cancel()} className="common-button-white">Cancel</button>
      </Link>
      <button onClick={()=>submitdetails()} className="common-button ml-5">Reset</button>

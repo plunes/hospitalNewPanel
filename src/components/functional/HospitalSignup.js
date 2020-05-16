@@ -15,7 +15,7 @@ import {
   if(!!props.registerUserRet){
     if(!!props.registerUserRet.success){
       addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true}) 
-      return  <Redirect to="/" />
+      return  <Redirect to="/signin" />
     }else{
       addToast(props.registerUserRet.message, {appearance: 'error', autoDismiss:true})
     }
