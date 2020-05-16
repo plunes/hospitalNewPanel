@@ -337,26 +337,25 @@ ul.report_any {
 }
 
 @media (max-width: 767px) and (min-width: 281px) {
-.offers_int{width: 100%;top: -46px;left: 0;height: 780px;}
+
 .laptop {
     width: 100%;
 }
 .real_time {
-    width: 100%;
+    width: 25rem;
 }
 
 .video_sec iframe {
     width: 100%;
     height: auto;;}
-    .inteljent_cloud{width: 100%;left: 0;
-        top: 0px;}
+    .inteljent_cloud{margin-top: 0;}
     img.clod_anum{width: 268px;
         height: auto;}
     .heading_hos h2{width: 100%;font-size: 21px;}
     .heading_hos p {
         font-size: 12px;}
         .get_startd_h {font-size: 13px;padding: 7px 20px 7px 20px;}
-        .Plunes_india {margin-bottom: 0px;}
+        .Plunes_india {margin-bottom: 3rem;}
         .revenues_heding {
             padding-top: 31px;
         }
@@ -397,16 +396,18 @@ ul.report_any {
 
 
 }
+@media (max-width: 1199px) and (min-width: 767px) {
 
+    .tools_pat{margin-left: 4rem;} 
+}
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 
     .offers_int {
-
-        width: 767px;height: 990px;}
+}
         .laptop {
             width: 100%;
         }
-        .inteljent_cloud {width: 768px;}
+        .inteljent_cloud {}
         .sig_lgn {
             font-size: 12px !important;}
             .real_time {
