@@ -323,9 +323,8 @@ class DashboardComponent extends React.PureComponent {
                             </div>
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
-                                    <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
-                                    {this.props.real_insight_loader && <LoaderComponent/>}
-                                        <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
+                                    <div className='dashboardsection scrolling_sec'>
+                                        <span className='businessrow1col1 realtimewidth real_tm_bor'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
                                         {
                                             this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
                                                 
