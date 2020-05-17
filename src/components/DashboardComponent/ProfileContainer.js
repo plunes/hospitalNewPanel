@@ -195,8 +195,8 @@ class ProfileContainer extends React.PureComponent {
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
           <div className="col-md-6">
-            <div className="card mb-2 card_im">
-              <img className="card-img-top"
+            <div className="card mb-2">
+              <img className="card-img-top card_im"
                 src={arr[i].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
               <div className="card-body">
   <p className="card-text">{arr[i].title}</p>
@@ -210,8 +210,8 @@ class ProfileContainer extends React.PureComponent {
        newarr.push( <div className={`carousel-item ${i ===0?"active":''}`}>
        <div className="row">
             <div className="col-md-6">
-              <div className="card mb-2 card_im">
-                <img className="card-img-top"
+              <div className="card mb-2">
+                <img className="card-img-top card_im"
                   src={arr[i].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
                 <div class="card-body">
     <p class="card-text">{arr[i].title}</p>
@@ -220,8 +220,8 @@ class ProfileContainer extends React.PureComponent {
             </div>
       
             <div className="col-md-6">
-              <div className="card mb-2 card_im">
-                <img className="card-img-top"
+              <div className="card mb-2">
+                <img className="card-img-top card_im"
                    src={arr[i+1].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
                   <p className="card-text">{arr[i+1].title}</p>
