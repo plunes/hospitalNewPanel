@@ -759,13 +759,6 @@ export const registerUser = (obj) => async dispatch => {
   console.log("Inside registerUser")
  let type = obj.userType
   let token = localStorage.getItem('token');
-  return dispatch({
-    type:REGISTER_USER_RET,
-     payload:{
-      success:true,
-      message:'Sign up successfull',
-     }
-  })
   return await axios.post(baseUrl + '/user/register', obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {

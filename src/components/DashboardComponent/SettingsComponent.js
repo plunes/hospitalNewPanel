@@ -73,7 +73,7 @@ import "./AvailabilityComponent.css";
                                              <div className="col-xs-9 col-sm-11 col acnt">Account Settings</div>
                                         </div>
                                         <div className="accset settingfont">
-                                             <div className="row accsetrow">
+                                    {/* <div className="row accsetrow">
                                                   <div className="col-sm-1 col settingcol1"><img src="/SettingNotify.png" alt=''className="privc_icone"></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting">Notifications</p></div>
                                                   <div className="col-sm-2 col toggleswitch">
@@ -82,7 +82,7 @@ import "./AvailabilityComponent.css";
                                                             <span className="slider round"></span>
                                                        </label>
                                                   </div>
-                                             </div><hr></hr>
+                                             </div><hr></hr> */}
                                              <div className="row accsetrow" >
                                                   <div className="col-sm-1 col settingcol1"><img src="/Edit-Profile.png" alt='' className="privc_icone"></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting cursor-pointer">

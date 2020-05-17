@@ -441,53 +441,62 @@ class ProfileContainer extends React.PureComponent {
             />
     <hr className="brdr_tm"></hr>
           <div className="team_sec">
-            <h3 className="team_of">Team of Experts</h3>
-          <div className="row">
-  {this.props.user?!!this.props.user.doctors?!!this.props.user.doctors.length !==0?this.props.user.doctors.slice(0, this.props.user.doctors.length>5?this.state.show_doctor_count:this.props.user.doctors.length).map((item,i) =>{
-    return (<DoctorComponent
-            onClick = {this.onDoctorClick}
-          data = {item}
-          i = {i}
-      />)
-  }):"When Doctor length is zero":'':''}
-   <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_5">
-          <Link to="/dashboard/add-doctor"
-          role="button"
-          onClick = {()=>this.props.toggleAddDoc()}>
-          <img  src="/plus_2.svg"/>
-          </Link>
+           {
+             this.props.user.userType !=="Doctor" && <React.Fragment>
+                         <h3 className="team_of">Team of Experts</h3>
+             <div className="row">
+     {this.props.user?!!this.props.user.doctors?this.props.user.doctors.length !==0?this.props.user.doctors.slice(0, this.props.user.doctors.length>5?this.state.show_doctor_count:this.props.user.doctors.length).map((item,i) =>{
+       return (<DoctorComponent
+               onClick = {this.onDoctorClick}
+             data = {item}
+             i = {i}
+         />)
+     }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
+       <img  src="/Group 2096.svg"  />
+       <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
+     </div>:'':''}
+   
+   {this.props.user?!!this.props.user.doctors?this.props.user.doctors.length !==0?<div className="col-md-6 col-sm-12 col-lg-3">
+           <div className="timelinebox4 timelinebox4_5">
+             <Link to="/dashboard/add-doctor"
+             role="button"
+             onClick = {()=>this.props.toggleAddDoc()}>
+             <img  src="/plus_2.svg"/>
+             </Link>
+      </div>
+       </div>:'':'':''}
    </div>
-    </div>
-</div>
-
-{!!this.props.user.doctors?this.props.user.doctors.length===this.state.show_doctor_count?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
-show_doctor_count:this.props.user.doctors.length
-})} >See more Doctor's</span></div> :'' }
-
+   
+   {!!this.props.user.doctors?((this.props.user.doctors.length===this.state.show_doctor_count) || (this.props.user.doctors.length==0))?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
+   show_doctor_count:this.props.user.doctors.length
+   })} >See more Doctor's</span></div> :'' }
+   </React.Fragment>
+     }
 
 <div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
  
-<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+{!!this.props.user.achievements?
+  this.props.user.achievements.length!==0?
+  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
   {/* {true && <LoaderComponent />} */}
-  <div class="carousel-inner" role="listbox">
-     {achievementArray.map((item,i)=>{
-       return item
-     })}
+    <div class="carousel-inner" role="listbox">
+      {achievementArray.map((item,i)=>{
+        return item
+      })}
+    </div>
+    <div class="controls-top">
+      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+          class="fas fa-chevron-right"></i></a>
+    </div>
+</div>:<div className="row">
+<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
+    <img style={{marginLeft:'3rem'}} src="/Group 2096.svg"  />
+    <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Achievement added</div>
   </div>
-  <div class="controls-top">
-    <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
-    <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
-        class="fas fa-chevron-right"></i></a>
   </div>
- 
- <div className="text-center margin-top-medium_ris">
- <button onClick={()=>console.log()} className="common-button">Add Achievement</button>
- </div>
-
-
-</div>
+:'No achievements'}
        </div>
           </div>
           

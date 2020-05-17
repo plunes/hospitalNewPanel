@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 import { connect } from 'react-redux';
-import { bankDetails, submitBankDetailsClr } from "../../actions/userActions";
+import { bankDetails, submitBankDetailsClr, getUserDetails } from "../../actions/userActions";
 import ManagePayment from "../functional/ManagePayment"
 import  "./AvailabilityComponent.css";
 
@@ -36,7 +36,6 @@ class ManagePaymentComponent extends Component {
             "panNumber": this.state.pannumber
         }
         this.props.bankDetails(data);
-        
     }
 
     bankDetails = (data) =>{
@@ -48,12 +47,13 @@ class ManagePaymentComponent extends Component {
     loadingOff = () =>{
         this.setState({
             loading:false
-        })
+        },()=>this.props.getUserDetails())
     }
     
-    async componentWillReceiveProps(nextProps){
+     componentWillReceiveProps(nextProps){
         this.setState({
-            userDetails : nextProps.user
+            userDetails : nextProps.user,
+            loading:false
         }, () => {
             if(this.state.userDetails.bankDetails){
                 this.setState({
@@ -71,12 +71,13 @@ class ManagePaymentComponent extends Component {
         })
     }
 
-    async componentDidMount(){
+     componentDidMount(){
         console.log(this.props.user, 'user')
-   
+        this.props.getUserDetails()
     }
 
     render() {
+        console.log(this.state,"this.props in ManageComponent")
         return (
             <React.Fragment>
                 <div className='col-md-7 col-xl-8 AllComponents'>
@@ -104,5 +105,5 @@ const mapStateToProps = state => ({
     user : state.user.userDetail,
     submitBankDetailsRet:state.user.submitBankDetailsRet
   })
-  export default connect(mapStateToProps, {bankDetails, submitBankDetailsClr})(ManagePaymentComponent)
+  export default connect(mapStateToProps, {bankDetails, submitBankDetailsClr, getUserDetails})(ManagePaymentComponent)
 
