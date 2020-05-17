@@ -318,7 +318,7 @@ class DashboardComponent extends React.PureComponent {
                         /><div className="row">
                             <div className=' dashboardsection dashrow1'>
                                 
-                                <p className='DashboardHospitalName'>{this.props.user.name}</p>
+                                <p  className='DashboardHospitalName'>{this.props.user.name}</p>
                                 </div>
                             </div>
                             <div className='row'>

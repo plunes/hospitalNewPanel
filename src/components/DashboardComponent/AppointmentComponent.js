@@ -385,7 +385,7 @@ class AppointmentComponent extends Component {
                                  </div>
                                    </React.Fragment>
                                })} 
-                               <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                               <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
                                 {this.state.cancelled_bookings.map((item,i)=>{
@@ -437,7 +437,7 @@ class AppointmentComponent extends Component {
                            </div>
                              </React.Fragment>
                          })}                      
-                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
+                                 <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})} className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
                                                            
                                  </TabPanel>
                                 
@@ -496,20 +496,20 @@ class AppointmentComponent extends Component {
         <div className="text-right"><button onClick={this.closeModal} className="cross"><img src="/cross.png" alt="" className="covidCross"></img></button></div>
         <div className="text-center"><h4><b>Tips for more Conversions</b></h4></div><br></br>
         <div className='row tipsrow'>
-              <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Call up the Patients</b></div>     
+              <div className='col-md-2 vertical_center_ris'><img src="/smallIdea.svg" alt=""></img></div> 
+              <div className='col-md-10 vertical_center_ris'><b>Call up the Patients</b></div>     
+        </div>
+        <div className='row tipsrow'>
+              <div className='col-md-2 vertical_center_ris_r'><img src="/smallIdea.svg" alt=""></img></div> 
+              <div className='col-md-10 vertical_center_ris'><b>Make them Comfortable</b></div>     
+        </div>
+        <div className='row tipsrow'>
+              <div className='col-md-2 vertical_center_ris'><img src="/smallIdea.svg" alt=""></img></div> 
+              <div className='col-md-10 vertical_center_ris'><b>Please respect the time of patients as they care about it most</b></div>     
         </div>
         <div className='row tipsrow'>
               <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Make them Comfortable</b></div>     
-        </div>
-        <div className='row tipsrow'>
-              <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Please respect the time of patients as they care about it most</b></div>     
-        </div>
-        <div className='row tipsrow'>
-              <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Introduce proper communication with Patients</b></div>     
+              <div className='col-md-10 vertical_center_ris'><b>Introduce proper communication with Patients</b></div>     
         </div>
          
         </Modal>

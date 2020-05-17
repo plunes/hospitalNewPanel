@@ -110,6 +110,11 @@ export class DashboardPage extends React.PureComponent {
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
         }
+        if(!!this.props.notif_data){
+          this.setState({
+              notificationsData:this.props.notif_data
+          })
+        }
 }
 
   componentDidMount() {
@@ -347,7 +352,7 @@ prompt_success_notify =(data) =>{
                 message:data
             }
         }
-    })
+    },()=>this.props.getNotifications({page:1}))
 }
 
 set_notif_count = () =>{
@@ -361,10 +366,12 @@ getNotifications = (data) =>{
 }
 
   render() {
+    console.log(this.props,"this.props in DashboardPage")
+    console.log(this.state,"this.state in DashboardPage")
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
-        pathname : '/'
+        pathname : '/signin'
       }}
     />
     }
@@ -404,7 +411,7 @@ getNotifications = (data) =>{
                   solInsights = {this.state.solInsights}
                   insight = {this.state.insight}
                   real_insight_loader = {this.state.real_insight_loader}
-                  act_insight_loader = {this.state.act_insight_loader}                
+                  act_insight_loader = {this.state.act_insight_loader}            
                   /> :(this.props.location.pathname == '/dashboard/profile')?
                   <ProfileContainer
                   toggleProfile = {this.toggleProfile}

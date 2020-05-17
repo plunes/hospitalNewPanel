@@ -500,3 +500,8 @@ transform: translateY(-50%);
   top: 40%;
   transform: translateY(-50%);
 }
+
+.vertical_center{
+  display: flex;
+  align-items: center;
+}

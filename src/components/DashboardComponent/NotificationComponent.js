@@ -11,7 +11,7 @@ class NotificationComponent extends Component {
             rowsToDisplay: 3,
             notifications:[],
             total_pages:0,
-            page:1
+            page:0
         }
         this.handleClick = this.handleClick.bind(this)
     }
