@@ -239,8 +239,12 @@
     .left_ali p{font-size: 12px;line-height: 4px;}
     .timelinebox4_5 {padding: 35px;}
 .se-dr{text-align: center;margin: 2rem 20px;}
-.se-dr a{color: #01D35A; font-weight: 400;font-size: 1.3rem;}
-.se-dr a:hover{color: #01D35A !important;}
+.se-dr >.pika{
+        color: #01D35A; font-weight: 400;font-size: 1.3rem;
+}
+.se-dr >.pika:hover{
+        color: #01D35A !important;
+}
 .achivmnt_b{background: #F8FFFB;padding: 30px;margin-top: 35px;}
 .ach1 {width: 23vw;
         height: 12vw;}

@@ -17,6 +17,8 @@ import MapComponent from "../MapComponent"
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import locationImage from "../../images/Location.png"
+import Notify from '../functional/Notify';
+import LoaderComponent from "../functional/LoaderComponent"
 // import OwlCarousel from 'react-owl-carousel2';
 
 // import GoogleComponent from "../GoogleMapComponent"
@@ -52,7 +54,12 @@ class ProfileContainer extends React.PureComponent {
       user:'',
       editBioFlag:false,
       achievementImage:false,
-      get_profile_loading:false
+      get_profile_loading:false,
+      show_doctor_count:4,
+      notify:{
+        success:false,
+        error:false
+    }
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -63,6 +70,33 @@ class ProfileContainer extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
+
+      if(!!nextProps.updateAchievementRet){
+          if(nextProps.updateAchievementRet.type==='delete'){
+            if(nextProps.updateAchievementRet.success){
+              this.setState({
+                notify:{
+                  ...this.state.notify,
+                  success:{
+                    message:nextProps.updateAchievementRet.message
+                  }
+                }
+              })
+            }else{
+              this.setState({
+                notify:{
+                  ...this.state.notify,
+                  success:{
+                    error:nextProps.updateAchievementRet.message
+                  }
+                }
+              })
+            }
+            nextProps.getUserDetails()
+            nextProps.updateAchievementClr()
+          }
+      }
+
     if(!!nextProps.profileData){
        if(!!nextProps.profileData.success){
          this.setState({
@@ -149,17 +183,22 @@ class ProfileContainer extends React.PureComponent {
     })
   }
 
-  removeAchievement = (i) =>{
-    console.log(i,"i in removeAchievments")
+  removeAchievement = (e) =>{
+    let i = e.target.dataset.iterate
+    i = parseInt(i,10)
     let achievements = JSON.parse(JSON.stringify(this.props.user.achievements))
     let newAchievements = []
     achievements.forEach((item,j)=>{
+      console.log(i,"i in removeAchievement")
+      console.log(j,"j in removeAchievement")
       if(((i!==j) && (!!item))){
           newAchievements.push(item)
       }
     })
+    console.log(newAchievements,"newAchievements in removeAchievement")
     this.setState({
       removeAchievementLoading:true,
+      updated_achieve_remove:newAchievements,
       selectedAchievement:i
     },()=>this.props.updateAchievement({
       achievements:newAchievements,
@@ -192,13 +231,14 @@ class ProfileContainer extends React.PureComponent {
     let  newarr = []
     while(i<arr.length-1)
     {
+      console.log(i,"i in While of Achievement")
       if(i=== arr.length-1){
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
           <div className="col-md-6">
             <div className="card mb-2">
               <img className="card-img-top card_im"
-                src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={()=>this.removeAchievement(i)} className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
               <div className="card-body">
   <p className="card-text">{arr[i].title}</p>
               </div>
@@ -213,7 +253,7 @@ class ProfileContainer extends React.PureComponent {
             <div className="col-md-6">
               <div className="card mb-2">
                 <img className="card-img-top card_im"
-                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={()=>this.removeAchievement(i)} className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement} data-iterate= {i} className="ceoss_icon"><i  data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
                 <div class="card-body">
     <p class="card-text">{arr[i].title}</p>
                 </div>
@@ -223,7 +263,7 @@ class ProfileContainer extends React.PureComponent {
             <div className="col-md-6">
               <div className="card mb-2">
                 <img className="card-img-top card_im"
-                   src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={()=>this.removeAchievement(i+1)} className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                   src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
                   <p className="card-text">{arr[i+1].title}</p>
                 </div>
@@ -233,7 +273,6 @@ class ProfileContainer extends React.PureComponent {
       </div>)
        i = i+2
       }
-      
     }
     return newarr
     }
@@ -293,6 +332,16 @@ class ProfileContainer extends React.PureComponent {
       <React.Fragment>
       <div className='col-md-8 col-xl-9'>
       <div className="HospitalProfileBody AllComponents hspital">
+        <Notify 
+          success ={this.state.notify.success}
+          error ={this.state.notify.error}
+          clear = {()=>this.setState({
+            notify:{
+              success:false,
+              notify:false
+            }
+          })}
+        />
         {/* <div>
           <MapComponent
             location = {this.props.user.geoLocation}
@@ -394,13 +443,13 @@ class ProfileContainer extends React.PureComponent {
           <div className="team_sec">
             <h3 className="team_of">Team of Experts</h3>
           <div className="row">
-  {this.props.user?!!this.props.user.doctors?this.props.user.doctors.map((item,i) =>{
+  {this.props.user?!!this.props.user.doctors?!!this.props.user.doctors.length !==0?this.props.user.doctors.slice(0, this.props.user.doctors.length>5?this.state.show_doctor_count:this.props.user.doctors.length).map((item,i) =>{
     return (<DoctorComponent
             onClick = {this.onDoctorClick}
           data = {item}
           i = {i}
       />)
-  }):'':''}
+  }):"When Doctor length is zero":'':''}
    <div className="col-md-6 col-sm-12 col-lg-3">
         <div className="timelinebox4 timelinebox4_5">
           <Link to="/dashboard/add-doctor"
@@ -412,11 +461,16 @@ class ProfileContainer extends React.PureComponent {
     </div>
 </div>
 
-<div className="se-dr"><a href="#">See more Doctor's</a></div>
+{!!this.props.user.doctors?this.props.user.doctors.length===this.state.show_doctor_count?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
+show_doctor_count:this.props.user.doctors.length
+})} >See more Doctor's</span></div> :'' }
+
+
 <div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
  
 <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+  {/* {true && <LoaderComponent />} */}
   <div class="carousel-inner" role="listbox">
      {achievementArray.map((item,i)=>{
        return item
@@ -428,12 +482,12 @@ class ProfileContainer extends React.PureComponent {
         class="fas fa-chevron-right"></i></a>
   </div>
  
+ <div className="text-center margin-top-medium_ris">
+ <button onClick={()=>console.log()} className="common-button">Add Achievement</button>
+ </div>
 
 
 </div>
-
-
-   
        </div>
           </div>
           

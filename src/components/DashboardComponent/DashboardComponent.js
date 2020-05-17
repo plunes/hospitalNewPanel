@@ -95,7 +95,6 @@ class DashboardComponent extends React.PureComponent {
        // console.log(value, 'value')
         const { realUpdatePrice } = this.state
         let newPrice = realUpdatePrice - realUpdatePrice * value /100
-
         this.setState({
             solValue : value,
             solUpdatedPrice : newPrice
