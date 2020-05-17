@@ -98,7 +98,6 @@ export class DashboardPage extends React.PureComponent {
           })
       }
         if(!!nextProps.notificationData){
-          console.log(nextProps.notificationData,"notoficationData in Will ReceiveProps")
           this.setState({
               notificationsData:{
                 ...this.state.notificationsData,  ...nextProps.notificationData,
@@ -268,7 +267,6 @@ export class DashboardPage extends React.PureComponent {
      ...initialState,
      notif:'active'
     },()=>{
-      console.log("Inside Remove ToggleNotif")
      this.props.remove_notif_count()
     })
   }
@@ -363,9 +361,6 @@ getNotifications = (data) =>{
 }
 
   render() {
-    console.log(this.state,"this.state in DasboardPage")
-    console.log(this.props,"this.props in DasboardPage")
-
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{

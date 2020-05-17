@@ -17,7 +17,7 @@ import MapComponent from "../MapComponent"
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import locationImage from "../../images/Location.png"
-import OwlCarousel from 'react-owl-carousel2';
+// import OwlCarousel from 'react-owl-carousel2';
 
 // import GoogleComponent from "../GoogleMapComponent"
 
@@ -63,7 +63,6 @@ class ProfileContainer extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps,"nextProps in Profile Container")
     if(!!nextProps.profileData){
        if(!!nextProps.profileData.success){
          this.setState({
@@ -185,6 +184,62 @@ class ProfileContainer extends React.PureComponent {
     })
   }
 
+  achievement_slider = ()=>{
+    if(!!this.props.user.achievements){
+      let arr = [...this.props.user.achievements]
+    let i= 0
+    let  newarr = []
+    while(i<arr.length-1)
+    {
+      if(i===arr.length-1){
+       newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+       <div className="row">
+          <div className="col-md-6">
+            <div className="card mb-2 card_im">
+              <img className="card-img-top"
+                src={arr[i].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+              <div className="card-body">
+  <p className="card-text">{arr[i].title}</p>
+              </div>
+            </div>
+          </div>     
+      </div>
+        </div>)
+       i = i+1
+      }else{
+       newarr.push( <div className={`carousel-item ${i ===0?"active":''}`}>
+       <div className="row">
+            <div className="col-md-6">
+              <div className="card mb-2 card_im">
+                <img className="card-img-top"
+                  src={arr[i].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="card-body">
+    <p class="card-text">{arr[i].title}</p>
+                </div>
+              </div>
+            </div>
+      
+            <div className="col-md-6">
+              <div className="card mb-2 card_im">
+                <img className="card-img-top"
+                   src={arr[i+1].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+                  <p className="card-text">{arr[i+1].title}</p>
+                </div>
+              </div>
+            </div>
+      </div>
+      </div>)
+       i = i+2
+      }
+      
+    }
+    return newarr
+    }
+    return []
+  }
+
+
   updateBanner = (data) => {
     this.setState({
       loadingBanner:true
@@ -224,7 +279,6 @@ class ProfileContainer extends React.PureComponent {
   }
 
   onDoctorClick = (data) =>{
-    console.log(data,"data in addDocotor")
     return <Redirect to={`add-doctor/${data.__id}`} />
   }
 
@@ -232,6 +286,7 @@ class ProfileContainer extends React.PureComponent {
   render() {
     console.log(this.props,"this.props in  ProfileContainer")
     console.log(this.state,"this.state in ProfileContainer")
+    let achievementArray  = this.achievement_slider()
     const { open } = this.state;
     return (
       <React.Fragment>
@@ -288,8 +343,7 @@ class ProfileContainer extends React.PureComponent {
                         <a><img onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
                         <p className="ach_mnt">Achievement</p>
                 </div>
-                <div class="col-md-4 achivementlogo text-center">
-                       
+                <div class="col-md-4 achivementlogo text-center">        
                           <Link to="/dashboard/my-catalogue"
                           role="button"
                           onClick={()=>this.props.toggleMyCatalog()} >
@@ -335,41 +389,8 @@ class ProfileContainer extends React.PureComponent {
               loading = {this.state.editBioLoading}
               getUserDetails = {this.props.getUserDetails}
             />
-
-          {/* <div className="col-md-8 col-12 cardio_le">
-        <div className="b-select-wrap">
-          <label className="speclion">Specialization</label>
-          <select className="form-control b-select">
-            <option>Cardiologist</option>
-            <option>Cardiologist</option>
-            <option>Cardiologist</option>
-          </select>
-        </div>
-      </div>
-      <div className="Service_List">
-        <h6 className="s_list">Service List</h6>
-     
-        
-           <p>Abiation </p>
-           
-           <p>Cardiac Rehabilitation </p>
-           
-           <p>Coronary Artery Bypass Grafting </p>
-          
-          
-           <p>Heart Transplant</p>
-           
-           <p>Space for text </p>
-          
-       
-       
-       <div className="vi_m">
-       <a href="#"className="view_more">View More</a></div>
-      </div>
-   */}
     <hr className="brdr_tm"></hr>
           <div className="team_sec">
-          
             <h3 className="team_of">Team of Experts</h3>
           <div className="row">
   {this.props.user?!!this.props.user.doctors?this.props.user.doctors.map((item,i) =>{
@@ -389,136 +410,28 @@ class ProfileContainer extends React.PureComponent {
    </div>
     </div>
 </div>
-{/* 2nd-end */}
+
 <div className="se-dr"><a href="#">See more Doctor's</a></div>
 <div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
-  {/* <!--Carousel Wrapper--> */}
  
 <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-{/* <!--Slides--> */}
   <div class="carousel-inner" role="listbox">
-
-    {/* <!--First slide--> */}
-    <div class="carousel-item active">
-    <div className="row">
-      <div class="col-md-6">
-        <div class="card mb-2 card_im">
-          <img class="card-img-top" src="/ach1.png" alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card mb-2 card_im">
-          <img class="card-img-top"
-            src="/ach2.png"
-            alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-          </div>
-        </div>
-      </div>
-
-      </div>
-
-    </div>
-    {/* <!--/.First slide--> */}
-
-    {/* <!--Second slide--> */}
-    <div class="carousel-item">
- <div className="row">
-      <div class="col-md-6">
-        <div class="card mb-2 card_im">
-          <img class="card-img-top"
-            src="/ach1.png" alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card mb-2 card_im">
-          <img class="card-img-top"
-            src="/ach2.png" alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-          </div>
-        </div>
-      </div>
-</div>
-    </div>
-    {/* <!--/.Second slide--> */}
-
-    {/* <!--Third slide--> */}
-    <div class="carousel-item">
-    <div className="row">
-      <div class="col-md-6">
-        <div class="card mb-2 card_im">
-          <img class="card-img-top"
-            src="/ach1.png" alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card mb-2 card_im">
-          <img class="card-img-top"
-            src="/ach2.png" alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-          <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-              card's content.</p>
-          </div>
-        </div>
-      </div>
-</div>
-    </div>
-    {/* <!--/.Third slide--> */}
-
+     {achievementArray.map((item,i)=>{
+       return item
+     })}
   </div>
-  {/* <!--/.Slides--> */}
-  {/* <!--Controls--> */}
   <div class="controls-top">
     <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
     <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
         class="fas fa-chevron-right"></i></a>
   </div>
-  {/* <!--/.Controls--> */}
+ 
 
 
 </div>
 
-{/* <!--/.Carousel Wrapper--> */}
- 
 
-  {/* <OwlCarousel ref="car" options={options} events={events} >
-    <div className="trendingBox"><img src="/ach1.png" className="effect_new" alt=""/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <div className="card-body ">
-      <p className="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-    </div>
-    </div>
-    <div  className="trendingBox"><img src="/ach2.png" className="effect_new" alt=""/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <div className="card-body ">
-      <p className="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-   </div>
-   </div>
-    <div  className="trendingBox"><img src="/ach1.png" className="effect_new"alt=""/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-    <div className="card-body ">
-      <p className="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-     </div>
-    </div>
-  
-</OwlCarousel> */}
    
        </div>
           </div>
