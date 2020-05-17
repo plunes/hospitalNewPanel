@@ -330,7 +330,7 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p>
+                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
                                    </React.Fragment>
                                })}
@@ -381,7 +381,7 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p>
+                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
                                    </React.Fragment>
                                })} 
@@ -410,7 +410,7 @@ class AppointmentComponent extends Component {
                           </div>
                           <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,'cancelled_bookings','confirmed_bookings')}>Confirm</text></p>
+                                    <p className="gr_con "><text>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="res_udle ">Reschedule</p>
@@ -433,7 +433,7 @@ class AppointmentComponent extends Component {
                           {this.getProgressbar(item)}                        
                               <div className="two_chil">
                            <p className="pay_ptint">Payments done by patient</p>
-                           <p className="pay_green">Create Prescription</p>
+                           {/* <p className="pay_green">Create Prescription</p> */}
                            </div>
                              </React.Fragment>
                          })}                      

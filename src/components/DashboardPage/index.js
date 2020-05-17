@@ -110,10 +110,12 @@ export class DashboardPage extends React.PureComponent {
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
         }
-        if(!!this.props.notif_data){
-          this.setState({
-              notificationsData:this.props.notif_data
-          })
+        if(!!this.props.mount.notif_mount){
+          if(!!this.props.notif_data){
+            this.setState({
+                notificationsData:this.props.notif_data
+            })
+          }
         }
 }
 

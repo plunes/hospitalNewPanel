@@ -150,6 +150,7 @@ class ProfileContainer extends React.PureComponent {
   }
 
   removeAchievement = (i) =>{
+    console.log(i,"i in removeAchievments")
     let achievements = JSON.parse(JSON.stringify(this.props.user.achievements))
     let newAchievements = []
     achievements.forEach((item,j)=>{
@@ -191,13 +192,13 @@ class ProfileContainer extends React.PureComponent {
     let  newarr = []
     while(i<arr.length-1)
     {
-      if(i===arr.length-1){
+      if(i=== arr.length-1){
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
           <div className="col-md-6">
             <div className="card mb-2">
               <img className="card-img-top card_im"
-                src={arr[i].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={()=>this.removeAchievement(i)} className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
               <div className="card-body">
   <p className="card-text">{arr[i].title}</p>
               </div>
@@ -212,7 +213,7 @@ class ProfileContainer extends React.PureComponent {
             <div className="col-md-6">
               <div className="card mb-2">
                 <img className="card-img-top card_im"
-                  src={arr[i].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={()=>this.removeAchievement(i)} className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
                 <div class="card-body">
     <p class="card-text">{arr[i].title}</p>
                 </div>
@@ -222,7 +223,7 @@ class ProfileContainer extends React.PureComponent {
             <div className="col-md-6">
               <div className="card mb-2">
                 <img className="card-img-top card_im"
-                   src={arr[i+1].imageUrl} alt="Card image cap"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+                   src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={()=>this.removeAchievement(i+1)} className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
                   <p className="card-text">{arr[i+1].title}</p>
                 </div>
