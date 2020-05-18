@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr } from "../actions/userActions";
 import "./DEvelopment.css"
+import { Link } from "react-router-dom"
 import LandingHeader from './LandingHeader'
 
 var rootStyle = {
@@ -97,7 +98,10 @@ class Development extends Component {
                     <div className="heading_hos">
                        <h2>PLUNES is India's first AI powered utility network</h2>
                        <p>Create your profile for free to get started</p>
-                        <a href="#" className="get_startd_h">Get Started for Free</a>
+                        <Link
+                        to="/signup" 
+                        className="get_startd_h"
+                        >Get Started for Free</Link>
                        </div>
                       <div  id="video-container" className="video_sec">
 

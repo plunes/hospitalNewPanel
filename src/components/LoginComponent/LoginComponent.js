@@ -24,7 +24,7 @@ class LoginComponent extends Component {
         
         let data;
         let deviceId = localStorage.getItem('deviceId')
-            if (this.state.emailId.includes('@')) {
+            if (this.state.email.includes('@')) {
                 data = {
                     'email': this.state.email,
                     'password': this.state.password,

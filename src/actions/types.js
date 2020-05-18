@@ -160,4 +160,7 @@ export const GET_PROFILE_RET  = 'App/Profile/GET_PROFILE_RET'
 export const SUBMIT_QUERY_RET = 'App/Profile/SUBMIT_QUERY_RET'
 export const SUBMIT_QUERY_CLR  = 'App/Profile/SUBMIT_QUERY_CLR'
 
+export const EDIT_LOCATION_RET = 'App/Profile/EDIT_LOCATION_RET'
+export const EDIT_LOCATION_CLR  = 'App/Profile/EDIT_LOCATION_CLR'
+
 

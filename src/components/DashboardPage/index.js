@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import DashboardHeader from '../DashboardComponent/DashboardHeader';
 import SidebarComponent from '../DashboardComponent/SidebarComponent';
 import DashboardComponent from '../DashboardComponent/DashboardComponent';
-import ProfileComponent from '../DashboardComponent/ProfileComponent';
 import ProfileContainer from '../DashboardComponent/ProfileContainer'
 import AppointmentComponent from '../DashboardComponent/AppointmentComponent';
 import AvailabilityComponent from '../DashboardComponent/AvailabilityComponent';
@@ -13,7 +12,6 @@ import PaymentComponent from '../DashboardComponent/PaymentComponent';
 import HelpComponent from '../DashboardComponent/HelpComponent';
 import AboutUsComponent from '../DashboardComponent/AboutUsComponent';
 import MyCatalogueComponent from '../DashboardComponent/MyCatalogueComponent';
-import DoctorComponent from '../functional/DoctorComponent';
 import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr, clearSolInsights,
@@ -110,13 +108,13 @@ export class DashboardPage extends React.PureComponent {
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
         }
-        if(!!this.props.mount.notif_mount){
-          if(!!this.props.notif_data){
-            this.setState({
-                notificationsData:this.props.notif_data
-            })
-          }
-        }
+        // if(!!this.props.mount.notif_mount){
+        //   if(!!this.props.notif_data){
+        //     this.setState({
+        //         notificationsData:this.props.notif_data
+        //     })
+        //   }
+        // }
 }
 
   componentDidMount() {

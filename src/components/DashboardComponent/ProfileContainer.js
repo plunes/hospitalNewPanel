@@ -5,7 +5,7 @@ import './Profile.css';
 import Modal from "react-responsive-modal";
 import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr,
    getProfileDetails, updateBanner, updateBannerClr, updateAchievement, updateAchievementClr, editBio, editBioClr,
-   getUserDetails } from "../../actions/userActions";
+   getUserDetails, edit_location_clr, edit_location } from "../../actions/userActions";
 import ProfileImage from '../functional/ProfileImage';
 import ProfileBanner from '../functional/ProfileBanner';
 import DoctorComponent from "../functional/DoctorComponent"
@@ -21,7 +21,7 @@ import Notify from '../functional/Notify';
 import LoaderComponent from "../functional/LoaderComponent"
 // import OwlCarousel from 'react-owl-carousel2';
 
-// import GoogleComponent from "../GoogleMapComponent"
+import Map from "../MapComponent/index.js"
 
 const options = {
   items: 2,
@@ -95,6 +95,31 @@ class ProfileContainer extends React.PureComponent {
             nextProps.getUserDetails()
             nextProps.updateAchievementClr()
           }
+      }
+      
+
+      if(!!nextProps.edit_location_ret){
+        if(!!nextProps.edit_location_ret.success){
+          this.setState({
+            notify:{
+              ...this.state.notify,
+              success:{
+                message:nextProps.edit_location_ret.message
+              }
+            }
+          })
+          nextProps.getUserDetails()
+        }else{
+          this.setState({
+            notify:{
+              ...this.state.notify,
+              success:{
+                error:nextProps.updateAchievementRet.message
+              }
+            }
+          })
+        }
+        nextProps.edit_location_clr()
       }
 
     if(!!nextProps.profileData){
@@ -323,6 +348,20 @@ class ProfileContainer extends React.PureComponent {
   }
 
 
+  edit_location_clr = (data) =>{
+    this.setState({
+      edit_location_loading:false
+    },()=>this.props.edit_location_clr()) 
+  }
+
+ 
+  edit_location = (data) =>{
+    this.setState({
+      edit_location_loading:true
+    },()=>this.props.edit_location(data)) 
+  }
+
+
   render() {
     console.log(this.props,"this.props in  ProfileContainer")
     console.log(this.state,"this.state in ProfileContainer")
@@ -342,11 +381,6 @@ class ProfileContainer extends React.PureComponent {
             }
           })}
         />
-        {/* <div>
-          <MapComponent
-            location = {this.props.user.geoLocation}
-          />
-        </div> */} 
        <ProfileBanner
        user = {this.props.user}
        updateBanner = {this.updateBanner}
@@ -412,17 +446,33 @@ class ProfileContainer extends React.PureComponent {
                     </div>
                     <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
-          <a href="#" class="editmainbodymaxhospital"> Edit</a>
          </p>
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-lg-1"></div>
+                    <div class="col-xs-1 col-sm-1 col-lg-1">
+                    <span onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} class="editmainbodymaxhospital cursor-pointer underline">{this.state.mapFlag?"Cancel":'Edit'}</span>
+                    </div>
                     </div>
                 </div>
-         <div class="row">
+         {/* <div class="row">
                   <div class="col-sm-1 col"></div>
                   <div class="col-sm-10 col maxhospitalviewmap"><a href="" class="editmainbodymaxhospital viewmap">View on map</a></div>
                   <div class="col-sm-1 col"></div>
-              </div> 
+              </div>  */}
+                  
+          { this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
+            <Map
+               google={this.props.google}
+               center={{lat: 18.5204, lng: 73.8567}}
+               location = {this.props.user.geoLocation}
+               height='300px'
+               zoom={15}
+               edit_location_loading = {this.props.edit_location_loading}
+               edit_location = {this.edit_location}
+               edit_location_clr = {this.edit_location_clr}
+             />
+            </div>
+            }
+
           <hr className="Hospitalhr auto_center"></hr>
             <EditBio 
               editBio = {this.editBio}
@@ -522,7 +572,8 @@ const mapStateToProps = state => ({
   updateBannerRet:state.user.updateBannerRet,
   updateAchievementRet:state.user.updateAchievementRet,
   editBioRet:state.user.editBioRet,
-  profileData:state.user.profileData
+  profileData:state.user.profileData,
+  edit_location_ret:state.user.edit_location_ret
 })
 
 export default connect(mapStateToProps, { 
@@ -538,5 +589,7 @@ export default connect(mapStateToProps, {
   updateAchievementClr,
   editBioClr, 
   editBio, 
-  getUserDetails
+  getUserDetails,
+  edit_location,
+  edit_location_clr
  })(ProfileContainer);

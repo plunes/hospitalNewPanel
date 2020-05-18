@@ -123,7 +123,10 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   GET_PROFILE_CLR,
 
   SUBMIT_QUERY_RET,
-  SUBMIT_QUERY_CLR
+  SUBMIT_QUERY_CLR,
+
+  EDIT_LOCATION_CLR,
+  EDIT_LOCATION_RET
 
   } from './types';
 import history from '../history';
@@ -145,6 +148,51 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('specialities')
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
+}
+
+
+export const edit_location_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: EDIT_LOCATION_CLR,
+    payload:{}
+  })
+}
+
+
+export const edit_location = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.put(baseUrl + '/user/', data, { 'headers': { 'Authorization': token } })
+  .then((res) => {
+    console.log(res, 'res in submit_enquiry')
+    if (res.status === 201) {
+        dispatch({
+          type : EDIT_LOCATION_RET,
+          payload :{
+            success:true,
+            message:"Your location been successfully submited"
+          }
+        })
+    }else{
+      dispatch({
+        type : EDIT_LOCATION_RET,
+        payload :{
+          success:false,
+          message:"Unable to process your request now. try later"
+        }
+      })
+    }
+  })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: EDIT_LOCATION_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
 }
 
 

@@ -35,14 +35,12 @@ class LandinHeader extends Component {
                       <span className="ios-img-header">Android</span></a>
                   </li>
                 </ul>
-               
               </div>
                   </li>
                   <li className="nav-item">
-                    <Link to="/signup"
+                    <Link to="/signin"
                     className="nav-link sig_lgn"
-                    > Signup</Link>
-                    {/* <a href="/signup" className="nav-link sig_lgn">Signup</a> */}
+                    > Sign In</Link>
                   </li> 
                  </ul>
              </div>  
