@@ -73,7 +73,7 @@ class TimerComponent extends React.Component {
     }
   
     render() {
-      // console.log(this.state,"state in timerComponent")
+      console.log(this.state,"state in timerComponent")
         if(true){
             return(
                <React.Fragment>

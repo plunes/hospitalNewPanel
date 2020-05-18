@@ -314,6 +314,7 @@ class DashboardComponent extends React.PureComponent {
                             <div className=' dashboardsection dashrow1'>
                                 
                                 <p  className='DashboardHospitalName'>{this.props.user.name}</p>
+                                <p className="heading-right_ris"> For any query - Call at 7701805081</p>
                                 </div>
                             </div>
                             <div className='row'>
@@ -351,6 +352,7 @@ class DashboardComponent extends React.PureComponent {
                                                                             <React.Fragment>
                                                                             <TimerComponent 
                                                                               seconds = {seconds_diff}
+                                                                              key={Math.random()}
                                                                             />
                                                                             </React.Fragment>
                                                                         </div>
@@ -422,7 +424,7 @@ class DashboardComponent extends React.PureComponent {
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
                                         {this.props.act_insight_loader? <LoaderComponent/>:
-                                            this.props.insight.length !==0 ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
+                                            this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
                                                     <button type="button" className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></button>
                                                     <hr></hr>
@@ -434,9 +436,9 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="no_real_insights">No Actionable Insights yet </div>
                                             </div>
                                         }
-                                        <div className="text-center">
+                                        {/* <div className="text-center">
                                             {this.props.insight.length !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <Modal
                                         isOpen={this.state.modalIsOpen}

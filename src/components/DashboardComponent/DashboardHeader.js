@@ -72,7 +72,7 @@ class DashboardHeader extends Component {
                         <Link to= "/dashboard/notification"
                         role = "button"
                         onClick = {()=>this.props.toggleNotif()}>
-                        <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.notificationsData.count!==0?this.props.notificationsData.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
+                        <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.count!==0?this.props.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
                          </Link>
                         </div>
                   </li>

@@ -67,6 +67,7 @@ export class DashboardPage extends React.PureComponent {
           notifications:[]
         },
         act_insight_loader:false,
+        notification:[],
         real_insight_loader:false,
         get_notifs_loading:false,
         Notify:{
@@ -99,8 +100,9 @@ export class DashboardPage extends React.PureComponent {
           this.setState({
               notificationsData:{
                 ...this.state.notificationsData,  ...nextProps.notificationData,
-                notifications:[...this.state.notificationsData.notifications,...nextProps.notificationData.notifications ]
+                notifications:[...nextProps.notificationData.notifications ]
               },
+              notifications:[...nextProps.notificationData.notifications],
               get_notifs_loading:false
           },()=>{
               nextProps.set_notif_data({...nextProps.notif_data, ...this.state.notificationsData})
@@ -390,6 +392,7 @@ getNotifications = (data) =>{
                           notificationsData = {this.state.notificationsData}
                           remove_notif_count_ret = {this.props.remove_notif_count_ret}
                           notif_count_flag = {this.props.notif_count_flag}
+                          count = {this.props.notif_data.count}
                         />
                     </div>
                     <div className="container-fluid">
@@ -433,7 +436,7 @@ getNotifications = (data) =>{
                     location = {this.props.location}
                   />:(this.props.location.pathname == '/dashboard/notification')?
                   <NotificationComponent
-                  notifications = {this.state.notificationsData.notifications}
+                  notifications = {this.state.notifications}
                   get_notifs_loading = {this.state.get_notifs_loading}
                   total_count = {this.props.notif_data.totalCount}
                   getNotifications = {this.getNotifications}

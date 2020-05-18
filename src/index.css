@@ -507,3 +507,14 @@ transform: translateY(-50%);
 .map-wrapper{
   margin: 3rem;
 }
+
+.appoint-hr_ris{
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+}
+.heading-right_ris {
+  display: inline;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
