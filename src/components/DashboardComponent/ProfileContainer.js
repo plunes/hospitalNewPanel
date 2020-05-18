@@ -396,7 +396,6 @@ class ProfileContainer extends React.PureComponent {
         <div onSubmit={this.handleSubmit}>
           <div className="row HospitalProfileRow1">
             <div className="col-sm-2 col-lg-2">
-              <div>
                <ProfileImage
                 user = {this.props.user}
                 upload = {this.uploadProfleImage}
@@ -411,10 +410,6 @@ class ProfileContainer extends React.PureComponent {
                 loadingOff = {()=>this.setState({loadingProfileImage:false})}
 
                />
-                </div>
-                <div className="edit_image2">
-           
-           <img className="edit_icn2"src={'/pen_editor.svg'}></img></div>
             </div>
             <div className="col-sm-9 col-lg-9 maxhospitalrow1col2 content_pos">
               <p className="maxhospital max_cnt"><b>{this.props.user.name}</b></p>

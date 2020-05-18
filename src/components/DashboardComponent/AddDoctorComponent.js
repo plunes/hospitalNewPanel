@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
-    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity } from "../../actions/userActions";
+    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails } from "../../actions/userActions";
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
@@ -620,6 +620,7 @@ let obj =   {
               slotClicked = {this.slotClicked}
               handleCloseDay = {this.handleCloseDay}
               slots ={this.state.slots.length===0?[]:this.state.slots}
+              getUserDetails = {this.props.getUserDetails}
             />
         </div>
         <ModalComponent 
@@ -654,6 +655,7 @@ const mapStateToProps = state => ({
   addDoctor,
   addDoctorClr,
   getEntityClr,
-  getEntity
+  getEntity,
+  getUserDetails
   })(AddDoctorComponent)
 

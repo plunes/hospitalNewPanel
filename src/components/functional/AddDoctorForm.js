@@ -37,6 +37,7 @@ import React, { useRef, useState, useEffect } from "react"
     }else{
       addToast(props.addDoctorRet.message, {appearance: 'error', autoDismiss:true})
     }
+    props.getUserDetails()
     props.addDoctorClr()
     props.addDoctorLoadingOff()
 }
@@ -100,7 +101,7 @@ import React, { useRef, useState, useEffect } from "react"
     ref = {doctorImageRef}
     />
          <img src={!!props.doctorProfileImage?props.doctorProfileImage:'/account.svg'} className="accout"/>
-         <img src="/camera.svg" className="came" />
+         <img onClick={(e)=>handleImageClick(e)} src="/camera.svg" className="came cursor-pointer" />
        </div>
        <div className="col-lg-3">
   <h6 className="fil_nm">{!!props.doctorImageName?props.doctorImageName:'File Name'}</h6>

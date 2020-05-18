@@ -210,15 +210,12 @@ class DashboardComponent extends React.PureComponent {
     async componentDidMount() {
         //await this.props.getBooking();
         let defaulteDays = 15
-       
         // await this.props.getAllBookings(defaulteDays);
-        // await this.props.getInsights();
-
+        await this.props.getInsights();
         if(!!!this.props.mount.dash_mount){
             this.setState({
                 loader:true
             })
-
             // await this.props.getSolutionInsights();
             await this.props.getMonthWiseUsers();
             this.setState({

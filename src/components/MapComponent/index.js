@@ -17,12 +17,12 @@ class Map extends Component{
 			area: '',
 			state: '',
 			mapPosition: {
-				lat: this.props.location.latitude,
-				lng: this.props.location.longitude
+				lat: !!this.props.location?this.props.location.latitude:28.7041,
+				lng: !!this.props.location?this.props.location.longitude:77.2090
 			},
 			markerPosition: {
-				lat: this.props.location.latitude,
-				lng: this.props.location.longitude
+				lat: !!this.props.location?this.props.location.latitude:28.7041,
+				lng: !!this.props.location?this.props.location.longitude:77.2090
 			}
 		}
 	}
@@ -166,10 +166,10 @@ class Map extends Component{
 						lat: newLat,
 						lng: newLng
 					},
-					mapPosition: {
-						lat: newLat,
-						lng: newLng
-					},
+					// mapPosition: {
+					// 	lat: newLat,
+					// 	lng: newLng
+					// },
 				} )
 			},
 			error => {
@@ -213,9 +213,10 @@ class Map extends Component{
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (
-					<GoogleMap google={ this.props.google }
-					           defaultZoom={ this.props.zoom }
-					           defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
+					<GoogleMap 
+					google={ this.props.google }
+					defaultZoom={ this.props.zoom }
+					defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
 					>
 						{/* InfoWindow on top of marker */}
 						<InfoWindow
@@ -251,7 +252,7 @@ class Map extends Component{
 			)
 		);
 		let map;
-		if( this.props.location.latitude !== undefined ) {
+		if(true) {
 			console.log("254>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 			map = <div style={{position:'relative'}}>
 				{this.props.edit_location_loading && <LoaderComponent />}

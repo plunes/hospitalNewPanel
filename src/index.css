@@ -519,3 +519,9 @@ transform: translateY(-50%);
   right: 2rem;
   top: 2rem;
 }
+.no-appointment_ris {
+  position: relative;
+  height: 15rem;
+  display: flex;
+  flex-direction: column-reverse;
+}

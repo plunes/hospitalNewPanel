@@ -47,7 +47,7 @@ class RegistrationContainer extends  React.Component {
                 dob:'',
                 regno:'',
                 experience:'',
-                specialities_selected:" ",
+                specialities_selected:[]
             }
         };
         this.handleChange = this.handleChange.bind(this);
@@ -173,10 +173,12 @@ class RegistrationContainer extends  React.Component {
   }
 
   handleSpecialitySelectDoctor = (e)=>{
+    let arr = JSON.parse(JSON.stringify(this.state.doctor.specialities_selected))
+    arr.push(e.target.value)
     this.setState({
         doctor:{
             ...this.state.doctor,
-            specialities_selected:e.target.value
+            specialities_selected:arr
         }
     })
   }
@@ -187,6 +189,18 @@ class RegistrationContainer extends  React.Component {
     arr.splice(i,1)
     this.setState({
         hospital:{
+            ...this.state.hospital,
+            specialities_selected:arr
+        }
+    })
+  }
+
+  removeSpecialityDoctor = (data) =>{
+    let arr = JSON.parse(JSON.stringify(this.state.hospital.specialities_selected))
+    let i = arr.indexOf(data)
+    arr.splice(i,1)
+    this.setState({
+        doctor:{
             ...this.state.hospital,
             specialities_selected:arr
         }
@@ -289,9 +303,13 @@ class RegistrationContainer extends  React.Component {
                                 <DoctorSignup 
                                 data = {this.state.doctor}
                                 specialities = {this.state.specialities}
+                                specialities_selected = {this.state.hospital.specialities_selected}
+                                handleSpecialitySelect = {this.handleSpecialitySelectDoctor}
+                                removeSpeciality = {this.removeSpecialityDoctor}
+                                addFlag = {this.state.addFlag}
+                                addFlagToggle = {()=>this.setState({addFlag:!this.state.addFlag})}
                                 handleChange = {this.handleChangeDoctor}
                                 specialities_selected = {this.state.doctor.specialities_selected}
-                                handleSpecialitySelect = {this.handleSpecialitySelectDoctor}
                                 registerUser = {this.registerUser}
                                 loading = {this.state.loading}
                                 successRegister = {this.successRegister}

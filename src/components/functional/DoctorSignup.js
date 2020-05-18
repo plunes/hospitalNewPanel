@@ -42,22 +42,20 @@ import validator from 'validator'
                 addToast("Experience must be a number",{ appearance: 'error', autoDismiss:true })
             }
             else{
-
-                let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))
-                let spec = props.data.specialities_selected
-                   let id =''
-                   specialitiesArr.forEach((data,i)=>{
-                       if(data.name === spec){
-                        id=data.id
-                       }
-                   })
-                   let arr = [
-                    {
-                        specialityId:id,
-                        services:[]
-                    }
-                   ]
-            
+              let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))
+              let arr = JSON.parse(JSON.stringify(props.data.specialities_selected))
+              arr = arr.map((item, i)=>{
+                 let id =''
+                 specialitiesArr.forEach((data,i)=>{
+                     if(data.name === item){
+                      id=data.id
+                     }
+                 })
+                  return {
+                      specialityId:id,
+                      services:[]
+                  }
+              })
               console.log(arr,"sdsd")
                 props.registerUser({
                     name:props.data.name,
@@ -168,7 +166,7 @@ import validator from 'validator'
         ></input>
       </div>
        
-      <div className="form-group">
+      {/* <div className="form-group">
       <SelectComponent
            options = {props.specialities}
            handleChange = {props.handleSpecialitySelect}
@@ -178,7 +176,51 @@ import validator from 'validator'
            placeholder="Specialization"
            label = ""
         />
-      </div>
+      </div> */}
+
+<div className="text-center signupHosformfield margin-top-medium_ris ">
+            <h5 style={{fontWeight:'400'}}>
+             Add Specialization
+            </h5>
+            <p>Add Specialization and Services</p>
+          </div>
+          {props.addFlag?
+          <React.Fragment>
+        <SelectComponent
+           options = {props.specialities}
+           handleChange = {props.handleSpecialitySelect}
+           value = {props.specialities_selected[props.specialities_selected.length -1]}
+           multiple ={false}
+           name = "speciality"
+           label = "Speciality"
+        />
+        <div className="form-group buttonSignUp">
+        <button onClick={()=>props.addFlagToggle()}  className="btn btn-success text-center signupHosbtn">
+          Cancel
+        </button>
+        </div>
+          </React.Fragment>
+          : <div className="form-group buttonSignUp">
+        <button onClick={()=>props.addFlagToggle()}  className="btn btn-success text-center signupHosbtn">
+          Add
+        </button>
+        </div>}
+         
+        <div className="margin-top-medium_ris ">
+        </div>
+        
+        {props.specialities_selected.map((item,i)=>(
+            <React.Fragment>
+             <hr />
+             <div className="signup_specialities_wrapper_ris">
+                 <div className="signup_speciality">
+        <p className="signup_speciality_name">{item}</p>
+                     <p onClick={()=>props.removeSpeciality(item)} className="signup_speciality_X">X</p>
+                 </div>
+             </div>
+            </React.Fragment>
+        ))}
+
 
       <div className="form-group">
         <input

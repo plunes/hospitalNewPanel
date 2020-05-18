@@ -7,6 +7,7 @@ import ChangePassForm from "../functional/changePassForm"
 import redux from "redux"
 import './index.css'
 
+
 class ChangePassword extends React.PureComponent {
     constructor(props){
         super(props)

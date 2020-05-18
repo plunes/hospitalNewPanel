@@ -80,6 +80,7 @@ import LoaderComponent from "./LoaderComponent"
 
   return (
 <React.Fragment>
+  <div>
     <input  
     style={{display:'inline',display:'none'}}
     id="uploadInput"
@@ -95,6 +96,9 @@ import LoaderComponent from "./LoaderComponent"
     src={(!!props.user?props.user.imageUrl:'/profile.png')} 
     alt=""> 
     </img>
+    </div>
+    <div className="edit_image2">
+        <img onClick={(e)=>handleImageClick(e)} className="edit_icn2 cursor-pointer"src={'/pen_editor.svg'}></img></div>
 </React.Fragment>
   )
 }

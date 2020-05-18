@@ -285,6 +285,9 @@ class AppointmentComponent extends Component {
                                 </TabList>
                               <div className="upcoming_bdr"></div>
                                 <TabPanel className="ardee_ci">
+                                {this.state.upcoming_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
+                                        <h3>No New Appointments</h3>
+                                        </div>}
                                {this.state.upcoming_bookings.map((item,i)=>{
                                    return <React.Fragment>
                                         <div className="row">
@@ -338,6 +341,9 @@ class AppointmentComponent extends Component {
                                })}
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
+                                {this.state.confirmed_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
+                                        <h3>No  Appointments</h3>
+                                        </div>}
                                     {this.state.confirmed_bookings.map((item,i)=>{
                                    return <React.Fragment>
                                         <div className="row">
@@ -392,6 +398,9 @@ class AppointmentComponent extends Component {
                                <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
+                                {this.state.cancelled_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
+                                        <h3>No  Appointments</h3>
+                                        </div>}
                                 {this.state.cancelled_bookings.map((item,i)=>{
                                   return <React.Fragment>
                                   <div className="row">
@@ -467,7 +476,7 @@ class AppointmentComponent extends Component {
                             </div> */}
                       {!this.state.status_change_confirm && <div className="time_clo my_avl text-center">
                              <button onClick={()=>this.conformBooking()} className="common-button">Yes</button>
-                             <button onClick={()=>this. this.closeConfirmModal()} className="common-button-white  ml-5">No</button>
+                             <button onClick={()=>this.closeConfirmModal()} className="common-button-white  ml-5">No</button>
                       </div>}
                            </div>    
                          </Modal>        
@@ -488,7 +497,7 @@ class AppointmentComponent extends Component {
                             </div> */}
                       {!this.state.status_change_confirm && <div className="time_clo my_avl text-center">
                              <button onClick={()=>this.cancellAppointmentSubmit()} className="common-button">Yes</button>
-                             <button onClick={()=>this. this.closeCancelModal()} className="common-button-white  ml-5">No</button>
+                             <button onClick={()=>this.closeCancelModal()} className="common-button-white  ml-5">No</button>
                       </div>}
                            </div>    
                          </Modal>    
