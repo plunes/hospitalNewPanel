@@ -87,7 +87,8 @@
                 position: relative;
                left: 2rem;
                right:2rem;
-               margin-top: 1rem!important;
+               margin-top: 1.5rem!important;
+               margin-bottom: 1rem!important;
 }
 .edit
 
@@ -163,7 +164,7 @@
 .editmainbodymaxhospital{color: #01D35A;font-weight: 400;font-size: 1.2rem;}
 .ach_mnt{font-size: 1.2rem;}
 .edi_intr{
-        color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.4rem;
+        color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.3rem;left: 0;
        
 
 }

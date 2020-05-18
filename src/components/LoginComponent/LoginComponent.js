@@ -74,8 +74,9 @@ class LoginComponent extends Component {
           <div className="row">
           <AuthHeader/>
           </div>
-          <div className='row'>
-                    <div className='col-md-6 sidetimgcol'>
+          <div className='row '>
+           
+                    <div className='col-md-6 sidetimgcol sign_up_he'>
                         <img className="signImage"  src="Mobile-login.png" alt="SignUp" />
                     </div>
                     <div className='col-md-6'>
@@ -94,7 +95,8 @@ class LoginComponent extends Component {
                             />
                         </div>
                     </div>
-                </div>
+                    </div>
+               
         </React.Fragment>
         )
     }

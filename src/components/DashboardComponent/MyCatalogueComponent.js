@@ -428,7 +428,7 @@ class MyCatalogueComponent extends Component {
                                  <p className="uploadCata">Edit Catalogue</p></a>
                               </div>
                               <div className='col-md-3 text-center'>
-                                 <a href="" onClick={(e)=>this.handleAddProcedureClick(e)}><img className="catalogue-img" src="/edit.svg" alt=""></img>
+                                 <a href="" onClick={(e)=>this.handleAddProcedureClick(e)}><img className="catalogue-img" src="/cata.svg" alt=""></img>
                                  <p className="uploadCata">Add Catalogue</p></a>
                               </div>
                         </div>
