@@ -519,7 +519,7 @@ class ProfileContainer extends React.PureComponent {
    
    {!!this.props.user.doctors?((this.props.user.doctors.length===this.state.show_doctor_count) || (this.props.user.doctors.length==0))?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
    show_doctor_count:this.props.user.doctors.length
-   })} >See more Doctor's</span></div> :'' }
+   })} >See more Doctors</span></div> :'' }
    </React.Fragment>
      }
 

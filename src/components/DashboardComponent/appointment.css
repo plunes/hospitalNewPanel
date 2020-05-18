@@ -5,7 +5,9 @@
 .upcoming_bdr{border-bottom: 3px solid #B7B7B7;position: relative;
     top: -19px;
     z-index: 0;}
-    .two_chil{margin-top: 30px; text-align: center;margin-bottom: 6rem;}
+    .two_chil{
+      margin-top: 1rem; text-align: center;margin-bottom: 1rem;
+    }
 .active { color:#f00;font-weight:bolder; }
 .react-tabs__tab-list{padding-left: 0;}
 .react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;position: relative !important;top:-4px;}

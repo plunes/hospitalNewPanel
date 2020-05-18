@@ -297,6 +297,7 @@ class AppointmentComponent extends Component {
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
+                                                  <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
                                       <div className="col-lg-2 loc_tab">
@@ -332,6 +333,7 @@ class AppointmentComponent extends Component {
                                  <p className="pay_ptint">Payments done by patient</p>
                                  {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
+                                 <hr className="appoint-hr_ris"/>
                                    </React.Fragment>
                                })}
                                 </TabPanel>
@@ -348,6 +350,7 @@ class AppointmentComponent extends Component {
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
+                                                  <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
                                       <div className="col-lg-2 loc_tab">
@@ -383,6 +386,7 @@ class AppointmentComponent extends Component {
                                  <p className="pay_ptint">Payments done by patient</p>
                                  {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
+                                 <hr className="appoint-hr_ris"/>
                                    </React.Fragment>
                                })} 
                                <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
@@ -400,6 +404,7 @@ class AppointmentComponent extends Component {
                                             </div>
                                             <div className="col-lg-4 nov_2">
                                             <h4>{item.userName}</h4>
+                                            <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                             <p>{item.professionalAddress}</p>
                                           </div> 
                                 <div className="col-lg-2 loc_tab">
@@ -435,6 +440,7 @@ class AppointmentComponent extends Component {
                            <p className="pay_ptint">Payments done by patient</p>
                            {/* <p className="pay_green">Create Prescription</p> */}
                            </div>
+                           <hr className="appoint-hr_ris"/>
                              </React.Fragment>
                          })}                      
                                  <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})} className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
