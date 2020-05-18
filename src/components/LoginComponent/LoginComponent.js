@@ -24,7 +24,7 @@ class LoginComponent extends Component {
         
         let data;
         let deviceId = localStorage.getItem('deviceId')
-            if (this.state.emailId.includes('@')) {
+            if (this.state.email.includes('@')) {
                 data = {
                     'email': this.state.email,
                     'password': this.state.password,
@@ -76,7 +76,7 @@ class LoginComponent extends Component {
           </div>
           <div className='row'>
                     <div className='col-md-6 sidetimgcol'>
-                        <img className="signImage"  src="Mobile-login.png" alt="SignUp" />
+                        <img className="signImage botm_sign"  src="Mobile-login.png" alt="SignUp" />
                     </div>
                     <div className='col-md-6'>
                         <div className='col-md-1'>

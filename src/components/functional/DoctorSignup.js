@@ -10,7 +10,7 @@ import validator from 'validator'
  const DoctorSignup= (props) => {
 
   const redirect = () =>{
-    return <Redirect to="/" />
+    return <Redirect to="/signin" />
   }
 
 
@@ -20,7 +20,7 @@ import validator from 'validator'
   if(!!props.registerUserRet){
       if(!!props.registerUserRet.success){
         addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true}) 
-        return  <Redirect to="/" />
+        return  <Redirect to="/signin" />
       }else{
         addToast(props.registerUserRet.message, {appearance: 'error', autoDismiss:true})
       }

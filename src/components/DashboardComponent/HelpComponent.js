@@ -1,30 +1,45 @@
-import React, { Component } from 'react';
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
+import React from 'react';
+import SubmitQuery from "../functional/SubmitQuery";
+import { connect } from 'react-redux';
+import { submit_query, submit_query_clr } from "../../actions/userActions"
 import  "./AboutUs.css";
 
-export default class HelpComponent extends Component {
+ class HelpComponent extends React.PureComponent {
+        constructor(props){
+            super(props)
+            this.state = {
+              vaid:true,
+              laoding:false
+            }
+            this.submit_query_clr = this.submit_query_clr.bind(this)
+            this.submit_query = this.submit_query.bind(this)
+        }
+
+        submit_query_clr(){
+            this.setState({
+                laoding:false
+            },()=>this.props.submit_query_clr())
+        }
+        submit_query(data){
+            this.setState({
+                laoding:true
+            },()=>this.props.submit_query(data))
+        }
+     
+    
     render() {
+        console.log(this.props,"this.props in helpCompoent")
         return (
             <React.Fragment>
                 <div className='col-md-8 col-xl-9'>
-                    
-        
                   <div className="helppage">
                   <div className="helppageBody">
-
-                    <div className="helprow1"><p>Help</p></div>
-                    <div className="form-group">
-                        <label></label>
-                        <input type="Text" className="form-control query_en" placeholder="Enter your Query"></input>
-                        <div className="sub_que">
-                         <a href="#"className="sub_fr">Submit</a>
-                        </div>
-                    </div>
-                   <div className="cal_nu">
-                    <h6  className="or_frm">OR</h6>
-                    <h5  className="or_frm">Call at : 7701805081</h5>
-                    </div>
+                      <SubmitQuery 
+                        submit_query_ret = {this.props.submit_query_ret}
+                        submit_query_clr = {()=>this.submit_query_clr()}
+                        submit_query = {this.submit_query}
+                        laoding = {this.state.laoding}
+                      />
                     {/* <div className="form-group">
                         <label></label>
                         <input type="Text" className="form-control helpinput helprow2" placeholder="I have an issue with"></input>
@@ -185,3 +200,12 @@ export default class HelpComponent extends Component {
         )
     }
 }
+
+
+
+const mapStateToProps = state => ({
+    submit_query_ret : state.user.submit_query_ret
+  })
+  export default connect(mapStateToProps, {
+  submit_query, submit_query_clr
+  })(HelpComponent)

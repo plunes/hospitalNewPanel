@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import DashboardHeader from '../DashboardComponent/DashboardHeader';
 import SidebarComponent from '../DashboardComponent/SidebarComponent';
 import DashboardComponent from '../DashboardComponent/DashboardComponent';
-import ProfileComponent from '../DashboardComponent/ProfileComponent';
 import ProfileContainer from '../DashboardComponent/ProfileContainer'
 import AppointmentComponent from '../DashboardComponent/AppointmentComponent';
 import AvailabilityComponent from '../DashboardComponent/AvailabilityComponent';
@@ -13,13 +12,12 @@ import PaymentComponent from '../DashboardComponent/PaymentComponent';
 import HelpComponent from '../DashboardComponent/HelpComponent';
 import AboutUsComponent from '../DashboardComponent/AboutUsComponent';
 import MyCatalogueComponent from '../DashboardComponent/MyCatalogueComponent';
-import DoctorComponent from '../functional/DoctorComponent';
 import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
-   remove_notif_count_ret } from "../../actions/userActions"
+   remove_notif_count_ret, set_notif_count } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -78,25 +76,6 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
-  componentDidMount(){
-    if(!!this.props.mount.dash_mount){
-      if(this.props.dash_data){
-        this.setState({
-          solInsights:this.props.dash_data.solInsights,
-          insight:this.props.dash_data.insight,
-        })
-      }
-    }
-
-    if(!!this.props.mount.notif_mount){
-          if(!!this.props.notif_data){
-          this.setState({
-              notificationsData:this.props.notif_data
-          })
-        }
-    }
-  }
-
   componentWillReceiveProps(nextProps){
         if(!!nextProps.solInsights){
           this.setState({
@@ -117,7 +96,6 @@ export class DashboardPage extends React.PureComponent {
           })
       }
         if(!!nextProps.notificationData){
-          console.log(nextProps.notificationData,"notoficationData in Will ReceiveProps")
           this.setState({
               notificationsData:{
                 ...this.state.notificationsData,  ...nextProps.notificationData,
@@ -130,6 +108,13 @@ export class DashboardPage extends React.PureComponent {
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
         }
+        // if(!!this.props.mount.notif_mount){
+        //   if(!!this.props.notif_data){
+        //     this.setState({
+        //         notificationsData:this.props.notif_data
+        //     })
+        //   }
+        // }
 }
 
   componentDidMount() {
@@ -201,6 +186,23 @@ export class DashboardPage extends React.PureComponent {
       real_insight_loader:true,
       get_notifs_loading:true
     })
+
+    if(!!this.props.mount.dash_mount){
+      if(this.props.dash_data){
+        this.setState({
+          solInsights:this.props.dash_data.solInsights,
+          insight:this.props.dash_data.insight,
+        })
+      }
+    }
+
+    if(!!this.props.mount.notif_mount){
+          if(!!this.props.notif_data){
+          this.setState({
+              notificationsData:this.props.notif_data
+          })
+        }
+    }
     this.props.getSolutionInsights()
     this.props.getInsights()
     this.props.getNotifications({page:1})
@@ -270,7 +272,6 @@ export class DashboardPage extends React.PureComponent {
      ...initialState,
      notif:'active'
     },()=>{
-      console.log("Inside Remove ToggleNotif")
      this.props.remove_notif_count()
     })
   }
@@ -351,7 +352,7 @@ prompt_success_notify =(data) =>{
                 message:data
             }
         }
-    })
+    },()=>this.props.getNotifications({page:1}))
 }
 
 set_notif_count = () =>{
@@ -365,13 +366,12 @@ getNotifications = (data) =>{
 }
 
   render() {
-    console.log(this.state,"this.state in DasboardPage")
-    console.log(this.props,"this.props in DasboardPage")
-
+    console.log(this.props,"this.props in DashboardPage")
+    console.log(this.state,"this.state in DashboardPage")
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
-        pathname : '/'
+        pathname : '/signin'
       }}
     />
     }
@@ -411,7 +411,7 @@ getNotifications = (data) =>{
                   solInsights = {this.state.solInsights}
                   insight = {this.state.insight}
                   real_insight_loader = {this.state.real_insight_loader}
-                  act_insight_loader = {this.state.act_insight_loader}                
+                  act_insight_loader = {this.state.act_insight_loader}            
                   /> :(this.props.location.pathname == '/dashboard/profile')?
                   <ProfileContainer
                   toggleProfile = {this.toggleProfile}
@@ -473,6 +473,7 @@ getNotifications,
 clr_get_notif,
 setMount,
 remove_notif_count,
-remove_notif_count_ret
+remove_notif_count_ret,
+set_notif_count
 })(DashboardPage);
 

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import DashboardHeader from './DashboardHeader';
 import SidebarComponent from './SidebarComponent';
-// import ProfileComponent from './ProfileContainer';
 import { connect } from 'react-redux';
-// import { getUserDetails } from "../../actions/userActions";
-// import { getBooking } from '../../actions/userActions'
 import { getInsights, updateRealPriceClr, clearUpdatePriceData,
      clearSolInsights, getSolutionInsights, getAllBookings,
       getMonthWiseUsers, updateRealPrice, setMount,
@@ -21,7 +18,6 @@ import 'react-rangeslider/lib/index.css'
 import TimerComponent from '../TimerComponent'
 import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
-
 
 const customStyles = {
     content: {
@@ -95,7 +91,6 @@ class DashboardComponent extends React.PureComponent {
        // console.log(value, 'value')
         const { realUpdatePrice } = this.state
         let newPrice = realUpdatePrice - realUpdatePrice * value /100
-
         this.setState({
             solValue : value,
             solUpdatedPrice : newPrice
@@ -318,16 +313,17 @@ class DashboardComponent extends React.PureComponent {
                         /><div className="row">
                             <div className=' dashboardsection dashrow1'>
                                 
-                                <p className='DashboardHospitalName'>{this.props.user.name}</p>
+                                <p  className='DashboardHospitalName'>{this.props.user.name}</p>
                                 </div>
                             </div>
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
-                                    <div className='dashboardsection scrolling_sec'>
-                                        <span className='businessrow1col1 realtimewidth real_tm_bor'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
-                                        {
-                                            this.props.solInsights ? this.props.solInsights.slice(0, this.state.ro_insight_count).map((s, index) =>{
-                                                
+                                    <div className="custome_scrol">
+                                    <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
+                                    {/* {this.props.real_insight_loader && <LoaderComponent/>} */}
+                                        <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
+                                        {this.props.real_insight_loader?<LoaderComponent/>:
+                                            this.props.solInsights.length!==0 ? this.props.solInsights.map((s, index) =>{
                                                 let seconds_diff = this.getSecondsDifferent(s.createdAt)
                                                 return (
                                                     (
@@ -356,19 +352,6 @@ class DashboardComponent extends React.PureComponent {
                                                                             <TimerComponent 
                                                                               seconds = {seconds_diff}
                                                                             />
-                                                                            {/* <Timer
-                                                                                initialTime={100}
-                                                                                direction="backward"
-                                                                            >
-                                                                                {() => (
-                                                                                    <React.Fragment>
-                                                                                        <div className="Timer"><Timer.Minutes /> :&nbsp;
-                                                                                             <Timer.Seconds /> 
-                                                                                        </div>min sec
-                                                                                    </React.Fragment>
-                                                                                )}
-                                                                            </Timer> */}
-                                                                            {/* {this.setTimer.call(this, 5000)} */}
                                                                             </React.Fragment>
                                                                         </div>
                                                                         : <div>
@@ -378,8 +361,14 @@ class DashboardComponent extends React.PureComponent {
                                                         </div>
                                                     )
                                                 )
-                                            }) : false
+                                            }) : <div className="no_insights_wrapper_ris">
+                                                <div className="no_insight_image-wrapper">
+                                                <img className="no_isights_image" src="./Group 2053.svg" />
+                                                </div>
+                                                <div className="no_real_insights">No Real Time Insights yet </div>
+                                                </div>
                                         }
+                                    </div>
                                     </div>
                                     <div className='dashboardsection'>
                                         <div className="bdr_dash">
@@ -429,17 +418,21 @@ class DashboardComponent extends React.PureComponent {
                                 </div>
                                 <div className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
-                                    {this.props.act_insight_loader && <LoaderComponent/>}
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
-                                        {
-                                            this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
+                                        {this.props.act_insight_loader? <LoaderComponent/>:
+                                            this.props.insight.length !==0 ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
                                                     <button type="button" className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></button>
                                                     <hr></hr>
                                                 </div>
-                                            )) : false
+                                            )) :  <div className="no_insights_wrapper_ris">
+                                            <div className="no_insight_image-wrapper">
+                                            <img className="no_isights_image" src="./Group 2055.svg" />
+                                            </div>
+                                            <div className="no_real_insights">No Actionable Insights yet </div>
+                                            </div>
                                         }
                                         <div className="text-center">
                                             {this.props.insight.length !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
@@ -472,21 +465,16 @@ class DashboardComponent extends React.PureComponent {
                                             <span>
                                             {Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)} 
                                             </span>
-                                            {/* <input className="valu_chenge"
-                                            type='text' onChange={this.handleChange} 
-                                            name='updatePrice' 
-                                            value={Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)}>
-                                            </input> */}
                                             </div>
                                             <br>
                                             </br>
-                                            {/* <input className='value' value={this.state.value}></input> */}
+                                           
                                         </div> 
                                         <div className="row maxmin">
                                             <div className="col-sm-6"><h4>&#8377;{this.state.updatePrice}</h4></div>
                                             <div className="col-sm-6 text-right"><h4>&#8377;{this.state.updatePrice / 2}</h4></div>
                                         </div>
-                                        {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br> */}
+                                       
                                         <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.value===0?
                                         <p style={{ fontWeight:'bold'}}><b>0%</b></p>:
                                         <p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p>}</div>
@@ -517,13 +505,8 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="SliderUpdatedPrice">&#8377;
                                             <span>
                                             {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)} 
-                                            </span>
-                                            {/* <input className="price_up" type='text' onChange={this.handleChange} name='updatePrice' 
-                                            value={this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice}>
-                                                </input> */}
-                                                
+                                            </span>            
                                                 </div><br></br>
-                                            {/* <input className='value' value={this.state.value}></input> */}
                                         </div> 
                                         <div className="row maxmin">
                                             <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
@@ -532,7 +515,6 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.solValue===0?
                                              <p style={{ fontWeight:'bold'}}><b>0%</b></p>
                                             :<p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p>}</div>
-                                        {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br> */}
                                         <div className="text-center"><button style={{ fontSize: '18px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                 </div>

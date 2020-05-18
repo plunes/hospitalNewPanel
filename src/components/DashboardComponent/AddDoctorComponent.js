@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
     getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity } from "../../actions/userActions";
-
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
@@ -192,7 +189,7 @@ let obj =   {
     
       timeToString = (time) =>{
         let  hour =  time.hour>12?time.hour-12:time.hour
-        let minutes = time.minutes===0?"00":time.minutes
+        let minutes =  time.minutes<10?`0${time.minutes}`:time.minutes
         let timeString = `${hour}:${minutes} ${time.hour>12?'PM':'AM'}`
         return timeString
      }

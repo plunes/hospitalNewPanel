@@ -206,7 +206,7 @@ class AppointmentComponent extends Component {
         return  <React.Fragment>
         <ul className="list-unstyled multi-steps">
             <li className="active_ris">Booked</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>10000{item.paidAmmount}</li>
+            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmount}</li>
             <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
        </ul>
       </React.Fragment>
@@ -330,7 +330,7 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p>
+                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
                                    </React.Fragment>
                                })}
@@ -381,11 +381,11 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 <p className="pay_green">Create Prescription</p>
+                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
                                    </React.Fragment>
                                })} 
-                               <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                               <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
                                 </TabPanel>
                                 <TabPanel className="ardee_ci">
                                 {this.state.cancelled_bookings.map((item,i)=>{
@@ -410,7 +410,7 @@ class AppointmentComponent extends Component {
                           </div>
                           <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,'cancelled_bookings','confirmed_bookings')}>Confirm</text></p>
+                                    <p className="gr_con "><text>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="res_udle ">Reschedule</p>
@@ -433,11 +433,11 @@ class AppointmentComponent extends Component {
                           {this.getProgressbar(item)}                        
                               <div className="two_chil">
                            <p className="pay_ptint">Payments done by patient</p>
-                           <p className="pay_green">Create Prescription</p>
+                           {/* <p className="pay_green">Create Prescription</p> */}
                            </div>
                              </React.Fragment>
                          })}                      
-                                 <div className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
+                                 <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})} className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
                                                            
                                  </TabPanel>
                                 
@@ -496,20 +496,20 @@ class AppointmentComponent extends Component {
         <div className="text-right"><button onClick={this.closeModal} className="cross"><img src="/cross.png" alt="" className="covidCross"></img></button></div>
         <div className="text-center"><h4><b>Tips for more Conversions</b></h4></div><br></br>
         <div className='row tipsrow'>
-              <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Call up the Patients</b></div>     
+              <div className='col-md-2 vertical_center_ris'><img src="/smallIdea.svg" alt=""></img></div> 
+              <div className='col-md-10 vertical_center_ris'><b>Call up the Patients</b></div>     
+        </div>
+        <div className='row tipsrow'>
+              <div className='col-md-2 vertical_center_ris_r'><img src="/smallIdea.svg" alt=""></img></div> 
+              <div className='col-md-10 vertical_center_ris'><b>Make them Comfortable</b></div>     
+        </div>
+        <div className='row tipsrow'>
+              <div className='col-md-2 vertical_center_ris'><img src="/smallIdea.svg" alt=""></img></div> 
+              <div className='col-md-10 vertical_center_ris'><b>Please respect the time of patients as they care about it most</b></div>     
         </div>
         <div className='row tipsrow'>
               <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Make them Comfortable</b></div>     
-        </div>
-        <div className='row tipsrow'>
-              <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Please respect the time of patients as they care about it most</b></div>     
-        </div>
-        <div className='row tipsrow'>
-              <div className='col-md-2'><img src="/smallIdea.svg" alt=""></img></div> 
-              <div className='col-md-10'><b>Introduce proper communication with Patients</b></div>     
+              <div className='col-md-10 vertical_center_ris'><b>Introduce proper communication with Patients</b></div>     
         </div>
          
         </Modal>

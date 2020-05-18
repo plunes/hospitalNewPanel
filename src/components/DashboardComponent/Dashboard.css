@@ -192,7 +192,7 @@ a:hover
 
 .sidebaricon
       {
-            width: 1.7rem;
+            width: 1.8rem;
             margin-right: .9rem;
       }
         
@@ -286,11 +286,12 @@ hr
       border-radius: 7px;
       opacity: 1; margin-bottom: 3%;
 }
-.scrolling_sec {
+/* .scrolling_sec {
       overflow: auto;
-      height: 32vw;
+      max-height: 32vw;
+      min-height: 20vw;
       overflow-x: hidden;
-  }
+  } */
   .side_br {padding-left: 0 !important;}
 .dashrow1
 {
@@ -302,10 +303,14 @@ hr
       margin-left: 1rem;
     
 }
-.second_scro{ width: 30vw;
+.second_scro{ 
+      width: 30vw;
       overflow: auto;
-      height: 33vw;
-      overflow-x: hidden;}
+      overflow: auto;
+      max-height: 32vw;
+      min-height: 20vw;
+      overflow-x: hidden;
+}
 
 .dashrow2col1
       {margin-right: 18px;max-width: 47.666667% !important;}
@@ -623,3 +628,30 @@ hr
       top: 5px; */
 }
  .price_up{text-align: left;border: none;width: 15%;font-weight: bold;font-size: 16px;}
+
+ /* custome-scrolling */
+ .custome_scrol{ position: relative;
+     }
+      .scrolling_sec{ top: 10px;
+           
+            bottom: 10px;
+            right: 0;
+            overflow-y: scroll;
+            overflow-x: hidden;position: absolute;height: 37rem;}
+      /* Scrollbar Styling */
+      .custome_scrol ::-webkit-scrollbar {
+      width: 10px;
+      height: 30px;
+  }
+   
+  .custome_scrol ::-webkit-scrollbar-track {
+      background-color: #ebebeb;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+  }
+  
+  .custome_scrol ::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background: #c2c1c1; 
+  }

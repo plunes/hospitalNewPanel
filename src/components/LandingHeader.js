@@ -22,7 +22,7 @@ class LandinHeader extends Component {
                 <button type="button" className="btn dropdown-toggle cus_bu" data-toggle="dropdown" >
                   Download the App
                     </button>
-                    <div className="row">
+                   
                   <ul className="dropdown-menu" role="tree" aria-expanded="true" aria-hidden="false">
                   <li className="icons_pdi"><a href="https://apps.apple.com/us/app/plunes/id1463747553/" title="app store">
                     <img className="OIS" src="/OIS.png" alt=".." />
@@ -35,14 +35,12 @@ class LandinHeader extends Component {
                       <span className="ios-img-header">Android</span></a>
                   </li>
                 </ul>
-                </div>
               </div>
                   </li>
                   <li className="nav-item">
-                    <Link to="/signup"
+                    <Link to="/signin"
                     className="nav-link sig_lgn"
-                    > Signup</Link>
-                    {/* <a href="/signup" className="nav-link sig_lgn">Signup</a> */}
+                    > Sign In</Link>
                   </li> 
                  </ul>
              </div>  

@@ -5,7 +5,7 @@ import './Profile.css';
 import Modal from "react-responsive-modal";
 import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr,
    getProfileDetails, updateBanner, updateBannerClr, updateAchievement, updateAchievementClr, editBio, editBioClr,
-   getUserDetails } from "../../actions/userActions";
+   getUserDetails, edit_location_clr, edit_location } from "../../actions/userActions";
 import ProfileImage from '../functional/ProfileImage';
 import ProfileBanner from '../functional/ProfileBanner';
 import DoctorComponent from "../functional/DoctorComponent"
@@ -17,9 +17,24 @@ import MapComponent from "../MapComponent"
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import locationImage from "../../images/Location.png"
-// import GoogleComponent from "../GoogleMapComponent"
+import Notify from '../functional/Notify';
+import LoaderComponent from "../functional/LoaderComponent"
+// import OwlCarousel from 'react-owl-carousel2';
 
+import Map from "../MapComponent/index.js"
 
+const options = {
+  items: 2,
+  margin: 0,
+  nav: true,
+  navText: [ '<', '>' ],
+  rewind: true,
+  autoplay: true
+};
+const events = {
+  onDragged: function(event) {},
+  onChanged: function(event) {}
+};
 class ProfileContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -39,7 +54,12 @@ class ProfileContainer extends React.PureComponent {
       user:'',
       editBioFlag:false,
       achievementImage:false,
-      get_profile_loading:false
+      get_profile_loading:false,
+      show_doctor_count:4,
+      notify:{
+        success:false,
+        error:false
+    }
     };
 
     // this.handleChange = this.handleChange.bind(this);
@@ -50,7 +70,58 @@ class ProfileContainer extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps,"nextProps in Profile Container")
+
+      if(!!nextProps.updateAchievementRet){
+          if(nextProps.updateAchievementRet.type==='delete'){
+            if(nextProps.updateAchievementRet.success){
+              this.setState({
+                notify:{
+                  ...this.state.notify,
+                  success:{
+                    message:nextProps.updateAchievementRet.message
+                  }
+                }
+              })
+            }else{
+              this.setState({
+                notify:{
+                  ...this.state.notify,
+                  success:{
+                    error:nextProps.updateAchievementRet.message
+                  }
+                }
+              })
+            }
+            nextProps.getUserDetails()
+            nextProps.updateAchievementClr()
+          }
+      }
+      
+
+      if(!!nextProps.edit_location_ret){
+        if(!!nextProps.edit_location_ret.success){
+          this.setState({
+            notify:{
+              ...this.state.notify,
+              success:{
+                message:nextProps.edit_location_ret.message
+              }
+            }
+          })
+          nextProps.getUserDetails()
+        }else{
+          this.setState({
+            notify:{
+              ...this.state.notify,
+              success:{
+                error:nextProps.updateAchievementRet.message
+              }
+            }
+          })
+        }
+        nextProps.edit_location_clr()
+      }
+
     if(!!nextProps.profileData){
        if(!!nextProps.profileData.success){
          this.setState({
@@ -137,16 +208,22 @@ class ProfileContainer extends React.PureComponent {
     })
   }
 
-  removeAchievement = (i) =>{
+  removeAchievement = (e) =>{
+    let i = e.target.dataset.iterate
+    i = parseInt(i,10)
     let achievements = JSON.parse(JSON.stringify(this.props.user.achievements))
     let newAchievements = []
     achievements.forEach((item,j)=>{
+      console.log(i,"i in removeAchievement")
+      console.log(j,"j in removeAchievement")
       if(((i!==j) && (!!item))){
           newAchievements.push(item)
       }
     })
+    console.log(newAchievements,"newAchievements in removeAchievement")
     this.setState({
       removeAchievementLoading:true,
+      updated_achieve_remove:newAchievements,
       selectedAchievement:i
     },()=>this.props.updateAchievement({
       achievements:newAchievements,
@@ -171,6 +248,62 @@ class ProfileContainer extends React.PureComponent {
       }
     })
   }
+
+  achievement_slider = ()=>{
+    if(!!this.props.user.achievements){
+      let arr = [...this.props.user.achievements]
+    let i= 0
+    let  newarr = []
+    while(i<arr.length-1)
+    {
+      console.log(i,"i in While of Achievement")
+      if(i=== arr.length-1){
+       newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+       <div className="row">
+          <div className="col-md-6">
+            <div className="card mb-2">
+              <img className="card-img-top card_im"
+                src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+              <div className="card-body">
+  <p className="card-text">{arr[i].title}</p>
+              </div>
+            </div>
+          </div>     
+      </div>
+        </div>)
+       i = i+1
+      }else{
+       newarr.push( <div className={`carousel-item ${i ===0?"active":''}`}>
+       <div className="row">
+            <div className="col-md-6">
+              <div className="card mb-2">
+                <img className="card-img-top card_im"
+                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement} data-iterate= {i} className="ceoss_icon"><i  data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+                <div class="card-body">
+    <p class="card-text">{arr[i].title}</p>
+                </div>
+              </div>
+            </div>
+      
+            <div className="col-md-6">
+              <div className="card mb-2">
+                <img className="card-img-top card_im"
+                   src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+                  <p className="card-text">{arr[i+1].title}</p>
+                </div>
+              </div>
+            </div>
+      </div>
+      </div>)
+       i = i+2
+      }
+    }
+    return newarr
+    }
+    return []
+  }
+
 
   updateBanner = (data) => {
     this.setState({
@@ -211,24 +344,43 @@ class ProfileContainer extends React.PureComponent {
   }
 
   onDoctorClick = (data) =>{
-    console.log(data,"data in addDocotor")
     return <Redirect to={`add-doctor/${data.__id}`} />
+  }
+
+
+  edit_location_clr = (data) =>{
+    this.setState({
+      edit_location_loading:false
+    },()=>this.props.edit_location_clr()) 
+  }
+
+ 
+  edit_location = (data) =>{
+    this.setState({
+      edit_location_loading:true
+    },()=>this.props.edit_location(data)) 
   }
 
 
   render() {
     console.log(this.props,"this.props in  ProfileContainer")
     console.log(this.state,"this.state in ProfileContainer")
+    let achievementArray  = this.achievement_slider()
     const { open } = this.state;
     return (
       <React.Fragment>
       <div className='col-md-8 col-xl-9'>
       <div className="HospitalProfileBody AllComponents hspital">
-        {/* <div>
-          <MapComponent
-            location = {this.props.user.geoLocation}
-          />
-        </div> */} 
+        <Notify 
+          success ={this.state.notify.success}
+          error ={this.state.notify.error}
+          clear = {()=>this.setState({
+            notify:{
+              success:false,
+              notify:false
+            }
+          })}
+        />
        <ProfileBanner
        user = {this.props.user}
        updateBanner = {this.updateBanner}
@@ -275,8 +427,7 @@ class ProfileContainer extends React.PureComponent {
                         <a><img onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
                         <p className="ach_mnt">Achievement</p>
                 </div>
-                <div class="col-md-4 achivementlogo text-center">
-                       
+                <div class="col-md-4 achivementlogo text-center">        
                           <Link to="/dashboard/my-catalogue"
                           role="button"
                           onClick={()=>this.props.toggleMyCatalog()} >
@@ -295,17 +446,33 @@ class ProfileContainer extends React.PureComponent {
                     </div>
                     <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
-          <a href="#" class="editmainbodymaxhospital"> Edit</a>
          </p>
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-lg-1"></div>
+                    <div class="col-xs-1 col-sm-1 col-lg-1">
+                    <span onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} class="editmainbodymaxhospital cursor-pointer underline">{this.state.mapFlag?"Cancel":'Edit'}</span>
+                    </div>
                     </div>
                 </div>
-         <div class="row">
+         {/* <div class="row">
                   <div class="col-sm-1 col"></div>
                   <div class="col-sm-10 col maxhospitalviewmap"><a href="" class="editmainbodymaxhospital viewmap">View on map</a></div>
                   <div class="col-sm-1 col"></div>
-              </div> 
+              </div>  */}
+                  
+          { this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
+            <Map
+               google={this.props.google}
+               center={{lat: 18.5204, lng: 73.8567}}
+               location = {this.props.user.geoLocation}
+               height='300px'
+               zoom={15}
+               edit_location_loading = {this.props.edit_location_loading}
+               edit_location = {this.edit_location}
+               edit_location_clr = {this.edit_location_clr}
+             />
+            </div>
+            }
+
           <hr className="Hospitalhr auto_center"></hr>
             <EditBio 
               editBio = {this.editBio}
@@ -322,141 +489,67 @@ class ProfileContainer extends React.PureComponent {
               loading = {this.state.editBioLoading}
               getUserDetails = {this.props.getUserDetails}
             />
-
-          {/* <div className="col-md-8 col-12 cardio_le">
-        <div className="b-select-wrap">
-          <label className="speclion">Specialization</label>
-          <select className="form-control b-select">
-            <option>Cardiologist</option>
-            <option>Cardiologist</option>
-            <option>Cardiologist</option>
-          </select>
-        </div>
-      </div>
-      <div className="Service_List">
-        <h6 className="s_list">Service List</h6>
-     
-        
-           <p>Abiation </p>
-           
-           <p>Cardiac Rehabilitation </p>
-           
-           <p>Coronary Artery Bypass Grafting </p>
-          
-          
-           <p>Heart Transplant</p>
-           
-           <p>Space for text </p>
-          
-       
-       
-       <div className="vi_m">
-       <a href="#"className="view_more">View More</a></div>
-      </div>
-   */}
     <hr className="brdr_tm"></hr>
           <div className="team_sec">
-          
-            <h3 className="team_of">Team of Experts</h3>
-          <div className="row">
-  {this.props.user?!!this.props.user.doctors?this.props.user.doctors.map((item,i) =>{
-    return (<DoctorComponent
-            onClick = {this.onDoctorClick}
-          data = {item}
-          i = {i}
-      />)
-  }):'':''}
-   <div className="col-md-6 col-sm-12 col-lg-3">
-        <div className="timelinebox4 timelinebox4_5">
-          <Link to="/dashboard/add-doctor"
-          role="button"
-          onClick = {()=>this.props.toggleAddDoc()}>
-          <img  src="/plus_2.svg"/>
-          </Link>
+           {
+             this.props.user.userType !=="Doctor" && <React.Fragment>
+                         <h3 className="team_of">Team of Experts</h3>
+             <div className="row">
+     {this.props.user?!!this.props.user.doctors?this.props.user.doctors.length !==0?this.props.user.doctors.slice(0, this.props.user.doctors.length>5?this.state.show_doctor_count:this.props.user.doctors.length).map((item,i) =>{
+       return (<DoctorComponent
+               onClick = {this.onDoctorClick}
+             data = {item}
+             i = {i}
+         />)
+     }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
+       <img  src="/Group 2096.svg"  />
+       <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
+     </div>:'':''}
+   
+   {this.props.user?!!this.props.user.doctors?this.props.user.doctors.length !==0?<div className="col-md-6 col-sm-12 col-lg-3">
+           <div className="timelinebox4 timelinebox4_5">
+             <Link to="/dashboard/add-doctor"
+             role="button"
+             onClick = {()=>this.props.toggleAddDoc()}>
+             <img  src="/plus_2.svg"/>
+             </Link>
+      </div>
+       </div>:'':'':''}
    </div>
-    </div>
-</div>
-{/* 2nd-end */}
-<div className="se-dr"><a href="#">See more Doctor's</a></div>
+   
+   {!!this.props.user.doctors?((this.props.user.doctors.length===this.state.show_doctor_count) || (this.props.user.doctors.length==0))?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
+   show_doctor_count:this.props.user.doctors.length
+   })} >See more Doctor's</span></div> :'' }
+   </React.Fragment>
+     }
+
 <div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
-  <div class="row">
-    <div class="owl-carousel owl-theme">
-        <div class="item" data-aos="zoom-in">
-        <a href="#">
-            <div class="trendingBox">
-                <img src="/ach1.png" alt=".." class="image effect_new"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-                <div class="overlay">
-
-                </div>
-                <div class="card-body ">
-                <p class="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-    
-            </div>
-            </div>
-            
-            </a>
-           </div>
-           <div class="item">
-        <a href="#">
-            <div class="trendingBox">
-                <img src="/ach2.png" alt="" class="image effect_new"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-                <div class="overlay">
-
-                </div>
-                <div class="card-body ">
-                <p class="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-    
-            </div>
-            </div>
-            
-            </a>
-        </div>
-        <div class="item">
-        <a href="#">
-            <div class="trendingBox">
-                <img src="/ach1.png" alt="" class="image effect_new"/><span className="ceoss_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-                <div class="overlay">
-
-                </div>
-                <div class="card-body ">
-                <p class="card_tooth">Lorem Ipsum, lorem ipsum lorem ipsum, lorem ipsum</p>
-    
-            </div>
-            </div>
-           
-
-            </a>
-        </div>
-          </div>
-        </div>
-  {/* <div className="row">
-    {!!this.props.user?!!this.props.user.achievements?this.props.user.achievements.map((item,i)=>{
-      if(!!item){
-        return (
-          <Achievement
-            data = {item}
-            i={i}
-            removeAchievement = {this.removeAchievement}
-            updateAchievementRet = {this.props.updateAchievementRet}
-            loading = {this.props.removeAchievementLoading}
-            selectedAchievement = {this.state.selectedAchievement}
-            updateAchievementClr = {this.props.updateAchievementClr}
-            getUser = {this.props.getUserDetails}
-            loadingOff = {()=>this.setState({
-              removeAchievementLoading:false
-            })}
-           />
-        )
-      }else{
-        return ''
-      }
-     
-    }):'':''}
  
-</div> */}
+{!!this.props.user.achievements?
+  this.props.user.achievements.length!==0?
+  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+  {/* {true && <LoaderComponent />} */}
+    <div class="carousel-inner" role="listbox">
+      {achievementArray.map((item,i)=>{
+        return item
+      })}
+    </div>
+    <div class="controls-top">
+      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
+      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+          class="fas fa-chevron-right"></i></a>
+    </div>
+</div>:<div className="row">
+<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
+    <img style={{marginLeft:'3rem'}} src="/Group 2096.svg"  />
+    <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Achievement added</div>
   </div>
+  </div>
+:'No achievements'}
+       </div>
           </div>
+          
           <ModalComponent 
                 open = {this.state.addAchievementFlag}
                 handleClose = {this.addAchievementClose}
@@ -479,7 +572,8 @@ const mapStateToProps = state => ({
   updateBannerRet:state.user.updateBannerRet,
   updateAchievementRet:state.user.updateAchievementRet,
   editBioRet:state.user.editBioRet,
-  profileData:state.user.profileData
+  profileData:state.user.profileData,
+  edit_location_ret:state.user.edit_location_ret
 })
 
 export default connect(mapStateToProps, { 
@@ -495,5 +589,7 @@ export default connect(mapStateToProps, {
   updateAchievementClr,
   editBioClr, 
   editBio, 
-  getUserDetails
+  getUserDetails,
+  edit_location,
+  edit_location_clr
  })(ProfileContainer);

@@ -63,7 +63,8 @@ class App extends Component {
       <Router history={history}>
           <Switch>
           <div className="container-fluid">
-            <Route exact path='/' component={LoginComponent} />
+            <Route exact path='/' component={Development} />
+            <Route exact path ="/signin" component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
             <Route exact path='/home' component={Development} />
             <Route  path='/dashboard' component={DashboardPage} />
