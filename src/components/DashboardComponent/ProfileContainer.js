@@ -444,7 +444,7 @@ class ProfileContainer extends React.PureComponent {
                     <div class="col-xs-1 col-sm-1 col-lg-1">
                         <img src={locationImage} className="lction"></img>
                     </div>
-                    <div class="col-xs-10 col-sm-10 col-lg-10 mainBodyMaxHospitalrow4col2">
+                    <div class="col-xs-9 col-sm-9 col-lg-9 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
          </p>
                     </div>

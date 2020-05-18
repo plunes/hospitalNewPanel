@@ -179,6 +179,7 @@ body {
 .save_edit_ris {
   display: flex;
   justify-content: space-around;
+  margin-left: 4rem;
 }
 .hover_underline:hover {
   text-decoration: underline;

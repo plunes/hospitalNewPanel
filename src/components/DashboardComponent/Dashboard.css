@@ -192,7 +192,7 @@ a:hover
 
 .sidebaricon
       {
-            width: 1.8rem;
+            width: 1.9rem;
             margin-right: .9rem;
       }
         
@@ -288,8 +288,12 @@ hr
 }
 /* .scrolling_sec {
       overflow: auto;
+<<<<<<< Updated upstream
       max-height: 32vw;
       min-height: 20vw;
+=======
+      height: 32vw;
+>>>>>>> Stashed changes
       overflow-x: hidden;
   } */
   .side_br {padding-left: 0 !important;}
@@ -632,7 +636,7 @@ hr
  /* custome-scrolling */
  .custome_scrol{ position: relative;
      }
-      .scrolling_sec{ top: 10px;
+      .scrolling_sec{ top: 4px;
            
             bottom: 10px;
             right: 0;

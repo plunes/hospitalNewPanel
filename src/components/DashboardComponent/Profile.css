@@ -87,7 +87,8 @@
                 position: relative;
                left: 2rem;
                right:2rem;
-               margin-top: 1rem!important;
+               margin-top: 1.5rem!important;
+               margin-bottom: 1rem!important;
 }
 .edit
 
@@ -160,10 +161,10 @@
 }
 .intro {font-size: 1.2rem;}
 .viewmap{color:#01D35A;padding-left: 0px;font-weight: 400;font-size: 1.2rem;}
-.editmainbodymaxhospital{color: #01D35A;font-weight: 400;font-size: 1.2rem;}
+.editmainbodymaxhospital{color: #01D35A;font-weight: 400;font-size: 1.2rem;margin-left: 2rem;}
 .ach_mnt{font-size: 1.2rem;}
 .edi_intr{
-        color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.4rem;
+        color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.2rem;left: 0;
        
 
 }
