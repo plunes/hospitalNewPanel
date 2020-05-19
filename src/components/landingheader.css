@@ -1,0 +1,88 @@
+.cus_bu {
+    width: 100%;
+    outline: none!important;
+    background-color: #01d35a!important;
+    border-radius: 44px!important;
+    color: #fff!important;
+    font-size: 13px!important;
+    padding: 6px 18px 5px!important;
+    text-transform: initial !important;
+    box-shadow: none !important;
+    position: relative;
+    top: -5px;
+    right: 10px;
+}
+.dropdown-menu.show {
+    border-radius: 15px;
+    width: 100%;
+    left: -8px;
+    padding: 12px 22px 5px 14px ;
+}
+.icons_pdi{padding-bottom: 10px;padding-top: 10px;}
+.OIS {
+    margin-left: 15px;
+}
+.Andgre, .OIS {
+    height: 20px;
+    width: 20px;
+    margin-top: -3px;
+    margin-right: 10px;
+}
+.Andgre {
+    margin-left: 15px;
+}
+/* sigun-up-header */
+.navbar{width:100%}
+.landing_hedr{
+      height: 70px;
+    }
+   
+    .ios_m {
+        position: relative;
+        top: -35px;
+        left: 13px;
+        width: 20px;
+    }
+    .andorid_m {
+        position: relative;
+        top: -34px;
+        left: 14px;
+        width: 20px;
+    }
+    .d_app:hover{color: #fff !important;}
+    /* .sig_lgn{font-size: 14px;border:1px solid ;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;color: #343434;}
+    .signup_lgu{border: 1px solid #707070;color: #01D35A;border-radius: 54px;padding: 4px 29px 5px 32px !important;margin-left: 10px;}
+    .signup_lgu:hover{color: #01D35A !important;} */
+    .lgo_sigun{
+        width: 161px;
+        padding-bottom: 19px;
+    }
+    @media (max-width: 767px) and (min-width: 281px) {
+        .cus_bu {
+            width: 20rem;}
+        .landing_hedr{height: auto;}
+        .navbar .container{height: auto;}
+        .sigunup_hedr {
+            height: 100%;
+        }
+        a.nav-link.sig_lgn {
+            font-size: 12px;
+            text-align: center;
+            width: 20rem;
+            margin: 0 auto;
+           
+        }
+        .dropdown.drp_part {
+            text-align: center;
+            margin-left: 1rem;
+        }
+      
+        .lgo_sigun {
+            width: 100%;}
+            .sigunup_hedr .fa.fa-bars {
+                padding-bottom: 20px;
+                color: #707070; 
+            }
+
+    }
+   

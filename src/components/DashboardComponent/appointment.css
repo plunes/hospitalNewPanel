@@ -1,0 +1,189 @@
+.AppointBodyrow1{padding-top: 30px;}
+.Appoint{height: 100%;}
+
+.tab_pd{padding: 30px;text-align: center;}
+.upcoming_bdr{border-bottom: 3px solid #B7B7B7;position: relative;
+    top: -19px;
+    z-index: 0;}
+    .two_chil{
+      margin-top: 1rem; text-align: center;margin-bottom: 1rem;
+    }
+.active { color:#f00;font-weight:bolder; }
+.react-tabs__tab-list{padding-left: 0;}
+.react-tabs__tab--selected{border-bottom: 4px solid #01D35A;padding-bottom: 15px;z-index: 9;position: relative !important;top:-4px;}
+.frame_de{width: 83px;height:81px;object-fit:cover;border-radius: 50px;position: relative;
+  left: 44px;}
+  .nov_2 {
+    position: relative;
+    left: 18px;
+}
+.acnt{font-size: 1.2rem;}
+.upcmg_fnt a{color: #343434; font-weight: 500;font-size: 14px;}
+.ardee_ci{text-align: left;margin-top: 11px;}
+.nov_2 h4{font-size: 15px; font-weight: 500;color: #474747;}
+.nov_2 p{font-size: 14px;color: #343434;opacity: 0.5;}
+.loc_tab img{padding-left: 0px;position: relative;
+  left: 40px;}
+.gr_con{color: #01D35A;font-weight: 500;font-size: 15px;}
+.con_re{color: #D30101; font-weight: 500;text-align: right;font-size: 1.3rem;}
+.res_udle{text-align: center;font-size: 15px;}
+.confrm_mar_sec{margin-top: 20px;margin-bottom: 10px;margin-left: 0px !important;}
+.dental_th{text-align: right;font-weight: 500;font-size: 1.3rem;}
+.brace_m{color: #474747;font-weight: 400;font-size: 15px;}
+i.fa.fa-rupee-sign {
+  font-size: 13px;
+  padding-right: 3px;
+}
+.py_stu h2{text-align: center;text-decoration: underline;font-weight: 500;font-size: 16px;margin-bottom: 20px;}
+.graph_cir{border-radius: 80px;background-color: #01D35A;width: 60px;height: 60px;}
+img.right_im {
+    position: relative;
+    top: 17px;
+    left: 16px;
+    width: 30px;
+}
+.grap_bod{border-bottom:  3px solid #01D35A;border-bottom: 3px solid #01D35A;
+    width: 70px;
+    position: relative;
+    top: -26px;
+    left: 41px;}
+.righr_side_p{margin-right: 60px;}
+.gray_circ{border-radius: 80px;border: 3px solid #F1F1F1;width: 60px;height: 60px;position: absolute;
+    right: 52px;
+    /* padding-top: 10px; */
+    padding: 13px 10px;}
+    .grap_bod2{border-bottom:  3px solid #F1F1F1;width: 452px;
+        position: relative;
+        left: 165px;
+        top: -30px;}
+
+        .righr_side_p span{font-size: 13px;
+            position: relative;
+            top: 34px; font-weight: 400}
+        .gray_circ span{position: absolute;
+            top: 55px;
+            font-size: 13px;
+            font-weight: 400;}
+        .thousent{font-size: 13px; font-weight: 400;position: relative;
+            top: 59px;
+            right: 13px;}
+.pay_ptint{text-align: center;font-size: 16px;color:#474747;font-weight: 400;padding: 20px 10px;margin-bottom: 0px;}
+.pay_green{text-decoration: underline;color: #01D35A;font-size: 16px;text-align: center;font-weight: 400;padding-bottom: 20px;}
+.bg_bulb{background: #FBFBFB;height: 4rem;width: 33rem;
+  margin: 0 auto;}
+.bg_bulb img{width: 4rem;
+    position: relative;
+    left: 6rem;
+    top: -1rem;}
+.bg_bulb p{text-align: center;color: #01D35A;font-size: 1.4rem;position: relative;top: -3.8rem;
+  left: 2rem;}
+
+.rund_im {
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px;
+  object-fit: cover;
+}
+
+
+/* progress-bar */
+/* .progressbar {
+  counter-reset: step;
+  
+}
+.prog{
+}
+.progressbar li {
+  list-style-type: none;
+  width: 25%;
+  float: left;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #7d7d7d;
+}
+.progressbar li:before {
+  width: 60px;
+  height: 60px;
+  content:"	\002714";
+  color: #fff;
+  counter-increment: step;
+  line-height: 30px;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: #01D35A
+}
+.progressbar li:after {
+  width: 100%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #7d7d7d;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+}
+.progressbar li.active:before {
+  border-color: #55b776;
+}
+.progressbar li.active + li:after {
+  background-color: #55b776;
+} */
+.progressbar{padding-left: 0px; width: 100%;}
+.prog {
+  padding-bottom: 76px;
+}
+
+/* .sixp span{position: relative;left: -56px;} */
+.progressbar li{list-style: none;width: 25%;font-size: 15px;}
+.progressbar li:before{ width: 60px;
+  height: 60px;line-height: 60px;}
+.progressbar li:first-child:before {
+  width: 60px;
+  height: 60px;
+  content:"	\002714";
+  color: #fff;
+  counter-increment: step;
+  line-height: 60px;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: #01D35A;
+  font-size: 33px;
+}
+.progressbar li:nth-child(2):before{
+  background-color: #01D35A;
+  font-size: 33px;
+  content:"	\002714";
+  color: #fff;
+  border: 0px;
+ margin-left: 5%;
+ 
+}
+.progressbar li:nth-child(3):before{ content:"	\002714"; background-color: #01D35A;  color: #fff; font-size: 33px;border: 0px;}
+.progressbar li:after {
+  width: 100%;
+  height: 4px;
+  content: '';
+  position: absolute;
+  background-color: #ccc;
+  top: 30px;
+  left: -64%;
+  z-index: -1;
+}
+.sispan{position: relative;right: 55px;}
+.progressbar li:nth-child(4):before{content:"	100%";border: 2px solid #ccc;}
+.progressbar li.active:before {
+  border-color: #01D35A;
+}
+.progressbar li.active + li:after{background-color: #01D35A;}

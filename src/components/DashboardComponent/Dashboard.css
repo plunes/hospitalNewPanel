@@ -5,9 +5,12 @@
         }
 
 .AllComponents
-       {margin-top: 116px;
-        margin-left: -33px;}
-
+       {
+             margin-top: 7.6rem;
+             margin-left: 6rem;
+          
+            }
+.hspital
 .Leftpaddingremove
        {padding-left: 0px !important;}
 
@@ -78,22 +81,23 @@ hr
         margin-left: 185px; padding: 15px;}
 
 .logo
-     {margin-left: 68px; width: 200px;}
+     {margin-left: 68px; width: 120px;}
 
 .sol-img
-     {height: 35px;
-      width: 35px !important;}
+     {height: 29px;
+      width: 29px !important;}
 
 .nav2
      {font-size: 12px;}
 
 
 .sol-img2
-     {height: 40px;
-      width: 40px;
+     {height: 33px;
+      width: 33px;
       margin-right: 11px;
       border-radius: 50%;}
-
+.profile-font{padding: 10px !important;}
+.profile-font li a{font-size: 11px !important;padding: 10px 10px !important;display: inline-block !important;}
 .sol-img3
      {height: 35px;
       width: 35px !important;}
@@ -117,53 +121,65 @@ hr
     {font-size: 12px !important;}
 
 .dash-dropdown
-    {width: 22px;
+    {width: 18px;
      height: auto;
      margin-left: 15px;}
-
+     
 .sidenav 
-    {width: 250px;
-    position: fixed;
-    z-index: 1;
-    display:'inline';
-    background-color:none;
+    {
+  
+    margin-top: 7.5rem;
+    z-index: 0;
+    display: 'inline';
+    background-color: none;
     overflow-x: hidden;
-    top: 115px;
-    left: 30px;    
-    font-size: 15px;
+    font-size: 1rem;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;     
-    margin-left: 54px;      
-    background-color: white;}
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    left: 6rem;
+   /* position: fixed;
+   width: 16vw; */
+    }
       
       /* Style the sidenav links and the dropdown button */
 .sidenav a, .log,.dropdown-btn 
-   {padding: 15px 0px 15px 12px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #818181;
-    display: block;
-    border: none;
-    background: none;
-    width:100%;
-    text-align: left;
-    cursor: pointer;
-    outline: none;}
-
+   {
+      padding: 0.7rem 0px .7rem 0.8rem;
+      text-decoration: none;
+      font-size: 1.1rem;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: autoto;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+   }
 .log
-   {padding: 15px !important;}
+   {
+         padding: 12px !important;
+         font-size: 1.1rem !important;
+    }
 
 .sidenav div
-      {text-decoration: none;
-       font-size: 18px;
-       color: #818181;
-       display: block;
-       border: none;
-       background: none;
-       width:100%;
-       text-align: left;
-       cursor: pointer;
-       outline: none;}
+      {
+            text-decoration: none;
+            font-size: 1rem;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+           
+      }
+      .HeaderLink a{color: #000000;}
       
 /* On mouse-over */
 .sidenav a:hover, .dropdown-btn:hover 
@@ -175,14 +191,42 @@ a:hover
         color: black !important;}
 
 .sidebaricon
-      {width: 26px;    
-       margin-right: 18px;}
+      {
+            width: 1.9rem;
+            margin-right: .9rem;
+      }
         
 .arrowdesign
-      {margin-top: 6px;
-       position: absolute;
-       left: 220px;     
-       width: 8px;}
+      {
+            margin-top: 6px;
+            position: absolute;
+            left: 14rem;
+            width: 0.6vw;
+      }
+      input.query_en[type="text"]
+    {
+        border: 0;
+        border-bottom: 1px solid #DCDCDC;
+        outline: 0;
+        width: 100%;
+    padding-bottom: 7rem;
+    font-size: 1.3rem;
+    padding-top: 1rem;
+    }
+    .sub_que{text-align: center;margin-top: 3rem;}
+    .cal_nu{text-align: center;margin-top: 2rem;}
+    .or_frm{font-size: 1.3rem;margin-bottom: 1.7rem;}
+    .sub_fr{background: #01D35A;
+      border-radius: 26px;
+      color: #fff;
+      width: 13vw;
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+      padding: 11px;
+      font-size: 1.3rem;}
+      .sub_fr:hover { color: #fff !important;} 
+     
 
 .pointer 
       {cursor: pointer;}
@@ -236,22 +280,52 @@ hr
     {width: 100%;}
 
 .dashboardsection
-      {background: #FFFFFF 0% 0% no-repeat padding-box;
+      {
+      background: #FFFFFF 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       border-radius: 7px;
-      opacity: 1; margin-bottom: 3%;}
-
+      opacity: 1; margin-bottom: 3%;
+}
+/* .scrolling_sec {
+      overflow: auto;
+<<<<<<< Updated upstream
+      max-height: 32vw;
+      min-height: 20vw;
+=======
+      height: 32vw;
+>>>>>>> Stashed changes
+      overflow-x: hidden;
+  } */
+  .side_br {padding-left: 0 !important;}
 .dashrow1
-      {margin-bottom: 18px;
-      font-size: 27px;
+{
+      margin-bottom: 1rem;
+      font-size: inherit;
       font-weight: normal;
-      padding: 25px;}
+      padding: 1.2rem 1.5rem 1.2rem 0.5rem;
+      width:64vw !important;
+      margin-left: 1rem;
+    
+}
+.second_scro{ 
+      width: 30vw;
+      overflow: auto;
+      overflow: auto;
+      max-height: 32vw;
+      min-height: 20vw;
+      overflow-x: hidden;
+}
 
 .dashrow2col1
       {margin-right: 18px;max-width: 47.666667% !important;}
 
 .DashboardHospitalName
-      {margin-top: 0; margin-bottom: 0;}
+      {
+      margin-top: 0; 
+      margin-bottom: 0;
+      font-size: 1.8rem;
+      padding-left: 10px;
+}
 
 .Dashboardsec1
       {font-size: 21px;
@@ -274,10 +348,14 @@ hr
 
 .DashboardInsight
       {text-transform: none;
-      font-size: 18px;
+      font-size: 16px;
       text-align: justify;
       margin-top: 8px;
-      margin-bottom: 30px;} 
+      margin-bottom: 30px;color: #676767a3;} 
+      b, strong {
+            font-weight: bolder !important;
+            color: #000;
+        }
 
 .Insightdiv
      {font-weight: 300;}
@@ -295,16 +373,17 @@ hr
       {border: none;
       background-color: white;
       color: #01D35A;
-      font-size: 19px;
+      font-size: 16px;
       margin-bottom: 10px;
-      font-weight: 400;} 
+      font-weight: 400;padding-top: 12px;} 
 
 .InsightUpdate
-      {overflow: visible;
+      {
+      overflow: visible;
       background: white;
       border: none;
-      margin: 0px 10px;
-      color: #01D35A;}
+      color: #01D35A;position: relative;
+      left: -6px;}
 .NotifyNum
       {position: absolute;
       margin-left: -15px;
@@ -320,10 +399,10 @@ hr
       {border: none;
       background: white;
       color: #01D35A;
-      font-size: 20px;}
+      font-size: 1.4rem;}
 
 .PaymentUN
-      {font-size: 20px;
+      {font-size: 1.4rem;
       font-weight: 400;}
 
 .redeemModal
@@ -334,7 +413,6 @@ hr
       width: 33%;
       border: 1px solid rgb(204, 204, 204);
       background: rgb(255, 255, 255);
-      overflow: auto;
       border-radius: 15px;
       outline: none;
       padding: 20px;
@@ -354,18 +432,24 @@ hr
       {display: inline-flex;}
 
 .businessicon
-      {margin-left: 6%;
-      margin-top: 7%;
-      width: 14%;}
-
+      {
+            width: 3rem;
+            margin-left: 1rem;
+}
+.dash_clr{background: #FBFBFB;}
 .business
-      {text-decoration: underline;
-      letter-spacing: 0;
-      color: #333333;
-      margin-left: 9%;
-      margin-top: 11%;
-      font-weight: bold;
-      font-size: 20px;}
+      {
+            /* text-decoration: underline; */
+            letter-spacing: 0;
+            color: #333333;
+            margin-left: .5rem;
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: underline;
+            padding-top: 20px;
+            padding-bottom: 20px;
+}
 
 .selectBusinessPeriod
       {text-align: center;
@@ -376,10 +460,10 @@ hr
       border: 1px solid #DCDCDC;
       border-radius: 5px;
       padding: 2%;
-      width: 42%;}
+      width: 68%;}
 
 .businessPrice
-      {font-size: 40px;
+      {font-size: 30px;
       font-weight: 700;}
 
 .businessEarn
@@ -390,14 +474,15 @@ hr
 
 .Earn
       {color: #676767;
-      font-size: 16px;}
+      font-size: 14px;}
 
 .businessWarn
-      {text-align: center;
+      {
       color: #333333;
-      font-size: 18px;
+      font-size: 1.2rem;
       font-weight: 400;
       padding: 3%;}
+      .businessWarn p{text-align: left;color: #676767a3;}
 
 .width
      {width: 45%;}
@@ -405,14 +490,17 @@ hr
 /* DASHBOARD slider */
 
 .SliderUpdatedPrice
-     {font-size: 25px; 
+     {
+      text-align: center;
+      /* font-size: 18px; 
       text-align:center; 
       margin-top:42px !important;    
-      font-weight: bold;}
+      font-weight: bold; */
+}
 
 .bookingChance
     {text-align: center;
-    font-size: 20px; }
+    font-size: 16px; }
 
 .slidecontainer 
     {width: 100%;}
@@ -447,38 +535,127 @@ hr
 /* Dashboard RealTime Insight Css */
 
 .realtimewidth
-    {width: 58%;
-     margin-bottom: 20px;}
+    {
+          /* width: 58%;
+     margin-bottom: 20px; */
+}
 
 .realtime
-    {padding: 3%;}
-
+    {
+          padding: .5rem;
+    }
+.maximum_time{font-size: 1.0rem;color: #676767;opacity: 0.6;padding-left: 6rem;}
+.real_ti_bd{border-bottom: 1px solid #F1F1F1;
+      margin-bottom: 1rem;}
 .realtimeicon1
-    {border-radius: 50%;
-    border: 1px solid #BCD3F6;
-    padding: 21%;
-    background-color: #F2F7FF;}
+    {border-radius: 2vw;
+      border: 1px solid #BCD3F6;
+      padding: 10px 12px 12px 13px;
 
+      background-color: #F2F7FF;
+      margin-left: 0.6rem;
+     }
+      img.privc_icone {
+            width: 26px;
+            position: relative;
+            left: 13px;
+        }
+        .real_tm_bor {
+            border-bottom: 1px solid #F1F1F1;
+            margin-bottom: 1rem;
+        }
 .realtimeicon
-    {width: 31%;}
+    {width: 1rem;}
 
 .RealtimeUsername
-    {font-size: 20px;
-    font-weight: 500;}
+    {
+      font-size: 1.2rem;
+      font-weight: 500;
+}
 
 .kindlyUpdate
-    {font-weight: 400; 
-    font-size: 18px;}
+    {
+      font-weight: 400;
+      font-size: 1.2rem;
+}
 
 .RealtimeHr
-    {margin: 20px !important;}
+    {
+      margin: .9rem !important;
+      }
 
 .Timer
-    {background: #FFFFFF 0% 0% no-repeat padding-box;
+    {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
     border-radius: 5px;
     color: #01D35A;
     font-weight: bold;
-    width: 81%;
+    width: min-content;
     padding-left: 4px;
-    padding-right: 4px;}
+    padding-right: 4px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+/* alka-css */
+.light_content{ 
+      font-size: 1.2rem;
+      color: #676767a3;
+}
+.bdr_dash{padding: 10px;}
+/* modal-css */
+.update_price{font-size: 16px;text-align: center;}
+.dynmic_pra{}
+.catlou_sli{margin-top: 20px;}
+.modal_pdd{padding: 20px 60px 20px 60px;}
+.valu_fl {
+      position: relative;
+      left: 60px;
+  }
+  .maxmin h4{font-size: 14px;}
+  .valu_chenge{width: 15%;border:none;text-align: left;font-weight: bold;font-size: 16px;}
+  .redeemCross{position: relative;
+      top: -4px;
+      right: -55px;}
+  .rud_bu{position: relative;left:10px;top: -10px;}
+
+  /* 2nd modal */
+  .secon_modal{padding: 20px 60px 20px 60px;}
+  .yout_ctl{font-size: 16px;text-align: center;}
+  .serv_ces{font-size: 14px;margin-top: 20px;text-align: center;}
+  .valu_second{
+      position: relative;
+      /* right: 83px;
+      top: 5px; */
+}
+ .price_up{text-align: left;border: none;width: 15%;font-weight: bold;font-size: 16px;}
+
+ /* custome-scrolling */
+ .custome_scrol{ position: relative;
+     }
+      .scrolling_sec{ top: 4px;
+           
+            bottom: 10px;
+            right: 0;
+            overflow-y: scroll;
+            overflow-x: hidden;position: absolute;height: 37rem;}
+      /* Scrollbar Styling */
+      .custome_scrol ::-webkit-scrollbar {
+      width: 10px;
+      height: 30px;
+  }
+   
+  .custome_scrol ::-webkit-scrollbar-track {
+      background-color: #ebebeb;
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+  }
+  
+  .custome_scrol ::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background: #c2c1c1; 
+  }

@@ -5,30 +5,16 @@ import { connect } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import RegistrationContainer from './components/RegistrationComponent/RegistrationContainer';
 import LoginComponent from './components/LoginComponent/LoginComponent';
-import DashboardComponent from './components/DashboardComponent/DashboardComponent';
-import ForgotPasswordComponent from './components/LoginComponent/ForgotPassword';
-import ProfileComponent from './components/DashboardComponent/ProfileComponent';
-import AvailabilityComponent from './components/DashboardComponent/AvailabilityComponent';
-import AppointmentComponent from './components/DashboardComponent/AppointmentComponent';
-import SettingsComponent from './components/DashboardComponent/SettingsComponent';
-import ManagePaymentComponent from './components/DashboardComponent/ManagePaymentComponent';
-import HelpComponent from './components/DashboardComponent/HelpComponent';
-import AboutUsComponent from './components/DashboardComponent/AboutUsComponent';
-import MyCatalogueComponent from './components/DashboardComponent/MyCatalogueComponent';
-//import LogoutComponent from './components/DashboardComponent/LogoutComponent';
-// import { connect } from 'react-redux';
+import ForgotPasswordComponent from "./components/ChangePasswordComponent"
 import { getUserDetails } from "../src/actions/userActions";
-// import { countNewNotification } from "../src/actions/userActions";
 import { messaging } from "./init-fcm";
 import 'react-toastify/dist/ReactToastify.min.css'
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
-import NotificationComponent from './components/DashboardComponent/NotificationComponent';
-import PaymentComponent from './components/DashboardComponent/PaymentComponent';
-import EditProfileComponent from './components/DashboardComponent/EditProfileComponent';
-import CatalogueComponent from './components/DashboardComponent/CatalogueComponent';
 import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
+import Development from './components/Development'
+import DashboardPage from './components/DashboardPage'
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -45,8 +31,9 @@ class App extends Component {
     }
     messaging.requestPermission()
       .then(async function () {
+        
         const token = await messaging.getToken();
-        //console.log(token)
+        console.log(token,"token In Messaging.request permissions")
         localStorage.setItem('deviceId', token)
       })
       .catch(function (err) {
@@ -60,8 +47,8 @@ class App extends Component {
           body: message.data.firebaseMessaging.payload.notification.body,
           title: message.data.firebaseMessaging.payload.notification.title
         }
-        await this.props.getSolutionInsights()
-        await this.props.getNotifications()
+        // await this.props.getSolutionInsights()
+        // await this.props.getNotifications()
         toast(<Greet message={obj} />)
       }
       //this.props.countNewNotification()
@@ -72,28 +59,23 @@ class App extends Component {
   render() {
   
     const App = () => (
+    
       <Router history={history}>
-        <div className='container-fluid'>
           <Switch>
-            <Route exact path='/' component={LoginComponent} />
+          <div className="container-fluid">
+            <Route exact path='/' component={Development} />
+            <Route exact path ="/signin" component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
-            <Route exact path='/dashboard' component={DashboardComponent} />
+            <Route exact path='/home' component={Development} />
+            <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
-            <Route exact path='/profile' component={ProfileComponent} />
-            <Route exact path='/availability' component={AvailabilityComponent} />
-            <Route exact path='/appointments' component={AppointmentComponent} />
-            <Route exact path='/settings' component={SettingsComponent} />
-            <Route exact path='/manage' component={ManagePaymentComponent} />
-            <Route exact path='/help' component={HelpComponent} />
-            <Route exact path='/aboutus' component={AboutUsComponent} />
-            <Route exact path='/notification' component={NotificationComponent} />
-            <Route exact path='/payment' component={PaymentComponent} />
-            <Route exact path='/editProfile' component={EditProfileComponent} />
-            <Route exact path='/my-catalogue' component={MyCatalogueComponent} />
+            <Route exact path='/devlopment' component={Development} />
+            </div>
           </Switch>
-        </div>
+        
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />
       </Router>
+    
     )
     return (
       <Switch>

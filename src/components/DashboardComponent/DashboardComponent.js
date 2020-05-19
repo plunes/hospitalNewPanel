@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import DashboardHeader from './DashboardHeader';
 import SidebarComponent from './SidebarComponent';
-// import ProfileComponent from './ProfileContainer';
 import { connect } from 'react-redux';
-// import { getUserDetails } from "../../actions/userActions";
-// import { getBooking } from '../../actions/userActions'
-import { getInsights } from '../../actions/userActions'
+import { getInsights, updateRealPriceClr, clearUpdatePriceData,
+     clearSolInsights, getSolutionInsights, getAllBookings,
+      getMonthWiseUsers, updateRealPrice, setMount,
+      set_dash_data } from '../../actions/userActions'
 import { sendUpdateData } from '../../actions/userActions'
-import { getSolutionInsights } from '../../actions/userActions'
-import { getAllBookings } from '../../actions/userActions'
-import { getMonthWiseUsers } from '../../actions/userActions'
-import { updateRealPrice } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import './Dashboard.css';
@@ -19,7 +15,9 @@ import Loader from 'react-loader-spinner'
 import Slider from 'react-rangeslider'
 import Timer from 'react-compound-timer'
 import 'react-rangeslider/lib/index.css'
-
+import TimerComponent from '../TimerComponent'
+import NotifFunc from "../functional/NotifFunc"
+import LoaderComponent from "../functional/LoaderComponent"
 
 const customStyles = {
     content: {
@@ -33,7 +31,7 @@ const customStyles = {
 };
 
 
-class DashboardComponent extends Component {
+class DashboardComponent extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -43,18 +41,21 @@ class DashboardComponent extends Component {
             updatePrice: 0,
             actionUpdatedPrice : 0,
             updateData: {},
+            solInsights:[],
             serviceName: '',
             days: 0,
-            loader: true,
+            loader: false,
             percent: 0,
             realServiceName:'',
             realUpdatePrice:0,
             solUpdatedPrice : 0,
             realUpdateData: {},
-            value: 10,
-            solValue: 10,
+            value: 0,
+            solValue: 0,
             distance: 30,
-            showBusiness :  true
+            showBusiness :  true,
+            ro_insight_count:50,
+            user_map_loading:false
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -69,7 +70,17 @@ class DashboardComponent extends Component {
         this.handleSolutionSliderChange = this.handleSolutionSliderChange.bind(this);
         this.setTimer = this.setTimer.bind(this);
     }
-    
+
+    // componentWillReceiveProps(nextProps){
+    //     if(!!nextProps.solInsights){
+    //         this.setState({
+    //             solInsights:nextProps.solInsights
+    //         },()=>{
+    //             nextProps.clearSolInsights(),
+    //             nextProps.set_dash_data({...nextProps.data.dash_data, solInsights:nextProps.solInsights})
+    //         })
+    //     }
+    // }   
     setTimer(time){
         setTimeout(async () => {
             await this.props.getSolutionInsights();
@@ -80,7 +91,6 @@ class DashboardComponent extends Component {
        // console.log(value, 'value')
         const { realUpdatePrice } = this.state
         let newPrice = realUpdatePrice - realUpdatePrice * value /100
-
         this.setState({
             solValue : value,
             solUpdatedPrice : newPrice
@@ -108,7 +118,6 @@ class DashboardComponent extends Component {
     }
 
     async handleRealPrice(select) {
-        console.log(select, 'select');
         this.setState({
             realModalIsOpen :  true,
             realServiceName: select.serviceName,
@@ -123,12 +132,18 @@ class DashboardComponent extends Component {
     handleRealModal() {
         this.setState({
             realModalIsOpen: false,
+            solUpdatedPrice:0,
+            realUpdatePrice:0,
+            solValue:0,
+            value:0
         })
     }
 
     handleModal() {
         this.setState({
             modalIsOpen: false,
+            solValue:0,
+            value:0
         })
     }
 
@@ -138,23 +153,27 @@ class DashboardComponent extends Component {
             updatePrice: this.state.actionUpdatedPrice,
             updateData: this.state.updateData
         }
-        await this.props.sendUpdateData(data);
-        //console.log('Anshul')
         this.setState({
-            modalIsOpen: false,
-        })
+            actionablePriceLoading:true
+        },()=>this.props.sendUpdateData(data))
+        
+        //console.log('Anshul')
+        // this.setState({
+        //     modalIsOpen: false,
+        // })
     }
-    async handleRealSubmit(e) {
+     handleRealSubmit(e) {
         e.preventDefault();
         let data = {
             realUpdatePrice: this.state.solUpdatedPrice,
             realUpdateData: this.state.realUpdateData
         }
-        await this.props.updateRealPrice(data);
-        //console.log('Anshul')
         this.setState({
-            realModalIsOpen: false,
-        })
+            realUpdatePriceLoading:true
+        },()=>{
+            this.props.updateRealPrice(data);
+        }) 
+        //console.log('Anshul')
     }
 
     // handleChange(e) {
@@ -191,24 +210,56 @@ class DashboardComponent extends Component {
     async componentDidMount() {
         //await this.props.getBooking();
         let defaulteDays = 15
-        await this.props.getAllBookings(defaulteDays);
+        // await this.props.getAllBookings(defaulteDays);
         await this.props.getInsights();
-        await this.props.getSolutionInsights();
-        await this.props.getMonthWiseUsers();
+        if(!!!this.props.mount.dash_mount){
+            this.setState({
+                loader:true
+            })
+            // await this.props.getSolutionInsights();
+            await this.props.getMonthWiseUsers();
+            this.setState({
+                loader: false
+            },()=>this.props.setMount({...this.props.mount,dash_mount:true}))
+        }
+    }
+
+    updateRealPriceClr = () =>{
         this.setState({
-            loader: false
+            realUpdatePriceLoading:false
+        },() => {
+            this.props.updateRealPriceClr()
+            this.handleRealModal()
         })
     }
 
+    clearUpdatePriceData = () =>{
+        this.setState({
+            actionablePriceLoading:false
+        },()=>{
+            this.props.clearUpdatePriceData()
+            this.props.getInsights()
+            this.handleModal()
+        })
+    }
+    getSecondsDifferent=(sec)=>{
+           let newSec = (new Date).getTime()
+        //    console.log(newSec,"newSec in getSeconds Differnce")
+           let seconds = (newSec-sec)/1000
+           return seconds>600?0:600-seconds
+    }
+
     render() {
-        // console.log(this.props.insight, 'insight')
+        console.log(this.props,"this.props in DashboardComponent")
+        console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
-        //    let timer = Date.now() + 100000
         const options = {
-            // title: {
-            //     text: 'My chart'
-            // },
+            title: {
+                text: ''
+              },
             series: [{
+                showInLegend: false,             
+                name: "Users",
                 data: this.props.solutionUsers
             }],
             chart: {
@@ -225,14 +276,14 @@ class DashboardComponent extends Component {
             plotOptions: {
                 line: {
                     dataLabels: {
-                        enabled: true
+                        enabled: false
                     },
                     enableMouseTracking: false
                 }
             },
         }
-        //console.log(this.props.bookings, 'booking')
-        if (this.state.loader) {
+       
+        if (false) {
             return (
                 <div className="Loader">
                     <Loader
@@ -240,77 +291,86 @@ class DashboardComponent extends Component {
                         color="#00BFFF"
                         height={200}
                         width={200}
-                    // timeout={3000} //3 secs
+                    
                     />
                 </div>
             )
         } else {
             return (
-                <div>
-                    <div className='row'>
-                        <DashboardHeader />
-                    </div>
-                    <div className='row DashboardBody'>
-                        <div className='col-md-3'>
-                            <SidebarComponent />
-                        </div>
-                        <div className='col-md-9 Dashboard AllComponents'>
-                            <div className='row dashboardsection dashrow1'>
-                                <p className='DashboardHospitalName'>{this.props.user.name}</p>
+                <React.Fragment>
+                        <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
+                      
+                        <NotifFunc 
+                            ret ={this.props.updateRealPriceRet}
+                            retClr = {this.updateRealPriceClr}
+                        />
+                        <NotifFunc 
+                            ret ={this.props.updatePriceDataRet}
+                            retClr = {this.clearUpdatePriceData}
+                        /><div className="row">
+                            <div className=' dashboardsection dashrow1'>
+                                
+                                <p  className='DashboardHospitalName'>{this.props.user.name}</p>
+                                <p className="heading-right_ris"> For any query - Call at 7701805081</p>
+                                </div>
                             </div>
                             <div className='row'>
-                                <div className='col-md-6 col-6 Leftpaddingremove'>
-                                    <div className='dashboardsection'>
-                                        <span className='businessrow1col1 realtimewidth'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights</p></span><br></br>
-                                        {
-                                            this.props.solInsights ? this.props.solInsights.slice(0, 5).map((s, index) => (
-                                                <div className='row' key={index}>
-                                                    <div className='col-md-2 text-right realtime'>
-                                                        <span className="realtimeicon1"><img src="/realtimerows.svg" className="realtimeicon" alt=""></img></span>
-                                                    </div>
-                                                    <div className='col-md-8'>
-                                                        <div className="RealtimeUsername">
-                                                            {s.userName}
-                                                        </div>
-                                                        <div>
-                                                            is looking for {s.serviceName}
-                                                        </div><br></br>
-                                                        {
-                                                            s.negotiating ?
-                                                                <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
-                                                                : null
-                                                        }
-                                                        <div>
-                                                        </div>
-                                                    </div>
-                                                    <div className='col-md-2'>
-                                                        {
-                                                            s.negotiating ?
+                                <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
+                                    <div className="custome_scrol">
+                                    <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
+                                    {/* {this.props.real_insight_loader && <LoaderComponent/>} */}
+                                        <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
+                                        {this.props.real_insight_loader?<LoaderComponent/>:
+                                            this.props.solInsights.length!==0 ? this.props.solInsights.map((s, index) =>{
+                                                let seconds_diff = this.getSecondsDifferent(s.createdAt)
+                                                return (
+                                                    (
+                                                        <div className='row' key={index}>
+                                                            <div className='col-md-2 text-right realtime'>
+                                                                <span className="realtimeicon1"><img src="/realtimerows.svg" className="realtimeicon" alt=""></img></span>
+                                                            </div>
+                                                            <div className='col-md-7'>
+                                                                <div className="RealtimeUsername">
+                                                                    {s.userName}
+                                                                </div>
                                                                 <div>
-                                                                    <Timer
-                                                                        initialTime={s.timeRemaining}
-                                                                        direction="backward"
-                                                                    >
-                                                                        {() => (
+                                                                   <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {s.serviceName}</p>
+                                                                </div>
+                                                                {
+                                                                   seconds_diff >0 ?
+                                                                        <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
+                                                                        : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
+                                                                }
+                                                            </div>
+                                                            <div className='col-md-3'>
+                                                                {
+                                                                   true ?
+                                                                        <div className="text-center">
                                                                             <React.Fragment>
-                                                                                <div className="Timer"><Timer.Minutes /> :&nbsp;
-                                                                                     <Timer.Seconds /> 
-                                                                                </div>min sec
+                                                                            <TimerComponent 
+                                                                              seconds = {seconds_diff}
+                                                                              key={Math.random()}
+                                                                            />
                                                                             </React.Fragment>
-                                                                        )}
-                                                                    </Timer>
-                                                                    {this.setTimer.call(this, 5000)}
-                                                                </div>
-                                                                : <div>
-                                                                    00:00
-                                                                </div>
-                                                        }
-                                                    </div><hr className="RealtimeHr"></hr>
+                                                                        </div>
+                                                                        : <div>
+                                                                        </div>
+                                                                }
+                                                            </div><hr className="RealtimeHr"></hr>
+                                                        </div>
+                                                    )
+                                                )
+                                            }) : <div className="no_insights_wrapper_ris">
+                                                <div className="no_insight_image-wrapper">
+                                                <img className="no_isights_image" src="./Group 2053.svg" />
                                                 </div>
-                                            )) : false
+                                                <div className="no_real_insights">No Real Time Insights yet </div>
+                                                </div>
                                         }
                                     </div>
+                                    </div>
                                     <div className='dashboardsection'>
+                                        <div className="bdr_dash">
                                         <div className='row'>
                                             <div className='col businessrow1col1'>
                                                    <img src="/business.svg" className="businessicon" alt=""></img>
@@ -325,6 +385,8 @@ class DashboardComponent extends Component {
                                                     <option value='365'>Yearly</option>
                                                 </select>
                                             </div>
+                                          
+                                        </div>
                                         </div>
                                         { this.state.showBusiness ? <div className='row'>
                                             <div className='col text-center'>
@@ -337,7 +399,7 @@ class DashboardComponent extends Component {
                                             </div>
                                         </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
                                         <div className="businessWarn">
-                                            Please take action on real time insights to increase your business
+                                            <p>Please take action on real time insights to increase your business</p>
                                         </div>
 
                                     </div>
@@ -353,20 +415,27 @@ class DashboardComponent extends Component {
                                     </div>
                                     <br></br>
                                 </div>
-                                <div className='col-md-6 col-6 dashboardsection dashrow2col2'>
+                                <div className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
-                                        {
-                                            this.props.insight ? this.props.insight.slice(0, this.state.rowsToDisplay).map((i, index) => (
-                                                <div className="DashboardInsight" key={index}>{i.serviceName} <span className="Insightdiv">were</span> {i.percent}<span>%</span><span className="Insightdiv"> higher than the booked price</span>
+                                        {this.props.act_insight_loader? <LoaderComponent/>:
+                                            this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
+                                                <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
                                                     <button type="button" className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></button>
                                                     <hr></hr>
                                                 </div>
-                                            )) : false
+                                            )) :  <div className="no_insights_wrapper_ris">
+                                            <div className="no_insight_image-wrapper">
+                                            <img className="no_isights_image" src="./Group 2055.svg" />
+                                            </div>
+                                            <div className="no_real_insights">No Actionable Insights yet </div>
+                                            </div>
                                         }
-                                        <button onClick={this.handleClick} className="DashboardViewMore">View more</button>
+                                        {/* <div className="text-center">
+                                            {this.props.insight.length !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
+                                        </div> */}
                                     </div>
                                     <Modal
                                         isOpen={this.state.modalIsOpen}
@@ -374,32 +443,41 @@ class DashboardComponent extends Component {
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
                                         ariaHideApp={false}
-                                        contentLabel="Example Modal" className='redeemModal'>
+                                        contentLabel="Example Modal" className='redeemModal modal_pdd'>
                                         <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
-                                        <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
-                                        <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.serviceName}</div>
-                                        <div>           
-                                            <div style={ { width: '50%'} }>
-                                                <b>{Math.floor( this.state.value )} % </b>
-                                            </div>    
+                                        <h2 className="update_price" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                        <div clasname="dynmic_pra" style={ { color:'#333333',fontSize:'13px',textAlign: 'center', marginTop:'20px'} }>{this.state.serviceName}</div>
+                                        <div className="catlou_sli">     
+                                        {this.state.actionablePriceLoading && <LoaderComponent />}      
+                                        <div className="text-center valu_second">
+                                               <b>{Math.floor( this.state.value )} % </b>
+                                            </div> 
                                             <Slider
                                             min={0}
                                             max={50}
                                             value={this.state.value}
-                                            onChange={this.handleChange}
+                                            onChange={this.handleSliderChange}
                                             onValueChange={value => this.setState({ value })}
                                             valueLabelDisplay="on"
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)}></input></div><br></br>
-                                            {/* <input className='value' value={this.state.value}></input> */}
+                                            <div className="SliderUpdatedPrice">&#8377;
+                                            <span>
+                                            {Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)} 
+                                            </span>
+                                            </div>
+                                            <br>
+                                            </br>
+                                           
                                         </div> 
                                         <div className="row maxmin">
                                             <div className="col-sm-6"><h4>&#8377;{this.state.updatePrice}</h4></div>
                                             <div className="col-sm-6 text-right"><h4>&#8377;{this.state.updatePrice / 2}</h4></div>
                                         </div>
-                                        {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.updatePrice}></input></div><br></br> */}
-                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p></div>
-                                        <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+                                       
+                                        <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.value===0?
+                                        <p style={{ fontWeight:'bold'}}><b>0%</b></p>:
+                                        <p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p>}</div>
+                                        <div className="text-center"><button style={{ fontSize: '17px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                     <Modal
                                         isOpen={this.state.realModalIsOpen}
@@ -407,14 +485,15 @@ class DashboardComponent extends Component {
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
                                         ariaHideApp={false}
-                                        contentLabel="Example Modal" className='redeemModal'>
+                                        contentLabel="Example Modal" className='redeemModal secon_modal'>
                                         <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }} alt=""></img></button></div>
-                                        <h2 style={{ fontSize: '25px', textAlign: 'center' }} ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
-                                        <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '20px' }}>{this.state.realServiceName}</div>
-                                        <div>           
-                                            <div style={ { width: '50%', textAlign: 'center'} }>
+                                        <h2 className="yout_ctl" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                        <div><p className="serv_ces">{this.state.realServiceName}</p></div>
+                                        <div>   
+                                            {this.state.realUpdatePriceLoading && <LoaderComponent />}        
+                                            <div className="text-center valu_second">
                                                <b>{Math.floor( this.state.solValue )} % </b>
-                                            </div>    
+                                            </div>
                                             <Slider
                                             min={0}
                                             max={50}
@@ -422,38 +501,50 @@ class DashboardComponent extends Component {
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;<input style={{ textAlign:'left',border: 'none', width: '25%', fontWeight:'bold'}} type='text' onChange={this.handleChange} name='updatePrice' value={this.state.realUpdatePrice - this.state.realUpdatePrice * this.state.value / 100}></input></div><br></br>
-                                            {/* <input className='value' value={this.state.value}></input> */}
+                                            <div className="SliderUpdatedPrice">&#8377;
+                                            <span>
+                                            {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)} 
+                                            </span>            
+                                                </div><br></br>
                                         </div> 
                                         <div className="row maxmin">
                                             <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
                                             <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
                                         </div>
-                                        <div className="bookingChance">Chances of Bookings increases by<br></br><p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p></div>
-                                        {/* <div style={{ fontSize: '25px', textAlign: 'center', marginTop: '25px' }}>&#8377;<input style={{ textAlign: 'center', border: 'none', width: '10%' }} type='text' onChange={this.handleChange} name='realUpdatePrice' value={this.state.realUpdatePrice}></input></div><br></br> */}
-                                        <div className="text-center"><button style={{ fontSize: '25px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+                                            <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.solValue===0?
+                                             <p style={{ fontWeight:'bold'}}><b>0%</b></p>
+                                            :<p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p>}</div>
+                                        <div className="text-center"><button style={{ fontSize: '18px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
                                 </div>
                             </div>
                         </div>
-                        <div className='col-md-2'></div>
-                    </div>
-                </div>
+                      
+                  </React.Fragment>
             )
         }
-
     }
 }
 const mapStateToProps = state => ({
     //bookings: state.user.bookingData,
     user: state.user.userDetail,
-    insight: state.user.insightData,
-    solInsights: state.user.solInsights,
+    dash_data:state.user.data.dash_data,
+    mount:state.user.mount,
     businessEarn: state.user.businessEarn,
     businessLost: state.user.businessLost,
-    solutionUsers: state.user.solutionUsers
+    solutionUsers: state.user.solutionUsers,
+    updateRealPriceRet:state.user.updateRealPriceRet,
+    updatePriceDataRet:state.user.updatePriceDataRet
 })
 
-
-export default connect(mapStateToProps, { getAllBookings, getInsights, sendUpdateData, getSolutionInsights, getMonthWiseUsers, updateRealPrice })(DashboardComponent);
+export default connect(mapStateToProps, {updateRealPriceClr, 
+     clearUpdatePriceData, 
+     getAllBookings,
+     getInsights,
+     sendUpdateData, 
+     getSolutionInsights,
+     getMonthWiseUsers,
+     updateRealPrice,
+     set_dash_data,
+     clearSolInsights, setMount })(DashboardComponent);
 // Call userdetails from

@@ -1,15 +1,35 @@
 .HospitalProfileBody
-        {height: 2691px;
+        {height: 100%;
         background: #FFFFFF 0% 0% no-repeat padding-box;
         border: 1px solid #DCDCDC;
         border-radius: 10px;
         opacity: 1;}
 
-.HospitalCoverImg
-        {width: inherit;
-        margin-left: 21px;
-        margin-top: 5px; height:auto;}
 
+   /* .HospitalCoverImg     {width: inherit;
+        margin-left: 21px;
+        margin-top: 5px; height:auto;} */
+        .card-body {
+                background: #fff;
+                box-shadow: 0px 3px 6px #00000029;
+                border-radius: 9px;
+            }
+            .trendingBox{position: relative;padding: 20px;}
+            .ceoss_icon{position: absolute;
+                top: -1rem;
+                right: -1rem;
+                background: #fff;
+                border-radius: 28px;
+                padding: 11px 15px 9px 16px;
+                color: #000;
+                border: 1px solid #A8A8A8;box-shadow: 0px 3px 6px #00000029;}
+                
+                    
+                    button.owl-prev {
+                        margin-right: 4rem;
+                    }
+                   
+                .card_tooth{color: #474747;}
 .HospitalCover
         {position: relative;     
         width: 99%;}
@@ -23,11 +43,11 @@
         margin: 384px 0px 0px 822px;}
 
 .blackdot
-        {margin-left: 68px;
-        width: 115px;
+        {margin-left: 3rem;
+        width: 66px;
         border-radius: 50%;
-        height: 109px;
-        border: 1px solid darkgrey;}
+        height: 66px;
+        border: 1px solid #ced4da;}
 
 .ExpertsDetails
         {width: 50%; 
@@ -53,16 +73,29 @@
         margin-right: 0px !important;}
 
 .HospitalBio
-        {width: 92%;
+        {
+         /* margin-left: 2rem;
+         margin-right: 2rem; */
+        min-height: 3rem;
         text-align: justify;
-        margin-left: 35px !important;}
+        margin-left: 1.5rem !important;
+}
 
 .Hospitalhr
-        {margin: 35px !important; 
-        width: 92%;}
+        {
+                width: 95%;
+                position: relative;
+               left: 2rem;
+               right:2rem;
+               margin-top: 1.5rem!important;
+               margin-bottom: 1rem!important;
+}
+.edit
 
 .HospitalProfileRow1
-        {margin-top: 25px;}
+        {
+                margin-top: 1rem;
+        }
 
 .AddExpertForm
         {padding: 25px;} 
@@ -76,3 +109,200 @@
         border: none;}
         
 .AddExInput{border: none; border-bottom: 1px solid darkgrey;}
+.catalogueImg{
+        padding: 2%;
+}
+/* alka-css */
+.mas_hos{
+        padding: 13px 19px 10px 28px;
+        width: 100%;
+        height: 30rem;
+}
+.edit_image{background: #01D35A;border-radius: 50%;width: 44px;height: 44px;text-align: center;cursor: pointer;float: right;position: relative;
+        right: 26px;
+        top: -45px;}
+.edit_icn {width:16px;padding-top: 15px;}
+.content_pos{
+        /* padding-top: 11px;
+        position: relative; */
+        right: 1rem;
+    top: 0.6rem;
+}
+.maxhospitaladd{font-size: 1.2rem;color: #474747;opacity: 0.6;line-height: 12px;}
+.max_cnt{   font-size: 1.8rem; margin-bottom: 9px;}
+.team_of{color: #474747;font-size: 15px;position: relative;margin-top: 10px;
+        top: 12px;}
+        .achiment_bk{text-align: center;color: #474747;font-size: 16px;padding-bottom: 20px;}
+        /* .brdr_tm{border: 1px solid #DCDCDC;} */
+        .brdr_tm {
+                width: 95%;
+                position: relative;
+               left: 2rem;
+               right:2rem;
+            }
+            /* payment-screen */
+            .rorpy_im{width: 6rem;height: 6rem;border-radius: 50px;border:1px solid #DCDCDC;}
+            .righside_pad{position: relative;
+                right: 30px;}
+            .ser_nme{font-size: 1.4rem;color: #474747;opacity: 0.5;}
+.achimen_pd
+{
+        /* margin-top: 2rem; */
+}
+.edit_image2{background: #01D35A;border-radius: 50%;width: 25px;height: 25px;text-align: center;position: relative; left: 74px; top: -23px;}
+.edit_icn2{width: 10px;padding-top: 4px;}
+.achivementlogo img{
+        width: 7rem;
+}
+/* b, strong{    font-size: 1.2rem;} */
+.bdyhs_mar{
+        margin-top: 1rem;
+        /* margin-left: 20px; */
+}
+.intro {font-size: 1.2rem;}
+.viewmap{color:#01D35A;padding-left: 0px;font-weight: 400;font-size: 1.2rem;}
+.editmainbodymaxhospital{color: #01D35A;font-weight: 400;font-size: 1.2rem;margin-left: 2rem;}
+.ach_mnt{font-size: 1.2rem;}
+.edi_intr{
+        color: #01D35A; font-weight: 400;cursor: pointer;font-size: 1.2rem;left: 0;
+       
+
+}
+.b-select-wrap {
+        border: none;
+        color: #474747;
+        overflow: hidden;
+        position: relative;
+        border-radius: 3px;
+        font-weight: 400;
+    }
+    
+    .b-select-wrap::after {
+        content: "⌄";
+        position: absolute;
+        right: 0px;
+        top: 10px;
+        z-index: 1;
+        text-align: center;
+        width: 10%;
+        height: 100%;
+        pointer-events: none;
+        font-size: 35px;
+        color: #989393;
+    }
+    
+    .b-select {
+        padding: 5px 15px;
+        background-color: white;
+        border: 0;
+        outline: none;
+        color: #8A8A8A;
+        font-size: 22px;
+        -webkit-appearance: none; /* for webkit browsers */
+        -moz-appearance: none; /* for firefox */
+        appearance: none; /* for modern browsers */
+       
+}
+.cardio_le{margin: 30px 10px 50px 20px;}
+.Service_List{padding-left: 40px;margin-bottom: 0px;}
+.s_list{font-size: 20px;color: #474747;font-weight: 400;}
+.abiatio{font-size: 15px;}
+.Service_List a {color:#474747;}
+.view_more{color: #01D35A !important;text-align: center;font-weight: 400;}
+.view_more:hover{color: #01D35A !important;}
+.vi_m{text-align: center;margin: 20px;position: relative;right: 76px;top:34px;}
+.bg_clr{background: #AFAFAF;}
+.bg_clr img{width: 40px;}
+.team_sec{padding: 0px 40px 0px 41px;}
+
+
+.timelinebox4 {
+      
+        text-align: center;
+        background-color: #AFAFAF;
+        margin-top: 30px;
+        padding: 10px 0px 10px 0px;
+        height: 160px;
+    }
+  
+    .timelinebox4 img{
+        width: 55px;
+        height: 55px;
+        margin-top: 10px;
+        border-radius: 50%;
+        object-fit: cover;
+}
+    .left_ali{text-align: left; color: #fff; padding-bottom: 5px;
+        padding-left: 11px;
+        padding-top: 13px;}
+        .speclion{font-size: 16px;}
+    .left_ali h2{font-size: 13px;}
+    .left_ali p{font-size: 12px;line-height: 4px;}
+    .timelinebox4_5 {padding: 35px;}
+.se-dr{text-align: center;margin: 2rem 20px;}
+.se-dr >.pika{
+        color: #01D35A; font-weight: 400;font-size: 1.3rem;
+}
+.se-dr >.pika:hover{
+        color: #01D35A !important;
+}
+.achivmnt_b{background: #F8FFFB;padding: 30px;margin-top: 35px;}
+.ach1 {width: 23vw;
+        height: 12vw;}
+        .lction{width: 31px;position: relative;
+                left: 40px;}
+        .cir_b{border-radius: 50%;width: 3vw; height: 3vw;background: #fff;position: absolute;
+                right: -8rem;
+                top: -1rem;text-align: center;border: 1px solid #A8A8A8;}
+        .croS{width: 1vw;padding-top: 0.9rem;}
+        span.three {
+                position: relative;
+                float: right;
+                top: -33px;
+                color: #fff;
+                right: 10px;
+            }
+            .achivmnt_b p{padding-top: 16px;font-size: 1.2rem;}
+.text_cmt textarea{border: 0;
+      
+        outline: 0;height: 180px;font-size: 14px;color: #989393;}
+        .loc{color: #989393 !important;font-size: 14px;}
+        .vikas_marg{font-size: 14px;}
+
+
+       /* css-slider */
+
+
+       .controls-top {
+        text-align: center;
+        padding-top: 26px;
+    }
+
+       a.btn-floating {
+        background: #fff;
+        padding:0.6rem 1.4rem 0.8rem 1.5rem;
+        border-radius: 35px;
+        border: 1px solid #ddd;
+        font-size: 1.9rem;
+        box-shadow: 0px 0px 6px #00000029;margin-right: 15px;}
+        i.fas.fa-chevron-left {
+                font-size: 15px;
+                color: #747373;
+            }
+            i.fas.fa-chevron-right {
+                font-size: 15px;
+                color: #747373;
+            }
+            .card .card-body .card-text {
+                font-size: 1.2rem !important;
+                font-weight: 400;
+                color: #747373;
+            }
+            /* .card.mb-2.card_im {
+                width: 27rem;
+            } */
+            .carousel-item{padding: 20px;}
+            .card_im {
+                width: 28rem;
+                height: 23rem;
+            }

@@ -2,11 +2,13 @@ ul
     {list-style-type: none;}
 
 .signupHospitalForm
-   {display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    width: max-content;}
+   {
+      display: block;
+      margin-left: 2rem;
+      margin-right: auto;
+      margin-top: 60px;
+      width: max-content;
+   }
 
 .sideimg
    {display: block;
@@ -19,21 +21,36 @@ ul
     {background: #EBEBEB 0% 0% no-repeat padding-box;
      background: #F9F9F9 0% 0% no-repeat padding-box;
     opacity: 1;
-    position: relative;}
-
+    position: relative;z-index: -1}
+.sigun_imu{width: 360px;display: block;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 20%;
+   position: relative;}
 .signImage 
     {display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    position: relative;}
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 35px;
+      position: relative;
+      width: 450px;}
 
 form
    {margin: 0px !important;}
 
 .TypeOfSignup
    {width: 100% !important;}
-
+.form-group h5{font-size: 16px;}
+.form-group p{font-size: 15px;}
+.signupHosbtn{font-size: 15px; background-color: #01D35A !important;}
+.MuiList-padding{
+background: #FFFFFF 0% 0% no-repeat padding-box;
+box-shadow: 0px 3px 6px #00000029;
+border: 1px solid #B2B2B2;
+border-radius: 8px;
+opacity: 1;
+   /* padding: 30px !important; */
+}
 .signupHosbtn 
    {background: #01D35A 0% 0% no-repeat padding-box;
     border-radius: 35px !important;
@@ -46,7 +63,20 @@ form
 .customborder 
    {border: none !important;
     border-radius: 0px !important; padding: 0px !important;
-    border-bottom: 1px solid #B2B2B2 !important;}
+    border-bottom: 1px solid #B2B2B2 !important;
+    color: #8A8A8A;
+   opacity: 1;font-weight: 400;font-size: 14px !important;}
+   .margin-top-medium_ris{font-size: 14px;}
+   label {
+      display: inline-block;
+      margin-bottom: .5rem;
+      font-size: 14px;
+      font-weight: 400;
+      color: #333333bf;
+  }
+  .MuiSelect-select.MuiSelect-select{font-size: 1.2rem; color: #333333bf;text-align: left;
+   padding-left: 0.6rem;}
+  
     
 textarea 
    {resize: none !important; }
@@ -57,15 +87,21 @@ textarea
     font-weight: 600;}
 
 .Plzenter 
-   {font-weight: 600;
+   {font-weight: 400;
     margin-bottom: 14px;
     margin-top: 25px;
-    color: darkgrey;}
-
+    color: darkgrey;font-size: 14px;}
+    .btn-success
+{box-shadow: none !important;}
+.btn-success {
+   color: #fff;
+   background-color: #01D35A !important;
+   border-color: #01D35A;
+}
 .signUpText
    {font-size: 1.5rem;
     margin-top: 65px;
-    margin-bottom: 20px;}
+    margin-bottom: 20px;font-weight: 400;}
 
 .buttonSignUp
    {padding-top: 10px;}

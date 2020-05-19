@@ -1,6 +1,8 @@
-.AllComponents
-       {margin-top: 116px !important;
-        margin-left: -33px !important;}
+.ReactModal__Content--after-open{
+        background: #FFFFFF 0% 0% no-repeat padding-box !important;
+        box-shadow: 5px 5px 10px #00000029 !important;
+        border-radius: 20px !important;
+}
 .AvailableTime
         {background: #FFFFFF 0% 0% no-repeat padding-box;
         border: 1px solid #DCDCDC;
@@ -51,55 +53,10 @@ form
         -ms-user-select: none;
         user-select: none;}
 
-  /* Hide the browser's default checkbox */
-
-.contain input 
-    {position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;}
-  
-  /* Create a custom checkbox */
-
-.checkmark 
-    {position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;     border-radius: 50%;
-    background-color: #eee;}
-  
-  /* On mouse-over, add a grey background color */
-
-.contain:hover input ~ .checkmark 
-    {background-color: #ccc;}
-  
-  /* When the checkbox is checked, add a blue background */
-.contain input:checked ~ .checkmark 
-    {background-color: #01D35A;}
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after 
-    {content: "";
-     position: absolute;
-     display: none;}
-  
-  /* Show the checkmark when checked */
-.contain input:checked ~ .checkmark:after 
-     {display: block;}
-  
-  /* Style the checkmark/indicator */
-.contain .checkmark:after 
-   {left: 9px;
-    top: 5px;
-    width: 6px;
-    height: 12px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);}
+        .abt_sec{padding-top: 30px;font-size: 18px;}
+        .my_av_sec{margin-bottom: 30px;}
+        .my_avl{margin-bottom: 30px;}
+          
 
   /* MANAGE PAYMENT CSS */
 .ManagePayForm
@@ -107,40 +64,49 @@ form
     border: 1px solid #DCDCDC;
     opacity: 1;
     letter-spacing: 0px;     text-align: center;
-    border-radius: 12px;}
+    border-radius: 12px;padding: 40px;}
+.bok_apt{font-size: 1.2rem;font-weight: 600;
+  position: relative;
+  right: 25px;top: 6px;}
+  .managePay {
+    margin-top: 1rem !important;
+  }
   
 .editbankdetailfield 
     {border: none !important;
     border-bottom: 1px solid #B5B3B3 !important;
     border-radius: 0px !important;     
-    margin: 35px 0px;}
+    margin: 35px 0px;font-size: 1.2rem !important;}
 
 .managePay
     {margin: 30px;}
+    .managePay h4 b{font-size: 1.5rem !important;}
+   
 
 .proceedbtn 
     {background: #01D35A 0% 0% no-repeat padding-box;
     border-radius: 35px !important;
     opacity: 1;
-    width: 57%;
+    width: 26%;
     height: 47px;
-    font-size: 17px !important;}
+    font-size: 17px !important;text-transform: capitalize !important;}
 
 /* APPOINTMENTS */
 
 .Appoint
     {background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;} 
+    border-radius: 10px;
+    } 
 
 .AppointBody
      {margin: 25px;}
 
 .AppointBodyrow1
      {text-align: center;      
-      font-size: 24px;   
+      font-size: 18px;   
       font-weight: bolder;     
-      margin-bottom: 20px;}
+      margin-bottom: 0px;}
 
 .AppointBodyrow2
      {margin-top: 10px;}
@@ -216,6 +182,37 @@ input:checked + .slider:before
       -ms-transform: translateX(26px);
       transform: translateX(26px);}
 
+.idea{
+    display: inline-flex;
+    border: none;
+    background: transparent;
+    color: #01D35A;
+    font-weight: 400;
+}
+.ideaDiv{
+    background-color: #FBFBFB;
+    color: #01D35A;
+    font-weight: 500;
+    margin: 2%;
+}
+.tip{
+    margin-top: 27px;
+}
+.tipsrow {
+    margin: 1% 12% !important;
+}
+.appointCreateP{
+    text-decoration: underline;
+    letter-spacing: 0px;
+    color: #01D35A;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.cross{
+    border: none;
+    background-color: white;
+}
+
 /* Rounded sliders */
 
 .slider.round 
@@ -225,10 +222,10 @@ input:checked + .slider:before
      {border-radius: 50%;}
 
 .settingpage
-    {margin-top: 115px;
+    {margin-top: 93px;
       background: #FFFFFF 0% 0% no-repeat padding-box;
       border: 1px solid #DCDCDC;
-      border-radius: 10px;}
+      border-radius: 10px;margin-left: 5rem;}
 
 .settingpageBody
     {margin: 40px;}  
@@ -238,10 +235,82 @@ input:checked + .slider:before
     margin-top: 20px; margin-bottom: 20px;
     border-radius: 10px;}
 
-.settingtopic 
+.settingtopic p
     {text-align: center;
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: bolder;} 
 
 .accsetrow 
     {margin: 23px 0px 16px 0px !important;}
+
+/* PAYMENT STATUS PROGRESS BAR */
+.progres{
+      height: 114px;
+}
+.progressbar{
+  counter-reset: step;
+}
+.progressbar li{
+  list-style-type:none;
+  float: left;
+  width:20%;
+  position:relative;
+  text-align:center;
+}
+.progressbar li:before{
+  content: counter(step);
+  counter-increment: step;
+  width: 50px;
+  height: 50px;
+  border: 1px solid darkgrey;
+  display: block;
+  text-align:center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  line-height:50px;
+  background-color:white;
+}
+.progressbar li:after{
+  content: '';
+  position:absolute;
+  width:100%;
+  height:3px;
+  background-color:#F1F1F1;
+  top:25px;
+  left:-50%;
+  z-index:-1;
+}
+.progressbar li:first-child:after{
+  content:none;
+}
+.progressbar li.active{
+  color:#01D35A;
+}
+.progressbar li.active:before{
+  border-color: #01D35A;
+}
+
+/* Progress */
+
+/* .progres li{
+  width:20%;
+}
+ul{
+  text-align:center;
+}
+ul li{
+  display: inline-block;
+}
+ul li .fa{
+    background-color:#01D35A;
+    color:white;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+.fa-check:before {
+    line-height: 50px;
+} */
+
+.ReactModal__Overlay{background-color: rgba(80, 77, 77, 0.21) !important;z-index: 11;}
+.persent_md{padding: 40px !important;}

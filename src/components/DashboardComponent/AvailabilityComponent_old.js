@@ -85,7 +85,7 @@ export default class AvailabilityComponent extends Component {
                     <SidebarComponent />
                 </div>
 
-                <div className='col-md-6 AvailableTime'>
+                <div className='col-md-6 col-xl-8 AvailableTime'>
 	                <form>
                     <div className="Avail">
                         Availability

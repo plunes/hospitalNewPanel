@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './LoginComponent.css';
-import { createLogin } from "../../actions/userActions";
+import { createLogin, newUserClr } from "../../actions/userActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router-dom';
+import AuthHeader from "../functional/AuthHeader"
+import Login from '../functional/Login';
 
 
 class LoginComponent extends Component {
@@ -13,30 +15,31 @@ class LoginComponent extends Component {
             emailId:'',
             password:'',
             phone_number:'',
-            
+            loading:false  
         } 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-
-
     }
-    handleSubmit(e){
-        e.preventDefault();
+    handleSubmit(){
+        
         let data;
         let deviceId = localStorage.getItem('deviceId')
-            if (this.state.emailId.includes('@')) {
+            if (this.state.email.includes('@')) {
                 data = {
-                    'email': this.state.emailId,
+                    'email': this.state.email,
                     'password': this.state.password,
                     "deviceId": [deviceId]
                 }
             } else {
                 data = {
-                    'mobileNumber': this.state.emailId,
+                    'mobileNumber': this.state.email,
                     'password': this.state.password,
                     "deviceId" : [deviceId]
                 }
             }
+            this.setState({
+              loading:true
+            })
         this.props.createLogin(data);
     }
     handleChange(e) {
@@ -44,6 +47,12 @@ class LoginComponent extends Component {
           [e.target.name]: e.target.value
         });
         
+    }
+
+    loadingOff = () =>{
+      this.setState({
+        loading:false
+      })
     }
     
 
@@ -61,40 +70,41 @@ class LoginComponent extends Component {
         // Password
         // UserDetails action payload store (Dispatch)
         return (
-            <div className="container">
-            <div className="row">
-                <div className="col-xl-6"><div>
-                  <img className="loginImage"  src="/login.png"  alt=".."/>
+          <React.Fragment>
+          <div className="row">
+          <AuthHeader/>
+          </div>
+          <div className='row'>
+                    <div className='col-md-6 sidetimgcol'>
+                        <img className="signImage botm_sign"  src="Mobile-login.png" alt="SignUp" />
+                    </div>
+                    <div className='col-md-6'>
+                        <div className='col-md-1'>
+                        </div>
+                        <div className="col-md-7 signupHospitalForm" >
+                            <Login 
+                            email = {this.state.email}
+                            password = {this.state.password}
+                            handleChange = {this.handleChange}
+                            handleSubmit = {this.handleSubmit}
+                            loadingOff = {this.loadingOff}
+                            loading = {this.state.loading}
+                            newUserClr = {this.props.newUserClr}
+                            newUserRet = {this.props.newUserRet}
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="col-xl-6">
-                  <div className = 'row'>
-                    <div className = 'col-md-1'>
-
-                    </div>
-                    <div className = 'col-md-6'>
-                    <h1 className="login-text">Login</h1>
-                     <form action="" onSubmit ={this.handleSubmit}>
-                      <div  className=" form-group">
-                        <input className="form-controlll inputLogin"   name="emailId" placeholder="Email id or Phone Number" onChange={this.handleChange}  />
-                      </div>
-                      <div  className="form-group">
-                        <input className="form-controlll inputLogin" type='password' name="password" placeholder="Password" onChange = {this.handleChange}  />
-                          <button className="button-login" type='submit'>Login</button>
-                      </div>
-                    </form>
-                    {/* <a href="/forgotPassword" ><h6 className="forgotPassword" >Forgot Password?</h6></a> */}
-                    <h6 className="signupClass" >Don't have an account?<a href="/signup" >Signup</a> </h6>
-                  </div>
-                </div>
-            </div>
-        </div>
-        </div>
+        </React.Fragment>
         )
     }
 }
 LoginComponent.propTypes = {
-    createLogin: PropTypes.func.isRequired
+    createLogin: PropTypes.func.isRequired,
+    newUserClr: PropTypes.func.isRequired
   };
-export default connect(null, { createLogin })(LoginComponent);
+  const mapStateToProps = state => ({
+    newUserRet:state.user.newUserRet
+  })
+export default connect( mapStateToProps , { createLogin, newUserClr })(LoginComponent);
 

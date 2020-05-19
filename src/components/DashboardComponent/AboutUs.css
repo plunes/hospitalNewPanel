@@ -1,11 +1,13 @@
-.payment
-   {margin-top: 120px ;}
-
+.Payment
+   {margin-top: 7.8rem;
+      border: 1px solid #dcdcdc;
+      border-radius: 10px ;}
+.paymnt_heding{font-size: 1.8rem;margin: 3rem !important;}
 .helppage
-   {margin-top: 115px;
+   {margin-top: 95px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;}
+    border-radius: 10px;margin-left: 5rem;}
 
 .helppageBody
    {margin: 40px;}
@@ -21,23 +23,29 @@
    {margin: 20px 0px 20px 0px !important;
     font-size: 14px;}
 
+.helpBtn{
+   width: 100%;
+   border:none;
+   background: transparent;
+}
+
 .bookappointhead
    {margin-top: 20px;}
 
 .helprow1
    {text-align: center;
-    font-size: 24px;
+    font-size: 1.8rem;
     font-weight: bolder;}
 
 .helpinput
-    {background-color: #DFDFDF !important;}
+    {background-color: #dfdfdf2e !important;height: 60px !important;font-size: 1.3rem !important; border:none !important;}
 
 /* ABOUT CSS */
 .AboutHospital
-   {margin-top: 115px; 
+   {margin-top: 95px; 
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;}
+    border-radius: 10px;margin-left: 5rem;}
 
 .About
    {text-align: center;
@@ -49,34 +57,43 @@
    {margin: 40px;}  
 
 .Aboutplunes
-   {text-align: justify;}
+   {text-align: justify;font-size: 14px;}
+   .Aboutplunes p{color: #474747;opacity: 0.7;line-height: 27px;}
 
-
+.typeofsetting{font-size: 14px;color: #474747;opacity: 0.7;}
+.typeofsetting a{color: #474747;}
 /* NOTIFICATION CSS */
 
 .Notification
-    {margin-top: 120px;
+{
+    /* margin-top: 120px; */
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #DCDCDC;
-    border-radius: 10px;} 
+    border-radius: 10px;
+} 
 
 .Notify
     {text-align: center;  
      font-weight: 400; 
-     margin: 25px;}
+     margin: 25px;font-size: 17px;}
 
 .NotifierName
-    {margin-bottom: 0px !important;     
+    {
+    margin-bottom: 0px !important;     
     font-weight: 500;
-    font-size: 18px;}
-
+    font-size: 15px;
+    padding-top: 5px;
+    color:gray;
+   }
+.intro_di{font-size: 14px;color: #474747;opacity: 0.6;}
 .NotifyImg
     {background-color: #888888;
-    width: 71px;
-    height: 71px;
+    width: 58px;
+    height: 57px;
     color: white;
     font-weight: 400;
     font-size: 15px;
-    border-radius: 50%;}
+    border-radius: 50%;position: relative;
+    left: 37px;}
      
 .PaymentHR{margin-top: 1rem !important; margin-bottom: 1rem !important;}
