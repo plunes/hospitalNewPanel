@@ -385,7 +385,7 @@ export const submitOtp = (data) => async dispatch => {
  console.log(data,"data in getEntity")
   return await axios.put(baseUrl + `/user/updatePassword`, data , { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res, 'res in getOTP')
+      console.log(res, 'res in submitOtp')
       if (res.status === 201) {
         //dispatch(getSolutionInsights()
         if(!!res.data.success){
@@ -403,7 +403,7 @@ export const submitOtp = (data) => async dispatch => {
             payload :{
               success:false,
               data:[],
-              message:"Something went wrong. try again later"
+              message:"Invalid OTP"
             }
           })
         }

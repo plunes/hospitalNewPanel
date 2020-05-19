@@ -17,7 +17,7 @@ import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
-   remove_notif_count_ret, set_notif_count } from "../../actions/userActions"
+   remove_notif_count_ret, set_notif_count, getUserDetails } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -62,6 +62,7 @@ export class DashboardPage extends React.PureComponent {
         changePass:'',
         solInsights:[],
         insight:[],
+        initial_render:true,
         notificationsData:{
           count:0,
           notifications:[]
@@ -78,6 +79,7 @@ export class DashboardPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
+    console.log(nextProps,"nextProps in willReceiveProps")
         if(!!nextProps.solInsights){
           this.setState({
               solInsights:nextProps.solInsights,
@@ -110,6 +112,23 @@ export class DashboardPage extends React.PureComponent {
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
         }
+
+        if(!!this.state.initial_render){
+          if(!!nextProps.user.userDetail){
+            if(!!!nextProps.user.userDetail.geoLocation){
+                this.setState({
+                  initial_render:false,
+                  Notify:{
+                    ...this.state.Notify,
+                    success:{
+                      message:'Please make sure to update you location in profile section to avail better services'
+                    }
+                  }
+                })
+            }
+          }
+        }
+
         // if(!!this.props.mount.notif_mount){
         //   if(!!this.props.notif_data){
         //     this.setState({
@@ -208,6 +227,7 @@ export class DashboardPage extends React.PureComponent {
     this.props.getSolutionInsights()
     this.props.getInsights()
     this.props.getNotifications({page:1})
+    this.props.getUserDetails()
     this.socketEmit()
   }
 
@@ -381,6 +401,7 @@ getNotifications = (data) =>{
              <div>
                  <Notify  
                         success={this.state.Notify.success}
+                        autoDismiss = {this.state.initial_render?false:true}
                         error={this.state.Notify.error}
                         clear = {()=>this.setState({Notify:{success:false,error:false}})}
                         />
@@ -477,6 +498,7 @@ clr_get_notif,
 setMount,
 remove_notif_count,
 remove_notif_count_ret,
-set_notif_count
+set_notif_count,
+getUserDetails
 })(DashboardPage);
 

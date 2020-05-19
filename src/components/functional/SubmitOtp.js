@@ -29,7 +29,7 @@ const EnterEmail = (props) =>{
     }else if(props.newPassword !== props.rePassword){
       addToast("Passwords do not match",{ appearance: 'error', autoDismiss:true  })
     }else if(props.otp.length !== 4){
-       addToast("Invalid OTP",{ appearance: 'error', autoDismiss:true  })
+       addToast("OTP should be 4 characters long.",{ appearance: 'error', autoDismiss:true  })
     }else{
         props.submitDetails({
             password:props.newPassword,

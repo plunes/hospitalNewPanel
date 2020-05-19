@@ -499,6 +499,11 @@ class ProfileContainer extends React.PureComponent {
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
        <img  src="/Group 2096.svg"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
+       <Link to="/dashboard/add-doctor"
+             role="button"
+             onClick = {()=>this.props.toggleAddDoc()}>
+       <button className="common-button" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
+       </Link>
      </div>:'':''}
    
    {this.props.user?!!this.props.user.doctors?this.props.user.doctors.length !==0?<div className="col-md-6 col-sm-12 col-lg-3">

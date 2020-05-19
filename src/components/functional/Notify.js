@@ -18,7 +18,7 @@ const Notify = (props) => {
         props.clear()
     }
     if(!!props.success){
-        addToast(props.success.message, {appearance: 'success', autoDismiss:true}) 
+        addToast(props.success.message, {appearance: 'success', autoDismiss:!!props.autoDismiss?false:true}) 
         props.clear()
     }
 
