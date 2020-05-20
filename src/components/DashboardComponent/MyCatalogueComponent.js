@@ -55,6 +55,7 @@ class MyCatalogueComponent extends Component {
             limit:50,
             searchQuery:'',
             page:1,
+            to_add_service_page:1,
             procedures:[],
             selectedProcedure:{},
             editProcedureLoading:false,
@@ -79,7 +80,6 @@ class MyCatalogueComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-
         if(!!nextProps.toAddServicesRet){
             if(nextProps.toAddServicesRet.success){
                 this.setState({
@@ -100,7 +100,6 @@ class MyCatalogueComponent extends Component {
 
                     }else{
                         this.setState({
-                            editFlag:false,
                             selected_procedures:[],
                             procedures:nextProps.searchProceduresRet.data,
                             loading:false
@@ -262,8 +261,9 @@ class MyCatalogueComponent extends Component {
       
     }
 
-    viewMore = () =>{
+    viewMore = (obj) =>{
         this.setState({
+            ...obj,
             limit:this.state.limit + 50,
             loading:true
         },()=>this.props.searchProcedures(
@@ -323,10 +323,6 @@ class MyCatalogueComponent extends Component {
         let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
         arr.push(data.data)
         this.setState({
-            // selectedProcedure:{
-            //     ...data.data,
-            //     id:data.id
-            // }
             selected_procedures:arr
         },()=>this.setState({
             edit_Proc_flag:false
@@ -346,7 +342,7 @@ class MyCatalogueComponent extends Component {
             })
         })
     }
-    handleAddProcedureClick = (e) =>{
+ handleAddProcedureClick = (e) =>{
     e.preventDefault()
     this.setState({
         loading:true,
@@ -359,8 +355,24 @@ class MyCatalogueComponent extends Component {
             limit:'50',
             specialityId:this.state.selected_speciality
  })  
-    })
-                
+    })          
+    }
+
+    handleNext_add_procedures = (obj) =>{
+        this.setState({
+            ...this.state,
+            ...obj,
+            loading:true,
+            addProcedureFlag:true,
+            to_add_service_page:this.state.to_add_service_page + 1
+        },()=>{
+            this.props.toAddServices({
+                searchQuery:'',
+                page:this.state.to_add_service_page,
+                limit:'50',
+                specialityId:this.state.selected_speciality
+     })  
+        })
     }
 
     editProcedureLoadingOff =()=>{
@@ -387,7 +399,7 @@ class MyCatalogueComponent extends Component {
             this.props.toAddServices({
                 searchQuery:'',
                 page:'1',
-                limit:'50',
+                limit:'300',
                 specialityId:this.state.selected_speciality
              })})
     }
@@ -521,7 +533,9 @@ class MyCatalogueComponent extends Component {
                            <div className='text-center'>No Procedures</div>)
                         }
                         {!this.state.addProcedureFlag && <div className='text-center'>
-                            {this.state.procedures.length !==0 && <button onClick={this.viewMore} className="catalogueViewMore">View more</button> }    
+                            {this.state.procedures.length !==0 && <button onClick={()=>this.viewMore({
+                                editFlag:false
+                            })} className="catalogueViewMore">View more</button> }    
                         </div>}
                        {!this.state.addProcedureFlag && <div className='text-center'>
                             {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
@@ -545,9 +559,11 @@ class MyCatalogueComponent extends Component {
                             )) : 
                            <div className='text-center'>No Procedures</div>)
                         }
-                       {this.state.addProcedureFlag && <div className='text-center'>
-                            {this.state.procedures_toAdd.length !==0 && <button onClick={this.viewMore} className="catalogueViewMore">View more</button> }    
-                        </div>}
+                       {/* {this.state.addProcedureFlag && <div className='text-center'>
+                            {this.state.procedures_toAdd.length !==0 && <button onClick={()=>this.handleNext_add_procedures({
+                                editFlag:true
+                            })} className="catalogueViewMore">View more</button> }    
+                        </div>} */}
 
                         {this.state.addProcedureFlag  && <div className='text-center'>
                             {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    

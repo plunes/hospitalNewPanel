@@ -1,7 +1,7 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import SelectComponent from "../SelectComponent"
-import React,  { useState } from "react"
+import React,  { useState, useRef } from "react"
 import { Redirect } from "react-router-dom"
 import {
     isValidPhoneNumber,
@@ -17,6 +17,7 @@ import validator from 'validator'
   console.log(props.loadingState,"props in EditProfileForm")
   const [password, setPassword] = useState(false);
   const { addToast } = useToasts()
+  const dob_ref = useRef()
   if(!!props.registerUserRet){
       if(!!props.registerUserRet.success){
         addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true}) 
@@ -121,12 +122,13 @@ import validator from 'validator'
 
       <div className="form-group">
         <input
+          type="date"
+          ref = {dob_ref}
           className="form-control customborder "
           name="dob"
           placeholder="Date of Birth"
           onChange={props.handleChange}
           required
-          onfocus="(this.type='date')"
           value = {props.data.dob}
         />
       </div>
@@ -134,6 +136,9 @@ import validator from 'validator'
 
       <div className="form-group">
         <input
+          autocomplete="off" 
+          readonly 
+          onfocus="this.removeAttribute('readonly');"
           className="form-control customborder"
           name="password"
           placeholder="Password"

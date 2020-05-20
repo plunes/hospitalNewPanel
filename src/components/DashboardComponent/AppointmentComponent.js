@@ -207,14 +207,16 @@ class AppointmentComponent extends Component {
         <ul className="list-unstyled multi-steps">
             <li className="active_ris">Booked</li>
             <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmount}</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
+            <li className="not_active_ris not-paid_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
        </ul>
       </React.Fragment>
-    }else if(item.paidAmmount===item.totalAmount){
+    }else if(item.paidAmount===item.totalAmount){
+        return (
         <ul className="list-unstyled multi-steps">
                 <li className="active_ris">Booked</li>
                 <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
            </ul>
+        )
     }
     }
 
@@ -247,8 +249,7 @@ class AppointmentComponent extends Component {
 
     render() {
         // console.log(this.state,"this.state in AppointmentComponent")
-        console.log(time_flag,"time_flag in render")
-        console.log(this.state.get_bookings_loading,"this.state.getBookings loading in appointment")
+        console.log(this.state,"state in AppointmentComponent")
         if(!!this.state.get_bookings_loading){
            return   <div className='col-md-8'>
            <div className="Appoint AllComponents">

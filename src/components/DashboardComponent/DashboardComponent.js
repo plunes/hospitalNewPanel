@@ -415,15 +415,15 @@ class DashboardComponent extends React.PureComponent {
                                     </div>
                                     <br></br>
                                 </div>
-                                <div className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
+                                <div id="second_scro_is" className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
                                     <div>
                                        <span className='businessrow1col1 realtimewidth'>
                                        <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
                                        </span>
                                         {this.props.act_insight_loader? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
-                                                <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price</span>
-                                                    <button type="button" className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></button>
+                                                <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price </span>
+                                                    <span  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></span>
                                                     <hr></hr>
                                                 </div>
                                             )) :  <div className="no_insights_wrapper_ris">

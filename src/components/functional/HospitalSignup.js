@@ -191,6 +191,9 @@ import {
       </div>
       <div className="form-group">
         <input
+          autocomplete="off" 
+          readonly 
+          onfocus="this.removeAttribute('readonly');"
           className="form-control customborder"
           name="password"
           placeholder="User Password"

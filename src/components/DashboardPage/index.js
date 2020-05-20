@@ -23,6 +23,7 @@ import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
 import io from "socket.io-client"
 import Notify from '../functional/Notify';
+import { isEmpty } from "../../utils/common_utilities"
 
 const initialState = {
   dash: '',
@@ -79,7 +80,6 @@ export class DashboardPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps,"nextProps in willReceiveProps")
         if(!!nextProps.solInsights){
           this.setState({
               solInsights:nextProps.solInsights,
@@ -114,7 +114,7 @@ export class DashboardPage extends React.PureComponent {
         }
 
         if(!!this.state.initial_render){
-          if(!!nextProps.user.userDetail){
+          if(!!!isEmpty(nextProps.user.userDetail)){
             if(!!!nextProps.user.userDetail.geoLocation){
                 this.setState({
                   initial_render:false,
@@ -388,8 +388,6 @@ getNotifications = (data) =>{
 }
 
   render() {
-    console.log(this.props,"this.props in DashboardPage")
-    console.log(this.state,"this.state in DashboardPage")
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
