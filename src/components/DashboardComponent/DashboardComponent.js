@@ -18,6 +18,7 @@ import 'react-rangeslider/lib/index.css'
 import TimerComponent from '../TimerComponent'
 import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
+import InsightComponent from "../InsightComponent"
 
 const customStyles = {
     content: {
@@ -118,6 +119,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async handleRealPrice(select) {
+        console.log(select,"select in handleRealProce")
         this.setState({
             realModalIsOpen :  true,
             realServiceName: select.serviceName,
@@ -325,40 +327,12 @@ class DashboardComponent extends React.PureComponent {
                                                 let seconds_diff = this.getSecondsDifferent(s.createdAt)
                                                 return (
                                                     (
-                                                        <div className='row' key={index}>
-                                                            <div className='col-md-2 text-right realtime'>
-                                                                <span className="realtimeicon1"><img src="/realtimerows.svg" className="realtimeicon" alt=""></img></span>
-                                                            </div>
-                                                            <div className='col-md-7'>
-                                                                <div className="RealtimeUsername">
-                                                                    {s.userName}
-                                                                </div>
-                                                                <div>
-                                                                   <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {s.serviceName}</p>
-                                                                </div>
-                                                                {
-                                                                   seconds_diff >0 ?
-                                                                        <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.handleRealPrice(s)}><u>Kindly update your price</u></button>
-                                                                        : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
-                                                                }
-                                                            </div>
-                                                            <div className='col-md-3'>
-                                                                {
-                                                                   true ?
-                                                                        <div className="text-center">
-                                                                            <React.Fragment>
-                                                                            <TimerComponent 
-                                                                              seconds = {seconds_diff}
-                                                                              key={Math.random()}
-                                                                            />
-                                                                            </React.Fragment>
-                                                                        </div>
-                                                                        : <div>
-                                                                        </div>
-                                                                }
-                                                            </div><hr className="RealtimeHr"></hr>
-                                                        </div>
-                                                    )
+                                                       <InsightComponent 
+                                                       seconds_diff = {seconds_diff}
+                                                       s = {s}
+                                                       handleRealPrice = {this.handleRealPrice}
+                                                       index = {index}
+                                                       />)
                                                 )
                                             }) : <div className="no_insights_wrapper_ris">
                                                 <div className="no_insight_image-wrapper">

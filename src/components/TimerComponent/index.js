@@ -18,6 +18,10 @@ class TimerComponent extends React.Component {
       this.countDown = this.countDown.bind(this);
     }
 
+    componentWillUnmount(){
+      clearInterval(this.timer);
+    }
+
     secondsToTime(secs){
       let hours = Math.floor(secs / (60 * 60));
   
@@ -35,7 +39,7 @@ class TimerComponent extends React.Component {
       return obj;
     }
     componentDidMount() {
-      console.log(this.props,"props in componentDidMount of Timer")
+     
       let timeLeftVar = this.secondsToTime(this.props.seconds);
       // console.log(timeLeftVar,this.props.seconds(),"timeLeftVar in timeer")
       this.setState(
@@ -62,6 +66,7 @@ class TimerComponent extends React.Component {
           }
         })
         clearInterval(this.timer);
+        this.props.toggler()
       }else{
         this.setState({
           time: this.secondsToTime(seconds),
@@ -73,7 +78,7 @@ class TimerComponent extends React.Component {
     }
   
     render() {
-      console.log(this.state,"state in timerComponent")
+     
         if(true){
             return(
                <React.Fragment>
