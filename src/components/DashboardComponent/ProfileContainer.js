@@ -262,7 +262,7 @@ class ProfileContainer extends React.PureComponent {
        <div className="row">
           <div className="col-md-6">
             <div className="card mb-2">
-              <img className="card-img-top card_im"
+              <img className="card-img-top card_im img-loading_rish"
                 src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
               <div className="card-body">
   <p className="card-text">{arr[i].title}</p>
@@ -287,7 +287,7 @@ class ProfileContainer extends React.PureComponent {
       
             <div className="col-md-6">
               <div className="card mb-2">
-                <img className="card-img-top card_im"
+                <img className="card-img-top card_im img-loading_rish"
                    src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
                   <p className="card-text">{arr[i+1].title}</p>
@@ -419,14 +419,14 @@ class ProfileContainer extends React.PureComponent {
           <div className="row achimen_pd">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 achivementlogo text-center">
-                        <a><img onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
+                        <a><img  onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
                         <p className="ach_mnt">Achievement</p>
                 </div>
                 <div class="col-md-4 achivementlogo text-center">        
                           <Link to="/dashboard/my-catalogue"
                           role="button"
                           onClick={()=>this.props.toggleMyCatalog()} >
-                          <img src="/cata.svg" className='catalogueImg'></img>
+                          <img src="/cata.svg" className='catalogueImg '></img>
                           </Link>
                           <br></br>
                         <p className="ach_mnt">Catalogue</p>
@@ -437,7 +437,7 @@ class ProfileContainer extends React.PureComponent {
           <div class="row mainBodyMaxHospitalrow4 ">
            
                     <div class="col-xs-1 col-sm-1 col-lg-1">
-                        <img src={locationImage} className="lction"></img>
+                        <img src={locationImage} className="lction "></img>
                     </div>
                     <div class="col-xs-9 col-sm-9 col-lg-9 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
@@ -497,7 +497,7 @@ class ProfileContainer extends React.PureComponent {
              i = {i}
          />)
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
-       <img  src="/Group 2096.svg"  />
+       <img  src="/Group 2096.svg" className="img-loading_rish"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
        <Link to="/dashboard/add-doctor"
              role="button"

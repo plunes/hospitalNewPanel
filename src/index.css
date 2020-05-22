@@ -534,3 +534,11 @@ input[type="date"]:before {
 input[type="date"]:focus:before {
   content: '' !important;
 }
+
+.img-loading_rish {
+  background: transparent url('images/loading-spinner.gif') center no-repeat;
+}
+
+.img-loading-small_rish {
+  background: transparent url('images/loading-spinner.gif') center no-repeat;
+}

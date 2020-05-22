@@ -264,9 +264,6 @@ class AppointmentComponent extends Component {
         }
         return (
             <React.Fragment>
-               
-
-               
                 <NotifFunc
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
@@ -297,7 +294,7 @@ class AppointmentComponent extends Component {
                                     <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
                                       </div>
                                               <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de" />
+                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
@@ -353,7 +350,7 @@ class AppointmentComponent extends Component {
                                     <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
                                       </div>
                                               <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de" />
+                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
@@ -362,7 +359,7 @@ class AppointmentComponent extends Component {
                                                 </div> 
                                       <div className="col-lg-2 loc_tab">
                                     <div className="round-image">
-                                      <img src={item.userImageUrl} className="rund_im"/>
+                                      <img src={item.userImageUrl} className="rund_im img-loading-small_rish"/>
                                       </div>
                                      </div>
                                 </div>
@@ -419,7 +416,7 @@ class AppointmentComponent extends Component {
                                           </div> 
                                 <div className="col-lg-2 loc_tab">
                               <div className="round-image">
-                                <img src={item.userImageUrl} className="rund_im"/>
+                                <img src={item.userImageUrl} className="rund_im img-loading-small_rish"/>
                                 </div>
                                </div>
                           </div>

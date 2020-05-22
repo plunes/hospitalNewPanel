@@ -35,7 +35,9 @@ import {
             addToast("Enter valid email address",{ appearance: 'error', autoDismiss:true })
         }else if(!validator.isLength(props.data.password, { min: 8, max: 50 })){
             addToast("Password length must between 8 to 50 characters",{ appearance: 'error', autoDismiss:true })
-        } 
+        }else if(props.specialities_selected.length ===0){
+          addToast("Please select a speciality",{ appearance: 'error', autoDismiss:true })
+        }
         else{
             let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))
             let arr = JSON.parse(JSON.stringify(props.data.specialities_selected))

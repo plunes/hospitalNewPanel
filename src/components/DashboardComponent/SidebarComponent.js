@@ -51,10 +51,10 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleAvail()}
             > 
               <span>
-                <img className="sidebaricon" src="/a1.png"></img>
+                <img className="sidebaricon" src="/a1.png" alt=""></img>
               </span>
               My Availability
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </Link> <hr></hr>
             <Link to= "/dashboard/appointments"
                 className="list-group"
@@ -82,10 +82,10 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleSettings()}
             > 
               <span>
-                <img className="sidebaricon" src="/Settings.png"></img>
+                <img className="sidebaricon" src="/Settings.png" alt=""></img>
               </span>
               Settings
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </Link> <hr></hr>
             <Link to= "/dashboard/manage-payment"
                 className="list-group"
@@ -104,10 +104,10 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleHelp()}
             > 
               <span>
-                <img className="sidebaricon" src="/Help.png"></img>
+                <img className="sidebaricon" src="/Help.png" alt=""></img>
               </span>
               Help
-              <img className="arrowdesign" src="arrow.svg"></img>
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </Link> <hr></hr>
             <Link to= "/dashboard/aboutus"
                 className="list-group"
@@ -128,7 +128,6 @@ class SidebarComponent extends Component {
                 <img className="sidebaricon" src="/Logout.png" alt=""></img>
               </span>
               Logout
-            
             </div>
           </div>
         </div>

@@ -123,17 +123,19 @@ class MyCatalogueComponent extends Component {
                       }
                       arr.push(obj)
                     })
-                    this.setState({
-                        specialities:arr,
-                        selected_speciality:arr[0].value,
-                        loading:true
-                    },()=>{
-                          this.props.searchProcedures({
-                                      limit:50,
-                                      searchQuery:'',
-                                      page:1,
-                                      specialityId:this.state.selected_speciality                            })
-                    })
+                    if(arr.length!==0){
+                        this.setState({
+                            specialities:arr,
+                            selected_speciality:arr[0].value,
+                            loading:true
+                        },()=>{
+                              this.props.searchProcedures({
+                                          limit:50,
+                                          searchQuery:'',
+                                          page:1,
+                                          specialityId:this.state.selected_speciality                            })
+                        })
+                    }  
                 }else{
                     this.setState({
                         loading:false

@@ -78,7 +78,7 @@ import LoaderComponent from "./LoaderComponent"
           <p className="HospitalCover">
           <div style={{position:"relative"}}>
          {props.loading && <LoaderComponent />}
-            <img className="HospitalCoverImg mas_hos" 
+            <img className="HospitalCoverImg mas_hos img-loading_rish" 
             src={(!!props.user?props.user.coverImageUrl:'/maxhos.png')} 
             alt=""></img>
              </div>

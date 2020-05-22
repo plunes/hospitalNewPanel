@@ -41,6 +41,8 @@ import validator from 'validator'
                 addToast("Password length must between 8 to 50 characters",{ appearance: 'error', autoDismiss:true })
             }else if(!validator.isNumeric(props.data.experience)){
                 addToast("Experience must be a number",{ appearance: 'error', autoDismiss:true })
+            }else if(props.specialities_selected.length ===0){
+              addToast("Please select a speciality",{ appearance: 'error', autoDismiss:true })
             }
             else{
               let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))

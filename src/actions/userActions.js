@@ -1513,11 +1513,11 @@ export const getProfileDetails = () => async dispatch => {
 export const submitResetDetails = (uData) => async dispatch => {
   console.log(uData,"Data in submitResetDetails Action")
   let obj = {
-    "mobileNumber": uData.phone,
-    "password": uData.password
+    "newPassword": uData.newPassword,
+    "oldPassword": uData.oldPassword
   }
   let token = localStorage.getItem('token');
-  return await axios.put(baseUrl + '/user/update_password', obj, { 'headers': { 'Authorization': token } })
+  return await axios.patch(baseUrl + '/user/changePassword', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.data.success === true) {
         dispatch({
@@ -1535,6 +1535,19 @@ export const submitResetDetails = (uData) => async dispatch => {
             message:'Something went wrong try again later..'
            }
         })
+      }
+    }).catch(e=>{
+      console.log(e.response,"e in api")
+      if(!!e.response.data){
+        if(!!e.response.data.error){
+          dispatch({
+            type:RESET_PASS_RET,
+             payload:{
+              success:false,
+              message:e.response.data.error==="Incorrect password"?"Old Password is incorrect":e.response.data.error
+             }
+          })
+        }
       }
     })
 }
