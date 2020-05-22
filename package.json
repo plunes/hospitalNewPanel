@@ -15,6 +15,7 @@
     "history": "^4.10.1",
     "mdbreact": "^4.24.0",
     "multiselect-dropdown-react": "^1.0.5",
+    "node-sass": "^4.14.1",
     "pretty-ms": "^7.0.0",
     "profile-picture": "git+https://github.com/dsalvagni/react-profile-picture.git",
     "rc-slider": "^9.2.4",
@@ -50,7 +51,8 @@
     "validator": "^13.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "watch:sass": "node-sass appScss.scss newStyle.css -w",
+    "start": "react-scripts start watch:sass",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
