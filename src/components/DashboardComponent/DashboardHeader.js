@@ -61,7 +61,7 @@ class DashboardHeader extends Component {
                   </li>
                   <li className="nav2 nav-item">
                     <div>
-                      <a className=" nav-link HeaderLink" rel= "noopener" href={`https://www.plunes.com/plockrapp/${localStorage.getItem('token')}`}>
+                      <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
                         <img className="sol-img" src="/plockerlogo.svg" alt='Not available'></img><span className="top-img">Plockr</span>
                       </a>
                     </div>

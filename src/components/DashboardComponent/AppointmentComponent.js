@@ -207,14 +207,16 @@ class AppointmentComponent extends Component {
         <ul className="list-unstyled multi-steps">
             <li className="active_ris">Booked</li>
             <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmount}</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
+            <li className="not_active_ris not-paid_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
        </ul>
       </React.Fragment>
-    }else if(item.paidAmmount===item.totalAmount){
+    }else if(item.paidAmount===item.totalAmount){
+        return (
         <ul className="list-unstyled multi-steps">
                 <li className="active_ris">Booked</li>
                 <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
            </ul>
+        )
     }
     }
 
@@ -247,8 +249,7 @@ class AppointmentComponent extends Component {
 
     render() {
         // console.log(this.state,"this.state in AppointmentComponent")
-        console.log(time_flag,"time_flag in render")
-        console.log(this.state.get_bookings_loading,"this.state.getBookings loading in appointment")
+        console.log(this.state,"state in AppointmentComponent")
         if(!!this.state.get_bookings_loading){
            return   <div className='col-md-8'>
            <div className="Appoint AllComponents">
@@ -263,9 +264,6 @@ class AppointmentComponent extends Component {
         }
         return (
             <React.Fragment>
-               
-
-               
                 <NotifFunc
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
@@ -296,7 +294,7 @@ class AppointmentComponent extends Component {
                                     <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
                                       </div>
                                               <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de" />
+                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
@@ -352,7 +350,7 @@ class AppointmentComponent extends Component {
                                     <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
                                       </div>
                                               <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de" />
+                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
                                                   <h4>{item.userName}</h4>
@@ -361,7 +359,7 @@ class AppointmentComponent extends Component {
                                                 </div> 
                                       <div className="col-lg-2 loc_tab">
                                     <div className="round-image">
-                                      <img src={item.userImageUrl} className="rund_im"/>
+                                      <img src={item.userImageUrl} className="rund_im img-loading-small_rish"/>
                                       </div>
                                      </div>
                                 </div>
@@ -418,7 +416,7 @@ class AppointmentComponent extends Component {
                                           </div> 
                                 <div className="col-lg-2 loc_tab">
                               <div className="round-image">
-                                <img src={item.userImageUrl} className="rund_im"/>
+                                <img src={item.userImageUrl} className="rund_im img-loading-small_rish"/>
                                 </div>
                                </div>
                           </div>

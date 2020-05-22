@@ -14,7 +14,8 @@ class ChangePassword extends React.PureComponent {
         this.state = {
             valid:true,
             rePassword:'',
-            newPassword:''
+            newPassword:'',
+            oldPassword:''
         }
     }
     handleChange = (e)=>{
@@ -75,6 +76,7 @@ class ChangePassword extends React.PureComponent {
                                 errorText = {this.state.errorText}
                                 newPassword = {this.state.newPassword}
                                 rePassword = {this.state.rePassword}
+                                oldPassword = {this.state.oldPassword}
                                 successText = {this.state.successText}
                                 clearNotif = {this.clearNotif}
                                />

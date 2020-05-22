@@ -69,6 +69,9 @@ import { messaging } from 'firebase';
     {props.loading && <LoaderComponent />}
       <div className="form-group sign_in_form_group">
         <input
+          autocomplete="off" 
+          readonly 
+          onfocus="this.removeAttribute('readonly');"
           className="form-control customborder"
           name="email"
           placeholder={`Email Id or Phonenumber`}
@@ -79,6 +82,9 @@ import { messaging } from 'firebase';
       </div>
       <div className="form-group sign_in_form_group">
       <input
+          autocomplete="off" 
+          readonly 
+          onfocus="this.removeAttribute('readonly');"
           className="form-control customborder"
           name="password"
           placeholder="Password"

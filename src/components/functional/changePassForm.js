@@ -1,6 +1,7 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
+import { logout } from '../../actions/userActions';
 
  const ChangePassForm= (props) => {
   const { addToast } = useToasts()
@@ -9,21 +10,27 @@ import { Link } from "react-router-dom"
     
       if(!!props.resetPassRet.success){
         addToast(props.resetPassRet.message, {appearance: 'success', autoDismiss:true}) 
+        logout()
+        RedirectTo()
       }else{
         addToast(props.resetPassRet.message, {appearance: 'error', autoDismiss:true})
       }
       props.clearResetRet()
   }
+  const RedirectTo = () =>{
+    return <Redirect to="/login" 
+    />
+  }
 
    const submitdetails = () => {
-        if(props.newPassword === '' ||props.rePassword==='' ){
+        if(props.newPassword === '' ||props.rePassword==='' || props.oldPassword==='' ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true  })
         }else if(props.newPassword !== props.rePassword){
           addToast("Passwords do not match",{ appearance: 'error', autoDismiss:true  })
         }else{
             props.submitResetDetails({
-                 password:props.newPassword,
-                 phone:props.user.mobileNumber
+                 newPassword:props.newPassword,
+                 oldPassword:props.oldPassword
             })
         }
     }
@@ -40,6 +47,13 @@ import { Link } from "react-router-dom"
 
   return (
     <div className="managePay">
+    <input 
+    type="text"
+    className="form-control editbankdetailfield input-field-common"
+    placeholder="Old Password" 
+    name="oldPassword" 
+    onChange={props.handleChange} 
+    value = {props.oldPassword}/>  
     <input 
     type="text"
     className="form-control editbankdetailfield input-field-common"

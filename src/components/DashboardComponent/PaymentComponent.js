@@ -122,7 +122,7 @@ class PaymentComponent extends Component {
                                 <div key={index} className='row'>
                                      <div className='col-md-2'>
                                          <a href="#">
-                                          <img src="/doctorpay.png" className="rorpy_im" /></a>
+                                          <img src={p.userImageUrl} className="rorpy_im img-loading-small_rish" /></a>
                                         </div>
                                     <div className='col-md-4 righside_pad'>
                                         <div className='PaymentUN'>{p.userName}</div>
