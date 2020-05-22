@@ -7,7 +7,7 @@ import VarianceDropdown from "./varianceDropdown"
   const { addToast } = useToasts()
   const {data} = props
   const [ select , setSelect ] = useState(false)
-
+console.log(props,"props in Procedure")
   if(!!props.ret){
     if(props.data.serviceId === props.selected_procedures[0].serviceId){
       if(!!props.ret.success){
@@ -87,6 +87,7 @@ const getVariance = () =>{
         <div className="price_se">
           < VarianceDropdown 
             editFlag = {props.editFlag}
+            disabled = {props.disabled}
             handleChange={(e)=>props.handleVarianceChange(e,props.data.serviceId)}
             value = {isSelected()?getVariance():props.data.variance}
           />

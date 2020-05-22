@@ -1,13 +1,11 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
-import SelectComponent from "../SelectComponent"
 import { Link } from "react-router-dom"
 import React, { useState } from "react"
 import {
     isValidPhoneNumber,
   } from 'react-phone-number-input';
   import validator from 'validator'
-import { messaging } from 'firebase';
 
  const Login= (props) => {
    console.log(props,"props in HospitalSignup")

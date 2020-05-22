@@ -269,7 +269,7 @@ class Select extends Component {
             value:value
       }
         }
-          this.props.onChange(e)
+          this.props.handleChange(e)
         return {
           values: [ value ],
           isOpen: false
@@ -319,7 +319,7 @@ class Select extends Component {
     const { options } = this.props
     const { isOpen } = this.state;
 
-    if (!isOpen) {
+    if (!!this.props.disabled?true:!isOpen) {
       return null
     }
 
@@ -377,7 +377,8 @@ class Select extends Component {
       {
           // <label className="label">{ label }</label>
       }
-        <div className="selection" onClick={ this.onClick }>
+        <div 
+        className={this.props.variant==="no_border"?"no_border_select":"selection"} onClick={ this.onClick }>
           { this.renderValues() }
           <span className="select-arrow">
             { isOpen ? <ChevronUp /> : <ChevronDown /> }

@@ -1,13 +1,12 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
-import SelectComponent from "../SelectComponent"
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 import {
     isValidPhoneNumber,
   } from 'react-phone-number-input';
   import validator from 'validator'
-  import Select from "../Select"
+import Select from "../Select";
 
  const HospitalSignup= (props) => {
    console.log(props,"props in HospitalSignup")
@@ -74,28 +73,6 @@ import {
   return (
     <div style={{position:'relative'}}>
     {props.loading && <LoaderComponent />}
-    <text className="h2_rish">Hello Class</text>
-    <Select
-       id="sdasd"
-                   // label="React Select"
-      placeholder = "asdasdsadsad"
-      name="sad"
-      onChange={(e) =>console.log(e)}
-      value={"asd"}
-      options={[
-        { name: "String", value: "string" },
-        { name: "Boolean", value: "bool" },
-        { name: "Integer", value: "uint" },
-        { name: "Date", value: "date" },
-        { name: "List-Type", value: "enum" },
-        { name: "Compliance Documents / Certificates / Images", value: "image" },
-        { name : 'Geo' , value : 'geo' }
-        // { name: "INTEGER", value: "image" }
-      ]}
-      disabled ={false}
-      className="asdsad"
-                 />
-
       <div className="form-group">
         <input
           className="form-control customborder"
@@ -156,7 +133,7 @@ import {
           </div>
           {props.addFlag?
           <React.Fragment>
-        <SelectComponent
+        <Select
            options = {props.specialities}
            handleChange = {props.handleSpecialitySelect}
            value = {props.specialities_selected[props.specialities_selected.length -1]}

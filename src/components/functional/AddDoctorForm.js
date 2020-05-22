@@ -1,6 +1,6 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
-import SelectComponent from "../SelectComponent"
+import Select from "../Select"
 import React, { useRef, useState, useEffect } from "react"
 
  const AddDoctorForm= (props) => {
@@ -130,7 +130,7 @@ import React, { useRef, useState, useEffect } from "react"
          
           <div className="row form-group label-floating">
           <div class="col-lg-6 col-12">
-                   <SelectComponent
+                   <Select
                     options = {props.specialities}
                     handleChange = {props.handleSelectChange}
                     value = {props.specialitie_chosen}
@@ -141,7 +141,7 @@ import React, { useRef, useState, useEffect } from "react"
                    />
            </div>
            <div class="col-lg-6 col-12">
-                   <SelectComponent
+                   <Select
                      options = {props.services}
                      handleChange = {props.handleSelectChange}
                      value = {props.services_chosen}
