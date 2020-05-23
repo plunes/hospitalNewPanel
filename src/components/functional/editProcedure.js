@@ -1,7 +1,6 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import React from "react"
 import "./editProcedure.css"
-import SelectComponent from  "../SelectComponent"
 
  const EditProcedure= (props) => {
   const { addToast } = useToasts()

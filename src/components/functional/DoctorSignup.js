@@ -1,12 +1,12 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
-import SelectComponent from "../SelectComponent"
 import React,  { useState, useRef } from "react"
 import { Redirect } from "react-router-dom"
 import {
     isValidPhoneNumber,
   } from 'react-phone-number-input';
 import validator from 'validator'
+import Select from "../Select";
  const DoctorSignup= (props) => {
 
   const redirect = () =>{
@@ -193,7 +193,7 @@ import validator from 'validator'
           </div>
           {props.addFlag?
           <React.Fragment>
-        <SelectComponent
+        <Select
            options = {props.specialities}
            handleChange = {props.handleSpecialitySelect}
            value = {props.specialities_selected[props.specialities_selected.length -1]}

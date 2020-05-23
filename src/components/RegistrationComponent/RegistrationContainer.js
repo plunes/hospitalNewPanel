@@ -5,9 +5,9 @@ import '../RegistrationComponent/RegistrationComponent.css';
 // import DoctorRegistrationForm from "./DoctorRegistrationForm";
 import HospitalRegistrationForm from './HospitalRegistrationForm';
 import  "./RegistrationComponent.css";
+import Select from "../Select"
 
 import { registerUser, registerUserClr } from "../../actions/userActions";
-import SelectComponent from '../SelectComponent'
 import HospitalSignup from "../functional/HospitalSignup"
 import DoctorSignup from '../functional/DoctorSignup'
 import AuthHeader from '../functional/AuthHeader'
@@ -122,6 +122,7 @@ class RegistrationContainer extends  React.Component {
     }
 
     selectType = (e) =>{
+        console.log(e,"e.target.name","e.target.value")
         this.setState({
             [e.target.name]:e.target.value
         })
@@ -255,7 +256,7 @@ class RegistrationContainer extends  React.Component {
                             <div>
                                 <h4 className="signUpText">Sign up</h4>
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                             <SelectComponent
                                 options = {[{
                                     value:'Doctors',
@@ -277,7 +278,39 @@ class RegistrationContainer extends  React.Component {
                                 name = "type"
                                 label = ""
                    />
-                   </div>
+                   </div> */}
+                            <div className="form-group">
+                            <Select
+                                id="sdasd"
+                                handleChange = {this.selectType}
+                                value = {this.state.type}
+                                multiple ={false}
+                                name = "type"
+                                label = ""
+                                // label="React Select"
+                                placeholder = "Select user type"
+                                variant="no_border"
+                                value={this.state.type}
+                                options = {[{
+                                    value:'Doctors',
+                                    name:'Doctors'
+                                },
+                                {
+                                    value:'Hospital',
+                                    name:'Hospital'
+                                    
+                                },
+                                {
+                                    value:'Lab',
+                                    name:'Lab'
+                                },
+                            ]}
+                             // disabled ={true}
+                            loading = {true}
+                 />
+                            </div>
+
+
                             {
                                 ((this.state.type==="Hospital") || (this.state.type==="Lab")) ?
                                 <HospitalSignup 

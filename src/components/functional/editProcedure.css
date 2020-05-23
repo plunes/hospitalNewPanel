@@ -75,7 +75,7 @@
     .price_se {
         border: none;
         color: #B2B2B2;
-        overflow: hidden;
+        /* overflow: hidden; */
         position: relative;
         text-align: center;
         border-radius: 3px;

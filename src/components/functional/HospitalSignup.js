@@ -1,12 +1,12 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
-import SelectComponent from "../SelectComponent"
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 import {
     isValidPhoneNumber,
   } from 'react-phone-number-input';
   import validator from 'validator'
+import Select from "../Select";
 
  const HospitalSignup= (props) => {
    console.log(props,"props in HospitalSignup")
@@ -73,7 +73,6 @@ import {
   return (
     <div style={{position:'relative'}}>
     {props.loading && <LoaderComponent />}
-
       <div className="form-group">
         <input
           className="form-control customborder"
@@ -134,7 +133,7 @@ import {
           </div>
           {props.addFlag?
           <React.Fragment>
-        <SelectComponent
+        <Select
            options = {props.specialities}
            handleChange = {props.handleSpecialitySelect}
            value = {props.specialities_selected[props.specialities_selected.length -1]}

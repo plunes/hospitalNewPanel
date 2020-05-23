@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
-import SelectComponent from "../SelectComponent"
+// import SelectComponent from "../SelectComponent"
 //import "./AvailabilityComponent.css";
 import "./MyCatalogueComponent.css";
 import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
@@ -31,6 +31,7 @@ import EditProcedure from "../functional/editProcedure"
 import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
 import MeasureTime from "../MeasureTime"
+import Select from "../Select";
 
 
  const isEmpty = function(obj) {
@@ -177,6 +178,7 @@ class MyCatalogueComponent extends Component {
     }
 
     handleVarianceChange = (e,serviceId) =>{
+        console.log(e,"weweeewerwerwerwerwerwerwer")
         let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
         console.log(arr,"arr in handleSelectedProcedureChage")
         let obj = {
@@ -186,7 +188,7 @@ class MyCatalogueComponent extends Component {
             if(element.serviceId===serviceId){
               obj = {
                   ...element,
-                  variance:e.target.value
+                  variance:parseInt(e.target.value, 10)
               }
               id = index
               return false
@@ -449,7 +451,15 @@ class MyCatalogueComponent extends Component {
                         <div className="row gastroent_mar">
                        {
                            !this.state.addProcedureFlag &&  <div className="text-center col-xl-6">
-                           <SelectComponent
+                               <Select
+                                 options = {this.state.specialities}
+                                 handleChange = {this.handleSpecialitySelect}
+                                 placeholder= "Speciality"
+                                 value = {this.state.selected_speciality}
+                                 name = "speciality_chosen"
+                                 label = "Speciality"
+                               />
+                           {/* <SelectComponent
                            options = {this.state.specialities}
                            handleChange = {this.handleSpecialitySelect}
                            placeholder= "Speciality"
@@ -478,7 +488,7 @@ class MyCatalogueComponent extends Component {
                        }
                            name = "speciality_chosen"
                            label = "Speciality"
-                  />
+                  /> */}
                        </div>
 
                        }   
@@ -522,6 +532,7 @@ class MyCatalogueComponent extends Component {
                             data = {c}
                             editFlag = {this.state.editFlag}
                             handleEditInclusion = {this.handleEditInclusion}
+                            disabled={!this.state.editFlag}
                             onEdit = {this.onEdit}
                             selectedProcedure = {this.state.selectedProcedure}
                             selected_procedures = {this.state.selected_procedures}
@@ -550,6 +561,7 @@ class MyCatalogueComponent extends Component {
                             editFlag = {this.state.editFlag}
                             handleEditInclusion = {this.handleEditInclusion}
                             onEdit = {this.onEdit}
+                            disabled={(!!((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))}
                             selectedProcedure = {this.state.selectedProcedure}
                             handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
                             handleVarianceChange = {this.handleVarianceChange}
@@ -557,6 +569,7 @@ class MyCatalogueComponent extends Component {
                             clr = {this.props.addServicesClr}
                             loadingOff = {()=>this.addProcedureLoadingOff()}
                             selected_procedures = {this.state.selected_procedures}
+                            disabled={false}
                             />
                             )) : 
                            <div className='text-center'>No Procedures</div>)
