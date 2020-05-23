@@ -464,7 +464,7 @@ class AppointmentComponent extends Component {
                             style={customStyles}
                             ariaHideApp={false}
                             contentLabel="Example Modal" className='redeemModal modal_pdd'>
-                            <div className='text-right'><button type='button' onClick={this.closeConfirmModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
+                            <div className='text-right'><button type='button' onClick={this.closeConfirmModal} className='redeemCross'><img src="/cross.jpg" alt="" style={{ width: "65%" }}></img></button></div>
                         <h4 className="update_price" ref={subtitle => this.subtitle = subtitle}>{this.state.status_change_confirm?<b style={{margin:'.5rem'}}>Appointment has been <br></br>successfully confirmed</b>:
                             <b>Confirm Appointment for <br></br>Patient</b>
                         }</h4>
@@ -485,7 +485,7 @@ class AppointmentComponent extends Component {
                             style={customStyles}
                             ariaHideApp={false}
                             contentLabel="Example Modal" className='redeemModal modal_pdd'>
-                            <div className='text-right'><button type='button' onClick={this.closeCancelModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
+                            <div className='text-right'><button type='button' onClick={this.closeCancelModal} className='redeemCross'><img src="/cross.jpg" alt="" style={{ width: "65%" }}></img></button></div>
                         <h4 className="update_price" ref={subtitle => this.subtitle = subtitle}>{this.state.status_change_confirm?<b style={{margin:'.5rem'}}>Appointment has been <br></br>successfully Cancelled</b>:
                             <b>Cancel Appointment for <br></br>Patient</b>
                         }</h4>
@@ -506,7 +506,7 @@ class AppointmentComponent extends Component {
           style={customStyles}
         //   contentLabel="Example Modal"
        >
-        <div className="text-right"><button onClick={this.closeModal} className="cross"><img src="/cross.png" alt="" className="covidCross"></img></button></div>
+        <div className="text-right"><button onClick={this.closeModal} className="cross"><img src="/cross.jpg" alt="" className="covidCross"></img></button></div>
         <div className="text-center"><h4><b>Tips for more Conversions</b></h4></div><br></br>
         <div className='row tipsrow'>
               <div className='col-md-2 vertical_center_ris'><img src="/smallIdea.svg" alt=""></img></div> 

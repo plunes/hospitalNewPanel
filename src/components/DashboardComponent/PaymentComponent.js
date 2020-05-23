@@ -151,7 +151,7 @@ class PaymentComponent extends Component {
                         style={customStyles}
                         ariaHideApp={false}
                         contentLabel="Example Modal" className='redeemModal'>
-                        <div className='text-right'><button type='button' onClick = {this.handleModal} className='redeemCross rud_bu'><img src= "/cross.png" style={{width:"65%"}} alt=""></img></button></div>
+                        <div className='text-right'><button type='button' onClick = {this.handleModal} className='redeemCross rud_bu'><img src= "/cross.jpg" style={{width:"65%"}} alt=""></img></button></div>
                         <div className='text-center'>
                              <img src= "/smile.svg" alt = 'Not available' style={{width:"18%"}}></img>
                         </div>

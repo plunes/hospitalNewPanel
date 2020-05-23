@@ -79,7 +79,7 @@ import LoaderComponent from "./LoaderComponent"
           <div style={{position:"relative"}}>
          {props.loading && <LoaderComponent />}
             <img className="HospitalCoverImg mas_hos img-loading_rish" 
-            src={(!!props.user?props.user.coverImageUrl:'/maxhos.png')} 
+            src={(!!props.user?props.user.coverImageUrl:'/maxhos.jpg')} 
             alt=""></img>
              </div>
             </p>
@@ -92,7 +92,7 @@ import LoaderComponent from "./LoaderComponent"
     onClick={(e)=>handleImageClick(e)}
     className="blackdot"
     style={{cursor:'pointer'}}
-    src={(!!props.user?props.user.imageUrl:'/profile.png')} 
+    src={(!!props.user?props.user.imageUrl:'/profile.jpg')} 
     alt=""> 
     </img> */}
 </React.Fragment>

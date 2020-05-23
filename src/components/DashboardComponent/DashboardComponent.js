@@ -418,7 +418,7 @@ class DashboardComponent extends React.PureComponent {
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal modal_pdd'>
-                                        <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.png" alt="" style={{ width: "65%" }}></img></button></div>
+                                        <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.jpg" alt="" style={{ width: "65%" }}></img></button></div>
                                         <h2 className="update_price" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div clasname="dynmic_pra" style={ { color:'#333333',fontSize:'13px',textAlign: 'center', marginTop:'20px'} }>{this.state.serviceName}</div>
                                         <div className="catlou_sli">     
@@ -460,7 +460,7 @@ class DashboardComponent extends React.PureComponent {
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal secon_modal'>
-                                        <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.png" style={{ width: "65%" }} alt=""></img></button></div>
+                                        <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.jpg" style={{ width: "65%" }} alt=""></img></button></div>
                                         <h2 className="yout_ctl" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div><p className="serv_ces">{this.state.realServiceName}</p></div>
                                         <div>   

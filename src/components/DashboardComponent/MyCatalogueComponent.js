@@ -493,7 +493,7 @@ class MyCatalogueComponent extends Component {
 
                        }   
                       <div className="text-center col-xl-6 serc_mar_pad">
-                          <img src="/search.png" className="serc_icn"/>
+                          <img src="/search.jpg" className="serc_icn"/>
                             <SearchComponent 
                                 searchProcedures = {this.searchProceduresFun}
                                 searchProceduresClr = {this.props.searchProceduresClr}

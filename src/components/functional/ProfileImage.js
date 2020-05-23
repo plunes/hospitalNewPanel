@@ -93,7 +93,7 @@ import LoaderComponent from "./LoaderComponent"
     onClick={(e)=>handleImageClick(e)}
     className="blackdot img-loading_rish"
     style={{cursor:'pointer'}}
-    src={(!!props.user?props.user.imageUrl:'/profile.png')} 
+    src={(!!props.user?props.user.imageUrl:'/profile.jpg')} 
     alt=""> 
     </img>
     </div>

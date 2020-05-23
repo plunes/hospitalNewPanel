@@ -40,7 +40,7 @@ class SidebarComponent extends Component {
            onClick={()=>this.props.toggleProfile()}
             > 
                <span>
-                <img className="sidebaricon pro_tw" src="/profile.png" alt=""></img>
+                <img className="sidebaricon pro_tw" src="/profile.jpg" alt=""></img>
               </span>
               Profile
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -51,7 +51,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleAvail()}
             > 
               <span>
-                <img className="sidebaricon" src="/a1.png" alt=""></img>
+                <img className="sidebaricon" src="/a1.jpg" alt=""></img>
               </span>
               My Availability
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -62,7 +62,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleAppoint()}
             > 
               <span>
-                <img className="sidebaricon" src="/a2.png" alt=""></img>
+                <img className="sidebaricon" src="/a2.jpg" alt=""></img>
               </span>
               Appointments
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -82,7 +82,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleSettings()}
             > 
               <span>
-                <img className="sidebaricon" src="/Settings.png" alt=""></img>
+                <img className="sidebaricon" src="/Settings.jpg" alt=""></img>
               </span>
               Settings
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -93,7 +93,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleManage()}
             > 
               <span>
-                <img className="sidebaricon" src="/m1.png" alt=""></img>
+                <img className="sidebaricon" src="/m1.jpg" alt=""></img>
               </span>
               Manage Payment
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -104,7 +104,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleHelp()}
             > 
               <span>
-                <img className="sidebaricon" src="/Help.png" alt=""></img>
+                <img className="sidebaricon" src="/Help.jpg" alt=""></img>
               </span>
               Help
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -115,7 +115,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleAbout()}
             > 
               <span>
-                <img className="sidebaricon" src="/about-us.png" alt=""></img>
+                <img className="sidebaricon" src="/about-us.jpg" alt=""></img>
               </span>
               About Us
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
@@ -125,7 +125,7 @@ class SidebarComponent extends Component {
               onClick={this.handlelogoutClick}
             >
               <span>
-                <img className="sidebaricon" src="/Logout.png" alt=""></img>
+                <img className="sidebaricon" src="/Logout.jpg" alt=""></img>
               </span>
               Logout
             </div>

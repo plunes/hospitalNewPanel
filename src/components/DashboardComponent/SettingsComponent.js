@@ -69,12 +69,12 @@ import "./AvailabilityComponent.css";
                                    <div className="settingpageBody">
                                         <div className="settingtopic"><p >Settings</p></div>
                                         <div className="row settingfont settingtype">
-                                             <div className="col-xs-3 col-sm-1 col settingtypecol1"><img src="/Account-Settings.png" alt=''className=""></img></div>
+                                             <div className="col-xs-3 col-sm-1 col settingtypecol1"><img src="/Account-Settings.jpg" alt=''className=""></img></div>
                                              <div className="col-xs-9 col-sm-11 col acnt">Account Settings</div>
                                         </div>
                                         <div className="accset settingfont">
                                     {/* <div className="row accsetrow">
-                                                  <div className="col-sm-1 col settingcol1"><img src="/SettingNotify.png" alt=''className="privc_icone"></img></div>
+                                                  <div className="col-sm-1 col settingcol1"><img src="/SettingNotify.jpg" alt=''className="privc_icone"></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting">Notifications</p></div>
                                                   <div className="col-sm-2 col toggleswitch">
                                                        <label className="switch">
@@ -84,7 +84,7 @@ import "./AvailabilityComponent.css";
                                                   </div>
                                              </div><hr></hr> */}
                                              <div className="row accsetrow" >
-                                                  <div className="col-sm-1 col settingcol1"><img src="/Edit-Profile.png" alt='' className="privc_icone"></img></div>
+                                                  <div className="col-sm-1 col settingcol1"><img src="/Edit-Profile.jpg" alt='' className="privc_icone"></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting cursor-pointer">
                                                        <Link to="/dashboard/editProfile"
                                                        role = "button"
@@ -97,12 +97,12 @@ import "./AvailabilityComponent.css";
                                              </div>
                                         </div>
                                         <div className="row settingfont settingtype">
-                                             <div className="col-sm-1 col settingtypecol1"><img src="/Profile-Settings.png" alt="" className=""></img></div>
+                                             <div className="col-sm-1 col settingtypecol1"><img src="/Profile-Settings.jpg" alt="" className=""></img></div>
                                              <div className="col-sm-11 col acnt">Privacy Setting</div>
                                         </div>
                                         <div className="accset settingfont">
                                              <div className="row accsetrow">
-                                                  <div className="col-sm-1 col settingcol1"><img src="/Change-Password.png" alt="" className="privc_icone"></img></div>
+                                                  <div className="col-sm-1 col settingcol1"><img src="/Change-Password.jpg" alt="" className="privc_icone"></img></div>
                                                   <div className="col-sm-9 col settingcol2"><p className="typeofsetting">
                                                   <Link to="/dashboard/change-password"
                                                        role = "button"
@@ -114,7 +114,7 @@ import "./AvailabilityComponent.css";
                                                   <div className="col-sm-2 col settingcol3"><img className="/settingcontrolarrow" src="arrow.svg" alt=""></img></div>
                                              </div><hr></hr>
                                              <div className="row accsetrow">
-                                                  <div className="col-sm-1 col settingcol1"><img src="/Logout.png" alt=""className="privc_icone"></img></div>
+                                                  <div className="col-sm-1 col settingcol1"><img src="/Logout.jpg" alt=""className="privc_icone"></img></div>
                                                   <LogoutOther
                                                      logoutOtherDevices = {this.props.logoutOtherDevices}
                                                      logoutDevicesRet = {this.props.logoutDevicesRet}

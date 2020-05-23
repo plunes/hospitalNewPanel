@@ -494,10 +494,10 @@ let obj =   {
           <form action="#" method="get">
               <label className="sech_b">Search</label>
             <input list="browsers" name="browser" placeholder="Dr. Surbhi" className="cus_inp col-lg-12"/>
-            <img src="/search.png" className="pst_srch"/>
+            <img src="/search.jpg" className="pst_srch"/>
              <div className="box_pnl">
               <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_1.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pexel_1.jpg"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
                    <h6>Dr. Sudha Sethi</h6>
                     <p>Anaesthesia, Fortis Hospital, Mohali</p>
@@ -505,7 +505,7 @@ let obj =   {
              </div>
              
              <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_2.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pexel_2.jpg"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
                    <h6>Dr. Minal Sharma</h6>
                     <p>Neurology, Fortis Hospital, Jaipur</p>
@@ -513,7 +513,7 @@ let obj =   {
              </div>
                 
                  <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_3.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pexel_3.jpg"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
                    <h6>Dr. Anita Gupta</h6>
                     <p>Gynecology, Fortis Hospital, Jaipur</p>
@@ -521,7 +521,7 @@ let obj =   {
              </div>
                 
                   <div className="row">
-                  <div className="col-lg-2"><img src="/pixel_4.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pixel_4.jpg"className="pixel" /></div>
                   <div className="col-lg-6 sudha_a">
                    <h6>Dr. Anita Joshi</h6>
                     <p>Gynecology, Fortis Hospital, Jaipur</p>
@@ -545,7 +545,7 @@ let obj =   {
 
                <div className="manualy_pnl">
               <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_1.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pexel_1.jpg"className="pixel" /></div>
                   <div className="col-lg-4 sudha_a">
                    <h6>Dr. Sudha Sethi</h6>
                     <p>MBBS, DGO HOD, Gynecology 10yrs experience Fortis Hospital, Ludhiana</p>
@@ -558,7 +558,7 @@ let obj =   {
              </div>
              
              <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_2.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pexel_2.jpg"className="pixel" /></div>
                   <div className="col-lg-4 sudha_a">
                    <h6>Dr. Minal Sharma</h6>
                     <p>BDS, MDS Surgeon, Dentistry 17yrs experience Fortis Hospital, Jaipur</p>
@@ -571,7 +571,7 @@ let obj =   {
              </div>
                 
                  <div className="row">
-                  <div className="col-lg-2"><img src="/pexel_3.png"className="pixel" /></div>
+                  <div className="col-lg-2"><img src="/pexel_3.jpg"className="pixel" /></div>
                   <div className="col-lg-4 sudha_a">
                    <h6>Dr. Anita Gupta</h6>
                     <p>BPTh, BPT Therapist, Physiotherapy 8yrs experience Fortis Hospital,Gurgaon</p>
