@@ -16,7 +16,7 @@ import AddAchievement from '../functional/AddAchievement';
 import MapComponent from "../MapComponent"
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom"
-import locationImage from "../../images/Location.png"
+import locationImage from "../../images/Location.jpg"
 import Notify from '../functional/Notify';
 import LoaderComponent from "../functional/LoaderComponent"
 // import OwlCarousel from 'react-owl-carousel2';
@@ -419,7 +419,7 @@ class ProfileContainer extends React.PureComponent {
           <div className="row achimen_pd">
                 <div class="col-md-2"></div>
                 <div class="col-md-4 achivementlogo text-center">
-                        <a><img  onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.png"></img></a>
+                        <a><img  onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.jpg"></img></a>
                         <p className="ach_mnt">Achievement</p>
                 </div>
                 <div class="col-md-4 achivementlogo text-center">        

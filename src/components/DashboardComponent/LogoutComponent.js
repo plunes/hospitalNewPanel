@@ -14,7 +14,7 @@ export default class LogoutComponent extends Component {
                     <SidebarComponent />
                 </div>
                 <div className='col-md-8'>
-                    {/* <img src='/profile.png' alt='Profile'/> */}
+                    {/* <img src='/profile.jpg' alt='Profile'/> */}
                     LogoutComponent
                 </div>
             </div>

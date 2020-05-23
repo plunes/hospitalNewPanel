@@ -38,7 +38,7 @@ class DashboardHeader extends Component {
         return <div className="Header">
           <div>
             <nav className="navbar navbar-expand-lg navbar-light">
-              <a className="navbar-brand" href=""><img className="logo" src="/logo.png"  alt='Not available'/></a>
+              <a className="navbar-brand" href=""><img className="logo" src="/logo.jpg"  alt='Not available'/></a>
               {/* <div>
                 <input className="dashbord-input" name="search" type="search" placeholder="Search" aria-label="Search" autoComplete="off" id="mytInput" onChange={this.onSearchQuery} />
               </div> */}
@@ -72,7 +72,7 @@ class DashboardHeader extends Component {
                         <Link to= "/dashboard/notification"
                         role = "button"
                         onClick = {()=>this.props.toggleNotif()}>
-                        <img className="sol-img" src="/Notification.png" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.count!==0?this.props.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
+                        <img className="sol-img" src="/Notification.jpg" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.count!==0?this.props.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
                          </Link>
                         </div>
                   </li>
@@ -84,7 +84,7 @@ class DashboardHeader extends Component {
                            to="/dashboard/profile"
                            onClick = {this.props.toggleProfile()}
                            >
-                         <img className="sol-img2" src={this.props.user.imageUrl || '/profile.png'}  alt='Not available'/>{this.props.user.name}
+                         <img className="sol-img2" src={this.props.user.imageUrl || '/profile.jpg'}  alt='Not available'/>{this.props.user.name}
                          </Link>
                     </div>
                   </li>

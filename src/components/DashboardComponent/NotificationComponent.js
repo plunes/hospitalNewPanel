@@ -40,7 +40,7 @@ class NotificationComponent extends Component {
                                     >
                                 <div className='row' key={index}>
                                     <div className="col-sm-2">
-                                        <img className="NotifyImg" src={n.senderImageUrl || '/profile.png'} alt="NoImg"></img>
+                                        <img className="NotifyImg" src={n.senderImageUrl || '/profile.jpg'} alt="NoImg"></img>
                                     </div>
                                     <div className="col-sm-6">
                                         <p className="NotifierName">{n.senderName}</p>

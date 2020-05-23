@@ -46,7 +46,7 @@ import  "./AboutUs.css";
                     </div>
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="/bookingappointments.png" alt=""></img>
+                            <img src="/bookingappointments.jpg" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11 bok_apt">
                             Booking Appointments
@@ -98,7 +98,7 @@ import  "./AboutUs.css";
 
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="/onlinesolutions.png" alt=""></img>
+                            <img src="/onlinesolutions.jpg" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11 bok_apt">
                             Online Solutions
@@ -138,7 +138,7 @@ import  "./AboutUs.css";
 
                     <div className="row bookappointhead">
                         <div className="col-sm-1 col-1">
-                            <img src="/feedbacks.png" alt=""></img>
+                            <img src="/feedbacks.jpg" alt=""></img>
                         </div>
                         <div className="col-sm-11 col-11 bok_apt">
                             Feedbacks

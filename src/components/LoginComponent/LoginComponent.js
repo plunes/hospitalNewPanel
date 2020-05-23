@@ -76,7 +76,7 @@ class LoginComponent extends Component {
           </div>
           <div className='row'>
                     <div className='col-md-6 sidetimgcol'>
-                        <img className="signImage botm_sign"  src="Mobile-login.png" alt="SignUp" />
+                        <img className="signImage botm_sign"  src="Mobile-login.jpg" alt="SignUp" />
                     </div>
                     <div className='col-md-6'>
                         <div className='col-md-1'>
