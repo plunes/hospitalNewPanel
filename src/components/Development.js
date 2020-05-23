@@ -122,12 +122,12 @@ class Development extends Component {
                           <div className="text-center">
                            <div className="revenues_heding">
                             <h3>AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h3>
-                             <img src="/system.jpg" className="laptop" />
+                             <img src="/system.png" className="laptop" />
                             </div>
                             <div className="container">
                              <div className="row marg_real" id="main">
                                   <div className="col-lg-6 col-md-6 col-12" id="myRedDIV">
-                                    <img src="/realtime.jpg" className="real_time"/>
+                                    <img src="/realtime.png" className="real_time"/>
                                   </div>
                                   <div className="col-lg-4 col-md-4 col-12 tools_pat" id="myPinkDIV">
                                    <h2>Real Time Insights</h2>

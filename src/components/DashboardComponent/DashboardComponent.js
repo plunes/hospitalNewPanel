@@ -347,7 +347,7 @@ class DashboardComponent extends React.PureComponent {
                                         <div className="bdr_dash">
                                         <div className='row'>
                                             <div className='col businessrow1col1'>
-                                                   <img src="/business.svg" className="businessicon" alt=""></img>
+                                                   <img style={{marginTop:'1rem'}} src="/business.svg" className="businessicon" alt=""></img>
                                                    <p className='business'>Business</p>
                                             </div>
                                             <div className='col selectBusinessPeriod'>
@@ -378,7 +378,7 @@ class DashboardComponent extends React.PureComponent {
 
                                     </div>
                                     <div className='dashboardsection'>
-                                        <span className='businessrow1col1 width'>
+                                        <span style={{marginTop:'1rem'}} className='businessrow1col1 width'>
                                         <img src="/nouser.svg" className="businessicon" alt=""></img>
                                         <p className='business'>Number of Users</p>
                                         </span>
