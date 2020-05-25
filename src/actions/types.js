@@ -163,4 +163,14 @@ export const SUBMIT_QUERY_CLR  = 'App/Profile/SUBMIT_QUERY_CLR'
 export const EDIT_LOCATION_RET = 'App/Profile/EDIT_LOCATION_RET'
 export const EDIT_LOCATION_CLR  = 'App/Profile/EDIT_LOCATION_CLR'
 
+export const GET_USER_INFO_RET = 'App/Profile/GET_USER_INFO_RET'
+export const GET_USER_INFO_CLR  = 'App/Profile/GET_USER_INFO_CLR'
+export const SET_USER_INFO  = 'App/Profile/SET_USER_INFO'
+
+export const GET_BUSINESS_RET = 'App/Profile/GET_BUSINESS_RET'
+export const GET_BUSINESS_CLR  = 'App/Profile/GET_BUSINESS_CLR'
+export const SET_BUSINESS_DATA  = 'App/Profile/SET_BUSINESS_DATA'
+
+
+
 

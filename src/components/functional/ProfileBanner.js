@@ -1,9 +1,9 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import React, { useRef } from "react"
 import LoaderComponent from "./LoaderComponent"
+let url = ""
 
- const ProfileBanner= (props) => {
-    console.log(props,"props in Profile Image")
+ const ProfileBanner= React.memo((props) => {
   const { addToast } = useToasts()
   const bannerImageRef  = useRef()
  
@@ -16,6 +16,7 @@ import LoaderComponent from "./LoaderComponent"
             props.updateBanner({
                 coverImageUrl:props.uploadRet.data.imageUrl
             })
+            url = props.uploadRet.data.imageUrl
           }else{
             addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
           }
@@ -28,9 +29,10 @@ import LoaderComponent from "./LoaderComponent"
 
   if(!!props.updateBannerRet){
     if(!!props.updateBannerRet.success){
-      console.log("inside update bAnner ret")
       addToast(props.updateBannerRet.message, {appearance: 'success', autoDismiss:true}) 
-      props.getProfileDetails()
+      props.set_user_info({
+        coverImageUrl:url
+      })
       props.loadingOff()
     }else{
       addToast(props.updateBannerRet.message, {appearance: 'error', autoDismiss:true})
@@ -97,7 +99,7 @@ import LoaderComponent from "./LoaderComponent"
     </img> */}
 </React.Fragment>
   )
-}
+})
  
 
 export default ProfileBanner

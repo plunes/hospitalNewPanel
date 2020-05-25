@@ -1,8 +1,9 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import React, { useRef } from "react"
 import LoaderComponent from "./LoaderComponent"
+let url = ""
 
- const ProfileImage= (props) => {
+ const ProfileImage= React.memo((props) => {
     const profileImageRef  = useRef()
     
   const { addToast } = useToasts()
@@ -16,6 +17,7 @@ import LoaderComponent from "./LoaderComponent"
           props.updateImage({
               imageUrl:props.uploadRet.data.imageUrl
           })
+           url = props.uploadRet.data.imageUrl
         }else{
           addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
         }
@@ -30,7 +32,9 @@ import LoaderComponent from "./LoaderComponent"
   if(!!props.updateImageRet){
     if(!!props.updateImageRet.success){
       addToast(props.updateImageRet.message, {appearance: 'success', autoDismiss:true}) 
-      props.getProfileDetails()
+      props.set_user_info({
+        imageUrl:url
+      })
     }else{
       addToast(props.updateImageRet.message, {appearance: 'error', autoDismiss:true})
     }
@@ -101,7 +105,7 @@ import LoaderComponent from "./LoaderComponent"
         <img onClick={(e)=>handleImageClick(e)} className="edit_icn2 cursor-pointer"src={'/pen_editor.svg'}></img></div>
 </React.Fragment>
   )
-}
+})
  
 
 export default ProfileImage

@@ -126,7 +126,15 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   SUBMIT_QUERY_CLR,
 
   EDIT_LOCATION_CLR,
-  EDIT_LOCATION_RET
+  EDIT_LOCATION_RET,
+
+  GET_USER_INFO_RET,
+  GET_USER_INFO_CLR,
+  SET_USER_INFO,
+
+  SET_BUSINESS_DATA,
+  GET_BUSINESS_CLR,
+  GET_BUSINESS_RET
 
   } from './types';
 import history from '../history';
@@ -148,6 +156,116 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('specialities')
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
+}
+
+
+
+export const set_business_data = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_BUSINESS_DATA,
+    payload:data
+  })
+}
+
+
+export const get_business_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_BUSINESS_CLR,
+    payload:{}
+  })
+}
+
+export const get_business = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.get(baseUrl + `/analytics/totalBusiness?days=${data.days}`, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      // console.log(res, 'data');
+      if (res.status === 200) {
+        console.log(res,"res in get_business");
+        dispatch({
+          type: GET_BUSINESS_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: GET_BUSINESS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: GET_BUSINESS_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
+}
+
+
+
+export const set_user_info = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_USER_INFO,
+    payload:data
+  })
+}
+
+
+export const get_user_info_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_USER_INFO_CLR,
+    payload:{}
+  })
+}
+
+export const get_user_info = () => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      // console.log(res, 'data');
+      if (res.status === 201) {
+        //console.log(res);
+        dispatch({
+          type: GET_USER_INFO_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: GET_USER_INFO_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: GET_USER_INFO_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
 }
 
 
@@ -2039,7 +2157,8 @@ export const getBooking = () => async  dispatch => {
             'userImageUrl':b.userImageUrl,
             'professionalImageUrl':b.professionalImageUrl,
             'doctorConfirmation':b.doctorConfirmation,
-            'userMobileNumber':b.userMobileNumber
+            'userMobileNumber':b.userMobileNumber,
+            'paymentProgress':b.paymentProgress
           }
           businessBooking.push(bookDet)
         })

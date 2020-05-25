@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
 import { getBooking, getBookingClr, changeAppoint, changeAppointClr } from '../../actions/userActions'
 import { connect } from 'react-redux';
-import ProgressBar from 'react-bootstrap/ProgressBar'
 import  "./AvailabilityComponent.css";
 import "./appointment.css"
 import Modal from 'react-modal';
@@ -194,30 +191,17 @@ class AppointmentComponent extends Component {
     }
 
     getProgressbar = (item) =>{
-        if(item.paidAmount===0){
-            return   <React.Fragment>
-            <ul className="list-unstyled multi-steps">
-                <li className="not_active_ris">Booked</li>
-                <li className="not_active_ris not-paid_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
-           </ul>
-        </React.Fragment>
-        }
-       else if(item.paidAmount<item.totalAmount){
-        return  <React.Fragment>
-        <ul className="list-unstyled multi-steps">
-            <li className="active_ris">Booked</li>
-            <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.paidAmount}</li>
-            <li className="not_active_ris not-paid_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
-       </ul>
-      </React.Fragment>
-    }else if(item.paidAmount===item.totalAmount){
-        return (
-        <ul className="list-unstyled multi-steps">
-                <li className="active_ris">Booked</li>
-                <li className="not_active_ris" ><i className="fa fa-rupee-sign"></i>{item.totalAmount}</li>
-           </ul>
-        )
-    }
+    return <ul className="list-unstyled multi-steps">
+        {item.paymentProgress.map((payment,i)=>{
+            if(i===0){
+                return   <li className={!!payment.status?'active_ris':'not_active_ris'}>Booked</li>
+            }else if(i===(item.paymentProgress.length-1)){
+                return <li className={!!payment.status?"not_active_ris":"not_active_ris not-paid_ris"} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
+            }else{
+                return  <li className={!!payment.status?'not_active_ris':'not_active_ris not-paid_ris'} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
+            }
+        })}
+        </ul>
     }
 
     changeAppointClr = ()=>{
@@ -248,8 +232,10 @@ class AppointmentComponent extends Component {
 
 
     render() {
+        let time_now = ((new Date()).getTime())
+        console.log(time_now,"time_now")
         // console.log(this.state,"this.state in AppointmentComponent")
-        console.log(this.state,"state in AppointmentComponent")
+        // console.log(this.state,"state in AppointmentComponent")
         if(!!this.state.get_bookings_loading){
            return   <div className='col-md-8'>
            <div className="Appoint AllComponents">
@@ -307,7 +293,8 @@ class AppointmentComponent extends Component {
                                       </div>
                                      </div>
                                 </div>
-                                <div className="row confrm_mar_sec">
+
+                                { (time_now<item.appointmentTime)  &&  <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
                                  </div>
@@ -318,7 +305,8 @@ class AppointmentComponent extends Component {
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings","cancelled_bookings")}>Cancel</text></p>
                                  </div>
                                 </div>
-                                {/* 2nd--end */}
+}
+                            {/* 2nd--end */}
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
                                     <p className="brace_m">{item.serviceName}</p>
@@ -359,11 +347,11 @@ class AppointmentComponent extends Component {
                                                 </div> 
                                       <div className="col-lg-2 loc_tab">
                                     <div className="round-image">
-                                      <img src={item.userImageUrl} className="rund_im img-loading-small_rish"/>
+                                      <img src={item.userImageUrl} className="rund_im "/>
                                       </div>
                                      </div>
                                 </div>
-                                <div className="row confrm_mar_sec">
+                               {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con "><text>Confirmed</text></p>
                                  </div>
@@ -373,7 +361,7 @@ class AppointmentComponent extends Component {
                                  <div className="col-lg-4">
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings','cancelled_bookings')}>Cancel</text></p>
                                  </div>
-                                </div>
+                                </div>}
                                 {/* 2nd--end */}
                                 <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
@@ -416,11 +404,11 @@ class AppointmentComponent extends Component {
                                           </div> 
                                 <div className="col-lg-2 loc_tab">
                               <div className="round-image">
-                                <img src={item.userImageUrl} className="rund_im img-loading-small_rish"/>
+                                <img src={item.userImageUrl} className="rund_im "/>
                                 </div>
                                </div>
                           </div>
-                          <div className="row confrm_mar_sec">
+                     { (time_now<item.appointmentTime)   &&  <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con "><text>Confirm</text></p>
                                  </div>
@@ -430,7 +418,7 @@ class AppointmentComponent extends Component {
                                  <div className="col-lg-4">
                                  <p className="con_re "><text>Cancelled</text></p>
                                  </div>
-                          </div>
+                          </div>}
                           {/* 2nd--end */}
                           <div className="row confrm_mar_sec">
                           <div className="col-lg-6">

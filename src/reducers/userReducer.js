@@ -109,7 +109,16 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   SUBMIT_QUERY_CLR,
 
   EDIT_LOCATION_RET,
-  EDIT_LOCATION_CLR
+  EDIT_LOCATION_CLR,
+
+  GET_USER_INFO_RET,
+  GET_USER_INFO_CLR,
+  SET_USER_INFO,
+
+  GET_BUSINESS_RET,
+  GET_BUSINESS_CLR
+
+  
   
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -175,6 +184,8 @@ const initialState = {
   profileData:false,
   submit_query_ret:false,
   edit_location_ret:false,
+  get_user_info_ret:false,
+  business_ret:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -191,7 +202,8 @@ const initialState = {
   data:{
     dash_data:{
       solInsights:[],
-      insight:[]
+      insight:[],
+      business_data:{}
     },
     notif_data:{
       count:0,
@@ -206,6 +218,31 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case GET_USER_INFO_RET:
+      return {
+        ...state,
+        get_user_info_ret:action.payload
+      };
+
+      case GET_USER_INFO_CLR:
+      return {
+        ...state,
+        get_user_info_ret:false
+      };
+
+      case GET_BUSINESS_RET:
+        return {
+          ...state,
+          business_ret:action.payload
+        };
+  
+        case GET_BUSINESS_CLR:
+        return {
+          ...state,
+          business_ret:false
+        }
+
     case EDIT_LOCATION_RET:
       return {
         ...state,
@@ -241,6 +278,18 @@ export default function (state = initialState, action) {
         ...state,
         profileData:false
       };
+
+      case SET_USER_INFO:
+        return {
+          ...state,
+        data:{
+          ...state.data,
+          prof_data:{
+            ...state.data.prof_data,
+            ...action.payload
+          }
+        }
+        }
 
       case REMOVE_NOTIF_COUNT:
         return {

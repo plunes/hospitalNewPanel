@@ -5,24 +5,19 @@ import './Profile.css';
 import Modal from "react-responsive-modal";
 import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr,
    getProfileDetails, updateBanner, updateBannerClr, updateAchievement, updateAchievementClr, editBio, editBioClr,
-   getUserDetails, edit_location_clr, edit_location } from "../../actions/userActions";
+   getUserDetails, edit_location_clr, edit_location, get_user_info, set_user_info } from "../../actions/userActions";
 import ProfileImage from '../functional/ProfileImage';
 import ProfileBanner from '../functional/ProfileBanner';
 import DoctorComponent from "../functional/DoctorComponent"
-import Achievement from "../functional/Achievement"
 import EditBio from '../functional/EditBio';
 import ModalComponent from "../ModalComponent"
 import AddAchievement from '../functional/AddAchievement';
-import MapComponent from "../MapComponent"
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import locationImage from "../../images/Location.jpg"
 import Notify from '../functional/Notify';
-import LoaderComponent from "../functional/LoaderComponent"
-// import OwlCarousel from 'react-owl-carousel2';
-
 import Map from "../MapComponent/index.js"
-
+import { isEmpty } from "../../utils/common_utilities"
 const options = {
   items: 2,
   margin: 0,
@@ -39,6 +34,9 @@ class ProfileContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      prof_data:{
+        achievements:[]
+      },
       file: null,
       open: false,
       doctors: [],
@@ -69,12 +67,24 @@ class ProfileContainer extends React.PureComponent {
     this.achievementSuccess = this.achievementSuccess.bind(this)
   }
 
+
   componentWillReceiveProps(nextProps){
 
+    if(!!!isEmpty(nextProps.prof_data)){
+      this.setState({
+        prof_data:nextProps.prof_data
+      })
+    }
       if(!!nextProps.updateAchievementRet){
           if(nextProps.updateAchievementRet.type==='delete'){
             if(nextProps.updateAchievementRet.success){
+                  let updatedAchievement 
               this.setState({
+                // prof_data:{
+                //   ...this.state.prof_data,
+                //   achievements:[...this.state.prof_data.achievements.slice(0,this.state.selectedAchievement),
+                //     ...this.state.prof_data.achievements.slice(0,this.state.selectedAchievement)]
+                // }
                 notify:{
                   ...this.state.notify,
                   success:{
@@ -134,7 +144,7 @@ class ProfileContainer extends React.PureComponent {
     }
   }
 
-  achievementSuccess = () =>{
+  achievementSuccess = (data) =>{
       this.addAchievementClose()
       this.props.getUserDetails()
   }
@@ -144,11 +154,13 @@ class ProfileContainer extends React.PureComponent {
         this.setState({
           get_profile_loading:true
         },()=>{
-
+          this.props.getUserDetails()
         })
       }else{
         this.setState({
-          user:this.props.prof_data
+          // need to remove this line after complete refactoring
+          user:this.props.prof_data,
+          prof_data:this.props.prof_data
         })
       }
   }
@@ -214,13 +226,10 @@ class ProfileContainer extends React.PureComponent {
     let achievements = JSON.parse(JSON.stringify(this.props.user.achievements))
     let newAchievements = []
     achievements.forEach((item,j)=>{
-      console.log(i,"i in removeAchievement")
-      console.log(j,"j in removeAchievement")
       if(((i!==j) && (!!item))){
           newAchievements.push(item)
       }
     })
-    console.log(newAchievements,"newAchievements in removeAchievement")
     this.setState({
       removeAchievementLoading:true,
       updated_achieve_remove:newAchievements,
@@ -251,12 +260,12 @@ class ProfileContainer extends React.PureComponent {
 
   achievement_slider = ()=>{
     if(!!this.props.user.achievements){
-      let arr = [...this.props.user.achievements]
+      console.log(this.state.prof_data,"pikabo")
+      let arr = [...this.state.prof_data.achievements]
     let i= 0
     let  newarr = []
     while(i<arr.length-1)
     {
-      console.log(i,"i in While of Achievement")
       if(i=== arr.length-1){
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
@@ -382,14 +391,15 @@ class ProfileContainer extends React.PureComponent {
           })}
         />
        <ProfileBanner
-       user = {this.props.user}
+       user = {this.state.prof_data}
        updateBanner = {this.updateBanner}
        updateBannerRet = {this.props.updateBannerRet}
        updateBannerClr = {this.props.updateBannerClr}
        upload = {this.upload}
        uploadRetClr = {this.props.uploadRetClr}
        uploadRet = {this.props.uploadRet}
-       getProfileDetails = {this.props.getUserDetails}
+       getProfileDetails = {this.props.get_user_info}
+       set_user_info = {this.props.set_user_info}
        loadingOff = {()=>this.setState({loadingBanner:false})}
        loading  = {this.state.loadingBanner}
        />
@@ -397,18 +407,17 @@ class ProfileContainer extends React.PureComponent {
           <div className="row HospitalProfileRow1">
             <div className="col-sm-2 col-lg-2">
                <ProfileImage
-                user = {this.props.user}
+                user = {this.state.prof_data}
                 upload = {this.uploadProfleImage}
                 uploadRetClr = {this.props.uploadRetClr}
                 uploadRet = {this.props.uploadRet}
-
+                set_user_info = {this.props.set_user_info}
                 updateImage ={this.updateImage}
                 updateImageRet ={this.props.updateImageRet}
                 updateImageClr ={this.props.updateImageClr}
                 getProfileDetails = {this.props.getUserDetails}
                 loading  = {this.state.loadingProfileImage}
                 loadingOff = {()=>this.setState({loadingProfileImage:false})}
-
                />
             </div>
             <div className="col-sm-9 col-lg-9 maxhospitalrow1col2 content_pos">
@@ -567,6 +576,7 @@ const mapStateToProps = state => ({
   user: state.user.userDetail,
   mount:state.user.mount,
   prof_data:state.user.data.prof_data,
+  user_info:state.user.data.prof_data,
   uploadRet:state.user.uploadRet,
   updateImageRet:state.user.updateImageRet,
   updateBannerRet:state.user.updateBannerRet,
@@ -591,5 +601,7 @@ export default connect(mapStateToProps, {
   editBio, 
   getUserDetails,
   edit_location,
-  edit_location_clr
+  edit_location_clr,
+  get_user_info,
+  set_user_info
  })(ProfileContainer);

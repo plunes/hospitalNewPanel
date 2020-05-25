@@ -17,7 +17,8 @@ import NotificationComponent from '../DashboardComponent/NotificationComponent';
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
-   remove_notif_count_ret, set_notif_count, getUserDetails } from "../../actions/userActions"
+   remove_notif_count_ret, set_notif_count, getUserDetails, get_user_info,
+   get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -64,6 +65,8 @@ export class DashboardPage extends React.PureComponent {
         solInsights:[],
         insight:[],
         initial_render:true,
+        user_info:{},
+        business_data:{},
         notificationsData:{
           count:0,
           notifications:[]
@@ -111,6 +114,34 @@ export class DashboardPage extends React.PureComponent {
               nextProps.clr_get_notif()
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
+        }
+
+        if(!!nextProps.business_ret){
+          // console.log(nextProps.business_ret,"nextProps.business_ret")
+          this.setState({
+              business_data:nextProps.business_ret.data,
+              get_business_loading:false
+          },()=>{
+              nextProps.set_dash_data({...nextProps.dash_data, business_data:{...nextProps.business_ret.data}})
+              nextProps.get_business_clr()
+          })
+      }
+
+
+        if(!!nextProps.get_user_info_ret){
+          // console.log(nextProps.get_user_info_ret,"nextProps.get_user_info_ret")
+          if(!!nextProps.get_user_info_ret.success){
+                this.setState({
+                  user_info:{...nextProps.get_user_info_ret.data},
+                  get_user_info_loading:false
+                },()=>{
+                  nextProps.setMount({...this.props.mount,prof_mount:true})
+                  nextProps.set_user_info({...this.state.user_info})
+                })
+          }else{
+              console.log("Error in getting the proifle Details")
+          }
+          nextProps.get_user_info_clr()
         }
 
         if(!!this.state.initial_render){
@@ -227,7 +258,14 @@ export class DashboardPage extends React.PureComponent {
     this.props.getSolutionInsights()
     this.props.getInsights()
     this.props.getNotifications({page:1})
+    this.props.get_business({days:7})
+
+    // need to remove this api call after refactoring
     this.props.getUserDetails()
+
+    this.props.get_user_info()
+
+    // To Establish socket connection
     this.socketEmit()
   }
 
@@ -388,6 +426,8 @@ getNotifications = (data) =>{
 }
 
   render() {
+    // console.log(this.state,"this.state in Dashboard page")
+    // console.log(this.props,"this.props in Dashboard page")
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
@@ -430,6 +470,7 @@ getNotifications = (data) =>{
                         </div>
                   {(this.props.location.pathname == '/dashboard')?
                   <DashboardComponent
+                  business_data = {this.props.dash_data.business_data}
                   solInsights = {this.state.solInsights}
                   insight = {this.state.insight}
                   real_insight_loader = {this.state.real_insight_loader}
@@ -477,9 +518,11 @@ const mapStateToProps = state => ({
     mount:state.user.mount,
     solInsights:state.user.solInsights,
     insight: state.user.insightData,
+    business_ret:state.user.business_ret,
     notificationData: state.user.notificationData,
     notif_data:state.user.data.notif_data,
-    notif_count_flag:state.user.notifCountFlag
+    notif_count_flag:state.user.notifCountFlag,
+    get_user_info_ret:state.user.get_user_info_ret
 })
 
 export default connect(mapStateToProps, { 
@@ -497,6 +540,12 @@ setMount,
 remove_notif_count,
 remove_notif_count_ret,
 set_notif_count,
-getUserDetails
+getUserDetails,
+get_user_info,
+get_user_info_clr,
+set_user_info,
+get_business,
+get_business_clr,
+set_business_data
 })(DashboardPage);
 

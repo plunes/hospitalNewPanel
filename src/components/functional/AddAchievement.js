@@ -3,7 +3,7 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 
 
-const AddAchievement = (props) => {
+const AddAchievement = React.memo((props) => {
     const achievementRef = useRef()
     const { addToast } = useToasts()
     const [ loading, setLoading ] = useState(false)
@@ -140,6 +140,6 @@ const submitdetails = () => {
         
         </div>         
     )
-}
+})
 
  export default AddAchievement

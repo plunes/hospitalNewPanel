@@ -84,7 +84,7 @@ class DashboardHeader extends Component {
                            to="/dashboard/profile"
                            onClick = {this.props.toggleProfile()}
                            >
-                         <img className="sol-img2" src={this.props.user.imageUrl || '/profile.jpg'}  alt='Not available'/>{this.props.user.name}
+                         <img className="sol-img2" src={this.props.prof_data.imageUrl || '/profile.jpg'}  alt='Not available'/>{this.props.user.name}
                          </Link>
                     </div>
                   </li>
@@ -102,7 +102,8 @@ class DashboardHeader extends Component {
 
 //fetch userDetails reducer
 const mapStateToProps = state => ({
-  user : state.user.userDetail
+  user : state.user.userDetail,
+  prof_data:state.user.data.prof_data
 })
 //export default connect(mapStateToProps, {})(DashboardHeader)
 export default connect(mapStateToProps, {getNotifications, sendCounterZero})(DashboardHeader)

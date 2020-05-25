@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getInsights, updateRealPriceClr, clearUpdatePriceData,
      clearSolInsights, getSolutionInsights, getAllBookings,
       getMonthWiseUsers, updateRealPrice, setMount,
-      set_dash_data } from '../../actions/userActions'
+      set_dash_data, get_business } from '../../actions/userActions'
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
@@ -56,7 +56,8 @@ class DashboardComponent extends React.PureComponent {
             distance: 30,
             showBusiness :  true,
             ro_insight_count:50,
-            user_map_loading:false
+            user_map_loading:false,
+            business_day:7
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -108,18 +109,20 @@ class DashboardComponent extends React.PureComponent {
       };
 
     async handleDaysChange(e) {
+     
         this.setState({
             showBusiness : false
         })
         let days = e.target.value
-        await this.props.getAllBookings(days)
+        await this.props.get_business({days})
         this.setState({
-            showBusiness : true
+            showBusiness : true,
+            business_day:days
         })
     }
 
     async handleRealPrice(select) {
-        console.log(select,"select in handleRealProce")
+        // console.log(select,"select in handleRealProce")
         this.setState({
             realModalIsOpen :  true,
             realServiceName: select.serviceName,
@@ -252,8 +255,8 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.props,"this.props in DashboardComponent")
-        console.log(this.state,"this.state in DashboardComponent")
+        // console.log(this.props,"this.props in DashboardComponent")
+        // console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
         const options = {
             title: {
@@ -351,8 +354,7 @@ class DashboardComponent extends React.PureComponent {
                                                    <p className='business'>Business</p>
                                             </div>
                                             <div className='col selectBusinessPeriod'>
-                                                <select onChange={this.handleDaysChange} name="days" className="selectBusiness">
-                                                    <option value=''>Select</option>
+                                                <select onChange={this.handleDaysChange} name="days" value={this.state.business_day} className="selectBusiness">
                                                     <option value='1'>Today</option>
                                                     <option value='7'>Weekly</option>
                                                     <option value='30'>Monthly</option>
@@ -364,11 +366,11 @@ class DashboardComponent extends React.PureComponent {
                                         </div>
                                         { this.state.showBusiness ? <div className='row'>
                                             <div className='col text-center'>
-                                                <p className="businessPrice businessEarn">&#8377;{this.props.businessEarn}</p>
+                                                <p className="businessPrice businessEarn">&#8377;{!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):''}</p>
                                                 <p className="Earn">Business <br></br>Earned</p>
                                             </div>
                                             <div className='col text-center'>
-                                                <p className="businessPrice businessLost">&#8377;{this.props.businessLost}</p>
+                                                <p className="businessPrice businessLost">&#8377;{!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):''}</p>
                                                 <p className="Earn">Business<br></br> Lost</p>
                                             </div>
                                         </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
@@ -520,5 +522,6 @@ export default connect(mapStateToProps, {updateRealPriceClr,
      getMonthWiseUsers,
      updateRealPrice,
      set_dash_data,
+     get_business,
      clearSolInsights, setMount })(DashboardComponent);
 // Call userdetails from
