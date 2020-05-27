@@ -266,25 +266,25 @@ let obj =   {
   getDay = (i) =>{
      switch (i) {
       case 0:
-        return 'monday'
+        return 'Monday'
         break;
       case 1:
-        return 'tuesday'
+        return 'Tuesday'
         break;
       case 2:
-        return 'wendesday'
+        return 'Wednesday'
         break;
       case 3:
-        return 'thursday'
+        return 'Thursday'
         break;
       case 4:
-        return 'friday'
+        return 'Friday'
         break;
       case 5:
-       return 'saturday'
+       return 'Saturday'
        break;
       case 6:
-       return 'sunday'
+       return 'Sunday'
        break;
      
        default:

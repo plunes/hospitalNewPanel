@@ -468,41 +468,41 @@ getNotifications = (data) =>{
                               toggleAbout = {this.toggleAbout}
                             />
                         </div>
-                  {(this.props.location.pathname == '/dashboard')?
+                  {(this.props.location.pathname === '/dashboard')?
                   <DashboardComponent
                   business_data = {this.props.dash_data.business_data}
                   solInsights = {this.state.solInsights}
                   insight = {this.state.insight}
                   real_insight_loader = {this.state.real_insight_loader}
                   act_insight_loader = {this.state.act_insight_loader}            
-                  /> :(this.props.location.pathname == '/dashboard/profile')?
+                  /> :(this.props.location.pathname === '/dashboard/profile')?
                   <ProfileContainer
                   toggleProfile = {this.toggleProfile}
                   toggleMyCatalog = {this.toggleMyCatalog}
                   toggleAddDoc = {this.toggleAddDoc}
-                  />:(this.props.location.pathname == '/dashboard/appointments')?
-                  <AppointmentComponent />:(this.props.location.pathname == '/dashboard/availability')?
-                  <AvailabilityComponent />:(this.props.location.pathname == '/dashboard/settings')?
+                  />:(this.props.location.pathname === '/dashboard/appointments')?
+                  <AppointmentComponent />:(this.props.location.pathname === '/dashboard/availability')?
+                  <AvailabilityComponent />:(this.props.location.pathname === '/dashboard/settings')?
                   <SettingsComponent
                     toggleEditProf = {this.toggleEditProf}
                     toggleChangePass = {this.toggleChangePass}
-                  />:(this.props.location.pathname == '/dashboard/manage-payment')?
-                  <ManagePaymentComponent />:(this.props.location.pathname == '/dashboard/help')?
-                  <HelpComponent />:(this.props.location.pathname == '/dashboard/aboutus')?
-                  <AboutUsComponent />:(this.props.location.pathname == '/dashboard/aboutus')?
-                  <ProfileContainer />:(this.props.location.pathname == '/dashboard/my-catalogue')?
-                  <MyCatalogueComponent />:(this.props.location.pathname == '/dashboard/add-doctor')?
+                  />:(this.props.location.pathname === '/dashboard/manage-payment')?
+                  <ManagePaymentComponent />:(this.props.location.pathname === '/dashboard/help')?
+                  <HelpComponent />:(this.props.location.pathname === '/dashboard/aboutus')?
+                  <AboutUsComponent />:(this.props.location.pathname === '/dashboard/aboutus')?
+                  <ProfileContainer />:(this.props.location.pathname === '/dashboard/my-catalogue')?
+                  <MyCatalogueComponent />:(this.props.location.pathname === '/dashboard/add-doctor')?
                   <AddDoctorComponent
                     location = {this.props.location}
-                  />:(this.props.location.pathname == '/dashboard/notification')?
+                  />:(this.props.location.pathname === '/dashboard/notification')?
                   <NotificationComponent
                   notifications = {this.state.notifications}
                   get_notifs_loading = {this.state.get_notifs_loading}
                   total_count = {this.props.notif_data.totalCount}
                   getNotifications = {this.getNotifications}
-                  />:(this.props.location.pathname == '/dashboard/editProfile')?
-                  <EditProfileComponent />:(this.props.location.pathname == '/dashboard/change-password')?
-                  <ChangePassword />:(this.props.location.pathname == '/dashboard/payments')?
+                  />:(this.props.location.pathname === '/dashboard/editProfile')?
+                  <EditProfileComponent />:(this.props.location.pathname === '/dashboard/change-password')?
+                  <ChangePassword />:(this.props.location.pathname === '/dashboard/payments')?
                   <PaymentComponent />:''}
         </div>
         </div>

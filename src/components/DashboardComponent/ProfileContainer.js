@@ -80,17 +80,20 @@ class ProfileContainer extends React.PureComponent {
             if(nextProps.updateAchievementRet.success){
                   let updatedAchievement 
               this.setState({
-                // prof_data:{
-                //   ...this.state.prof_data,
-                //   achievements:[...this.state.prof_data.achievements.slice(0,this.state.selectedAchievement),
-                //     ...this.state.prof_data.achievements.slice(0,this.state.selectedAchievement)]
-                // }
+                prof_data:{
+                  ...this.state.prof_data,
+                  achievements:this.state.updated_achieve_remove
+                },
                 notify:{
                   ...this.state.notify,
                   success:{
                     message:nextProps.updateAchievementRet.message
                   }
                 }
+              })
+              this.props.set_user_info({
+                ...this.props.prof_data,
+                achievements:this.state.updated_achieve_remove
               })
             }else{
               this.setState({
@@ -102,7 +105,7 @@ class ProfileContainer extends React.PureComponent {
                 }
               })
             }
-            nextProps.getUserDetails()
+            // nextProps.getUserDetails()
             nextProps.updateAchievementClr()
           }
       }
@@ -146,7 +149,16 @@ class ProfileContainer extends React.PureComponent {
 
   achievementSuccess = (data) =>{
       this.addAchievementClose()
-      this.props.getUserDetails()
+      this.setState({
+        prof_data:{
+          ...this.state.prof_data,
+          achievements:this.state.updated_achievement_array
+        }
+      },()=>this.props.set_user_info({
+        ...this.props.prof_data,
+        achievements:this.state.updated_achievement_array
+      }))
+      // this.props.getUserDetails()
   }
 
   componentDidMount(){
@@ -165,16 +177,24 @@ class ProfileContainer extends React.PureComponent {
       }
   }
 
+  updateAchievement=(data)=>{
+    this.setState({
+      updated_achievement_array:data.achievements
+    },()=>this.props.updateAchievement({
+      ...data
+    }))
+  }
+
   generateAddAchievement = () =>{
     return(
         <React.Fragment>
            <AddAchievement
            loading = {this.state.achievementLoading}
            toggleLoading = {()=>this.setState({achievementLoading:!this.state.achievementLoading})}
-           updateAchievement =  {this.props.updateAchievement}
+           updateAchievement =  {this.updateAchievement}
            updateAchievementRet =  {this.props.updateAchievementRet}
            updateAchievementClr =  {this.props.updateAchievementClr}
-           achievements = {this.props.user.achievements}
+           achievements = {this.state.prof_data.achievements}
            upload = {this.props.upload}
            uploadRet = {this.props.uploadRet}
            uploadRetClr = {this.props.uploadRetClr}
@@ -467,7 +487,7 @@ class ProfileContainer extends React.PureComponent {
             <Map
                google={this.props.google}
                center={{lat: 18.5204, lng: 73.8567}}
-               location = {this.props.user.geoLocation}
+               location = {this.state.prof_data.geoLocation}
                height='300px'
                zoom={15}
                edit_location_loading = {this.props.edit_location_loading}
