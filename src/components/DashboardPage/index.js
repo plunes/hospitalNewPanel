@@ -18,7 +18,7 @@ import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
    remove_notif_count_ret, set_notif_count, getUserDetails, get_user_info,
-   get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data } from "../../actions/userActions"
+   get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url } from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -371,7 +371,23 @@ export class DashboardPage extends React.PureComponent {
     let data = {
         userId: localStorage.getItem('userId')
       }
-    const socket = io.connect(`https://devapi.plunes.com?userId=${data.userId}`)
+      let baseUrl = "https://api.plunes.com?userId="
+
+    const pathLocation = window.location.host;
+      if(!!pathLocation) {
+    console.log('pathLocation : ', pathLocation);
+         if(pathLocation === 'hospital.plunes.com') {
+      console.log('PROD');
+      // Production baseUrl
+              baseUrl = 'https://api.plunes.com?userId='
+       }else{
+          baseUrl = "https://devapi.plunes.com?userId="
+            }
+       }
+    const socket = io.connect(`${baseUrl}${data.userId}`)
+
+
+
     socket.on('connect', (data) => {
         console.log("Connect event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         console.log(data)
@@ -426,6 +442,7 @@ getNotifications = (data) =>{
 }
 
   render() {
+    console.log(this.props,"this.props.baseUrl")
     // console.log(this.state,"this.state in Dashboard page")
     // console.log(this.props,"this.props in Dashboard page")
     if(!!!localStorage.getItem('token')){
@@ -546,6 +563,7 @@ get_user_info_clr,
 set_user_info,
 get_business,
 get_business_clr,
-set_business_data
+set_business_data,
+base_url
 })(DashboardPage);
 

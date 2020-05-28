@@ -158,6 +158,10 @@ if(!!pathLocation) {
   }
 }
 
+export const  base_url = ()=>{
+    return baseUrl
+}
+
 export const Unauth_Logout = () =>{
   localStorage.removeItem('token')
   localStorage.removeItem('isAuth')
