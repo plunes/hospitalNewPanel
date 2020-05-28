@@ -140,10 +140,24 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
 import history from '../history';
 import axios from 'axios';
 // import { connect } from 'react-redux';
+
+
+
 let baseUrl = "https://devapi.plunes.com/v5"
-// let baseUrl = "https://plunes.co/v4"
-// let baseUrl = "http://localhost:5000"
-// let baseUrl = "http://3.6.212.85/v4"
+
+const pathLocation = window.location.host;
+if(!!pathLocation) {
+  console.log('pathLocation : ', pathLocation);
+  if(pathLocation === 'hospital.plunes.com') {
+    console.log('PROD');
+    // Production baseUrl
+    baseUrl = 'https://api.plunes.com/v5'
+  }else{
+    baseUrl = "https://devapi.plunes.com/v5"
+    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
+  }
+}
+
 export const Unauth_Logout = () =>{
   localStorage.removeItem('token')
   localStorage.removeItem('isAuth')
