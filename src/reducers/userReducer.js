@@ -116,7 +116,11 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   SET_USER_INFO,
 
   GET_BUSINESS_RET,
-  GET_BUSINESS_CLR
+  GET_BUSINESS_CLR,
+
+  RESCHEDULE_APPOINTMENT_CLR,
+  RESCHEDULE_APPOINTMENT_RET,
+  SET_RESCHEDULE_APPOINTMENT
 
   
   
@@ -181,6 +185,7 @@ const initialState = {
   getOtpRet:false,
   submitOtpRet:false,
   notifCountFlag:false,
+  reschedule_appointment_ret:false,
   profileData:false,
   submit_query_ret:false,
   edit_location_ret:false,
@@ -218,6 +223,18 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case RESCHEDULE_APPOINTMENT_RET:
+      return {
+        ...state,
+        reschedule_appointment_ret:action.payload
+      };
+
+      case RESCHEDULE_APPOINTMENT_CLR:
+      return {
+        ...state,
+        reschedule_appointment_ret:false
+      };
 
     case GET_USER_INFO_RET:
       return {

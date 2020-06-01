@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from "react"
-import { ToastProvider, useToasts } from 'react-toast-notifications'
+import {  useToasts } from 'react-toast-notifications'
 
 const TimeSlot = (props) => {
         console.log(props,"props in TimeSlot")
@@ -100,11 +100,11 @@ const TimeSlot = (props) => {
                     }
                 }
             }
-            console.log(error,message,hour,minutes,"error and message")
+           
             if(!!error){
               addToast(message, {appearance: 'error', autoDismiss:true})
             }else{
-                console.log("inside success in timeSlot")
+               
                 props.submit({
                     hour, minutes
                 })

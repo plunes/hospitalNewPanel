@@ -134,7 +134,11 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
 
   SET_BUSINESS_DATA,
   GET_BUSINESS_CLR,
-  GET_BUSINESS_RET
+  GET_BUSINESS_RET,
+
+  RESCHEDULE_APPOINTMENT_CLR,
+  RESCHEDULE_APPOINTMENT_RET,
+  SET_RESCHEDULE_APPOINTMENT
 
   } from './types';
 import history from '../history';
@@ -174,6 +178,59 @@ export const Unauth_Logout = () =>{
   window.location.reload()
 }
 
+
+export const set_reschedule_appointment = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_RESCHEDULE_APPOINTMENT,
+    payload:data
+  })
+}
+
+
+export const reschedule_appointment_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: RESCHEDULE_APPOINTMENT_CLR,
+    payload:{}
+  })
+}
+
+export const reschedule_appointment = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  let body =  data.body 
+  return await axios.put(baseUrl + `/booking/${data.params.bookingId}/${data.params.bookingStatus}`, body, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res,"res in reschedule_appointment");
+        dispatch({
+          type: RESCHEDULE_APPOINTMENT_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: RESCHEDULE_APPOINTMENT_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: RESCHEDULE_APPOINTMENT_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
+}
 
 
 export const set_business_data = (data) => dispatch =>{
@@ -630,7 +687,7 @@ export const changeAppoint = (data) => async dispatch => {
   return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': token } })
   .then((res) => {
     console.log(res, 'res in changeAppoint')
-    if (res.status === 200) {
+    if (res.status === 201) {
       //dispatch(getSolutionInsights())
       console.log(res.data, 'data in update Image')
       if(!!res.data){

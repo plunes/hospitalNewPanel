@@ -17,12 +17,12 @@ class Map extends Component{
 			area: '',
 			state: '',
 			mapPosition: {
-				lat: !!this.props.location?this.props.location.latitude:28.7041,
-				lng: !!this.props.location?this.props.location.longitude:77.2090
+				lng: !!this.props.location?this.props.location.coordinates[0]:28.7041,
+				lat: !!this.props.location?this.props.location.coordinates[1]:77.2090
 			},
 			markerPosition: {
-				lat: !!this.props.location?this.props.location.latitude:28.7041,
-				lng: !!this.props.location?this.props.location.longitude:77.2090
+				lng: !!this.props.location?this.props.location.coordinates[0]:28.7041,
+				lat: !!this.props.location?this.props.location.coordinates[1]:77.2090
 			}
 		}
 	}
@@ -30,6 +30,8 @@ class Map extends Component{
 	 * Get the current address from the default map position and set those values in the state
 	 */
 	componentDidMount() {
+		console.log(this.props,"this.props in didMount MapComponent")
+		console.log(this.state,"this.state in didMount MapComponent")
 		Geocode.fromLatLng( this.state.mapPosition.lat , this.state.mapPosition.lng ).then(
 			response => {
 				const address = response.results[0].formatted_address,
@@ -210,6 +212,7 @@ class Map extends Component{
 
 
 	render(){
+		console.log(this.props,"this.props in MapComponent")
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (
@@ -272,9 +275,12 @@ class Map extends Component{
 					<div className="text-center">
 					 <span onClick={()=>{
 						 this.props.edit_location({
-							 geoLocation:{
-								latitude:this.state.mapPosition.lat,
-								longitude:this.state.mapPosition.lng
+							location:{
+								type:'Point',
+								coordinates:[
+								   this.state.markerPosition.lng,
+								   this.state.markerPosition.lat
+								]
 							},
 							address:this.state.address
 						 })

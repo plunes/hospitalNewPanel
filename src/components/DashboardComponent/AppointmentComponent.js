@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getBooking, getBookingClr, changeAppoint, changeAppointClr } from '../../actions/userActions'
+import { getBooking, getBookingClr, changeAppoint, changeAppointClr, getTimeslot, reschedule_appointment_clr, reschedule_appointment } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import  "./AvailabilityComponent.css";
 import "./appointment.css"
@@ -8,6 +8,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
 import MeasureTime from "../MeasureTime"
+
+import  { generateSlotsFormat, getDay, timeToString , stringToTime } from "../../utils/common_utilities"
+
+import RescheduleComponent from '../RescheduleComponent';
 let time_flag = false
 const getMonth = (item) =>{
         switch (item) {
@@ -72,9 +76,10 @@ class AppointmentComponent extends Component {
             upcoming_bookings:[],
             cancelled_bookings:[],
             confirmed_bookings:[],
-            get_bookings_loading:false
+            get_bookings_loading:false,
+            firstRender:true,
+            defaultDate:new Date
         };
-        
         this.openModal = this.openModal.bind(this);
         this.closeModal =  this.closeModal.bind(this);
     }
@@ -85,7 +90,7 @@ class AppointmentComponent extends Component {
         this.props.getBooking()
         time_flag =true
       })
-      
+      this.props.getTimeslot()
     }
     openModal(){
         this.setState({
@@ -154,6 +159,47 @@ class AppointmentComponent extends Component {
             }
             nextProps.getBookingClr()
         }
+
+
+        if(((!!nextProps.timeSlot) && (this.state.firstRender))){
+            let arr = []
+            nextProps.timeSlot.forEach((item,i)=>{
+                  let obj = {}
+                  obj.day = getDay(i)
+                  obj.closed = item.closed==="false"?false:true
+                  obj.slots = {
+                  morning: stringToTime(item.slots[0]),
+                  evening: stringToTime(item.slots[1])
+                  }
+                  arr.push(obj)
+            })
+            this.setState({
+              slots:arr,
+              firstRender:false
+            })
+          }
+
+          if(nextProps.reschedule_appointment_ret){
+              if(nextProps.reschedule_appointment_ret.success){
+                    let selected_bookings = [...this.state[this.state.reschedule_appointment.type]]
+                    console.log(selected_bookings,"updated_arr updated_arr")
+                    let  update_arr = selected_bookings.map((item)=>{
+                        if(item._id===this.state.reschedule_appointment.reschedule_id){
+                            return {
+                                ...item,
+                                appointmentTime:this.state.reschedule_appointment.appointmentTime
+                            }
+                        }else{
+                            return item
+                        }
+                    })
+                    this.setState({
+                        [this.state.reschedule_appointment.type]:update_arr
+                    })
+              }else{
+                
+              }
+          }
     }
 
     confirmBooking = (item,type) =>{
@@ -230,10 +276,29 @@ class AppointmentComponent extends Component {
             })
     }
 
+    selected_callback = (value) =>{
+        console.log(value,"value in selected_callback")
+        this.setState({
+            reschedule_selected:value
+        })
+    }
+
+    reschedule_appointment = (data) =>{
+        this.setState({
+            reschedule_appointment:{
+                type:data.bookingType,
+                reschedule_id:data.params.bookingId,
+                appointmentTime:data.body.appointmentTime
+            }
+        },()=>{
+            this.props.reschedule_appointment(data)
+        })
+    }
+
 
     render() {
+        console.log(this.state,"state in AppointmentLoading")
         let time_now = ((new Date()).getTime())
-        console.log(time_now,"time_now")
         // console.log(this.state,"this.state in AppointmentComponent")
         // console.log(this.state,"state in AppointmentComponent")
         if(!!this.state.get_bookings_loading){
@@ -254,6 +319,11 @@ class AppointmentComponent extends Component {
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
                 />
+
+                {/* <NotifFunc
+                    ret = {this.props.reschedule_appointment_ret}
+                    retClr = {this.props.reschedule_appointment_clr}
+                /> */}
                 <div className='col-md-8 col-xl-9'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
@@ -294,12 +364,19 @@ class AppointmentComponent extends Component {
                                      </div>
                                 </div>
 
-                                { (time_now<item.appointmentTime)  &&  <div className="row confrm_mar_sec">
+                                { (time_now<item.appointmentTime )  &&  <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle underline">Reschedule</p>
+                                <RescheduleComponent
+                                 reschedule_appointment = {this.reschedule_appointment}
+                                 value = {item}
+                                 slots = {this.state.slots}
+                                 selected_callback = {this.selected_callback}
+                                 defaultValue = {this.state.defaultDate}
+                                 type="upcoming_bookings"
+                                />
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings","cancelled_bookings")}>Cancel</text></p>
@@ -356,7 +433,14 @@ class AppointmentComponent extends Component {
                                     <p className="gr_con "><text>Confirmed</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle ">Reschedule</p>
+                                 <RescheduleComponent
+                                 reschedule_appointment = {this.reschedule_appointment}
+                                 value = {item}
+                                 slots = {this.state.slots}
+                                 selected_callback = {this.selected_callback}
+                                 defaultValue = {this.state.defaultDate}
+                                 type="confirmed_bookings"
+                                />
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings','cancelled_bookings')}>Cancel</text></p>
@@ -413,7 +497,14 @@ class AppointmentComponent extends Component {
                                     <p className="gr_con "><text>Confirm</text></p>
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="res_udle ">Reschedule</p>
+                                 <RescheduleComponent
+                                 reschedule_appointment = {this.reschedule_appointment}
+                                 value = {item}
+                                 slots = {this.state.slots}
+                                 selected_callback = {this.selected_callback}
+                                 defaultValue = {this.state.defaultDate}
+                                 type="cancelled_bookings"
+                                />
                                  </div>
                                  <div className="col-lg-4">
                                  <p className="con_re "><text>Cancelled</text></p>
@@ -526,8 +617,17 @@ class AppointmentComponent extends Component {
 const mapStateToProps = state => ({
     bookings: state.user.bookingData,
     getBookingRet:state.user.getBookingRet,
-    changeAppointRet:state.user.changeAppointRet
+    changeAppointRet:state.user.changeAppointRet,
+    timeSlot : state.user.timeSlot,
+    reschedule_appointment_ret:state.user.reschedule_appointment_ret
 })
 
-export default connect(mapStateToProps, {getBooking, getBookingClr, changeAppoint, changeAppointClr })(AppointmentComponent);
+export default connect(mapStateToProps, {
+    getBooking, 
+    getBookingClr, 
+    changeAppoint, 
+    changeAppointClr,
+    reschedule_appointment,
+    reschedule_appointment_clr,
+    getTimeslot })(AppointmentComponent);
 

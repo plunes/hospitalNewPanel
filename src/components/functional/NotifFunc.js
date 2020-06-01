@@ -26,6 +26,7 @@ const NotifFunc = (props) => {
           } 
         }
         props.retClr()
+        // setIniitialRender(true)
     }
 
     return (

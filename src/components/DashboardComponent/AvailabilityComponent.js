@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
 import  "./AvailabilityComponent.css";
 // import TimePicker from 'react-time-picker';
 import { connect } from "react-redux";
@@ -49,8 +47,6 @@ let obj =   {
          return obj
       }
       componentWillReceiveProps(nextProps){
-      
-        
         if(((!!nextProps.timeSlot) && (this.state.firstRender))){
           let arr = []
           nextProps.timeSlot.forEach((item,i)=>{
@@ -75,9 +71,7 @@ let obj =   {
          let timeString = `${hour}:${minutes} ${time.hour>12?'PM':'AM'}`
          return timeString
       }
-
       handleTimeSubmit = (data) =>{
-       
           let slot = JSON.parse(JSON.stringify(this.state.slots))
           let index  = ''
           let newSlot  = slot.filter((item,i)=>{
@@ -141,18 +135,6 @@ let obj =   {
           timeSlots:this.generateSlotsFormat()
         }))
       }
-
-      // componentWillReceiveProps(nextProps){
-      //   if(!!nextProps.setAvailabilityRet){
-      //     if(!!nextProps.setAvailabilityRet.success){
-      //       console.log();
-      //     }else{
-      //       console.log();
-      //     }
-      //     nextProps.setAvailabilityClr()
-      //     this.setLoadingOff()
-      //   }
-      // }
       
   generateTimeSlot = () =>{
     return(
@@ -211,11 +193,7 @@ generateSlotsFormat = () =>{
       }
       arr.push(obj)
     })
-  
-    
-    return arr
-
-   
+    return arr   
 }
 
 onOpenModal = () => {

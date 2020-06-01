@@ -12,6 +12,11 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 import { ToastProvider } from 'react-toast-notifications'
+import "react-widgets/dist/css/react-widgets.css";
+import Moment from 'moment'
+import momentLocalizer from 'react-widgets-moment';
+Moment.locale('en')
+momentLocalizer()
 
 
 if ("serviceWorker" in navigator) {
