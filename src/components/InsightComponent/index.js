@@ -30,10 +30,10 @@ class InsightComponent extends React.PureComponent {
         let seconds_diff = this.getSecondsDifferent(this.props.s.createdAt)
       return (
         <div className='row' key={this.props.index}>
-        <div className='col-md-2 text-right realtime'>
-            <span className="realtimeicon1"><img src="/realtimerows.svg" className="realtimeicon" alt=""></img></span>
+        <div className='col-md-2  realtime vertical_align_rish'>
+            <span className="realtimeicon1 center_align_rish vertical_align_rish"><img src="/realtimerows.svg" className="realtimeicon center_align_rish vertical_align_rish" alt=""></img></span>
         </div>
-        <div className='col-md-7'>
+        <div className='col-md-7 vertical_align_rish'>
             <div className="RealtimeUsername">
                 {this.props.s.userName}
             </div>
@@ -46,10 +46,10 @@ class InsightComponent extends React.PureComponent {
                     : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
             }
         </div>
-        <div className='col-md-3'>
+        <div className='col-md-3 vertical_align_rish'>
             {
                true ?
-                    <div className="text-center">
+                    <div style={{height:'100%'}} className="text-center">
                         <React.Fragment>
                         <TimerComponent 
                           seconds = {seconds_diff}

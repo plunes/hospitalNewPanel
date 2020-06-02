@@ -176,5 +176,14 @@ export const RESCHEDULE_APPOINTMENT_RET  = 'App/Appointments/RESCHEDULE_APPOINTM
 export const RESCHEDULE_APPOINTMENT_CLR  = 'App/Appointments/RESCHEDULE_APPOINTMENT_CLR'
 
 
+export const ACT_AS_ADMIN_RET  = 'App/Dashboard/ACT_AS_ADMIN_RET'
+export const ACT_AS_ADMIN_CLR  = 'App/Dashboard/ACT_AS_ADMIN_CLR'
+
+export const ADMIN_OTP_RET  = 'App/Dashboard/ADMIN_OTP_RET'
+export const ADMIN_OTP_CLR  = 'App/Dashboard/ADMIN_OTP_CLR'
+
+export const ADMIN_DETAILS_RET  = 'App/Dashboard/ADMIN_DETAILS_RET'
+export const ADMIN_DETAILS_CLR  = 'App/Dashboard/ADMIN_DETAILS_CLR'
+
 
 

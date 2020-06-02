@@ -138,7 +138,16 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
 
   RESCHEDULE_APPOINTMENT_CLR,
   RESCHEDULE_APPOINTMENT_RET,
-  SET_RESCHEDULE_APPOINTMENT
+  SET_RESCHEDULE_APPOINTMENT,
+
+  ACT_AS_ADMIN_RET,
+  ACT_AS_ADMIN_CLR,
+
+  ADMIN_OTP_CLR,
+  ADMIN_OTP_RET,
+
+  ADMIN_DETAILS_CLR,
+  ADMIN_DETAILS_RET
 
   } from './types';
 import history from '../history';
@@ -179,13 +188,145 @@ export const Unauth_Logout = () =>{
 }
 
 
+export const admin_details_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: ADMIN_DETAILS_CLR,
+    payload:{}
+  })
+}
+
+export const admin_details = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res,"res in act_as_admin");
+        dispatch({
+          type: ADMIN_DETAILS_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: ADMIN_DETAILS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: ADMIN_DETAILS_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
+}
+
+export const admin_otp_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: ADMIN_OTP_CLR,
+    payload:{}
+  })
+}
+
+export const admin_otp = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res,"res in act_as_admin");
+        dispatch({
+          type: ADMIN_OTP_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: ADMIN_OTP_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: ADMIN_OTP_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
+}
+
+
+export const act_as_admin_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: ACT_AS_ADMIN_CLR,
+    payload:{}
+  })
+}
+
+export const act_as_admin = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res,"res in act_as_admin");
+        dispatch({
+          type: ACT_AS_ADMIN_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: ACT_AS_ADMIN_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch({
+        type: ACT_AS_ADMIN_RET,
+        payload: {
+          success:false,
+          data:{},
+          message:"Unable to process request. Try again"
+        }
+      })
+    })
+}
+
 export const set_reschedule_appointment = (data) => dispatch =>{
   return  dispatch({
     type: SET_RESCHEDULE_APPOINTMENT,
     payload:data
   })
 }
-
 
 export const reschedule_appointment_clr = (data) => dispatch =>{
   return  dispatch({

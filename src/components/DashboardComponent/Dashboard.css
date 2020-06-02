@@ -303,7 +303,7 @@ hr
     
 }
 .second_scro{ 
-      width: 30vw;
+      width: auto;
       overflow: auto;
       overflow: auto;
       max-height: 37rem;
@@ -345,7 +345,9 @@ hr
       font-size: 16px;
       text-align: justify;
       margin-top: 8px;
-      margin-bottom: 30px;color: #676767a3;} 
+      margin-bottom: 1rem;
+      color: #676767a3;
+} 
       b, strong {
             font-weight: bolder !important;
             color: #000;
@@ -436,16 +438,13 @@ hr
 .dash_clr{background: #FBFBFB;}
 .business
       {
-            /* text-decoration: underline; */
             letter-spacing: 0;
             color: #333333;
             margin-left: .5rem;
-            margin-top: 1rem;
             font-size: 1.3rem;
             font-weight: bold;
             text-decoration: underline;
-            /* padding-top: 20px; */
-            padding-bottom: 20px;
+            margin-left: 1rem;
 }
 
 .selectBusinessPeriod
@@ -458,7 +457,8 @@ hr
       border: 1px solid #DCDCDC;
       border-radius: 5px;
       padding: 2%;
-      width: 68%;}
+      /* width: 68%; */
+}
 
 .businessPrice
       {font-size: 30px;
@@ -536,28 +536,34 @@ hr
     {
       border-bottom: 1px solid #F1F1F1;
       width: 100%;
-      margin-top: 1rem;
-          /* width: 58%;
-     margin-bottom: 20px; */
+      padding: 0.5rem 0rem 0.5rem 0rem;
 }
 
 .realtime
     {
           padding: .5rem;
     }
-.maximum_time{font-size: 1.0rem;color: #676767;opacity: 0.6;padding-left: 6rem;}
+.maximum_time{
+      font-size: 1.0rem;
+      color: #676767;
+      opacity: 0.6;
+      padding-right: 1rem;
+      margin-left: auto;
+}
 .real_ti_bd{
       border-bottom: 1px solid #F1F1F1;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
+      /* margin-top: 1rem;
+      margin-bottom: 1rem; */
 }
 .realtimeicon1
-    {border-radius: 2vw;
+    {
+      border-radius: 50%;
+      height: 4rem;
+      width: 4rem;
       border: 1px solid #BCD3F6;
-      padding: 10px 12px 12px 13px;
-
+      padding: 10px 10px 10px 10px;
       background-color: #F2F7FF;
-      margin-left: 0.6rem;
+      /* margin-left: 0.6rem; */
      }
       img.privc_icone {
             width: 26px;
@@ -569,7 +575,9 @@ hr
             margin-bottom: 1rem;
         }
 .realtimeicon
-    {width: 1rem;}
+    {
+          width: 2rem;
+    }
 
 .RealtimeUsername
     {
@@ -585,8 +593,8 @@ hr
 
 .RealtimeHr
     {
-      margin: .9rem !important;
-      }
+      margin: .2rem !important;
+    }
 
 .Timer
     {
@@ -645,7 +653,9 @@ hr
             bottom: 10px;
             right: 0;
             overflow-y: scroll;
-            overflow-x: hidden;position: absolute;height: 37rem;}
+            overflow-x: hidden;position: absolute;height: 37rem;
+            padding: .5rem;
+      }
       /* Scrollbar Styling */
       .custome_scrol ::-webkit-scrollbar {
       width: 10px;
@@ -667,6 +677,8 @@ hr
   #second_scro_is  {
         position: relative;
         overflow-y: scroll;
+        padding: 1rem;
+        height: 37rem;
   }
 
     ::-webkit-scrollbar {
@@ -683,4 +695,79 @@ hr
       -webkit-border-radius: 10px !important;
       border-radius: 10px !important;
       background: #c2c1c1 !important; 
+  }
+
+  .card_rish {
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px #00000029;
+      opacity: 1;
+  }
+  .add-center-wrapper{
+      min-height: 22rem;
+  }
+  .vertical_align_rish {
+      display: block;
+      margin-bottom: auto;
+      margin-top: auto;
+  }
+  .center_align_rish {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  .add-center-content{
+        height: 100%;
+  }
+  .no_center_img {
+      margin-top: 5rem;
+  }
+  .no-center-text {
+      text-align: center;
+      font-size: 1.2rem;
+      font-family: Regular 27px/33px Proxima Nova;
+      letter-spacing: 0px;
+      color: #676767;
+      opacity: 1;
+  }
+  .modal-wrapper{
+        /* padding: 0.5rem; */
+        min-height: 20rem;
+  }
+  .modal_heading {
+      text-align: center;
+      font-size: 2rem;
+      font: Regular 40px/46px Proxima Nova;
+      letter-spacing: 0px;
+      color: #333333;
+      opacity: 1;
+  }
+  .modal_content_rish{
+        margin-top: 2rem;
+  }
+  .modal_content_description{
+      font-size: 1.5rem;
+      text-align: center;
+      font: Regular 36px/45px Proxima Nova;
+      letter-spacing: 0px;
+      color: #333333;
+      opacity: 1;
+  }
+
+  .common_button_rish {
+      background: #01D35A 0% 0% no-repeat padding-box;
+      border-radius: 35px !important;
+      color: white;
+      font-size: 15px !important;
+      padding: 10px;
+      width: 100%;
+      border: none;
+  }
+
+  .white_button_rish{
+      background: #fff 0% 0% no-repeat padding-box !important; 
+      border: 1px solid #3333 !important;
+      color: #333333 !important;
+  }
+  .modal_footer_rish{
+        margin-top: 2rem;
   }

@@ -120,10 +120,16 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
 
   RESCHEDULE_APPOINTMENT_CLR,
   RESCHEDULE_APPOINTMENT_RET,
-  SET_RESCHEDULE_APPOINTMENT
+  SET_RESCHEDULE_APPOINTMENT,
 
-  
-  
+  ACT_AS_ADMIN_CLR,
+  ACT_AS_ADMIN_RET,
+
+  ADMIN_OTP_CLR,
+  ADMIN_OTP_RET,
+
+  ADMIN_DETAILS_RET,
+  ADMIN_DETAILS_CLR
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
 
@@ -186,6 +192,9 @@ const initialState = {
   submitOtpRet:false,
   notifCountFlag:false,
   reschedule_appointment_ret:false,
+  act_as_admin_ret:false,
+  admin_otp:false,
+  admin_details_ret:false,
   profileData:false,
   submit_query_ret:false,
   edit_location_ret:false,
@@ -223,6 +232,43 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case ADMIN_DETAILS_RET:
+      return {
+        ...state,
+        admin_details_ret:action.payload
+      };
+
+      case ADMIN_DETAILS_CLR:
+      return {
+        ...state,
+        admin_details_ret:false
+      };
+
+    case ADMIN_OTP_RET:
+      return {
+        ...state,
+        admin_otp_ret:action.payload
+      };
+
+      case ADMIN_OTP_CLR:
+      return {
+        ...state,
+        admin_otp_clr:false
+      };
+
+    case ACT_AS_ADMIN_RET:
+      return {
+        ...state,
+        act_as_admin_ret:action.payload
+      };
+
+      case ACT_AS_ADMIN_CLR:
+      return {
+        ...state,
+        act_as_admin_clt:false
+      };
+
 
     case RESCHEDULE_APPOINTMENT_RET:
       return {

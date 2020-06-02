@@ -82,7 +82,7 @@ class TimerComponent extends React.Component {
         if(true){
             return(
                <React.Fragment>
-                  <div className="Timer">{this.state.time.m }:&nbsp;
+                  <div className="Timer vertical_align_rish">{this.state.time.m }:&nbsp;
                     {this.state.time.s}
                 </div><text style={{fontSize:'.7rem'}}>Mins</text>
                 </React.Fragment>

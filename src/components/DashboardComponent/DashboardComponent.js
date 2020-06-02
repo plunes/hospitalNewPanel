@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 import { getInsights, updateRealPriceClr, clearUpdatePriceData,
      clearSolInsights, getSolutionInsights, getAllBookings,
       getMonthWiseUsers, updateRealPrice, setMount,
-      set_dash_data, get_business } from '../../actions/userActions'
+      set_dash_data, get_business,
+       act_as_admin, act_as_admin_clr,
+       admin_otp_clr, admin_otp,
+       admin_details, admin_details_clr
+    } from '../../actions/userActions'
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
@@ -13,12 +17,14 @@ import './Dashboard.css';
 import Modal from 'react-modal';
 import Loader from 'react-loader-spinner'
 import Slider from 'react-rangeslider'
-import Timer from 'react-compound-timer'
 import 'react-rangeslider/lib/index.css'
-import TimerComponent from '../TimerComponent'
 import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
 import InsightComponent from "../InsightComponent"
+import {
+    isValidPhoneNumber,
+  } from 'react-phone-number-input';
+import validator from "validator"
 
 const customStyles = {
     content: {
@@ -31,6 +37,13 @@ const customStyles = {
     }
 };
 
+const default_state = {
+    act_as_admin_ask:false,
+    act_as_admin_yes:false,
+    act_as_admin_no:false,
+    act_as_admin_enter_email:false,
+    act_as_admin_enter_otp:false
+}
 
 class DashboardComponent extends React.PureComponent {
     constructor(props) {
@@ -57,7 +70,17 @@ class DashboardComponent extends React.PureComponent {
             showBusiness :  true,
             ro_insight_count:50,
             user_map_loading:false,
-            business_day:7
+            business_day:7,
+            act_as_admin_flag:false,
+            act_as_admin_data:{
+                phone:'',
+                email:''
+            },
+            act_as_admin_ask:true,
+            act_as_admin_yes:false,
+            act_as_admin_no:false,
+            act_as_admin_enter_email:false,
+            act_as_admin_enter_otp:false
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleModal = this.handleModal.bind(this);
@@ -73,16 +96,76 @@ class DashboardComponent extends React.PureComponent {
         this.setTimer = this.setTimer.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps){
-    //     if(!!nextProps.solInsights){
-    //         this.setState({
-    //             solInsights:nextProps.solInsights
-    //         },()=>{
-    //             nextProps.clearSolInsights(),
-    //             nextProps.set_dash_data({...nextProps.data.dash_data, solInsights:nextProps.solInsights})
-    //         })
-    //     }
-    // }   
+    
+    componentWillReceiveProps(nextProps){
+        if(!!nextProps.act_as_admin_ret){
+            if(nextProps.act_as_admin_ret.success){
+                this.setState({
+                    act_admin_loading:false
+                },()=>this.handle_act_as_admin('act_as_admin_yes'))
+            }else{
+            this.setState({
+                ret:nextProps.act_as_admin_ret
+            })
+            }
+            nextProps.act_as_admin_clr()
+        }
+
+        if(!!nextProps.admin_details_ret){
+            if(nextProps.admin_details_ret.success){
+                this.setState({
+                    submit_admin_details_loading:false
+                })
+            }else{
+                this.setState({
+                    ret:nextProps.admin_details_ret
+                })
+            }
+            nextProps.admin_details_clr()
+        }
+     }   
+
+    send_details = () =>{
+        if(!isValidPhoneNumber(this.state.act_as_admin_data.phone)){
+            this.setState({
+                ret:{
+                    success:false,
+                    message:'Invalid mobile number'
+                }
+            })
+        }else if(!validator.isEmail(this.state.act_as_admin_data.email)){
+            this.setState({
+                ret:{
+                    success:false,
+                    message:'Invalid email address'
+                }
+            })
+        }else{
+           this.setState({
+               submit_admin_details_loading:true
+           },()=>this.props.admin_details({
+               email:this.state.act_as_admin_data.email,
+               mobileNumber:this.state.act_as_admin_data.phone
+           }))
+        }
+    }
+
+    handlePhoneChange = (e)=>{
+        let str = e.target.value
+        console.log(str.substring(0,3)," str.substring(0,2) in handlePhoneChange ")
+        if(str.substring(0,3)==='+91'){
+            
+        }else{
+            str = '+91'+e.target.value
+        }
+        this.setState({
+                act_as_admin_data:{
+                    ...this.state.act_as_admin_data,
+                    phone:str
+                }
+        })
+    }
+
     setTimer(time){
         setTimeout(async () => {
             await this.props.getSolutionInsights();
@@ -254,6 +337,26 @@ class DashboardComponent extends React.PureComponent {
            return seconds>600?0:600-seconds
     }
 
+    close_act_as_admin = () =>{
+        this.setState({
+            ...default_state,
+            act_as_admin_ask:true,
+            act_as_admin_flag:false
+        })
+    }
+    open_act_as_admin = () =>{
+        this.setState({
+            act_as_admin_flag:true
+        })
+    }
+
+    handle_act_as_admin = (prop) =>{
+        this.setState({
+            ...default_state,
+            [prop]:true
+        })
+    }
+
     render() {
         // console.log(this.props,"this.props in DashboardComponent")
         // console.log(this.state,"this.state in DashboardComponent")
@@ -304,7 +407,6 @@ class DashboardComponent extends React.PureComponent {
             return (
                 <React.Fragment>
                         <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
-                      
                         <NotifFunc 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
@@ -312,59 +414,60 @@ class DashboardComponent extends React.PureComponent {
                         <NotifFunc 
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
-                        /><div className="row">
-                            <div className=' dashboardsection dashrow1'>
-                                
-                                <p  className='DashboardHospitalName'>{this.props.user.name}</p>
-                                <p className="heading-right_ris"> For any query - Call at 7701805081</p>
-                                </div>
-                            </div>
+                        />
+                        <NotifFunc 
+                            ret ={this.state.ret}
+                            retClr = {()=>{this.setState({
+                                ret:false
+                            })}}
+                        />
+                        <div className="row">
+                                    <div className=' dashboardsection dashrow1'>    
+                                        <p  className='DashboardHospitalName'>{this.props.user.name}</p>
+                                        <p className="heading-right_ris"> For any query - Call at 7701805081</p>
+                                    </div>
+                        </div>
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
                                     <div className="custome_scrol">
                                     <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
-                                    {/* {this.props.real_insight_loader && <LoaderComponent/>} */}
-                                        <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon" alt=""></img><p className='business'>Real Time Insights<span className="maximum_time">Maximum time limit 10 Min</span></p></span><br></br>
-                                        {this.props.real_insight_loader?<LoaderComponent/>:
-                                            this.props.solInsights.length!==0 ? this.props.solInsights.map((s, index) =>{
-                                                let seconds_diff = this.getSecondsDifferent(s.createdAt)
-                                                return (
-                                                    (
-                                                       <InsightComponent 
-                                                       seconds_diff = {seconds_diff}
-                                                       s = {s}
-                                                       handleRealPrice = {this.handleRealPrice}
-                                                       index = {index}
-                                                       />)
-                                                )
-                                            }) : <div className="no_insights_wrapper_ris">
-                                                <div className="no_insight_image-wrapper">
-                                                <img className="no_isights_image" src="./Group 2053.svg" />
-                                                </div>
-                                                <div className="no_real_insights">No Real Time Insights yet </div>
-                                                </div>
-                                        }
+                                        <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish'>Real Time Insights</p>
+                                        <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span>
+                                        </span><br></br>
+                                            {this.props.real_insight_loader?<LoaderComponent/>:
+                                                this.props.solInsights.length!==0 ? this.props.solInsights.map((s, index) =>{
+                                                    let seconds_diff = this.getSecondsDifferent(s.createdAt)
+                                                    return (
+                                                        (
+                                                        <InsightComponent 
+                                                        seconds_diff = {seconds_diff}
+                                                        s = {s}
+                                                        handleRealPrice = {this.handleRealPrice}
+                                                        index = {index}
+                                                        />)
+                                                    )
+                                                }) : <div className="no_insights_wrapper_ris">
+                                                    <div className="no_insight_image-wrapper">
+                                                    <img className="no_isights_image" src="./Group 2053.svg" />
+                                                    </div>
+                                                    <div className="no_real_insights">No Real Time Insights yet </div>
+                                                    </div>
+                                            }
                                     </div>
                                     </div>
-                                    <div className='dashboardsection'>
-                                        <div className="bdr_dash">
-                                        <div className='row'>
-                                            <div className='col businessrow1col1'>
-                                                   <img style={{marginTop:'1rem'}} src="/business.svg" className="businessicon" alt=""></img>
-                                                   <p className='business'>Business</p>
-                                            </div>
-                                            <div className='col selectBusinessPeriod'>
-                                                <select onChange={this.handleDaysChange} name="days" value={this.state.business_day} className="selectBusiness">
-                                                    <option value='1'>Today</option>
-                                                    <option value='7'>Weekly</option>
-                                                    <option value='30'>Monthly</option>
-                                                    <option value='365'>Yearly</option>
-                                                </select>
-                                            </div>
-                                          
-                                        </div>
-                                        </div>
-                                        { this.state.showBusiness ? <div className='row'>
+                                    <div style={{padding:'0.5rem'}} className='dashboardsection card_rish add-center-wrapper'>
+                                                    <div style={{width:'100%'}} className=' businessrow1col1'>
+                                                        <span className='businessrow1col1 realtimewidth'>
+                                                            <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Business</p>
+                                                        </span>
+                                                        <span className="maximum_time vertical_align_rish"> <select onChange={this.handleDaysChange} name="days" value={this.state.business_day} className="selectBusiness">
+                                                                    <option value='1'>Today</option>
+                                                                    <option value='7'>Weekly</option>
+                                                                    <option value='30'>Monthly</option>
+                                                                    <option value='365'>Yearly</option>
+                                                                </select></span>
+                                                    </div>
+                                        { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
                                             <div className='col text-center'>
                                                 <p className="businessPrice businessEarn">&#8377;{!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):''}</p>
                                                 <p className="Earn">Business <br></br>Earned</p>
@@ -380,10 +483,9 @@ class DashboardComponent extends React.PureComponent {
 
                                     </div>
                                     <div className='dashboardsection'>
-                                        <span style={{marginTop:'1rem'}} className='businessrow1col1 width'>
-                                        <img src="/nouser.svg" className="businessicon" alt=""></img>
-                                        <p className='business'>Number of Users</p>
-                                        </span>
+                                    <span className='businessrow1col1 realtimewidth'>
+                                        <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Number of Users</p>
+                                      </span>
                                         <HighchartsReact
                                             highcharts={Highcharts}
                                             options={options}
@@ -391,11 +493,12 @@ class DashboardComponent extends React.PureComponent {
                                     </div>
                                     <br></br>
                                 </div>
-                                <div id="second_scro_is" className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 dashboardsection dashrow2col2 second_scro'>
-                                    <div>
+
+                                <div  className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 '>
+                                    <div id="second_scro_is" className="dashboardsection dashrow2col2 second_scro">
                                        <span className='businessrow1col1 realtimewidth'>
-                                       <img src="/Outline.svg" className="businessicon" alt=""></img><p className='business'>Actionable Insights</p>
-                                       </span>
+                                        <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business'>Actionable Insights</p>
+                                      </span>
                                         {this.props.act_insight_loader? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price </span>
@@ -404,15 +507,28 @@ class DashboardComponent extends React.PureComponent {
                                                 </div>
                                             )) :  <div className="no_insights_wrapper_ris">
                                             <div className="no_insight_image-wrapper">
-                                            <img className="no_isights_image" src="./Group 2055.svg" />
+                                              <img className="no_isights_image" src="./Group 2055.svg" />
                                             </div>
                                             <div className="no_real_insights">No Actionable Insights yet </div>
                                             </div>
                                         }
-                                        {/* <div className="text-center">
-                                            {this.props.insight.length !==0 &&  <button onClick={this.handleClick} className="DashboardViewMore">View more</button> }
-                                        </div> */}
                                     </div>
+                                    {/* <div className='add-center-wrapper card_rish'>
+                                    <span className='businessrow1col1 realtimewidth'>
+                                        <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p>
+                                      </span>
+                                      <div className="add-center-content">
+                                            <img src="/no_center_img.svg" alt="no_center_img" onClick={()=>this.open_act_as_admin()} className="no_center_img  center_align_rish cursor-pointer" />
+                                            <div >
+                                            <span onClick={()=>this.setState({
+                                                ret:{
+                                                    success:true,
+                                                    message:"Dummy Message"
+                                                }
+                                            })} className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>
+                                            </div>
+                                      </div>
+                                    </div> */}
                                     <Modal
                                         isOpen={this.state.modalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
@@ -492,6 +608,84 @@ class DashboardComponent extends React.PureComponent {
                                             :<p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p>}</div>
                                         <div className="text-center"><button style={{ fontSize: '18px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
                                     </Modal>
+                                    <Modal
+                                        isOpen={this.state.act_as_admin_flag}
+                                        onAfterOpen={this.afterOpenModal}
+                                        onRequestClose={this.close_act_as_admin}
+                                        style={customStyles}
+                                        ariaHideApp={false}
+                                        contentLabel="Example Modal" className='redeemModal secon_modal'>
+                                        <div className='text-right'><button type='button' onClick={this.close_act_as_admin} className='redeemCross'><img src="/cross.jpg" style={{ width: "65%" }} alt=""></img></button></div>
+                                        <div className="modal-wrapper">
+                                        <div>
+                                           
+                                            {this.state.act_as_admin_ask &&  <span className="modal_heading center_align_rish">Add Center</span> }
+                                            {this.state.act_as_admin_yes && <span className="modal_heading center_align_rish">
+                                            Otp Has been sent to the registered number"- Enter and Verify
+                                            </span>
+                                            }
+
+                                           {this.state.act_as_admin_no && <span className="modal_heading center_align_rish">
+                                            Provide email and mobile number for admin
+                                            </span>
+                                            }
+                                            </div>
+                                        <div className="modal_content_rish">
+                                            {this.state.act_as_admin_ask &&   <span className="modal_content_description center_align_rish">
+                                            Do you want to continue as Admin from the existing account?
+                                            </span> }
+                                            {this.state.act_as_admin_yes &&   <span className="modal_content_description center_align_rish">
+                                            <input type="int" placeholder="Enter OTP" className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                                            </span> }
+                                            {this.state.act_as_admin_no &&   <span className="modal_content_description center_align_rish">
+                                            <input type="text" onChange={(e)=>this.setState({act_as_admin_data:{
+                                                ...this.state.act_as_admin_data,
+                                                email:e.target.value
+                                            }})} placeholder="Admin email" value={this.state.act_as_admin_data.email} className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                                            <input type="tel" placeholder="Admin phone number" onChange={(e)=>this.handlePhoneChange(e)} value={this.state.act_as_admin_data.phone} className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                                            </span> }
+                                        </div>
+                                        <div className="modal_footer_rish row">
+                                                {this.state.act_as_admin_ask && 
+                                                <React.Fragment>
+                                                <div className="col-md-6">                           
+                                                    <button onClick={()=>{
+                                                        this.setState({
+                                                            act_admin_loading:true
+                                                        },()=>this.props.act_as_admin())
+                                                    }} className="common_button_rish white_button_rish">
+                                                        Yes
+                                                    </button>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                    <button onClick={()=>this.handle_act_as_admin('act_as_admin_no')} className="common_button_rish">
+                                                        No
+                                                    </button>
+                                                    </div>
+                                                    </React.Fragment>
+                                                    }
+
+                                                {this.state.act_as_admin_yes && 
+                                                <React.Fragment> 
+                                                    <div className="col-md-12">
+                                                    <button className="common_button_rish white_button_rish">
+                                                        Submit
+                                                    </button>
+                                                    </div>
+                                                    </React.Fragment>
+                                                }
+                                            {this.state.act_as_admin_no && 
+                                                <React.Fragment> 
+                                                    <div className="col-md-12">
+                                                    <button onClick={()=>this.send_details()} className="common_button_rish ">
+                                                        Send OTP
+                                                    </button>
+                                                    </div>
+                                                    </React.Fragment>
+                                                }   
+                                        </div>
+                                        </div>
+                                    </Modal>
                                 </div>
                             </div>
                         </div>
@@ -510,7 +704,10 @@ const mapStateToProps = state => ({
     businessLost: state.user.businessLost,
     solutionUsers: state.user.solutionUsers,
     updateRealPriceRet:state.user.updateRealPriceRet,
-    updatePriceDataRet:state.user.updatePriceDataRet
+    updatePriceDataRet:state.user.updatePriceDataRet,
+    act_as_admin_ret:state.user.act_as_admin_ret,
+    admin_otp_ret:state.user.admin_otp_ret,
+    admin_details_ret:state.user.admin_details_ret
 })
 
 export default connect(mapStateToProps, {updateRealPriceClr, 
@@ -523,5 +720,11 @@ export default connect(mapStateToProps, {updateRealPriceClr,
      updateRealPrice,
      set_dash_data,
      get_business,
+     act_as_admin_clr,
+     act_as_admin,
+     admin_otp_clr,
+     admin_otp,
+     admin_details,
+     admin_details_clr,
      clearSolInsights, setMount })(DashboardComponent);
 // Call userdetails from

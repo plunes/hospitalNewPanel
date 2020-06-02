@@ -2,6 +2,7 @@ import React from "react"
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import { getDay, timeToString } from "../../utils/common_utilities"
 import NotifFunc from "../functional/NotifFunc"
+import NewNotif from "../functional/NewNotif"
 
 class RescheduleComponent extends React.PureComponent {
         constructor(props){
@@ -28,6 +29,7 @@ class RescheduleComponent extends React.PureComponent {
                 this.props.slots.forEach(element => {
                     if(element.day===day){
                         ret = element
+                        ret.closed = element.closed
                         throw new Error("dummy_error_to_break_for_each")
                     }
                 });
@@ -71,29 +73,44 @@ class RescheduleComponent extends React.PureComponent {
          let  date = new Date(this.state.value)
          let day  = getDay(date.getDay())
          let slot = this.get_slot(day)
-         let flag = this.valid_time(slot, date.getMinutes(), date.getHours())
-         if(!!flag){
-             console.log("Volla Entered a valid time")
-             this.props.reschedule_appointment({
-                 bookingType:this.props.type,
-                 params:{
-                     bookingId:this.props.value._id,
-                     bookingStatus:"reschedule"
-                 },
-                 body:{
-                     timeSlot:flag,
-                     appointmentTime:date.getTime()
+         let closed = slot.closed
+         delete slot.closed
+         try {
+            if(!!closed){
+                throw new Error("dummy_error_thrown")
+            }
+            let flag = this.valid_time(slot, date.getMinutes(), date.getHours())
+            if(!!flag){
+                console.log("Volla Entered a valid time")
+                this.props.reschedule_appointment({
+                    bookingType:this.props.type,
+                    params:{
+                        bookingId:this.props.value._id,
+                        bookingStatus:"reschedule"
+                    },
+                    body:{
+                        timeSlot:flag,
+                        appointmentTime:date.getTime()
+                    }
+                })
+            }else{
+               console.log("Sorry Invalid time")   
+               this.setState({
+                   ret:{
+                       success:false,
+                       message:"Doctor not available on selected time"
+                   }
+               })
+            }
+         }
+         catch(e){
+             console.log(e)
+             this.setState({
+                 ret:{
+                     success:false,
+                     message:"Doctor not available on selected day"
                  }
              })
-         }else{
-            console.log("Sorry Invalid time")   
-            this.setState({
-                toggler:!this.state.toggler,
-                ret:{
-                    success:false,
-                    message:"Invalid Time Slot"
-                }
-            })
          }
         }
         render(){
@@ -105,10 +122,9 @@ class RescheduleComponent extends React.PureComponent {
             }else{
                 return (
                     <React.Fragment>
-                         <NotifFunc
+                         <NewNotif
                             ret = {this.state.ret}
                             retClr = {()=>this.setState({ret:false})}
-                            toggler = {this.state.toggler}
                 />
                     <div className="row"> 
                         <div className="col-md-6 ">
