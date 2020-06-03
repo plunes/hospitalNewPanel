@@ -5,8 +5,6 @@ export  const isEmpty = (obj)  => {
     }
     return true;
 }
-
-
 export const  generateSlotsFormat = (data) =>{
     let slots = JSON.parse(JSON.stringify(data || []))
     let arr = []
@@ -77,4 +75,14 @@ let obj =   {
         }
     }
        return obj
+    }
+
+    export const get_url_params = (sParam) => {
+      let sPageURL = window.location.search.substring(1)
+      let sURLVariables = sPageURL.split('&')
+      for (let i = 0; i < sURLVariables.length; i++){
+          let sParameterName = sURLVariables[i].split('=');
+          if (sParameterName[0] == sParam)
+          return sParameterName[1]
+      }
     }

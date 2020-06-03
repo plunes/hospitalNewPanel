@@ -147,7 +147,16 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   ADMIN_OTP_RET,
 
   ADMIN_DETAILS_CLR,
-  ADMIN_DETAILS_RET
+  ADMIN_DETAILS_RET,
+
+  ADD_CENTER_CLR,
+  ADD_CENTER_RET,
+
+  GET_CENTERS_CLR,
+  GET_CENTERS_RET,
+  SET_CENTERS_DATA,
+  SET_LOCATION_TOGGLER,
+  SET_OPEN_MAP
 
   } from './types';
 import history from '../history';
@@ -187,6 +196,142 @@ export const Unauth_Logout = () =>{
   window.location.reload()
 }
 
+export const set_open_map = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_OPEN_MAP,
+    payload:data
+  })
+}
+
+export const set_location_toggler = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_LOCATION_TOGGLER,
+    payload:data
+  })
+}
+
+export const set_centers_data = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_CENTERS_DATA,
+    payload:data
+  })
+}
+
+
+export const get_centers_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_CENTERS_CLR,
+    payload:{}
+  })
+}
+
+export const get_centers = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.get(baseUrl + `user/getAllCenters`,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res,"res in get_Center");
+        dispatch({
+          type: GET_CENTERS_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: GET_CENTERS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      try{
+        dispatch({
+          type: GET_CENTERS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: GET_CENTERS_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }  
+    })
+}
+
+
+
+export const add_center_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: ADD_CENTER_CLR,
+    payload:{}
+  })
+}
+
+export const add_center = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.post(baseUrl + `/admin/addCenter`, data, { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      if (res.status === 201) {
+        console.log(res,"res in add_center");
+        dispatch({
+          type: ADD_CENTER_RET,
+          payload: {
+            success:true,
+            data:res.data.user
+          }
+        })
+      }else{
+        dispatch({
+          type: ADD_CENTER_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      try{
+        dispatch({
+          type: ADD_CENTER_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: ADD_CENTER_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }  
+    })
+}
+
 
 export const admin_details_clr = (data) => dispatch =>{
   return  dispatch({
@@ -197,9 +342,9 @@ export const admin_details_clr = (data) => dispatch =>{
 
 export const admin_details = (data) => async dispatch => {
   let token = localStorage.getItem('token')
-  return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
+  return await axios.put(baseUrl + `/user/RequestForAdmin`, data, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 201) {
+      if (res.status === 200) {
         console.log(res,"res in act_as_admin");
         dispatch({
           type: ADMIN_DETAILS_RET,
@@ -221,14 +366,26 @@ export const admin_details = (data) => async dispatch => {
     })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: ADMIN_DETAILS_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: ADMIN_DETAILS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: ADMIN_DETAILS_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }  
     })
 }
 
@@ -241,10 +398,10 @@ export const admin_otp_clr = (data) => dispatch =>{
 
 export const admin_otp = (data) => async dispatch => {
   let token = localStorage.getItem('token')
-  return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
+  return await axios.put(baseUrl + `/user/verifyAndAddAdmin`, data, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
-        console.log(res,"res in act_as_admin");
+        console.log(res,"res in admin_otp");
         dispatch({
           type: ADMIN_OTP_RET,
           payload: {
@@ -264,15 +421,27 @@ export const admin_otp = (data) => async dispatch => {
       }
     })
     .catch((e) => {
-      console.log(e)
-      dispatch({
-        type: ADMIN_OTP_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      console.log(e.response)
+      try{
+        dispatch({
+          type: ADMIN_OTP_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: ADMIN_OTP_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }   
     })
 }
 
@@ -288,7 +457,7 @@ export const act_as_admin = (data) => async dispatch => {
   let token = localStorage.getItem('token')
   return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 201) {
+      if (res.status === 200) {
         console.log(res,"res in act_as_admin");
         dispatch({
           type: ACT_AS_ADMIN_RET,

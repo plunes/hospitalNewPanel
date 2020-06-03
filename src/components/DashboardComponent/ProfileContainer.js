@@ -5,7 +5,7 @@ import './Profile.css';
 import Modal from "react-responsive-modal";
 import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr,
    getProfileDetails, updateBanner, updateBannerClr, updateAchievement, updateAchievementClr, editBio, editBioClr,
-   getUserDetails, edit_location_clr, edit_location, get_user_info, set_user_info } from "../../actions/userActions";
+   getUserDetails, edit_location_clr, edit_location, get_user_info, set_user_info, set_open_map } from "../../actions/userActions";
 import ProfileImage from '../functional/ProfileImage';
 import ProfileBanner from '../functional/ProfileBanner';
 import DoctorComponent from "../functional/DoctorComponent"
@@ -34,6 +34,7 @@ class ProfileContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      flag_for_map:true,
       prof_data:{
         achievements:[]
       },
@@ -69,6 +70,16 @@ class ProfileContainer extends React.PureComponent {
 
 
   componentWillReceiveProps(nextProps){
+
+    if(this.state.flag_for_map){
+      if(!!nextProps.open_map){
+        
+        this.setState({
+          flag_for_map:false
+        })
+      }
+    }
+   
 
     if(!!!isEmpty(nextProps.prof_data)){
       this.setState({
@@ -603,7 +614,8 @@ const mapStateToProps = state => ({
   updateAchievementRet:state.user.updateAchievementRet,
   editBioRet:state.user.editBioRet,
   profileData:state.user.profileData,
-  edit_location_ret:state.user.edit_location_ret
+  edit_location_ret:state.user.edit_location_ret,
+  open_map:state.user.open_map
 })
 
 export default connect(mapStateToProps, { 
@@ -623,5 +635,6 @@ export default connect(mapStateToProps, {
   edit_location,
   edit_location_clr,
   get_user_info,
-  set_user_info
+  set_user_info,
+  set_open_map
  })(ProfileContainer);

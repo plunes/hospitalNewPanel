@@ -326,6 +326,7 @@ body {
 .auto-center_ris {
   margin-left: auto;
   margin-right: auto;
+  display: block;
 }
 
 .forgot_pass_wrap{
@@ -541,4 +542,22 @@ input[type="date"]:focus:before {
 
 .img-loading-small_rish {
   background: transparent url('images/loading-spinner.gif') center no-repeat;
+}
+
+.hospital_center_img{
+  width: 6rem;
+}
+.sub_heading_rish{
+  font-size: 1.2rem;
+}
+.centers-wrap{
+  margin-top: 1rem;
+}
+.add_loaction_wrapper{
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.heading_rish{
+  font-weight: 600;
+  font-size: 1.8rem;
 }

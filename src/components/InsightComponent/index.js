@@ -26,7 +26,7 @@ class InsightComponent extends React.PureComponent {
 
 
     render(){
-        console.log(this.props,"this.props in Insight")
+        // console.log(this.props,"this.props in Insight")
         let seconds_diff = this.getSecondsDifferent(this.props.s.createdAt)
       return (
         <div className='row' key={this.props.index}>

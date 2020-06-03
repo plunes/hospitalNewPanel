@@ -185,5 +185,14 @@ export const ADMIN_OTP_CLR  = 'App/Dashboard/ADMIN_OTP_CLR'
 export const ADMIN_DETAILS_RET  = 'App/Dashboard/ADMIN_DETAILS_RET'
 export const ADMIN_DETAILS_CLR  = 'App/Dashboard/ADMIN_DETAILS_CLR'
 
+export const ADD_CENTER_RET  = 'App/Dashboard/ADD_CENTER_RET'
+export const ADD_CENTER_CLR  = 'App/Dashboard/ADD_CENTER_CLR'
 
+export const SET_CENTERS_DATA  = 'App/Dashboard/SET_CENTERS_DATA'
 
+export const GET_CENTERS_RET  = 'App/Dashboard/GET_CENTERS_RET'
+export const GET_CENTERS_CLR  = 'App/Dashboard/GET_CENTERS_CLR'
+
+export const SET_LOCATION_TOGGLER  = 'App/Dashboard/SET_LOCATION_TOGGLER'
+
+export const SET_OPEN_MAP  = 'App/Profile/SET_OPEN_MAP'

@@ -18,13 +18,15 @@ import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
    remove_notif_count_ret, set_notif_count, getUserDetails, get_user_info,
-   get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url } from "../../actions/userActions"
+   get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url,
+   get_centers, get_centers_clr , set_centers_data, set_location_toggler} from "../../actions/userActions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
 import io from "socket.io-client"
 import Notify from '../functional/Notify';
 import { isEmpty } from "../../utils/common_utilities"
+import Centers from "../Centers"
 
 const initialState = {
   dash: '',
@@ -41,7 +43,8 @@ const initialState = {
   myCataloge: '',
   addDoc: '',
   dev: '',
-  changePass:''
+  changePass:'',
+  centers:''
 }
 export class DashboardPage extends React.PureComponent {
   constructor() {
@@ -59,6 +62,7 @@ export class DashboardPage extends React.PureComponent {
         payment: '',
         editProf: '',
         myCataloge: '',
+        centers:'',
         addDoc: '',
         dev: '',
         changePass:'',
@@ -135,6 +139,11 @@ export class DashboardPage extends React.PureComponent {
                   user_info:{...nextProps.get_user_info_ret.data},
                   get_user_info_loading:false
                 },()=>{
+                  if(!!this.state.user_info.isAdmin){
+                    this.setState({
+                      get_centers_loading:true
+                    },()=>nextProps.get_centers())
+                  }
                   nextProps.setMount({...this.props.mount,prof_mount:true})
                   nextProps.set_user_info({...this.state.user_info})
                 })
@@ -144,21 +153,39 @@ export class DashboardPage extends React.PureComponent {
           nextProps.get_user_info_clr()
         }
 
-        if(!!this.state.initial_render){
-          if(!!!isEmpty(nextProps.user.userDetail)){
-            if(!!!nextProps.user.userDetail.geoLocation){
+        
+        if(!!nextProps.get_centers_ret){
+          // console.log(nextProps.get_user_info_ret,"nextProps.get_user_info_ret")
+          if(!!nextProps.get_centers_ret.success){
                 this.setState({
-                  initial_render:false,
-                  Notify:{
-                    ...this.state.Notify,
-                    success:{
-                      message:'Please make sure to update you location in profile section to avail better services'
-                    }
-                  }
+                  centers_info:{...nextProps.get_centers_ret.data},
+                  get_centers_loading:false
+                },()=>{
+                  nextProps.setMount({...this.props.mount,centers_mount:true})
+                  nextProps.set_centers_data({...this.state.centers_info})
                 })
-            }
+          }else{
+              console.log("Error in getting the proifle Details")
           }
+          nextProps.get_centers_clr()
         }
+
+        // if(!!this.state.initial_render){
+        //   if(!!!isEmpty(nextProps.user.userDetail)){
+        //     if(!!!nextProps.user.userDetail.geoLocation){
+        //       nextProps.set_location_toggler(true)
+        //         // this.setState({
+        //         //   initial_render:false,
+        //         //   Notify:{
+        //         //     ...this.state.Notify,
+        //         //     success:{
+        //         //       message:'Please make sure to update you location in profile section to avail better services'
+        //         //     }
+        //         //   }
+        //         // })
+        //     }
+        //   }
+        // }
 
         // if(!!this.props.mount.notif_mount){
         //   if(!!this.props.notif_data){
@@ -232,7 +259,12 @@ export class DashboardPage extends React.PureComponent {
       this.setState({
       ...initialState, changePass:'active'
       })
+    } else if (this.props.location.pathname == '/dashboard/centers') {
+      this.setState({
+      ...initialState, centers:'active'
+      })
     }
+
     this.setState({
       act_insight_loader:true,
       real_insight_loader:true,
@@ -366,6 +398,13 @@ export class DashboardPage extends React.PureComponent {
      dev:'active'
     });
   }
+  toggleCenters =  () => {
+    this.setState({
+     ...initialState,
+     centers:'active'
+    });
+  }
+
 
   socketEmit = () => {
     let data = {
@@ -375,9 +414,7 @@ export class DashboardPage extends React.PureComponent {
 
     const pathLocation = window.location.host;
       if(!!pathLocation) {
-    console.log('pathLocation : ', pathLocation);
          if(pathLocation === 'hospital.plunes.com') {
-      console.log('PROD');
       // Production baseUrl
               baseUrl = 'https://api.plunes.com?userId='
        }else{
@@ -442,7 +479,7 @@ getNotifications = (data) =>{
 }
 
   render() {
-    console.log(this.props,"this.props.baseUrl")
+    // console.log(this.props,"this.props.baseUrl")
     // console.log(this.state,"this.state in Dashboard page")
     // console.log(this.props,"this.props in Dashboard page")
     if(!!!localStorage.getItem('token')){
@@ -483,10 +520,13 @@ getNotifications = (data) =>{
                               toggleManage = {this.toggleManage}
                               toggleHelp = {this.toggleHelp}
                               toggleAbout = {this.toggleAbout}
+                              toggleCenters = {this.toggleCenters}
+                              user_info = {this.state.user_info}
                             />
                         </div>
                   {(this.props.location.pathname === '/dashboard')?
                   <DashboardComponent
+                  get_centers_loading = {this.props.get_centers_loading}
                   business_data = {this.props.dash_data.business_data}
                   solInsights = {this.state.solInsights}
                   insight = {this.state.insight}
@@ -520,7 +560,10 @@ getNotifications = (data) =>{
                   />:(this.props.location.pathname === '/dashboard/editProfile')?
                   <EditProfileComponent />:(this.props.location.pathname === '/dashboard/change-password')?
                   <ChangePassword />:(this.props.location.pathname === '/dashboard/payments')?
-                  <PaymentComponent />:''}
+                  <PaymentComponent />:(this.props.location.pathname === '/dashboard/centers')?
+                  <Centers
+                  get_centers_loading = {this.state.get_centers_loading}
+                  location={this.props.location} />:''}
         </div>
         </div>
         </div>
@@ -564,6 +607,10 @@ set_user_info,
 get_business,
 get_business_clr,
 set_business_data,
-base_url
+base_url,
+get_centers,
+get_centers_clr,
+set_location_toggler,
+set_centers_data
 })(DashboardPage);
 

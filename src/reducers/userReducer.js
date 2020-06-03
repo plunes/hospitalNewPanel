@@ -129,7 +129,17 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   ADMIN_OTP_RET,
 
   ADMIN_DETAILS_RET,
-  ADMIN_DETAILS_CLR
+  ADMIN_DETAILS_CLR,
+
+  ADD_CENTER_RET,
+  ADD_CENTER_CLR,
+
+  GET_CENTERS_CLR,
+  GET_CENTERS_RET,
+  SET_CENTERS_DATA,
+  SET_LOCATION_TOGGLER,
+
+  SET_OPEN_MAP
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
 
@@ -200,6 +210,9 @@ const initialState = {
   edit_location_ret:false,
   get_user_info_ret:false,
   business_ret:false,
+  add_center_ret:false,
+  location_toggler:false,
+  open_map:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -226,12 +239,72 @@ const initialState = {
     },
     prof_data:{
 
+    },
+    centers_data:{
+        centers_list:[]
     }
   }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+    case SET_LOCATION_TOGGLER:
+      return {
+        ...state,
+        location_toggler:action.payload
+      };
+
+    case SET_OPEN_MAP:
+      return {
+        ...state,
+        open_map:action.payload
+      };
+
+    case GET_CENTERS_RET:
+      return {
+        ...state,
+        add_center_ret:action.payload
+      };
+
+    case GET_CENTERS_CLR:
+      return {
+        ...state,
+        add_center_ret:false
+      };
+
+      case ADD_CENTER_CLR:
+      return {
+        ...state,
+        add_center_ret:false
+      };
+
+      case SET_CENTERS_DATA:
+        return {
+          ...state,
+        data:{
+          ...state.data,
+          centers_data:{
+            ...state.data.centers_data,
+            ...action.payload
+          }
+        }
+        }
+
+
+    case ADD_CENTER_RET:
+      return {
+        ...state,
+        add_center_ret:action.payload
+      };
+
+      case ADD_CENTER_CLR:
+      return {
+        ...state,
+        add_center_ret:false
+      };
+
+     
 
     case ADMIN_DETAILS_RET:
       return {
@@ -254,7 +327,7 @@ export default function (state = initialState, action) {
       case ADMIN_OTP_CLR:
       return {
         ...state,
-        admin_otp_clr:false
+        admin_otp_ret:false
       };
 
     case ACT_AS_ADMIN_RET:
@@ -266,7 +339,7 @@ export default function (state = initialState, action) {
       case ACT_AS_ADMIN_CLR:
       return {
         ...state,
-        act_as_admin_clt:false
+        act_as_admin_ret:false
       };
 
 

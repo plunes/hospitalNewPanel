@@ -1,7 +1,6 @@
 import React from "react"
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import { getDay, timeToString } from "../../utils/common_utilities"
-import NotifFunc from "../functional/NotifFunc"
 import NewNotif from "../functional/NewNotif"
 
 class RescheduleComponent extends React.PureComponent {
@@ -16,6 +15,13 @@ class RescheduleComponent extends React.PureComponent {
             }
         }
 
+        componentWillReceiveProps(nextProps){
+            if(nextProps.success_reschedule_id === nextProps.value._id){
+                this.setState({reschedule_flag:false})
+                nextProps.remove_success_id()
+            }
+        }
+
         reschedule_click = () =>{
             this.setState(
                 {
@@ -24,12 +30,11 @@ class RescheduleComponent extends React.PureComponent {
         }
 
         get_slot = (day) =>{
-            let ret = ''
+            let ret = {}
             try{
                 this.props.slots.forEach(element => {
                     if(element.day===day){
                         ret = element
-                        ret.closed = element.closed
                         throw new Error("dummy_error_to_break_for_each")
                     }
                 });

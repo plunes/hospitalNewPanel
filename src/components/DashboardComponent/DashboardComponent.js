@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import DashboardHeader from './DashboardHeader';
-import SidebarComponent from './SidebarComponent';
 import { connect } from 'react-redux';
 import { getInsights, updateRealPriceClr, clearUpdatePriceData,
      clearSolInsights, getSolutionInsights, getAllBookings,
@@ -8,7 +6,12 @@ import { getInsights, updateRealPriceClr, clearUpdatePriceData,
       set_dash_data, get_business,
        act_as_admin, act_as_admin_clr,
        admin_otp_clr, admin_otp,
-       admin_details, admin_details_clr
+       admin_details, admin_details_clr,
+       get_user_info,
+       set_user_info,
+       get_centers,
+       set_location_toggler,
+       set_open_map
     } from '../../actions/userActions'
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
@@ -18,6 +21,7 @@ import Modal from 'react-modal';
 import Loader from 'react-loader-spinner'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
+import AddLocationTab from "../AddLocationTab"
 import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
 import InsightComponent from "../InsightComponent"
@@ -25,7 +29,8 @@ import {
     isValidPhoneNumber,
   } from 'react-phone-number-input';
 import validator from "validator"
-
+import { Link } from "react-router-dom"
+import { isEmpty } from "../../utils/common_utilities"
 const customStyles = {
     content: {
         top: '50%',
@@ -37,18 +42,22 @@ const customStyles = {
     }
 };
 
+
 const default_state = {
     act_as_admin_ask:false,
     act_as_admin_yes:false,
     act_as_admin_no:false,
     act_as_admin_enter_email:false,
-    act_as_admin_enter_otp:false
+    act_as_admin_enter_otp:false,
+    act_as_admin_success:false
 }
 
 class DashboardComponent extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
+            password:false,
+            initial_render:true,
             rowsToDisplay: 5,
             modalIsOpen: false,
             realModalIsOpen : false,
@@ -74,7 +83,9 @@ class DashboardComponent extends React.PureComponent {
             act_as_admin_flag:false,
             act_as_admin_data:{
                 phone:'',
-                email:''
+                email:'',
+                password:'',
+                otp:''
             },
             act_as_admin_ask:true,
             act_as_admin_yes:false,
@@ -99,9 +110,11 @@ class DashboardComponent extends React.PureComponent {
     
     componentWillReceiveProps(nextProps){
         if(!!nextProps.act_as_admin_ret){
+            console.log(nextProps.act_as_admin_ret,"nextProps.act_as_admin_ret")
             if(nextProps.act_as_admin_ret.success){
                 this.setState({
-                    act_admin_loading:false
+                    act_admin_loading:false,
+                    act_as_admin_self:true,
                 },()=>this.handle_act_as_admin('act_as_admin_yes'))
             }else{
             this.setState({
@@ -110,18 +123,51 @@ class DashboardComponent extends React.PureComponent {
             }
             nextProps.act_as_admin_clr()
         }
+        if(!!nextProps.admin_otp_ret){
+            console.log(nextProps.admin_otp_ret,"nextProps.admin_otp_ret")
+            if(nextProps.admin_otp_ret.success){
+                if(this.state.act_as_admin_other){
+                    nextProps.set_user_info({...this.props.prof_data,isCenter:true})
+                }else{
+                     nextProps.set_user_info({...this.props.prof_data,isAdmin:true})
+                     nextProps.get_centers()
+                }
+                this.setState({
+                    submit_admin_otp_loading:false
+                },()=>this.handle_act_as_admin('act_as_admin_success'))
+            }else{
+                this.setState({
+                    ret:nextProps.admin_otp_ret
+                })
+            }
+            nextProps.admin_otp_clr()
+        }
 
         if(!!nextProps.admin_details_ret){
+            console.log(nextProps.admin_details_ret,"nextProps.admin_details_ret")
             if(nextProps.admin_details_ret.success){
                 this.setState({
-                    submit_admin_details_loading:false
-                })
+                    submit_admin_details_loading:false,
+                    act_as_admin_other:true
+                },()=>this.handle_act_as_admin('act_as_admin_yes'))
             }else{
                 this.setState({
                     ret:nextProps.admin_details_ret
                 })
             }
             nextProps.admin_details_clr()
+        }
+
+        if(!!this.state.initial_render){
+            if(!!!isEmpty(nextProps.prof_data)){
+                console.log(nextProps.prof_data,"prof_data")
+              if(!!!nextProps.prof_data.geoLocation){
+                this.setState({
+                    initial_render:false
+                })
+                nextProps.set_location_toggler(true)
+              }
+            }
         }
      }   
 
@@ -173,7 +219,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handleSolutionSliderChange(value){
-       // console.log(value, 'value')
         const { realUpdatePrice } = this.state
         let newPrice = realUpdatePrice - realUpdatePrice * value /100
         this.setState({
@@ -205,16 +250,12 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async handleRealPrice(select) {
-        // console.log(select,"select in handleRealProce")
         this.setState({
             realModalIsOpen :  true,
             realServiceName: select.serviceName,
             realUpdatePrice : select.userPrice,
             realUpdateData : select
         })
-        //await this.props.updateRealPrice(select);
-        //await this.props.getSolutionInsights();
-
     }
 
     handleRealModal() {
@@ -244,11 +285,6 @@ class DashboardComponent extends React.PureComponent {
         this.setState({
             actionablePriceLoading:true
         },()=>this.props.sendUpdateData(data))
-        
-        //console.log('Anshul')
-        // this.setState({
-        //     modalIsOpen: false,
-        // })
     }
      handleRealSubmit(e) {
         e.preventDefault();
@@ -263,16 +299,6 @@ class DashboardComponent extends React.PureComponent {
         }) 
         //console.log('Anshul')
     }
-
-    // handleChange(e) {
-    //     console.log(typeof (e.target.value), 'value')
-        
-    //     this.setState({
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
-
     handleUpdatePrice(updateData) {
         //console.log(updateData, 'update data')
         this.setState({
@@ -340,7 +366,15 @@ class DashboardComponent extends React.PureComponent {
     close_act_as_admin = () =>{
         this.setState({
             ...default_state,
+            act_as_admin_data:{
+                email:'',
+                otp:'',
+                password:'',
+                phone:''
+            },
             act_as_admin_ask:true,
+            act_as_admin_other:false,
+            act_as_admin_self:false,
             act_as_admin_flag:false
         })
     }
@@ -351,15 +385,55 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handle_act_as_admin = (prop) =>{
+        console.log(prop,"inside handle_act_as_admin>>>>>>>>>>")
         this.setState({
             ...default_state,
             [prop]:true
         })
     }
 
+    submit_admin_otp = ()=>{
+        if(this.state.act_as_admin_self){
+            if(this.state.act_as_admin_data.otp.length!==4){
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:"OTP must be 4 characters long"
+                    }
+                })
+            }else if(this.state.act_as_admin_data.password.length<=6){
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:"Password must be greater than 6 characters"
+                    }
+                })
+            }else{
+                this.props.admin_otp({
+                    otp:this.state.act_as_admin_data.otp,
+                    password:this.state.act_as_admin_data.password
+                })
+            }
+        }else{
+            if(this.state.act_as_admin_data.otp.length!==4){
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:"OTP must be 4 characters long"
+                    }
+                })
+            }else{
+                this.props.admin_otp({
+                    otp:this.state.act_as_admin_data.otp
+                })
+            }
+        }
+      
+    }
+
     render() {
-        // console.log(this.props,"this.props in DashboardComponent")
-        // console.log(this.state,"this.state in DashboardComponent")
+        console.log(this.props,"this.props in DashboardComponent")
+        console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
         const options = {
             title: {
@@ -423,10 +497,12 @@ class DashboardComponent extends React.PureComponent {
                         />
                         <div className="row">
                                     <div className=' dashboardsection dashrow1'>    
-                                        <p  className='DashboardHospitalName'>{this.props.user.name}</p>
+                                        <p  className='heading_rish'>{this.props.user.name}</p>
                                         <p className="heading-right_ris"> For any query - Call at 7701805081</p>
                                     </div>
                         </div>
+                        {this.props.location_toggler  &&   <AddLocationTab /> }
+                      
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
                                     <div className="custome_scrol">
@@ -513,22 +589,19 @@ class DashboardComponent extends React.PureComponent {
                                             </div>
                                         }
                                     </div>
-                                    {/* <div className='add-center-wrapper card_rish'>
+                                   {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
                                     <span className='businessrow1col1 realtimewidth'>
-                                        <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p>
+                                        {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p></React.Fragment>:
+                                         <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addUsers=true"> <p className='business vertical_align_rish cursor-pointer'>Add Centre</p></Link></React.Fragment> }
                                       </span>
                                       <div className="add-center-content">
-                                            <img src="/no_center_img.svg" alt="no_center_img" onClick={()=>this.open_act_as_admin()} className="no_center_img  center_align_rish cursor-pointer" />
+                                      {!!this.props.get_centers_laoding? <LoaderComponent/>: ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/no_center_img.svg" onClick={()=>this.open_act_as_admin()} alt="no_center_img" className="no_center_img  center_align_rish cursor-pointer" /></React.Fragment>:
+                                         <React.Fragment><Link to="/dashboard/centers?addUsers=true"><img src="/no_center_img.svg" alt="no_center_img"  className="no_center_img  center_align_rish cursor-pointer" /></Link></React.Fragment> }
                                             <div >
-                                            <span onClick={()=>this.setState({
-                                                ret:{
-                                                    success:true,
-                                                    message:"Dummy Message"
-                                                }
-                                            })} className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>
+                                           {!this.props.get_centers_laoding &&  <span className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>}
                                             </div>
                                       </div>
-                                    </div> */}
+                                    </div>}
                                     <Modal
                                         isOpen={this.state.modalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
@@ -579,6 +652,7 @@ class DashboardComponent extends React.PureComponent {
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal secon_modal'>
                                         <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.jpg" style={{ width: "65%" }} alt=""></img></button></div>
+                                        <span style={{marginBottom:'2rem'}} className="modal_heading center_align_rish">Real Time Prediction</span>
                                         <h2 className="yout_ctl" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                         <div><p className="serv_ces">{this.state.realServiceName}</p></div>
                                         <div>   
@@ -618,10 +692,11 @@ class DashboardComponent extends React.PureComponent {
                                         <div className='text-right'><button type='button' onClick={this.close_act_as_admin} className='redeemCross'><img src="/cross.jpg" style={{ width: "65%" }} alt=""></img></button></div>
                                         <div className="modal-wrapper">
                                         <div>
-                                           
+                                                
+                                            {this.state.act_as_admin_success &&  <span className="modal_heading center_align_rish">Congrats!</span> }
                                             {this.state.act_as_admin_ask &&  <span className="modal_heading center_align_rish">Add Center</span> }
                                             {this.state.act_as_admin_yes && <span className="modal_heading center_align_rish">
-                                            Otp Has been sent to the registered number"- Enter and Verify
+                                            Otp Has been sent to the registered number- Enter and Verify
                                             </span>
                                             }
 
@@ -631,11 +706,22 @@ class DashboardComponent extends React.PureComponent {
                                             }
                                             </div>
                                         <div className="modal_content_rish">
+                                        {this.state.act_as_admin_success &&   <span className="modal_content_description center_align_rish">
+                                            {this.state.act_as_admin_other?'We have sent credentials to your account, kindly check them and Give them to your respective branches':`You are now the Admin of  ${this.props.user.name}`}
+                                            </span> }
                                             {this.state.act_as_admin_ask &&   <span className="modal_content_description center_align_rish">
                                             Do you want to continue as Admin from the existing account?
                                             </span> }
                                             {this.state.act_as_admin_yes &&   <span className="modal_content_description center_align_rish">
-                                            <input type="int" placeholder="Enter OTP" className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                                            
+                                            <input type="int" placeholder="Enter OTP" onChange={(e)=>this.setState({act_as_admin_data:{...this.state.act_as_admin_data,otp:e.target.value}})} value={this.state.act_as_admin_data.otp} className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                                            {this.state.act_as_admin_self && <React.Fragment>
+                                                <div style={{position:'relative'}}>
+                                                <input type={this.state.password?"password":'text'} placeholder="password" onChange={(e)=>this.setState({act_as_admin_data:{...this.state.act_as_admin_data,password:e.target.value}})} value={this.state.act_as_admin_data.password} className="input_typt_ris form-control editbankdetailfield input-field-common" /> 
+                                                <i onClick={()=>this.setState({password:!this.state.password})} className={this.state.password?"fa fa-fw fa-eye-slash password_eye":'fa fa-fw fa-eye password_eye'} />
+                                                </div> </React.Fragment>
+                                            }
+                                           
                                             </span> }
                                             {this.state.act_as_admin_no &&   <span className="modal_content_description center_align_rish">
                                             <input type="text" onChange={(e)=>this.setState({act_as_admin_data:{
@@ -648,7 +734,7 @@ class DashboardComponent extends React.PureComponent {
                                         <div className="modal_footer_rish row">
                                                 {this.state.act_as_admin_ask && 
                                                 <React.Fragment>
-                                                <div className="col-md-6">                           
+                                                <div className="col-md-6 text-center">                           
                                                     <button onClick={()=>{
                                                         this.setState({
                                                             act_admin_loading:true
@@ -657,7 +743,7 @@ class DashboardComponent extends React.PureComponent {
                                                         Yes
                                                     </button>
                                                     </div>
-                                                    <div className="col-md-6">
+                                                    <div className="col-md-6 text-center">
                                                     <button onClick={()=>this.handle_act_as_admin('act_as_admin_no')} className="common_button_rish">
                                                         No
                                                     </button>
@@ -667,8 +753,8 @@ class DashboardComponent extends React.PureComponent {
 
                                                 {this.state.act_as_admin_yes && 
                                                 <React.Fragment> 
-                                                    <div className="col-md-12">
-                                                    <button className="common_button_rish white_button_rish">
+                                                    <div className="col-md-12 text-center">
+                                                    <button onClick={()=>this.submit_admin_otp()} className="common_button_rish white_button_rish">
                                                         Submit
                                                     </button>
                                                     </div>
@@ -676,7 +762,7 @@ class DashboardComponent extends React.PureComponent {
                                                 }
                                             {this.state.act_as_admin_no && 
                                                 <React.Fragment> 
-                                                    <div className="col-md-12">
+                                                    <div className="col-md-12 text-center">
                                                     <button onClick={()=>this.send_details()} className="common_button_rish ">
                                                         Send OTP
                                                     </button>
@@ -699,6 +785,7 @@ const mapStateToProps = state => ({
     //bookings: state.user.bookingData,
     user: state.user.userDetail,
     dash_data:state.user.data.dash_data,
+    prof_data:state.user.data.prof_data,
     mount:state.user.mount,
     businessEarn: state.user.businessEarn,
     businessLost: state.user.businessLost,
@@ -707,7 +794,9 @@ const mapStateToProps = state => ({
     updatePriceDataRet:state.user.updatePriceDataRet,
     act_as_admin_ret:state.user.act_as_admin_ret,
     admin_otp_ret:state.user.admin_otp_ret,
-    admin_details_ret:state.user.admin_details_ret
+    admin_details_ret:state.user.admin_details_ret,
+    location_toggler:state.user.location_toggler,
+    open_map:state.user.open_map
 })
 
 export default connect(mapStateToProps, {updateRealPriceClr, 
@@ -726,5 +815,10 @@ export default connect(mapStateToProps, {updateRealPriceClr,
      admin_otp,
      admin_details,
      admin_details_clr,
+     get_user_info,
+     set_user_info,
+     get_centers,
+     set_location_toggler,
+     set_open_map,
      clearSolInsights, setMount })(DashboardComponent);
 // Call userdetails from

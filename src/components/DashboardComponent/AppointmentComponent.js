@@ -9,9 +9,10 @@ import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
 import MeasureTime from "../MeasureTime"
 
-import  { generateSlotsFormat, getDay, timeToString , stringToTime } from "../../utils/common_utilities"
+import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/common_utilities"
 
 import RescheduleComponent from '../RescheduleComponent';
+import NewNotif from '../functional/NewNotif';
 let time_flag = false
 const getMonth = (item) =>{
         switch (item) {
@@ -55,6 +56,35 @@ const getMonth = (item) =>{
                 break;
         }
 }
+
+const getDay = (i) =>{
+    switch (i) {
+     case 0:
+       return 'Monday'
+       break;
+     case 1:
+       return 'Tuesday'
+       break;
+     case 2:
+       return 'Wednesday'
+       break;
+     case 3:
+       return 'Thursday'
+       break;
+     case 4:
+       return 'Friday'
+       break;
+     case 5:
+      return 'Saturday'
+      break;
+     case 6:
+      return 'Sunday'
+      break;
+    
+      default:
+        break;
+    }
+ }
 
 
 const customStyles = {
@@ -194,7 +224,8 @@ class AppointmentComponent extends Component {
                         }
                     })
                     this.setState({
-                        [this.state.reschedule_appointment.type]:update_arr
+                        [this.state.reschedule_appointment.type]:update_arr,
+                        success_reschedule_id:this.state.reschedule_appointment.reschedule_id
                     })
               }else{
                 
@@ -299,8 +330,6 @@ class AppointmentComponent extends Component {
     render() {
         console.log(this.state,"state in AppointmentLoading")
         let time_now = ((new Date()).getTime())
-        // console.log(this.state,"this.state in AppointmentComponent")
-        // console.log(this.state,"state in AppointmentComponent")
         if(!!this.state.get_bookings_loading){
            return   <div className='col-md-8'>
            <div className="Appoint AllComponents">
@@ -315,7 +344,7 @@ class AppointmentComponent extends Component {
         }
         return (
             <React.Fragment>
-                <NotifFunc
+                <NewNotif
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
                 />
@@ -372,6 +401,8 @@ class AppointmentComponent extends Component {
                                 <RescheduleComponent
                                  reschedule_appointment = {this.reschedule_appointment}
                                  value = {item}
+                                 success_reschedule_id = {this.state.success_reschedule_id}
+                                 remove_success_id = {()=>this.setState({success_reschedule_id:false})}
                                  slots = {this.state.slots}
                                  selected_callback = {this.selected_callback}
                                  defaultValue = {this.state.defaultDate}

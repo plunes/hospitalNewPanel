@@ -18,9 +18,8 @@ class SidebarComponent extends Component {
   }
 
   render() {
-    console.log(this.props,"this.props in Sidebar Component")
+   const  prof_data  = this.props.prof_data
     return (
-     
         <div className="sidenav auto-center_ris">
           <div className="pointer">
          <Link to= "/dashboard" 
@@ -67,6 +66,18 @@ class SidebarComponent extends Component {
               Appointments
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
            </Link><hr></hr>
+           {!!prof_data.isAdmin && <React.Fragment> <Link to= "/dashboard/centers"
+                className="list-group"
+                role="button" 
+                onClick={()=>this.props.toggleCenters()}
+            >
+              <span>
+                <img className="sidebaricon" src="/a2.jpg" alt=""></img>
+              </span>
+              Centers
+              <img className="arrowdesign" src="arrow.svg" alt=""></img>
+           </Link><hr></hr> </React.Fragment>}
+           
             {/* <a href="/my-catalogue"
               className="list-group"
             >
@@ -136,5 +147,9 @@ class SidebarComponent extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  prof_data:state.user.data.prof_data
+})
 
-export default connect(null, {logout})(SidebarComponent);
+export default connect(mapStateToProps, {logout})(SidebarComponent);
+
