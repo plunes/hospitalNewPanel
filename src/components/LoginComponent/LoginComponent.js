@@ -15,13 +15,25 @@ class LoginComponent extends Component {
             emailId:'',
             password:'',
             phone_number:'',
-            loading:false  
+            loading:false  ,
+            type:'admin'
         } 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    handle_phone_change = (e)=>{
+      let str = e.target.value
+      if(str.substring(0,3)==='+91'){
+          
+      }else{
+          str = '+91'+e.target.value
+      }
+      this.setState({
+            email:str
+      })
+    }
     handleSubmit(){
-        
         let data;
         let deviceId = localStorage.getItem('deviceId')
             if (this.state.email.includes('@')) {
@@ -40,7 +52,7 @@ class LoginComponent extends Component {
             this.setState({
               loading:true
             })
-        this.props.createLogin(data);
+        this.props.createLogin({...data,type:this.state.type});
     }
     handleChange(e) {
         this.setState({
@@ -84,6 +96,12 @@ class LoginComponent extends Component {
                         <div className="col-md-7 signupHospitalForm" >
                             <Login 
                             email = {this.state.email}
+                            type = {this.state.type}
+                            handle_phone_change = {this.handle_phone_change}
+                            handle_type_change = {(e)=>this.setState({
+                              type:e.target.value,
+                              email:''
+                            })}
                             password = {this.state.password}
                             handleChange = {this.handleChange}
                             handleSubmit = {this.handleSubmit}

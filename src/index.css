@@ -561,3 +561,6 @@ input[type="date"]:focus:before {
   font-weight: 600;
   font-size: 1.8rem;
 }
+.login_select {
+  font-size: 1.2rem !important;
+}

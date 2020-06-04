@@ -22,7 +22,7 @@ import Loader from 'react-loader-spinner'
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
 import AddLocationTab from "../AddLocationTab"
-import NotifFunc from "../functional/NotifFunc"
+// import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
 import InsightComponent from "../InsightComponent"
 import {
@@ -30,7 +30,8 @@ import {
   } from 'react-phone-number-input';
 import validator from "validator"
 import { Link } from "react-router-dom"
-import { isEmpty } from "../../utils/common_utilities"
+import { isEmpty, is_positive_real_number } from "../../utils/common_utilities"
+import NewNotif from '../functional/NewNotif';
 const customStyles = {
     content: {
         top: '50%',
@@ -105,6 +106,15 @@ class DashboardComponent extends React.PureComponent {
         this.handleSliderChange = this.handleSliderChange.bind(this);
         this.handleSolutionSliderChange = this.handleSolutionSliderChange.bind(this);
         this.setTimer = this.setTimer.bind(this);
+    }
+
+
+    handle_real_time_edit_price = (e) =>{
+            let val = e.target.value
+           if(is_positive_real_number(val))
+           this.setState({real_time_edit_price:val})
+           else
+           console.log("no_negative_value")
     }
 
     
@@ -237,7 +247,6 @@ class DashboardComponent extends React.PureComponent {
       };
 
     async handleDaysChange(e) {
-     
         this.setState({
             showBusiness : false
         })
@@ -249,12 +258,13 @@ class DashboardComponent extends React.PureComponent {
         })
     }
 
-    async handleRealPrice(select) {
+     handleRealPrice(select) {
         this.setState({
             realModalIsOpen :  true,
             realServiceName: select.serviceName,
             realUpdatePrice : select.userPrice,
-            realUpdateData : select
+            realUpdateData : select,
+            real_time_edit_price:select.userPrice
         })
     }
 
@@ -264,7 +274,9 @@ class DashboardComponent extends React.PureComponent {
             solUpdatedPrice:0,
             realUpdatePrice:0,
             solValue:0,
-            value:0
+            value:0,
+            real_time_edit:false,
+            realUpdatePriceLoading:false
         })
     }
 
@@ -272,7 +284,8 @@ class DashboardComponent extends React.PureComponent {
         this.setState({
             modalIsOpen: false,
             solValue:0,
-            value:0
+            value:0,
+            actionablePriceLoading:false
         })
     }
 
@@ -289,7 +302,7 @@ class DashboardComponent extends React.PureComponent {
      handleRealSubmit(e) {
         e.preventDefault();
         let data = {
-            realUpdatePrice: this.state.solUpdatedPrice,
+            realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
             realUpdateData: this.state.realUpdateData
         }
         this.setState({
@@ -323,6 +336,17 @@ class DashboardComponent extends React.PureComponent {
 
     async componentDidMount() {
         //await this.props.getBooking();
+         if(!!this.state.initial_render){
+            if(!!!isEmpty(this.props.prof_data)){
+                console.log(this.props.prof_data,"prof_data")
+              if(!!!this.props.prof_data.geoLocation){
+                this.setState({
+                    initial_render:false
+                })
+                this.props.set_location_toggler(true)
+              }
+            }
+        }
         let defaulteDays = 15
         // await this.props.getAllBookings(defaulteDays);
         await this.props.getInsights();
@@ -339,22 +363,25 @@ class DashboardComponent extends React.PureComponent {
     }
 
     updateRealPriceClr = () =>{
-        this.setState({
-            realUpdatePriceLoading:false
-        },() => {
-            this.props.updateRealPriceClr()
-            this.handleRealModal()
-        })
+        this.props.updateRealPriceClr()
+        this.handleRealModal()
+        // this.setState({
+        //     realUpdatePriceLoading:false
+        // },() => {
+        //     this.props.updateRealPriceClr()
+        //     this.handleRealModal()
+        // })
     }
 
     clearUpdatePriceData = () =>{
-        this.setState({
-            actionablePriceLoading:false
-        },()=>{
-            this.props.clearUpdatePriceData()
+        this.props.clearUpdatePriceData()
             this.props.getInsights()
             this.handleModal()
-        })
+        // this.setState({
+        //     actionablePriceLoading:false
+        // },()=>{
+            
+        // })
     }
     getSecondsDifferent=(sec)=>{
            let newSec = (new Date).getTime()
@@ -432,8 +459,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.props,"this.props in DashboardComponent")
-        console.log(this.state,"this.state in DashboardComponent")
         let { percent } = this.state
         const options = {
             title: {
@@ -478,18 +503,20 @@ class DashboardComponent extends React.PureComponent {
                 </div>
             )
         } else {
+            console.log(this.props.updateRealPriceRet,"this.props.updateRealPriceRet")
+            console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
             return (
                 <React.Fragment>
                         <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
-                        <NotifFunc 
+                        <NewNotif 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
                         />
-                        <NotifFunc 
+                        <NewNotif 
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
                         />
-                        <NotifFunc 
+                        <NewNotif 
                             ret ={this.state.ret}
                             retClr = {()=>{this.setState({
                                 ret:false
@@ -501,8 +528,9 @@ class DashboardComponent extends React.PureComponent {
                                         <p className="heading-right_ris"> For any query - Call at 7701805081</p>
                                     </div>
                         </div>
-                        {this.props.location_toggler  &&   <AddLocationTab /> }
-                      
+                        {this.props.location_toggler  &&   <AddLocationTab
+                            set_open_map = {this.props.set_open_map}
+                        /> }
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
                                     <div className="custome_scrol">
@@ -668,8 +696,18 @@ class DashboardComponent extends React.PureComponent {
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
                                             <div className="SliderUpdatedPrice">&#8377;
-                                            <span>
-                                            {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)} 
+                                            <span style={{fontSize:'1rem'}}>
+                                                {this.state.real_time_edit?
+                                                <React.Fragment>
+                                                <input onChange={(e)=>this.handle_real_time_edit_price(e)} value={this.state.real_time_edit_price} className="real_time_edit_input"  /> 
+                                                <i style={{color:'green', fontSize:'1rem',  marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:false})}  className="fas fa-edit cursor-pointer"></i>
+                                                </React.Fragment>
+                                                 :
+                                                 <React.Fragment>
+                                                 {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)}
+                                                 <i style={{color:'green', fontSize:'1rem', marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:true})} className="fas fa-edit cursor-pointer vertical_align_rish"></i>
+                                                 </React.Fragment>
+                                                }
                                             </span>            
                                                 </div><br></br>
                                         </div> 

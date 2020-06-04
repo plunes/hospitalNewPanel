@@ -1,11 +1,10 @@
-import { ToastProvider, useToasts } from 'react-toast-notifications'
+import {  useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import { Link } from "react-router-dom"
 import React, { useState } from "react"
-import {
-    isValidPhoneNumber,
-  } from 'react-phone-number-input';
-  import validator from 'validator'
+import { isValidPhoneNumber} from 'react-phone-number-input';
+import validator from 'validator'
+import Select from "../Select"
 
  const Login= (props) => {
    console.log(props,"props in HospitalSignup")
@@ -28,17 +27,25 @@ import {
         let error = false
         let message = ""
 
-        if (props.email.includes('@')) {
-            if(!validator.isEmail(props.email)){
-                error = true
-                message = "Invalid email address"
-            }
-        }else{
-            if(!isValidPhoneNumber('+91'+props.email)){
+        // if (props.email.includes('@')) {
+        //     if(!validator.isEmail(props.email)){
+        //         error = true
+        //         message = "Invalid email address"
+        //     }
+        // }else{
+        //     if(!isValidPhoneNumber('+91'+props.email)){
+        //         error = true
+        //         message = "Invalid Mobile number"
+        //     }
+        // }
+        
+        if(props.type==="admin"){
+            if(!isValidPhoneNumber(props.email)){
                 error = true
                 message = "Invalid Mobile number"
-            }
+      }
         }
+        
 
         if(!validator.isLength(props.password, { min: 8, max: 50 })){
             error = true
@@ -65,6 +72,28 @@ import {
 </div>
     <div style={{position:'relative'}}>
     {props.loading && <LoaderComponent />}
+                      <Select
+                         id="login_select"
+                         handleChange = {props.handle_type_change}
+                         value = {props.type}
+                         multiple ={false}
+                         name = "type"
+                         label = ""
+                         input_text_class = "login_select"
+                         placeholder = "Select user type"
+                         variant="no_border"
+                         options = {[{
+                                value:'admin',
+                                name:'Admin'
+                            },
+                            {
+                                value:'center',
+                                name:'Center'
+                                
+                            }
+                           ]}
+                      loading = {true}
+                 />
       <div className="form-group sign_in_form_group">
         <input
           autocomplete="off" 
@@ -72,8 +101,8 @@ import {
           onfocus="this.removeAttribute('readonly');"
           className="form-control customborder"
           name="email"
-          placeholder={`Email Id or Phonenumber`}
-          onChange={props.handleChange}
+          placeholder={`Enter ${props.type==="admin"?'Phonenumber':'Id'} `}
+          onChange={props.type==="admin"?props.handle_phone_change:props.handleChange}
           required
           value = {props.email}
         />

@@ -158,7 +158,7 @@ svg {
   border-bottom: 1px solid #B2B2B2 !important;
   color: #8A8A8A;
  opacity: 1;font-weight: 100;
- font-size: 1rem !important;
+ font-size: 1rem;
 }
 .option {
   font-size: .9rem !important;

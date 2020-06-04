@@ -18,6 +18,7 @@ import locationImage from "../../images/Location.jpg"
 import Notify from '../functional/Notify';
 import Map from "../MapComponent/index.js"
 import { isEmpty } from "../../utils/common_utilities"
+import ScrollTo from "../functional/ScrollTo"
 const options = {
   items: 2,
   margin: 0,
@@ -55,6 +56,7 @@ class ProfileContainer extends React.PureComponent {
       achievementImage:false,
       get_profile_loading:false,
       show_doctor_count:4,
+      scroll_to_active:false,
       notify:{
         success:false,
         error:false
@@ -70,17 +72,6 @@ class ProfileContainer extends React.PureComponent {
 
 
   componentWillReceiveProps(nextProps){
-
-    if(this.state.flag_for_map){
-      if(!!nextProps.open_map){
-        
-        this.setState({
-          flag_for_map:false
-        })
-      }
-    }
-   
-
     if(!!!isEmpty(nextProps.prof_data)){
       this.setState({
         prof_data:nextProps.prof_data
@@ -173,6 +164,18 @@ class ProfileContainer extends React.PureComponent {
   }
 
   componentDidMount(){
+
+    if(this.state.flag_for_map){
+      console.log(this.props.open_map,"this.props.open_map")
+      if(!!this.props.open_map){
+        this.setState({
+          flag_for_map:false,
+          mapFlag:true
+        })
+      }
+    }
+
+
       if(!!!this.props.mount.prof_mount){
         this.setState({
           get_profile_loading:true
@@ -481,21 +484,22 @@ class ProfileContainer extends React.PureComponent {
                     </div>
                     <div class="col-xs-9 col-sm-9 col-lg-9 mainBodyMaxHospitalrow4col2">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.props.user.address }</span> 
-         </p>
+                        </p>
                     </div>
                     <div class="col-xs-1 col-sm-1 col-lg-1">
                     <span onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} class="editmainbodymaxhospital cursor-pointer underline">{this.state.mapFlag?"Cancel":'Edit'}</span>
                     </div>
                     </div>
                 </div>
-         {/* <div class="row">
-                  <div class="col-sm-1 col"></div>
-                  <div class="col-sm-10 col maxhospitalviewmap"><a href="" class="editmainbodymaxhospital viewmap">View on map</a></div>
-                  <div class="col-sm-1 col"></div>
-              </div>  */}
-                  
+
           { this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
+           {!this.state.flag_for_map &&  <ScrollTo
+              remove_me = {()=>{
+                this.props.set_open_map(false)
+              }}
+            />}
             <Map
+            
                google={this.props.google}
                center={{lat: 18.5204, lng: 73.8567}}
                location = {this.state.prof_data.location}
@@ -542,7 +546,7 @@ class ProfileContainer extends React.PureComponent {
        <Link to="/dashboard/add-doctor"
              role="button"
              onClick = {()=>this.props.toggleAddDoc()}>
-       <button className="common-button" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
+       <button className="common_button_rish" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
        </Link>
      </div>:'':''}
    
@@ -582,7 +586,7 @@ class ProfileContainer extends React.PureComponent {
     </div>
 </div>:<div className="row">
 <div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
-    <img style={{marginLeft:'3rem'}} src="/Group 2096.svg"  />
+    <img style={{marginLeft:'3rem'}} src="/no_achievement.svg"  alt="no_achivement_added" />
     <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Achievement added</div>
   </div>
   </div>

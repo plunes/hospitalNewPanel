@@ -478,15 +478,26 @@ export const act_as_admin = (data) => async dispatch => {
       }
     })
     .catch((e) => {
-      console.log(e)
-      dispatch({
-        type: ACT_AS_ADMIN_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: ACT_AS_ADMIN_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: ACT_AS_ADMIN_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }
     })
 }
 
@@ -531,14 +542,27 @@ export const reschedule_appointment = (data) => async dispatch => {
     })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: RESCHEDULE_APPOINTMENT_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: RESCHEDULE_APPOINTMENT_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: RESCHEDULE_APPOINTMENT_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }
+ 
     })
 }
 
@@ -585,14 +609,26 @@ export const get_business = (data) => async dispatch => {
     })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: GET_BUSINESS_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: GET_BUSINESS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: GET_BUSINESS_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }
     })
 }
 
@@ -640,14 +676,26 @@ export const get_user_info = () => async dispatch => {
     })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: GET_USER_INFO_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: GET_USER_INFO_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: GET_USER_INFO_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }
     })
 }
 
@@ -685,14 +733,26 @@ export const edit_location = (data) => async dispatch => {
   })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: EDIT_LOCATION_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: EDIT_LOCATION_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: EDIT_LOCATION_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }  
     })
 }
 
@@ -730,14 +790,26 @@ export const submit_query = (data) => async dispatch => {
   })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: SUBMIT_QUERY_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: SUBMIT_QUERY_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: SUBMIT_QUERY_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }  
     })
 }
 
@@ -778,14 +850,26 @@ export const get_user_profile = () => async dispatch => {
     })
     .catch((e) => {
       console.log(e)
-      dispatch({
-        type: GET_PROFILE_RET,
-        payload: {
-          success:false,
-          data:{},
-          message:"Unable to process request. Try again"
-        }
-      })
+      try{
+        dispatch({
+          type: GET_PROFILE_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: GET_PROFILE_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Unable to process request. Try again"
+            }
+          })
+      }
     })
 }
 
@@ -832,15 +916,26 @@ export const remove_notif_count = (data) => async dispatch =>{
          }
        }
      }).catch(error => {
-       console.log(error,"error in GET")
-       dispatch({
-         type:REMOVE_NOTIF_COUNT,
-          payload:{
-           success:false,
-           message:"Something went wrong. try agian later",
-           data:{}
-          }
-       })
+      try{
+        dispatch({
+          type:REMOVE_NOTIF_COUNT,
+           payload:{
+            success:false,
+            message:"Something went wrong. try agian later",
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:REMOVE_NOTIF_COUNT,
+             payload:{
+              success:false,
+              message:"Something went wrong. try agian later",
+              data:{}
+             }
+          })
+        }
    });
 }
 export const set_dash_data = (data) => dispatch =>{
@@ -911,14 +1006,26 @@ export const submitOtp = (data) => async dispatch => {
       }
     }).catch(error => {
       console.log(error,"error in GET")
-      dispatch({
-        type:GET_OTP_RET,
-         payload:{
-          success:false,
-          message:"Something went wrong. try agian later",
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:GET_OTP_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try agian later",
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:GET_OTP_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try agian later",
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -960,15 +1067,26 @@ export const getOtp = (data) => async dispatch => {
         }
       }
     }).catch(error => {
-      console.log(error,"error in GET")
-      dispatch({
-        type:GET_OTP_RET,
-         payload:{
-          success:false,
-          message:error.response?error.response.data.error:'Something went wrong. try again later',
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:GET_OTP_RET,
+           payload:{
+            success:false,
+            message:error.response?error.response.data.error:'Something went wrong. try again later',
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:GET_OTP_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try agian later",
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1024,15 +1142,28 @@ export const changeAppoint = (data) => async dispatch => {
     }
   }).catch(error => {
     console.log(error.response)
-    dispatch({
-      type:CHANGE_APPOINT_RET,
-       payload:{
-        success:false,
-        message:"Something went wrong. try again later",
-        data:{},
-        type:type
-       }
-    })
+    try{
+      dispatch({
+        type:CHANGE_APPOINT_RET,
+         payload:{
+          success:false,
+          message:"Something went wrong. try again later",
+          data:{},
+          type:type
+         }
+      })
+    }catch(x){
+        console.log(x)
+        dispatch({
+          type:CHANGE_APPOINT_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{},
+            type:type
+           }
+        })
+      }
 });
  }else{
   return await axios.put(baseUrl + requestUrl, {}  ,{ 'headers': { 'Authorization': token } })
@@ -1065,15 +1196,28 @@ export const changeAppoint = (data) => async dispatch => {
       }
     }).catch(error => {
       console.log(error)
-      dispatch({
-        type:CHANGE_APPOINT_RET,
-         payload:{
-          success:false,
-          message:"Something went wrong. try again later",
-          data:{},
-          type:type
-         }
-      })
+      try{
+        dispatch({
+          type:CHANGE_APPOINT_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{},
+            type:type
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:CHANGE_APPOINT_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try again later",
+              data:{},
+              type:type
+             }
+          })
+        }
   });
  }
   
@@ -1119,14 +1263,26 @@ export const getEntity = (data) => async dispatch => {
       }
     }).catch(error => {
       console.log(error.response)
-      dispatch({
-        type:GET_ENTITY_RET,
-         payload:{
-          success:false,
-          message:"Something went wrong. try again later",
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:GET_ENTITY_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:GET_ENTITY_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try again later",
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1171,15 +1327,26 @@ export const addServices = (data) => async dispatch => {
         }
       }
     }).catch(error => {
-      console.log(error.response)
-      dispatch({
-        type:ADD_SERVICES_RET,
-         payload:{
-          success:false,
-          message:"Something went wrong. try again later",
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:ADD_SERVICES_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:ADD_SERVICES_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try again later",
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1231,14 +1398,26 @@ export const toAddServices = (data) => async dispatch => {
       }
     }).catch(error => {
       console.log(error.response)
-      dispatch({
-        type:TO_ADD_SERVICES_RET,
-         payload:{
-          success:false,
-          message:"Something went wrong. try again later",
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:TO_ADD_SERVICES_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:TO_ADD_SERVICES_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try again later",
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1280,14 +1459,26 @@ export const setAvailability = (obj) => async dispatch => {
       }
     }).catch(error => {
       console.log(error.response)
-      dispatch({
-        type:SET_AVAILABILITY_RET,
-         payload:{
-          success:false,
-          message:"Something went wrong. try again later",
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:SET_AVAILABILITY_RET,
+           payload:{
+            success:false,
+            message:"Something went wrong. try again later",
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:SET_AVAILABILITY_RET,
+             payload:{
+              success:false,
+              message:"Something went wrong. try again later",
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1330,14 +1521,26 @@ export const registerUser = (obj) => async dispatch => {
       }
     }).catch(error => {
       console.log(error.response)
-      dispatch({
-        type:REGISTER_USER_RET,
-         payload:{
-          success:false,
-          message:error.response.data.error,
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:REGISTER_USER_RET,
+           payload:{
+            success:false,
+            message:error.response.data.error,
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:REGISTER_USER_RET,
+             payload:{
+              success:false,
+              message:error.response.data.error,
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1384,14 +1587,26 @@ export const editProcedure = (obj) => async dispatch => {
       }
     }).catch(error => {
       console.log(error.response)
-      dispatch({
-        type:EDIT_PROCEDURE_RET,
-         payload:{
-          success:false,
-          message:'Something went wrong try again later..',
-          data:{}
-         }
-      })
+      try{
+        dispatch({
+          type:EDIT_PROCEDURE_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:EDIT_PROCEDURE_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..',
+              data:{}
+             }
+          })
+        }
   });
 }
 
@@ -1432,6 +1647,27 @@ export const addDoctor = (obj) => async dispatch => {
            }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type:ADD_DOCTOR_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:ADD_DOCTOR_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..',
+              data:{}
+             }
+          })
+        }
     })
 }
 
@@ -1478,6 +1714,27 @@ export const getSpecs = (obj) => async dispatch => {
            }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type:GET_SPECS_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:GET_SPECS_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..',
+              data:{}
+             }
+          })
+        }
     })
 }
 
@@ -1515,6 +1772,27 @@ export const getServ = (obj) => async dispatch => {
            }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type:GET_SERV_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            data:{}
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:GET_SERV_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..',
+              data:{}
+             }
+          })
+        }
     })
 }
 
@@ -1557,6 +1835,25 @@ export const editBio = (obj) => async dispatch => {
            }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type:EDIT_BIO_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..'
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:EDIT_BIO_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..'
+             }
+          })
+        }
     })
 }
 
@@ -1596,6 +1893,27 @@ export const updateAchievement = (obj) => async dispatch => {
            }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type:UPDATE_ACHIEVEMENT_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..',
+            type:type
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:UPDATE_ACHIEVEMENT_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..',
+              type:type
+             }
+          })
+        }
     })
 }
 
@@ -1638,6 +1956,25 @@ let obj = {
            }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type:UPDATE_BANNER_RET,
+           payload:{
+            success:false,
+            message:'Something went wrong try again later..'
+           }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type:UPDATE_BANNER_RET,
+             payload:{
+              success:false,
+              message:'Something went wrong try again later..'
+             }
+          })
+        }
     })
 }
 
@@ -1699,6 +2036,25 @@ export const downloadCatalogue = (data) => async dispatch => {
           }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type : DOWNLOAD_CATALOGUE_RET,
+          payload :{
+            success:false,
+            message:"Unable to process your request now. try later"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type : DOWNLOAD_CATALOGUE_RET,
+            payload :{
+              success:false,
+              message:"Unable to process your request now. try later"
+            }
+          })
+        }
     })
 }
 
@@ -1748,6 +2104,25 @@ export const uploadProcedures = (data) => async dispatch => {
           }
         })
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type : UPLOAD_PROCEDURE_RET,
+          payload :{
+            success:false,
+            message:"Unable to process your request now. try later"
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type : UPLOAD_PROCEDURE_RET,
+            payload :{
+              success:false,
+              message:"Unable to process your request now. try later"
+            }
+          })
+        }
     })
 }
 
@@ -1804,6 +2179,25 @@ export const searchProcedures = (data) => async dispatch => {
           })
         }
       }
+    }).catch(e=>{
+      try{
+        dispatch({
+          type : SEARCH_PROCEDURE_RET,
+          payload :{
+            success:false,
+            data:[]
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type : SEARCH_PROCEDURE_RET,
+            payload :{
+              success:false,
+              data:[]
+            }
+          })
+        }
     })
 }
 
@@ -1847,7 +2241,9 @@ export const updateImage = (data) => async dispatch => {
           })
         }
       }
-    })
+    }).catch(e=>{
+     console.log(e)
+})
 }
 
 
@@ -1904,6 +2300,8 @@ export const upload = (data) => async dispatch => {
           }
         })
       }
+    }).catch(e=>{
+      console.log(e)
     })
 }
 
@@ -1947,6 +2345,8 @@ export const logoutOtherDevices = (data) => async dispatch => {
           })
         }
       }
+    }).catch(e=>{
+      console.log(e)
     })
 }
 
@@ -1990,6 +2390,8 @@ export const getUserCatalogue = () => async dispatch => {
           })
         }
       }
+    }).catch(e=>{
+      console.log(e)
     })
 }
 
@@ -2007,6 +2409,8 @@ export const getProfileDetails = () => async dispatch => {
           })
         }
       }
+    }).catch(e=>{
+      console.log(e)
     })
 }
 
@@ -2091,6 +2495,8 @@ export const submitProfileDetails = (uData) => async dispatch => {
            }
         })
       }
+    }).catch(e=>{
+      console.log(e)
     })
 }
 
@@ -2132,6 +2538,8 @@ export const updateRealPrice = (uData) => async dispatch => {
           }
         })
       }
+    }).catch(e=>{
+      console.log(e)
     })
 }
 
@@ -2167,6 +2575,8 @@ export const getMonthWiseUsers = (days) => async dispatch => {
                 })
                 console.log(result, 'result')
               }
+              }).catch(e=>{
+                console.log(e)
               })
 
             }
@@ -2466,7 +2876,18 @@ export const getUserDetails = () => async dispatch => {
 
 export const createLogin = loginData => async dispatch => {
   console.log(loginData, "login data")
-  return await axios.post(baseUrl + '/user/login', loginData)
+  let type = loginData.type
+  delete loginData.type
+  let new_url = ""
+   switch (type) {
+     case 'admin':
+        new_url = baseUrl +'/admin/login'
+       break;
+       new_url = baseUrl +'/user/login'
+     default:
+       break;
+   }
+  return await axios.post(new_url, loginData)
     .then(res => {
       console.log(res , 'res in create Login')
       if (res.data.success === true) {
@@ -2563,6 +2984,8 @@ export const getBooking = () => async  dispatch => {
           }
         })
       }
+    }).catch(e=>{
+      console.log(e)
     })
 
 
@@ -2608,7 +3031,7 @@ export const bankDetails = bankData => dispatch => {
       }
     })
     .catch((e) => {
-
+      console.log(e)
     })
 };
 
@@ -2654,7 +3077,7 @@ export const expertDetails = expertData => dispatch => {
     }
     )
     .catch((e) => {
-
+        console.log(e)
     })
 
 };

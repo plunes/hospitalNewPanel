@@ -1,9 +1,10 @@
 import React,  { useState }  from "react"
 import { Link } from "react-router-dom"
 
-const AddLocationTab  = () =>{
+const AddLocationTab  = (props) =>{
      const [toggle, setToggle] = useState(true)
      if(!!toggle){
+         console.log(props,"props in addLocation Tab")
         return (
             <div className="card_rish add_loaction_wrapper">
                 <div className="row margin-top-medium_ris heading_rish">
@@ -20,9 +21,13 @@ const AddLocationTab  = () =>{
                 </span>
                 </div>
             <div className="margin-top-medium_ris">
-                <button className="common_button_rish">
+                <Link to="/dashboard/profile" type="button">
+                <div style={{width:'30rem'}}>
+                <button onClick={()=>props.set_open_map(true)} className="common_button_rish">
                 Add Location
                 </button>
+                </div>
+                </Link>
             </div>
                 
             </div>

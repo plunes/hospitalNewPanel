@@ -27,6 +27,7 @@ import io from "socket.io-client"
 import Notify from '../functional/Notify';
 import { isEmpty } from "../../utils/common_utilities"
 import Centers from "../Centers"
+import ConnectivityListener from '../ConnectivityListener'
 
 const initialState = {
   dash: '',
@@ -491,6 +492,7 @@ getNotifications = (data) =>{
     }
     return (
              <div>
+               <ConnectivityListener />
                  <Notify  
                         success={this.state.Notify.success}
                         autoDismiss = {this.state.initial_render?false:true}

@@ -30,8 +30,8 @@ class Map extends Component{
 	 * Get the current address from the default map position and set those values in the state
 	 */
 	componentDidMount() {
-		console.log(this.props,"this.props in didMount MapComponent")
-		console.log(this.state,"this.state in didMount MapComponent")
+		// console.log(this.props,"this.props in didMount MapComponent")
+		// console.log(this.state,"this.state in didMount MapComponent")
 		Geocode.fromLatLng( this.state.mapPosition.lat , this.state.mapPosition.lng ).then(
 			response => {
 				const address = response.results[0].formatted_address,

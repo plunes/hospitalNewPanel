@@ -775,3 +775,8 @@ hr
   .modal_footer_rish{
         margin-top: 2rem;
   }
+  .real_time_edit_input {
+      border: none;
+      border-bottom: 1px solid #01D35A;
+      width: 7rem;
+  }

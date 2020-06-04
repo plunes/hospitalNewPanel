@@ -5,6 +5,32 @@ export  const isEmpty = (obj)  => {
     }
     return true;
 }
+
+export const is_positive_number =(value) =>{
+  if (value.toString().match(/^((?!(=))[0-9]*)$/g))
+   return true;
+  else
+   return false;
+}
+export const is_positive_real_number = (value) =>{
+  if(value===""){
+    return true
+  }
+      if (value.toString().match(/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/)){
+          if(value[0]==="0" && value.length===1){
+            return true
+          }else if(value[0]==="0"&&value[1]!=='.')
+            {
+              return false
+            }else{
+              return true
+            }
+      }
+      else{
+          return false;
+      }
+}
+
 export const  generateSlotsFormat = (data) =>{
     let slots = JSON.parse(JSON.stringify(data || []))
     let arr = []
