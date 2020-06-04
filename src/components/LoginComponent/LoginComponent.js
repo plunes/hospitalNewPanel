@@ -36,19 +36,25 @@ class LoginComponent extends Component {
     handleSubmit(){
         let data;
         let deviceId = localStorage.getItem('deviceId')
-            if (this.state.email.includes('@')) {
-                data = {
-                    'email': this.state.email,
-                    'password': this.state.password,
-                    "deviceId": [deviceId]
-                }
-            } else {
-                data = {
-                    'mobileNumber': this.state.email,
-                    'password': this.state.password,
-                    "deviceId" : [deviceId]
-                }
-            }
+            // if (this.state.email.includes('@')) {
+            //     data = {
+            //         'email': this.state.email,
+            //         'password': this.state.password,
+            //         "deviceId": [deviceId]
+            //     }
+            // } else {
+            //     data = {
+            //         'mobileNumber': this.state.email,
+            //         'password': this.state.password,
+            //         "deviceId" : [deviceId]
+            //     }
+            // }
+         let txt = this.state.email
+            data = {
+                      'mobileNumber': this.state.type==="admin"?txt.substring(3):this.state.email,
+                      'password': this.state.password,
+                      "deviceId" : [deviceId]
+                  }
             this.setState({
               loading:true
             })

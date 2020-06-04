@@ -2883,10 +2883,13 @@ export const createLogin = loginData => async dispatch => {
      case 'admin':
         new_url = baseUrl +'/admin/login'
        break;
-       new_url = baseUrl +'/user/login'
+     case 'center':
+      new_url = baseUrl +'/user/login'
+     break;
      default:
        break;
    }
+   console.log(new_url,"new_url")
   return await axios.post(new_url, loginData)
     .then(res => {
       console.log(res , 'res in create Login')
