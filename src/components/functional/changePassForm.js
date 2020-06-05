@@ -1,27 +1,9 @@
-import { ToastProvider, useToasts } from 'react-toast-notifications'
+import {  useToasts } from 'react-toast-notifications'
 import React from "react"
-import { Link, Redirect } from "react-router-dom"
-import { logout } from '../../actions/userActions';
+import { Link } from "react-router-dom"
 
  const ChangePassForm= (props) => {
   const { addToast } = useToasts()
-  if(!!props.resetPassRet){
-    console.log(props.resetPassRet,"props.resetPassret")
-    
-      if(!!props.resetPassRet.success){
-        addToast(props.resetPassRet.message, {appearance: 'success', autoDismiss:true}) 
-        logout()
-        RedirectTo()
-      }else{
-        addToast(props.resetPassRet.message, {appearance: 'error', autoDismiss:true})
-      }
-      props.clearResetRet()
-  }
-  const RedirectTo = () =>{
-    return <Redirect to="/login" 
-    />
-  }
-
    const submitdetails = () => {
         if(props.newPassword === '' ||props.rePassword==='' || props.oldPassword==='' ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true  })

@@ -5,6 +5,7 @@ import SubmitOtp from "../functional/SubmitOtp"
 import { getOtp, getOtpClr, submitOtp, submitOtpClr } from "../../actions/userActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import NewNotif from "../functional/NewNotif";
 
 class ChangePasswordComponent extends React.Component {
     constructor(props){
@@ -57,11 +58,11 @@ class ChangePasswordComponent extends React.Component {
     submitOtpClr = (flag) =>{
         if(!!flag){
             this.setState({
-                loading:false
+                loading:false,
+                redirect_sign_in:true
             },()=>{
                 this.props.submitOtpClr()
             })
-           return <Redirect to="/signin" />
         }else{
             this.setState({
                 loading:false
@@ -71,6 +72,8 @@ class ChangePasswordComponent extends React.Component {
         }
         
     }
+
+
 
     getOtpClr =(flag)=>{
         if(!!flag){
@@ -88,7 +91,50 @@ class ChangePasswordComponent extends React.Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.submitOtpRet){
+            if(nextProps.submitOtpRet.success){
+                this.setState({
+                    ret:{
+                        success:true,
+                        message:nextProps.submitOtpRet.message
+                    }
+                })
+            }else{
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:nextProps.submitOtpRet.message
+                    }
+                })
+            }
+            this.submitOtpClr(nextProps.submitOtpRet.success)
+        }
+
+        // if(nextProps.getOtpRet){
+        //     if(nextProps.getOtpRet.success){
+        //         this.setState({
+        //             ret:{
+        //                 success:true,
+        //                 message:nextProps.getOtpRet.message
+        //             }
+        //         })
+        //     }else{
+        //         this.setState({
+        //             ret:{
+        //                 success:false,
+        //                 message:nextProps.getOtpRet.message
+        //             }
+        //         })
+        //     }
+        //     nextProps.getOtpClr()
+        // }
+    }
+
     render(){
+        if(this.state.redirect_sign_in){
+            return <Redirect to="signin" />
+        }
         console.log(this.props,"props in getOtpRet")
         return(
          <div >
@@ -96,6 +142,10 @@ class ChangePasswordComponent extends React.Component {
           <AuthHeader/>
           </div>
           <div className="row">
+              <NewNotif 
+                ret = {this.state.ret}
+                retClr= {()=>this.setState({ret:false})}
+              />
           <div className="col-md-4"></div>
           <div className="forgot_pass_wrap col-md-4">
            {this.state.screen===0 && <EnterEmail

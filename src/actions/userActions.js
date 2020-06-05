@@ -986,7 +986,7 @@ export const submitOtp = (data) => async dispatch => {
         //dispatch(getSolutionInsights()
         if(!!res.data.success){
           dispatch({
-            type : GET_OTP_RET,
+            type : SUBMIT_OTP_RET,
             payload :{
               success:true,
               data:res.data,
@@ -995,7 +995,7 @@ export const submitOtp = (data) => async dispatch => {
           })
         }else{
           dispatch({
-            type : GET_OTP_RET,
+            type : SUBMIT_OTP_RET,
             payload :{
               success:false,
               data:[],
@@ -1008,7 +1008,7 @@ export const submitOtp = (data) => async dispatch => {
       console.log(error,"error in GET")
       try{
         dispatch({
-          type:GET_OTP_RET,
+          type:SUBMIT_OTP_RET,
            payload:{
             success:false,
             message:"Something went wrong. try agian later",
@@ -1018,7 +1018,7 @@ export const submitOtp = (data) => async dispatch => {
       }catch(x){
           console.log(x)
           dispatch({
-            type:GET_OTP_RET,
+            type:SUBMIT_OTP_RET,
              payload:{
               success:false,
               message:"Something went wrong. try agian later",
@@ -2424,6 +2424,7 @@ export const submitResetDetails = (uData) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.patch(baseUrl + '/user/changePassword', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
+      console.log(res,"res in submitResetDetails")
       if (res.data.success === true) {
         dispatch({
           type:RESET_PASS_RET,

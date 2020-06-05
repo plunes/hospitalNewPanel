@@ -120,6 +120,8 @@ class RescheduleComponent extends React.PureComponent {
         }
         render(){
            console.log(this.state,"state in reschedule_component")
+           if(this.props.type==="cancelled_bookings")
+           return <div></div>
             if(!this.state.reschedule_flag){
                 return(
                     <p onClick={()=>this.reschedule_click()} className="res_udle underline">Reschedule</p>

@@ -144,6 +144,16 @@ class RegistrationContainer extends  React.Component {
             }
         })
     }
+
+    handleDateChange = (val) => {
+        this.setState({
+            doctor:{
+                ...this.state.doctor,
+                'dob':(new Date(val)).getTime()
+            }
+        })
+    }
+
  componentDidMount() {
     axios.get(`https://devapi.plunes.com/v5/catalogue_manager/specialities`)
       .then(res => {
@@ -284,6 +294,7 @@ class RegistrationContainer extends  React.Component {
                                 id="sdasd"
                                 arrow_class = "login_arrow_class"
                                 handleChange = {this.selectType}
+                                input_text_class = "login_select"
                                 value = {this.state.type}
                                 multiple ={false}
                                 name = "type"
@@ -336,6 +347,7 @@ class RegistrationContainer extends  React.Component {
                                 this.state.type ==="Doctors" ?
                                 <DoctorSignup 
                                 data = {this.state.doctor}
+                                handleDateChange = {this.handleDateChange}
                                 specialities = {this.state.specialities}
                                 specialities_selected = {this.state.hospital.specialities_selected}
                                 handleSpecialitySelect = {this.handleSpecialitySelectDoctor}

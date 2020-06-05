@@ -16,9 +16,10 @@ import  "./AboutUs.css";
         }
 
         submit_query_clr(){
-            this.setState({
+            this.props.submit_query_clr()
+            setTimeout(this.setState({
                 laoding:false
-            },()=>this.props.submit_query_clr())
+            }),500)
         }
         submit_query(data){
             this.setState({

@@ -2,6 +2,15 @@
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import React from "react"
+import validator from "validator"
+import { is_valid_pan } from '../../utils/common_utilities'
+
+function  MyError(message){
+  console.log(this,"this in myerror")
+  this.message = message;
+}
+MyError.prototype = new Error()
+
 
  const ManagePayment= (props) => {
    console.log(props.loadingState,"props in EditProfileForm")
@@ -10,7 +19,7 @@ import React from "react"
       if(!!props.submitBankDetailsRet.success){
         addToast(props.submitBankDetailsRet.message, {appearance: 'success', autoDismiss:true}) 
       }else{
-        addToast(props.submitBankDetailsRet.message, {appearance: 'success', autoDismiss:true})
+        addToast(props.submitBankDetailsRet.message, {appearance: 'error', autoDismiss:true})
       }
       props.loadingOff()
       props.submitBankDetailsClr()
@@ -18,17 +27,34 @@ import React from "react"
 
    const submitdetails = (e) => {
        e.preventDefault()
-        if(props.bankname === '' ||props.accnumber==='' || props.ifsccode==="" || props.pannumber===""  ||  props.accountname==="" ){
-            addToast("Enter all the details",{ appearance: 'error' })
-        }else{
-            props.bankDetails({
-                    "name": props.accountname,
-                    "bankName": props.bankname,
-                    "ifscCode": props.ifsccode,
-                    "accountNumber": props.accnumber,
-                    "panNumber": props.pannumber
-            })
+      console.log(props,"props in submitdetails")
+       try{
+        if(props.accnumber===''){
+            throw new MyError('Please  enter your account number')
         }
+        if(props.ifsccode===''){
+          throw new MyError('Please enter your Bank IFSC code')
+          }
+        if(props.bankname===''){
+            throw new MyError('Please enter your Bank Name')
+          }
+        if(props.accountname===''){
+          throw new MyError('Please enter your account name')
+          }
+      if(!is_valid_pan(props.pannumber)){
+        throw new MyError('Please enter a valid pan number')
+          }
+          props.bankDetails({
+          "name": props.accountname,
+          "bankName": props.bankname,
+          "ifscCode": props.ifsccode,
+          "accountNumber": props.accnumber,
+          "panNumber": props.pannumber
+  })
+    }catch(e){
+        console.log(e,"error in Catch Block")
+       addToast(e.message, {appearance: 'error', autoDismiss:true})
+    }
     }
 
 

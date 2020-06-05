@@ -1,3 +1,14 @@
+
+function  MyError(message){
+  console.log(this,"this in myerror")
+  this.message = message;
+}
+MyError.prototype = new Error()
+
+export const config_error = (msg) =>{
+  return MyError(msg)
+}
+
 export  const isEmpty = (obj)  => {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
@@ -5,6 +16,17 @@ export  const isEmpty = (obj)  => {
     }
     return true;
 }
+// [A-Z]{5}[0-9]{4}[A-Z]{1}
+
+export const is_valid_pan =(value) =>{
+  if (value.toString().match(/[A-Z]{5}[0-9]{4}[A-Z]{1}$/))
+   return true;
+  else
+   return false;
+}
+
+
+
 
 export const is_positive_number =(value) =>{
   if (value.toString().match(/^((?!(=))[0-9]*)$/g))

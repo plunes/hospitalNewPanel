@@ -57,11 +57,11 @@ class ManagePaymentComponent extends Component {
         }, () => {
             if(this.state.userDetails.bankDetails){
                 this.setState({
-                    bankname : this.state.userDetails.bankDetails.bankName,
-                    accnumber : this.state.userDetails.bankDetails.accountNumber,
-                    ifsccode : this.state.userDetails.bankDetails.ifscCode,
-                    pannumber : this.state.userDetails.bankDetails.panNumber,
-                    accountname : this.state.userDetails.bankDetails.name,
+                    bankname : !!this.state.userDetails.bankDetails.bankName?this.state.userDetails.bankDetails.bankName:'',
+                    accnumber : !!this.state.userDetails.bankDetails.accountNumber?this.state.userDetails.bankDetails.accountNumber:'',
+                    ifsccode : !!this.state.userDetails.bankDetails.ifscCode?this.state.userDetails.bankDetails.ifscCode:'',
+                    pannumber : !!this.state.userDetails.bankDetails.panNumber?this.state.userDetails.bankDetails.panNumber:'',
+                    accountname : !!this.state.userDetails.bankDetails.name?this.state.userDetails.bankDetails.name:'',
                     loading:false
                 }, () => {
                     console.log(this.state.userDetails.bankDetails.bankName)
@@ -82,7 +82,7 @@ class ManagePaymentComponent extends Component {
             <React.Fragment>
                 <div className='col-md-7 col-xl-8 AllComponents'>
                     <ManagePayment 
-                     bankName = {this.state.bankName}
+                     bankname = {this.state.bankname}
                      accnumber = {this.state.accnumber}
                      ifsccode = {this.state.ifsccode}
                      pannumber = {this.state.pannumber}

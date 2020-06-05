@@ -7,11 +7,17 @@ import {
   } from 'react-phone-number-input';
 import validator from 'validator'
 import Select from "../Select";
+import DateTimePicker from 'react-widgets/lib/DateTimePicker'
+// let { DateTimePicker } = ReactWidgets;
+
+// let formatter = Globalize.dateFormatter({ raw: 'MMM dd, yyyy' })
  const DoctorSignup= (props) => {
 
   const redirect = () =>{
     return <Redirect to="/signin" />
   }
+
+
 
 
   console.log(props.loadingState,"props in EditProfileForm")
@@ -123,7 +129,20 @@ import Select from "../Select";
       </div>
 
       <div className="form-group">
-        <input
+      <DateTimePicker
+        inputProps={{
+          style:{
+            // border:'5px solid red'
+          },
+          className:'inpi_rish'
+        }}
+         placeholder="Your Date of Birth"
+         name="dob"
+         onChange={props.handleDateChange}
+         time={false}
+        //  max={new Date(1023301800000)}
+  />
+        {/* <input
           type="date"
           ref = {dob_ref}
           className="form-control customborder "
@@ -132,7 +151,7 @@ import Select from "../Select";
           onChange={props.handleChange}
           required
           value = {props.data.dob}
-        />
+        /> */}
       </div>
 
 

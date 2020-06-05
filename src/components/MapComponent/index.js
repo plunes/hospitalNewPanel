@@ -8,7 +8,6 @@ Geocode.setApiKey( GoogleMapsAPI );
 Geocode.enableDebug();
 
 class Map extends Component{
-
 	constructor( props ){
 		super( props );
 		this.state = {
@@ -17,12 +16,12 @@ class Map extends Component{
 			area: '',
 			state: '',
 			mapPosition: {
-				lng: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
-				lat: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
+				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
+				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
 			},
 			markerPosition: {
-				lng: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
-				lat: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
+				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
+				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
 			}
 		}
 	}

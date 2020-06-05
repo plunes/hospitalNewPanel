@@ -2,11 +2,21 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
-import {
-    isValidPhoneNumber,
-  } from 'react-phone-number-input';
-  import validator from 'validator'
-import Select from "../Select";
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import validator from 'validator'
+import Select from "../Select"
+// let { DateTimePicker } = ReactWidgets;
+
+// let formatter = Globalize.dateFormatter({ raw: 'MMM dd, yyyy' })
+
+// let widget = (
+//   <DateTimePicker
+//     // format={formatter} 
+//     defaultValue={new Date()}
+//     time={false}
+//   />
+// )
+
 
  const HospitalSignup= (props) => {
    console.log(props,"props in HospitalSignup")
@@ -26,10 +36,11 @@ import Select from "../Select";
    const submitdetails = () => {  
      console.log((props.data.mobile.substring(0,2)==="+91"),"props.data.mobile.substring(0,2))===`+91`")
      console.log(props.data,"props.data in submitdetails")
-    if(props.data.name === '' ||props.data.address==='' || props.data.mobile==="" || props.data.about==="" ||   props.data.regno === ''){
-        addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
-    }else{
-         if(!isValidPhoneNumber(props.data.mobile)){
+    if(props.data.name === ''){
+        addToast("Please enter your name",{ appearance: 'error', autoDismiss:true })
+    }else if(props.data.mobile===''){
+      addToast("Please enter your phone number",{ appearance: 'error', autoDismiss:true })
+    }else if(!isValidPhoneNumber(props.data.mobile)){
             addToast("Enter valid mobile number",{ appearance: 'error', autoDismiss:true })
         }else if(!validator.isEmail(props.data.email)){
             addToast("Enter valid email address",{ appearance: 'error', autoDismiss:true })
@@ -37,6 +48,17 @@ import Select from "../Select";
             addToast("Password length must between 8 to 50 characters",{ appearance: 'error', autoDismiss:true })
         }else if(props.specialities_selected.length ===0){
           addToast("Please select a speciality",{ appearance: 'error', autoDismiss:true })
+        }else if(!validator.isEmail(props.data.email)){
+          addToast("Enter valid email address",{ appearance: 'error', autoDismiss:true })
+        }
+        else if(props.data.address===''){
+          addToast("Please enter your address",{ appearance: 'error', autoDismiss:true })
+        }
+        else if(props.data.about===""){
+          addToast("Please enter about",{ appearance: 'error', autoDismiss:true })
+        }
+        else if(props.data.regno === ''){
+          addToast("Please enter registration number",{ appearance: 'error', autoDismiss:true })
         }
         else{
             let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))
@@ -67,9 +89,6 @@ import Select from "../Select";
            })
         }
     }
-    }
-
-
   return (
     <div style={{position:'relative'}}>
     {props.loading && <LoaderComponent />}

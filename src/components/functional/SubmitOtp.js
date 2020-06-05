@@ -13,14 +13,14 @@ const EnterEmail = (props) =>{
     const { addToast } = useToasts()
     const [newPassword, setNewPassword] = useState(false);
     const [rePassword, setRePassword] = useState(false);
-    if(!!props.submitOtpRet){
-    if(!!props.submitOtpRet.success){
-        addToast(props.submitOtpRet.message, {appearance: 'success', autoDismiss:true}) 
-      }else{
-        addToast(props.submitOtpRet.message, {appearance: 'error', autoDismiss:true})
-      }
-      props.submitOtpClr(props.submitOtpRet.success)
-  }
+  //   if(!!props.submitOtpRet){
+  //   if(!!props.submitOtpRet.success){
+  //       addToast(props.submitOtpRet.message, {appearance: 'success', autoDismiss:true}) 
+  //     }else{
+  //       addToast(props.submitOtpRet.message, {appearance: 'error', autoDismiss:true})
+  //     }
+  //     props.submitOtpClr(props.submitOtpRet.success)
+  // }
 
 
   const submitdetails = () => {

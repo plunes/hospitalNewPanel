@@ -284,20 +284,20 @@ class AppointmentComponent extends Component {
     changeAppointClr = ()=>{
         let arr = []
             if(this.state.selected_type==="upcoming_bookings"){
-                arr = JSON.parse(JSON.stringify(this.state.upcoming_bookings))
+                arr = [...this.state.upcoming_bookings]
             }else if(this.state.selected_type==="cancelled_bookings"){
-                arr = JSON.parse(JSON.stringify(this.state.cancelled_bookings))
+                arr = [...this.state.cancelled_bookings]
             }else if(this.state.selected_type==="confirmed_bookings"){
-                arr = JSON.parse(JSON.stringify(this.state.confirmed_bookings))
+                arr = [...this.state.confirmed_bookings ]
             }
             let newArr = arr.filter((item,i)=>item._id!==this.state.selected_booking._id)
             let toArr = []
             if(this.state.toType==="cancelled_bookings"){
-                toArr = JSON.parse(JSON.stringify(this.state.cancelled_bookings))
+                toArr = [...this.state.cancelled_bookings]
             }else if(this.state.toType==="confirmed_bookings"){
-                toArr = JSON.parse(JSON.stringify(this.state.confirmed_bookings))
+                toArr = [...this.state.confirmed_bookings]
             }
-            toArr.push(this.state.selected_booking)
+            toArr.unshift(this.state.selected_booking)
             this.setState({
                 [this.state.selected_type]:newArr,
                 [this.state.toType]:toArr,
@@ -344,11 +344,10 @@ class AppointmentComponent extends Component {
         }
         return (
             <React.Fragment>
-                <NewNotif
+                {/* <NewNotif
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
-                />
-
+                /> */}
                 {/* <NotifFunc
                     ret = {this.props.reschedule_appointment_ret}
                     retClr = {this.props.reschedule_appointment_clr}
@@ -525,7 +524,8 @@ class AppointmentComponent extends Component {
                           </div>
                      { (time_now<item.appointmentTime)   &&  <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
-                                    <p className="gr_con "><text>Confirm</text></p>
+                                    <p className="gr_con "><text></text></p>
+                                    {/* <p className="gr_con "><text>Confirm</text></p> */}
                                  </div>
                                  <div className="col-lg-4">
                                  <RescheduleComponent
@@ -538,7 +538,8 @@ class AppointmentComponent extends Component {
                                 />
                                  </div>
                                  <div className="col-lg-4">
-                                 <p className="con_re "><text>Cancelled</text></p>
+                                 <p className="con_re "><text></text></p>
+                                 {/* <p className="con_re "><text>Cancelled</text></p> */}
                                  </div>
                           </div>}
                           {/* 2nd--end */}

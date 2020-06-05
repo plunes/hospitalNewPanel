@@ -567,3 +567,16 @@ input[type="date"]:focus:before {
 .login_arrow_class{
   right: -6px !important;
 }
+.rw-widget>.rw-widget-container {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid grey;
+}
+.rw-input{
+  padding: 0px !important;
+  font-size: 1.1rem !important;
+}
+.rw-widget-picker{
+  height:2.5rem;
+}
