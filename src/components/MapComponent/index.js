@@ -17,12 +17,12 @@ class Map extends Component{
 			area: '',
 			state: '',
 			mapPosition: {
-				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595,
-				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266
+				lng: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
+				lat: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
 			},
 			markerPosition: {
-				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595,
-				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266
+				lng: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
+				lat: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
 			}
 		}
 	}
@@ -30,8 +30,7 @@ class Map extends Component{
 	 * Get the current address from the default map position and set those values in the state
 	 */
 	componentDidMount() {
-		// console.log(this.props,"this.props in didMount MapComponent")
-		console.log(this.state.mapPosition.lng.toString().split(''),"this.state in didMount MapComponent")
+		// console.log(this.props,"this.props in didMount MapComponent"
 		Geocode.fromLatLng( this.state.mapPosition.lat , this.state.mapPosition.lng ).then(
 			response => {
 				const address = response.results[0].formatted_address,
