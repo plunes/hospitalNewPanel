@@ -113,14 +113,16 @@ class DashboardComponent extends React.PureComponent {
             let val = e.target.value
            if(is_positive_real_number(val))
            this.setState({real_time_edit_price:val})
-           else
-           console.log("no_negative_value")
+           else{
+            console.log("no_negative_value")
+           }
+           
     }
 
     
     componentWillReceiveProps(nextProps){
         if(!!nextProps.act_as_admin_ret){
-            console.log(nextProps.act_as_admin_ret,"nextProps.act_as_admin_ret")
+            // console.log(nextProps.act_as_admin_ret,"nextProps.act_as_admin_ret")
             if(nextProps.act_as_admin_ret.success){
                 this.setState({
                     act_admin_loading:false,
@@ -134,7 +136,7 @@ class DashboardComponent extends React.PureComponent {
             nextProps.act_as_admin_clr()
         }
         if(!!nextProps.admin_otp_ret){
-            console.log(nextProps.admin_otp_ret,"nextProps.admin_otp_ret")
+            // console.log(nextProps.admin_otp_ret,"nextProps.admin_otp_ret")
             if(nextProps.admin_otp_ret.success){
                 if(this.state.act_as_admin_other){
                     nextProps.set_user_info({...this.props.prof_data,isCenter:true})
@@ -154,7 +156,7 @@ class DashboardComponent extends React.PureComponent {
         }
 
         if(!!nextProps.admin_details_ret){
-            console.log(nextProps.admin_details_ret,"nextProps.admin_details_ret")
+            // console.log(nextProps.admin_details_ret,"nextProps.admin_details_ret")
             if(nextProps.admin_details_ret.success){
                 this.setState({
                     submit_admin_details_loading:false,
@@ -170,13 +172,15 @@ class DashboardComponent extends React.PureComponent {
 
         if(!!this.state.initial_render){
             if(!!!isEmpty(nextProps.prof_data)){
-                console.log(nextProps.prof_data,"prof_data")
-              if(!!!nextProps.prof_data.geoLocation){
-                this.setState({
-                    initial_render:false
-                })
-                nextProps.set_location_toggler(true)
-              }
+                let coordinates = nextProps.prof_data.location.coordinates
+                if(!!coordinates){
+                    if(coordinates[0]===0){
+                        this.setState({
+                            initial_render:false
+                        })
+                        nextProps.set_location_toggler(true)
+                    }
+                }
             }
         }
      }   
@@ -208,7 +212,6 @@ class DashboardComponent extends React.PureComponent {
 
     handlePhoneChange = (e)=>{
         let str = e.target.value
-        console.log(str.substring(0,3)," str.substring(0,2) in handlePhoneChange ")
         if(str.substring(0,3)==='+91'){
             
         }else{
@@ -310,10 +313,8 @@ class DashboardComponent extends React.PureComponent {
         },()=>{
             this.props.updateRealPrice(data);
         }) 
-        //console.log('Anshul')
     }
     handleUpdatePrice(updateData) {
-        //console.log(updateData, 'update data')
         this.setState({
             modalIsOpen: true,
             updatePrice: updateData.userPrice,
@@ -338,7 +339,7 @@ class DashboardComponent extends React.PureComponent {
         //await this.props.getBooking();
          if(!!this.state.initial_render){
             if(!!!isEmpty(this.props.prof_data)){
-                console.log(this.props.prof_data,"prof_data")
+                // console.log(this.props.prof_data,"prof_data")
               if(!!!this.props.prof_data.geoLocation){
                 this.setState({
                     initial_render:false
@@ -412,7 +413,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handle_act_as_admin = (prop) =>{
-        console.log(prop,"inside handle_act_as_admin>>>>>>>>>>")
+        // console.log(prop,"inside handle_act_as_admin>>>>>>>>>>")
         this.setState({
             ...default_state,
             [prop]:true
@@ -503,8 +504,8 @@ class DashboardComponent extends React.PureComponent {
                 </div>
             )
         } else {
-            console.log(this.props.updateRealPriceRet,"this.props.updateRealPriceRet")
-            console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
+            // console.log(this.props.updateRealPriceRet,"this.props.updateRealPriceRet")
+            // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
             return (
                 <React.Fragment>
                         <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
@@ -782,7 +783,8 @@ class DashboardComponent extends React.PureComponent {
                                                     </button>
                                                     </div>
                                                     <div className="col-md-6 text-center">
-                                                    <button onClick={()=>this.handle_act_as_admin('act_as_admin_no')} className="common_button_rish">
+                                                    {/* onClick={()=>this.handle_act_as_admin('act_as_admin_no')} */}
+                                                    <button onClick={()=>this.close_act_as_admin()}  className="common_button_rish">    
                                                         No
                                                     </button>
                                                     </div>

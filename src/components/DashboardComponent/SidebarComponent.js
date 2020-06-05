@@ -98,6 +98,8 @@ class SidebarComponent extends Component {
               Settings
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </Link> <hr></hr>
+            {!!prof_data.isAdmin &&
+            <React.Fragment>
             <Link to= "/dashboard/manage-payment"
                 className="list-group"
                 role="button" 
@@ -109,6 +111,8 @@ class SidebarComponent extends Component {
               Manage Payment
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
             </Link> <hr></hr>
+            </React.Fragment>
+            }
             <Link to= "/dashboard/help"
                 className="list-group"
                 role="button" 

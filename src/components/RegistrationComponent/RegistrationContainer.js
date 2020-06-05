@@ -282,6 +282,7 @@ class RegistrationContainer extends  React.Component {
                             <div className="form-group">
                             <Select
                                 id="sdasd"
+                                arrow_class = "login_arrow_class"
                                 handleChange = {this.selectType}
                                 value = {this.state.type}
                                 multiple ={false}

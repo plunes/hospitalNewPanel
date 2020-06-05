@@ -51,14 +51,15 @@ class LoginComponent extends Component {
             // }
          let txt = this.state.email
             data = {
-                      'mobileNumber': this.state.type==="admin"?txt.substring(3):this.state.email,
+                      // 'mobileNumber': this.state.type==="admin"?txt.substring(3):this.state.email,
+                      'mobileNumber':this.state.email,
                       'password': this.state.password,
                       "deviceId" : [deviceId]
                   }
             this.setState({
               loading:true
             })
-        this.props.createLogin({...data,type:this.state.type});
+        this.props.createLogin({...data,type:'center'});
     }
     handleChange(e) {
         this.setState({

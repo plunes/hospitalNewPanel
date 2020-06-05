@@ -28,6 +28,8 @@ import Notify from '../functional/Notify';
 import { isEmpty } from "../../utils/common_utilities"
 import Centers from "../Centers"
 import ConnectivityListener from '../ConnectivityListener'
+import admin_route from "../../HOC/admin_route"
+import protected_route from "../../HOC/protected_route"
 
 const initialState = {
   dash: '',
@@ -479,7 +481,16 @@ getNotifications = (data) =>{
   },()=>this.props.getNotifications(data))
 }
 
+authObject =()=> {
+   return {
+    isAuthenticated: !!localStorage.getItem('token'),
+    isAdmin:this.props.prof_data.isAdmin,
+    isCenter:this.props.prof_data.isCenter
+   }
+}
+
   render() {
+    console.log(this.authObject(),"this.authObject in DashboardPage")
     // console.log(this.props,"this.props.baseUrl")
     // console.log(this.state,"this.state in Dashboard page")
     // console.log(this.props,"this.props in Dashboard page")
@@ -508,6 +519,7 @@ getNotifications = (data) =>{
                           remove_notif_count_ret = {this.props.remove_notif_count_ret}
                           notif_count_flag = {this.props.notif_count_flag}
                           count = {this.props.notif_data.count}
+                          prof_data = {this.props.prof_data}
                         />
                     </div>
                     <div className="container-fluid">
@@ -527,45 +539,109 @@ getNotifications = (data) =>{
                             />
                         </div>
                   {(this.props.location.pathname === '/dashboard')?
-                  <DashboardComponent
-                  get_centers_loading = {this.props.get_centers_loading}
-                  business_data = {this.props.dash_data.business_data}
-                  solInsights = {this.state.solInsights}
-                  insight = {this.state.insight}
-                  real_insight_loader = {this.state.real_insight_loader}
-                  act_insight_loader = {this.state.act_insight_loader}            
-                  /> :(this.props.location.pathname === '/dashboard/profile')?
-                  <ProfileContainer
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=><DashboardComponent
+                    get_centers_loading = {this.props.get_centers_loading}
+                    business_data = {this.props.dash_data.business_data}
+                    solInsights = {this.state.solInsights}
+                    insight = {this.state.insight}
+                    real_insight_loader = {this.state.real_insight_loader}
+                    act_insight_loader = {this.state.act_insight_loader}            
+                    />)
+                   :(this.props.location.pathname === '/dashboard/profile')?
+                   protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=><ProfileContainer
                   toggleProfile = {this.toggleProfile}
                   toggleMyCatalog = {this.toggleMyCatalog}
                   toggleAddDoc = {this.toggleAddDoc}
-                  />:(this.props.location.pathname === '/dashboard/appointments')?
-                  <AppointmentComponent />:(this.props.location.pathname === '/dashboard/availability')?
-                  <AvailabilityComponent />:(this.props.location.pathname === '/dashboard/settings')?
-                  <SettingsComponent
-                    toggleEditProf = {this.toggleEditProf}
-                    toggleChangePass = {this.toggleChangePass}
-                  />:(this.props.location.pathname === '/dashboard/manage-payment')?
-                  <ManagePaymentComponent />:(this.props.location.pathname === '/dashboard/help')?
-                  <HelpComponent />:(this.props.location.pathname === '/dashboard/aboutus')?
-                  <AboutUsComponent />:(this.props.location.pathname === '/dashboard/aboutus')?
-                  <ProfileContainer />:(this.props.location.pathname === '/dashboard/my-catalogue')?
-                  <MyCatalogueComponent />:(this.props.location.pathname === '/dashboard/add-doctor')?
-                  <AddDoctorComponent
-                    location = {this.props.location}
-                  />:(this.props.location.pathname === '/dashboard/notification')?
-                  <NotificationComponent
-                  notifications = {this.state.notifications}
-                  get_notifs_loading = {this.state.get_notifs_loading}
-                  total_count = {this.props.notif_data.totalCount}
-                  getNotifications = {this.getNotifications}
-                  />:(this.props.location.pathname === '/dashboard/editProfile')?
-                  <EditProfileComponent />:(this.props.location.pathname === '/dashboard/change-password')?
-                  <ChangePassword />:(this.props.location.pathname === '/dashboard/payments')?
-                  <PaymentComponent />:(this.props.location.pathname === '/dashboard/centers')?
-                  <Centers
-                  get_centers_loading = {this.state.get_centers_loading}
-                  location={this.props.location} />:''}
+                  />)
+                  :(this.props.location.pathname === '/dashboard/appointments')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=><AppointmentComponent />)
+                  :(this.props.location.pathname === '/dashboard/availability')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=><AvailabilityComponent />)
+                  :(this.props.location.pathname === '/dashboard/settings')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=> <SettingsComponent
+                  toggleEditProf = {this.toggleEditProf}
+                  toggleChangePass = {this.toggleChangePass}
+                />)
+                 :(this.props.location.pathname === '/dashboard/manage-payment')?
+                 admin_route({
+                  authObject:this.authObject,
+                  passed_func:()=>console.log("From the passed Dunc")
+                })(()=> <ManagePaymentComponent />)
+                  :(this.props.location.pathname === '/dashboard/help')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=> <HelpComponent />)
+                  :(this.props.location.pathname === '/dashboard/aboutus')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=>  <AboutUsComponent />)
+                 :(this.props.location.pathname === '/dashboard/aboutus')?
+                 protected_route({
+                  authObject:this.authObject,
+                  logout:this.props.logout
+                })(()=> <ProfileContainer />)
+                 :(this.props.location.pathname === '/dashboard/my-catalogue')?
+                 protected_route({
+                  authObject:this.authObject,
+                  logout:this.props.logout
+                })(()=> <MyCatalogueComponent />)
+                  :(this.props.location.pathname === '/dashboard/add-doctor')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=>  <AddDoctorComponent
+                  location = {this.props.location}
+                />)
+                 :(this.props.location.pathname === '/dashboard/notification')?
+                 protected_route({
+                  authObject:this.authObject,
+                  logout:this.props.logout
+                })(()=><NotificationComponent
+                notifications = {this.state.notifications}
+                get_notifs_loading = {this.state.get_notifs_loading}
+                total_count = {this.props.notif_data.totalCount}
+                getNotifications = {this.getNotifications}
+                />)
+                :(this.props.location.pathname === '/dashboard/editProfile')?
+                protected_route({
+                  authObject:this.authObject,
+                  logout:this.props.logout
+                })(()=><EditProfileComponent />)
+                  :(this.props.location.pathname === '/dashboard/change-password')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=> <ChangePassword />)
+                 :(this.props.location.pathname === '/dashboard/payments')?
+                 admin_route({
+                  authObject:this.authObject,
+                  logout:this.props.logout
+                })(()=> <PaymentComponent />)
+                  :(this.props.location.pathname === '/dashboard/centers')?
+                  admin_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=> <Centers
+                   get_centers_loading ={this.state.get_centers_loading}
+                   location = {this.props.location}
+                  />):''}
         </div>
         </div>
         </div>
@@ -584,6 +660,7 @@ const mapStateToProps = state => ({
     notificationData: state.user.notificationData,
     notif_data:state.user.data.notif_data,
     notif_count_flag:state.user.notifCountFlag,
+    prof_data:state.user.data.prof_data,
     get_user_info_ret:state.user.get_user_info_ret
 })
 

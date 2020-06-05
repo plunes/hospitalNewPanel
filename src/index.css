@@ -564,3 +564,6 @@ input[type="date"]:focus:before {
 .login_select {
   font-size: 1.2rem !important;
 }
+.login_arrow_class{
+  right: -6px !important;
+}

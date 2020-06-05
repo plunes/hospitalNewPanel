@@ -380,7 +380,7 @@ class Select extends Component {
         <div 
         className={this.props.variant==="no_border"?`no_border_select ${this.props.input_text_class}`:`selection ${this.props.input_text_class}`} onClick={ this.onClick }>
           { this.renderValues() }
-          <span className="select-arrow">
+          <span className={!!this.props.arrow_class?`select-arrow ${this.props.arrow_class}`:'select-arrow'}>
             { isOpen ? <ChevronUp /> : <ChevronDown /> }
           </span>
         </div>

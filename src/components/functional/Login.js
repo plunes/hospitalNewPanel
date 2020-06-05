@@ -39,12 +39,12 @@ import Select from "../Select"
         //     }
         // }
         
-        if(props.type==="admin"){
-            if(!isValidPhoneNumber(props.email)){
-                error = true
-                message = "Invalid Mobile number"
-      }
-        }
+      //   if(props.type==="admin"){
+      //       if(!isValidPhoneNumber(props.email)){
+      //           error = true
+      //           message = "Invalid Mobile number"
+      // }
+      //   }
         
 
         if(!validator.isLength(props.password, { min: 8, max: 50 })){
@@ -72,7 +72,7 @@ import Select from "../Select"
 </div>
     <div style={{position:'relative'}}>
     {props.loading && <LoaderComponent />}
-                      <Select
+                      {/* <Select
                          id="login_select"
                          handleChange = {props.handle_type_change}
                          value = {props.type}
@@ -80,6 +80,7 @@ import Select from "../Select"
                          name = "type"
                          label = ""
                          input_text_class = "login_select"
+                         arrow_class = "login_arrow_class"
                          placeholder = "Select user type"
                          variant="no_border"
                          options = {[{
@@ -93,7 +94,7 @@ import Select from "../Select"
                             }
                            ]}
                       loading = {true}
-                 />
+                 /> */}
       <div className="form-group sign_in_form_group">
         <input
           autocomplete="off" 
@@ -101,8 +102,10 @@ import Select from "../Select"
           onfocus="this.removeAttribute('readonly');"
           className="form-control customborder"
           name="email"
-          placeholder={`Enter ${props.type==="admin"?'Phonenumber':'Id'} `}
-          onChange={props.type==="admin"?props.handle_phone_change:props.handleChange}
+          // placeholder={`Enter ${props.type==="admin"?'Phonenumber':'Id'} `}
+          placeholder = "Enter Phonenumber or center Id"
+          // onChange={props.type==="admin"?props.handle_phone_change:props.handleChange}
+          onChange={props.handleChange}
           required
           value = {props.email}
         />
