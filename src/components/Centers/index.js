@@ -113,7 +113,7 @@ class Centers extends React.PureComponent{
                 </div>
                 <div className="text-center margin-top-medium_ris">
                  <Link to="/dashboard/centers?addCenter=true">
-                <button className="common_button_rish">Add Center</button>
+                <button className="common_button_rish margin_top_medium_rish margin_bottom_medium_rish">Add Center</button>
                 </Link>
                 </div>
                 </div>

@@ -580,3 +580,9 @@ input[type="date"]:focus:before {
 .rw-widget-picker{
   height:2.5rem;
 }
+.margin_top_medium_rish{
+  margin-top: 2rem;
+}
+.margin_bottom_medium_rish{
+  margin-bottom: 2rem;
+}
