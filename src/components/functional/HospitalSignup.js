@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom"
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import validator from 'validator'
 import Select from "../Select"
+import { only_alphabets } from  "../../utils/common_utilities"
 // let { DateTimePicker } = ReactWidgets;
 
 // let formatter = Globalize.dateFormatter({ raw: 'MMM dd, yyyy' })
@@ -97,7 +98,11 @@ import Select from "../Select"
           className="form-control customborder"
           name="name"
           placeholder={`${!!props.lab?'Lab Name':'Hospital Name'}`}
-          onChange={props.handleChange}
+          onChange={(e)=>{
+            if(!!only_alphabets(e.target.value)){
+              props.handleChange(e)
+            }
+          }}
           required
           value = {props.data.name}
         />

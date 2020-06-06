@@ -2,25 +2,18 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import React,  { useState, useRef } from "react"
 import { Redirect } from "react-router-dom"
-import {
-    isValidPhoneNumber,
-  } from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 import validator from 'validator'
 import Select from "../Select";
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
-// let { DateTimePicker } = ReactWidgets;
+import { only_alphabets } from "../../utils/common_utilities"
 
-// let formatter = Globalize.dateFormatter({ raw: 'MMM dd, yyyy' })
+
+
  const DoctorSignup= (props) => {
-
   const redirect = () =>{
     return <Redirect to="/signin" />
   }
-
-
-
-
-  console.log(props.loadingState,"props in EditProfileForm")
   const [password, setPassword] = useState(false);
   const { addToast } = useToasts()
   const dob_ref = useRef()
@@ -101,7 +94,11 @@ import DateTimePicker from 'react-widgets/lib/DateTimePicker'
           className="form-control customborder"
           name="name"
           placeholder="Name"
-          onChange={props.handleChange}
+          onChange={(e)=>{
+            if(!!only_alphabets(e.target.value)){
+              props.handleChange(e)
+            }
+          }}
           required
           value = {props.data.name}
         />
@@ -140,6 +137,7 @@ import DateTimePicker from 'react-widgets/lib/DateTimePicker'
          name="dob"
          onChange={props.handleDateChange}
          time={false}
+         max = {new Date()}
         //  max={new Date(1023301800000)}
   />
         {/* <input

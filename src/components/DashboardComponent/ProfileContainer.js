@@ -368,7 +368,9 @@ class ProfileContainer extends React.PureComponent {
   
   addAchievementClose =() =>{
     this.setState({
-      addAchievementFlag:false
+      addAchievementFlag:false,
+      achievementImage:false,
+      achieveTitle:''
     })
   }
   upload = (data) =>{

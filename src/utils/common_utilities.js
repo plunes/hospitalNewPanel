@@ -1,11 +1,25 @@
 
-function  MyError(message){
-  console.log(this,"this in myerror")
-  this.message = message;
-}
-MyError.prototype = new Error()
+
+export const  only_alphabets = (value) =>{
+  if(value.toString()===""){
+  return true
+  }else if (value.toString().match(/^[A-Za-z ]+$/)){
+    return true;
+  }else{
+          return false;
+      }
+  }
+
+
+
 
 export const config_error = (msg) =>{
+  function  MyError(message){
+    console.log(this,"this in myerror")
+    this.message = message;
+  }
+  MyError.prototype = new Error()
+
   return MyError(msg)
 }
 

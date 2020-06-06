@@ -26,6 +26,7 @@ const AddAchievement = React.memo((props) => {
       if(!!props.uploadRet.success){
         console.log("SetLoading in updateAchhievementRet")
         props.toggleLoading()
+        document.getElementById('uploatCatalogue').value = null;
         addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
         props.toggleAchievementImage(props.uploadRet.data.imageUrl)
       }else{
@@ -48,6 +49,7 @@ const handleUpload = (e) => {
   if(!!file){
     if (file.size > 2 * 1024 * 1024) {
       console.log("File Tooo Big")
+      document.getElementById('uploatCatalogue').value = null;
       addToast('File size should be less than 2MB', {appearance: 'error', autoDismiss:true})
     } else {
       console.log("SetLoading in HandleUpload")
@@ -102,7 +104,7 @@ const submitdetails = () => {
             style={{display:'inline',display:'none'}}
             id="uploatCatalogue"
             type="file" 
-            accept=".jpg, .jpg, .jpeg"
+            accept=".jpg, .jpeg, .png"
             onChange ={(e)=>handleUpload(e)}
     />
         </div>   }
