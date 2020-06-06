@@ -227,7 +227,7 @@ export const get_centers_clr = (data) => dispatch =>{
 
 export const get_centers = (data) => async dispatch => {
   let token = localStorage.getItem('token')
-  return await axios.get(baseUrl + `user/getAllCenters`,  { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + `/user/getAllCenters`,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         console.log(res,"res in get_Center");
@@ -235,7 +235,7 @@ export const get_centers = (data) => async dispatch => {
           type: GET_CENTERS_RET,
           payload: {
             success:true,
-            data:res.data
+            data:res.data.data
           }
         })
       }else{
@@ -2644,11 +2644,28 @@ export const getSolutionInsights = () => async dispatch => {
       }
     })
     .catch((e) => {
-      console.log(e.response,"e.repsonse in SolutionSearcnh")
+      try{
+        console.log(e.response,"e.repsonse in SolutionSearcnh")
         if(e.response.status===401){
           Unauth_Logout()
         }
-      console.log(e)
+        // dispatch({
+        //   type : SEARCH_PROCEDURE_RET,
+        //   payload :{
+        //     success:false,
+        //     data:[]
+        //   }
+        // })
+      }catch(x){
+          console.log(x)
+          // dispatch({
+          //   type : SEARCH_PROCEDURE_RET,
+          //   payload :{
+          //     success:false,
+          //     data:[]
+          //   }
+          // })
+        }
     })
 }
 

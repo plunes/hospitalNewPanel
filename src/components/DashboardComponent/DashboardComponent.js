@@ -462,6 +462,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
+        console.log(this.props.centers_data,"this.props.centers_data")
         let { percent } = this.state
         const options = {
             title: {
@@ -622,16 +623,44 @@ class DashboardComponent extends React.PureComponent {
                                     </div>
                                    {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
                                     <span className='businessrow1col1 realtimewidth'>
-                                        {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p></React.Fragment>:
-                                         <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addUsers=true"> <p className='business vertical_align_rish cursor-pointer'>Add Centre</p></Link></React.Fragment> }
-                                      </span>
-                                      <div className="add-center-content">
-                                      {!!this.props.get_centers_laoding? <LoaderComponent/>: ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/no_center_img.svg" onClick={()=>this.open_act_as_admin()} alt="no_center_img" className="no_center_img  center_align_rish cursor-pointer" /></React.Fragment>:
-                                         <React.Fragment><Link to="/dashboard/centers?addUsers=true"><img src="/no_center_img.svg" alt="no_center_img"  className="no_center_img  center_align_rish cursor-pointer" /></Link></React.Fragment> }
-                                            <div >
-                                           {!this.props.get_centers_laoding &&  <span className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>}
+                                    {!!this.props.get_centers_loading &&  <LoaderComponent/>}
+
+                                       { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p></React.Fragment>:
+                                         <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addUsers=true"> <p className='business vertical_align_rish cursor-pointer'>Add Centre</p></Link></React.Fragment> 
+                                    }
+                                 
+                                    </span>   
+                                      {!this.props.get_centers_loading && <div className="add-center-content">
+                                      {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/no_center_img.svg" onClick={()=>this.open_act_as_admin()} alt="no_center_img" className="no_center_img  center_align_rish cursor-pointer" /></React.Fragment>:
+                                         this.props.centers_data.centers_list.length !==0?
+                                         <React.Fragment>
+                                         <div className="row">
+                                        { this.props.centers_data.centers_list.slice(0,4).map((item)=>{
+                                                return  <div className="col-md-6">
+                                                <div className="centers-wrap">
+                                                        <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
+                                                        <div className="text-center">
+                                                        <span className="sub_heading_rish">{item.name} <br></br>{item.centerLocation}</span>
+                                                        </div>
+                                                </div>
                                             </div>
-                                      </div>
+                                         })}
+                                         </div>
+                                         <div className="text-center margin-top-medium_ris">
+                                         <Link to="/dashboard/centers?addCenter=true">
+                                        <button className="common_button_rish margin_top_medium_rish margin_bottom_medium_rish">Add Center</button>
+                                        </Link>
+                                        </div>
+                                        </React.Fragment>
+                                         :  
+                                         <React.Fragment>
+                                             <Link to="/dashboard/centers?addUsers=true"><img src="/no_center_img.svg" alt="no_center_img"  className="no_center_img  center_align_rish cursor-pointer" /></Link></React.Fragment>
+                                         }
+                                            <div>
+                                           { this.props.centers_data.centers_list.length !==0?'': 
+                                           !this.props.get_centers_loading &&  <span className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>}
+                                            </div>
+                                      </div>}
                                     </div>}
                                     <Modal
                                         isOpen={this.state.modalIsOpen}
@@ -838,7 +867,8 @@ const mapStateToProps = state => ({
     admin_otp_ret:state.user.admin_otp_ret,
     admin_details_ret:state.user.admin_details_ret,
     location_toggler:state.user.location_toggler,
-    open_map:state.user.open_map
+    open_map:state.user.open_map,
+    centers_data:state.user.data.centers_data
 })
 
 export default connect(mapStateToProps, {updateRealPriceClr, 

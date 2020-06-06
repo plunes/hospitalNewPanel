@@ -213,6 +213,7 @@ const initialState = {
   add_center_ret:false,
   location_toggler:false,
   open_map:false,
+  get_centers_ret:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -264,13 +265,13 @@ export default function (state = initialState, action) {
     case GET_CENTERS_RET:
       return {
         ...state,
-        add_center_ret:action.payload
+        get_centers_ret:action.payload
       };
 
     case GET_CENTERS_CLR:
       return {
         ...state,
-        add_center_ret:false
+        get_centers_ret:false
       };
 
       case ADD_CENTER_CLR:

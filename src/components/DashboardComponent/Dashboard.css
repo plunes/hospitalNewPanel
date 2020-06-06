@@ -694,11 +694,14 @@ hr
       background-color: #ebebeb !important;
       -webkit-border-radius: 10px !important;
       border-radius: 10px !important;
+      margin-top: .5rem;
   }
  ::-webkit-scrollbar-thumb {
       -webkit-border-radius: 10px !important;
       border-radius: 10px !important;
       background: #c2c1c1 !important; 
+      /* margin-top:1rem !important; */
+      /* margin-top:2rem; */
   }
 
   .card_rish {
@@ -722,6 +725,7 @@ hr
   }
   .add-center-content{
         height: 100%;
+        padding: 1rem;
   }
   .no_center_img {
       margin-top: 5rem;

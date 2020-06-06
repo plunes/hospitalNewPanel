@@ -159,14 +159,19 @@ export class DashboardPage extends React.PureComponent {
 
         
         if(!!nextProps.get_centers_ret){
+          console.log(nextProps.get_centers_ret.data,"nextProps.get_centers_ret.data")
           // console.log(nextProps.get_user_info_ret,"nextProps.get_user_info_ret")
           if(!!nextProps.get_centers_ret.success){
+          
                 this.setState({
                   centers_info:{...nextProps.get_centers_ret.data},
                   get_centers_loading:false
                 },()=>{
                   nextProps.setMount({...this.props.mount,centers_mount:true})
-                  nextProps.set_centers_data({...this.state.centers_info})
+                  nextProps.set_centers_data({
+                    ...this.props.centers_data,
+                    centers_list:[...nextProps.get_centers_ret.data]
+                  })
                 })
           }else{
               console.log("Error in getting the proifle Details")
@@ -492,6 +497,7 @@ authObject =()=> {
 
   render() {
     console.log(this.authObject(),"this.authObject in DashboardPage")
+    
     // console.log(this.props,"this.props.baseUrl")
     // console.log(this.state,"this.state in Dashboard page")
     // console.log(this.props,"this.props in Dashboard page")
@@ -544,7 +550,7 @@ authObject =()=> {
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=><DashboardComponent
-                    get_centers_loading = {this.props.get_centers_loading}
+                    get_centers_loading = {this.state.get_centers_loading}
                     business_data = {this.props.dash_data.business_data}
                     solInsights = {this.state.solInsights}
                     insight = {this.state.insight}
@@ -662,7 +668,9 @@ const mapStateToProps = state => ({
     notif_data:state.user.data.notif_data,
     notif_count_flag:state.user.notifCountFlag,
     prof_data:state.user.data.prof_data,
-    get_user_info_ret:state.user.get_user_info_ret
+    get_user_info_ret:state.user.get_user_info_ret,
+    get_centers_ret:state.user.get_centers_ret,
+    centers_data:state.user.data.centers_data
 })
 
 export default connect(mapStateToProps, { 

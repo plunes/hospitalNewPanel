@@ -549,6 +549,7 @@ input[type="date"]:focus:before {
 }
 .sub_heading_rish{
   font-size: 1.2rem;
+  word-break: break-word;
 }
 .centers-wrap{
   margin-top: 1rem;
@@ -585,4 +586,13 @@ input[type="date"]:focus:before {
 }
 .margin_bottom_medium_rish{
   margin-bottom: 2rem;
+}
+.center_location_rish {
+  text-align: center;
+  word-break: break-word;
+  font-size:1.2rem;
+  font-weight: bold;
+  letter-spacing: 0px;
+  color: #676767;
+  opacity: 1;
 }
