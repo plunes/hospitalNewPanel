@@ -32,7 +32,9 @@ class Centers extends React.PureComponent{
                         {this.props.centers_data.centers_list.map(item=>{
                            return  <div className="col-md-3">
                            <div className="centers-wrap">
+                               <Link to={`/dashboard/profile?center=${item._id}`}>
                                    <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
+                                </Link>
                                    <div className="text-center">
                                   <div className="center_location_rish text-center">{item.centerLocation}</div>
                                    <span className="sub_heading_rish">{item.mobileNumber} <br></br>{item.password}</span>

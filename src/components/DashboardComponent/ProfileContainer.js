@@ -494,7 +494,7 @@ class ProfileContainer extends React.PureComponent {
                     </div>
                 </div>
 
-          { this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
+          {this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
            {!this.state.flag_for_map &&  <ScrollTo
               remove_me = {()=>{
                 this.props.set_open_map(false)
@@ -620,7 +620,8 @@ const mapStateToProps = state => ({
   editBioRet:state.user.editBioRet,
   profileData:state.user.profileData,
   edit_location_ret:state.user.edit_location_ret,
-  open_map:state.user.open_map
+  open_map:state.user.open_map,
+  centers_list:state.user.data.centers_data.centers_list
 })
 
 export default connect(mapStateToProps, { 
