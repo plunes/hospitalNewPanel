@@ -138,8 +138,15 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   GET_CENTERS_RET,
   SET_CENTERS_DATA,
   SET_LOCATION_TOGGLER,
+  SET_OPEN_MAP,
 
-  SET_OPEN_MAP
+  GET_REMAIN_SPECS_CLR,
+  GET_REMAIN_SPECS_RET,
+
+  SET_CATALOGUE_DATA,
+
+  ADD_SPECS_RET,
+  ADD_SPECS_CLR
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
 
@@ -214,6 +221,8 @@ const initialState = {
   location_toggler:false,
   open_map:false,
   get_centers_ret:false,
+  get_remain_specs_ret:false,
+  add_specs_ret:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -243,12 +252,54 @@ const initialState = {
     },
     centers_data:{
         centers_list:[]
+    },
+    catalogue_data:{
+      remaining_specs:[]
     }
   }
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+   case SET_CATALOGUE_DATA:
+      return {
+       ...state,
+       data:{
+        ...state.data,
+        catalogue_data:{
+          ...state.data.catalogue_data,
+          ...action.payload
+        }
+      }
+     };
+
+   case ADD_SPECS_RET:
+     return {
+       ...state,
+       add_specs_ret:action.payload
+     };
+
+  case ADD_SPECS_CLR:
+     return {
+       ...state,
+       add_specs_ret:false
+     };
+
+
+
+   case GET_REMAIN_SPECS_CLR:
+     return {
+       ...state,
+       get_remain_specs_ret:false
+     };
+
+  case GET_REMAIN_SPECS_RET:
+     return {
+       ...state,
+       get_remain_specs_ret:action.payload
+     };
+
 
     case SET_LOCATION_TOGGLER:
       return {

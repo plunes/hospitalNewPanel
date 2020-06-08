@@ -3,7 +3,6 @@ import { useToasts } from 'react-toast-notifications'
 import Select from "../Select"
 
 export default function VarianceDropdown(props) {
-  console.log(props,"props in VarianceDropdown")
   return (
     <div>
         <Select

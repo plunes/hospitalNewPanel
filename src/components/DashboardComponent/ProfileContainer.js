@@ -165,6 +165,8 @@ class ProfileContainer extends React.PureComponent {
 
   componentDidMount(){
 
+    
+
     if(this.state.flag_for_map){
       console.log(this.props.open_map,"this.props.open_map")
       if(!!this.props.open_map){

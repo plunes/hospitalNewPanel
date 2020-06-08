@@ -156,7 +156,14 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT, U
   GET_CENTERS_RET,
   SET_CENTERS_DATA,
   SET_LOCATION_TOGGLER,
-  SET_OPEN_MAP
+  SET_OPEN_MAP,
+
+  GET_REMAIN_SPECS_CLR,
+  GET_REMAIN_SPECS_RET,
+  SET_CATALOGUE_DATA,
+
+  ADD_SPECS_CLR,
+  ADD_SPECS_RET
 
   } from './types';
 import history from '../history';
@@ -195,6 +202,129 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
 }
+
+
+export const set_catalogue_data = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_CATALOGUE_DATA,
+    payload:data
+  })
+}
+
+
+export const add_specs_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: ADD_SPECS_CLR,
+    payload:{}
+  })
+}
+
+export const add_specs = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.post(baseUrl + `/catalogue/addSpecialities`, data,  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in get_remaining_specs");
+      if (res.status === 200) {
+        dispatch({
+          type: ADD_SPECS_RET,
+          payload: {
+            success:true,
+            data:res.data,
+            message:"Specialities successfully added"
+          }
+        })
+      }else{
+        dispatch({
+          type: ADD_SPECS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      try{
+        dispatch({
+          type: ADD_SPECS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: ADD_SPECS_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }  
+    })
+}
+
+export const get_remaining_specs_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_REMAIN_SPECS_CLR,
+    payload:{}
+  })
+}
+
+export const get_remaining_specs = (data) => async dispatch => {
+  let token = localStorage.getItem('token')
+  return await axios.post(baseUrl + `/catalogue/getSpecialitiesForDoctor`, {limit:100, page:'1', searchQuery:''},  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in get_remaining_specs");
+      if (res.status === 200) {
+        dispatch({
+          type: GET_REMAIN_SPECS_RET,
+          payload: {
+            success:true,
+            data:res.data
+          }
+        })
+      }else{
+        dispatch({
+          type: GET_REMAIN_SPECS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      try{
+        dispatch({
+          type: GET_REMAIN_SPECS_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: GET_REMAIN_SPECS_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }  
+    })
+}
+
 
 export const set_open_map = (data) => dispatch =>{
   return  dispatch({

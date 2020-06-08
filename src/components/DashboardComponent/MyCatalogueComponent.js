@@ -18,7 +18,12 @@ getSpecsClr,
 toAddServices,
 toAddServicesClr,
 addServices,
-addServicesClr
+addServicesClr,
+get_remaining_specs,
+set_catalogue_data,
+get_remaining_specs_clr,
+add_specs,
+add_specs_clr
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -30,7 +35,7 @@ import Procedure from "../functional/Procedure"
 import EditProcedure from "../functional/editProcedure"
 import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
-import MeasureTime from "../MeasureTime"
+import NewNotif from "../functional/NewNotif"
 import Select from "../Select";
 
 
@@ -42,6 +47,11 @@ import Select from "../Select";
     return true;
 }
 
+function MyError(message){
+    this.message = message;
+}
+
+MyError.prototype = new Error()
 // import history from '../../history';
 
 class MyCatalogueComponent extends Component {
@@ -64,7 +74,9 @@ class MyCatalogueComponent extends Component {
             specialities:[],
             addProcedureFlag:false,
             procedures_toAdd:[],
-            selected_procedures:[]
+            selected_procedures:[],
+            add_remaining_specs:false,
+            selected_remain_specs:[]
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -75,12 +87,76 @@ class MyCatalogueComponent extends Component {
         this.setState({
             loading:true
         })
+        this.props.get_remaining_specs()
         await this.props.getSpecs({
             type:"getUserSpecialities"
         })
     }
 
     componentWillReceiveProps(nextProps){
+        if(nextProps.add_specs_ret){
+            if(nextProps.add_specs_ret.success){
+                let arr = []
+                let added_specs = [...this.state.selected_remain_specs]
+                let specialities = [...nextProps.catalogue_data.remaining_specs].filter((item,i)=>{
+                 return  !added_specs.includes(item.name)
+                })
+                let new_specs = added_specs.map((item)=>{
+                    return {
+                        name:item,
+                        value:[...nextProps.catalogue_data.remaining_specs].filter(val=>val.name===item)[0].id
+                    }
+                })
+                nextProps.set_catalogue_data({
+                    ...nextProps.catalogue_data,
+                    remaining_specs:specialities
+                })
+                this.setState({
+                    add_specs_loading:false,
+                    ret:{
+                        success:true,
+                        message:nextProps.add_specs_ret.message
+                    },
+                    selected_remain_specs:[],
+                    add_remaining_specs:false,
+                    specialities:[...this.state.specialities, ...new_specs]
+                })
+            }else{
+                this.setState({
+                    add_specs_loading:false,
+                    ret:{
+                        success:false,
+                        data:nextProps.add_specs_ret.message
+                    }
+                })
+            }
+          nextProps.add_specs_clr()
+        }
+
+
+        if(nextProps.get_remain_specs_ret){
+            if(nextProps.get_remain_specs_ret.success){
+                let arr = []
+                let specialities = [...nextProps.get_remain_specs_ret.data]
+                specialities.forEach((item,i)=>{
+                  let obj = {
+                    name:item.speciality,
+                    value:item.speciality,
+                    id:item._id
+                  }
+                  arr.push(obj)
+                })
+                nextProps.set_catalogue_data({
+                    ...nextProps.catalogue_data,
+                    remaining_specs:arr
+                })
+            }else{
+
+            }
+          nextProps.get_remaining_specs_clr()
+        }
+
+
         if(!!nextProps.toAddServicesRet){
             if(nextProps.toAddServicesRet.success){
                 this.setState({
@@ -116,7 +192,7 @@ class MyCatalogueComponent extends Component {
             if(!!nextProps.getSpecsRet){
                 if(nextProps.getSpecsRet.success){
                     let arr = []
-                    let specialities = JSON.parse(JSON.stringify(nextProps.getSpecsRet.data))
+                    let specialities = [...nextProps.getSpecsRet.data]
                     specialities.forEach((item,i)=>{
                       let obj = {
                         name:item.speciality,
@@ -129,13 +205,7 @@ class MyCatalogueComponent extends Component {
                             specialities:arr,
                             selected_speciality:arr[0].value,
                             loading:true
-                        },()=>{
-                              this.props.searchProcedures({
-                                          limit:50,
-                                          searchQuery:'',
-                                          page:1,
-                                          specialityId:this.state.selected_speciality                            })
-                        })
+                        },()=>{this.props.searchProcedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality})  })
                     }  
                 }else{
                     this.setState({
@@ -153,7 +223,7 @@ class MyCatalogueComponent extends Component {
     }
     handleSelectedProcedureChange = (e, serviceId) =>{
         let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
-        console.log(arr,"arr in handleSelectedProcedureChage")
+       
         let obj = {
         }
         let id= ''
@@ -178,9 +248,7 @@ class MyCatalogueComponent extends Component {
     }
 
     handleVarianceChange = (e,serviceId) =>{
-        console.log(e,"weweeewerwerwerwerwerwerwer")
         let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
-        console.log(arr,"arr in handleSelectedProcedureChage")
         let obj = {
         }
         let id= ''
@@ -320,7 +388,6 @@ class MyCatalogueComponent extends Component {
     }
 
     onEdit = (data) =>{
-        console.log(data,"onEdit In mYcatalogiecomponent")
         this.setState({
             edit_Proc_flag:true
         })
@@ -408,11 +475,58 @@ class MyCatalogueComponent extends Component {
              })})
     }
 
+    handle_change_selected_remain_specs = (e) =>{
+        try{
+            let arr = [...this.state.selected_remain_specs]
+            if(arr.includes(e.target.value))
+            throw new MyError(`${e.target.value} is already selected`)
+            arr.unshift(e.target.value)
+            this.setState({
+                selected_remain_specs:arr
+            })
+        } catch (e){
+            this.setState({
+                ret:{
+                    success:true,
+                    message:e.message
+                }
+            })
+        }
+    }
+    add_selected_remain_specs = () =>{
+        try{
+            if(this.state.selected_remain_specs.length===0)
+            throw new MyError("Select Speciality to add")
+            let arr = []
+            this.state.selected_remain_specs.map((spec)=>{
+               let boom = this.props.catalogue_data.remaining_specs.filter((item=>item.name===spec))
+               if(boom.length!==0){
+                   arr.push(boom[0].id)
+               }
+            })
+            this.setState({
+                add_specs_loading:true
+            },()=>this.props.add_specs({specialities:arr}))
+        }catch(e){
+            this.setState({
+                ret:{
+                    success:false,
+                    message:e.message
+                }
+            })
+        }
+    }
+
     render() {
-        console.log(this.state,"this.state in myCatalogueComponent")
+        // console.log(this.state,"this.state in  Mycatalogue")
+        // console.log(this.props,"this.props. in Mycatalogue ")
                 return (
                     <React.Fragment>
                         <NotifFunc />
+                        <NewNotif 
+                            ret = {this.state.ret}
+                            retClr= {()=>this.setState({ret:false})}
+                        />
                     <div className='col-md-8 col-xl-8 catalogueComponent'>
                         <div className='row justify-content-center'>
                             {/* <p className='catalogue'>Catalogue</p> */}
@@ -448,49 +562,59 @@ class MyCatalogueComponent extends Component {
                                  <p className="uploadCata">Add Catalogue</p></a>
                               </div>
                         </div>
-                        <div className="row gastroent_mar">
+                        {!this.state.addProcedureFlag &&  <div style={{position:'relative'}} className="text-center">
+                          {this.state.add_specs_loading && <LoaderComponent />}
+                            <div className="add_specs_wrapper">
+                            {   
+                                this.state.add_remaining_specs? 
+                                <React.Fragment>
+                                <Select
+                                options = {this.props.catalogue_data.remaining_specs}
+                                handleChange = {this.handle_change_selected_remain_specs}
+                                placeholder= "Speciality"
+                                input_text_class = "login_select"
+                                value = {this.state.selected_remain_specs[0]}
+                                name = "remain_specs"
+                                label = "Speciality"
+                              />
+                              <div className="margin_top_small_rish">
+                              {this.state.selected_remain_specs.map((item,i)=>(
+                               <React.Fragment>
+                                    
+                            <div className="signup_specialities_wrapper_ris">
+                               <div className="signup_speciality">
+                                     <p className="signup_speciality_name">{item}</p>
+                                     <p onClick={()=>this.setState({selected_remain_specs:[...this.state.selected_remain_specs].filter((val=>val!==item))})} className="signup_speciality_X">X</p>
+                               </div>
+                            </div>
+                               <hr />
+                                </React.Fragment>
+                                  ))}
+                                <div className="text-center">
+                                 <button onClick = {()=>this.add_selected_remain_specs()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add</button>
+                                </div>  
+                              </div>
+                              </React.Fragment>
+                              : 
+                              <button onClick = {()=>this.setState({add_remaining_specs: true})} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add Speciality</button>
+                            }
+                         </div>
+                        </div>
+}
+                     <div className="row gastroent_mar">
                        {
                            !this.state.addProcedureFlag &&  <div className="text-center col-xl-6">
                                <Select
                                  options = {this.state.specialities}
                                  handleChange = {this.handleSpecialitySelect}
                                  placeholder= "Speciality"
+                                 input_text_class = "login_select"
                                  value = {this.state.selected_speciality}
                                  name = "speciality_chosen"
                                  label = "Speciality"
                                />
-                           {/* <SelectComponent
-                           options = {this.state.specialities}
-                           handleChange = {this.handleSpecialitySelect}
-                           placeholder= "Speciality"
-                           value = {this.state.selected_speciality}
-                           hidelabel = {true}
-                           dropdownStyle = {{
-                               top:'240px !important'
-                           }}
-                           labelStyles = {{
-                               'padding': '6px 0px 0px 12px'
-                           }}
-                           wrapperDivStyles = {{
-                                   'width': '100%',
-                                   'marginTop':'1rem',
-                                   'marginLeft': 'auto',
-                                  'marginRight': 'auto'
-                               }}
-                           selectStyles = {{  
-                               'border':'1px solid #01D35A !important;',
-                               'padding':'3px',
-                               'borderRadius':'39px',
-                               'padding':'2%',
-                               '&:active':{
-                                   'backgroundColor':'none !important'
-                               }}
-                       }
-                           name = "speciality_chosen"
-                           label = "Speciality"
-                  /> */}
+                              
                        </div>
-
                        }   
                       <div className="text-center col-xl-6 serc_mar_pad">
                           <img src="/search.jpg" className="serc_icn"/>
@@ -617,7 +741,10 @@ const mapStateToProps = state => ({
     editProcedureRet:state.user.editProcedureRet,
     getSpecsRet:state.user.getSpecsRet,
     toAddServicesRet:state.user.toAddServicesRet,
-    addServicesRet:state.user.addServicesRet
+    addServicesRet:state.user.addServicesRet,
+    catalogue_data:state.user.data.catalogue_data,
+    get_remain_specs_ret:state.user.get_remain_specs_ret,
+    add_specs_ret:state.user.add_specs_ret
 })
 
 export default connect(mapStateToProps, { getUserCatalogue, 
@@ -633,5 +760,11 @@ getSpecsClr,
 toAddServices,
 toAddServicesClr,
 addServices,
-addServicesClr
+addServicesClr,
+get_remaining_specs,
+get_remaining_specs_clr,
+set_catalogue_data,
+set_catalogue_data,
+add_specs_clr,
+add_specs
 })(MyCatalogueComponent);

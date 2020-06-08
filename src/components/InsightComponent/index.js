@@ -38,7 +38,7 @@ class InsightComponent extends React.PureComponent {
                 {this.props.s.userName}
             </div>
             <div>
-               <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}</p>
+      <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName} ({this.props.s.profName})</p>
             </div>
             {
               seconds_diff>0?

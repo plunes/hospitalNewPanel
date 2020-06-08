@@ -7,7 +7,6 @@ import VarianceDropdown from "./varianceDropdown"
   const { addToast } = useToasts()
   const {data} = props
   const [ select , setSelect ] = useState(false)
-console.log(props,"props in Procedure")
   if(!!props.ret){
     if(props.data.serviceId === props.selected_procedures[0].serviceId){
       if(!!props.ret.success){

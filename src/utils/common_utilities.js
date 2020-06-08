@@ -1,5 +1,3 @@
-
-
 export const  only_alphabets = (value) =>{
   if(value.toString()===""){
   return true
@@ -9,9 +7,6 @@ export const  only_alphabets = (value) =>{
           return false;
       }
   }
-
-
-
 
 export const config_error = (msg) =>{
   function  MyError(message){
@@ -30,7 +25,7 @@ export  const isEmpty = (obj)  => {
     }
     return true;
 }
-// [A-Z]{5}[0-9]{4}[A-Z]{1}
+
 
 export const is_valid_pan =(value) =>{
   if (value.toString().match(/[A-Z]{5}[0-9]{4}[A-Z]{1}$/))
@@ -39,15 +34,13 @@ export const is_valid_pan =(value) =>{
    return false;
 }
 
-
-
-
 export const is_positive_number =(value) =>{
   if (value.toString().match(/^((?!(=))[0-9]*)$/g))
    return true;
   else
    return false;
 }
+
 export const is_positive_real_number = (value) =>{
   if(value===""){
     return true

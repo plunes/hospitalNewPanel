@@ -596,3 +596,47 @@ input[type="date"]:focus:before {
   color: #676767;
   opacity: 1;
 }
+.button_rish {
+  background: #01D35A 0% 0% no-repeat padding-box;
+  border-radius: 4rem !important;
+  width: auto;
+  opacity: 1;
+  padding: .8rem 2rem;
+  border: none;
+  /* font-family: 'Proxima', 'Nova'; */
+  font-size: 1rem;
+}
+.button_rish:focus{
+outline: none; 
+}
+.color_white_rish {
+  color: #ffff;
+}
+
+.margin_top_medium_rish {
+  margin-top: 2rem;
+}
+.margin_top_small_rish {
+  margin-top: 1rem;
+}
+.margin_bottom_medium_rish {
+  margin-bottom: 2rem;
+}
+.margin_bottom_small_rish {
+  margin-bottom: 1rem;
+}
+.margin_left_small_rish {
+  margin-left: 1rem;
+}
+.margin_right_small_rish {
+  margin-right: 1rem;
+}
+
+.add_speciality_button {
+  width: 15rem;
+}
+.add_specs_wrapper {
+  width:45rem;
+  margin-left: auto;
+  margin-right: auto;
+}

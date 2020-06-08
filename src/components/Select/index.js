@@ -288,7 +288,6 @@ class Select extends Component {
   renderValues() {
     const { placeholder, multiple } = this.props
     const { value } = this.props
-    console.log(!!value, value,"!!value in SelectComponent")
     if(!!value){
       if (value.length === 0) {
         return (
@@ -362,7 +361,6 @@ class Select extends Component {
   }
 
   render() {
-    console.log(this.state,"state in SelectComponent")
     const { label } = this.props
     const { isOpen } = this.state
 

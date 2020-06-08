@@ -194,5 +194,14 @@ export const GET_CENTERS_RET  = 'App/Dashboard/GET_CENTERS_RET'
 export const GET_CENTERS_CLR  = 'App/Dashboard/GET_CENTERS_CLR'
 
 export const SET_LOCATION_TOGGLER  = 'App/Dashboard/SET_LOCATION_TOGGLER'
-
 export const SET_OPEN_MAP  = 'App/Profile/SET_OPEN_MAP'
+
+
+
+export const SET_CATALOGUE_DATA  = 'App/Catalogue/SET_CATALOGUE_DATA'
+
+export const GET_REMAIN_SPECS_RET  = 'App/Catalogue/GET_REMAIN_SPECS_RET'
+export const GET_REMAIN_SPECS_CLR  = 'App/Catalogue/GET_REMAIN_SPECS_CLR'
+
+export const ADD_SPECS_RET  = 'App/Catalogue/ADD_SPECS_RET'
+export const ADD_SPECS_CLR  = 'App/Catalogue/ADD_SPECS_CLR'
