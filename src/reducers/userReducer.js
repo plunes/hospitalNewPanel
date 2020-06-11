@@ -146,9 +146,15 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   SET_CATALOGUE_DATA,
 
   ADD_SPECS_RET,
-  ADD_SPECS_CLR
+  ADD_SPECS_CLR,
+
+  GET_CENTER_PROFILE_RET,
+  GET_CENTER_PROFILE_CLR,
+
+  SET_CENTER_DATA
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
+import { get_url_params } from "../utils/common_utilities"
 
 const initialState = {
   userDetail: {},
@@ -223,6 +229,7 @@ const initialState = {
   get_centers_ret:false,
   get_remain_specs_ret:false,
   add_specs_ret:false,
+  get_center_profile_ret:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -251,7 +258,8 @@ const initialState = {
 
     },
     centers_data:{
-        centers_list:[]
+        centers_list:[],
+        center_data:{}
     },
     catalogue_data:{
       remaining_specs:[]
@@ -261,6 +269,22 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+
+   case SET_CENTER_DATA:{
+     return {
+       ...state,
+       data:{
+         ...state.data,
+         centers_data:{
+           ...state.data.centers_data,
+           center_data:{
+             ...state.data.centers_data.center_data,
+             ...action.payload
+           }
+         }
+       }
+     }
+   }
 
    case SET_CATALOGUE_DATA:
       return {
@@ -285,6 +309,19 @@ export default function (state = initialState, action) {
        ...state,
        add_specs_ret:false
      };
+
+
+  case GET_CENTER_PROFILE_RET:
+      return {
+        ...state,
+        get_center_profile_ret:action.payload
+       };
+
+case GET_CENTER_PROFILE_CLR:
+     return {
+      ...state,
+      get_center_profile_ret:false
+  };
 
 
 
@@ -468,13 +505,34 @@ export default function (state = initialState, action) {
       };
 
       case SET_USER_INFO:
+        let  action_data = { ...action.payload}
+        let from_dash_page = action_data.from_dash_page
+        if(!!from_dash_page){
+          delete action_data.from_dash_page
+        }
+        if(((!!get_url_params('center')) &&  (!from_dash_page)) ){
+      return {
+            ...state,
+            data:{
+              ...state.data,
+              centers_data:{
+                ...state.data.centers_data,
+                centers_list:[...state.data.centers_data.centers_list].map(item=>{if(item._id===get_url_params('center')){return {...state.data.centers_data.center_data,...action_data} } return item}),
+                center_data:{
+                  ...state.data.centers_data.center_data,
+                  ...action_data
+                }
+              }
+            }
+          }
+        }
         return {
           ...state,
         data:{
           ...state.data,
           prof_data:{
             ...state.data.prof_data,
-            ...action.payload
+            ...action_data
           }
         }
         }

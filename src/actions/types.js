@@ -205,3 +205,10 @@ export const GET_REMAIN_SPECS_CLR  = 'App/Catalogue/GET_REMAIN_SPECS_CLR'
 
 export const ADD_SPECS_RET  = 'App/Catalogue/ADD_SPECS_RET'
 export const ADD_SPECS_CLR  = 'App/Catalogue/ADD_SPECS_CLR'
+
+
+export const GET_CENTER_PROFILE_CLR  = 'App/Profile/GET_CENTER_PROFILE_CLR'
+export const GET_CENTER_PROFILE_RET  = 'App/Profile/GET_CENTER_PROFILE_RET'
+
+
+export const SET_CENTER_DATA = 'APP/Centers/SET_CENTER_DATA'

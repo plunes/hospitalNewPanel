@@ -4,6 +4,7 @@ import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
 import { GoogleMapsAPI } from './client-config';
 import LoaderComponent from "../functional/LoaderComponent"
+import NewNotif from "../functional/NewNotif"
 Geocode.setApiKey( GoogleMapsAPI );
 Geocode.enableDebug();
 
@@ -25,6 +26,44 @@ class Map extends Component{
 			}
 		}
 	}
+
+
+
+	componentWillReceiveProps(nextProps){
+		if(!!nextProps.edit_location_ret){
+			console.log(nextProps.edit_location_ret,"next")
+			if(!!nextProps.edit_location_ret.success){
+			  this.setState({
+				ret:{
+				  success:true,
+    			  message:nextProps.edit_location_ret.message
+				}
+			  })
+			  nextProps.edit_location_clr()
+			  nextProps.set_user_info({
+				location:{
+					type:'Point',
+					coordinates:[
+					   this.state.markerPosition.lng,
+					   this.state.markerPosition.lat
+					]
+				},
+				address:this.state.address
+			  })
+			}else{
+				this.setState({
+					ret:{
+					  success:false,
+					  message:nextProps.edit_location_ret.message
+					}
+				  })
+			}
+			nextProps.edit_location_clr()
+		  }
+	}
+
+
+
 	/**
 	 * Get the current address from the default map position and set those values in the state
 	 */
@@ -257,6 +296,10 @@ class Map extends Component{
 			console.log("254>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 			map = <div style={{position:'relative'}}>
 				{this.props.edit_location_loading && <LoaderComponent />}
+				<NewNotif 
+				ret = {this.state.ret}
+				retClr = {()=>this.setState({ret:false})}
+				/>
 				<div>
 					{/* <div className="form-group">
 						<label htmlFor="">City</label>

@@ -11,6 +11,7 @@ import { registerUser, registerUserClr } from "../../actions/userActions";
 import HospitalSignup from "../functional/HospitalSignup"
 import DoctorSignup from '../functional/DoctorSignup'
 import AuthHeader from '../functional/AuthHeader'
+import { get_url } from '../../utils/common_utilities'
 
 import { connect } from "react-redux"
 
@@ -155,7 +156,7 @@ class RegistrationContainer extends  React.Component {
     }
 
  componentDidMount() {
-    axios.get(`https://devapi.plunes.com/v5/catalogue_manager/specialities`)
+    axios.get(`${get_url()}/catalogue/getSpecialities`)
       .then(res => {
         const specialities = res.data.data;
         // console.log(specialities);

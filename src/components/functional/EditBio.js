@@ -8,7 +8,10 @@ import React, { useRef } from "react"
   if(!!props.editBioRet){
       if(!!props.editBioRet.success){
         addToast(props.editBioRet.message, {appearance: 'success', autoDismiss:true}) 
-        props.getUserDetails()
+        // props.getUserDetails()
+        props.set_user_info({
+          biography:props.biography
+        })
         props.toggleEditBio()
       }else{
         addToast(props.editBioRet.message, {appearance: 'success', autoDismiss:true})
@@ -47,7 +50,7 @@ import React, { useRef } from "react"
     </p>
     <div className="col-lg-12 text_cmt">
     {props.loading && <LoaderComponent />}
-   {((!props.editBioFlag) && (props.biography)) && <p className="loc">{props.biography}</p>}
+   {((!props.editBioFlag) && (props.user.biography)) && <p className="loc">{props.user.biography}</p>}
   {props.editBioFlag &&  <textarea 
    name="biography" 
    ref={textareaRef}

@@ -149,7 +149,7 @@ export class DashboardPage extends React.PureComponent {
                     },()=>nextProps.get_centers())
                   }
                   nextProps.setMount({...this.props.mount,prof_mount:true})
-                  nextProps.set_user_info({...this.state.user_info})
+                  nextProps.set_user_info({...this.state.user_info, from_dash_page:true})
                 })
           }else{
               console.log("Error in getting the proifle Details")
@@ -302,9 +302,9 @@ export class DashboardPage extends React.PureComponent {
     this.props.get_business({days:7})
 
     // need to remove this api call after refactoring
-    this.props.getUserDetails()
+    // this.props.getUserDetails()
 
-    this.props.get_user_info()
+    this.props.get_user_info({from_dash_page:true})
 
     // To Establish socket connection
     this.socketEmit()
@@ -328,7 +328,7 @@ export class DashboardPage extends React.PureComponent {
     this.setState({
      ...initialState,
      prof:'active'
-    });
+    })
   }
   toggleAvail =() =>{
     this.setState({

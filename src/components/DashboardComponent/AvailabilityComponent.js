@@ -221,7 +221,7 @@ setAvailabilityClr = () =>{
   },()=>this.props.setAvailabilityClr())
 }
     render() {
-     
+       console.log(this.state,"this.state in availability")
         return (
            <React.Fragment> 
              <NotifFunc

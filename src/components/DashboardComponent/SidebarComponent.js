@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
-import { logout } from '../../actions/userActions';
+import { logout, get_user_info } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
+import { get_url_params } from "../../utils/common_utilities"
 // import { Link, Redirect} from 'react-router-dom'
 // import history from "../../history";
 // import { ListGroup, ListGroupItem, Collapse } from "reactstrap";
@@ -36,8 +37,14 @@ class SidebarComponent extends Component {
             <Link to= "/dashboard/profile" 
            className="list-group"
            role="button" 
-           onClick={()=>this.props.toggleProfile()}
-            > 
+           onClick={()=>
+              {
+              if(!!get_url_params('center')){
+                console.log(get_url_params('center'),"sky is one and shes a")
+                this.props.get_user_info({from_dash_page:true})
+              }
+              this.props.toggleProfile()
+            }}> 
                <span>
                 <img className="sidebaricon pro_tw" src="/profile.jpg" alt=""></img>
               </span>
@@ -155,5 +162,5 @@ const mapStateToProps = state => ({
   prof_data:state.user.data.prof_data
 })
 
-export default connect(mapStateToProps, {logout})(SidebarComponent);
+export default connect(mapStateToProps, { logout, get_user_info })(SidebarComponent);
 

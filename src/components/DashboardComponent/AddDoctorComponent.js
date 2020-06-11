@@ -400,9 +400,9 @@ let obj =   {
       }
     }
 
-    async componentDidMount(){
-       this.props.getSpecs()
-    }
+    // async componentDidMount(){
+    //    this.props.getSpecs()
+    // }
 
     handleChange = (e)=>{
       this.setState({

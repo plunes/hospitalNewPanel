@@ -1,3 +1,20 @@
+export const get_url = () =>{
+  let baseUrl = "https://devapi.plunes.com/v5"
+  const pathLocation = window.location.host;
+    if(!!pathLocation) {
+            console.log('pathLocation : ', pathLocation);
+        if(pathLocation === 'hospital.plunes.com') {
+            console.log('PROD');
+    // Production baseUrl
+          baseUrl = 'https://api.plunes.com/v5'
+              }else{
+        baseUrl = "https://devapi.plunes.com/v5"
+    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
+      }
+  }
+      return baseUrl
+}
+
 export const  only_alphabets = (value) =>{
   if(value.toString()===""){
   return true

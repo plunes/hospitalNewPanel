@@ -217,6 +217,7 @@ import { only_alphabets } from "../../utils/common_utilities"
            multiple ={false}
            name = "speciality"
            label = "Speciality"
+           placeholder="Choose Specialities"
         />
         <div className="form-group buttonSignUp">
         <button onClick={()=>props.addFlagToggle()}  className="btn btn-success text-center signupHosbtn">

@@ -162,6 +162,7 @@ import { only_alphabets } from  "../../utils/common_utilities"
            handleChange = {props.handleSpecialitySelect}
            value = {props.specialities_selected[props.specialities_selected.length -1]}
            multiple ={false}
+           placeholder="Choose Specialities"
            name = "speciality"
            label = "Speciality"
         />
