@@ -5,6 +5,7 @@ import { add_center_clr, add_center, set_centers_data } from "../../actions/user
 import validator from 'validator'
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import { Redirect } from "react-router-dom"
+import Map from "../MapComponent"
 
 function MyError(message){
     this.message = message;
@@ -54,6 +55,7 @@ class AddCenter extends React.PureComponent{
         })
     }
     handle_submit = () =>{
+        console.log("Inside handle_submit")
         try{
             if(!isValidPhoneNumber(this.state.phone)){
                 throw new MyError('Please enter a valid phone number')
@@ -87,6 +89,7 @@ class AddCenter extends React.PureComponent{
         }
     }
 render(){
+    console.log(this.state,'this.state in add Center')
     return (
         <div className= 'col-md-8 col-xl-8  AllComponents AvailableTime'>
             <NewNotif 
@@ -107,18 +110,36 @@ render(){
                         <input type="text" placeholder="Alternate/Reception Phone No."   onChange={(e)=>this.handle_phone_change(e)}  name="phone" value={this.state.phone} className="input_typt_ris form-control editbankdetailfield input-field-common" />
                         </div>
 
-                        <div className="col-md-6">
+                        <div className="col-md-12">
                         <input type="tel" placeholder="Email" value={this.state.email}  onChange={(e)=>this.setState({[e.target.name]:e.target.value})} name="email" className="input_typt_ris form-control editbankdetailfield input-field-common" />
-                        </div>
-
-                        <div className="col-md-6">
+                        </div>  
+                        {/* <div className="col-md-6">
                         <input type="tel" placeholder="Location"  value={this.state.location} onChange={(e)=>this.setState({[e.target.name]:e.target.value})}  name="location" className="input_typt_ris form-control editbankdetailfield input-field-common" />
-                        </div>
-
+                        </div> */}
                     </div>
+                    <div style={{display:'block'}}>
+                        <Map
+                          google={this.props.google}
+                          no_save_changes = {true}
+                          center={{lat: 18.5204, lng: 73.8567}}
+                          location = {{
+                              coordinates:[77.026344,28.457523]
+                          }}
+                          update_location = {(data)=>this.setState({
+                              location: `${data.area} ( ${data.city} )`
+                          })}
+                          set_user_info = {this.props.set_user_info}
+                          height='300px'
+                          zoom={15}
+                          edit_location_loading = {this.props.edit_location_loading}
+                          edit_location = {this.edit_location}
+                          edit_location_clr = {this.edit_location_clr}
+                          edit_location_ret = {this.props.edit_location_ret}
+                          />
+                        </div>
                 </div>
                 <div className="text-center margin-top-medium_ris">
-                <button onClick={()=>this.handle_submit()} className="common_button_rish">Submit</button>
+                  <button style={{marginTop:'3rem', marginBottom:'1rem'}} onClick={()=>this.handle_submit()} className="common_button_rish cursor-pointer">Submit</button>
                 </div>
             </div>
         </div>

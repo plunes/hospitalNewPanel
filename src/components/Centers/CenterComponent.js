@@ -11,31 +11,37 @@ const CenterComponent = (props) =>{
 
  const  get_center_cred = data => {
      set_selected(data._id)
+     console.log(props.centers_cred, data," lorem Ipsumm is the new norm ")
      let val = [...props.centers_cred].filter(data=> data._id === item._id )
      console.log(val,"val")
      if(val.length!==0){
          set_show_cred(true)
-         set_cred({...val})
+         set_cred({...val[0]})
      }else{
         props.get_center_cred({...item})
      }
  }
-
+ 
+ console.log(selected, item._id,"pika boo")
  useEffect(()=>{
      if(selected===item._id){
         if(props.get_center_cred_ret){
             if(props.get_center_cred_ret.success){
                 addToast("Message from true case", {appearance: 'success', autoDismiss:true}) 
-                set_cred({...props.get_center_cred_ret})
+                console.log({...props.get_center_cred_ret},"sdasdasdasdsad")
+                set_cred({...props.get_center_cred_ret.centerCredInfo})
                 set_show_cred(true)
                 props.set_centers_cred({...props.get_center_cred_ret.centerCredInfo, _id:item._id})            
             }else{
-                addToast("Message from false case", {appearance: 'success', autoDismiss:true})
+                addToast("Try again later", {appearance: 'errpr', autoDismiss:true})
             }
             props.get_center_cred_clr()
+            set_selected(false)
         }
      }
  },[props.get_center_cred_ret])
+
+ console.log(cred,"cred onsdfdsmfdsf")
     return  <div className="centers-wrap">
     <Link to={`/dashboard/profile?center=${item._id}`}>
         <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
@@ -43,9 +49,30 @@ const CenterComponent = (props) =>{
         <div className="text-center">
        <div className="center_location_rish text-center">{item.centerLocation}</div>
         {/* <span className="sub_heading_rish">{item.mobileNumber} <br></br>{item.password}</span> */}
-        {show_cred?<p>Cred will Show here</p>:''}
+        {show_cred?<div className="text-center">
+              <div>
+              <div>
+                    <span  style={{display:'inline'}}>
+                        <img   style={{display:'inline'}} src="/user_id_icon.svg" className="icon_rish" />
+                    </span>
+                    <span>
+                        <p   style={{display:'inline',fontSize:'1rem'}}>{cred.centerId}</p>
+                    </span>
+                </div>
+              </div>
+                <div > 
+                    <span  style={{display:'inline'}}>
+                    <img style={{display:'inline'}} src="/password_icon.svg" className="icon_rish" />
+                    </span>
+                    <span>
+                        <p  style={{display:'inline',fontSize:'1rem'}}>{cred.centerPassword}</p>
+                    </span>
+                </div>
+
+        </div> :''}
         <div className="text-center">
-            <button className ="common_button_rish" onClick={()=>get_center_cred({...item})}>Get Creds</button>
+            {!show_cred && <p style={{textDecoration:'underline'}} className="green_text_rish cursor-pointer" onClick={()=>get_center_cred({...item})}> Get Credentials</p> }
+           
         </div>
         </div>
 </div>

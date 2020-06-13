@@ -874,7 +874,7 @@ export const get_business = (data) => async dispatch => {
   let token = localStorage.getItem('token')
   return await axios.get(baseUrl + `/analytics/totalBusiness?days=${data.days}`, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      // console.log(res, 'data');
+      console.log(res, 'res in get_business');
       if (res.status === 200) {
         console.log(res,"res in get_business");
         dispatch({

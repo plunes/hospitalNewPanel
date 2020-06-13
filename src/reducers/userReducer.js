@@ -290,13 +290,14 @@ export default function (state = initialState, action) {
       };
 
     case GET_CENTER_CRED_RET:
-      console.log(action.payload,"action.payload 2")
+      
       return {
         ...state,
         get_center_cred_ret:action.payload.data
       };
  
    case GET_CENTER_CRED_CLR:
+    console.log(action.payload,"get_Center_Cred_clr")
       return {
         ...state,
         get_center_cred_ret:false

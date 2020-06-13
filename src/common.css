@@ -1,0 +1,26 @@
+.green_text_rish{
+    color: #01D35A;;
+  }
+  .icon_rish {
+      height: 1rem;
+  }
+
+  .flex_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .flex_wrap_child_3 {
+    flex:1 1 25;
+    margin: 0 1%;
+  }
+  .flex_wrap_child_7 {
+    flex:1 1 65;
+    margin: 0 1%;
+  }
+
+  .vertical_align_rish {
+    display: block !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }

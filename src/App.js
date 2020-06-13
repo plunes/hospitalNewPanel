@@ -15,7 +15,7 @@ import { getNotifications } from "../src/actions/userActions";
 import { getSolutionInsights } from "../src/actions/userActions";
 import Development from './components/Development'
 import DashboardPage from './components/DashboardPage'
-
+import './common.css'
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>

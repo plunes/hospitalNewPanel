@@ -17,12 +17,12 @@ class Map extends Component{
 			area: '',
 			state: '',
 			mapPosition: {
-				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
-				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
+				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:28.457523:28.457523,
+				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:77.026344:77.026344
 			},
 			markerPosition: {
-				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:77.0266:77.0266,
-				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:28.4595:28.4595
+				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:28.457523:28.457523,
+				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:77.026344:77.026344
 			}
 		}
 	}
@@ -100,7 +100,7 @@ class Map extends Component{
 	 */
 	shouldComponentUpdate( nextProps, nextState ){
 		if (
-			this.state.markerPosition.lat !== this.props.center.lat ||
+			// this.state.markerPosition.lat !== this.props.center.lat ||
 			this.state.address !== nextState.address ||
 			this.state.city !== nextState.city ||
 			this.state.area !== nextState.area ||
@@ -110,6 +110,7 @@ class Map extends Component{
 		} else if ( this.props.center.lat === nextProps.center.lat ){
 			return false
 		}
+		return false
 	}
 	/**
 	 * Get the city and set the city input value to the one selected
@@ -195,7 +196,12 @@ class Map extends Component{
 				      addressArray =  response.results[0].address_components,
 				      city = this.getCity( addressArray ),
 				      area = this.getArea( addressArray ),
-				      state = this.getState( addressArray );
+					  state = this.getState( addressArray );
+					  
+					  if(!!this.props.no_save_changes){
+						this.props.update_location({area:this.getArea( addressArray ),
+													city:this.getCity( addressArray )})
+						 }
 				this.setState( {
 					address: ( address ) ? address : '',
 					area: ( area ) ? area : '',
@@ -231,6 +237,13 @@ class Map extends Component{
 		      latValue = place.geometry.location.lat(),
 		      lngValue = place.geometry.location.lng();
 		// Set these values in the state.
+
+		if(!!this.props.no_save_changes){
+			this.props.update_location({area:this.getArea( addressArray ),
+										city:this.getCity( addressArray )})
+		     }
+
+
 		this.setState({
 			address: ( address ) ? address : '',
 			area: ( area ) ? area : '',
@@ -250,6 +263,7 @@ class Map extends Component{
 
 	render(){
 		console.log(this.props,"this.props in MapComponent")
+		console.log(this.state," this.stae in MapComponent")
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (
@@ -281,8 +295,7 @@ class Map extends Component{
 								width: '100%',
 								height: '40px',
 								paddingLeft: '16px',
-								marginTop: '2px',
-								marginBottom: '500px'
+								marginTop: '2px'
 							}}
 							onPlaceSelected={ this.onPlaceSelected }
 							types={['(regions)']}
@@ -301,19 +314,7 @@ class Map extends Component{
 				retClr = {()=>this.setState({ret:false})}
 				/>
 				<div>
-					{/* <div className="form-group">
-						<label htmlFor="">City</label>
-						<input type="text" name="city" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.city }/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="">Area</label>
-						<input type="text" name="area" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.area }/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="">State</label>
-						<input type="text" name="state" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.state }/>
-					</div> */}
-					<div className="text-center">
+					{!!!this.props.no_save_changes && 	<div className="text-center">
 					 <span onClick={()=>{
 						 this.props.edit_location({
 							location:{
@@ -326,7 +327,7 @@ class Map extends Component{
 							address:this.state.address
 						 })
 					 }} class="editmainbodymaxhospital cursor-pointer underline">Save Changes</span>
-					 </div>
+					 </div>}
 					<div className="form-group">
 						<label htmlFor="">Address</label>
 						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>

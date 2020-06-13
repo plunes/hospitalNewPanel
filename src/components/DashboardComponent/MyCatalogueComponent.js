@@ -37,6 +37,7 @@ import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
 import NewNotif from "../functional/NewNotif"
 import Select from "../Select";
+import { is_positive_real_number } from "../../utils/common_utilities"
 
 
  const isEmpty = function(obj) {
@@ -222,29 +223,30 @@ class MyCatalogueComponent extends Component {
         })
     }
     handleSelectedProcedureChange = (e, serviceId) =>{
-        let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
-       
-        let obj = {
-        }
-        let id= ''
-     arr.every(function(element, index) {
-            if(element.serviceId===serviceId){
-              obj = {
-                  ...element,
-                  price:[parseInt(e.target.value,10)]
-              }
-              id = index
-              return false
+        if(!!is_positive_real_number(e.target.value)){
+            let arr =[...this.state.selected_procedures]
+            let obj = {
             }
-             return true
-          })
-    let newArr = arr.filter((item,i)=>{
-        return  item.serviceId!==serviceId
-    })
-        newArr.push(obj)
-        this.setState({
-           selected_procedures:newArr
+            let id= ''
+         arr.every(function(element, index) {
+                if(element.serviceId===serviceId){
+                  obj = {
+                      ...element,
+                      price:[parseInt(e.target.value,10)]
+                  }
+                  id = index
+                  return false
+                }
+                 return true
+              })
+        let newArr = arr.filter((item,i)=>{
+            return  item.serviceId!==serviceId
         })
+            newArr.push(obj)
+            this.setState({
+               selected_procedures:newArr
+            })
+        }
     }
 
     handleVarianceChange = (e,serviceId) =>{

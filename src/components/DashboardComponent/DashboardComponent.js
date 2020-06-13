@@ -626,7 +626,7 @@ class DashboardComponent extends React.PureComponent {
                                     {!!this.props.get_centers_loading &&  <LoaderComponent/>}
 
                                        { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p></React.Fragment>:
-                                         <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addUsers=true"> <p className='business vertical_align_rish cursor-pointer'>Add Centre</p></Link></React.Fragment> 
+                                         <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Add Centre</p></Link></React.Fragment> 
                                     }
                                  
                                     </span>   
@@ -654,7 +654,7 @@ class DashboardComponent extends React.PureComponent {
                                         </React.Fragment>
                                          :  
                                          <React.Fragment>
-                                             <Link to="/dashboard/centers?addUsers=true"><img src="/no_center_img.svg" alt="no_center_img"  className="no_center_img  center_align_rish cursor-pointer" /></Link></React.Fragment>
+                                             <Link to="/dashboard/centers?addCenter=true"><img src="/no_center_img.svg" alt="no_center_img"  className="no_center_img  center_align_rish cursor-pointer" /></Link></React.Fragment>
                                          }
                                             <div>
                                            { this.props.centers_data.centers_list.length !==0?'': 
