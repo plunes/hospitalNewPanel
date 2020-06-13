@@ -151,6 +151,9 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   GET_CENTER_PROFILE_RET,
   GET_CENTER_PROFILE_CLR,
 
+  GET_CENTER_CRED_CLR,
+  GET_CENTER_CRED_RET,
+  SET_CENTER_CRED,
   SET_CENTER_DATA
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
@@ -230,6 +233,7 @@ const initialState = {
   get_remain_specs_ret:false,
   add_specs_ret:false,
   get_center_profile_ret:false,
+  get_center_cred_ret:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -259,7 +263,8 @@ const initialState = {
     },
     centers_data:{
         centers_list:[],
-        center_data:{}
+        center_data:{},
+        centers_cred:[]
     },
     catalogue_data:{
       remaining_specs:[]
@@ -269,6 +274,34 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+ 
+   case SET_CENTER_CRED:
+     let updated_arr = [...state.data.centers_data.centers_cred]
+     updated_arr.push({...action.payload})
+      return {
+        ...state,
+        data:{
+          ...state.data,
+          centers_data:{
+            ...state.data.centers_data,
+            centers_cred:[...updated_arr]
+          }
+        }
+      };
+
+    case GET_CENTER_CRED_RET:
+      console.log(action.payload,"action.payload 2")
+      return {
+        ...state,
+        get_center_cred_ret:action.payload.data
+      };
+ 
+   case GET_CENTER_CRED_CLR:
+      return {
+        ...state,
+        get_center_cred_ret:false
+      };
+  
 
    case SET_CENTER_DATA:{
      return {

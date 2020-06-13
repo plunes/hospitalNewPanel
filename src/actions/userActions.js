@@ -175,7 +175,13 @@ import {
   SET_CENTER_DATA,
 
   GET_CENTER_PROFILE_CLR,
-  GET_CENTER_PROFILE_RET
+  GET_CENTER_PROFILE_RET,
+
+  GET_CENTER_CRED_RET,
+  GET_CENTER_CRED_CLR,
+
+  SET_CENTER_CRED
+
 
   } from './types';
 import history from '../history';
@@ -229,6 +235,74 @@ export const set_center_data = (data) => dispatch =>{
     type: SET_CENTER_DATA,
     payload:data
   })
+}
+
+
+export const set_centers_cred = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_CENTER_CRED,
+    payload:data
+  })
+}
+
+
+export const get_center_cred_clr = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_CENTER_CRED_CLR,
+    payload:{}
+  })
+}
+
+export const get_center_cred = (data) => async dispatch => {
+  let center_id = get_url_params('center')
+  console.log(center_id,"center_id")
+  let token = localStorage.getItem('token')
+  return await axios.put(baseUrl + `/user/getCenterCred?location=${data.centerLocation}`, {},  { 'headers': { 'Authorization': token } })
+    .then((res) => {
+      console.log(res,"res in get_remaining_specs");
+      if (res.status === 201) {
+        dispatch({
+          type: GET_CENTER_CRED_RET,
+          payload: {
+            success:true,
+            data:res.data,
+            message:"Successfully fetched center's Details"
+          }
+        })
+      }else{
+        dispatch({
+          type: GET_CENTER_CRED_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to process request. Try again"
+          }
+        })
+      }
+    })
+    .catch((e) => {
+      console.log(e)
+      try{
+        dispatch({
+          type: GET_CENTER_CRED_RET,
+          payload: {
+            success:false,
+            data:{},
+            message:e.response.data.error
+          }
+        })
+      }catch(x){
+          console.log(x)
+          dispatch({
+            type: GET_CENTER_CRED_RET,
+            payload: {
+              success:false,
+              data:{},
+              message:"Try again later"
+            }
+          })
+      }  
+    })
 }
 
 
@@ -1586,6 +1660,7 @@ export const toAddServicesClr = () => dispatch =>{
 }
 
 export const toAddServices = (data) => async dispatch => {
+  const center_id = get_url_params('center')
   let token = localStorage.getItem('token');
   let dataObject = {
     page:data.page,
@@ -1593,8 +1668,9 @@ export const toAddServices = (data) => async dispatch => {
     limit:data.limit,
     specialityId:data.specialityId
   }
+  
 
-  return await axios.post(baseUrl + '/catalogue/getServicesForDoctor', dataObject, { 'headers': { 'Authorization': token } })
+  return await axios.post(baseUrl + '/catalogue/getServicesForDoctor'+`${!!center_id?'?userId='+center_id:''}`, dataObject, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res, 'res in searchProcedures')
     
@@ -1779,6 +1855,7 @@ export const editProcedureClr = () => dispatch =>{
 }
 
 export const editProcedure = (obj) => async dispatch => {
+  const center_id = get_url_params('center')
   console.log("Inside editProcedure",obj)
   // let newObj = {
   //   specialityId:obj.specialityId,
@@ -1787,7 +1864,7 @@ export const editProcedure = (obj) => async dispatch => {
   //   newVariance:obj.variance
   // }
   let token = localStorage.getItem('token');
-  return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate', obj,  { 'headers': { 'Authorization': token } })
+  return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in editProcedure")
       if (res.status === 200) {
@@ -1846,9 +1923,9 @@ export const addDoctorClr = () => dispatch =>{
 
 export const addDoctor = (obj) => async dispatch => {
   console.log("Inside addDoctor")
-  
+  const center_id = get_url_params('center')
   let token = localStorage.getItem('token');
-  return await axios.patch(baseUrl + '/admin_panel/addHospitalDoctor', obj,  { 'headers': { 'Authorization': token } })
+  return await axios.patch(baseUrl + '/admin_panel/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in addDoctor")
       
@@ -1907,7 +1984,7 @@ export const getSpecsClr = () => dispatch =>{
 export const getSpecs = (obj) => async dispatch => {
   console.log("Inside GetSPecs")
   let center_id = get_url_params('center')
-  let requestUrl ="/admin_panel/specialities"
+  let requestUrl ="/admin_panel/specialities"+`${!!center_id?'?userId='+center_id:''}`
   if(!!obj){
     if(obj.type === "getUserSpecialities"){
       requestUrl = "/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`

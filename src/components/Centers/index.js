@@ -3,8 +3,9 @@ import AddCenter from "./AddCenter"
 import { Link } from 'react-router-dom'
 import { get_url_params } from "../../utils/common_utilities"
 import { connect } from 'react-redux';
-import {  set_centers_data } from "../../actions/userActions"
+import {  set_centers_data, get_center_cred, get_center_cred_clr, set_centers_cred } from "../../actions/userActions"
 import LoaderComponent from '../functional/LoaderComponent';
+import CenterComponent from "./CenterComponent"
 
 class Centers extends React.PureComponent{
         constructor(props){
@@ -13,6 +14,12 @@ class Centers extends React.PureComponent{
                 valid:true
             }
         }
+
+        // get_center_cred = (item) =>{
+        //     this.setState({
+
+        //     })
+        // }
     render(){
         console.log(this.props,"this.props in Centers")
         if(get_url_params('addCenter')==='true'){
@@ -31,15 +38,15 @@ class Centers extends React.PureComponent{
                         <div className="row">
                         {this.props.centers_data.centers_list.map(item=>{
                            return  <div className="col-md-3">
-                           <div className="centers-wrap">
-                               <Link to={`/dashboard/profile?center=${item._id}`}>
-                                   <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
-                                </Link>
-                                   <div className="text-center">
-                                  <div className="center_location_rish text-center">{item.centerLocation}</div>
-                                   <span className="sub_heading_rish">{item.mobileNumber} <br></br>{item.password}</span>
-                                   </div>
-                           </div>
+                               <CenterComponent
+                                data = {item}
+                                centers_cred = {this.props.centers_data.centers_cred}
+                                selected_id = {this.state.selected_id}
+                                get_center_cred = {this.props.get_center_cred}
+                                set_centers_cred = {this.props.set_centers_cred}
+                                get_center_cred_ret = {this.props.get_center_cred_ret}
+                                get_center_cred_clr = {this.props.get_center_cred_clr}
+                               />
                        </div>
                         })}
                     </div>
@@ -57,7 +64,8 @@ class Centers extends React.PureComponent{
     }
 }
 const mapStateToProps = state => ({
-    centers_data:state.user.data.centers_data
+    centers_data:state.user.data.centers_data,
+    get_center_cred_ret:state.user.get_center_cred_ret
   })
   
-export default connect(mapStateToProps, { set_centers_data})(Centers);
+export default connect(mapStateToProps, { set_centers_data, get_center_cred, get_center_cred_clr , set_centers_cred})(Centers);
