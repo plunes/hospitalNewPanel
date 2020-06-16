@@ -11,9 +11,7 @@ const CenterComponent = (props) =>{
 
  const  get_center_cred = data => {
      set_selected(data._id)
-     console.log(props.centers_cred, data," lorem Ipsumm is the new norm ")
      let val = [...props.centers_cred].filter(data=> data._id === item._id )
-     console.log(val,"val")
      if(val.length!==0){
          set_show_cred(true)
          set_cred({...val[0]})
@@ -22,13 +20,11 @@ const CenterComponent = (props) =>{
      }
  }
  
- console.log(selected, item._id,"pika boo")
  useEffect(()=>{
      if(selected===item._id){
         if(props.get_center_cred_ret){
             if(props.get_center_cred_ret.success){
-                addToast("Message from true case", {appearance: 'success', autoDismiss:true}) 
-                console.log({...props.get_center_cred_ret},"sdasdasdasdsad")
+                // addToast("Message from true case", {appearance: 'success', autoDismiss:true}) 
                 set_cred({...props.get_center_cred_ret.centerCredInfo})
                 set_show_cred(true)
                 props.set_centers_cred({...props.get_center_cred_ret.centerCredInfo, _id:item._id})            
@@ -41,7 +37,6 @@ const CenterComponent = (props) =>{
      }
  },[props.get_center_cred_ret])
 
- console.log(cred,"cred onsdfdsmfdsf")
     return  <div className="centers-wrap">
     <Link to={`/dashboard/profile?center=${item._id}`}>
         <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />

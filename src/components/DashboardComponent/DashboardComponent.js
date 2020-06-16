@@ -306,15 +306,17 @@ class DashboardComponent extends React.PureComponent {
     }
      handleRealSubmit(e) {
         e.preventDefault();
-        let data = {
-            realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
-            realUpdateData: this.state.realUpdateData
-        }
-        this.setState({
-            realUpdatePriceLoading:true
-        },()=>{
-            this.props.updateRealPrice(data);
-        }) 
+         if(this.state.realUpdatePrice !== this.state.real_time_edit_price){
+            let data = {
+                realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
+                realUpdateData: this.state.realUpdateData
+            }
+            this.setState({
+                realUpdatePriceLoading:true
+            },()=>{
+                this.props.updateRealPrice(data);
+            }) 
+         }
     }
     handleUpdatePrice(updateData) {
         this.setState({
@@ -338,7 +340,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async componentDidMount() {
-        //await this.props.getBooking();
+         // to get the geo location tab
          if(!!this.state.initial_render){
             if(!!!isEmpty(this.props.prof_data)){
                 // console.log(this.props.prof_data,"prof_data")
@@ -350,14 +352,12 @@ class DashboardComponent extends React.PureComponent {
               }
             }
         }
-        let defaulteDays = 15
-        // await this.props.getAllBookings(defaulteDays);
-        await this.props.getInsights();
+    
+    
         if(!!!this.props.mount.dash_mount){
             this.setState({
                 loader:true
             })
-            // await this.props.getSolutionInsights();
             await this.props.getMonthWiseUsers();
             this.setState({
                 loader: false
@@ -368,27 +368,16 @@ class DashboardComponent extends React.PureComponent {
     updateRealPriceClr = () =>{
         this.props.updateRealPriceClr()
         this.handleRealModal()
-        // this.setState({
-        //     realUpdatePriceLoading:false
-        // },() => {
-        //     this.props.updateRealPriceClr()
-        //     this.handleRealModal()
-        // })
+      
     }
 
     clearUpdatePriceData = () =>{
         this.props.clearUpdatePriceData()
             this.props.getInsights()
             this.handleModal()
-        // this.setState({
-        //     actionablePriceLoading:false
-        // },()=>{
-            
-        // })
     }
     getSecondsDifferent=(sec)=>{
            let newSec = (new Date).getTime()
-        //    console.log(newSec,"newSec in getSeconds Differnce")
            let seconds = (newSec-sec)/1000
            return seconds>600?0:600-seconds
     }
@@ -415,7 +404,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handle_act_as_admin = (prop) =>{
-        // console.log(prop,"inside handle_act_as_admin>>>>>>>>>>")
         this.setState({
             ...default_state,
             [prop]:true
@@ -462,7 +450,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.props.centers_data,"this.props.centers_data")
+        console.log(this.state,"this.state")
         let { percent } = this.state
         const options = {
             title: {
@@ -507,8 +495,6 @@ class DashboardComponent extends React.PureComponent {
                 </div>
             )
         } else {
-            // console.log(this.props.updateRealPriceRet,"this.props.updateRealPriceRet")
-            // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
             return (
                 <React.Fragment>
                         <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
@@ -646,7 +632,14 @@ class DashboardComponent extends React.PureComponent {
                                             </div>
                                          })}
                                          </div>
-                                         <div className="text-center margin-top-medium_ris">
+                                         {
+                                            (this.props.centers_data.centers_list.length>4)  &&  <div className="text-center">
+                                            <Link to='/dashboard/centers' >
+                                            <p style={{textDecoration:'underline',fontSize:'1rem'}} className="green_text_rish">View More</p>
+                                            </Link>
+                                     </div>
+                                        }
+                                         <div className="text-center margin-top-small_ris">
                                          <Link to="/dashboard/centers?addCenter=true">
                                         <button className="common_button_rish margin_top_medium_rish margin_bottom_medium_rish">Add Center</button>
                                         </Link>
@@ -720,6 +713,10 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="text-center valu_second">
                                                <b>{Math.floor( this.state.solValue )} % </b>
                                             </div>
+                                            <div className="row maxmin">
+                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
+                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
+                                               </div>
                                             <Slider
                                             min={0}
                                             max={50}
@@ -743,10 +740,7 @@ class DashboardComponent extends React.PureComponent {
                                             </span>            
                                                 </div><br></br>
                                         </div> 
-                                        <div className="row maxmin">
-                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
-                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
-                                        </div>
+                                       
                                             <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.solValue===0?
                                              <p style={{ fontWeight:'bold'}}><b>0%</b></p>
                                             :<p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p>}</div>

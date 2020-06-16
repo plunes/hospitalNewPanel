@@ -1,11 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {  useToasts } from 'react-toast-notifications'
 let flag = true
 const NewNotif = (props) => {
     const { addToast } = useToasts()
     const [initialRender, setIniitialRender] = useState(true)
 
-    if(!!props.ret){
+
+    useEffect(()=>{
+      if(!!props.ret){
         if(!!props.ret.success){
           if(!!flag){
             addToast(props.ret.message, {appearance: 'success', autoDismiss:true}) 
@@ -23,6 +25,7 @@ const NewNotif = (props) => {
         flag=true
         // setIniitialRender(true)
     }
+  },[props.ret])
 
     return (
         <div></div>

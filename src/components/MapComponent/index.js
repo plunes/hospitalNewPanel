@@ -104,7 +104,8 @@ class Map extends Component{
 			this.state.address !== nextState.address ||
 			this.state.city !== nextState.city ||
 			this.state.area !== nextState.area ||
-			this.state.state !== nextState.state
+			this.state.state !== nextState.state ||
+			this.state.ret !== nextState.ret
 		) {
 			return true
 		} else if ( this.props.center.lat === nextProps.center.lat ){

@@ -164,7 +164,7 @@ class RegistrationContainer extends  React.Component {
         specialities.forEach((s) => {
           let data = {
             name: s.speciality,
-            id: s._id,
+            id: s.specialityId,
             value:s.speciality
           }
           array.push(data);

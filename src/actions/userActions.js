@@ -2339,6 +2339,7 @@ export const downloadCatalogue = (data) => async dispatch => {
         })
       }
     }).catch(e=>{
+      console.log(e,"pila")
       try{
         dispatch({
           type : DOWNLOAD_CATALOGUE_RET,

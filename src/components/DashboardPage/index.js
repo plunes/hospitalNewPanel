@@ -300,6 +300,7 @@ export class DashboardPage extends React.PureComponent {
     this.props.getInsights()
     this.props.getNotifications({page:1})
     this.props.get_business({days:7})
+    
 
     // need to remove this api call after refactoring
     // this.props.getUserDetails()
