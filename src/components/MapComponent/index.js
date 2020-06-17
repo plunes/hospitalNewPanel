@@ -200,8 +200,17 @@ class Map extends Component{
 					  state = this.getState( addressArray );
 					  
 					  if(!!this.props.no_save_changes){
-						this.props.update_location({area:this.getArea( addressArray ),
-													city:this.getCity( addressArray )})
+						this.props.update_location({
+							location:{
+								type:'Point',
+								coordinates:[
+								   this.state.markerPosition.lng,
+								   this.state.markerPosition.lat
+								]
+							},
+							area:this.getArea( addressArray ),
+							city:this.getCity( addressArray )
+						})
 						 }
 				this.setState( {
 					address: ( address ) ? address : '',
@@ -240,8 +249,17 @@ class Map extends Component{
 		// Set these values in the state.
 
 		if(!!this.props.no_save_changes){
-			this.props.update_location({area:this.getArea( addressArray ),
-										city:this.getCity( addressArray )})
+			this.props.update_location({
+				location:{
+					type:'Point',
+					coordinates:[
+					   this.state.markerPosition.lng,
+					   this.state.markerPosition.lat
+					]
+				},
+				area:this.getArea( addressArray ),
+				city:this.getCity( addressArray )
+			})
 		     }
 
 

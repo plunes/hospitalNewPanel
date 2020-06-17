@@ -550,6 +550,8 @@ input[type="date"]:focus:before {
 .sub_heading_rish{
   font-size: 1.2rem;
   word-break: break-word;
+  color: #333 !important;
+  
 }
 .centers-wrap{
   margin-top: 1rem;
@@ -561,6 +563,7 @@ input[type="date"]:focus:before {
 .heading_rish{
   font-weight: 600;
   font-size: 1.8rem;
+  color: #333333;
 }
 .login_select {
   font-size: 1.2rem !important;
@@ -639,4 +642,23 @@ outline: none;
   width:45rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+.select_class_rish {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #DCDCDC;
+  border-radius: 5px;
+  padding: 2%;
+  width: 10rem;
+ 
+  min-height: 2.5rem
+      /* width: 68%; */
+}
+.heading_flex_wrapper{
+  display: flex;
+  flex-wrap: wrap;
+}
+.heading_flex_child {
+  flex:1 1 45%;
+  margin: 0 1%;
 }

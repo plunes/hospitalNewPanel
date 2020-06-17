@@ -308,10 +308,7 @@ class ProfileContainer extends React.PureComponent {
 
   handleBioChange = (e) =>{
     this.setState({
-      user:{
-        ...this.state.user,
-        biography:e.target.value
-      }
+      biography:e.target.value
     })
   }
 
@@ -557,7 +554,7 @@ class ProfileContainer extends React.PureComponent {
                 editBioLoading:false
               })}
               biography = {this.state.biography}
-              toggleEditBio ={()=>this.setState({editBioFlag:!this.state.editBioFlag})}
+              toggleEditBio ={()=>this.setState({editBioFlag:!this.state.editBioFlag, biography:this.state.prof_data.biography})}
               getDetails = {this.props.expertDetails}
               loading = {this.state.editBioLoading}
               getUserDetails = {this.props.getUserDetails}

@@ -1,11 +1,13 @@
 import  React from 'react'
 import AddCenter from "./AddCenter"
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { get_url_params } from "../../utils/common_utilities"
 import { connect } from 'react-redux';
 import {  set_centers_data, get_center_cred, get_center_cred_clr, set_centers_cred } from "../../actions/userActions"
 import LoaderComponent from '../functional/LoaderComponent';
 import CenterComponent from "./CenterComponent"
+import NewNotif from '../functional/NewNotif';
+import { compose } from 'redux';
 
 class Centers extends React.PureComponent{
         constructor(props){
@@ -13,6 +15,25 @@ class Centers extends React.PureComponent{
             this.state= {
                 valid:true
             }
+        }
+
+        componentWillReceiveProps(nextProps){
+            console.log(nextProps.location,"this.props.location")
+            if(!!nextProps.location.state){
+                if(!!nextProps.location.state.add_center_success){
+                    this.setState({
+                        ret:{
+                            success:true,
+                            message:'Center succcessfully added.'
+                        }
+                    })
+                    nextProps.history.replace({
+                        pathname: this.props.location.pathname,
+                        state: {}
+                    });
+                }
+            }
+         
         }
 
         // get_center_cred = (item) =>{
@@ -29,6 +50,10 @@ class Centers extends React.PureComponent{
         return (
             <div className= 'col-md-8 col-xl-8  AllComponents AvailableTime'>
                 <div className="centers_wrapper">
+                    <NewNotif 
+                    ret = {this.state.ret}
+                    retClr = {()=>this.setState({ret:false})}
+                    />
                     <div className="text-center">
                 <h1 className="margin-top-medium_ris center_align_rish " >Centers List</h1>
                 </div>
@@ -68,4 +93,7 @@ const mapStateToProps = state => ({
     get_center_cred_ret:state.user.get_center_cred_ret
   })
   
-export default connect(mapStateToProps, { set_centers_data, get_center_cred, get_center_cred_clr , set_centers_cred})(Centers);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, { set_centers_data, get_center_cred, get_center_cred_clr , set_centers_cred})
+)(Centers)

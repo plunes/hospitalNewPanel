@@ -256,7 +256,8 @@ const initialState = {
     notif_data:{
       count:0,
       notifications:[],
-      totalCount:0
+      totalCount:0,
+      page_count:1
     },
     prof_data:{
 

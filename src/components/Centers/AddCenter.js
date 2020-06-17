@@ -6,6 +6,7 @@ import validator from 'validator'
 import { isValidPhoneNumber } from 'react-phone-number-input';
 import { Redirect } from "react-router-dom"
 import Map from "../MapComponent"
+import LoaderComponent from "../functional/LoaderComponent";
 
 function MyError(message){
     this.message = message;
@@ -16,7 +17,11 @@ class AddCenter extends React.PureComponent{
     constructor(props){
         super(props)
         this.state= {
-            valid:true
+            valid:true,
+            add_successfull:false,
+            name:'',
+            centerLocation:'',
+            location:''
         }
     }
 
@@ -31,8 +36,11 @@ class AddCenter extends React.PureComponent{
                    ret:{
                        success:true,
                        message:"Center Successfully added"
-                   }
+                   },
+                   add_successfull:true,
+                   loading:false
                })
+               
             }else{
                 this.setState({
                     ret:nextProps.add_center_ret
@@ -69,14 +77,18 @@ class AddCenter extends React.PureComponent{
             if(!!!this.state.location){
                 throw new MyError('Please enter your locality')
             }
+            this.setState({
+                loading:true
+            })
             this.props.add_center({
                 name: this.state.name,
                 // location: "H.NO-13/280 KALYANPURI NEW DELHI",
                 userType:"Hospital",
                 // "biography": "S",
                 email:this.state.email,
-                centerLocation:this.state.location,
-                phone:this.state.phone
+                centerLocation:this.state.centerLocation,
+                phone:this.state.phone,
+                location:this.state.location
             })
         }catch(e){
             console.log(e,"error in Catch Block")
@@ -88,15 +100,26 @@ class AddCenter extends React.PureComponent{
             })
         }
     }
+
+    set_cordinates = () =>{
+
+    }
 render(){
     console.log(this.state,'this.state in add Center')
+    if(this.state.add_successfull){
+       return <Redirect to= {{
+        pathname: "/dashboard/centers",
+        state: { add_center_success: true }
+    }}  />
+    }
     return (
         <div className= 'col-md-8 col-xl-8  AllComponents AvailableTime'>
             <NewNotif 
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
             />
-             <div className="centers_wrapper">
+             <div style={{position:'relative'}} className="centers_wrapper">
+                 {true && <LoaderComponent />}
                     <div className="text-center">
                 <h1 className="margin-top-medium_ris center_align_rish " >Add Center</h1>
                 </div>
@@ -126,8 +149,10 @@ render(){
                               coordinates:[77.026344,28.457523]
                           }}
                           update_location = {(data)=>this.setState({
-                              location: `${data.area} ( ${data.city} )`
+                              centerLocation: `${data.area} ( ${data.city} )`,
+                              location:data.location
                           })}
+                          set_cordinates = {this.set_cordinates}
                           set_user_info = {this.props.set_user_info}
                           height='300px'
                           zoom={15}

@@ -877,8 +877,9 @@ export const get_business_clr = (data) => dispatch =>{
 }
 
 export const get_business = (data) => async dispatch => {
+  console.log(data,"data in get_business_ action")
   let token = localStorage.getItem('token')
-  return await axios.get(baseUrl + `/analytics/totalBusiness?days=${data.days}`, { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + `/analytics/totalBusiness?days=${data.days}&userId=${data.center}`, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res, 'res in get_business');
       if (res.status === 200) {
@@ -902,14 +903,14 @@ export const get_business = (data) => async dispatch => {
       }
     })
     .catch((e) => {
-      console.log(e)
+      console.log(e.response,"e.response in get_business")
       try{
         dispatch({
           type: GET_BUSINESS_RET,
           payload: {
             success:false,
             data:{},
-            message:"Unable to process request. Try again"
+            message:e.response.data.error
           }
         })
       }catch(x){
@@ -3367,24 +3368,54 @@ export const bankDetails = bankData => dispatch => {
     })
 };
 
-export const getInsights = () => async dispatch => {
+export const getInsights = (data) => async dispatch => {
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + '/analytics/actionableInsight', { 'headers': { 'Authorization': token } })
-    .then((res) => {
-      if (res.status === 201) {
-        console.log(res.data, 'Insights')
-        //console.log(res.data.data, 'data');
+  return await axios.get(baseUrl + `/analytics/actionableInsight?userId=${data.center}`, { 'headers': { 'Authorization': token } })
+  .then(res => {
+    console.log(res , 'res in getInsights')
+    if (res.status=== 201) {
+      dispatch({
+        type: GET_INSIGHTS,
+        payload: {
+          data:res.data.data,
+          success:true
+        },
+      })
+    }else{
+      dispatch({
+        type: GET_INSIGHTS,
+        payload: {
+          data:[],
+          success:false,
+          message:"Unable to get actionable insights, try again later"
+        },
+      })
+    }
+  }
+  ).catch((e) => {
+    console.log(e)
+    try{
+      dispatch({
+        type: GET_INSIGHTS,
+        payload: {
+          data:[],
+          success:false,
+          message:e.response.data.error
+        },
+      })
+    }catch(x){
+        console.log(x)
         dispatch({
           type: GET_INSIGHTS,
-          payload: res.data.data
+          payload: {
+            success:false,
+            data:{},
+            message:"Unable to get actionable insights, try again later"
+          }
         })
-      }
-    })
-    .catch((e) => {
-      console.log(e)
-    })
-};
-
+    }  
+  })
+}
 export const expertDetails = expertData => dispatch => {
   let token = localStorage.getItem('token');
   let array = []

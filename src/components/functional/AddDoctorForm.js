@@ -93,7 +93,7 @@ import React, { useRef, useState, useEffect } from "react"
        {props.addDoctorLoading && <LoaderComponent />}
     <h5 className="pfo_im">Profile Image</h5>
    <div className="row">
-     <div className="col-lg-2 col-md-4 position-relative">
+     <div className="col-lg-2 col-md-4 image_wrapper_add_doctor position-relative">
    {props.laodingImage &&  <LoaderComponent />}
      <input  
     style={{display:'inline',display:'none'}}
@@ -103,7 +103,7 @@ import React, { useRef, useState, useEffect } from "react"
     ref = {doctorImageRef}
     />
          <img src={!!props.doctorProfileImage?props.doctorProfileImage:'/account.svg'} className="accout"/>
-         <img onClick={(e)=>handleImageClick(e)} src="/camera.svg" className="came cursor-pointer" />
+         <img onClick={(e)=>handleImageClick(e)} src="/camera.svg" className=" profile_camera_rish cursor-pointer" />
        </div>
        <div className="col-lg-3">
   <h6 className="fil_nm">{!!props.doctorImageName?props.doctorImageName:'File Name'}</h6>

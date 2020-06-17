@@ -82,6 +82,13 @@ class DashboardComponent extends React.PureComponent {
             user_map_loading:false,
             business_day:7,
             act_as_admin_flag:false,
+            get_actionable:{
+                center:''
+            },
+            get_business:{
+                days:'7',
+                center:''
+            },
             act_as_admin_data:{
                 phone:'',
                 email:'',
@@ -251,17 +258,34 @@ class DashboardComponent extends React.PureComponent {
         })
       };
 
-    async handleDaysChange(e) {
+     handleDaysChange(e) {
         this.setState({
-            showBusiness : false
-        })
-        let days = e.target.value
-        await this.props.get_business({days})
-        this.setState({
-            showBusiness : true,
-            business_day:days
-        })
+            get_business_loading:true,
+            get_business:{
+                ...this.state.get_business,
+               days:e.target.value
+            }
+        },()=>this.props.get_business({...this.state.get_business}))
     }
+
+     handle_business_center_change = (e)=>{
+         console.log(e.target.value,"value in get_business_center_change")
+         this.setState({
+             get_business_loading:true,
+             get_business:{
+                 ...this.state.get_business,
+                center:e.target.value
+             }
+         },()=>this.props.get_business({...this.state.get_business}))  
+     }
+
+     handle_actionable_insights = (e) =>{
+            this.setState({
+                get_actionable:{
+                    center:e.target.value
+                }
+            },()=>this.props.get_actionable_insight(this.state.get_actionable))
+    }   
 
      handleRealPrice(select) {
         this.setState({
@@ -450,7 +474,8 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.state,"this.state")
+        console.log(this.props,"N")
+        console.log(!!this.props.business_data.businessGained,"!!this.props.business_data.businessGained")
         let { percent } = this.state
         const options = {
             title: {
@@ -515,7 +540,7 @@ class DashboardComponent extends React.PureComponent {
                         <div className="row">
                                     <div className=' dashboardsection dashrow1'>    
                                         <p  className='heading_rish'>{this.props.user.name}</p>
-                                        <p className="heading-right_ris"> For any query - Call at 7701805081</p>
+                                        <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
                                     </div>
                         </div>
                         {this.props.location_toggler  &&   <AddLocationTab
@@ -551,26 +576,37 @@ class DashboardComponent extends React.PureComponent {
                                     </div>
                                     <div style={{padding:'0.5rem'}} className='dashboardsection card_rish add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
-                                                        <span className='businessrow1col1 realtimewidth'>
+                                                      <span className="realtimewidth heading_flex_wrapper">
+                                                         <span className='businessrow1col1 heading_flex_child '>
                                                             <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Business</p>
-                                                        </span>
-                                                        <span className="maximum_time vertical_align_rish"> <select onChange={this.handleDaysChange} name="days" value={this.state.business_day} className="selectBusiness">
+                                                         </span>
+                                                         <span className="heading_flex_child">  
+                                                           <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
+                                                             <option value={''}>{'Centers List'}</option>
+                                                                {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                                           </select>
+                                                         </span>
+                                                      </span>
+                                                    </div>
+                                        { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
+                                            <div className='col text-center'>
+                                                <p className="businessPrice businessEarn">&#8377; {!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):'0'}</p>
+                                                <p className="Earn">Business <br></br>Earned</p>
+                                            </div>
+                                            <div className='col text-center'>
+                                                <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
+                                                <p className="Earn">Business<br></br> Lost</p>
+                                            </div>
+                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
+                                        <div className="text-center">
+                                        <select onChange={this.handleDaysChange} name="days" value={this.state.get_business.days} className="select_class_rish">
+                                                                  {/* {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)} */}
                                                                     <option value='1'>Today</option>
                                                                     <option value='7'>Weekly</option>
                                                                     <option value='30'>Monthly</option>
                                                                     <option value='365'>Yearly</option>
-                                                                </select></span>
-                                                    </div>
-                                        { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
-                                            <div className='col text-center'>
-                                                <p className="businessPrice businessEarn">&#8377;{!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):''}</p>
-                                                <p className="Earn">Business <br></br>Earned</p>
-                                            </div>
-                                            <div className='col text-center'>
-                                                <p className="businessPrice businessLost">&#8377;{!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):''}</p>
-                                                <p className="Earn">Business<br></br> Lost</p>
-                                            </div>
-                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
+                                                                </select>
+                                        </div>
                                         <div className="businessWarn">
                                             <p>Please take action on real time insights to increase your business</p>
                                         </div>
@@ -592,6 +628,12 @@ class DashboardComponent extends React.PureComponent {
                                     <div id="second_scro_is" className="dashboardsection dashrow2col2 second_scro">
                                        <span className='businessrow1col1 realtimewidth'>
                                         <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business'>Actionable Insights</p>
+                                       <span className="text-center" style={{position:'absolute', right:'1rem'}}>
+                                       <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish">
+                                                                  <option value={''}>{'Centers List'}</option>
+                                                                  {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                          </select>
+                                       </span>
                                       </span>
                                         {this.props.act_insight_loader? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
@@ -624,10 +666,12 @@ class DashboardComponent extends React.PureComponent {
                                         { this.props.centers_data.centers_list.slice(0,4).map((item)=>{
                                                 return  <div className="col-md-6">
                                                 <div className="centers-wrap">
+                                                    <Link to={`/dashboard/profile?center=${item._id}`} >
                                                         <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
                                                         <div className="text-center">
                                                         <span className="sub_heading_rish">{item.name} <br></br>{item.centerLocation}</span>
                                                         </div>
+                                                    </Link>
                                                 </div>
                                             </div>
                                          })}
@@ -840,7 +884,6 @@ class DashboardComponent extends React.PureComponent {
                                 </div>
                             </div>
                         </div>
-                      
                   </React.Fragment>
             )
         }

@@ -24,3 +24,13 @@
     margin-top: auto !important;
     margin-bottom: auto !important;
   }
+
+  .profile_camera_rish{
+    display: none;
+    position: absolute;
+    top: 2rem;
+    left: 2.5rem;
+  }
+  .image_wrapper_add_doctor:hover  + .profile_camera_rish {
+      display: inline;
+  }

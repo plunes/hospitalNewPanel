@@ -30,6 +30,7 @@ import Centers from "../Centers"
 import ConnectivityListener from '../ConnectivityListener'
 import admin_route from "../../HOC/admin_route"
 import protected_route from "../../HOC/protected_route"
+import NewNotif from '../functional/NewNotif';
 
 
 const initialState = {
@@ -79,10 +80,12 @@ export class DashboardPage extends React.PureComponent {
           count:0,
           notifications:[]
         },
+        notifications:[],
         act_insight_loader:false,
         notification:[],
         real_insight_loader:false,
         get_notifs_loading:false,
+        centers_name_list:[],
         Notify:{
           success:false,
           error:false
@@ -100,22 +103,35 @@ export class DashboardPage extends React.PureComponent {
               nextProps.clearSolInsights()
           })
       }
-        if(!!nextProps.insight){
+      
+      if(!!nextProps.insight){
+        console.log(nextProps.insight,"nexrsadsd")
+        if(!!nextProps.insight.success){
           this.setState({
-              insight:nextProps.insight,
+              insight:nextProps.insight.data,
               act_insight_loader:false
           },()=>{
               nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.insight})
               nextProps.clr_act_insght()
           })
+      }else{
+          this.setState({
+            ret:{
+              success:false,
+              message:nextProps.insight.message
+            }
+          })
+          nextProps.clr_act_insght()
       }
+      }
+        
         if(!!nextProps.notificationData){
           this.setState({
               notificationsData:{
                 ...this.state.notificationsData,  ...nextProps.notificationData,
-                notifications:[...nextProps.notificationData.notifications ]
+                notifications:[this.state.notificationsData.notifications,...nextProps.notificationData.notifications ]
               },
-              notifications:[...nextProps.notificationData.notifications],
+              notifications:[...this.state.notifications,...nextProps.notificationData.notifications],
               get_notifs_loading:false
           },()=>{
               nextProps.set_notif_data({...nextProps.notif_data, ...this.state.notificationsData})
@@ -126,13 +142,24 @@ export class DashboardPage extends React.PureComponent {
 
         if(!!nextProps.business_ret){
           // console.log(nextProps.business_ret,"nextProps.business_ret")
-          this.setState({
+          if(nextProps.business_ret.success){
+            this.setState({
               business_data:nextProps.business_ret.data,
               get_business_loading:false
           },()=>{
               nextProps.set_dash_data({...nextProps.dash_data, business_data:{...nextProps.business_ret.data}})
               nextProps.get_business_clr()
           })
+          }else{
+            this.setState({
+              ret:{
+                success:false,
+                message:nextProps.business_ret.message
+              }
+            })
+            nextProps.get_business_clr()
+          }
+          
       }
 
 
@@ -141,7 +168,8 @@ export class DashboardPage extends React.PureComponent {
           if(!!nextProps.get_user_info_ret.success){
                 this.setState({
                   user_info:{...nextProps.get_user_info_ret.data},
-                  get_user_info_loading:false
+                  get_user_info_loading:false,
+                  
                 },()=>{
                   if(!!this.state.user_info.isAdmin){
                     this.setState({
@@ -165,7 +193,13 @@ export class DashboardPage extends React.PureComponent {
           
                 this.setState({
                   centers_info:{...nextProps.get_centers_ret.data},
-                  get_centers_loading:false
+                  get_centers_loading:false,
+                  centers_name_list:nextProps.get_centers_ret.data.map((item=>{
+                    return {
+                      name:item.centerLocation,
+                      value:item._id
+                    }
+                  }))
                 },()=>{
                   nextProps.setMount({...this.props.mount,centers_mount:true})
                   nextProps.set_centers_data({
@@ -297,9 +331,9 @@ export class DashboardPage extends React.PureComponent {
         }
     }
     this.props.getSolutionInsights()
-    this.props.getInsights()
+    this.props.getInsights({center:''})
     this.props.getNotifications({page:1})
-    this.props.get_business({days:7})
+    this.props.get_business({days:7, center:''})
     
 
     // need to remove this api call after refactoring
@@ -309,6 +343,12 @@ export class DashboardPage extends React.PureComponent {
 
     // To Establish socket connection
     this.socketEmit()
+  }
+
+  get_actionable_insight = (data) =>{
+      this.setState({
+        act_insight_loader:true
+      },()=>this.props.getInsights(data))
   }
 
   toggleChangePass =()=>{
@@ -512,6 +552,10 @@ authObject =()=> {
     return (
              <div>
                <ConnectivityListener />
+               <NewNotif 
+                ret = {this.state.ret}
+                retClr = {()=>this.setState({ret:false})}
+               />
                  <Notify  
                         success={this.state.Notify.success}
                         autoDismiss = {this.state.initial_render?false:true}
@@ -551,6 +595,8 @@ authObject =()=> {
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=><DashboardComponent
+                    get_actionable_insight = {this.get_actionable_insight}
+                    centers_name_list = {this.state.centers_name_list}
                     get_centers_loading = {this.state.get_centers_loading}
                     business_data = {this.props.dash_data.business_data}
                     solInsights = {this.state.solInsights}
@@ -626,6 +672,7 @@ authObject =()=> {
                 get_notifs_loading = {this.state.get_notifs_loading}
                 total_count = {this.props.notif_data.totalCount}
                 getNotifications = {this.getNotifications}
+                page_count = {this.props.notif_data.page_count}
                 />)
                 :(this.props.location.pathname === '/dashboard/editProfile')?
                 protected_route({

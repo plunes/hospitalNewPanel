@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getNotifications } from "../../actions/userActions";
+import { getNotifications, set_notif_data } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 import "./AboutUs.css";
@@ -15,15 +15,28 @@ class NotificationComponent extends Component {
         }
         this.handleClick = this.handleClick.bind(this)
     }
+
+    componentDidMount(){
+        this.setState({
+            page:this.props.page_count
+        })
+    }
+
     handleClick() {
         let total = this.props.total_count
         let total_pages = this.props.total_count/20
         if(this.state.page<total_pages){
             this.setState({
                 page:this.state.page +1
-            },()=>this.props.getNotifications({
-                page:this.state.page
-            }))
+            },()=>{
+                this.props.getNotifications({
+                    page:this.state.page
+                })
+                this.props.set_notif_data({
+                    ...this.props.notif_data,
+                    page_count:this.state.page
+                })
+            })
         }
     }
     render() {
@@ -52,10 +65,12 @@ class NotificationComponent extends Component {
                               </Link>
                             )) : false
                         } 
+                        
+                        {this.props.notifications.length ===0  ? <div className="text-center"><h6 className="rish_sub_heading">No Notification</h6></div>: <div className="text-center"><button onClick={this.handleClick} className="NotificationViewMore">View more</button></div>}
                           {this.props.get_notifs_loading &&
                           <LoaderComponent />
                          }
-                        <div className="text-center"><button onClick={this.handleClick} className="NotificationViewMore">View more</button></div>
+                        
                     </div>
                     <div className='col-md-3'></div>
             </React.Fragment>
@@ -63,6 +78,7 @@ class NotificationComponent extends Component {
     }
 }
 const mapStateToProps = state => ({
-    // notification: state.user.notificationData
+    // notification: state.user.notificationData,
+    notif_data :state.user.data.notif_data
 })
-export default connect(mapStateToProps, {  })(NotificationComponent)
+export default connect(mapStateToProps, {  set_notif_data })(NotificationComponent)
