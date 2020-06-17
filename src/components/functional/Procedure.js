@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useToasts } from 'react-toast-notifications'
 import "./editProcedure.css"
 import VarianceDropdown from "./varianceDropdown"
+import { is_positive_whole_number } from "../../utils/common_utilities"
 
  const Procedure= (props) => {
   const { addToast } = useToasts()
@@ -73,7 +74,16 @@ const getVariance = () =>{
            &#x20B9;
              {((!!props.editFlag) && (isSelected()))?<input
               value={isSelected()?getValue():props.selectedProcedure.price}
-              onChange={(e)=>props.handleSelectedProcedureChange(e,props.data.serviceId)}
+              onChange={
+                e =>{
+                     console.log(is_positive_whole_number(e.target.value),"is_positive_whole_number(e.target.value)")
+                    if(is_positive_whole_number(e.target.value)){
+                     props.handleSelectedProcedureChange(e,props.data.serviceId)
+                    }else{
+                      e.preventDefault()
+                    }
+                    }
+                }
              name="editPrice"
              style={{marginLeft:'0.3rem'}}
              className="no_brdr_input consultaion_input"

@@ -344,14 +344,14 @@ class AppointmentComponent extends Component {
         }
         return (
             <React.Fragment>
-                {/* <NewNotif
+                <NewNotif
                     ret = {this.props.changeAppointRet}
                     retClr = {this.changeAppointClr}
-                /> */}
-                {/* <NotifFunc
+                /> 
+            <NewNotif
                     ret = {this.props.reschedule_appointment_ret}
                     retClr = {this.props.reschedule_appointment_clr}
-                /> */}
+                />
                 <div className='col-md-8 col-xl-9'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
@@ -381,7 +381,7 @@ class AppointmentComponent extends Component {
                                                   <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                  <h4>{item.userName}</h4>
+                                                    <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{`(${item.centerLocation})`}</text>:''}</h4>
                                                   <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
@@ -448,7 +448,7 @@ class AppointmentComponent extends Component {
                                                   <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                  <h4>{item.userName}</h4>
+                                                  <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{`(${item.centerLocation})`}</text>:''}</h4>
                                                   <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
@@ -512,7 +512,7 @@ class AppointmentComponent extends Component {
                                             <img  src={item.professionalImageUrl} className="frame_de" />
                                             </div>
                                             <div className="col-lg-4 nov_2">
-                                            <h4>{item.userName}</h4>
+                                            <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{`(${item.centerLocation})`}</text>:''}</h4>
                                             <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                             <p>{item.professionalAddress}</p>
                                           </div> 

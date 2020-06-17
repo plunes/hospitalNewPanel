@@ -6,7 +6,7 @@ import { getTimeslot, setAvailability, setAvailabilityClr } from "../../actions/
 import ModalComponent from "../ModalComponent"
 import TimeSlot from '../functional/TimeSlot'
 import LoaderComponent from "../functional/LoaderComponent"
-import NotifFunc from   '../functional/NotifFunc'
+import NewNotif from   '../functional/NewNotif'
 
 class AvailabilityComponent extends Component {
    constructor(props) {
@@ -63,6 +63,27 @@ let obj =   {
             slots:arr,
             firstRender:false
           })
+        }
+
+        if(nextProps.setAvailabilityRet){
+          if(nextProps.setAvailabilityRet.success){
+              this.setState({
+                ret:{
+                  success:true,
+                  message:nextProps.setAvailabilityRet.message
+                },
+                loading:false
+              })
+          }else{
+            this.setState({
+              ret:{
+                success:false,
+                message:nextProps.setAvailabilityRet.message
+              },
+              loading:false
+            })
+          }
+          nextProps.setAvailabilityClr()
         }
       }
       timeToString = (time) =>{
@@ -224,9 +245,11 @@ setAvailabilityClr = () =>{
        console.log(this.state,"this.state in availability")
         return (
            <React.Fragment> 
-             <NotifFunc
-                      ret = {this.props.setAvailabilityRet}
-                      retClr = {this.setAvailabilityClr}
+             <NewNotif
+                      ret = {this.state.ret}
+                      retClr = {()=>this.setState({
+                        setAvailabilityRet:false
+                      })}
                   />       
                 <div className= 'col-md-8 col-xl-8 AvailableTime AllComponents my_av_sec'>
                 <div className= 'text-center'><h4 className="abt_sec"><b>My Availability</b></h4></div>

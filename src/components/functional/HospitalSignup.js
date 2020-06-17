@@ -26,12 +26,15 @@ import { only_alphabets } from  "../../utils/common_utilities"
   if(!!props.registerUserRet){
     if(!!props.registerUserRet.success){
       addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true}) 
+      props.successRegister()
+      props.registerUserClr()
       return  <Redirect to="/signin" />
     }else{
       addToast(props.registerUserRet.message, {appearance: 'error', autoDismiss:true})
+      props.successRegister()
+      props.registerUserClr()
     }
-    props.successRegister()
-    props.registerUserClr()
+   
 }
 
    const submitdetails = () => {  
@@ -62,8 +65,8 @@ import { only_alphabets } from  "../../utils/common_utilities"
           addToast("Please enter registration number",{ appearance: 'error', autoDismiss:true })
         }
         else{
-            let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))
-            let arr = JSON.parse(JSON.stringify(props.data.specialities_selected))
+            let specialitiesArr = [...props.specialities]
+            let arr = [...props.data.specialities_selected]
             arr = arr.map((item, i)=>{
                let id =''
                specialitiesArr.forEach((data,i)=>{
@@ -86,7 +89,8 @@ import { only_alphabets } from  "../../utils/common_utilities"
                 registrationNumber:props.data.regno,
                 specialities:arr,
                 email:props.data.email,
-                password:props.data.password
+                password:props.data.password,
+                regno:props.data.regno
            })
         }
     }
@@ -160,7 +164,7 @@ import { only_alphabets } from  "../../utils/common_utilities"
         <Select
            options = {props.specialities}
            handleChange = {props.handleSpecialitySelect}
-           value = {props.specialities_selected[props.specialities_selected.length -1]}
+           value = {!!props.specialities_selected[props.specialities_selected.length -1]?props.specialities_selected[props.specialities_selected.length -1]:''}
            multiple ={false}
            placeholder="Choose Specialities"
            name = "speciality"

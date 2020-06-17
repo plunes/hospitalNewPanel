@@ -79,8 +79,8 @@ class AddDoctorComponent extends Component {
             loading:true,
             specialities:[],
             services:[],
-            specialitie_chosen:' ',
-            services_chosen:' ',
+            specialitie_chosen:'',
+            services_chosen:'',
             name:'',
             education:'',
             designation:'',
@@ -364,11 +364,11 @@ let obj =   {
         if(nextProps.getSpecsRet.success){
           console.log(nextProps.getSpecsRet,"nextProps.getSpecsRet")
           let arr = []
-          let specialities = JSON.parse(JSON.stringify(nextProps.getSpecsRet.data))
+          let specialities = [...nextProps.getSpecsRet.data]
           specialities.forEach((item,i)=>{
             let obj = {
-              name:item,
-              value:item
+              name:item.speciality,
+              value:item.specialityId
             }
             arr.push(obj)
           })
@@ -400,9 +400,9 @@ let obj =   {
       }
     }
 
-    // async componentDidMount(){
-    //    this.props.getSpecs()
-    // }
+    async componentDidMount(){
+       this.props.getSpecs()
+    }
 
     handleChange = (e)=>{
       this.setState({

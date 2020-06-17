@@ -83,6 +83,8 @@ import React, { useRef, useState, useEffect } from "react"
     }
   }
 
+  console.log(props,"props in AddDoctorForm")
+
 
   return (
     <React.Fragment>
@@ -137,7 +139,7 @@ import React, { useRef, useState, useEffect } from "react"
                     multiple ={false}
                     name = "specialitie_chosen"
                     label = "Speciality"
-
+                    placeholder = "Choose Spectiality"
                    />
            </div>
            <div class="col-lg-6 col-12">
@@ -147,6 +149,7 @@ import React, { useRef, useState, useEffect } from "react"
                      value = {props.services_chosen}
                      name = "services_chosen"
                      label = "Service"
+                     placeholder = "Choose Servives"
                    />
            </div>
             </div>

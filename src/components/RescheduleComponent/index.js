@@ -52,24 +52,49 @@ class RescheduleComponent extends React.PureComponent {
                 if(slot.morning.from.hour === slot.morning.to.hour ){
                         if(minutes<slot.morning.to.minutes){
                             return `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
-                        }else{
+                        }
                             return false
                         }
-                }else{
-                    return `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
-                } 
-            }
+                if(hours===slot.morning.from.hour){
+                        if(minutes<slot.morning.from.minutes){
+                            return false
+                        }else{
+                            return  `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
+                        }
+                  }else if(hours===slot.morning.to.hour){
+                         if(minutes>slot.morning.from.minutes){
+                        return false
+                    }else{
+                        return  `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
+                    }
+                 }else {
+                    return  `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
+                }
+                }
             // checking for evening case
-            if((hours>=slot.evening.from.hour) && (hours<=slot.evening.to.hour)){
+           else if((hours>=slot.evening.from.hour) && (hours<=slot.evening.to.hour)){
                 if(slot.evening.from.hour === slot.evening.to.hour ){
                         if(minutes<slot.evening.to.minutes){
                             return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
                         }else{
                             return false
                         }
-                }else{
+                }
+                if(hours===slot.evening.from.hour){
+                    if(minutes<slot.evening.from.minutes){
+                        return  false
+                    }else{
+                        return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
+                    }
+              }else if(hours===slot.evening.to.hour){
+                     if(minutes>slot.evening.from.minutes){
+                    return  false
+                }else {
                     return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
                 }
+             }else {
+                return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
+            }
             }
             return false
         }

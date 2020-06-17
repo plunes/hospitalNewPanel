@@ -57,16 +57,16 @@ const TimeSlot = (props) => {
             }
         }
 
-        if(((!!props.setAvailabilityRet && (props.i === 0)))){
-            if(!!props.setAvailabilityRet.success){
-              addToast(props.setAvailabilityRet.message, {appearance: 'success', autoDismiss:true}) 
+        // if(((!!props.setAvailabilityRet && (props.i === 0)))){
+        //     if(!!props.setAvailabilityRet.success){
+        //       addToast(props.setAvailabilityRet.message, {appearance: 'success', autoDismiss:true}) 
               
-            }else{
-              addToast(props.setAvailabilityRet.message, {appearance: 'error', autoDismiss:true})
-            }
-            props.setAvailabilityClr()
-            props.loadingOff()
-        }
+        //     }else{
+        //       addToast(props.setAvailabilityRet.message, {appearance: 'error', autoDismiss:true})
+        //     }
+        //     props.setAvailabilityClr()
+        //     props.loadingOff()
+        // }
 
         const submit = () =>{
             let slot = props.selectedSlot

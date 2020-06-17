@@ -726,7 +726,7 @@ class DashboardComponent extends React.PureComponent {
                                             />
                                             <div className="SliderUpdatedPrice">&#8377;
                                             <span style={{fontSize:'1rem'}}>
-                                                {this.state.real_time_edit?
+                                                {((!!this.state.real_time_edit) && (!!this.state.realUpdateData.suggested))?
                                                 <React.Fragment>
                                                 <input onChange={(e)=>this.handle_real_time_edit_price(e)} value={this.state.real_time_edit_price} className="real_time_edit_input"  /> 
                                                 <i style={{color:'green', fontSize:'1rem',  marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:false})}  className="fas fa-edit cursor-pointer"></i>

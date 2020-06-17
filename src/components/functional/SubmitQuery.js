@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from "react"
 import {  useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
-import React, { useState } from "react"
+
 
  const SubmitQuery= (props) => {
    const [ query, setQuery ] = useState('')
@@ -8,9 +9,11 @@ import React, { useState } from "react"
    const { addToast } = useToasts()
 
 
-  if(!!props.submit_query_ret){
+   useEffect(()=>{
+    if(!!props.submit_query_ret){
       if(!!props.submit_query_ret.success){
         addToast(props.submit_query_ret.message, {appearance: 'success', autoDismiss:true}) 
+        setQuery('')
         props.submit_query_clr()
       }else{
         addToast(props.submit_query_ret.message, {appearance: 'error', autoDismiss:true})
@@ -18,6 +21,8 @@ import React, { useState } from "react"
       }
     
   }
+   },[props.submit_query_ret])
+
 
    const submit_query = () => {
         if(query === ''){

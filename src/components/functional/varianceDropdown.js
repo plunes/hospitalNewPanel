@@ -12,7 +12,12 @@ export default function VarianceDropdown(props) {
           name ="variance"
           disabled= {props.disabled}
           placeholder={0}
-          options = {[{
+          options = {[
+        {
+              value:0,
+              name:'0'
+        },    
+        {
             value:5,
             name:'5'
         },

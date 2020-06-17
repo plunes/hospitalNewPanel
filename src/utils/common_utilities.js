@@ -2,9 +2,9 @@ export const get_url = () =>{
   let baseUrl = "https://devapi.plunes.com/v5"
   const pathLocation = window.location.host;
     if(!!pathLocation) {
-            console.log('pathLocation : ', pathLocation);
+          
         if(pathLocation === 'hospital.plunes.com') {
-            console.log('PROD');
+          
     // Production baseUrl
           baseUrl = 'https://api.plunes.com/v5'
               }else{
@@ -27,7 +27,6 @@ export const  only_alphabets = (value) =>{
 
 export const config_error = (msg) =>{
   function  MyError(message){
-    console.log(this,"this in myerror")
     this.message = message;
   }
   MyError.prototype = new Error()
@@ -71,6 +70,20 @@ export const is_positive_real_number = (value) =>{
             }else{
               return true
             }
+      }
+      else{
+          return false;
+      }
+}
+
+export const is_positive_whole_number = (value) =>{
+  if(value===""){
+    return true
+  }
+      if (value.toString().match(/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/)){
+        if(value==='0')
+         return false
+         return true
       }
       else{
           return false;

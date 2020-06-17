@@ -6,7 +6,7 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 import validator from 'validator'
 import Select from "../Select";
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
-import { only_alphabets } from "../../utils/common_utilities"
+import { only_alphabets, is_positive_real_number } from "../../utils/common_utilities"
 
 
 
@@ -19,13 +19,16 @@ import { only_alphabets } from "../../utils/common_utilities"
   const dob_ref = useRef()
   if(!!props.registerUserRet){
       if(!!props.registerUserRet.success){
-        addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true}) 
+        addToast(props.registerUserRet.message, {appearance: 'success', autoDismiss:true})
+        props.successRegister()
+        props.registerUserClr() 
         return  <Redirect to="/signin" />
-      }else{
+      }else{     
         addToast(props.registerUserRet.message, {appearance: 'error', autoDismiss:true})
+        props.successRegister()
+        props.registerUserClr()
       }
-      props.successRegister()
-      props.registerUserClr()
+    
   }
 
    const submitDetails = () => {
@@ -251,8 +254,12 @@ import { only_alphabets } from "../../utils/common_utilities"
         <input
           className="form-control customborder"
           name="experience"
-          placeholder="Experience"
-          onChange={props.handleChange}
+          placeholder="Experience (In Years)"
+          onChange={(e)=>{
+            if(is_positive_real_number(e.target.value)){
+              props.handleChange(e)
+            }
+          }}
           required
           type="number"
           value = {props.data.experience}

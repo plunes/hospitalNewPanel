@@ -21,31 +21,13 @@ import Select from "../Select"
 }
 
    const submitdetails = () => {  
-    if(props.email === '' ||props.password===''){
-        addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
-    }else{
+    if(props.email === ''){
+        addToast("Please enter your id or Phonenumber",{ appearance: 'error', autoDismiss:true })
+    }else if(props.password===''){
+      addToast("Please enter your password",{ appearance: 'error', autoDismiss:true })
+    } else{
         let error = false
-        let message = ""
-
-        // if (props.email.includes('@')) {
-        //     if(!validator.isEmail(props.email)){
-        //         error = true
-        //         message = "Invalid email address"
-        //     }
-        // }else{
-        //     if(!isValidPhoneNumber('+91'+props.email)){
-        //         error = true
-        //         message = "Invalid Mobile number"
-        //     }
-        // }
-        
-      //   if(props.type==="admin"){
-      //       if(!isValidPhoneNumber(props.email)){
-      //           error = true
-      //           message = "Invalid Mobile number"
-      // }
-      //   }
-        
+        let message = ""  
 
         if(!validator.isLength(props.password, { min: 8, max: 50 })){
             error = true

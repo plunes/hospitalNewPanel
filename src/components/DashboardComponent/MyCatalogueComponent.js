@@ -354,38 +354,66 @@ class MyCatalogueComponent extends Component {
         if(this.state.addProcedureFlag){
             let procedure = this.state.selectedProcedure
 
-            let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
-            let newArr = arr.map((item,i)=>{
-                return {
-                    ...item,
-                    price:parseInt(item.price[0],10)
-                }
-            })
-            let obj = {
-                specialityId:this.state.selected_procedures[0].specialityId,
-                services:newArr
-            }
-            this.setState({
-                addProcedureLoading:true
-            },()=>this.props.addServices(obj))
-            
-        }else{
-            let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
-            let newArr = arr.map((item,i)=>{
-                return {
-                    ...item,
-                    price:parseInt(item.price[0],10)
-                }
-            })
-            this.setState({
-                editProcedureLoading:true
-            },()=>{
+            try {
+                let arr = [...this.state.selected_procedures]
+                let newArr = arr.map((item,i)=>{
+                    console.log(item,"item in handleSubmit")
+                    if(!!!item.price){
+                        throw new MyError(`${item.service} price cannot be zero`)
+                     }else if(!!!parseInt(item.price[0],10)){
+                        throw new MyError(`${item.service} price cannot be empty`)
+                     }
+                    return {
+                        ...item,
+                        price: parseInt(item.price[0],10)
+                    }
+                })
                 let obj = {
                     specialityId:this.state.selected_procedures[0].specialityId,
                     services:newArr
                 }
-                this.props.editProcedure(obj)
-            }) 
+                this.setState({
+                    addProcedureLoading:true
+                },()=>this.props.addServices(obj))
+            }catch(e){
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:e.message
+                    }
+                })
+            }    
+        }else{
+            try {
+                let arr = [...this.state.selected_procedures]
+                let newArr = arr.map((item,i)=>{
+                    let procedure_price = parseInt(item.price[0],10)
+                    if(!!!procedure_price){
+                       throw new MyError(`${item.service} price cannot be empty`)
+                    }
+                    return {
+                        ...item,
+                        price:procedure_price
+                    }
+                })
+                this.setState({
+                    editProcedureLoading:true
+                },()=>{
+                    let obj = {
+                        specialityId:this.state.selected_procedures[0].specialityId,
+                        services:newArr
+                    }
+                    this.props.editProcedure(obj)
+                })
+            } catch(e){
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:e.message
+                    }
+                })
+            }  
+            
         }
     }
 
@@ -420,7 +448,8 @@ class MyCatalogueComponent extends Component {
     this.setState({
         loading:true,
         addProcedureFlag:true,
-        editFlag:true
+        editFlag:true,
+        selected_procedures:[]
     },()=>{
         this.props.toAddServices({
             searchQuery:'',
@@ -520,7 +549,7 @@ class MyCatalogueComponent extends Component {
     }
 
     render() {
-        // console.log(this.state,"this.state in  Mycatalogue")
+        console.log(this.state,"this.state in  Mycatalogue")
         // console.log(this.props,"this.props. in Mycatalogue ")
                 return (
                     <React.Fragment>
@@ -555,6 +584,7 @@ class MyCatalogueComponent extends Component {
                                      e.preventDefault()
                                      this.setState({
                                         editFlag:true,
+                                        selected_procedures:[],
                                         addProcedureFlag:false})
                                     }}><img className="catalogue-img" src="/edit.svg" alt=""></img>
                                  <p className="uploadCata">Edit Catalogue</p></a>
@@ -677,7 +707,7 @@ class MyCatalogueComponent extends Component {
                             })} className="catalogueViewMore">View more</button> }    
                         </div>}
                        {!this.state.addProcedureFlag && <div className='text-center'>
-                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
+                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
                         {this.state.addProcedureLoading && <LoaderComponent />}
                         {!!this.state.addProcedureFlag  &&    (this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
@@ -707,7 +737,7 @@ class MyCatalogueComponent extends Component {
                         </div>} */}
 
                         {this.state.addProcedureFlag  && <div className='text-center'>
-                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button onClick={this.handleSubmit} className="common-button">Submit</button> }    
+                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
 
                         </div>

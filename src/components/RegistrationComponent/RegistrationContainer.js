@@ -12,10 +12,15 @@ import HospitalSignup from "../functional/HospitalSignup"
 import DoctorSignup from '../functional/DoctorSignup'
 import AuthHeader from '../functional/AuthHeader'
 import { get_url } from '../../utils/common_utilities'
-
 import { connect } from "react-redux"
-
 import axios from "axios";
+import NewNotif from '../functional/NewNotif';
+
+function MyError(message){
+    this.message = message;
+}
+
+MyError.prototype = new Error()
 
 class RegistrationContainer extends  React.Component {
 
@@ -37,7 +42,8 @@ class RegistrationContainer extends  React.Component {
                 specialities_selected:[],
                 addFlag:false,
                 email:'',
-                password:''
+                password:'',
+                regno:''
             },
             doctor:{
                 name:'',
@@ -48,7 +54,8 @@ class RegistrationContainer extends  React.Component {
                 dob:'',
                 regno:'',
                 experience:'',
-                specialities_selected:[]
+                specialities_selected:[],
+                regno:''
             }
         };
         this.handleChange = this.handleChange.bind(this);
@@ -159,7 +166,7 @@ class RegistrationContainer extends  React.Component {
     axios.get(`${get_url()}/catalogue/getSpecialities`)
       .then(res => {
         const specialities = res.data.data;
-        // console.log(specialities);
+        console.log(specialities,"get specialities");
         let array = []
         specialities.forEach((s) => {
           let data = {
@@ -174,25 +181,47 @@ class RegistrationContainer extends  React.Component {
   }
 
   handleSpecialitySelect = (e) =>{
-        let arr = JSON.parse(JSON.stringify(this.state.hospital.specialities_selected))
-        arr.push(e.target.value)
+    try{
+        let arr = [...this.state.hospital.specialities_selected]
+        if(arr.includes(e.target.value))
+        throw new MyError(`${e.target.value} is already selected`)
+        arr.unshift(e.target.value)
         this.setState({
-            hospital:{
-                ...this.state.hospital,
-                specialities_selected:arr
+           hospital:{
+            ...this.state.hospital,
+            specialities_selected:arr
+           }
+        })
+    } catch (e){
+        this.setState({
+            ret:{
+                success:true,
+                message:e.message
             }
         })
+    }
   }
 
   handleSpecialitySelectDoctor = (e)=>{
-    let arr = JSON.parse(JSON.stringify(this.state.doctor.specialities_selected))
-    arr.push(e.target.value)
-    this.setState({
-        doctor:{
-            ...this.state.doctor,
-            specialities_selected:arr
-        }
-    })
+    try{
+        let arr = [...this.state.doctor.specialities_selected]
+        if(arr.includes(e.target.value))
+        throw new MyError(`${e.target.value} is already selected`)
+        arr.unshift(e.target.value)
+        this.setState({
+            doctor:{
+                ...this.state.doctor,
+                specialities_selected:arr
+            }
+        })
+    } catch (e){
+        this.setState({
+            ret:{
+                success:true,
+                message:e.message
+            }
+        })
+    }
   }
 
   removeSpeciality = (data) =>{
@@ -253,6 +282,10 @@ class RegistrationContainer extends  React.Component {
         }
         return (
            <div>
+               <NewNotif
+                ret = {this.state.ret}
+                retClr = {()=>this.setState({ret:false})}
+               />
                <div className="row">
                <AuthHeader />
                </div>

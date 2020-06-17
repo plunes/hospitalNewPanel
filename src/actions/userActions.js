@@ -192,6 +192,7 @@ import { get_url_params } from '../utils/common_utilities';
 
 
 let baseUrl = "https://devapi.plunes.com/v5"
+let base_url_without_v5 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
 if(!!pathLocation) {
@@ -200,11 +201,16 @@ if(!!pathLocation) {
     console.log('PROD');
     // Production baseUrl
     baseUrl = 'https://api.plunes.com/v5'
+    base_url_without_v5 = 'https://api.plunes.com'
   }else{
     baseUrl = "https://devapi.plunes.com/v5"
+    base_url_without_v5 ="https://devapi.plunes.com"
     // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
   }
 }
+
+
+
 
 export const  base_url = ()=>{
     return baseUrl
@@ -1984,7 +1990,7 @@ export const getSpecsClr = () => dispatch =>{
 export const getSpecs = (obj) => async dispatch => {
   console.log("Inside GetSPecs")
   let center_id = get_url_params('center')
-  let requestUrl ="/admin_panel/specialities"+`${!!center_id?'?userId='+center_id:''}`
+  let requestUrl ="/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`
   if(!!obj){
     if(obj.type === "getUserSpecialities"){
       requestUrl = "/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`
@@ -3031,7 +3037,7 @@ export const initiatePayment = (pData) => async dispatch => {
   }
   let token = localStorage.getItem('token');
   return new Promise(async function (resolve, reject) {
-    await axios.patch(baseUrl + '/admin_panel/paymentStatus', body, { headers: { "Authorization": `Bearer ${token}` } })
+    await axios.patch(base_url_without_v5 + '/admin/paymentStatus', body, { headers: { "Authorization": `Bearer ${token}` } })
       .then((res) => {
         //console.log('data', res.status)
         if (res.status === 200) {
@@ -3287,7 +3293,8 @@ export const getBooking = () => async  dispatch => {
             'professionalImageUrl':b.professionalImageUrl,
             'doctorConfirmation':b.doctorConfirmation,
             'userMobileNumber':b.userMobileNumber,
-            'paymentProgress':b.paymentProgress
+            'paymentProgress':b.paymentProgress,
+            'centerLocation':b.centerLocation
           }
           businessBooking.push(bookDet)
         })
