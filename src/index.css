@@ -545,7 +545,7 @@ input[type="date"]:focus:before {
 }
 
 .hospital_center_img{
-  width: 6rem;
+  width: 5rem;
 }
 .sub_heading_rish{
   font-size: 1.2rem;
@@ -661,4 +661,28 @@ outline: none;
 .heading_flex_child {
   flex:1 1 45%;
   margin: 0 1%;
+}
+.add_icon_center{
+  margin-left: auto;
+  height: 2.5rem;
+  margin-right: 1rem;
+}
+.add_text{
+  display: block;
+  text-align: right;
+  color: #333333;
+  margin-right: 1.1rem;
+}
+.add_text_wrapper_span {
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.center_wrap_dash {
+  padding: 1rem;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #C7C7C7;
+  border-radius: 20px;
+
 }

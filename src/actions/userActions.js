@@ -820,7 +820,8 @@ export const reschedule_appointment = (data) => async dispatch => {
           type: RESCHEDULE_APPOINTMENT_RET,
           payload: {
             success:true,
-            data:res.data
+            data:res.data,
+            message:res.data.msg
           }
         })
       }else{
@@ -1419,7 +1420,7 @@ export const changeAppoint = (data) => async dispatch => {
   return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': token } })
   .then((res) => {
     console.log(res, 'res in changeAppoint')
-    if (res.status === 201) {
+    if (res.status === 200) {
       //dispatch(getSolutionInsights())
       console.log(res.data, 'data in update Image')
       if(!!res.data){
@@ -1482,7 +1483,7 @@ export const changeAppoint = (data) => async dispatch => {
             payload :{
               success:true,
               data:res.data,
-              message:"Appointment status  successfully changed",
+              message:"Appointment status successfully changed",
               type:type
             }
           })

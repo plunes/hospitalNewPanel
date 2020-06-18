@@ -50,6 +50,7 @@ class Map extends Component{
 				},
 				address:this.state.address
 			  })
+			  nextProps.set_location_toggler(false)
 			}else{
 				this.setState({
 					ret:{

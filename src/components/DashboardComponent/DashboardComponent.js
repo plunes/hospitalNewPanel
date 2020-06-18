@@ -581,10 +581,10 @@ class DashboardComponent extends React.PureComponent {
                                                             <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Business</p>
                                                          </span>
                                                          <span className="heading_flex_child">  
-                                                           <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
+                                                          {this.props.centers_name_list.length !==0  &&  <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
                                                              <option value={''}>{'Centers List'}</option>
                                                                 {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                                           </select>
+                                                           </select>}
                                                          </span>
                                                       </span>
                                                     </div>
@@ -629,10 +629,10 @@ class DashboardComponent extends React.PureComponent {
                                        <span className='businessrow1col1 realtimewidth'>
                                         <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business'>Actionable Insights</p>
                                        <span className="text-center" style={{position:'absolute', right:'1rem'}}>
-                                       <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish">
+                                     {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish">
                                                                   <option value={''}>{'Centers List'}</option>
                                                                   {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                          </select>
+                                          </select>}
                                        </span>
                                       </span>
                                         {this.props.act_insight_loader? <LoaderComponent/>:
@@ -650,13 +650,21 @@ class DashboardComponent extends React.PureComponent {
                                         }
                                     </div>
                                    {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
-                                    <span className='businessrow1col1 realtimewidth'>
+                                    <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
+                                    <span className='businessrow1col1 heading_flex_child '>
                                     {!!this.props.get_centers_loading &&  <LoaderComponent/>}
-
-                                       { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Centre</p></React.Fragment>:
-                                         <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Add Centre</p></Link></React.Fragment> 
+                                                    { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Center</p></React.Fragment>:
+                                                    <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Add Center</p></Link></React.Fragment> 
                                     }
-                                 
+                                  </span>
+                                   <span className="heading_flex_child">  
+                                  <span className="add_text_wrapper_span">
+                                  <Link to="/dashboard/centers?addCenter=true">
+                                  <img src="/add_icon.svg" style={{height:'2rem'}} alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
+                                   <text  className="add_text">Add</text>
+                                   </Link>
+                                  </span>
+                                   </span>
                                     </span>   
                                       {!this.props.get_centers_loading && <div className="add-center-content">
                                       {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/no_center_img.svg" onClick={()=>this.open_act_as_admin()} alt="no_center_img" className="no_center_img  center_align_rish cursor-pointer" /></React.Fragment>:
@@ -665,7 +673,7 @@ class DashboardComponent extends React.PureComponent {
                                          <div className="row">
                                         { this.props.centers_data.centers_list.slice(0,4).map((item)=>{
                                                 return  <div className="col-md-6">
-                                                <div className="centers-wrap">
+                                                <div className="centers-wrap center_wrap_dash">
                                                     <Link to={`/dashboard/profile?center=${item._id}`} >
                                                         <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
                                                         <div className="text-center">
@@ -677,17 +685,17 @@ class DashboardComponent extends React.PureComponent {
                                          })}
                                          </div>
                                          {
-                                            (this.props.centers_data.centers_list.length>4)  &&  <div className="text-center">
+                                            (this.props.centers_data.centers_list.length>4)  &&  <div className="text-center margin-top-small_ris">
                                             <Link to='/dashboard/centers' >
-                                            <p style={{textDecoration:'underline',fontSize:'1rem'}} className="green_text_rish">View More</p>
+                                            <p style={{textDecoration:'underline',fontSize:'1.3rem'}} className="green_text_rish">View More</p>
                                             </Link>
                                      </div>
                                         }
-                                         <div className="text-center margin-top-small_ris">
+                                         {/* <div className="text-center margin-top-small_ris">
                                          <Link to="/dashboard/centers?addCenter=true">
                                         <button className="common_button_rish margin_top_medium_rish margin_bottom_medium_rish">Add Center</button>
                                         </Link>
-                                        </div>
+                                        </div> */}
                                         </React.Fragment>
                                          :  
                                          <React.Fragment>
@@ -778,7 +786,7 @@ class DashboardComponent extends React.PureComponent {
                                                  :
                                                  <React.Fragment>
                                                  {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)}
-                                                 <i style={{color:'green', fontSize:'1rem', marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:true})} className="fas fa-edit cursor-pointer vertical_align_rish"></i>
+                                                    { (!!this.state.realUpdateData.suggested) && <i style={{color:'green', fontSize:'1rem', marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:true})} className="fas fa-edit cursor-pointer vertical_align_rish"></i>} 
                                                  </React.Fragment>
                                                 }
                                             </span>            

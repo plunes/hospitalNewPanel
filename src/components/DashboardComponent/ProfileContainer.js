@@ -5,7 +5,8 @@ import './Profile.css';
 import Modal from "react-responsive-modal";
 import { expertDetails, upload, uploadRetClr, updateImage, updateImageClr,
    getProfileDetails, updateBanner, updateBannerClr, updateAchievement, updateAchievementClr, editBio, editBioClr,
-   getUserDetails, edit_location_clr, edit_location, get_user_info, set_user_info, set_open_map, set_center_data, get_center_profile, get_center_profile_clr } from "../../actions/userActions";
+   getUserDetails, edit_location_clr, edit_location, get_user_info, set_user_info, set_open_map, set_center_data, get_center_profile, get_center_profile_clr,
+   set_location_toggler } from "../../actions/userActions";
 import ProfileImage from '../functional/ProfileImage';
 import ProfileBanner from '../functional/ProfileBanner';
 import DoctorComponent from "../functional/DoctorComponent"
@@ -320,8 +321,34 @@ class ProfileContainer extends React.PureComponent {
     let  newarr = []
     console.log(arr, arr.length,"pika nbiii")
     while(i <= (arr.length-1))
-    {
-      if(i=== arr.length-1){
+    { 
+      if(arr.length===1){
+        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+        <div className="row">
+           <div className="col-md-6">
+             <div className="card mb-2">
+               <img className="card-img-top card_im img-loading_rish"
+                 src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+               <div className="card-body">
+                  <p className="card-text">{arr[i].title}</p>
+               </div>
+             </div>
+           </div>
+
+             <div className="col-md-6">
+              <div className="card mb-2">
+                <img className="card-img-top card_im img-loading_rish"
+                   src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+                  <p className="card-text">{arr[i].title}</p>
+                </div>
+              </div>
+            </div>     
+       </div>
+         </div>)
+         i = i+1
+      }
+    else if(i=== arr.length-1){
         console.log("Case 1")
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
@@ -537,6 +564,7 @@ class ProfileContainer extends React.PureComponent {
                edit_location = {this.edit_location}
                edit_location_clr = {this.edit_location_clr}
                edit_location_ret = {this.props.edit_location_ret}
+               set_location_toggler = {this.props.set_location_toggler}
              />
             </div>
             }
@@ -677,5 +705,6 @@ export default connect(mapStateToProps, {
   set_open_map,
   set_center_data,
   get_center_profile,
-  get_center_profile_clr
+  get_center_profile_clr,
+  set_location_toggler
  })(ProfileContainer);

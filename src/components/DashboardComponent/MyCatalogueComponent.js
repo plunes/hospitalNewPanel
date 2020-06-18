@@ -418,13 +418,19 @@ class MyCatalogueComponent extends Component {
     }
 
     onEdit = (data) =>{
+        console.log(data,"data from on Edit")
         this.setState({
             edit_Proc_flag:true
         })
-        let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
-        arr.push(data.data)
+        let selected_data_removed = [...this.state.selected_procedures].filter((item=>item.serviceId !== data.data.serviceId))
+        let selected_procedures = [...this.state.selected_procedures]
+        if(selected_data_removed.length === selected_procedures.length){
+            selected_procedures.push(data.data)
+        }else{
+            selected_procedures = [...selected_data_removed]
+        }
         this.setState({
-            selected_procedures:arr
+            selected_procedures:selected_procedures
         },()=>this.setState({
             edit_Proc_flag:false
         }))
@@ -702,9 +708,7 @@ class MyCatalogueComponent extends Component {
                            <div className='text-center'>No Procedures</div>)
                         }
                         {!this.state.addProcedureFlag && <div className='text-center'>
-                            {this.state.procedures.length !==0 && <button onClick={()=>this.viewMore({
-                                editFlag:false
-                            })} className="catalogueViewMore">View more</button> }    
+                            {this.state.procedures.length !==0 && <button onClick={()=>this.viewMore({})} className="catalogueViewMore">View more</button> }    
                         </div>}
                        {!this.state.addProcedureFlag && <div className='text-center'>
                             {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    

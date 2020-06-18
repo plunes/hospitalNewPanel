@@ -119,7 +119,7 @@ render(){
                 retClr = {()=>this.setState({ret:false})}
             />
              <div style={{position:'relative'}} className="centers_wrapper">
-                 {true && <LoaderComponent />}
+                 {this.state.loading && <LoaderComponent />}
                     <div className="text-center">
                 <h1 className="margin-top-medium_ris center_align_rish " >Add Center</h1>
                 </div>
