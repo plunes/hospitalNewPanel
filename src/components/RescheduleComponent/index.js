@@ -8,7 +8,7 @@ class RescheduleComponent extends React.PureComponent {
             super(props)
             this.state = {
                 valid:true,
-                value:!!this.props.value?this.props.value.appointmentTime:new Date,
+                value:!!this.props.value?new Date(parseInt(this.props.value.appointmentTime,10)):new Date,
                 reschedule_flag:false,
                 ret:false,
                 toggler:false
@@ -100,48 +100,52 @@ class RescheduleComponent extends React.PureComponent {
         }
         
         save_changes = () =>{
-         let  date = new Date(this.state.value)
-         let day  = getDay(date.getDay())
-         let slot = this.get_slot(day)
-         let closed = slot.closed
-         delete slot.closed
-         try {
-            if(!!closed){
-                throw new Error("dummy_error_thrown")
-            }
-            let flag = this.valid_time(slot, date.getMinutes(), date.getHours())
-            if(!!flag){
-                console.log("Volla Entered a valid time")
-                this.props.reschedule_appointment({
-                    bookingType:this.props.type,
-                    params:{
-                        bookingId:this.props.value._id,
-                        bookingStatus:"reschedule"
-                    },
-                    body:{
-                        timeSlot:flag,
-                        appointmentTime:date.getTime()
+            console.log(this.state,"this.state in save_changes")
+            if(this.state.value.getTime()!==(new Date(parseInt(this.props.value.appointmentTime,10)).getTime())){
+                let  date = new Date(this.state.value)
+                let day  = getDay(date.getDay())
+                let slot = this.get_slot(day)
+                let closed = slot.closed
+                delete slot.closed
+                try {
+                    if(!!closed){
+                        throw new Error("dummy_error_thrown")
                     }
-                })
-            }else{
-               console.log("Sorry Invalid time")   
-               this.setState({
-                   ret:{
-                       success:false,
-                       message:"Doctor not available on selected time"
-                   }
-               })
-            }
-         }
-         catch(e){
-             console.log(e)
-             this.setState({
-                 ret:{
-                     success:false,
-                     message:"Doctor not available on selected day"
-                 }
-             })
-         }
+                    let flag = this.valid_time(slot, date.getMinutes(), date.getHours())
+                    if(!!flag){
+                        console.log("Volla Entered a valid time")
+                        this.props.reschedule_appointment({
+                            bookingType:this.props.type,
+                            params:{
+                                bookingId:this.props.value._id,
+                                bookingStatus:"reschedule"
+                            },
+                            body:{
+                                timeSlot:flag,
+                                appointmentTime:date.getTime()
+                            }
+                        })
+                    }else{
+                    console.log("Sorry Invalid time")   
+                    this.setState({
+                        ret:{
+                            success:false,
+                            message:"Doctor not available on selected time"
+                        }
+                    })
+                    }
+                }
+                catch(e){
+                    console.log(e)
+                    this.setState({
+                        ret:{
+                            success:false,
+                            message:"Doctor not available on selected day"
+                        }
+                    })
+                }
+                    }
+ 
         }
         render(){
            console.log(this.state,"state in reschedule_component")

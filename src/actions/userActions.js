@@ -1933,7 +1933,7 @@ export const addDoctor = (obj) => async dispatch => {
   console.log("Inside addDoctor")
   const center_id = get_url_params('center')
   let token = localStorage.getItem('token');
-  return await axios.patch(baseUrl + '/admin_panel/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
+  return await axios.patch(base_url_without_v5 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in addDoctor")
       
@@ -2059,7 +2059,7 @@ export const getServClr = () => dispatch =>{
 export const getServ = (obj) => async dispatch => {
   console.log(obj,"Data in getServ Action")
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + `/admin_panel/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
+  return await axios.get(base_url_without_v5 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in getServ")
       if (res.status === 200) {
@@ -2996,7 +2996,7 @@ export const sendUpdateData = (uData) => async dispatch => {
   }
   //console.log(typeof obj.newPrice, obj.newPrice)
   let token = localStorage.getItem('token');
-  return await axios.patch(baseUrl + '/admin_panel/updatePrice', obj, { 'headers': { 'Authorization': token } })
+  return await axios.patch(base_url_without_v5 + '/admin/updatePrice', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       //console.log(res.data)
       if (res.data.status === 1) {

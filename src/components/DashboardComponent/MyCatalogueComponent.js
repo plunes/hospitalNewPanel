@@ -180,7 +180,8 @@ class MyCatalogueComponent extends Component {
                         this.setState({
                             selected_procedures:[],
                             procedures:nextProps.searchProceduresRet.data,
-                            loading:false
+                            loading:false,
+                            hide_view_more:nextProps.searchProceduresRet.data.length === this.state.procedures.length?true:false
                         })
                     }
                 }else{
@@ -708,7 +709,7 @@ class MyCatalogueComponent extends Component {
                            <div className='text-center'>No Procedures</div>)
                         }
                         {!this.state.addProcedureFlag && <div className='text-center'>
-                            {this.state.procedures.length !==0 && <button onClick={()=>this.viewMore({})} className="catalogueViewMore">View more</button> }    
+                            {((this.state.procedures.length !==0) && (!!!this.state.hide_view_more)) && <button onClick={()=>this.viewMore({})} className="catalogueViewMore">View more</button> }    
                         </div>}
                        {!this.state.addProcedureFlag && <div className='text-center'>
                             {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
@@ -741,7 +742,7 @@ class MyCatalogueComponent extends Component {
                         </div>} */}
 
                         {this.state.addProcedureFlag  && <div className='text-center'>
-                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
+                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)) )  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
 
                         </div>

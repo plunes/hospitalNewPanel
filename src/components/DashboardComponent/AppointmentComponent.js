@@ -139,7 +139,7 @@ class AppointmentComponent extends Component {
         return  {
             monthAndDate: `${getMonth(date.getMonth())}  ${date.getDate()>9?date.getDate():"0"+date.getDate()}`,
             fullDate:  `${date.getDate()>9?date.getDate():"0"+date.getDate()} ${getMonth(date.getMonth())}  ${date.getFullYear()} `,
-            time: `${date.getHours()>9?date.getHours():"0"+date.getHours()}:${date.getMinutes()>9?date.getMinutes():"0"+date.getMinutes()} ${date.getHours()>12?"PM":'AM'}`,
+            time: `${date.getHours()>9?date.getHours():"0"+date.getHours()}:${date.getMinutes()>9?date.getMinutes():"0"+date.getMinutes()} ${date.getHours()>=12?"PM":'AM'}`,
         }
     }
 
@@ -466,9 +466,11 @@ class AppointmentComponent extends Component {
                                  <RescheduleComponent
                                  reschedule_appointment = {this.reschedule_appointment}
                                  value = {item}
+                                 success_reschedule_id = {this.state.success_reschedule_id}
                                  slots = {this.state.slots}
                                  selected_callback = {this.selected_callback}
                                  defaultValue = {this.state.defaultDate}
+                                 remove_success_id = {()=>this.setState({success_reschedule_id:false})}
                                  type="confirmed_bookings"
                                 />
                                  </div>
@@ -531,9 +533,11 @@ class AppointmentComponent extends Component {
                                  <RescheduleComponent
                                  reschedule_appointment = {this.reschedule_appointment}
                                  value = {item}
+                                 success_reschedule_id = {this.state.success_reschedule_id}
                                  slots = {this.state.slots}
                                  selected_callback = {this.selected_callback}
                                  defaultValue = {this.state.defaultDate}
+                                 remove_success_id = {()=>this.setState({success_reschedule_id:false})}
                                  type="cancelled_bookings"
                                 />
                                  </div>
