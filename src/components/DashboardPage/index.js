@@ -464,7 +464,7 @@ export class DashboardPage extends React.PureComponent {
 
     const pathLocation = window.location.host;
       if(!!pathLocation) {
-         if(pathLocation === 'hospital.plunes.com') {
+         if(pathLocation === 'analytics.plunes.com') {
       // Production baseUrl
               baseUrl = 'https://api.plunes.com?userId='
        }else{

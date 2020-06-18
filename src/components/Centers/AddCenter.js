@@ -87,7 +87,7 @@ class AddCenter extends React.PureComponent{
                 // "biography": "S",
                 email:this.state.email,
                 centerLocation:this.state.centerLocation,
-                phone:this.state.phone,
+                alternateNumber:this.state.phone,
                 location:this.state.location
             })
         }catch(e){

@@ -197,7 +197,7 @@ let base_url_without_v5 = "https://devapi.plunes.com"
 const pathLocation = window.location.host;
 if(!!pathLocation) {
   console.log('pathLocation : ', pathLocation);
-  if(pathLocation === 'hospital.plunes.com') {
+  if(pathLocation === 'analytics.plunes.com') {
     console.log('PROD');
     // Production baseUrl
     baseUrl = 'https://api.plunes.com/v5'

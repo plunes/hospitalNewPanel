@@ -3,7 +3,7 @@ export const get_url = () =>{
   const pathLocation = window.location.host;
     if(!!pathLocation) {
           
-        if(pathLocation === 'hospital.plunes.com') {
+        if(pathLocation === 'analytics.plunes.com') {
           
     // Production baseUrl
           baseUrl = 'https://api.plunes.com/v5'
