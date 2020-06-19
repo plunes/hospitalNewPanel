@@ -343,6 +343,7 @@ let obj =   {
                 }
                 arr.push(obj)
           })
+          console.log(data,"data ajsakjskas")
               this.setState({
                 name:data.name,
                 education:data.education,
@@ -350,7 +351,7 @@ let obj =   {
                 experience:data.experience,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
-                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
+                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityName:'',
                 slots:arr
               })
         }else{

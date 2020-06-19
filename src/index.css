@@ -61,6 +61,26 @@ body {
   
 }
 
+.edi_intr {
+  width: fit-content;
+}
+
+.common_button_rish{
+  background: #01D35A 0% 0% no-repeat padding-box;
+  border-radius: 35px !important;
+  color: white;
+  font-size: 15px !important;
+  padding: 10px;
+  border: none;
+}
+.common_button_rish:focus{
+  border-color: inherit !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  
+}
+
 .common-button-white{
   background: #fff 0% 0% no-repeat padding-box;
   border-radius: 35px !important;

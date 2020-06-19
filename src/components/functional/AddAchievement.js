@@ -102,7 +102,7 @@ const submitdetails = () => {
             style={{display:'inline',display:'none'}}
             id="uploatCatalogue"
             type="file" 
-            accept=".jpg, .jpg, .jpeg"
+            accept=".png, .jpg, .jpeg"
             onChange ={(e)=>handleUpload(e)}
     />
         </div>   }

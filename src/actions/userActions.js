@@ -148,13 +148,14 @@ let baseUrl = "https://devapi.plunes.com/v5"
 const pathLocation = window.location.host;
 if(!!pathLocation) {
   console.log('pathLocation : ', pathLocation);
-  if(pathLocation === 'hospital.plunes.com') {
-    console.log('PROD');
-    // Production baseUrl
-    baseUrl = 'https://api.plunes.com/v5'
-  }else{
+  if(pathLocation === '127.0.0.1:3000') {
+    console.log('DEV');
+    // Dev baseUrl
     baseUrl = "https://devapi.plunes.com/v5"
-    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
+  }else{
+     // Prod baseUrl
+    baseUrl = 'https://api.plunes.com/v5'
+    
   }
 }
 
@@ -228,6 +229,7 @@ export const get_business = (data) => async dispatch => {
 
 
 export const set_user_info = (data) => dispatch =>{
+  console.log(data,"action set_user_info")
   return  dispatch({
     type: SET_USER_INFO,
     payload:data

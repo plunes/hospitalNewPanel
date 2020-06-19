@@ -72,7 +72,8 @@ class ProfileContainer extends React.PureComponent {
 
     if(!!!isEmpty(nextProps.prof_data)){
       this.setState({
-        prof_data:nextProps.prof_data
+        prof_data:nextProps.prof_data,
+        // biography:nextProps.prof_data.biography
       })
     }
       if(!!nextProps.updateAchievementRet){
@@ -139,7 +140,8 @@ class ProfileContainer extends React.PureComponent {
        if(!!nextProps.profileData.success){
          this.setState({
           user:nextProps.profileData.user,
-          get_profile_loading:false
+          get_profile_loading:false,
+          // biography:nextProps.profileData.user.biography
          })
        }else{
          console.log("/whoami api didn't work")
@@ -271,10 +273,7 @@ class ProfileContainer extends React.PureComponent {
 
   handleBioChange = (e) =>{
     this.setState({
-      user:{
-        ...this.state.user,
-        biography:e.target.value
-      }
+     biography:e.target.value
     })
   }
 
@@ -284,10 +283,25 @@ class ProfileContainer extends React.PureComponent {
       let arr = [...this.state.prof_data.achievements]
     let i= 0
     let  newarr = []
-    while(i<arr.length-1)
-    {
-      if(i=== arr.length-1){
-       newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+    while(i <= (arr.length-1))
+    {  
+      if(arr.length===1){
+      newarr.push( <div className={`carousel-item ${arr.length ===1?"active":''}`}>
+      <div className="row">
+         <div className="col-md-6">
+           <div className="card mb-2">
+             <img className="card-img-top card_im img-loading_rish"
+               src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+             <div className="card-body">
+ <p className="card-text">{arr[i].title}</p>
+             </div>
+           </div>
+         </div>     
+     </div>
+       </div>)
+      i = i+1
+     }else if(i=== arr.length-1){
+       newarr.push( <div className={`carousel-item ${arr.length ===1?"active":''}`}>
        <div className="row">
           <div className="col-md-6">
             <div className="card mb-2">
@@ -395,6 +409,7 @@ class ProfileContainer extends React.PureComponent {
     console.log(this.props,"this.props in  ProfileContainer")
     console.log(this.state,"this.state in ProfileContainer")
     let achievementArray  = this.achievement_slider()
+    console.log(achievementArray,"dsdfsdfdsfsdfsdfdsf")
     const { open } = this.state;
     return (
       <React.Fragment>
@@ -507,11 +522,13 @@ class ProfileContainer extends React.PureComponent {
               loadingOff = {()=>this.setState({
                 editBioLoading:false
               })}
-              biography = {this.state.user.biography}
+              user = {this.state.prof_data}
+              biography = {this.state.biography}
               toggleEditBio ={()=>this.setState({editBioFlag:!this.state.editBioFlag})}
               getDetails = {this.props.expertDetails}
               loading = {this.state.editBioLoading}
               getUserDetails = {this.props.getUserDetails}
+              set_user_info = {this.props.set_user_info}
             />
     <hr className="brdr_tm"></hr>
           <div className="team_sec">
@@ -528,11 +545,13 @@ class ProfileContainer extends React.PureComponent {
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
        <img  src="/Group 2096.svg" className="img-loading_rish"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
+       <div className="text-center">
        <Link to="/dashboard/add-doctor"
              role="button"
              onClick = {()=>this.props.toggleAddDoc()}>
-       <button className="common-button" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
+       <button className="common_button_rish" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
        </Link>
+       </div>
      </div>:'':''}
    
    {this.props.user?!!this.props.user.doctors?this.props.user.doctors.length !==0?<div className="col-md-6 col-sm-12 col-lg-3">
@@ -555,8 +574,8 @@ class ProfileContainer extends React.PureComponent {
 <div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
  
-{!!this.props.user.achievements?
-  this.props.user.achievements.length!==0?
+{!!this.state.prof_data.achievements?
+  this.state.prof_data.achievements.length!==0?
   <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
   {/* {true && <LoaderComponent />} */}
     <div class="carousel-inner" role="listbox">
@@ -571,7 +590,7 @@ class ProfileContainer extends React.PureComponent {
     </div>
 </div>:<div className="row">
 <div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
-    <img style={{marginLeft:'3rem'}} src="/Group 2096.svg"  />
+    <img style={{marginLeft:'3rem'}} src="/no_achievement.svg"  />
     <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Achievement added</div>
   </div>
   </div>

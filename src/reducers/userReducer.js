@@ -280,6 +280,7 @@ export default function (state = initialState, action) {
       };
 
       case SET_USER_INFO:
+        console.log(action.payload,"action.payload in reducer")
         return {
           ...state,
         data:{

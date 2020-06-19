@@ -316,7 +316,7 @@ class DashboardComponent extends React.PureComponent {
                             <div className=' dashboardsection dashrow1'>
                                 
                                 <p  className='DashboardHospitalName'>{this.props.user.name}</p>
-                                <p className="heading-right_ris"> For any query - Call at 7701805081</p>
+                                <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
                                 </div>
                             </div>
                             <div className='row'>

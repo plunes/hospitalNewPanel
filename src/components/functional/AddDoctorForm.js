@@ -18,6 +18,7 @@ import React, { useRef, useState, useEffect } from "react"
   const { addToast } = useToasts()
   const doctorImageRef = useRef()
 
+  console.log(props,"props in add_doctor_form")
 
   if(!!props.uploadRet){
       if(!!props.uploadRet.success){
