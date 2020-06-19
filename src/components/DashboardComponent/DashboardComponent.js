@@ -545,7 +545,7 @@ class DashboardComponent extends React.PureComponent {
                                         <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
                                     </div>
                         </div>
-                        {true  &&   <AddLocationTab
+                        {this.props.location_toggler  &&   <AddLocationTab
                             set_open_map = {this.props.set_open_map}
                         /> }
                             <div className='row'>

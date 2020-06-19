@@ -7,6 +7,8 @@ import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
 import ModalComponent from "../ModalComponent"
+import NewNotif from '../functional/NewNotif';
+
 const slots = [
   {
       "slots" : [
@@ -95,7 +97,8 @@ class AddDoctorComponent extends Component {
             selectedType:{},
             selectedshift:{},
             selectedDay:{},
-            getUserLoading:false
+            getUserLoading:false,
+            editConsultFlag:false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -350,7 +353,7 @@ let obj =   {
                 experience:data.experience,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
-                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
+                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityName:'',
                 slots:arr
               })
         }else{
@@ -477,6 +480,23 @@ let obj =   {
      })
     }
 
+    toggleSubmitConultation = () =>{
+      if(!!!this.state.editConsultFlag){
+        this.setState({editConsultFlag:true})
+      }else{
+        if(this.state.consultationFee===""){
+          this.setState({
+            ret:{
+              success:false,
+              message:'Invalid Consultion fees'
+            }
+          })
+        }else{
+          this.setState({editConsultFlag:false})
+        }
+      }
+    }
+
     render() {
       console.log(this.state,"this.state in AddComponent")
       
@@ -486,6 +506,12 @@ let obj =   {
                     <div className="border_dev">
                 <div className="add_dr">
                     <div className="add_srch_d">
+                      <NewNotif 
+                        ret= {this.state.ret}
+                        retClr= {()=>this.setState({
+                          ret:false
+                        })}
+                      />
                       {this.state.doctorProfileFlag?<h4>Doctor</h4>:<h4>Add Doctor</h4>}
           
           {/* <p>Search for a doctor by name or email</p> */}
@@ -614,8 +640,8 @@ let obj =   {
               addDoctorLoadingOff = {()=>this.setState({addDoctorLoading:false})}
               editConsultFlag = {this.state.editConsultFlag}
               consultationFee= {this.state.consultationFee}
-              submitConsultaion = {()=>this.setState({editConsultFlag:false})}
-              toggleSubmitConultation = {()=>this.setState({editConsultFlag:!this.state.editConsultFlag})}
+              submitConsultaion = {this.toggleSubmitConultation}
+              toggleSubmitConultation = {this.toggleSubmitConultation}
               timeToString = {this.timeToString}
               slotClicked = {this.slotClicked}
               handleCloseDay = {this.handleCloseDay}

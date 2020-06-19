@@ -2,6 +2,7 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import Select from "../Select"
 import React, { useRef, useState, useEffect } from "react"
+import { is_positive_whole_number } from "../../utils/common_utilities"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -202,7 +203,11 @@ import React, { useRef, useState, useEffect } from "react"
          <div className="col-lg-4">
              <h2 className="fee_ru">
              &#x20B9;
-             {!!props.editConsultFlag?<input value={props.consultationFee} onChange={props.handleChange}
+             {!!props.editConsultFlag?<input value={props.consultationFee} onChange={(e)=>{
+               if(is_positive_whole_number(e.target.value)){
+                props.handleChange(e)
+               }
+             }}
              name="consultationFee"
              className="no_brdr_input consultaion_input"
              type="number"
