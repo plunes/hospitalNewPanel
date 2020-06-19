@@ -502,7 +502,7 @@ class ProfileContainer extends React.PureComponent {
             <Map
                google={this.props.google}
                center={{lat: 18.5204, lng: 73.8567}}
-               location = {this.state.prof_data.geoLocation}
+               location = {this.state.prof_data.location}
                height='300px'
                zoom={15}
                edit_location_loading = {this.props.edit_location_loading}

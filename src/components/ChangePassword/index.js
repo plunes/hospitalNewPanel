@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import DashboardHeader from '../DashboardComponent/DashboardHeader';
-import { getUserDetails , clearResetRet, submitResetDetails} from "../../actions/userActions"
+import React from 'react';
+import { getUserDetails , clearResetRet, submitResetDetails, logout}  from "../../actions/userActions"
 import { connect } from 'react-redux';
-import {notify} from "../../utils/notification"
 import ChangePassForm from "../functional/changePassForm"
-import redux from "redux"
+import NewNotif from "../functional/NewNotif";
 import './index.css'
 
 
@@ -28,15 +26,24 @@ class ChangePassword extends React.PureComponent {
     }
 
     componentWillReceiveProps(nextProps){
-        // if(!!this.state.initRen){
-        //     this.setState({
-        //         fullname:nextProps.user.name,
-        //         email:nextProps.user.email,
-        //         phone:nextProps.user.mobileNumber,
-        //         location:nextProps.user.address,
-        //         initRen:false
-        //     })
-        // }
+        if(nextProps.resetPassRet){
+             if(nextProps.resetPassRet.success){
+                 this.setState({
+                     ret:{
+                         message:nextProps.resetPassRet.message,
+                         success:true
+                     }
+                 },()=>nextProps.logout())
+             }else{
+                this.setState({
+                    ret:{
+                        message:nextProps.resetPassRet.message,
+                        success:false
+                    }
+                })
+             }
+             nextProps.clearResetRet()
+        }
     }
 
     clearNotif = () =>{
@@ -45,15 +52,6 @@ class ChangePassword extends React.PureComponent {
             successText:false
         })
     }
-
-    submitdetails = () => {
-        if(this.state.fullname === '' ||this.state.email==='' || this.state.phone==="" || this.state.location==="" ){
-            notify("Enter all the details",'success')
-        }else{
-            notify("All Details have been entered", 'success')
-        }
-    }
-
   
 
     render() {
@@ -67,6 +65,10 @@ class ChangePassword extends React.PureComponent {
                                <div className='settingtopic'>
                                     <p>Please enter your new password</p>
                                </div>
+                               <NewNotif 
+                                ret = {this.state.ret}
+                                retClr = {()=>this.setState({ret:false})}
+                                />
                                <ChangePassForm 
                                 handleChange = {this.handleChange}
                                 submitResetDetails = {this.props.submitResetDetails}
@@ -85,7 +87,7 @@ class ChangePassword extends React.PureComponent {
                     </div>
                     <div className="col-md-3"></div>
                     </React.Fragment>
-        );
+        )
     }
 }
 
@@ -94,17 +96,9 @@ const mapStateToProps = state => ({
      resetPassRet: state.user.resetPassRet
 })
 
-
-  export default connect(mapStateToProps, { 
+ export default connect(mapStateToProps, { 
     getUserDetails,
     clearResetRet,
-    submitResetDetails
+    submitResetDetails,
+    logout
 })(ChangePassword);
-
-
-// export default connect(mapStateToProps, {
-//      getUserDetails,
-//      submitProfileDetails,
-//      ...mapDispatchToProps()
-// })(EditProfileComponent);
-// Call userdetails from

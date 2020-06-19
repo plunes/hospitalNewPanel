@@ -522,7 +522,7 @@ export const submitOtp = (data) => async dispatch => {
         //dispatch(getSolutionInsights()
         if(!!res.data.success){
           dispatch({
-            type : GET_OTP_RET,
+            type : SUBMIT_OTP_RET,
             payload :{
               success:true,
               data:res.data,
@@ -531,7 +531,7 @@ export const submitOtp = (data) => async dispatch => {
           })
         }else{
           dispatch({
-            type : GET_OTP_RET,
+            type : SUBMIT_OTP_RET,
             payload :{
               success:false,
               data:[],
@@ -543,7 +543,7 @@ export const submitOtp = (data) => async dispatch => {
     }).catch(error => {
       console.log(error,"error in GET")
       dispatch({
-        type:GET_OTP_RET,
+        type:SUBMIT_OTP_RET,
          payload:{
           success:false,
           message:"Something went wrong. try agian later",

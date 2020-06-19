@@ -17,12 +17,12 @@ class Map extends Component{
 			area: '',
 			state: '',
 			mapPosition: {
-				lat: !!this.props.location?this.props.location.latitude:28.7041,
-				lng: !!this.props.location?this.props.location.longitude:77.2090
+				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:28.457523:28.457523,
+				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:77.026344:77.026344
 			},
 			markerPosition: {
-				lat: !!this.props.location?this.props.location.latitude:28.7041,
-				lng: !!this.props.location?this.props.location.longitude:77.2090
+				lat: !!this.props.location?this.props.location.coordinates[1]!==0?this.props.location.coordinates[1]:28.457523:28.457523,
+				lng: !!this.props.location?this.props.location.coordinates[0]!==0?this.props.location.coordinates[0]:77.026344:77.026344
 			}
 		}
 	}
@@ -61,16 +61,18 @@ class Map extends Component{
 	 */
 	shouldComponentUpdate( nextProps, nextState ){
 		if (
-			this.state.markerPosition.lat !== this.props.center.lat ||
+			// this.state.markerPosition.lat !== this.props.center.lat ||
 			this.state.address !== nextState.address ||
 			this.state.city !== nextState.city ||
 			this.state.area !== nextState.area ||
-			this.state.state !== nextState.state
+			this.state.state !== nextState.state ||
+			this.state.ret !== nextState.ret
 		) {
 			return true
 		} else if ( this.props.center.lat === nextProps.center.lat ){
 			return false
 		}
+		return false
 	}
 	/**
 	 * Get the city and set the city input value to the one selected
@@ -271,10 +273,13 @@ class Map extends Component{
 					</div> */}
 					<div className="text-center">
 					 <span onClick={()=>{
-						 this.props.edit_location({
-							 geoLocation:{
-								latitude:this.state.mapPosition.lat,
-								longitude:this.state.mapPosition.lng
+						this.props.edit_location({
+							location:{
+								type:'Point',
+								coordinates:[
+								   this.state.markerPosition.lng,
+								   this.state.markerPosition.lat
+								]
 							},
 							address:this.state.address
 						 })
