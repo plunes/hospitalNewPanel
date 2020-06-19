@@ -34,3 +34,10 @@
   .image_wrapper_add_doctor:hover  + .profile_camera_rish {
       display: inline;
   }
+  .link_text_rish_medium {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #01D35A;
+    font-size: 1.2rem;
+    font-family:  'Proxima' 'Nova';
+  }

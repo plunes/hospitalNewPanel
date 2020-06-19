@@ -23,9 +23,9 @@ const AddLocationTab  = (props) =>{
             <div className="margin-top-medium_ris">
                 <Link to="/dashboard/profile" type="button">
                 <div style={{width:'30rem'}}>
-                <button onClick={()=>props.set_open_map(true)} className="common_button_rish">
+                <text onClick={()=>props.set_open_map(true)} className="green_test_rish link_text_rish_medium">
                 Add Location
-                </button>
+                </text>
                 </div>
                 </Link>
             </div>

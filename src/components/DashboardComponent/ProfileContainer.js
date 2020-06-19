@@ -322,33 +322,26 @@ class ProfileContainer extends React.PureComponent {
     console.log(arr, arr.length,"pika nbiii")
     while(i <= (arr.length-1))
     { 
-      if(arr.length===1){
-        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+      if(arr.length === 1){
+        console.log("First condition true")
+        newarr.push( <div className={`carousel-item ${arr.length ===1?"active":''}`}>
         <div className="row">
            <div className="col-md-6">
              <div className="card mb-2">
                <img className="card-img-top card_im img-loading_rish"
                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
                <div className="card-body">
-                  <p className="card-text">{arr[i].title}</p>
+   <p className="card-text">{arr[i].title}</p>
                </div>
              </div>
-           </div>
-
-             <div className="col-md-6">
-              <div className="card mb-2">
-                <img className="card-img-top card_im img-loading_rish"
-                   src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
-                <div className="card-body">
-                  <p className="card-text">{arr[i].title}</p>
-                </div>
-              </div>
-            </div>     
+           </div>  
        </div>
          </div>)
-         i = i+1
+       
+         i = i+2
       }
     else if(i=== arr.length-1){
+      console.log("Second Conditon")
         console.log("Case 1")
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
@@ -461,10 +454,11 @@ class ProfileContainer extends React.PureComponent {
 
 
   render() {
-    console.log(this.props,"this.props in  ProfileContainer")
+    console.log(this.props.location_toggler,"this.props in  location_toggler")
     console.log(this.state,"this.state in ProfileContainer")
     let center_id = get_url_params('center')
     let achievementArray  = this.achievement_slider()
+    console.log(achievementArray,"achievementArray")
     const { open } = this.state;
     return (
       <React.Fragment>
@@ -681,7 +675,8 @@ const mapStateToProps = state => ({
   open_map:state.user.open_map,
   centers_list:state.user.data.centers_data.centers_list,
   center_data:state.user.data.centers_data.center_data,
-  get_center_profile_ret:state.user.get_center_profile_ret
+  get_center_profile_ret:state.user.get_center_profile_ret,
+  location_toggler:state.user.location_toggler
 })
 
 export default connect(mapStateToProps, { 

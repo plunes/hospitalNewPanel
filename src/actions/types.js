@@ -216,3 +216,5 @@ export const SET_CENTER_CRED = "App/Centers/SET_CENTER_CRED"
 
 export const GET_CENTER_CRED_RET  = 'App/Profile/GET_CENTER_CRED_RET'
 export const GET_CENTER_CRED_CLR  = 'App/Profile/GET_CENTER_CRED_CLR'
+
+export const SET_NOTIF_ID = 'App/Notifications/SET_NOTIF_ID'

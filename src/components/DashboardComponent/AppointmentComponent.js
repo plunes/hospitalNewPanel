@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { getBooking, getBookingClr, changeAppoint, changeAppointClr, getTimeslot, reschedule_appointment_clr, reschedule_appointment } from '../../actions/userActions'
+import { getBooking, getBookingClr, changeAppoint, changeAppointClr,
+     getTimeslot, reschedule_appointment_clr, reschedule_appointment,
+     set_notif_id } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import  "./AvailabilityComponent.css";
 import "./appointment.css"
@@ -13,6 +15,11 @@ import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/c
 
 import RescheduleComponent from '../RescheduleComponent';
 import NewNotif from '../functional/NewNotif';
+function MyError(message){
+    this.message = message;
+}
+
+MyError.prototype = new Error()
 let time_flag = false
 const getMonth = (item) =>{
         switch (item) {
@@ -114,6 +121,7 @@ class AppointmentComponent extends Component {
         this.closeModal =  this.closeModal.bind(this);
     }
      componentDidMount(){
+         console.log(this.props.notif_id,"this.props.notif_id in didMoint")
       this.setState({
         get_bookings_loading:true
       },()=>{
@@ -160,6 +168,20 @@ class AppointmentComponent extends Component {
     componentWillReceiveProps(nextProps){
         if(!!nextProps.getBookingRet){
             if(nextProps.getBookingRet.success){
+               if(!!nextProps.notif_id){
+                // try{
+                //     let appointments_arr = [...nextProps.getBookingRet.success]
+                //     for (var i = 0, len = appointments_arr.length; i < len; i++) {
+                //       if(appointments_arr[i]._id===nextProps.notif_id){
+                //           console.log("this happens")
+                //           throw new MyError(nextProps.notif_id)
+                //       }
+                //   }
+                //   }catch(e){
+                //       console.log(e.message,"this is our message in catch Block")
+                //       nextProps.set_notif_id(false)
+                //   }
+               }
                let confirmed_bookings = []
                let cancelled_bookings = []
                let upcoming_bookings = []
@@ -328,6 +350,7 @@ class AppointmentComponent extends Component {
 
 
     render() {
+        console.log(this.props,"props in AppointmentLoading")
         console.log(this.state,"state in AppointmentLoading")
         let time_now = ((new Date()).getTime())
         if(!!this.state.get_bookings_loading){
@@ -655,7 +678,8 @@ const mapStateToProps = state => ({
     getBookingRet:state.user.getBookingRet,
     changeAppointRet:state.user.changeAppointRet,
     timeSlot : state.user.timeSlot,
-    reschedule_appointment_ret:state.user.reschedule_appointment_ret
+    reschedule_appointment_ret:state.user.reschedule_appointment_ret,
+    notif_id:state.user.notif_id
 })
 
 export default connect(mapStateToProps, {
@@ -665,5 +689,6 @@ export default connect(mapStateToProps, {
     changeAppointClr,
     reschedule_appointment,
     reschedule_appointment_clr,
+    set_notif_id,
     getTimeslot })(AppointmentComponent);
 

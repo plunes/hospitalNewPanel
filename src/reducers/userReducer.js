@@ -154,7 +154,8 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   GET_CENTER_CRED_CLR,
   GET_CENTER_CRED_RET,
   SET_CENTER_CRED,
-  SET_CENTER_DATA
+  SET_CENTER_DATA,
+  SET_NOTIF_ID
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
 import { get_url_params } from "../utils/common_utilities"
@@ -234,6 +235,7 @@ const initialState = {
   add_specs_ret:false,
   get_center_profile_ret:false,
   get_center_cred_ret:false,
+  notif_id:false,
   mount:{
     dash_mount:false,
     prof_mount:false,
@@ -297,6 +299,13 @@ export default function (state = initialState, action) {
         get_center_cred_ret:action.payload.data
       };
  
+    case SET_NOTIF_ID:
+      return {
+        ...state,
+        notif_id:action.payload
+      };
+ 
+        
    case GET_CENTER_CRED_CLR:
     console.log(action.payload,"get_Center_Cred_clr")
       return {

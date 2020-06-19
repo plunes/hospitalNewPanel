@@ -45,6 +45,8 @@ import React from "react"
     className="form-control editbankdetailfield input-field-common"
     placeholder="phone Number" 
     name="phone" 
+    id="input_rish"
+    disabled = {true}
     onChange={props.handleChange} 
     value = {props.phone}/>  
     <input 
@@ -52,6 +54,8 @@ import React from "react"
     className="form-control editbankdetailfield input-field-common"
     placeholder="email ID*" 
     name="email" 
+    id="input_rish"
+    disabled={true}
     onChange={props.handleChange} 
     value = {props.email}/>  
     <input 
@@ -59,6 +63,8 @@ import React from "react"
     className="form-control editbankdetailfield input-field-common"
     placeholder="Location*" 
     name="location" 
+    id="input_rish"
+    disabled={true}
     onChange={props.handleChange} 
     value = {props.location}/>  
 

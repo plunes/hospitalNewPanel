@@ -181,7 +181,8 @@ class DashboardComponent extends React.PureComponent {
             if(!!!isEmpty(nextProps.prof_data)){
                 let coordinates = nextProps.prof_data.location.coordinates
                 if(!!coordinates){
-                    if(coordinates[0]===0){
+                    // console.log(!!!coordinates[0],"Cordinates[0] sdsd")
+                    if(!!!coordinates[0]){
                         this.setState({
                             initial_render:false
                         })
@@ -364,18 +365,18 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async componentDidMount() {
-         // to get the geo location tab
-         if(!!this.state.initial_render){
-            if(!!!isEmpty(this.props.prof_data)){
-                // console.log(this.props.prof_data,"prof_data")
-              if(!!!this.props.prof_data.geoLocation){
-                this.setState({
-                    initial_render:false
-                })
-                this.props.set_location_toggler(true)
-              }
-            }
-        }
+    //      // to get the geo location tab
+    //      if(!!this.state.initial_render){
+    //         if(!!!isEmpty(this.props.prof_data)){
+    //             // console.log(this.props.prof_data,"prof_data")
+    //           if(!!!this.props.prof_data.geoLocation){
+    //             this.setState({
+    //                 initial_render:false
+    //             })
+    //             this.props.set_location_toggler(true)
+    //           }
+    //         }
+    //     }
     
     
         if(!!!this.props.mount.dash_mount){
@@ -474,8 +475,9 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.props,"N")
-        console.log(!!this.props.business_data.businessGained,"!!this.props.business_data.businessGained")
+        // console.log(this.props,"N")
+        // console.log(this.props.location_toggler,"this.props.location_toggler")
+        // console.log(!!this.props.business_data.businessGained,"!!this.props.business_data.businessGained")
         let { percent } = this.state
         const options = {
             title: {
@@ -543,7 +545,7 @@ class DashboardComponent extends React.PureComponent {
                                         <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
                                     </div>
                         </div>
-                        {this.props.location_toggler  &&   <AddLocationTab
+                        {true  &&   <AddLocationTab
                             set_open_map = {this.props.set_open_map}
                         /> }
                             <div className='row'>

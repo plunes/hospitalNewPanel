@@ -684,5 +684,8 @@ outline: none;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   border: 1px solid #C7C7C7;
   border-radius: 20px;
+}
 
+#input_rish:disabled {
+  background-color: #FFFFFF;
 }

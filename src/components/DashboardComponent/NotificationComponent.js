@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getNotifications, set_notif_data } from "../../actions/userActions";
+import { getNotifications, set_notif_data, set_notif_id } from "../../actions/userActions";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 import "./AboutUs.css";
@@ -49,6 +49,11 @@ class NotificationComponent extends Component {
                         {
                             this.props.notifications ? this.props.notifications.slice(0, this.props.notifications.length).map((n, index) => (
                                 <Link
+                                    onClick={()=>{
+                                        if(n.notificationScreen==="booking"){
+                                            this.props.set_notif_id(n.notificationId)
+                                        }
+                                    }}
                                     to= {n.notificationScreen==="booking"?'/dashboard/appointments':n.notificationScreen==="insight"?'/dashboard':''}
                                     >
                                 <div className='row' key={index}>
@@ -79,6 +84,7 @@ class NotificationComponent extends Component {
 }
 const mapStateToProps = state => ({
     // notification: state.user.notificationData,
-    notif_data :state.user.data.notif_data
+    notif_data :state.user.data.notif_data,
+    notif_id:state.user.notif_id
 })
-export default connect(mapStateToProps, {  set_notif_data })(NotificationComponent)
+export default connect(mapStateToProps, {  set_notif_data, set_notif_id })(NotificationComponent)

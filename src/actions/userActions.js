@@ -180,7 +180,9 @@ import {
   GET_CENTER_CRED_RET,
   GET_CENTER_CRED_CLR,
 
-  SET_CENTER_CRED
+  SET_CENTER_CRED,
+
+  SET_NOTIF_ID
 
 
   } from './types';
@@ -228,6 +230,13 @@ export const Unauth_Logout = () =>{
   window.location.reload()
 }
 
+
+export const set_notif_id = (data) => dispatch =>{
+  return  dispatch({
+    type: SET_NOTIF_ID,
+    payload:data
+  })
+}
 
 export const set_catalogue_data = (data) => dispatch =>{
   return  dispatch({
