@@ -243,11 +243,12 @@ a:hover
       border-bottom-left-radius: 9px !important;}
 
 .container 
-      {margin-top: 20px;
-      top: 185px;
+      {
+      margin-top: 20px;
+      /* top: 185px; */
       left: 441px;
       width: 896px;
-      height: 408px;
+      /* height: 408px; */
       opacity: 1;}
 
 .imgPreview 

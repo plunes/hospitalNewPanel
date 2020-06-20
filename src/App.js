@@ -16,6 +16,7 @@ import { getSolutionInsights } from "../src/actions/userActions";
 import Development from './components/Development'
 import DashboardPage from './components/DashboardPage'
 import './common.css'
+import HomePage from './components/HomePage';
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -64,7 +65,7 @@ class App extends Component {
       <Router history={history}>
           <Switch>
           <div className="container-fluid">
-            <Route exact path='/' component={Development} />
+            <Route exact path='/' component={()=><HomePage />} />
             <Route exact path ="/signin" component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
             <Route exact path='/home' component={Development} />

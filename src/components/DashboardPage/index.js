@@ -481,12 +481,12 @@ export class DashboardPage extends React.PureComponent {
     });
     socket.on('realtimeInsight',(data)=>{
         console.log("RealTimeInsights event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        console.log(data)
+        console.log(data, "data in realTimeInsight Event")
         this.add_insight(data)
     })
     socket.on('notification',(data)=>{
         console.log("Notification event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        console.log(data)
+        console.log(data,"data in notification Event")
         this.prompt_success_notify(data)
         this.set_notif_count()
     })
