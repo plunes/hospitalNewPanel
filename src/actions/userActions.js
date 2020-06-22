@@ -1945,7 +1945,6 @@ export const addDoctor = (obj) => async dispatch => {
   return await axios.patch(base_url_without_v5 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in addDoctor")
-      
       if (res.status === 200) {
         dispatch({
           type:ADD_DOCTOR_RET,

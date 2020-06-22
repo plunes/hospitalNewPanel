@@ -24,7 +24,7 @@ class Centers extends React.PureComponent{
                     this.setState({
                         ret:{
                             success:true,
-                            message:'Center succcessfully added.'
+                            message:'Center successfully added.'
                         }
                     })
                     nextProps.history.replace({

@@ -13,13 +13,13 @@ import DoctorComponent from "../functional/DoctorComponent"
 import EditBio from '../functional/EditBio';
 import ModalComponent from "../ModalComponent"
 import AddAchievement from '../functional/AddAchievement';
-import { Redirect } from 'react-router-dom';
-import { Link } from "react-router-dom"
+import { Redirect, withRouter, Link } from 'react-router-dom';
 import locationImage from "../../images/Location.jpg"
 import Notify from '../functional/Notify';
 import Map from "../MapComponent/index.js"
 import { isEmpty , get_url_params} from "../../utils/common_utilities"
 import ScrollTo from "../functional/ScrollTo"
+import { compose } from 'redux';
 const options = {
   items: 2,
   margin: 0,
@@ -73,6 +73,21 @@ class ProfileContainer extends React.PureComponent {
 
 
   componentWillReceiveProps(nextProps){
+
+    if(!!nextProps.location.state){
+      if(!!nextProps.location.state.add_center_success){
+          this.setState({
+              ret:{
+                  success:true,
+                  message:'Doctor successfully added.'
+              }
+          })
+          nextProps.history.replace({
+              pathname: this.props.location.pathname,
+              state: {}
+          });
+      }
+  }
 
     if(nextProps.get_center_profile_ret){
       if(nextProps.get_center_profile_ret.success){
@@ -679,27 +694,30 @@ const mapStateToProps = state => ({
   location_toggler:state.user.location_toggler
 })
 
-export default connect(mapStateToProps, { 
-  expertDetails, 
-  upload, 
-  uploadRetClr, 
-  updateImage, 
-  updateImageClr, 
-  getProfileDetails,
-  updateBannerClr,
-  updateBanner,
-  updateAchievement, 
-  updateAchievementClr,
-  editBioClr, 
-  editBio, 
-  getUserDetails,
-  edit_location,
-  edit_location_clr,
-  get_user_info,
-  set_user_info,
-  set_open_map,
-  set_center_data,
-  get_center_profile,
-  get_center_profile_clr,
-  set_location_toggler
- })(ProfileContainer);
+ export default compose(
+  withRouter,
+  connect(mapStateToProps, { 
+    expertDetails, 
+    upload, 
+    uploadRetClr, 
+    updateImage, 
+    updateImageClr, 
+    getProfileDetails,
+    updateBannerClr,
+    updateBanner,
+    updateAchievement, 
+    updateAchievementClr,
+    editBioClr, 
+    editBio, 
+    getUserDetails,
+    edit_location,
+    edit_location_clr,
+    get_user_info,
+    set_user_info,
+    set_open_map,
+    set_center_data,
+    get_center_profile,
+    get_center_profile_clr,
+    set_location_toggler
+   })
+)(ProfileContainer)

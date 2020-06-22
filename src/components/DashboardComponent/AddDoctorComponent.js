@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
-    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails } from "../../actions/userActions";
+    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails, set_user_info } from "../../actions/userActions";
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
 import ModalComponent from "../ModalComponent"
 import NewNotif from '../functional/NewNotif';
+import { get_url_params } from '../../utils/common_utilities';
+import { Redirect } from "react-router-dom"
+
+function MyError(message){
+  this.message = message;
+}
+
+MyError.prototype = new Error()
 
 const slots = [
   {
@@ -353,8 +361,21 @@ let obj =   {
                 experience:data.experience,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
-                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityName:'',
+                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
                 slots:arr
+              },()=>{
+                if(data.specialities.length!==0){
+                  try{
+                    this.setState({
+                      services_chosen:[]
+                    })
+                    this.props.getServ({
+                      name:data.specialities[0].specialityName
+                    })
+                  }catch(e) {
+                    console.log(e,"e in catch block")
+                  }
+                }
               })
         }else{
 
@@ -414,19 +435,41 @@ let obj =   {
     }
 
     handleSelectChange = (e) =>{
-    console.log(e,"e in handleSelectChange")
-
       this.setState({
         [e.target.name]:e.target.value
       },()=>{
         if(e.target.name==="specialitie_chosen"){
-          this.setState({
-            services_chosen:[]
-          })
-          this.props.getServ({
-            name:this.state.specialitie_chosen
-          })
+          try{
+            let arr = [...this.state.specialities]
+            arr.forEach((item)=>{
+              console.log(item,"item in loop")
+              if(item.value === e.target.value){
+                throw new MyError(item.name)
+              }
+            })
+          }catch(e){
+              console.log(e.message,"e.message in handelSelectChange")
+              this.setState({
+                services_chosen:[]
+              })
+              this.props.getServ({
+                name:e.message
+              })
+          }
         }
+      })
+    }
+
+    clear_data = () => {
+      this.setState({
+        name:'',
+        education:'',
+        designation:'',
+        experience:'',
+        doctorProfileImage:'',
+        doctorImageName:'',
+        specialitie_chosen:'',
+        add_success:true
       })
     }
 
@@ -499,6 +542,13 @@ let obj =   {
 
     render() {
       console.log(this.state,"this.state in AddComponent")
+      let center_id = get_url_params('center')
+      if(this.state.add_success){
+        return <Redirect to= {{
+         pathname: "/dashboard/profile"+`${!!center_id?'?center='+center_id:''}`,
+         state: { add_success: true }
+     }}  />
+     }
       
         return (
            <React.Fragment>
@@ -615,6 +665,9 @@ let obj =   {
            */}
             <AddDoctorForm   
               upload = {this.upload}
+              set_user_info = {this.props.set_user_info}
+              prof_data = {this.props.prof_data}
+              clear_data = {this.clear_data}
               uploadRet = {this.props.uploadRet}
               uploadRetClr = {this.props.uploadRetClr}
               specialities = {this.state.specialities}
@@ -668,7 +721,8 @@ const mapStateToProps = state => ({
     getSpecsRet:state.user.getSpecsRet,
     uploadRet:state.user.uploadRet,
     addDoctorRet:state.user.addDoctorRet,
-    getEntityRet:state.user.getEntityRet
+    getEntityRet:state.user.getEntityRet,
+    prof_data:state.user.data.prof_data
   })
   export default connect(mapStateToProps, {bankDetails,
   submitBankDetailsClr,
@@ -682,6 +736,7 @@ const mapStateToProps = state => ({
   addDoctorClr,
   getEntityClr,
   getEntity,
-  getUserDetails
+  getUserDetails,
+  set_user_info
   })(AddDoctorComponent)
 

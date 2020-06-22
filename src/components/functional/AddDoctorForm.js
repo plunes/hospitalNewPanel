@@ -35,6 +35,12 @@ import { is_positive_whole_number } from "../../utils/common_utilities"
   if(!!props.addDoctorRet){
     if(!!props.addDoctorRet.success){
        addToast(props.addDoctorRet.message, {appearance: 'success', autoDismiss:true}) 
+       console.log(props.addDoctorRet,"props.addDoctorRet")
+      //  props.set_user_info({
+      //   ...props.prof_data,
+      //   doctors:[...props.addDoctorRet.data, ...props.prof_data.doctors]
+      //  })
+       props.clear_data()
     }else{
       addToast(props.addDoctorRet.message, {appearance: 'error', autoDismiss:true})
     }

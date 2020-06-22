@@ -170,18 +170,20 @@ class AppointmentComponent extends Component {
             if(nextProps.getBookingRet.success){
                if(!!nextProps.notif_id){
                    console.log(nextProps.notif_id,"nextProps.notif_id")
-                // try{
-                //     let appointments_arr = [...nextProps.getBookingRet.success]
-                //     for (var i = 0, len = appointments_arr.length; i < len; i++) {
-                //       if(appointments_arr[i]._id===nextProps.notif_id){
-                //           console.log("this happens")
-                //           throw new MyError(nextProps.notif_id)
-                //       }
-                //   }
-                //   }catch(e){
-                //       console.log(e.message,"this is our message in catch Block")
-                //       nextProps.set_notif_id(false)
-                //   }
+                try{
+                    console.log(nextProps.getBookingRet,"nextProps.getBookingRet.")
+                    let appointments_arr = [...nextProps.getBookingRet.success]
+                    for (var i = 0, len = appointments_arr.length ; i < len; i++) {
+                        console.log(appointments_arr[i]._id,"all ids")
+                      if(appointments_arr[i]._id === nextProps.notif_id){
+                          console.log("this happens")
+                          throw new MyError(nextProps.notif_id)
+                      }
+                  }
+                  }catch(e){
+                      console.log(e.message,"this is our message in catch Block")
+                      nextProps.set_notif_id(false)
+                  }
                }
                let confirmed_bookings = []
                let cancelled_bookings = []
