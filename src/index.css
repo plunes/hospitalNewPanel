@@ -689,3 +689,63 @@ outline: none;
 #input_rish:disabled {
   background-color: #FFFFFF;
 }
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  } 
+}
+
+
+html {
+  font-size: 63.5%;
+}
+/* phone */
+  @media screen and (max-width: 460px) {
+    html {
+      font-size: 42% !important;
+     }
+}
+
+/* tab-port */
+@media (min-width: 460px) and ( max-width: 1100px) {
+  html {
+    font-size: 50% !important;
+   }
+}
+
+/* tab-land */
+  @media ( min-width: 1100px) and (max-width: 1900px) {
+    html {
+      font-size: 90% !important;
+     }
+}
+
+/* big-desktop */
+@media (min-width: 1900px)  and (max-width: 4000px) {
+  html {
+    font-size: 100% !important;
+   }
+}
+
+@media screen and (max-width: 112.5em) {
+  .container-fluid {
+    margin-left: 20%;
+    margin-right: 20%;
+   }
+}
+
+@media screen and (min-width: 112.5em) {
+  .main-body-wrapper{
+    margin-left: 35rem !important;
+    margin-right: 35rem !important;
+    margin-top: 2rem;
+  }
+  .sidenav{
+    width: 100% !important;
+  }
+}
+

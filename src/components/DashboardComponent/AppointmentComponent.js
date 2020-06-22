@@ -169,6 +169,7 @@ class AppointmentComponent extends Component {
         if(!!nextProps.getBookingRet){
             if(nextProps.getBookingRet.success){
                if(!!nextProps.notif_id){
+                   console.log(nextProps.notif_id,"nextProps.notif_id")
                 // try{
                 //     let appointments_arr = [...nextProps.getBookingRet.success]
                 //     for (var i = 0, len = appointments_arr.length; i < len; i++) {

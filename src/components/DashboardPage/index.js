@@ -129,9 +129,9 @@ export class DashboardPage extends React.PureComponent {
           this.setState({
               notificationsData:{
                 ...this.state.notificationsData,  ...nextProps.notificationData,
-                notifications:[this.state.notificationsData.notifications,...nextProps.notificationData.notifications ]
+                notifications:[...nextProps.notificationData.notifications ]
               },
-              notifications:[...this.state.notifications,...nextProps.notificationData.notifications],
+              notifications:[...nextProps.notificationData.notifications],
               get_notifs_loading:false
           },()=>{
               nextProps.set_notif_data({...nextProps.notif_data, ...this.state.notificationsData})
@@ -516,6 +516,7 @@ prompt_success_notify =(data) =>{
             }
         }
     },()=>this.props.getNotifications({page:1}))
+    
 }
 
 set_notif_count = () =>{

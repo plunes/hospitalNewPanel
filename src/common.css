@@ -96,9 +96,9 @@ display: flex;
 }
 @media screen and (min-width:2200px) {
     .oversize_wrap_rish {
-       margin-left: 30rem;
-       margin-right: 30rem;
-       display: block;
+        margin-left: 30rem;
+        margin-right: 30rem;
+        display: block;
     }
 }
 
@@ -169,7 +169,7 @@ display: flex;
     letter-spacing: 0px;
     color: #9E9E9E;
     opacity: 1;
-    font-size: 1.6rem;
+    font-size: 1rem;
     margin-bottom: .8rem;
     line-height: 1.6rem;
  }
@@ -194,7 +194,7 @@ display: flex;
     border: none;
     font-weight:normal;
     font-family:  'Proxima' 'Nova';
-    font-size: .9rem;
+    font-size: 1.2rem;
 }
 .button_rish:focus{
  outline: none; 
