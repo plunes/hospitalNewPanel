@@ -679,7 +679,7 @@ class DashboardComponent extends React.PureComponent {
                                                     <Link to={`/dashboard/profile?center=${item._id}`} >
                                                         <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
                                                         <div className="text-center">
-                                                        <span className="sub_heading_rish">{item.name} <br></br>{item.centerLocation}</span>
+                                                        <span style={{fontSize:'1rem'}} className="sub_heading_rish">{item.name} <br></br>{item.centerLocation}</span>
                                                         </div>
                                                     </Link>
                                                 </div>
