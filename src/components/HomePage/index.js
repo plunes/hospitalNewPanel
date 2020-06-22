@@ -81,12 +81,11 @@ class HomePage extends Component {
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div   className="flex_child_five_rish vertical_align_flex_rish">
                                   <div id="how_it_works_div" className="home_page_how_works_div">
-                                     <div>
+                                     <div className="iframe_wrapper_home">
                                         <iframe 
-                                           
+
                                             src="https://www.youtube.com/embed/eEQGGzplZ7w" 
-                                            className="vertical_align_rish_new"
-                                            height="315" 
+                                            className="vertical_align_rish_new home_page_iframe"
                                             frameBorder="0"
                                             alt = "Check how it work" 
                                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 

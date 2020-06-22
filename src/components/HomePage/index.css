@@ -167,3 +167,12 @@
     padding-left: 0rem;
 }
 
+.iframe_wrapper_home {
+    height: 90%;
+    width: 90%;
+    padding: 1;
+}
+.home_page_iframe {
+    height: 70%;
+    width: 100%;
+}
