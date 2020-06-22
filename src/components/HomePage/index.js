@@ -109,7 +109,7 @@ class HomePage extends Component {
                        <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish">
-                                            <h2 className="secondary-heading_rish bold_text_rish home_page_section3_secondary ">Manage Centers</h2>
+                                            <h2 className="secondary-heading_rish bold_text_rish home_page_section3_secondary ">Manage Centres</h2>
                                             <h3 className="sub_heading_rish  home_page_section3_secondary">Real Time Reports</h3>
                                             <ul className="home_page_ul_rish">
                                                 <li className="home_page_li_rish margin_top_small_rish"><h3 className="sub_heading_rish display_inline_rish">Manage all of your branches and centre with one app</h3> </li>

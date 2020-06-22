@@ -1951,6 +1951,7 @@ export const addDoctor = (obj) => async dispatch => {
            payload:{
             success:true,
             message:'Doctor successfully added',
+            data:res.data
            }
         })
       }else{

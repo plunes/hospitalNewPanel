@@ -172,11 +172,15 @@ class AppointmentComponent extends Component {
                    console.log(nextProps.notif_id,"nextProps.notif_id")
                 try{
                     console.log(nextProps.getBookingRet,"nextProps.getBookingRet.")
-                    let appointments_arr = [...nextProps.getBookingRet.success]
+                    let appointments_arr = [...nextProps.getBookingRet.data]
+                    console.log(appointments_arr.length,"pika booS")
                     for (var i = 0, len = appointments_arr.length ; i < len; i++) {
                         console.log(appointments_arr[i]._id,"all ids")
                       if(appointments_arr[i]._id === nextProps.notif_id){
                           console.log("this happens")
+                          this.setState({
+                              redirect_to:appointments_arr[i]
+                          })
                           throw new MyError(nextProps.notif_id)
                       }
                   }
@@ -386,7 +390,7 @@ class AppointmentComponent extends Component {
                                 <TabList>
                                 <div className="row upcmg_fnt">
                                 <Tab className="col-lg-4"><a href="#">Upcoming</a></Tab>
-                                <Tab className="col-lg-4"><a href="#">Confirmed</a></Tab>
+                                <Tab defaultFocus className="col-lg-4"><a href="#">Confirmed</a></Tab>
                                 <Tab className="col-lg-4"><a href="#">Cancelled</a></Tab>
                                 </div>
                                

@@ -39,7 +39,7 @@
     font-weight: bold;
     color: #01D35A;
     font-size: 1.2rem;
-    font-family:  'Proxima' 'Nova';
+    font-family:  "Proxima Nova";
   }
 
 .page_min_height_rish {
@@ -146,7 +146,7 @@ display: flex;
 }
 .primary_heading_rish {
     font-weight:normal;
-    font-family:  'Proxima' 'Nova';
+    font-family:  "ProximaNova";
     letter-spacing: 0px;
     color: #1E1E1E;
     opacity: 1;
@@ -155,7 +155,7 @@ display: flex;
 }
 .secondary-heading_rish {
    font-weight:normal;
-   font-family:  'Proxima' 'Nova';
+   font-family:  "ProximaNova";
    letter-spacing: 0px;
    color: #1E1E1E;
    opacity: 1;
@@ -165,7 +165,7 @@ display: flex;
 .sub_heading_rish {
     /* font-weight:bold; */
     font-weight:normal;
-   font-family:  'Proxima' 'Nova';
+   font-family:  "ProximaNova";
     letter-spacing: 0px;
     color: #9E9E9E;
     opacity: 1;
@@ -183,7 +183,7 @@ display: flex;
     padding-top: inherit;
     margin-top: .6rem;
     margin-bottom: .6rem;
-    font-family: 'Proxima', 'Nova';
+    font-family: 'ProximaNova';
 }
 .button_rish {
     background: #01D35A 0% 0% no-repeat padding-box;
@@ -193,7 +193,7 @@ display: flex;
     padding: .8rem 2rem;
     border: none;
     font-weight:normal;
-    font-family:  'Proxima' 'Nova';
+    font-family:  "ProximaNova";
     font-size: 1.2rem;
 }
 .button_rish:focus{
@@ -224,7 +224,7 @@ display: flex;
     margin-right: 2rem;
 }
 .info_text_rish {
-  font-family: 'Proxima', 'Nova';
+  font-family: 'ProximaNova';
   color: #4E4E4E;
 }
 
@@ -247,7 +247,7 @@ display: flex;
 .heading_footer_rish {
 text-align: left;
 font-weight:normal;
-font-family:  'Proxima' 'Nova';
+font-family:  "ProximaNova";
 font-size: 1rem;
 letter-spacing: 0px;
 color: #FFFFFF;
@@ -257,7 +257,7 @@ text-transform: uppercase;
 
 .sub_heading_footer_rish {
 font-weight:normal;
-font-family:  'Proxima' 'Nova';
+font-family:  "ProximaNova";
 font-size: .8rem;
 letter-spacing: 0.5px;
 color: #FFFFFF;
