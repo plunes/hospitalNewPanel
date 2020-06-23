@@ -49,7 +49,7 @@ class DashboardHeader extends Component {
               </button>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto">
-                 {this.props.prof_data.isAdmin &&  <li className="nav2 nav-item">
+                  <li className="nav2 nav-item">
                   <div className="nav-link HeaderLink" >
                   <Link to= "/dashboard/payments"
                     
@@ -58,7 +58,7 @@ class DashboardHeader extends Component {
                       <img className="sol-img" src="/payment.svg" alt='Not available'></img><span className="top-img">Payment</span> 
                    </Link>
                   </div>
-                  </li>}
+                  </li>
                   <li className="nav2 nav-item">
                     <div>
                       <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>

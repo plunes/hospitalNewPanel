@@ -85,7 +85,7 @@ import Select from "../Select"
           className="form-control customborder"
           name="email"
           // placeholder={`Enter ${props.type==="admin"?'Phonenumber':'Id'} `}
-          placeholder = "Enter Phonenumber or center Id"
+          placeholder = "Enter Phonenumber or center ID"
           // onChange={props.type==="admin"?props.handle_phone_change:props.handleChange}
           onChange={props.handleChange}
           required
