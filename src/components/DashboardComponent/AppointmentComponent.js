@@ -115,7 +115,8 @@ class AppointmentComponent extends Component {
             confirmed_bookings:[],
             get_bookings_loading:false,
             firstRender:true,
-            defaultDate:new Date
+            defaultDate:new Date,
+            tabIndex:0
         };
         this.openModal = this.openModal.bind(this);
         this.closeModal =  this.closeModal.bind(this);
@@ -168,18 +169,22 @@ class AppointmentComponent extends Component {
     componentWillReceiveProps(nextProps){
         if(!!nextProps.getBookingRet){
             if(nextProps.getBookingRet.success){
+                let appointments_arr = []
+                let redirect_index =false
+                let redirect_type =''
                if(!!nextProps.notif_id){
                    console.log(nextProps.notif_id,"nextProps.notif_id")
                 try{
                     console.log(nextProps.getBookingRet,"nextProps.getBookingRet.")
-                    let appointments_arr = [...nextProps.getBookingRet.data]
+                     appointments_arr = [...nextProps.getBookingRet.data]
                     console.log(appointments_arr.length,"pika booS")
                     for (var i = 0, len = appointments_arr.length ; i < len; i++) {
                         console.log(appointments_arr[i]._id,"all ids")
                       if(appointments_arr[i]._id === nextProps.notif_id){
-                          console.log("this happens")
+                          redirect_index = i
+                          redirect_type = ((appointments_arr[i].bookingStatus=== "Confirmed") &&  (appointments_arr[i].doctorConfirmation===true) )?'confirmed_bookings':(appointments_arr[i].bookingStatus=== "Cancelled")?'cancelled_bookings':'upcoming_bookings'
                           this.setState({
-                              redirect_to:appointments_arr[i]
+                            tabIndex:((appointments_arr[i].bookingStatus=== "Confirmed") &&  (appointments_arr[i].doctorConfirmation===true) )?1:(appointments_arr[i].bookingStatus=== "Cancelled")?2:0
                           })
                           throw new MyError(nextProps.notif_id)
                       }
@@ -192,20 +197,54 @@ class AppointmentComponent extends Component {
                let confirmed_bookings = []
                let cancelled_bookings = []
                let upcoming_bookings = []
+               console.log(this.state,"this.state before sorting")
                nextProps.getBookingRet.data.forEach(data =>{
+                   console.log(redirect_index,redirect_type,"redirect_index and redirect type")
                    if((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true) ){
-                       confirmed_bookings.push(data)
+                       if(!!redirect_index){
+                         if(appointments_arr[redirect_index]._id !== data._id){
+                            confirmed_bookings.push(data)
+                         }
+                       }else{
+                        confirmed_bookings.push(data)
+                       }
+                      
                    }else if(data.bookingStatus==="Cancelled"){
-                       cancelled_bookings.push(data)
+                    if(!!redirect_index){
+                        if(appointments_arr[redirect_index]._id !== data._id){
+                            console.log("cancelled_bookings")
+                            cancelled_bookings.push(data)
+                        }
+                      }else{
+                        cancelled_bookings.push(data)
+                      }
+
                    }else{
-                       upcoming_bookings.push(data)
+                    if(!!redirect_index){
+                        if(appointments_arr[redirect_index]._id !== data._id){
+                            upcoming_bookings.push(data)
+                        }
+                      }else{
+                        upcoming_bookings.push(data)
+                      }
                    }
                })
+
+               if(!!redirect_index){
+                   if(redirect_type==="confirmed_bookings"){
+                    confirmed_bookings.unshift(appointments_arr[redirect_index])
+                   }else if(redirect_type==="cancelled_bookings"){
+                    cancelled_bookings.unshift(appointments_arr[redirect_index])
+                   }else {
+                    upcoming_bookings.unshift(appointments_arr[redirect_index])
+                   }          
+               }
                this.setState({
                 confirmed_bookings:confirmed_bookings,
                 cancelled_bookings:cancelled_bookings,
                 upcoming_bookings:upcoming_bookings,
-                get_bookings_loading:false
+                get_bookings_loading:false,
+               
                },()=>{
                    time_flag=false
                })
@@ -263,21 +302,40 @@ class AppointmentComponent extends Component {
     }
 
     confirmBooking = (item,type) =>{
-        this.setState({
-            selected_booking:item,
-            confirm_modal_flag:true,
-            selected_type:type,
-            toType:'confirmed_bookings'
-        })
+        if(item.bookingStatus==="Request Cancellation"){
+            this.setState({
+                ret:{
+                    success:false,
+                    message:"User has requested cancellation on this appointment"
+                }
+            })
+        }else{
+            this.setState({
+                selected_booking:item,
+                confirm_modal_flag:true,
+                selected_type:type,
+                toType:'confirmed_bookings'
+            })
+        }
+       
     }
 
     cancelBooking = (item,type) =>{
+        if(item.bookingStatus==="Request Cancellation"){
+            this.setState({
+                ret:{
+                    success:false,
+                    message:"User has requested cancellation on this appointment"
+                }
+            })
+        }else{
         this.setState({
             selected_booking:item,
             cancel_modal_flag:true,
             selected_type:type,
             toType:'cancelled_bookings'
         })
+    }
     }
 
     closeConfirmModal = () =>{
@@ -382,11 +440,17 @@ class AppointmentComponent extends Component {
                     ret = {this.props.reschedule_appointment_ret}
                     retClr = {this.props.reschedule_appointment_clr}
                 />
+                 <NewNotif
+                    ret = {this.state.ret}
+                    retClr = {()=>this.setState({ret:false})}
+                />
                 <div className='col-md-8 col-xl-9'>
                     <div className="Appoint AllComponents">
                         <div className="AppointBodyrow1">Appointments</div>
                         
-                            <Tabs className="tab_pd">
+                            <Tabs 
+                            selectedIndex={this.state.tabIndex} 
+                            onSelect={tabIndex => this.setState({ tabIndex })} className="tab_pd">
                                 <TabList>
                                 <div className="row upcmg_fnt">
                                 <Tab className="col-lg-4"><a href="#">Upcoming</a></Tab>
@@ -411,7 +475,7 @@ class AppointmentComponent extends Component {
                                                   <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                    <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{`(${item.centerLocation})`}</text>:''}</h4>
+                                                    <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
                                                   <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
@@ -478,7 +542,7 @@ class AppointmentComponent extends Component {
                                                   <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
                                                   </div>
                                                   <div className="col-lg-4 nov_2">
-                                                  <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{`(${item.centerLocation})`}</text>:''}</h4>
+                                                  <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
                                                   <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                                   <p>{item.professionalAddress}</p>
                                                 </div> 
@@ -544,7 +608,7 @@ class AppointmentComponent extends Component {
                                             <img  src={item.professionalImageUrl} className="frame_de" />
                                             </div>
                                             <div className="col-lg-4 nov_2">
-                                            <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{`(${item.centerLocation})`}</text>:''}</h4>
+                                            <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
                                             <p>{`Phone no: ${item.userMobileNumber}`}</p>
                                             <p>{item.professionalAddress}</p>
                                           </div> 

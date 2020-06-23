@@ -3233,13 +3233,24 @@ export const createLogin = loginData => async dispatch => {
     .then(res => {
       console.log(res , 'res in create Login')
       if (res.data.success === true) {
-        dispatch({
-          type: NEW_USER,
-          payload: res.data.user
-        })
-        localStorage.setItem('token', res.data.token)
-        localStorage.setItem('userId', res.data.user._id)
-        history.push('/dashboard');
+         if(res.data.user.userType==="User"){
+          dispatch({
+            type : NEW_USER_RET,
+            payload :{
+              success:false,
+              data:[],
+              message:"Invalid Credentials"
+            }
+          })
+         }else{
+          dispatch({
+            type: NEW_USER,
+            payload: res.data.user
+          })
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem('userId', res.data.user._id)
+          history.push('/dashboard');
+         }
       }else{
         dispatch({
           type : NEW_USER_RET,
