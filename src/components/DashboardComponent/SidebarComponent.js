@@ -81,7 +81,7 @@ class SidebarComponent extends Component {
               <span>
                 <img className="sidebaricon" src="/a2.jpg" alt=""></img>
               </span>
-              Centers
+              Centres
               <img className="arrowdesign" src="arrow.svg" alt=""></img>
            </Link><hr></hr> </React.Fragment>}
            
