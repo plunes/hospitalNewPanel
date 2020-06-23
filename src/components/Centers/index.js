@@ -55,7 +55,7 @@ class Centers extends React.PureComponent{
                     retClr = {()=>this.setState({ret:false})}
                     />
                     <div className="text-center">
-                <h1 className="margin-top-medium_ris center_align_rish " >Centers List</h1>
+                <h1 className="margin-top-medium_ris center_align_rish " >Centres List</h1>
                 </div>
                 <div className="margin-top-medium_ris centers-list-wrapper">
                     {

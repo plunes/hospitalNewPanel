@@ -144,7 +144,7 @@ class SidebarComponent extends Component {
             </Link> <hr></hr>
             <div 
               className="list-group log"
-              onClick={this.handlelogoutClick}
+              onClick={()=>this.props.prompt_success_notify("My Dummy message")}
             >
               <span>
                 <img className="sidebaricon" src="/Logout.jpg" alt=""></img>

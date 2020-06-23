@@ -38,7 +38,7 @@ class InsightComponent extends React.PureComponent {
                 {this.props.s.userName}
             </div>
             <div>
-      <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?` ( ${this.props.s.centerLocation} )`:''}</p>
+      <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
             </div>
             {
               seconds_diff>0?

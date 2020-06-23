@@ -9,20 +9,23 @@ class LandinHeader extends Component {
           <React.Fragment>
           <nav className="navbar custom_ha navbar-expand-md custom-navbar landing_hedr">
         <div className="container">
-            <a className="navbar-brand logo_size col-lg-3 col-md-3 col-6" href="#">
-                <img src="/logo.jpg" className="lgo_sigun" />
+            <a  style={{position:'relative'}} className="col-lg-3 col-md-3 col-6" href="#">
+                <img src="/logo.jpg" className="vertical_align_rish_new logo_rish" />
             </a>
            <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <i className="fa fa-bars" aria-hidden="true"></i>
            </button>
              <div className="collapse navbar-collapse col-lg-9 col-12 col-md-9 back_color_mo" id="collapsibleNavbar">
                  <ul className="navbar-nav ml-auto Three_butn dr_lis_mobile">
-                   <li className="nav-item">
+                 <li className="nav-item header_li_rish">
+                    <Link to="/signin"
+                    > <text className="header_link_text">Login</text></Link>
+                  </li> 
+                   <li className="nav-item header_li_rish">
                     <div className="dropdown drp_part">
-                <button type="button" className="btn dropdown-toggle cus_bu" data-toggle="dropdown" >
-                  Download the App
-                    </button>
-                   
+                <text type="button"  className="header_link_text"  data-toggle="dropdown" >
+                  Download the App <img src="/Small-Arrow-Down.svg" style={{marginLeft:'.8rem', height:'0.6rem', width:'auto'}}  />
+                    </text>
                   <ul className="dropdown-menu" role="tree" aria-expanded="true" aria-hidden="false">
                   <li className="icons_pdi"><a href="https://apps.apple.com/us/app/plunes/id1463747553/" title="app store">
                     <img className="OIS" src="/OIS.jpg" alt=".." />
@@ -37,11 +40,7 @@ class LandinHeader extends Component {
                 </ul>
               </div>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/signin"
-                    className="nav-link sig_lgn"
-                    > Sign In</Link>
-                  </li> 
+                 
                  </ul>
              </div>  
         </div>

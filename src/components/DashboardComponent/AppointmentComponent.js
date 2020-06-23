@@ -302,7 +302,7 @@ class AppointmentComponent extends Component {
     }
 
     confirmBooking = (item,type) =>{
-        if(item.bookingStatus==="Request Cancellation"){
+        if(item.bookingStatus==="Cancellation Requested"){
             this.setState({
                 ret:{
                     success:false,
@@ -321,7 +321,7 @@ class AppointmentComponent extends Component {
     }
 
     cancelBooking = (item,type) =>{
-        if(item.bookingStatus==="Request Cancellation"){
+        if(item.bookingStatus==="Cancellation Requested"){
             this.setState({
                 ret:{
                     success:false,

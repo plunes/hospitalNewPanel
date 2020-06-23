@@ -49,7 +49,8 @@ const initialState = {
   addDoc: '',
   dev: '',
   changePass:'',
-  centers:''
+  centers:'',
+  notif_socket_triggered:false
 }
 export class DashboardPage extends React.PureComponent {
   constructor() {
@@ -126,13 +127,15 @@ export class DashboardPage extends React.PureComponent {
       }
         
         if(!!nextProps.notificationData){
+          // let data = !!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:{...nextProps.notif_data, ...this.state.notificationsData}
           this.setState({
               notificationsData:{
                 ...this.state.notificationsData,  ...nextProps.notificationData,
-                notifications:[...nextProps.notificationData.notifications ]
+                notifications:!!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:[...this.state.notificationsData.notifications,...nextProps.notificationData.notifications],
               },
-              notifications:[...nextProps.notificationData.notifications],
-              get_notifs_loading:false
+              notifications:!!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:[...this.state.notifications,...nextProps.notificationData.notifications],
+              get_notifs_loading:false,
+              notif_socket_triggered:!this.state.notif_socket_triggered
           },()=>{
               nextProps.set_notif_data({...nextProps.notif_data, ...this.state.notificationsData})
               nextProps.clr_get_notif()
@@ -509,6 +512,7 @@ add_insight = (data) =>{
 
 prompt_success_notify =(data) =>{
     this.setState({
+       notif_socket_triggered:true,
         Notify:{
             ...this.state.Notify,
             success:{
@@ -516,7 +520,6 @@ prompt_success_notify =(data) =>{
             }
         }
     },()=>this.props.getNotifications({page:1}))
-    
 }
 
 set_notif_count = () =>{
@@ -538,11 +541,7 @@ authObject =()=> {
 }
 
   render() {
-    console.log(this.authObject(),"this.authObject in DashboardPage")
-    
-    // console.log(this.props,"this.props.baseUrl")
-    // console.log(this.state,"this.state in Dashboard page")
-    // console.log(this.props,"this.props in Dashboard page")
+  console.log(this.state,"state in state")
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
@@ -579,6 +578,7 @@ authObject =()=> {
                     <div className='row main-body-wrapper'>
                         <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-2 side_br'>
                             <SidebarComponent
+                              prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
                               toggleDash = {this.toggleDash}
                               toggleAvail = {this.toggleAvail}
