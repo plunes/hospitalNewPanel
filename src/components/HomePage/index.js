@@ -53,7 +53,7 @@ class HomePage extends Component {
                                 </div>
                                 <div className="flex_child_three_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish home_page__sect2_heading_wrapper">
-                                        <h2 className="secondary-heading_rish bold_text_rish home_page_section3_secondary ">Real Time Insights.</h2>
+                                        <h2 className="secondary-heading_rish bold_text_rish  ">Real Time Insights.</h2>
                                         <h3 className="sub_heading_rish margin_top_small_rish ">AI and Big data tools to monitor the flow of patients, enabling you to take data driven decision for optimizing the revenue.</h3>
                                     </div>
                                 </div>
@@ -150,15 +150,15 @@ class HomePage extends Component {
                                            <div className="margin_top_medium_rish">
                                                 <div className="margin_top_small_rish rish_flex_wrap_sect7">
                                                     <span className="sect7_icon_span rish_flex_wrap_sect7_child1"><img className="icon_rish_sect7" src="/sect7_icon1.svg"/></span>
-                                                    <span className="sect7_data_span rish_flex_wrap_sect7_child2"><h3 className="sub_heading_rish display_inline_rish ">Unlimited cloud storage</h3></span>
+                                                    <span className="sect7_data_span rish_flex_wrap_sect7_child2"><h3 style={{marginBottom:'0rem'}} className="sub_heading_rish display_inline_rish ">Unlimited cloud storage</h3></span>
                                                 </div>
                                                 <div className="margin_top_small_rish rish_flex_wrap_sect7 ">
                                                     <span className="sect7_icon_span rish_flex_wrap_sect7_child1"><img className="icon_rish_sect7" src="/sect7_icon2.svg"/></span>
-                                                    <span className="sect7_data_span rish_flex_wrap_sect7_child2"><h3 className="sub_heading_rish ">Share reports with patients in one click</h3></span>
+                                                    <span className="sect7_data_span rish_flex_wrap_sect7_child2"><h3 style={{marginBottom:'0rem'}} className="sub_heading_rish ">Share reports with patients in one click</h3></span>
                                                 </div>
                                                 <div className="margin_top_small_rish rish_flex_wrap_sect7">
                                                     <span className="sect7_icon_span rish_flex_wrap_sect7_child1"><img className="icon_rish_sect7" src="/sect7_icon3.svg"/></span>
-                                                    <span className="sect7_data_span rish_flex_wrap_sect7_child2"><h3 className="sub_heading_rish ">Reduction in overall operational costs up to 40% /annum</h3></span>
+                                                    <span className="sect7_data_span rish_flex_wrap_sect7_child2"><h3  style={{marginBottom:'0rem'}} className="sub_heading_rish ">Reduction in overall operational costs up to 40% /annum</h3></span>
                                                 </div>
                                            </div>
                                     </div>

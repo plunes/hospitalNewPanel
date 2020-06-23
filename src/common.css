@@ -171,7 +171,7 @@ display: flex;
     opacity: 1;
     font-size: 1.8rem;
     margin-bottom: .8rem;
-    line-height: 1.6rem;
+    /* line-height: 1.6rem; */
  }
 .input_rish {
     display: block;
@@ -414,4 +414,11 @@ margin: 0 1%;
 .responsive-logo {
     width: 8rem;
     object-fit: contain;
+}
+
+.header_link_text {
+    color: #9E9E9E !important;
+}
+.header_li_rish {
+    margin: auto 2rem;
 }
