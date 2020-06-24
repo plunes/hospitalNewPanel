@@ -109,3 +109,9 @@
     display: flex !important;
 }
    
+@media screen and (max-width: 780px) {
+        .mobile_header_links {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+}

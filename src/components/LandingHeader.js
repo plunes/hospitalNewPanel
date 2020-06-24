@@ -17,7 +17,7 @@ class LandinHeader extends Component {
             </div>
           
           </div>
-        <div className="header_wrapper_links_child_rish ">
+        <div className="header_wrapper_links_child_rish mobile_header_links">
            <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <i className="fa fa-bars" aria-hidden="true"></i>
            </button>
