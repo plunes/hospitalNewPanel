@@ -2253,9 +2253,10 @@ let obj = {
   coverImageUrl:uData.coverImageUrl
 }
    
+let center_id = get_url_params('center')
   console.log()
   let token = localStorage.getItem('token');
-  return await axios.put(baseUrl + '/user', obj, { 'headers': { 'Authorization': token } })
+  return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         dispatch({

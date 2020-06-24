@@ -109,10 +109,12 @@ class ProfileContainer extends React.PureComponent {
     console.log(!!get_url_params('center'),"!!get_url_params('center')")
     if(!!get_url_params('center')){
       if(!!!isEmpty(nextProps.center_data)){
-        console.log(nextProps.center_data,"nextProps.center_data")
-        this.setState({
-          prof_data:nextProps.center_data
-        })
+        if(nextProps.center_data._id === get_url_params('center')){
+          console.log(nextProps.center_data,"nextProps.center_data")
+          this.setState({
+            prof_data:nextProps.center_data
+          })
+        }
       }
     }else{
       console.log("else case 1")
