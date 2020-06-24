@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
-    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails, set_user_info } from "../../actions/userActions";
+    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails, set_user_info, get_center_profile,  set_center_data } from "../../actions/userActions";
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
@@ -128,6 +128,16 @@ class AddDoctorComponent extends Component {
 
       }else{
         console.log("False case in DidMount")
+      }
+    let center_id = get_url_params('center')
+      if(!!center_id){
+        if(this.props.centers_list.length ===0){
+          console.log("calling for center profile")
+          this.props.get_center_profile({center_id})
+        }else{
+          let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
+          this.props.set_center_data({...center_data})
+        }
       }
     }
 
@@ -732,7 +742,8 @@ const mapStateToProps = state => ({
     uploadRet:state.user.uploadRet,
     addDoctorRet:state.user.addDoctorRet,
     getEntityRet:state.user.getEntityRet,
-    prof_data:state.user.data.prof_data
+    prof_data:state.user.data.prof_data,
+    centers_list:state.user.data.centers_data.centers_list
   })
   export default connect(mapStateToProps, {bankDetails,
   submitBankDetailsClr,
@@ -747,6 +758,8 @@ const mapStateToProps = state => ({
   getEntityClr,
   getEntity,
   getUserDetails,
-  set_user_info
+  set_user_info,
+  get_center_profile,
+  set_center_data
   })(AddDoctorComponent)
 
