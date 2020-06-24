@@ -1950,7 +1950,7 @@ export const addDoctor = (obj) => async dispatch => {
           type:ADD_DOCTOR_RET,
            payload:{
             success:true,
-            message:'Doctor successfully added',
+            message:get_url_params('id')?"Profile Sucessfully Edited":'Doctor successfully added',
             data:res.data
            }
         })

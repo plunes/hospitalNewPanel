@@ -159,7 +159,7 @@ display: flex;
    letter-spacing: 0px;
    color: #1E1E1E;
    opacity: 1;
-   font-size: 2rem;
+   font-size: 1.8rem;
    margin-bottom: .8rem;
 }
 .sub_heading_rish {
@@ -169,7 +169,7 @@ display: flex;
     letter-spacing: 0px;
     color: #9E9E9E;
     opacity: 1;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: .8rem;
     /* line-height: 1.6rem; */
  }
@@ -436,4 +436,10 @@ margin: 0 1%;
 
 .HospitalCoverImg {
     object-fit: contain !important;
+}
+@media screen and (max-width: 2100px) {
+#section_rish {
+     min-height: 30rem;
+     margin-bottom: 2rem;
+}
 }

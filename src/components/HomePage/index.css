@@ -74,7 +74,7 @@
     width:100%;
     object-fit:scale-down;
     object-position:50% 50%;
-    max-width: 70rem;
+    max-height: 35rem;
 }
 
 @media (min-width: 620px) and (max-width: 768px) {
@@ -191,4 +191,14 @@
 
 .home_page_ul_rish {
     padding-left: 0rem;
+}
+
+.home_page_section_1_image {
+    /* max-height: 50rem !important; */
+    width: 100%;
+    -o-object-fit: scale-down;
+    object-fit: scale-down;
+    -o-object-position: 50% 50%;
+    object-position: 50% 50%;
+    max-height: 26rem;
 }

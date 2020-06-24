@@ -2,7 +2,7 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import Select from "../Select"
 import React, { useRef, useState, useEffect } from "react"
-import { is_positive_whole_number } from "../../utils/common_utilities"
+import { is_positive_whole_number, get_url_params } from "../../utils/common_utilities"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -52,6 +52,8 @@ import { is_positive_whole_number } from "../../utils/common_utilities"
    const submitdetails = () => {
         if(props.name === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " || (props.services_chosen.length===0) ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
+        }else if(!!!props.doctorProfileImage){
+          addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
         }else{
             props.submitdetails({
                  name:props.name,
@@ -60,7 +62,8 @@ import { is_positive_whole_number } from "../../utils/common_utilities"
                  education:props.education,
                  services_chosen:props.services_chosen,
                  specialitie_chosen:props.specialitie_chosen,
-                 doctorProfileImage:props.doctorProfileImage
+                 doctorProfileImage:props.doctorProfileImage,
+                 doctorId:get_url_params('id')?get_url_params('id'):undefined
             })
         }
     }

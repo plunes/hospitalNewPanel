@@ -29,7 +29,7 @@ class HomePage extends Component {
                     <LandingHeader />
                 </div>
                 <div className="main_content_wrapper_rish page_min_height_rish oversize_wrap_rish">
-                    <section className="home_page_sec1">
+                    <section id="section_rish" className="home_page_sec1">
                         <div className="text-center">
                             <h1 className="primary_heading_rish ">Welcome to India's First Utility Network</h1>
                             <h3 className="sub_heading_rish grey_color">Create your profile for free to get started</h3>
@@ -41,17 +41,17 @@ class HomePage extends Component {
                                     <h2 className="secondary-heading_rish home_page_section1_secondary">AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h2>
                                 </div>
                                 <div className="flex_child_seven_rish">
-                                   <img src="/ai_offeres_inteligent_solution.png" className="ai_offers_intelligent_solution image_class_rish" alt="AI offers intelligent and competitive business insights to enhance your patient footfall and revenues." />
+                                   <img src="/ai_offeres_inteligent_solution.png" className="align_center_rish home_page_section_1_image " alt="AI offers intelligent and competitive business insights to enhance your patient footfall and revenues." />
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <section className="home_page_sec2 margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec2 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
-                                <div className="flex_child_seven_rish vertical_align_flex_rish">
-                                    <img src="/home_page_section_2.png" className="real_time_insights image_class_rish" alt="Real Time Insights" />
+                                <div className="flex_child_five_rish vertical_align_flex_rish">
+                                    <img src="/home_page_section_2.png" className="align_center_rish image_class_rish" alt="Real Time Insights" />
                                 </div>
-                                <div className="flex_child_three_rish vertical_align_flex_rish">
+                                <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish home_page__sect2_heading_wrapper">
                                         <h2 className="secondary-heading_rish bold_text_rish  ">Real Time Insights.</h2>
                                         <h3 className="sub_heading_rish margin_top_small_rish ">AI and Big data tools to monitor the flow of patients, enabling you to take data driven decision for optimizing the revenue.</h3>
@@ -60,30 +60,29 @@ class HomePage extends Component {
                        </div>
                     </section>
 
-                    <section className="home_page_sec3 margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec3 margin_top_medium_rish">
                        <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish home_page__sect3_heading_wrapper">
                                         <h2 className="secondary-heading_rish bold_text_rish home_page_section3_secondary ">Real Time Prediction.</h2>
                                         <ul className="home_page_ul_rish">
-                                            <li className="home_page_li_rish margin_top_small_rish"><h3 className="sub_heading_rish display_inline_rish">AI predicts the success rate based on the actions you take on insights. </h3> </li>
-                                            <li className="home_page_li_rish margin_top_small_rish"><h3 className="sub_heading_rish display_inline_rish">Smart decision making, via competition analysis.</h3></li>
+                                            <li className="home_page_li_rish"><h3 className="sub_heading_rish display_inline_rish">AI predicts the success rate based on the actions you take on insights. </h3> </li>
+                                            <li className="home_page_li_rish"><h3 className="sub_heading_rish display_inline_rish">Smart decision making, via competition analysis.</h3></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
-                                    <img src="/real_time_prediction.png" className="real_time_insights image_class_rish" alt="Real Time Insights" />
+                                    <img src="/real_time_prediction.png" className="image_class_rish align_center_rish" alt="Real Time Insights" />
                                 </div>
                        </div>
                     </section>
 
-                    <section className="home_page_sec4 margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec4 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div   className="flex_child_five_rish vertical_align_flex_rish">
                                   <div id="how_it_works_div" className="home_page_how_works_div">
                                      <div className="iframe_wrapper_home">
                                         <iframe 
-
                                             src="https://www.youtube.com/embed/eEQGGzplZ7w" 
                                             className="vertical_align_rish_new home_page_iframe"
                                             frameBorder="0"
@@ -105,7 +104,7 @@ class HomePage extends Component {
 
 
 
-                    <section className="home_page_sec5 margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec5 margin_top_medium_rish">
                        <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish">
@@ -119,17 +118,17 @@ class HomePage extends Component {
                                 </div>
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish ">
-                                      <img src="/manage_center_home.png" className="real_time_insights image_class_rish" alt="Real Time Insights" />
+                                      <img src="/manage_center_home.png" className="image_class_rish align_center_rish" alt="Real Time Insights" />
                                     </div>
                                 </div>
                        </div>
                     </section>
 
-                    <section className="home_page_sec6 margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec6 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div   className="flex_child_five_rish vertical_align_flex_rish">
                                   <div id="why_plunes_home_div" className="why_plunes_home_div">
-                                  <img src="/why_plunes_home.svg" className="real_time_insights image_class_rish" alt="Real Time Insights" />
+                                  <img src="/why_plunes_home.svg" className="align_center_rish image_class_rish" alt="Real Time Insights" />
                                   </div>
                                 </div>
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
@@ -142,7 +141,7 @@ class HomePage extends Component {
                     </section>
 
 
-                    <section className="home_page_sec7 margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec7 margin_top_medium_rish">
                        <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish">
@@ -165,7 +164,7 @@ class HomePage extends Component {
                                 </div>
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish ">
-                                      <img src="/home_page_plockr.png" className="real_time_insights image_class_rish" alt="Real Time Insights" />
+                                      <img src="/home_page_plockr.png" className="image_class_rish align_center_rish" alt="Real Time Insights" />
                                     </div>
                                 </div>
                        </div>

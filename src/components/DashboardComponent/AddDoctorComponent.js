@@ -415,7 +415,8 @@ let obj =   {
                   return item
           })
           this.setState({
-            services:arr
+            services:arr,
+            services_chosen:arr[0].service
           })
         }else{
           console.log("Unable to get Specs")
@@ -493,6 +494,8 @@ let obj =   {
          ]
         }
 ]
+
+console.log(data,'data in submit Details')
       let obj = {
         name:data.name,
         education:data.education,
@@ -503,7 +506,8 @@ let obj =   {
         imageUrl:data.doctorProfileImage,
         prescription:{},
         hospitalName:this.props.user.name,
-        specialities:specialities
+        specialities:specialities,
+        doctorId:data.doctorId
       }
       this.setState({
         addDoctorLoading:true
