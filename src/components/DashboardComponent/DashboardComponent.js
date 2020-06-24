@@ -541,7 +541,7 @@ class DashboardComponent extends React.PureComponent {
                         />
                         <div className="row">
                                     <div className=' dashboardsection dashrow1'>    
-                                        <p  className='heading_rish'>{this.props.user.name}</p>
+                                        <p  className='heading_rish'>{this.props.prof_data.name}</p>
                                         <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
                                     </div>
                         </div>
@@ -584,7 +584,7 @@ class DashboardComponent extends React.PureComponent {
                                                          </span>
                                                          <span className="heading_flex_child">  
                                                           {this.props.centers_name_list.length !==0  &&  <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
-                                                             <option value={''}>{'Centers List'}</option>
+                                                             <option value={''}>{this.props.prof_data.name}</option>
                                                                 {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                                            </select>}
                                                          </span>
@@ -632,7 +632,7 @@ class DashboardComponent extends React.PureComponent {
                                         <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business'>Actionable Insights</p>
                                        <span className="text-center" style={{position:'absolute', right:'1rem'}}>
                                      {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish">
-                                                                  <option value={''}>{'Centers List'}</option>
+                                                                 <option value={''}>{this.props.prof_data.name}</option>
                                                                   {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                           </select>}
                                        </span>
@@ -825,7 +825,7 @@ class DashboardComponent extends React.PureComponent {
                                             </div>
                                         <div className="modal_content_rish">
                                         {this.state.act_as_admin_success &&   <span className="modal_content_description center_align_rish">
-                                            {this.state.act_as_admin_other?'We have sent credentials to your account, kindly check them and Give them to your respective branches':`You are now the Admin of  ${this.props.user.name}`}
+                                            {this.state.act_as_admin_other?'We have sent credentials to your account, kindly check them and Give them to your respective branches':`You are now the Admin of  ${this.props.prof_data.name}`}
                                             </span> }
                                             {this.state.act_as_admin_ask &&   <span className="modal_content_description center_align_rish">
                                             Do you want to continue as Admin from the existing account?

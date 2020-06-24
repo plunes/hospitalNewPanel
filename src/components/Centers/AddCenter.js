@@ -149,7 +149,7 @@ render(){
                               coordinates:[77.026344,28.457523]
                           }}
                           update_location = {(data)=>this.setState({
-                              centerLocation: `${data.area} (${data.city})`,
+                              centerLocation: ` ${data.city}, ${data.area} `,
                               location:data.location
                           })}
                           set_cordinates = {this.set_cordinates}

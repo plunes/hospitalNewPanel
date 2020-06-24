@@ -83,4 +83,29 @@
             }
 
     }
+
+
+
+
+.header_wrapper_rish {
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+}
+
+.header_wrapper_logo_child_rish {
+    flex:1 1 10%;
+    margin: 0 .5%;
+}
+
+.header_wrapper_links_child_rish {
+    flex:1 1 75%;
+    margin: 0 .5%;
+    display: flex;
+}
+
+.display_flex {
+    display: flex !important;
+}
    
