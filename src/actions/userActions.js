@@ -2544,8 +2544,8 @@ export const updateImage = (data) => async dispatch => {
       type : UPLOAD,
       payload : "no-data-required"
     })
-
-  return await axios.put(baseUrl + '/user', data, { 'headers': { 'Authorization': token } })
+let center_id = get_url_params('center')
+  return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res, 'res in Upload')
     

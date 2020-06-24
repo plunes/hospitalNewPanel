@@ -38,7 +38,7 @@ class HomePage extends Component {
                             </Link>
                             <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_three_rish">
-                                    <h2 className="secondary-heading_rish home_page_section1_secondary">AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h2>
+                                    <h2 className="secondary-heading_rish sub_heading_home_page_rish home_page_section1_secondary">AI offers intelligent and competitive business insights to enhance your patient footfall and revenues.</h2>
                                 </div>
                                 <div className="flex_child_seven_rish">
                                    <img src="/ai_offeres_inteligent_solution.png" className="align_center_rish home_page_section_1_image " alt="AI offers intelligent and competitive business insights to enhance your patient footfall and revenues." />
@@ -54,7 +54,7 @@ class HomePage extends Component {
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish home_page__sect2_heading_wrapper">
                                         <h2 className="secondary-heading_rish bold_text_rish  ">Real Time Insights.</h2>
-                                        <h3 className="sub_heading_rish margin_top_small_rish ">AI and Big data tools to monitor the flow of patients, enabling you to take data driven decision for optimizing the revenue.</h3>
+                                        <h3 className="sub_heading_rish margin_top_small_rish sub_heading_home_page_rish">AI and Big data tools to monitor the flow of patients, enabling you to take data driven decision for optimizing the revenue.</h3>
                                     </div>
                                 </div>
                        </div>
@@ -134,7 +134,7 @@ class HomePage extends Component {
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className=" home_page_sec6_heading_wrap">
                                             <h2 className="secondary-heading_rish  bold_text_rish home_page_section3_secondary ">Why Plunes?</h2>
-                                            <h3 className="sub_heading_rish home_page_section3_secondary ">Enhance your revenues via smart insights.<br /> Stay ahead of the competition. <br />Direct leads matching your catalog.</h3>
+                                            <h3 className="sub_heading_rish home_page_section3_secondary  sub_heading_home_page_rish">Enhance your revenues via smart insights.<br /> Stay ahead of the competition. <br />Direct leads matching your catalog.</h3>
                                     </div>
                                 </div>  
                        </div>
