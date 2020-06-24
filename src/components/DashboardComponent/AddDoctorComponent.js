@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
-    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails, set_user_info, get_center_profile,  set_center_data } from "../../actions/userActions";
+    getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails, set_user_info,
+     get_center_profile,  set_center_data, get_center_profile_clr } from "../../actions/userActions";
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
@@ -435,6 +436,23 @@ let obj =   {
         }
         nextProps.getServClr()
       }
+
+
+      
+    if(nextProps.get_center_profile_ret){
+      if(nextProps.get_center_profile_ret.success){
+        nextProps.set_center_data({...nextProps.get_center_profile_ret.data})
+      }else{
+          this.setState({
+            ret:{
+              success:false,
+              message:nextProps.get_center_profile_ret.message
+            }
+          })
+      }
+      nextProps.get_center_profile_clr()
+    }
+
     }
 
     async componentDidMount(){
@@ -558,6 +576,7 @@ console.log(data,'data in submit Details')
 
     render() {
       console.log(this.state,"this.state in AddComponent")
+      console.log(this.props,"this.props in add Doctor component")
       let center_id = get_url_params('center')
       if(this.state.add_success){
         return <Redirect to= {{
@@ -743,7 +762,8 @@ const mapStateToProps = state => ({
     addDoctorRet:state.user.addDoctorRet,
     getEntityRet:state.user.getEntityRet,
     prof_data:state.user.data.prof_data,
-    centers_list:state.user.data.centers_data.centers_list
+    centers_list:state.user.data.centers_data.centers_list,
+    get_center_profile_ret:state.user.get_center_profile_ret
   })
   export default connect(mapStateToProps, {bankDetails,
   submitBankDetailsClr,
@@ -760,6 +780,7 @@ const mapStateToProps = state => ({
   getUserDetails,
   set_user_info,
   get_center_profile,
-  set_center_data
+  set_center_data,
+  get_center_profile_clr
   })(AddDoctorComponent)
 
