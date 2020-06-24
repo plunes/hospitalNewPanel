@@ -83,7 +83,7 @@ class ProfileContainer extends React.PureComponent {
               }
           })
           nextProps.history.replace({
-              pathname: this.props.location.pathname,
+              pathname: nextProps.location.state.center_id?`${this.props.location.pathname}?center=${nextProps.location.state.center_id}`:this.props.location.pathname,
               state: {}
           });
       }
@@ -613,7 +613,7 @@ class ProfileContainer extends React.PureComponent {
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
        <img  src="/Group 2096.svg" className="img-loading_rish"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
-       <Link to="/dashboard/add-doctor"
+       <Link to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
              role="button"
              onClick = {()=>this.props.toggleAddDoc()}>
        <button className="common_button_rish" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
@@ -622,7 +622,7 @@ class ProfileContainer extends React.PureComponent {
    
    {this.state.prof_data?!!this.state.prof_data.doctors?this.state.prof_data.doctors.length !==0?<div className="col-md-6 col-sm-12 col-lg-3">
            <div className="timelinebox4 timelinebox4_5">
-             <Link to="/dashboard/add-doctor"
+             <Link  to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
              role="button"
              onClick = {()=>this.props.toggleAddDoc()}>
              <img  src="/plus_2.svg"/>

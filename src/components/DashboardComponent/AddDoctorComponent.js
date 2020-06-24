@@ -83,6 +83,7 @@ class AddDoctorComponent extends Component {
             userDetails : {},
             bankname: '',
             accnumber:  '',
+            department:'',
             ifsccode: '',
             pannumber: '',
             accountname: '',
@@ -358,6 +359,7 @@ let obj =   {
                 name:data.name,
                 education:data.education,
                 designation:data.designation,
+                department:data.department,
                 experience:data.experience,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
@@ -500,12 +502,12 @@ console.log(data,'data in submit Details')
         name:data.name,
         education:data.education,
         designation:data.designation,
-        department:'',
+        department:data.department,
         timeSlots:this.generateSlotsFormat(),
         experience:data.experience,
         imageUrl:data.doctorProfileImage,
         prescription:{},
-        hospitalName:this.props.user.name,
+        hospitalName:!!get_url_params('center')?this.props.center_data.name:this.props.prof_data.name,
         specialities:specialities,
         doctorId:data.doctorId
       }
@@ -549,8 +551,9 @@ console.log(data,'data in submit Details')
       let center_id = get_url_params('center')
       if(this.state.add_success){
         return <Redirect to= {{
-         pathname: "/dashboard/profile"+`${!!center_id?'?center='+center_id:''}`,
-         state: { add_success: true }
+         pathname: "/dashboard/profile",
+         state: { add_success: true,
+                  center_id:center_id}
      }}  />
      }
       
@@ -704,6 +707,7 @@ console.log(data,'data in submit Details')
               handleCloseDay = {this.handleCloseDay}
               slots ={this.state.slots.length===0?[]:this.state.slots}
               getUserDetails = {this.props.getUserDetails}
+              department = {this.state.department}
             />
         </div>
         <ModalComponent 
@@ -720,6 +724,8 @@ console.log(data,'data in submit Details')
 }
 const mapStateToProps = state => ({
     user : state.user.userDetail,
+    prof_data:state.user.data.prof_data,
+    center_data:state.user.data.centers_data.center_data,
     submitBankDetailsRet:state.user.submitBankDetailsRet,
     getServRet:state.user.getServRet,
     getSpecsRet:state.user.getSpecsRet,

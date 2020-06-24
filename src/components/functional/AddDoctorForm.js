@@ -50,7 +50,7 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
 }
 
    const submitdetails = () => {
-        if(props.name === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " || (props.services_chosen.length===0) ){
+        if(props.name === '' || props.department === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " || (props.services_chosen.length===0) ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
         }else if(!!!props.doctorProfileImage){
           addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
@@ -58,6 +58,7 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
             props.submitdetails({
                  name:props.name,
                  designation:props.designation,
+                 department:props.department,
                  experience:props.experience,
                  education:props.education,
                  services_chosen:props.services_chosen,
@@ -131,6 +132,12 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
          <div class="form-group label-floating">
            <label class="control-label control_label_ris" for="education">Education Qualification</label>
            <input class="form-control no_padding_ris btm_in_bdr" value= {props.education} onChange={props.handleChange} id="educationqua" type="education" name="education" required data-error="Please enter your education qulification" />
+           <div class="help-block with-errors"></div>
+         </div>
+
+         <div class="form-group label-floating">
+           <label class="control-label control_label_ris" for="education">Department</label>
+           <input class="form-control no_padding_ris btm_in_bdr" value= {props.department} onChange={props.handleChange} id="department"  name="department" required data-error="Please enter your education qulification" />
            <div class="help-block with-errors"></div>
          </div>
 
