@@ -314,5 +314,5 @@
             .card_im {
                 width: 28rem;
                 height: 23rem;
-                object-fit: contain;
+                object-fit: cover;
             }
