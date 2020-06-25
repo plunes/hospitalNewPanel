@@ -17,6 +17,7 @@ class NotificationComponent extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props,"this.props in didMount of Notiifcation Container")
         this.setState({
             page:this.props.page_count
         })

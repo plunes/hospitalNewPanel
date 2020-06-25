@@ -628,7 +628,6 @@ case GET_CENTER_PROFILE_CLR:
         data:{
           ...state.data,
           notif_data:{
-            ...state.data.notif_data,
            ...action.payload
           }
         }

@@ -127,6 +127,8 @@ export class DashboardPage extends React.PureComponent {
       }
         
         if(!!nextProps.notificationData){
+          console.log(nextProps.notificationData,"log 1")
+          console.log(nextProps.notificationData.notifications,"log 2")
           // let data = !!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:{...nextProps.notif_data, ...this.state.notificationsData}
           this.setState({
               notificationsData:{
@@ -137,7 +139,7 @@ export class DashboardPage extends React.PureComponent {
               get_notifs_loading:false,
               notif_socket_triggered:!this.state.notif_socket_triggered
           },()=>{
-              nextProps.set_notif_data({...nextProps.notif_data, ...this.state.notificationsData})
+              nextProps.set_notif_data({ ...this.state.notificationsData})
               nextProps.clr_get_notif()
               nextProps.setMount({...this.props.mount,notif_mount:true})
           })
@@ -542,6 +544,7 @@ authObject =()=> {
 
   render() {
   console.log(this.state,"state in state")
+  console.log(this.props,"props in Dashboard page")
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
