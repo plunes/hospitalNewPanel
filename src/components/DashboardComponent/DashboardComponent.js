@@ -658,7 +658,7 @@ class DashboardComponent extends React.PureComponent {
                                    {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
                                     <span className='businessrow1col1 heading_flex_child '>
-                                    {!!this.props.get_centers_loading &&  <LoaderComponent/>}
+                                   
                                                     { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Center</p></React.Fragment>:
                                                     <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Add Center</p></Link></React.Fragment> 
                                     }

@@ -667,6 +667,7 @@ outline: none;
 .heading_flex_child {
   flex:1 1 45%;
   margin: 0 1%;
+  position: relative;
 }
 .add_icon_center{
   margin-left: auto;
