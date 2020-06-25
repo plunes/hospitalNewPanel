@@ -550,11 +550,12 @@ class DashboardComponent extends React.PureComponent {
                         /> }
                             <div className='row'>
                                 <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
-                                    <div className="custome_scrol">
-                                    <div style={{position:'relative'}} className='dashboardsection scrolling_sec'>
+                                    <div >
+                                    <div style={{position:'relative'}} className='dashboardsection '>
                                         <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish'>Real Time Insights</p>
                                         <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span>
                                         </span><br></br>
+                                        <div className='scrolling_sec'>
                                             {this.props.real_insight_loader?<LoaderComponent/>:
                                                 this.props.solInsights.length!==0 ? this.props.solInsights.map((s, index) =>{
                                                     let seconds_diff = this.getSecondsDifferent(s.createdAt)
@@ -574,9 +575,10 @@ class DashboardComponent extends React.PureComponent {
                                                     <div className="no_real_insights">No Real Time Insights yet </div>
                                                     </div>
                                             }
+                                        </div>
                                     </div>
                                     </div>
-                                    <div style={{padding:'0.5rem'}} className='dashboardsection card_rish add-center-wrapper'>
+                                    <div style={{padding:'0.5rem',position:'relative'}} className='dashboardsection card_rish add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='businessrow1col1 heading_flex_child '>
@@ -627,16 +629,17 @@ class DashboardComponent extends React.PureComponent {
                                 </div>
 
                                 <div  className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 '>
-                                    <div id="second_scro_is" className="dashboardsection dashrow2col2 second_scro">
+                                    <div className="dashboardsection dashrow2col2 ">
                                        <span className='businessrow1col1 realtimewidth'>
                                         <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business'>Actionable Insights</p>
-                                       <span className="text-center" style={{position:'absolute', right:'1rem'}}>
+                                       <span className="text-center" style={{position:'absolute', right:'2rem'}}>
                                      {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish">
                                                                  <option value={''}>{this.props.prof_data.name}</option>
                                                                   {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                           </select>}
                                        </span>
                                       </span>
+                                      <div  className="second_scro">
                                         {this.props.act_insight_loader? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
                                                 <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price </span>
@@ -650,6 +653,7 @@ class DashboardComponent extends React.PureComponent {
                                             <div className="no_real_insights">No Actionable Insights yet </div>
                                             </div>
                                         }
+                                    </div>
                                     </div>
                                    {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>

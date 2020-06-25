@@ -310,7 +310,10 @@ hr
       overflow: auto;
       overflow: auto;
       max-height: 37rem;
+      min-height: 20rem;
       overflow-x: hidden;
+      padding: 1rem;
+      position: relative;
 }
 
 .dashrow2col1
@@ -345,7 +348,7 @@ hr
 
 .DashboardInsight
       {text-transform: none;
-      font-size: 16px;
+      font-size: 1rem;
       text-align: justify;
       margin-top: 8px;
       margin-bottom: 1rem;
@@ -400,11 +403,14 @@ hr
       {border: none;
       background: white;
       color: #01D35A;
-      font-size: 1.4rem;}
+      font-size: 1rem;
+}
 
 .PaymentUN
-      {font-size: 1.4rem;
-      font-weight: 400;}
+      {
+      font-size: 1rem;
+      font-weight: 400;
+}
 
 .redeemModal
       {position: absolute;
@@ -444,7 +450,7 @@ hr
             letter-spacing: 0;
             color: #333333;
             margin-left: .5rem;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             text-decoration: underline;
             margin-left: 1rem;
@@ -530,7 +536,7 @@ hr
     {
       border-bottom: 1px solid #F1F1F1;
       width: 100%;
-      padding: 0.5rem 0rem 0.5rem 0rem;
+      padding: 1rem;
 }
 
 .realtime
@@ -575,7 +581,7 @@ hr
 
 .RealtimeUsername
     {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 500;
 }
 
@@ -608,7 +614,7 @@ hr
 
 /* alka-css */
 .light_content{ 
-      font-size: 1rem;
+      font-size: .9rem;
       color: #676767a3;
 }
 .bdr_dash{padding: 10px;}
@@ -648,9 +654,10 @@ hr
             right: 0;
             overflow-y: auto;
             overflow-x: hidden;
-            position: absolute;
-            height: 37rem;
-            padding: .5rem;
+            /* position: absolute; */
+            max-height: 37rem;
+            min-height: 20rem;
+            padding: 1rem;
       }
       /* Scrollbar Styling */
       .custome_scrol ::-webkit-scrollbar {
@@ -777,4 +784,30 @@ hr
       border: none;
       border-bottom: 1px solid #01D35A;
       width: 7rem;
+  }
+
+  .payment_flex_wrapper {
+      display: flex;
+      /* flex-wrap: wrap; */
+      padding: 0 1%;
+  }
+  
+  .payment_flex_image {
+      flex:1 1 0%;
+      margin: 0 1%;
+      text-align: center;
+  }
+  .payment_flex_content {
+      flex:1 1 55%;
+      margin: 0 1%;
+  }
+  
+  .payment_flex_requested {
+      flex:1 1 15%;
+      margin: 0 1%;
+      text-align:center;
+  }
+
+  .container-fluid {
+        height: 100vh !important;
   }

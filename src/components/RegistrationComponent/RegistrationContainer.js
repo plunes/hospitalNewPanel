@@ -294,9 +294,7 @@ class RegistrationContainer extends  React.Component {
                         <img className="sigun_imu"  src="signup.png" alt="SignUp" />
                     </div>
                     <div className='col-md-6'>
-                        <div className='col-md-1'>
-                        </div>
-                        <div className="col-md-7 signupHospitalForm" >
+                        <div className="signupHospitalForm" >
                             <div>
                                 <h4 className="signUpText">Sign up</h4>
                             </div>

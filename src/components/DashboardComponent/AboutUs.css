@@ -2,7 +2,10 @@
    {margin-top: 7.8rem;
       border: 1px solid #dcdcdc;
       border-radius: 10px ;}
-.paymnt_heding{font-size: 1.8rem;margin: 3rem !important;}
+.paymnt_heding{
+   /* font-size: 1.8rem; */
+   margin: 1rem !important;
+}
 .helppage
    {margin-top: 95px;
     background: #FFFFFF 0% 0% no-repeat padding-box;

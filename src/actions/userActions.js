@@ -3049,7 +3049,7 @@ export const initiatePayment = (pData) => async dispatch => {
   }
   let token = localStorage.getItem('token');
   return new Promise(async function (resolve, reject) {
-    await axios.patch(baseUrl+'/payment/paymentStatus', body, { headers: { "Authorization": `Bearer ${token}` } })
+    await axios.patch(baseUrl+'/booking/redeem', body, { headers: { "Authorization": `Bearer ${token}` } })
       .then((res) => {
         //console.log('data', res.status)
         if (res.status === 200) {

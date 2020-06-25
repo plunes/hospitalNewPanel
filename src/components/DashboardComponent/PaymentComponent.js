@@ -101,7 +101,6 @@ class PaymentComponent extends Component {
 
     dateTimeObject = (seconds) =>{
         let date = new Date(parseInt(seconds, 10))
-        console.log(date,"date in dateTimeObject")
         return  {
             monthAndDate: `${getMonth(date.getMonth())}  ${date.getDate()>9?date.getDate():"0"+date.getDate()}`,
             fullDate:  `${date.getDate()>9?date.getDate():"0"+date.getDate()} ${getMonth(date.getMonth())}  ${date.getFullYear()} `,
@@ -118,30 +117,36 @@ class PaymentComponent extends Component {
                     <div className='col-md-7 Payment AllComponents'>
                     <div className= 'text-center paymnt_heding'><h4>Payments</h4></div><br></br>
                         {
-                            this.state.payments.map((p, index) => (
-                                <div key={index} className='row'>
-                                     <div className='col-md-2'>
-                                         <a href="#">
-                                          <img src={p.userImageUrl} className="rorpy_im img-loading-small_rish" /></a>
-                                        </div>
-                                    <div className='col-md-4 righside_pad'>
-                                        <div className='PaymentUN'>{p.userName}</div>
-                                        <div><p className="ser_nme">{p.serviceName}</p></div><br></br>
-                                        <div>
-                                        <h4>{this.dateTimeObject(p.appointmentTime).monthAndDate}</h4>
-                                    <p className="ser_nme">{this.dateTimeObject(p.appointmentTime).fullDate}<br/>{this.dateTimeObject(p.appointmentTime).time}</p>            
-                                  {/* {p.appointmentTime} */}
-                                            </div>
-                                    </div>
-                                    <div className='col-md-6 text-right'>
-                                        <div className='PaymentUN'>&#x20b9;{p.totalAmount}</div><br></br>
-                                        {
-                                            p.redeemStatus === null ? <button type='button' onClick={() => this.handleClick(p)} className='redeemBtn'><u>Redeem</u></button> : <div><p className="ser_nme">{p.redeemStatus}</p></div>
-                                        }
-                                    </div>
-                                    <hr className="PaymentHR"></hr>
-                                </div>
-                            ))
+                            this.state.payments.map((p, index) => {
+                                 console.log(p.bookingStatus,"bookingStatus")
+                                 if(p.bookingStatus !== 'Cancelled'){
+                                    return ( <React.Fragment>
+                                    <div key={index} className='payment_flex_wrapper'>
+                                    <div className='payment_flex_image'>
+                                        <a href="#">
+                                         <img src={p.userImageUrl} className="rorpy_im img-loading-small_rish" /></a>
+                                       </div>
+                                   <div className='payment_flex_content'>
+                                       <div className='PaymentUN'>{p.userName}</div>
+                                       <div><p className="ser_nme">{p.serviceName}</p></div>
+                                      
+                                       <h6>{this.dateTimeObject(p.appointmentTime).monthAndDate}</h6>
+                                   <p className="ser_nme">{this.dateTimeObject(p.appointmentTime).fullDate}<br/>{this.dateTimeObject(p.appointmentTime).time}</p>            
+                                 {/* {p.appointmentTime} */}
+                                         
+                                   </div>
+                                   <div className='payment_flex_requested'>
+                                       <div className='PaymentUN'>&#x20b9;{p.totalAmount}</div><br></br>
+                                       {
+                                           p.redeemStatus === null ? <button type='button' onClick={() => this.handleClick(p)} className='redeemBtn'><u>Redeem</u></button> : <div><p className="ser_nme">{p.redeemStatus}</p></div>
+                                       }
+                                   </div>
+                               </div>
+                                <hr className="PaymentHR"></hr>
+                                </React.Fragment>
+                               )
+                                 }
+                            })
                         }
                     </div>
                     <Modal

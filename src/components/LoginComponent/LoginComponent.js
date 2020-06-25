@@ -93,14 +93,12 @@ class LoginComponent extends Component {
           <div className="row">
           <AuthHeader/>
           </div>
-          <div className='row'>
-                    <div className='col-md-6 sidetimgcol'>
-                        <img className="signImage botm_sign"  src="Mobile-login.jpg" alt="SignUp" />
+          <div className='login_flex_wrapper'>
+                    <div className='login_flex_image_child'>
+                        <img className="signImage botm_sign"  src="login_image.png" alt="Login" />
                     </div>
-                    <div className='col-md-6'>
-                        <div className='col-md-1'>
-                        </div>
-                        <div className="col-md-7 signupHospitalForm" >
+                    <div className='login_flex_form_child'>
+                        <div className="login_form_wrapper_rish" >
                             <Login 
                             email = {this.state.email}
                             type = {this.state.type}
