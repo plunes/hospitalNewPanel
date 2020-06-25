@@ -541,7 +541,7 @@ class DashboardComponent extends React.PureComponent {
                         />
                         <div className="row">
                                     <div className=' dashboardsection dashrow1'>    
-                                        <p  className='heading_rish'>{this.props.prof_data.name}</p>
+                                        <p style={{textTransform:'capitalize'}} className='heading_rish'>{this.props.prof_data.name}</p>
                                         <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
                                     </div>
                         </div>

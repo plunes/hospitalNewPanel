@@ -522,8 +522,8 @@ class ProfileContainer extends React.PureComponent {
                />
             </div>
             <div className="col-sm-9 col-lg-9 maxhospitalrow1col2 content_pos">
-              <p className="maxhospital max_cnt"><b>{this.state.prof_data.name}</b></p>
-              <p className="maxhospitaladd">{this.state.prof_data.name}</p>
+              <p  style={{textTransform:'capitalize'}} className="maxhospital max_cnt"><b>{this.state.prof_data.name}</b></p>
+              <p className="maxhospitaladd">{this.state.prof_data.centerLocation?this.state.prof_data.centerLocation:''}</p>
             </div>
           </div>
           <div className="row achimen_pd">
