@@ -406,8 +406,9 @@ margin: 0 1%;
 /* footer */
 
 .foter_colour_section {
-    margin-top: 57px;
-    padding-top: 60px;
+    margin-top: 4rem;
+    padding-top: 4rem;
+    max-height: 20rem;
     background-color: #1D3861;
 }
 
