@@ -30,7 +30,7 @@ class SidebarComponent extends Component {
                   onClick={()=>this.props.toggleDash()}>
                     <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon"src={this.props.pathname==='/dashboard'?'/icon/dash_icon_active.svg':'/icon/dash_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                       <text  className={`${this.props.pathname==='/dashboard'?'sidebar_list_text_active':''} `}>Dashboard</text>
@@ -52,7 +52,7 @@ class SidebarComponent extends Component {
                         }}> 
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/profile'?'/icon/profile_icon_active.svg':'/icon/profile_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text className={`${this.props.pathname==='/dashboard/profile'?'sidebar_list_text_active':''} `}>Profile</text>
@@ -67,7 +67,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleAvail()}>
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/availability'?'/icon/availability_icon_active.svg':'/icon/availability_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text className={`${this.props.pathname==='/dashboard/availability'?'sidebar_list_text_active':''} `}>My Availability</text>
@@ -82,7 +82,7 @@ class SidebarComponent extends Component {
                   onClick={()=>this.props.toggleAppoint()}>
                <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/appointments'?'/icon/appointment_icon_active.svg':'/icon/appointment_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text className={`${this.props.pathname==='/dashboard/appointments'?'sidebar_list_text_active':''} `}>Appointments</text>
@@ -97,7 +97,7 @@ class SidebarComponent extends Component {
                   onClick={()=>this.props.toggleCenters()}>
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon"  src={this.props.pathname==='/dashboard/centers'?'/icon/centers_icon_active.svg':'/icon/centers_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text  className={`${this.props.pathname==='/dashboard/centers'?'sidebar_list_text_active':''} `}>Centres</text>
@@ -113,7 +113,7 @@ class SidebarComponent extends Component {
                  onClick={()=>this.props.toggleSettings()}>
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/settings'?'/icon/settings_icon_active.svg':'/icon/settings_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text  className={`${this.props.pathname==='/dashboard/settings'?'sidebar_list_text_active':''} `}>Settings</text>
@@ -129,7 +129,7 @@ class SidebarComponent extends Component {
                     onClick={()=>this.props.toggleManage()}> 
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/manage-payment'?'/icon/payments_icon_active.svg':'/icon/payments_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text  className={`${this.props.pathname==='/dashboard/manage-payment'?'sidebar_list_text_active':''} `}>Manage Payment</text>
@@ -144,7 +144,7 @@ class SidebarComponent extends Component {
                   onClick={()=>this.props.toggleHelp()}>
                   <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon"src={this.props.pathname==='/dashboard/help'?'/icon/help_icon_active.svg':'/icon/help_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text  className={`${this.props.pathname==='/dashboard/help'?'sidebar_list_text_active':''} `}>Help</text>
@@ -159,7 +159,7 @@ class SidebarComponent extends Component {
                 onClick={()=>this.props.toggleAbout()}>
                 <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/aboutus'?'/icon/about_us_icon_active.svg':'/icon/about_us_icon.svg'} alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text  className={`${this.props.pathname==='/dashboard/aboutus'?'sidebar_list_text_active':''} `}>About Us</text>
@@ -174,7 +174,7 @@ class SidebarComponent extends Component {
                 onClick={this.handlelogoutClick}>
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
-                        <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
+                        <img className="sidebaricon" src="/icon/logout_icon.svg" alt=""></img>
                       </span>
                       <span className="sidebar_list_text">
                        <text className="">Logout</text>

@@ -66,6 +66,8 @@
     background-color: #F9F9F9;
 }
 
+
+
 .sidebar_list_item {
     display: flex;
     flex-wrap: wrap;
@@ -91,4 +93,12 @@
     color: #000;
     opacity: 1;
     font-weight: bolder;
+}
+.sidebaricon {
+    width: 1.4rem;
+}
+@media (min-width:1100px) and (max-width:1300px) {
+    .sidebaricon {
+        width: 1.7rem;
+    }
 }
