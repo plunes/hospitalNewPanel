@@ -590,8 +590,8 @@ export const add_center = (data) => async dispatch => {
   let token = localStorage.getItem('token')
   return await axios.post(baseUrl + `/admin/addCenter`, data, { 'headers': { 'Authorization': token } })
     .then((res) => {
+      console.log(res,"res in add_center")
       if (res.status === 201) {
-        console.log(res,"res in add_center");
         dispatch({
           type: ADD_CENTER_RET,
           payload: {
@@ -611,7 +611,7 @@ export const add_center = (data) => async dispatch => {
       }
     })
     .catch((e) => {
-      console.log(e)
+      console.log(e.response,"e.response in add_center")
       try{
         dispatch({
           type: ADD_CENTER_RET,

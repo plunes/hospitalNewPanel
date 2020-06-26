@@ -210,7 +210,8 @@ class Map extends Component{
 								]
 							},
 							area:this.getArea( addressArray ),
-							city:this.getCity( addressArray )
+							city:this.getCity( addressArray ),
+							address:address
 						})
 						 }
 				this.setState( {
@@ -259,7 +260,8 @@ class Map extends Component{
 					]
 				},
 				area:this.getArea( addressArray ),
-				city:this.getCity( addressArray )
+				city:this.getCity( addressArray ),
+				address:address
 			})
 		     }
 

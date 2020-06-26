@@ -43,7 +43,8 @@ class AddCenter extends React.PureComponent{
                
             }else{
                 this.setState({
-                    ret:nextProps.add_center_ret
+                    ret:nextProps.add_center_ret,
+                    loading:false
                 })
             }
             nextProps.add_center_clr()
@@ -88,7 +89,8 @@ class AddCenter extends React.PureComponent{
                 email:this.state.email,
                 centerLocation:this.state.centerLocation,
                 alternateNumber:this.state.phone,
-                location:this.state.location
+                location:this.state.location,
+                address:this.state.address
             })
         }catch(e){
             console.log(e,"error in Catch Block")
@@ -150,7 +152,8 @@ render(){
                           }}
                           update_location = {(data)=>this.setState({
                               centerLocation: ` ${data.city}, ${data.area} `,
-                              location:data.location
+                              location:data.location,
+                              address:data.address
                           })}
                           set_cordinates = {this.set_cordinates}
                           set_user_info = {this.props.set_user_info}
