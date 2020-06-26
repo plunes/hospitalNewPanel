@@ -31,7 +31,7 @@ class InsightComponent extends React.PureComponent {
       return (
         <div className='row' key={this.props.index}>
         <div className='col-md-2  realtime vertical_align_rish'>
-            <span className="realtimeicon1 center_align_rish vertical_align_rish"><img src="/realtimerows.svg" className="realtimeicon center_align_rish vertical_align_rish" alt=""></img></span>
+            <span className="realtimeicon1 center_align_rish vertical_align_rish"><img src="/icon/insight_image.svg" className="realtimeicon center_align_rish vertical_align_rish" alt=""></img></span>
         </div>
         <div className='col-md-7 vertical_align_rish'>
             <div className="RealtimeUsername">

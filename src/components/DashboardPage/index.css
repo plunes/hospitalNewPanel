@@ -102,3 +102,92 @@
         width: 1.7rem;
     }
 }
+
+.profile_name_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    background: #F9F9F9 0% 0% no-repeat padding-box;
+    opacity: 1;
+    border-radius: 1rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    min-height: 4rem;
+    box-shadow: 0px 3px 18px #00000029;
+}
+
+.profile_name_name {
+    flex: 1 1 70%;
+    font-size: 2rem;
+    padding: .5rem .5rem .5rem 1rem;
+}
+.profile_name_number {
+    flex: 1 1 25%;
+    font-size: 1rem;
+    padding: .5rem .5rem .5rem 1rem;
+    display: block;
+    margin: auto;
+}
+
+.new_card_class {
+    box-shadow: 0px 3px 18px #00000029;
+    border-radius: 1rem;
+    opacity: 1;
+    background-color: #fff;
+}
+
+.insigts_section_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+.real_insights_wrapper {
+    flex:1 1 55%;
+    display: block;
+    margin: auto;
+    min-height: 20rem;
+}
+
+.action_insights_wrapper {
+    flex:1 1 40%;
+    display: block;
+    padding: 1rem;
+    margin: auto;
+    min-height: 20rem;
+}
+
+.business {
+    color: #333333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.action_insight_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: .2rem .2rem 1rem .2rem;
+}
+.action_insight_image_wrapper {
+    flex:1 1 15%;
+    display: block;
+    margin: auto;
+}
+.action_insight_text_wrapper {
+    flex:1 1 65%;
+    display: block;
+    margin: auto;
+}
+.action_insight_image {
+    width: 4rem;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+.light_text_rish {
+    opacity: .6;
+    font-weight: 100;
+}
+.dark_text_rish {
+    opacity: 1 !important;
+    font-weight: 900 !important;
+    color: #000 !important;
+}

@@ -524,7 +524,7 @@ class DashboardComponent extends React.PureComponent {
         } else {
             return (
                 <React.Fragment>
-                        <div>
+                    
                         <NewNotif 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
@@ -539,21 +539,27 @@ class DashboardComponent extends React.PureComponent {
                                 ret:false
                             })}}
                         />
-                        <div className="row">
-                                    <div className=' dashboardsection dashrow1'>    
-                                        <p style={{textTransform:'capitalize'}} className='heading_rish'>{this.props.prof_data.name}</p>
-                                        <p className="heading-right_ris"> For any query - Call at +91 7011311900</p>
-                                    </div>
+                        <div className="profile_name_wrapper">
+                           <div className="profile_name_name" >    
+                              <text style={{textTransform:'capitalize'}}>{this.props.prof_data.name}</text>
+                           </div>
+                           <div className="profile_name_number">
+                              <text > For any query - Call at +91 7011311900</text>
+                           </div>
                         </div>
+
                         {this.props.location_toggler  &&   <AddLocationTab
                             set_open_map = {this.props.set_open_map}
                         /> }
-                            <div className='row'>
-                                <div className=' col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 Leftpaddingremove'>
-                                    <div >
-                                    <div style={{position:'relative'}} className='dashboardsection '>
-                                        <span className='businessrow1col1 realtimewidth real_ti_bd'><img src="/realtime.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish'>Real Time Insights</p>
-                                        <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span>
+
+                            <div className='insigts_section_wrapper'>
+                                <div className="real_insights_wrapper">
+                                <div style={{position:'relative'}} className='dashboardsection new_card_class'>
+                                        <span className='businessrow1col1 realtimewidth real_ti_bd'>
+                                            {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
+                                                </img> */}
+                                        <p className='business vertical_align_rish'>Real Time Insights</p>
+                                        {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
                                             {this.props.real_insight_loader?<LoaderComponent/>:
@@ -577,8 +583,75 @@ class DashboardComponent extends React.PureComponent {
                                             }
                                         </div>
                                     </div>
+                                </div>
+
+                                <div className="action_insights_wrapper">
+                                    
+                                <div className="dashboardsection dashrow2col2 new_card_class ">
+                                    <div style={{height:'100%'}}>
+                                       <span className='businessrow1col1 realtimewidth '>
+                                       {/* <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img> */}
+                                     <p className='business vertical_align_rish'>Actionable Insights</p>
+                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',bottom:'.5rem'}}>
+                                     {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
+                                                                 <option value={''}>{this.props.prof_data.name}</option>
+                                                                  {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                          </select>}
+                                       </span>
+                                      </span>
+                                      <div  className="second_scro">
+                                        {this.props.act_insight_loader? <LoaderComponent/>:
+                                            this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
+                                                <React.Fragment>
+                                                    <div className="action_insight_wrapper" key={index}>
+                                                        <span className="action_insight_image_wrapper">
+                                                            <img src ="/icon/action_insight_image.svg" className="action_insight_image"/>
+                                                        </span>
+                                                        <span className="action_insight_text_wrapper">
+                                                        <div>
+                                                            <text className="light_text_rish">
+                                                            <text className="dark_text_rish">{i.serviceName} </text>were <text className="dark_text_rish">{i.percent}% </text>higher than the booked price
+                                                            </text>
+                                                         </div>
+                                                            <div  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}>Update here</div>
+                                                        </span>
+                                                    </div>
+                                                   
+                                                    <hr></hr>
+                                                </React.Fragment>
+                                            )) :  <div className="no_insights_wrapper_ris">
+                                            <div className="no_insight_image-wrapper">
+                                              <img className="no_isights_image" src="./Group 2055.svg" />
+                                            </div>
+                                            <div className="no_real_insights">No Actionable Insights yet </div>
+                                            </div>
+                                        
+                                        }
                                     </div>
-                                    <div style={{padding:'0.5rem',position:'relative'}} className='dashboardsection card_rish add-center-wrapper'>
+                                    </div>
+                                 </div>
+                                </div>
+
+                            </div>
+                            
+
+
+                            
+                                {/* <div className='dashboardsection'>
+                                    <span className='businessrow1col1 realtimewidth'>
+                                        <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Number of Users</p>
+                                      </span>
+                                        <HighchartsReact
+                                            highcharts={Highcharts}
+                                            options={options}
+                                        />
+                                    </div>
+ */}
+
+
+
+
+                                {/* <div style={{padding:'0.5rem',position:'relative'}} className='dashboardsection card_rish add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='businessrow1col1 heading_flex_child '>
@@ -604,7 +677,6 @@ class DashboardComponent extends React.PureComponent {
                                         </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
                                         <div className="text-center">
                                         <select onChange={this.handleDaysChange} name="days" value={this.state.get_business.days} className="select_class_rish">
-                                                                  {/* {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)} */}
                                                                     <option value='1'>Today</option>
                                                                     <option value='7'>Weekly</option>
                                                                     <option value='30'>Monthly</option>
@@ -614,47 +686,12 @@ class DashboardComponent extends React.PureComponent {
                                         <div className="businessWarn">
                                             <p>Please take action on real time insights to increase your business</p>
                                         </div>
-                                    </div>
-                                    <div className='dashboardsection'>
-                                    <span className='businessrow1col1 realtimewidth'>
-                                        <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Number of Users</p>
-                                      </span>
-                                        <HighchartsReact
-                                            highcharts={Highcharts}
-                                            options={options}
-                                        />
-                                    </div>
-                                    <br></br>
-                                </div>
+                                    </div> */}
 
-                                <div  className='col-6 col-sm-6  col-md-6 col-lg-6 col-xl-6 '>
-                                    <div className="dashboardsection dashrow2col2 ">
-                                       <span className='businessrow1col1 realtimewidth'>
-                                        <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img><p className='business'>Actionable Insights</p>
-                                       <span className="text-center" style={{position:'absolute', right:'2rem'}}>
-                                     {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish">
-                                                                 <option value={''}>{this.props.prof_data.name}</option>
-                                                                  {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                          </select>}
-                                       </span>
-                                      </span>
-                                      <div  className="second_scro">
-                                        {this.props.act_insight_loader? <LoaderComponent/>:
-                                            this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
-                                                <div className="DashboardInsight" key={index}><b>{i.serviceName} </b><span className="Insightdiv">were</span> <b>{i.percent}</b><span><b>%</b></span><span className="Insightdiv"> higher than the booked price </span>
-                                                    <span  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}><u>Update here</u></span>
-                                                    <hr></hr>
-                                                </div>
-                                            )) :  <div className="no_insights_wrapper_ris">
-                                            <div className="no_insight_image-wrapper">
-                                              <img className="no_isights_image" src="./Group 2055.svg" />
-                                            </div>
-                                            <div className="no_real_insights">No Actionable Insights yet </div>
-                                            </div>
-                                        }
-                                    </div>
-                                    </div>
-                                   {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
+
+
+
+                                   {/* {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
                                     <span className='businessrow1col1 heading_flex_child '>
                                    
@@ -696,11 +733,6 @@ class DashboardComponent extends React.PureComponent {
                                             </Link>
                                      </div>
                                         }
-                                         {/* <div className="text-center margin-top-small_ris">
-                                         <Link to="/dashboard/centers?addCenter=true">
-                                        <button className="common_button_rish margin_top_medium_rish margin_bottom_medium_rish">Add Center</button>
-                                        </Link>
-                                        </div> */}
                                         </React.Fragment>
                                          :  
                                          <React.Fragment>
@@ -711,7 +743,7 @@ class DashboardComponent extends React.PureComponent {
                                            !this.props.get_centers_loading &&  <span className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>}
                                             </div>
                                       </div>}
-                                    </div>}
+                                    </div>} */}
                                     <Modal
                                         isOpen={this.state.modalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
@@ -894,9 +926,6 @@ class DashboardComponent extends React.PureComponent {
                                         </div>
                                         </div>
                                     </Modal>
-                                </div>
-                            </div>
-                        </div>
                   </React.Fragment>
             )
         }

@@ -223,9 +223,7 @@ hr
 .dashboardsection
       {
       background: #FFFFFF 0% 0% no-repeat padding-box;
-      box-shadow: 0px 3px 6px #00000029;
-      border-radius: 7px;
-      opacity: 1; margin-bottom: 3%;
+      opacity: 1;
 }
 /* .scrolling_sec {
       overflow: auto;
@@ -385,16 +383,7 @@ hr
             height: 3rem;
 }
 .dash_clr{background: #FBFBFB;}
-.business
-      {
-            letter-spacing: 0;
-            color: #333333;
-            margin-left: .5rem;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: underline;
-            margin-left: 1rem;
-}
+
 
 .selectBusinessPeriod
       {text-align: center;
@@ -477,6 +466,7 @@ hr
       border-bottom: 1px solid #F1F1F1;
       width: 100%;
       padding: 1rem;
+      position: relative;
 }
 
 .realtime
