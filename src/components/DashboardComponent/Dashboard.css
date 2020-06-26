@@ -125,66 +125,12 @@ hr
      height: auto;
      margin-left: 15px;}
      
-.sidenav 
-    {
-  
-    margin-top: 7.5rem;
-    z-index: 0;
-    display: 'inline';
-    background-color: none;
-    overflow-x: hidden;
-    font-size: 1rem;
-    border: 1px solid #DCDCDC;
-    border-radius: 10px;
-    background-color: white;
-    position: relative;
-    left: 6rem;
-   /* position: fixed;
-   width: 16vw; */
-    }
-      
-      /* Style the sidenav links and the dropdown button */
-.sidenav a, .log,.dropdown-btn 
-   {
-      padding: 0.7rem 0px .7rem 0.8rem;
-      text-decoration: none;
-      font-size: 1.1rem;
-      color: #818181;
-      display: block;
-      border: none;
-      background: none;
-      width: autoto;
-      text-align: left;
-      cursor: pointer;
-      position: relative;
-      outline: none;
-   }
-.log
-   {
-         padding: 12px !important;
-         font-size: 1.1rem !important;
-    }
-
-.sidenav div
-      {
-            text-decoration: none;
-            font-size: 1rem;
-            color: #818181;
-            display: block;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            outline: none;
-           
+     .log
+     {
+           padding: 12px !important;
+           font-size: 1.1rem !important;
       }
-      .HeaderLink a{color: #000000;}
-      
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover 
-      {color: #f1f1f1;}
-
+  
 a:hover 
       {-webkit-box-sizing: border-box;
         box-sizing: border-box;
@@ -232,7 +178,7 @@ a:hover
       {cursor: pointer;}
 
 .list-group:hover 
-      {background-color:#D7DBDD;}
+      {background-color:none}
 
 .list-group .list-group-item:first-child 
       {border-top-left-radius: 9px !important;

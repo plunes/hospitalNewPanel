@@ -524,7 +524,7 @@ class DashboardComponent extends React.PureComponent {
         } else {
             return (
                 <React.Fragment>
-                        <div className='col-md-8 col-lg-10 col-xl-8 Dashboard AllComponents'>
+                        <div>
                         <NewNotif 
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
@@ -614,7 +614,6 @@ class DashboardComponent extends React.PureComponent {
                                         <div className="businessWarn">
                                             <p>Please take action on real time insights to increase your business</p>
                                         </div>
-
                                     </div>
                                     <div className='dashboardsection'>
                                     <span className='businessrow1col1 realtimewidth'>

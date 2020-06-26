@@ -1,0 +1,94 @@
+.main_body_flex_parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+.main_body_flex_sidebar {
+    flex:1 1 15%;
+    /* margin: 0 1%; */
+}
+.main_body_flex_content {
+    flex:1 1 80%;
+    padding: 3rem !important;
+    /* margin: 0 1%; */
+}
+
+.sidebar_wrapper 
+    {
+    z-index: 0;
+    padding: 2rem;
+    background-color: none;
+    overflow-x: hidden;
+    font-size: 1rem;
+    background-color: #fff;
+    position: relative;
+    height: 100%;
+    }
+      
+      /* Style the sidebar_wrapper links and the dropdown button */
+.sidebar_wrapper a, .log,.dropdown-btn 
+   {
+      padding: 0.7rem 0px .7rem 0.8rem;
+      text-decoration: none;
+      font-size: 1.1rem;
+      color: #818181;
+      display: block;
+      border: none;
+      background: none;
+      width: autoto;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      outline: none;
+   }
+
+.sidebar_wrapper div
+      {
+        text-decoration: none;
+        font-size: 1rem;
+        color: #818181;
+        display: block;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        border-radius: 2rem;
+        opacity: .6;
+        margin-bottom: 1rem;
+      }
+      .HeaderLink a{color: #000000;}
+      
+/* On mouse-over */
+.sidebar_wrapper a:hover, .dropdown-btn:hover 
+      {color: #f1f1f1;}
+.main-body-wrapper {
+    background-color: #F9F9F9;
+}
+
+.sidebar_list_item {
+    display: flex;
+    flex-wrap: wrap;
+}
+.sidebar_list_icon {
+    flex:1 1 15%;
+    display: block;
+    margin: auto;
+}
+.sidebar_list_text {
+    flex:1 1 75%;
+    display: block;
+    margin: auto;
+}
+.sidebar_list_active {
+    background-color: #F6F6F6 !important;
+    font-weight: 900;
+    opacity: 1 !important;
+    text-transform: capitalize;
+    color: #000000 !important;
+}
+.sidebar_list_text_active {
+    color: #000;
+    opacity: 1;
+    font-weight: bolder;
+}

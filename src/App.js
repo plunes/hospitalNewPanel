@@ -64,7 +64,6 @@ class App extends Component {
     
       <Router history={history}>
           <Switch>
-          <div className="container-fluid">
             <Route exact path='/' component={()=><HomePage />} />
             <Route exact path ="/signin" component={LoginComponent} />
             <Route exact path='/signup' component={RegistrationContainer} />
@@ -72,7 +71,6 @@ class App extends Component {
             <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
             <Route exact path='/devlopment' component={Development} />
-            </div>
           </Switch>
         
         <ToastContainer  position={toast.POSITION.TOP_LEFT} />

@@ -151,7 +151,7 @@ render(){
                               coordinates:[77.026344,28.457523]
                           }}
                           update_location = {(data)=>this.setState({
-                              centerLocation: ` ${data.city}, ${data.area} `,
+                              centerLocation: `${data.city}, ${data.area}`,
                               location:data.location,
                               address:data.address
                           })}

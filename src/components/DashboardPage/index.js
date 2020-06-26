@@ -31,6 +31,7 @@ import ConnectivityListener from '../ConnectivityListener'
 import admin_route from "../../HOC/admin_route"
 import protected_route from "../../HOC/protected_route"
 import NewNotif from '../functional/NewNotif';
+import './index.css'
 
 
 const initialState = {
@@ -127,8 +128,6 @@ export class DashboardPage extends React.PureComponent {
       }
         
         if(!!nextProps.notificationData){
-          console.log(nextProps.notificationData,"log 1")
-          console.log(nextProps.notificationData.notifications,"log 2")
           // let data = !!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:{...nextProps.notif_data, ...this.state.notificationsData}
           this.setState({
               notificationsData:{
@@ -245,7 +244,7 @@ export class DashboardPage extends React.PureComponent {
 }
 
   componentDidMount() {
-    if (this.props.location.pathname == '/dashboard') {
+    if (this.props.location.pathname === '/dashboard') {
       this.setState({
       ...initialState,dash: 'active'
 
@@ -577,9 +576,9 @@ authObject =()=> {
                           prof_data = {this.props.prof_data}
                         />
                     </div>
-                    <div className="container-fluid">
-                    <div className='row main-body-wrapper'>
-                        <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-2 side_br'>
+                <div className="main-body-wrapper">
+                    <div className="main_body_flex_parent">
+                        <div className="main_body_flex_sidebar">
                             <SidebarComponent
                               prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
@@ -592,8 +591,10 @@ authObject =()=> {
                               toggleAbout = {this.toggleAbout}
                               toggleCenters = {this.toggleCenters}
                               user_info = {this.state.user_info}
+                              pathname ={this.props.location.pathname}
                             />
                         </div>
+                  <div className="main_body_flex_content">
                   {(this.props.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
@@ -701,9 +702,11 @@ authObject =()=> {
                    get_centers_loading ={this.state.get_centers_loading}
                    location = {this.props.location}
                   />):''}
+              </div>
         </div>
         </div>
         </div>
+      
     )
   }
 }
