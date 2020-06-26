@@ -408,9 +408,14 @@ margin: 0 1%;
 .foter_colour_section {
     margin-top: 4rem;
     padding-top: 4rem;
-    max-height: 20rem;
+    max-height: 25rem;
     background-color: #1D3861;
 }
+/* @media  screen and (min-width: 750px)  {
+.foter_colour_section {
+    max-height: 20rem;
+}
+} */
 
 .responsive-logo {
     width: 8rem;
