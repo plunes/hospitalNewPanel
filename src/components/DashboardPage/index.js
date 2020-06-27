@@ -689,7 +689,7 @@ authObject =()=> {
                     logout:this.props.logout
                   })(()=> <ChangePassword />)
                  :(this.props.location.pathname === '/dashboard/payments')?
-                 admin_route({
+                 protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout
                 })(()=> <PaymentComponent />)
