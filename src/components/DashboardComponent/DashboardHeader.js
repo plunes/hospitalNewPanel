@@ -9,11 +9,15 @@ import  { Link } from "react-router-dom"
 
 
 class DashboardHeader extends Component {
- 
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
+
+    constructor(props){
+      super(props)
+      this.state = {
+        valid:true
+      }
+      this.handleClick = this.handleClick.bind(this)
+    }
+   
 
 
   handleClick(){
@@ -34,67 +38,51 @@ class DashboardHeader extends Component {
   // }
   render() {
     console.log(this.props,'props in HeaderCompoent');
-
-        return <div className="Header">
-          <div>
-            <nav className="navbar  navbar-expand-lg navbar-light">
-              <a className="navbar-brand" href=""><img className="logo" src="/logo.jpg"  alt='Not available'/></a>
-              {/* <div>
-                <input className="dashbord-input" name="search" type="search" placeholder="Search" aria-label="Search" autoComplete="off" id="mytInput" onChange={this.onSearchQuery} />
-              </div> */}
-
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-              <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav2 nav-item">
-                  <div className="nav-link HeaderLink" >
-                  <Link to= "/dashboard/payments"
-                    
-                        role = "button"
-                        onClick = {this.props.togglePayment()}>
-                      <img className="sol-img" src="/payment.svg" alt='Not available'></img><span className="top-img">Payment</span> 
-                   </Link>
-                  </div>
-                  </li>
-                  <li className="nav2 nav-item">
-                    <div>
-                      <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
-                        <img className="sol-img" src="/plockerlogo.svg" alt='Not available'></img><span className="top-img">Plockr</span>
-                      </a>
-                    </div>
-                  </li>
-                  <li className="nav-item nav2" >
-                   
-                      <div className="nav-link HeaderLink" >
-                        <Link to= "/dashboard/notification"
-                        role = "button"
-                        onClick = {()=>this.props.toggleNotif()}>
-                        <img className="sol-img" src="/Notification.jpg" alt='Not available'/><span><span className="badge badge-danger NotifyNum">{this.props.count!==0?this.props.count:''}</span><span style={{marginLeft:"8px"}}>Notification</span></span>
-                         </Link>
-                        </div>
-                  </li>
-                  <li className="nav-item nav2">
-                    <div className="nav-link HeaderLink">
-                       <Link
-                          className="link_class"
-                          role = "button"
-                           to="/dashboard/profile"
-                           onClick = {this.props.toggleProfile()}
-                           >
-                         <img className="sol-img2" src={this.props.prof_data.imageUrl || '/profile.jpg'}  alt='Not available'/>{this.props.user.name}
-                         </Link>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-          </div>
+  console.log(window.location.pathname,"window.location in header")
+        return   <nav className="navbar custom_ha navbar-expand-md custom-navbar ">
+        <div className="header_wrapper_rish oversize_wrap_rish display_flex">
+          <div className="header_wrapper_logo_child_rish ">
+            <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
+              <Link to="/">
+                <img src="/logo.jpg" style={{marginLeft:'1rem'}} className="logo_rish cursor-pointer" />
+              </Link>
+            </div>
           
+          </div>
+        <div className="header_wrapper_links_child_rish mobile_header_links">
+           <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" >
+            <i className="fa fa-bars" aria-hidden="true"></i>
+           </button>
+             <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul className="navbar-nav ml-auto Three_butn dr_lis_mobile">
+                  
+                <li className="nav-item header_li_rish">
+                <Link to= "/dashboard/payments"
+                    onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.togglePayment())}>
+                  <text  className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
+                  </li> 
+                 <li className="nav-item header_li_rish">
+                 <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
+                  <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >PLOCKR</text>
+                     </a>
+                  </li> 
+
+                   <li className="nav-item header_li_rish">
+                <Link to= "/dashboard/notification"
+                     onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleNotif())}>
+                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text></Link>
+                  </li> 
+                  <li className="nav-item header_li_rish">
+                  <Link to="/dashboard/profile"  
+                   onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleProfile())}>
+                  <img className="sol-img2" src={this.props.prof_data.imageUrl || '/profile.jpg'}  alt='Not available'/>
+                  <text  className={`${window.location.pathname==='/dashboard/profile'?'green_text_rish':'header_link_text'} `} >{this.props.user.name}</text></Link>
+                  </li> 
+                 </ul>
+             </div>  
         </div>
-        
+      </div>
+  </nav>
         }
   }
       

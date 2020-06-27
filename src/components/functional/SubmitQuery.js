@@ -35,7 +35,7 @@ import LoaderComponent from "./LoaderComponent"
 
   return (    
       <React.Fragment>
-<div className="helprow1"><p>Help</p></div>
+<h4 style={{position:'relative'}} className="section_heading_rish">Help</h4>
 <div className="form-group">
     {loading && <LoaderComponent />}
     <label></label>

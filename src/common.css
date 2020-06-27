@@ -406,9 +406,10 @@ margin: 0 1%;
 /* footer */
 
 .foter_colour_section {
-    margin-top: 57px;
-    padding-top: 60px;
+    margin-top: 4rem;
+    padding-top: 1rem;
     background-color: #1D3861;
+    max-height: 30rem;
 }
 
 .responsive-logo {
@@ -443,4 +444,20 @@ margin: 0 1%;
      min-height: 30rem;
      margin-bottom: 2rem;
 }
+}
+
+.main_content_rish {
+    width: 80%;
+    background-color: #fff !important;
+    min-height: 30rem;
+    position: relative;
+}
+
+.navbar-collapse {
+    margin-right: 0px;
+}
+
+.section_heading_rish {
+    text-align: center;
+    position: relative;
 }

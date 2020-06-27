@@ -45,8 +45,8 @@ class NotificationComponent extends Component {
         // console.log(this.props.notification)
         return (
             <React.Fragment>
-                    <div  className='col-md-8 margin_bottom_ris Notification AllComponents'>
-                        <h4 style={{position:'relative'}} className="Notify">Notifications</h4>
+                    <div  className='main_content_rish Notification'>
+                                <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">Notifications</h4>
                         {
                             this.props.notifications ? this.props.notifications.slice(0, this.props.notifications.length).map((n, index) => (
                                 <Link

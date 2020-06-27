@@ -115,15 +115,15 @@ render(){
     }}  />
     }
     return (
-        <div className= 'col-md-8 col-xl-8  AllComponents AvailableTime'>
+        <div className= 'main_content_rish'>
             <NewNotif 
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
             />
-             <div style={{position:'relative'}} className="centers_wrapper">
+             <div style={{position:'relative',paddingTop:'1rem'}} className="centers_wrapper">
                  {this.state.loading && <LoaderComponent />}
                     <div className="text-center">
-                <h1 className="margin-top-medium_ris center_align_rish " >Add Center</h1>
+                <h4 style={{position:'relative'}} className="section_heading_rish">Centres</h4>
                 </div>
                 <div className="margin-top-medium_ris centers-list-wrapper">
                     <div className="row">

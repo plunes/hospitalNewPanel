@@ -637,11 +637,12 @@ class DashboardComponent extends React.PureComponent {
                             <div className="insigts_section_wrapper">
                                 <div className="real_insights_wrapper">
 
-                                    <div style={{padding:'0.5rem',position:'relative'}} className='dashboardsection new_card_class add-center-wrapper'>
+                                    <div style={{position:'relative'}} className='dashboardsection new_card_class add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='businessrow1col1 heading_flex_child '>
-                                                            <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Business</p>
+                                                         {/* <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""> */}
+                                                        <text className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
                                                          <span className="heading_flex_child">  
                                                           {this.props.centers_name_list.length !==0  &&  <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
@@ -662,12 +663,12 @@ class DashboardComponent extends React.PureComponent {
                                             </div>
                                         </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
                                         <div className="text-center">
-                                        <select onChange={this.handleDaysChange} name="days" value={this.state.get_business.days} className="select_class_rish">
+                                        {/* <select onChange={this.handleDaysChange} name="days" value={this.state.get_business.days} className="select_class_rish">
                                                                     <option value='1'>Today</option>
                                                                     <option value='7'>Weekly</option>
                                                                     <option value='30'>Monthly</option>
                                                                     <option value='365'>Yearly</option>
-                                                                </select>
+                                                                </select> */}
                                         </div>
                                         <div className="businessWarn">
                                             <p>Please take action on real time insights to increase your business</p>
@@ -676,7 +677,8 @@ class DashboardComponent extends React.PureComponent {
 
                                    <div className='dashboardsection new_card_class'>
                                     <span className='businessrow1col1 realtimewidth'>
-                                        <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Number of Users</p>
+                                        {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
+                                        <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
                                       </span>
                                         <HighchartsReact
                                             highcharts={Highcharts}
@@ -693,14 +695,18 @@ class DashboardComponent extends React.PureComponent {
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
                                     <span className='businessrow1col1 heading_flex_child '>
                                    
-                                                    { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Add Center</p></React.Fragment>:
-                                                    <React.Fragment><img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""></img><Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Add Center</p></Link></React.Fragment> 
+                                                    { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment>
+                                                        {/* <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""/> */}
+                                                        <p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Manage Centres</p></React.Fragment>:
+                                                    <React.Fragment>
+                                                        {/* <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""/> */}
+                                                        <Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Manage Centres</p></Link></React.Fragment> 
                                     }
                                   </span>
                                    <span className="heading_flex_child">  
                                   <span className="add_text_wrapper_span">
                                   <Link to="/dashboard/centers?addCenter=true">
-                                  <img src="/add_icon.svg" style={{height:'2rem'}} alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
+                                  <img src="/add_icon.svg" style={{height:'1.2rem'}} alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
                                    <text  className="add_text">Add</text>
                                    </Link>
                                   </span>
@@ -710,15 +716,35 @@ class DashboardComponent extends React.PureComponent {
                                       {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment><img src="/no_center_img.svg" onClick={()=>this.open_act_as_admin()} alt="no_center_img" className="no_center_img  center_align_rish cursor-pointer" /></React.Fragment>:
                                          this.props.centers_data.centers_list.length !==0?
                                          <React.Fragment>
-                                         <div className="row">
+                                            <div style={{fontSize:'1.2rem'}} className="text-center">Real Time Reports</div>
+                                         <div className="flex_parent">
                                         { this.props.centers_data.centers_list.slice(0,4).map((item)=>{
-                                                return  <div className="col-md-6">
+                                                return  <div className="flex_child_1">
                                                 <div className="centers-wrap center_wrap_dash">
                                                     <Link to={`/dashboard/profile?center=${item._id}`} >
-                                                        <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
+                                                        <div className="center_flex_wrap">
+                                                            <div className="center_flex_child">
+                                                                <img src="/icon/center_icon_new.png" className="center_flex_image" />
+                                                                <div className="center_heading_content">
+                                                                    <text className="center_name">{item.centerLocation}</text>
+                                                                    <text className="center_number">{!!item.alternateNumber?item.alternateNumber:item.adminMobileNumber}</text>
+                                                                </div>
+                                                            </div>
+                                                            <div className="center_flex_child-2">
+                                                                <span className="business_earned_lost_span">
+                                                                <text className="black_text">Business earned- </text>
+                                                                <text style={{fontSize:'.8rem'}} className="green_text_rish">12000</text>
+                                                                </span>
+                                                                <span className="business_earned_lost_span">
+                                                                <text className="black_text">Business lost- </text>
+                                                                <text className="orange_text">12000</text>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {/* <img src="/Lab 1.png" alt="hospitals_centers " className="center_align_rish hospital_center_img" />
                                                         <div className="text-center">
                                                         <span style={{fontSize:'1rem'}} className="sub_heading_rish">{item.name} <br></br>{item.centerLocation}</span>
-                                                        </div>
+                                                        </div> */}
                                                     </Link>
                                                 </div>
                                             </div>

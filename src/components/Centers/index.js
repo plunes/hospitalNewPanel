@@ -48,14 +48,14 @@ class Centers extends React.PureComponent{
             return <AddCenter />
         }
         return (
-            <div className= 'col-md-8 col-xl-8  AllComponents AvailableTime'>
-                <div className="centers_wrapper">
+            <div className= 'main_content_rish'>
+                <div style={{paddingLeft:'1rem'}} className="centers_wrapper">
                     <NewNotif 
                     ret = {this.state.ret}
                     retClr = {()=>this.setState({ret:false})}
                     />
                     <div className="text-center">
-                <h1 className="margin-top-medium_ris center_align_rish " >Centres List</h1>
+                    <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">Centres</h4>
                 </div>
                 <div className="margin-top-medium_ris centers-list-wrapper">
                     {

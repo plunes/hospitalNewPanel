@@ -91,7 +91,8 @@ export class DashboardPage extends React.PureComponent {
         Notify:{
           success:false,
           error:false
-      }
+      },
+      render_header:true
     }
   }
 
@@ -358,65 +359,75 @@ export class DashboardPage extends React.PureComponent {
   toggleChangePass =()=>{
     this.setState({
      ...initialState,
-     changePass:'active'
+     changePass:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleDash =()=>{
     this.setState({
      ...initialState,
-     dash:'active'
+     dash:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleProfile = () => {
     this.setState({
      ...initialState,
-     prof:'active'
+     prof:'active',
+     render_header:!this.state.render_header
     })
   }
   toggleAvail =() =>{
     this.setState({
      ...initialState,
-     avail:'active'
+     avail:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleAppoint =()=> {
     this.setState({
      ...initialState,
-     appoint:'active'
+     appoint:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleSettings =() => {
     this.setState({
      ...initialState,
-     settings:'active'
+     settings:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleManage =()=> {
     this.setState({
      ...initialState,
-     manage:'active'
+     manage:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleHelp =  () => {
     this.setState({
      ...initialState,
-     help:'active'
+     help:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleAbout =  () => {
     this.setState({
      ...initialState,
-     about:'active'
+     about:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleNotif =  () => {
     this.setState({
      ...initialState,
-     notif:'active'
+     notif:'active',
+     render_header:!this.state.render_header
     },()=>{
      this.props.remove_notif_count()
     })
@@ -424,20 +435,23 @@ export class DashboardPage extends React.PureComponent {
   togglePayment =  () => {
     this.setState({
      ...initialState,
-     payment:'active'
+     payment:'active',
+     render_header:!this.state.render_header
     })
   }
   toggleEditProf =  () => {
     this.setState({
      ...initialState,
-     editProf:'active'
+     editProf:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleMyCatalog =  () => {
     this.setState({
      ...initialState,
-     myCataloge:'active'
+     myCataloge:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleAddDoc =  () => {
@@ -455,7 +469,8 @@ export class DashboardPage extends React.PureComponent {
   toggleCenters =  () => {
     this.setState({
      ...initialState,
-     centers:'active'
+     centers:'active',
+     render_header:!this.state.render_header
     });
   }
 
@@ -564,7 +579,6 @@ authObject =()=> {
                         error={this.state.Notify.error}
                         clear = {()=>this.setState({Notify:{success:false,error:false}})}
                         />
-                    <div className='row'>
                         <DashboardHeader
                           toggleNotif = {this.toggleNotif}
                           togglePayment = {this.togglePayment}
@@ -574,8 +588,8 @@ authObject =()=> {
                           notif_count_flag = {this.props.notif_count_flag}
                           count = {this.props.notif_data.count}
                           prof_data = {this.props.prof_data}
+                          render_header = {this.state.render_header}
                         />
-                    </div>
                 <div className="main-body-wrapper">
                     <div className="main_body_flex_parent">
                         <div className="main_body_flex_sidebar">

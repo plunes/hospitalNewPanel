@@ -479,8 +479,7 @@ class ProfileContainer extends React.PureComponent {
     const { open } = this.state;
     return (
       <React.Fragment>
-      <div className='col-md-8 col-xl-9'>
-      <div className="HospitalProfileBody AllComponents hspital">
+     <div className="main_content_rish">
         <Notify 
           success ={this.state.notify.success}
           error ={this.state.notify.error}
@@ -670,9 +669,7 @@ class ProfileContainer extends React.PureComponent {
                 modalBody = {this.generateAddAchievement}
                 />  
         </div>
-      </div>
-      </div>
-      <div className='col-md-1'></div>
+  </div>
       </React.Fragment>
     )
   }

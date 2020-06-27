@@ -80,11 +80,11 @@ class EditProfileComponent extends React.PureComponent {
         console.log(this.props," this.props in Edit Profile Component")
         return (
                 <React.Fragment>
-                    <div className='col-md-7'>
-                        <div className = 'settingpage'>
+                    <div className="main_content_rish">
+                        <div>
                            <div className="settingpageBody">
                                <div className='settingtopic'>
-                                    <p>Edit Profile</p>
+                               <h4 style={{position:'relative'}} className="section_heading_rish">Edit Profile</h4>
                                </div>
                                <EditProfileForm 
                                 fullname = {this.state.fullname}

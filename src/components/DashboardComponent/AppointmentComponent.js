@@ -419,15 +419,11 @@ class AppointmentComponent extends Component {
         console.log(this.state,"state in AppointmentLoading")
         let time_now = ((new Date()).getTime())
         if(!!this.state.get_bookings_loading){
-           return   <div className='col-md-8'>
-           <div className="Appoint AllComponents">
-             <div style={{position:'relative', width:'100%',height:'100%'}}>
+           return   <div className='main_content_rish'>
            <LoaderComponent />
            {/* <MeasureTime  
                 flag = {this.state.get_bookings_loading}
                 /> */}
-       </div>
-       </div>
        </div>
         }
         return (
@@ -444,9 +440,9 @@ class AppointmentComponent extends Component {
                     ret = {this.state.ret}
                     retClr = {()=>this.setState({ret:false})}
                 />
-                <div className='col-md-8 col-xl-9'>
-                    <div className="Appoint AllComponents">
-                        <div className="AppointBodyrow1">Appointments</div>
+                <div className='main_content_rish'>
+                    <div>
+                        <div className="AppointBodyrow1">  <h4 style={{position:'relative'}} className="section_heading_rish">Appointments</h4></div>
                         
                             <Tabs 
                             selectedIndex={this.state.tabIndex} 
