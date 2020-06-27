@@ -222,8 +222,9 @@ hr
 
 .dashboardsection
       {
-      background: #FFFFFF 0% 0% no-repeat padding-box;
-      opacity: 1;
+      /* background: #FFFFFF 0% 0% no-repeat padding-box;
+      opacity: 1; */
+      margin-bottom: 1rem;
 }
 /* .scrolling_sec {
       overflow: auto;
@@ -580,31 +581,27 @@ hr
  .custome_scrol{ position: relative;
      }
       .scrolling_sec{ 
-            top: 4px;
-            bottom: 10px;
-            right: 0;
             overflow-y: auto;
             overflow-x: hidden;
-            /* position: absolute; */
             max-height: 37rem;
             min-height: 20rem;
             padding: 1rem;
       }
       /* Scrollbar Styling */
       .custome_scrol ::-webkit-scrollbar {
-      width: 10px;
-      height: 30px;
+      width: .9rem;
+      height: 2rem;
   }
    
   .custome_scrol ::-webkit-scrollbar-track {
       background-color: #ebebeb;
-      -webkit-border-radius: 10px;
-      border-radius: 10px;
+      -webkit-border-radius: 0.9rem;
+      border-radius: .9rem;
   }
   
   .custome_scrol ::-webkit-scrollbar-thumb {
-      -webkit-border-radius: 10px;
-      border-radius: 10px;
+      -webkit-border-radius: 0.9rem;
+      border-radius: .9rem;
       background: #c2c1c1; 
   }
 

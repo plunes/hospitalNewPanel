@@ -633,25 +633,11 @@ class DashboardComponent extends React.PureComponent {
                                 </div>
 
                             </div>
-                            
 
+                            <div className="insigts_section_wrapper">
+                                <div className="real_insights_wrapper">
 
-                            
-                                {/* <div className='dashboardsection'>
-                                    <span className='businessrow1col1 realtimewidth'>
-                                        <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Number of Users</p>
-                                      </span>
-                                        <HighchartsReact
-                                            highcharts={Highcharts}
-                                            options={options}
-                                        />
-                                    </div>
- */}
-
-
-
-
-                                {/* <div style={{padding:'0.5rem',position:'relative'}} className='dashboardsection card_rish add-center-wrapper'>
+                                    <div style={{padding:'0.5rem',position:'relative'}} className='dashboardsection new_card_class add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='businessrow1col1 heading_flex_child '>
@@ -686,12 +672,24 @@ class DashboardComponent extends React.PureComponent {
                                         <div className="businessWarn">
                                             <p>Please take action on real time insights to increase your business</p>
                                         </div>
-                                    </div> */}
+                                    </div> 
+
+                                   <div className='dashboardsection new_card_class'>
+                                    <span className='businessrow1col1 realtimewidth'>
+                                        <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""></img><p className='business vertical_align_rish cursor-pointer'>Number of Users</p>
+                                      </span>
+                                        <HighchartsReact
+                                            highcharts={Highcharts}
+                                            options={options}
+                                        />
+                                    </div>
+                                 
 
 
+                                </div>
 
-
-                                   {/* {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper card_rish'>
+                                <div className="action_insights_wrapper">      
+                                   {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper new_card_class'>
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
                                     <span className='businessrow1col1 heading_flex_child '>
                                    
@@ -743,8 +741,12 @@ class DashboardComponent extends React.PureComponent {
                                            !this.props.get_centers_loading &&  <span className="no-center-text center_align_rish">Add multiple locations and <br></br> Manage them from here </span>}
                                             </div>
                                       </div>}
-                                    </div>} */}
-                                    <Modal
+                                    </div>}
+                                </div>
+
+                            </div>
+                           
+                                    <Modal 
                                         isOpen={this.state.modalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
                                         onRequestClose={this.closeModal}
