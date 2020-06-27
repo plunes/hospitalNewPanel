@@ -66,6 +66,8 @@ let url = ""
   }
 }
 
+console.log(props,"props in ProfileBanner")
+
   return (
 <React.Fragment>
     <input  
@@ -81,7 +83,7 @@ let url = ""
           <div style={{position:"relative"}}>
          {props.loading && <LoaderComponent />}
             <img className="HospitalCoverImg mas_hos img-loading_rish" 
-            src={(!!props.user?props.user.coverImageUrl:'/maxhos.jpg')} 
+            src={(!!props.user?props.user.coverImageUrl===''?'/maxhos.jpg':props.user.coverImageUrl:'')} 
             alt=""></img>
              </div>
             </p>
