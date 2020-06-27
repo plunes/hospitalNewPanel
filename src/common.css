@@ -407,9 +407,20 @@ margin: 0 1%;
 
 .foter_colour_section {
     margin-top: 4rem;
-    padding-top: 4rem;
-    max-height: 25rem;
+    padding-top: 1rem;
+    max-height: 30rem;
     background-color: #1D3861;
+}
+@media (max-width: 1200px)  and (min-width: 370px)   {
+    .foter_colour_section {
+        max-height: 25rem;
+    }
+}
+
+@media  screen  and (min-width: 1210px)  {
+    .foter_colour_section {
+        max-height: 20rem
+    }
 }
 /* @media  screen and (min-width: 750px)  {
 .foter_colour_section {
