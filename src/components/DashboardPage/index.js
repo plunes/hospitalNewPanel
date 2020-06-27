@@ -575,6 +575,7 @@ authObject =()=> {
                           notif_count_flag = {this.props.notif_count_flag}
                           count = {this.props.notif_data.count}
                           prof_data = {this.props.prof_data}
+                          authObject = {this.authObject}
                         />
                     </div>
                     <div className="container-fluid">

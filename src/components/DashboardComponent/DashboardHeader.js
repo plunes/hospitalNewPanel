@@ -33,6 +33,7 @@ class DashboardHeader extends Component {
   //   await this.props.getNotifications()
   // }
   render() {
+    const authObject = this.props.authObject
     console.log(this.props,'props in HeaderCompoent');
 
         return <div className="Header">
@@ -50,14 +51,14 @@ class DashboardHeader extends Component {
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav ml-auto">
                   <li className="nav2 nav-item">
-                  <div className="nav-link HeaderLink" >
+                    <div className="nav-link HeaderLink" >
                   <Link to= "/dashboard/payments"
-                    
                         role = "button"
                         onClick = {this.props.togglePayment()}>
                       <img className="sol-img" src="/payment.svg" alt='Not available'></img><span className="top-img">Payment</span> 
                    </Link>
-                  </div>
+                  </div> 
+                
                   </li>
                   <li className="nav2 nav-item">
                     <div>
