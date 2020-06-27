@@ -88,9 +88,9 @@ class AddCenter extends React.PureComponent{
                 // location: "H.NO-13/280 KALYANPURI NEW DELHI",
                 userType:"Hospital",
                 // "biography": "S",
-                email:this.state.email,
+                centerEmail:this.state.email,
                 centerLocation:this.state.centerLocation,
-                alternateNumber:this.state.phone==='+91'?"":this.state.phone,
+                centerMobileNumber:this.state.phone==='+91'?"":this.state.phone,
                 location:this.state.location,
                 address:this.state.address
             })
