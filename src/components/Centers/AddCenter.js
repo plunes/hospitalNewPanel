@@ -21,7 +21,9 @@ class AddCenter extends React.PureComponent{
             add_successfull:false,
             name:'',
             centerLocation:'',
-            location:''
+            location:'',
+            phone:'',
+            email:''
         }
     }
 
@@ -66,14 +68,14 @@ class AddCenter extends React.PureComponent{
     handle_submit = () =>{
         console.log("Inside handle_submit")
         try{
-            if(!isValidPhoneNumber(this.state.phone)){
+            if((this.state.phone!=='') && (this.state.phone!=='+91')  && (!isValidPhoneNumber(this.state.phone))){
                 throw new MyError('Please enter a valid phone number')
             }
-            if(!validator.isEmail(this.state.email)){
+            if((this.state.email!=='') && (!validator.isEmail(this.state.email))){
                 throw new MyError('Please enter a valid email address')
             }
             if(validator.isEmpty(this.state.name)){
-                throw new MyError('Please enter your full name')
+                throw new MyError('Please enter centers name')
             }
             if(!!!this.state.location){
                 throw new MyError('Please enter your locality')
@@ -86,9 +88,9 @@ class AddCenter extends React.PureComponent{
                 // location: "H.NO-13/280 KALYANPURI NEW DELHI",
                 userType:"Hospital",
                 // "biography": "S",
-                email:this.state.email,
+                centerEmail:this.state.email,
                 centerLocation:this.state.centerLocation,
-                alternateNumber:this.state.phone,
+                centerMobileNumber:this.state.phone==='+91'?"":this.state.phone,
                 location:this.state.location,
                 address:this.state.address
             })
@@ -115,15 +117,15 @@ render(){
     }}  />
     }
     return (
-        <div className= 'main_content_rish'>
+        <div className= 'col-md-8 col-xl-8  AllComponents AvailableTime'>
             <NewNotif 
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
             />
-             <div style={{position:'relative',paddingTop:'1rem'}} className="centers_wrapper">
+             <div style={{position:'relative'}} className="centers_wrapper">
                  {this.state.loading && <LoaderComponent />}
                     <div className="text-center">
-                <h4 style={{position:'relative'}} className="section_heading_rish">Centres</h4>
+                <h1 className="margin-top-medium_ris center_align_rish " >Add Center</h1>
                 </div>
                 <div className="margin-top-medium_ris centers-list-wrapper">
                     <div className="row">
@@ -132,7 +134,7 @@ render(){
                         </div>
 
                         <div className="col-md-6">
-                        <input type="text" placeholder="Alternate/Reception Phone No."   onChange={(e)=>this.handle_phone_change(e)}  name="phone" value={this.state.phone} className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                        <input type="text" placeholder="Alternate/Reception Phone No."   onChange={(e)=>this.handle_phone_change(e)}  name="phone" value={this.state.phone==='+91'?'':this.state.phone} className="input_typt_ris form-control editbankdetailfield input-field-common" />
                         </div>
 
                         <div className="col-md-12">
@@ -151,7 +153,7 @@ render(){
                               coordinates:[77.026344,28.457523]
                           }}
                           update_location = {(data)=>this.setState({
-                              centerLocation: `${data.city}, ${data.area}`,
+                              centerLocation: ` ${data.city}, ${data.area} `,
                               location:data.location,
                               address:data.address
                           })}
