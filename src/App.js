@@ -17,6 +17,7 @@ import Development from './components/Development'
 import DashboardPage from './components/DashboardPage'
 import './common.css'
 import HomePage from './components/HomePage';
+import Login from './components/functional/Login';
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -65,8 +66,8 @@ class App extends Component {
       <Router history={history}>
           <Switch>
             <Route exact path='/' component={()=><div className="container-fluid"><HomePage /></div>} />
-            <Route exact path ="/signin" component={LoginComponent} />
-            <Route exact path='/signup' component={RegistrationContainer} />
+            <Route exact path ="/signin" component={()=><div className="container-fluid"><LoginComponent /></div>} />
+            <Route exact path='/signup' component={()=><div className="container-fluid"><RegistrationContainer /></div>} />
             <Route exact path='/home' component={Development} />
             <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
