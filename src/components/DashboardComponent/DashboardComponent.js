@@ -766,11 +766,11 @@ class DashboardComponent extends React.PureComponent {
                                                             <div className="center_flex_child-2">
                                                                 <span className="business_earned_lost_span">
                                                                 <text className="black_text">Business earned- </text>
-                                                                <text style={{fontSize:'.8rem'}} className="green_text_rish">12000</text>
+                                                                <text style={{fontSize:'.8rem'}} className="green_text_rish">-----</text>
                                                                 </span>
                                                                 <span className="business_earned_lost_span">
                                                                 <text className="black_text">Business lost- </text>
-                                                                <text className="orange_text">12000</text>
+                                                                <text className="orange_text">----</text>
                                                                 </span>
                                                             </div>
                                                         </div>
