@@ -16,12 +16,13 @@ const TimeSlot = (props) => {
                 return (
                     <React.Fragment>
                 <ul className="tme_d1">
+                    <li onClick= {()=>setHour(7)} className={hour===7?'active cursor-pointer':'cursor-pointer'} >7</li>
+                    <li onClick= {()=>setHour(8)} className={hour===8?'active cursor-pointer':'cursor-pointer'} >8</li>
                     <li onClick= {()=>setHour(9)} className={hour===9?'active cursor-pointer':'cursor-pointer'} >9</li>
                     <li onClick= {()=>setHour(10)} className={hour===10?'active cursor-pointer':' cursor-pointer'}>10</li>
                     <li onClick= {()=>setHour(11)} className={hour===11?'active cursor-pointer':'cursor-pointer'}>11</li>
                     <li onClick= {()=>setHour(12)} className={hour===12?'active cursor-pointer':'cursor-pointer'}>12</li>
-                    <li onClick= {()=>setHour(13)} className={hour===13?'active cursor-pointer':' cursor-pointer'}>13</li>
-                    <li onClick= {()=>setHour(14)} className={hour===14?'active cursor-pointer':' cursor-pointer'}>14</li>
+                   
                 </ul>
              <ul className="tme_d">
                     <li onClick= {()=>setMinutes(0)} className={minutes===0?'active cursor-pointer':' cursor-pointer'}>00</li>
@@ -37,6 +38,8 @@ const TimeSlot = (props) => {
                 return (
                     <React.Fragment>
                     <ul className="tme_d1">
+                        <li onClick= {()=>setHour(13)} className={hour===13?'active cursor-pointer':' cursor-pointer'}>13</li>
+                        <li onClick= {()=>setHour(14)} className={hour===14?'active cursor-pointer':' cursor-pointer'}>14</li>
                         <li onClick= {()=>setHour(15)} className={hour===15?'active cursor-pointer':'cursor-pointer'} >15</li>
                         <li onClick= {()=>setHour(16)} className={hour===16?'active cursor-pointer':'cursor-pointer'}>16</li>
                         <li onClick= {()=>setHour(17)} className={hour===17?'active cursor-pointer':'cursor-pointer'}>17</li>
