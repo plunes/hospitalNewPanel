@@ -64,7 +64,7 @@ class DashboardHeader extends Component {
                   </li> 
                  <li className="nav-item header_li_rish">
                  <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
-                  <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >PLOCKR</text>
+                  <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >Plockr</text>
                      </a>
                   </li> 
 

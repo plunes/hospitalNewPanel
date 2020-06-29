@@ -19,7 +19,8 @@ class EditProfileComponent extends React.PureComponent {
             initRen:true,
             errorText:false,
             successText:false,
-            loading:true
+            loading:true,
+            isCenter:false
         }
     }
 
@@ -41,11 +42,12 @@ class EditProfileComponent extends React.PureComponent {
             console.log(nextProps.user,'NextProps.user')
             this.setState({
                 fullname:nextProps.user.name,
-                email:nextProps.user.email,
-                phone:nextProps.user.mobileNumber,
+                email:nextProps.user.isCenter?nextProps.user.centerEmail===''?nextProps.user.adminEmail:nextProps.user.centerEmail:nextProps.user.email,
+                phone:nextProps.user.isCenter?nextProps.user.centerMobileNumber===''?nextProps.user.adminMobileNumber:nextProps.user.centerMobileNumber:nextProps.user.mobileNumber,
                 location:nextProps.user.address,
                 initRen:false,
-                loading:false
+                loading:false,
+                isCenter:nextProps.user.isCenter
             })
         }
     }
@@ -104,6 +106,7 @@ class EditProfileComponent extends React.PureComponent {
                                 loading = {this.loading}
                                 loadingOff = {this.loadingOff}
                                 loadingState = {this.state.loading}
+                                isCenter={this.state.isCenter}
                                />
                                </div>
                         </div>

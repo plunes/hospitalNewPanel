@@ -565,11 +565,11 @@ class MyCatalogueComponent extends Component {
                             ret = {this.state.ret}
                             retClr= {()=>this.setState({ret:false})}
                         />
-                    <div className='col-md-8 col-xl-8 catalogueComponent'>
+                    <div  style={{ padding:'0rem 1rem 1rem 1rem'}}  className='main_content_rish'>
                         <div className='row justify-content-center'>
                             {/* <p className='catalogue'>Catalogue</p> */}
-                            <div className='catalogue' >
-                            <h4>Catalogue</h4>
+                            <div className='text-center' >
+                            <h4 style={{position:'relative', marginTop:'1rem'}} className="section_heading_rish">Catalogue</h4>
                             </div>
                         </div>
                         <div className='row listOfService'>

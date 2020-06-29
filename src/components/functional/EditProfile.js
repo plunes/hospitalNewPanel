@@ -21,15 +21,15 @@ import React from "react"
         }else{
             props.submitProfileDetails({
                  fullname:props.fullname,
-                 phone:props.phone,
-                 email:props.email,
+                 [!!props.isCenter?'centerMobileNumber':'phone']:props.phone,
+                 [!!props.isCenter?'centerEmail':'email']:props.email,
                  location:props.location
             })
             props.loading()
         }
     }
 
-
+console.log(props.isCenter,"props.iscenter")
   return (
     <div className="managePay">
       {props.loadingState && <LoaderComponent />}
