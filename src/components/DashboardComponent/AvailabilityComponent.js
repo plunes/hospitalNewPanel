@@ -251,8 +251,8 @@ setAvailabilityClr = () =>{
                         setAvailabilityRet:false
                       })}
                   />       
-                <div className= 'col-md-8 col-xl-8 AvailableTime AllComponents my_av_sec'>
-                <div className= 'text-center'><h4 className="abt_sec"><b>My Availability</b></h4></div>
+                <div className='main_content_rish'>
+                <div className= 'text-center'>  <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">My Availability</h4></div>
                   <div className="time_she">
                   {this.state.loading &&  <LoaderComponent />}
                     <div className="row text-center">

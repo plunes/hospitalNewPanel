@@ -32,8 +32,8 @@ import  "./AboutUs.css";
         console.log(this.props,"this.props in helpCompoent")
         return (
             <React.Fragment>
-                <div className='col-md-8 col-xl-9'>
-                  <div className="helppage">
+                <div className='main_content_rish'>
+                  <div>
                   <div className="helppageBody">
                       <SubmitQuery 
                         submit_query_ret = {this.props.submit_query_ret}

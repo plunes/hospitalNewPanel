@@ -1,3 +1,20 @@
+export const  get_circular_progress_data = () =>{
+  let arr = []
+  let  i = 0
+   while(i<51){
+     arr.push(`${i}%`)
+     i++
+   }
+   return arr
+}
+
+export const get_slider_labels = (data) => {
+  return  {
+    0: data.lower,
+    100: data.upper
+  }
+}
+
 export const get_url = () =>{
   let baseUrl = "https://devapi.plunes.com/v5"
   const pathLocation = window.location.host;

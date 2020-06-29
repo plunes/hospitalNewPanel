@@ -19,141 +19,170 @@ class SidebarComponent extends Component {
   }
 
   render() {
+    console.log(this.props,"this.props in sidebar")
    const  prof_data  = this.props.prof_data
     return (
-        <div className="sidenav auto-center_ris">
-          <div className="pointer">
-         <Link to= "/dashboard" 
-           className="list-group"
-           role="button" 
-           onClick={()=>this.props.toggleDash()}
-            >
-              <span>
-                <img className="sidebaricon" src="/dashboard.svg" alt=""></img>
-                Dashboard
-              <img className="arrowdesign" src="arrow.svg" alt=""></img></span>
+        <div className="sidebar_wrapper">
+            <div  className={`${this.props.pathname==='/dashboard'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
+              <Link to= "/dashboard" 
+                  className="list-group"
+                  role="button" 
+                  onClick={()=>this.props.toggleDash()}>
+                    <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon"src={this.props.pathname==='/dashboard'?'/icon/dash_icon_active.svg':'/icon/dash_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                      <text  className={`${this.props.pathname==='/dashboard'?'sidebar_list_text_active':''} `}>Dashboard</text>
+                      </span>
+                    </span>
               </Link>
-               <hr></hr>
-            <Link to= "/dashboard/profile" 
-           className="list-group"
-           role="button" 
-           onClick={()=>
-              {
-              if(!!get_url_params('center')){
-                console.log(get_url_params('center'),"sky is one and shes a")
-                this.props.get_user_info({from_dash_page:true})
-              }
-              this.props.toggleProfile()
-            }}> 
-               <span>
-                <img className="sidebaricon pro_tw" src="/profile.jpg" alt=""></img>
-              </span>
-              Profile
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-            </Link> <hr></hr>
+            </div>
+            <div  className={`${this.props.pathname==='/dashboard/profile'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
+              <Link to= "/dashboard/profile" 
+                  className="list-group"
+                  role="button" 
+                  onClick={()=>
+                          {
+                          if(!!get_url_params('center')){
+                            console.log(get_url_params('center'),"sky is one and shes a")
+                            this.props.get_user_info({from_dash_page:true})
+                          }
+                          this.props.toggleProfile()
+                        }}> 
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/profile'?'/icon/profile_icon_active.svg':'/icon/profile_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text className={`${this.props.pathname==='/dashboard/profile'?'sidebar_list_text_active':''} `}>Profile</text>
+                      </span>
+                    </span>
+              </Link>
+            </div>
+            <div  className={`${this.props.pathname==='/dashboard/availability'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
                <Link to= "/dashboard/availability"
                 className="list-group"
                 role="button" 
-                onClick={()=>this.props.toggleAvail()}
-            > 
-              <span>
-                <img className="sidebaricon" src="/a1.jpg" alt=""></img>
-              </span>
-              My Availability
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-            </Link> <hr></hr>
-            <Link to= "/dashboard/appointments"
-                className="list-group"
-                role="button" 
-                onClick={()=>this.props.toggleAppoint()}
-            > 
-              <span>
-                <img className="sidebaricon" src="/a2.jpg" alt=""></img>
-              </span>
-              Appointments
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-           </Link><hr></hr>
-           {!!prof_data.isAdmin && <React.Fragment> <Link to= "/dashboard/centers"
-                className="list-group"
-                role="button" 
-                onClick={()=>this.props.toggleCenters()}
-            >
-              <span>
-                <img className="sidebaricon" src="/a2.jpg" alt=""></img>
-              </span>
-              Centres
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-           </Link><hr></hr> </React.Fragment>}
+                onClick={()=>this.props.toggleAvail()}>
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/availability'?'/icon/availability_icon_active.svg':'/icon/availability_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text className={`${this.props.pathname==='/dashboard/availability'?'sidebar_list_text_active':''} `}>My Availability</text>
+                      </span>
+                    </span>
+              </Link>
+            </div>
+            <div  className={`${this.props.pathname==='/dashboard/appointments'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
+              <Link to= "/dashboard/appointments"
+                  className="list-group"
+                  role="button" 
+                  onClick={()=>this.props.toggleAppoint()}>
+               <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/appointments'?'/icon/appointment_icon_active.svg':'/icon/appointment_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text className={`${this.props.pathname==='/dashboard/appointments'?'sidebar_list_text_active':''} `}>Appointments</text>
+                      </span>
+                    </span>
+              </Link>
+            </div>
+            {!!prof_data.isAdmin &&    <div  className={`${this.props.pathname==='/dashboard/centers'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
+              <Link to= "/dashboard/centers"
+                  className="list-group"
+                  role="button" 
+                  onClick={()=>this.props.toggleCenters()}>
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon"  src={this.props.pathname==='/dashboard/centers'?'/icon/centers_icon_active.svg':'/icon/centers_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text  className={`${this.props.pathname==='/dashboard/centers'?'sidebar_list_text_active':''} `}>Centres</text>
+                      </span>
+                    </span>
+              </Link>
+              </div>}
            
-            {/* <a href="/my-catalogue"
-              className="list-group"
-            >
-              <span>
-                <img className="sidebaricon" src="" alt=''></img>
-              </span>
-              My catalogue
-              <img className="arrowdesign" src="arrow.svg"></img>
-            </a> <hr></hr> */}
-             <Link to= "/dashboard/settings"
-                className="list-group"
-                role="button" 
-                onClick={()=>this.props.toggleSettings()}
-            > 
-              <span>
-                <img className="sidebaricon" src="/Settings.jpg" alt=""></img>
-              </span>
-              Settings
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-            </Link> <hr></hr>
-            {!!!prof_data.isCenter &&
-            <React.Fragment>
-            <Link to= "/dashboard/manage-payment"
-                className="list-group"
-                role="button" 
-                onClick={()=>this.props.toggleManage()}
-            > 
-              <span>
-                <img className="sidebaricon" src="/m1.jpg" alt=""></img>
-              </span>
-              Manage Payment
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-            </Link> <hr></hr>
-            </React.Fragment>
-            }
-            <Link to= "/dashboard/help"
-                className="list-group"
-                role="button" 
-                onClick={()=>this.props.toggleHelp()}
-            > 
-              <span>
-                <img className="sidebaricon" src="/Help.jpg" alt=""></img>
-              </span>
-              Help
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-            </Link> <hr></hr>
+              <div  className={`${this.props.pathname==='/dashboard/settings'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}> 
+                <Link to= "/dashboard/settings"
+                   className="list-group"
+                   role="button" 
+                 onClick={()=>this.props.toggleSettings()}>
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/settings'?'/icon/settings_icon_active.svg':'/icon/settings_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text  className={`${this.props.pathname==='/dashboard/settings'?'sidebar_list_text_active':''} `}>Settings</text>
+                      </span>
+                    </span>
+               </Link> 
+            </div>
+            {!!prof_data.isAdmin &&
+            <div  className={`${this.props.pathname==='/dashboard/manage-payment'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>  
+               <Link to= "/dashboard/manage-payment"
+                    className="list-group"
+                    role="button" 
+                    onClick={()=>this.props.toggleManage()}> 
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/manage-payment'?'/icon/payments_icon_active.svg':'/icon/payments_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text  className={`${this.props.pathname==='/dashboard/manage-payment'?'sidebar_list_text_active':''} `}>Manage Payment</text>
+                      </span>
+                    </span>
+               </Link>
+           </div>}
+           <div  className={`${this.props.pathname==='/dashboard/help'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}> 
+              <Link to= "/dashboard/help"
+                  className="list-group"
+                  role="button" 
+                  onClick={()=>this.props.toggleHelp()}>
+                  <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon"src={this.props.pathname==='/dashboard/help'?'/icon/help_icon_active.svg':'/icon/help_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text  className={`${this.props.pathname==='/dashboard/help'?'sidebar_list_text_active':''} `}>Help</text>
+                      </span>
+                    </span>
+              </Link>
+            </div> 
+            <div  className={`${this.props.pathname==='/dashboard/aboutus'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}> 
             <Link to= "/dashboard/aboutus"
                 className="list-group"
                 role="button" 
-                onClick={()=>this.props.toggleAbout()}
-            > 
-              <span>
-                <img className="sidebaricon" src="/about-us.jpg" alt=""></img>
-              </span>
-              About Us
-              <img className="arrowdesign" src="arrow.svg" alt=""></img>
-            </Link> <hr></hr>
-            <div 
-              className="list-group log"
-              onClick={this.handlelogoutClick}
-            >
-              <span>
-                <img className="sidebaricon" src="/Logout.jpg" alt=""></img>
-              </span>
-              Logout
-            </div>
-          </div>
+                onClick={()=>this.props.toggleAbout()}>
+                <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={this.props.pathname==='/dashboard/aboutus'?'/icon/about_us_icon_active.svg':'/icon/about_us_icon.svg'} alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text  className={`${this.props.pathname==='/dashboard/aboutus'?'sidebar_list_text_active':''} `}>About Us</text>
+                      </span>
+                    </span>
+           </Link>
         </div>
-     
+         <div  className="sidebar_item_wraper " onClick={this.handlelogoutClick} >
+         <Link to= "/"
+                className="list-group"
+                role="button" 
+                onClick={this.handlelogoutClick}>
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src="/icon/logout_icon.svg" alt=""></img>
+                      </span>
+                      <span className="sidebar_list_text">
+                       <text className="">Logout</text>
+                      </span>
+                   </span>
+          </Link>
+         </div>
+      </div>
     );
   }
 }

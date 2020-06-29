@@ -228,7 +228,9 @@ input:checked + .slider:before
       border-radius: 10px;margin-left: 5rem;}
 
 .settingpageBody
-    {margin: 40px;}  
+   {
+    padding: 1rem;
+   }
 
 .accset 
     {border: 1px solid #DCDCDC;

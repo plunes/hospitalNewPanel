@@ -16,10 +16,10 @@ export default class AboutUsComponent extends Component {
         }else{
             return (
               <React.Fragment>
-                            <div className='col-md-8 col-xl-9'>
-                                <div className="AboutHospital">
+                            <div className='main_content_rish'>
+                                <div>
                                 <div className="AboutHospitalBody">
-                                <div className="About">About Us</div>
+                                <h4 style={{position:'relative'}} className="section_heading_rish">About Us</h4>
                                 <div className="Aboutplunes"><p>Plunes is building India's first utility network, which helps you find instant solutions to your all healthcare problems. 
                                     We are an AI powered utility network, which helps you find curated, validated & cost effective solutions to your all healthcare problems. 
                                     Our technology enables every individual to have their own doctor anywhere anytime as well as have the experience of solving the problems

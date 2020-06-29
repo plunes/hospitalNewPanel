@@ -97,11 +97,7 @@ import { only_alphabets, is_positive_real_number } from "../../utils/common_util
           className="form-control customborder"
           name="name"
           placeholder="Name"
-          onChange={(e)=>{
-            if(!!only_alphabets(e.target.value)){
-              props.handleChange(e)
-            }
-          }}
+          onChange={(e)=> props.handleChange(e)}
           required
           value = {props.data.name}
         />

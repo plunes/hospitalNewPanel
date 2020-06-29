@@ -13,7 +13,9 @@
     border-radius: 10px;margin-left: 5rem;}
 
 .helppageBody
-   {margin: 40px;}
+  {
+     padding: 1rem;
+  }
 
 .bookappoint 
    {background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -57,7 +59,9 @@
     margin-bottom: 30px;}
 
 .AboutHospitalBody
-   {margin: 40px;}  
+   {
+      padding: 1rem;
+   }
 
 .Aboutplunes
    {text-align: justify;font-size: 14px;}

@@ -59,11 +59,11 @@ class ChangePassword extends React.PureComponent {
         console.log(this.props,"this.props changePassword")
         return (
                     <React.Fragment>
-                    <div className='col-md-7'>
-                        <div className="body-wrap">
+                    <div className='main_content_rish'>
+                        <div >
                            <div className="settingpageBody">
                                <div className='settingtopic'>
-                                    <p>Please enter your new password</p>
+                                    <h4 style={{position:'relative'}} className="section_heading_rish">Please enter your new password</h4>
                                </div>
                                <NewNotif 
                                 ret = {this.state.ret}

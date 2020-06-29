@@ -31,6 +31,7 @@ import ConnectivityListener from '../ConnectivityListener'
 import admin_route from "../../HOC/admin_route"
 import protected_route from "../../HOC/protected_route"
 import NewNotif from '../functional/NewNotif';
+import './index.css'
 
 
 const initialState = {
@@ -90,7 +91,8 @@ export class DashboardPage extends React.PureComponent {
         Notify:{
           success:false,
           error:false
-      }
+      },
+      render_header:true
     }
   }
 
@@ -127,8 +129,6 @@ export class DashboardPage extends React.PureComponent {
       }
         
         if(!!nextProps.notificationData){
-          console.log(nextProps.notificationData,"log 1")
-          console.log(nextProps.notificationData.notifications,"log 2")
           // let data = !!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:{...nextProps.notif_data, ...this.state.notificationsData}
           this.setState({
               notificationsData:{
@@ -245,7 +245,7 @@ export class DashboardPage extends React.PureComponent {
 }
 
   componentDidMount() {
-    if (this.props.location.pathname == '/dashboard') {
+    if (this.props.location.pathname === '/dashboard') {
       this.setState({
       ...initialState,dash: 'active'
 
@@ -359,65 +359,75 @@ export class DashboardPage extends React.PureComponent {
   toggleChangePass =()=>{
     this.setState({
      ...initialState,
-     changePass:'active'
+     changePass:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleDash =()=>{
     this.setState({
      ...initialState,
-     dash:'active'
+     dash:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleProfile = () => {
     this.setState({
      ...initialState,
-     prof:'active'
+     prof:'active',
+     render_header:!this.state.render_header
     })
   }
   toggleAvail =() =>{
     this.setState({
      ...initialState,
-     avail:'active'
+     avail:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleAppoint =()=> {
     this.setState({
      ...initialState,
-     appoint:'active'
+     appoint:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleSettings =() => {
     this.setState({
      ...initialState,
-     settings:'active'
+     settings:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleManage =()=> {
     this.setState({
      ...initialState,
-     manage:'active'
+     manage:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleHelp =  () => {
     this.setState({
      ...initialState,
-     help:'active'
+     help:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleAbout =  () => {
     this.setState({
      ...initialState,
-     about:'active'
+     about:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleNotif =  () => {
     this.setState({
      ...initialState,
-     notif:'active'
+     notif:'active',
+     render_header:!this.state.render_header
     },()=>{
      this.props.remove_notif_count()
     })
@@ -425,20 +435,23 @@ export class DashboardPage extends React.PureComponent {
   togglePayment =  () => {
     this.setState({
      ...initialState,
-     payment:'active'
+     payment:'active',
+     render_header:!this.state.render_header
     })
   }
   toggleEditProf =  () => {
     this.setState({
      ...initialState,
-     editProf:'active'
+     editProf:'active',
+     render_header:!this.state.render_header
     });
   }
 
   toggleMyCatalog =  () => {
     this.setState({
      ...initialState,
-     myCataloge:'active'
+     myCataloge:'active',
+     render_header:!this.state.render_header
     });
   }
   toggleAddDoc =  () => {
@@ -456,7 +469,8 @@ export class DashboardPage extends React.PureComponent {
   toggleCenters =  () => {
     this.setState({
      ...initialState,
-     centers:'active'
+     centers:'active',
+     render_header:!this.state.render_header
     });
   }
 
@@ -565,7 +579,6 @@ authObject =()=> {
                         error={this.state.Notify.error}
                         clear = {()=>this.setState({Notify:{success:false,error:false}})}
                         />
-                    <div className='row'>
                         <DashboardHeader
                           toggleNotif = {this.toggleNotif}
                           togglePayment = {this.togglePayment}
@@ -577,10 +590,9 @@ authObject =()=> {
                           prof_data = {this.props.prof_data}
                           authObject = {this.authObject}
                         />
-                    </div>
-                    <div className="container-fluid">
-                    <div className='row main-body-wrapper'>
-                        <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-2 side_br'>
+                <div className="main-body-wrapper">
+                    <div className="main_body_flex_parent">
+                        <div className="main_body_flex_sidebar">
                             <SidebarComponent
                               prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
@@ -593,8 +605,10 @@ authObject =()=> {
                               toggleAbout = {this.toggleAbout}
                               toggleCenters = {this.toggleCenters}
                               user_info = {this.state.user_info}
+                              pathname ={this.props.location.pathname}
                             />
                         </div>
+                  <div className="main_body_flex_content">
                   {(this.props.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
@@ -702,9 +716,11 @@ authObject =()=> {
                    get_centers_loading ={this.state.get_centers_loading}
                    location = {this.props.location}
                   />):''}
+              </div>
         </div>
         </div>
         </div>
+      
     )
   }
 }

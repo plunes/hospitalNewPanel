@@ -64,10 +64,10 @@ import "./AvailabilityComponent.css";
           console.log(this.state,"state in SettingsComponent")
           return (
                <React.Fragment>
-                  <div className='col-md-8 col-xl-9'>
-                              <div className="settingpage">
+                  <div className='main_content_rish'>
+                              <div>
                                    <div className="settingpageBody">
-                                        <div className="settingtopic"><p >Settings</p></div>
+                                   <h4 style={{position:'relative'}} className="section_heading_rish">Settings</h4>
                                         <div className="row settingfont settingtype">
                                              <div className="col-xs-3 col-sm-1 col settingtypecol1"><img src="/Account-Settings.jpg" alt=''className=""></img></div>
                                              <div className="col-xs-9 col-sm-11 col acnt">Account Settings</div>

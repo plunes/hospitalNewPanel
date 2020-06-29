@@ -93,7 +93,7 @@ export default class LandingFooter extends Component {
           </div>
           <div className="">
             <div className="row align-items-center _brdr_bt">
-              <p className="col-lg-12 col-sm-12 footer-text m-0 text-center footerlast ">
+              <p style={{color:'#fff'}} className="col-lg-12 col-sm-12 footer-text m-0 text-center footerlast ">
                 © 2020 Plunes · All rights reserved
              </p>
             </div>

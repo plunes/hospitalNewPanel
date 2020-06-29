@@ -80,7 +80,7 @@ class ManagePaymentComponent extends Component {
         console.log(this.state,"this.props in ManageComponent")
         return (
             <React.Fragment>
-                <div className='col-md-7 col-xl-8 AllComponents'>
+                <div className='main_content_rish'>
                     <ManagePayment 
                      bankname = {this.state.bankname}
                      accnumber = {this.state.accnumber}

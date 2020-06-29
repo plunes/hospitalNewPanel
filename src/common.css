@@ -408,25 +408,9 @@ margin: 0 1%;
 .foter_colour_section {
     margin-top: 4rem;
     padding-top: 1rem;
-    max-height: 30rem;
     background-color: #1D3861;
+    max-height: 30rem;
 }
-@media (max-width: 1200px)  and (min-width: 370px)   {
-    .foter_colour_section {
-        max-height: 25rem;
-    }
-}
-
-@media  screen  and (min-width: 1210px)  {
-    .foter_colour_section {
-        max-height: 20rem
-    }
-}
-/* @media  screen and (min-width: 750px)  {
-.foter_colour_section {
-    max-height: 20rem;
-}
-} */
 
 .responsive-logo {
     width: 8rem;
@@ -446,11 +430,11 @@ margin: 0 1%;
     margin-left: 2rem;
 }
 
-.navbar_dashboard_rish {
+/* .navbar_dashboard_rish {
         font-weight: 300;
         -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12) !important;
         box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12) !important;
-}
+} */
 
 .HospitalCoverImg {
     object-fit: contain !important;
@@ -460,4 +444,31 @@ margin: 0 1%;
      min-height: 30rem;
      margin-bottom: 2rem;
 }
+}
+
+.main_content_rish {
+    width: 80%;
+    background-color: #fff !important;
+    min-height: 30rem;
+    position: relative;
+}
+
+.navbar-collapse {
+    margin-right: 0px;
+}
+
+.section_heading_rish {
+    text-align: center;
+    position: relative;
+}
+.insight_wrapp_rish-12 {
+    margin-top: .5rem;
+    margin-bottom: .5rem !important;
+}
+.modal_cross_icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+    left: 2.5rem;
+    cursor: pointer;
 }

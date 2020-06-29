@@ -102,11 +102,7 @@ import { only_alphabets } from  "../../utils/common_utilities"
           className="form-control customborder"
           name="name"
           placeholder={`${!!props.lab?'Lab Name':'Hospital Name'}`}
-          onChange={(e)=>{
-            if(!!only_alphabets(e.target.value)){
-              props.handleChange(e)
-            }
-          }}
+          onChange={(e)=> props.handleChange(e)}
           required
           value = {props.data.name}
         />
