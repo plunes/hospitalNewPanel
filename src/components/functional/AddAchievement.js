@@ -66,7 +66,7 @@ const handleUpload = (e) => {
 
 
 const submitdetails = () => {
-    if(props.achieveTitle === ''){
+    if(props.achieveTitle ===''){
         addToast("Enter title of Achievement",{ appearance: 'error', autoDismiss:true })
     }else{
       let achievements = [...props.achievements]
