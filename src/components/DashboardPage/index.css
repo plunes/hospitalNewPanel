@@ -177,6 +177,17 @@
     display: block;
     margin: auto;
 }
+
+.insight_component_time_wrap {
+    flex:1 1 15%;
+    display: block;
+    margin: auto;
+}
+.insight_component_info_wrap {
+    flex:1 1 50%;
+    display: block;
+    margin: auto;
+}
 .action_insight_image {
     width: 4rem;
     height: auto;
@@ -262,4 +273,36 @@
 .center_flex_image {
     height: 3.5rem;
     width: auto;
+}
+
+.tech_background {
+    background: transparent url('../../images/tech_background.png') center no-repeat !important;
+    background-size: cover !important;
+}
+
+.tag_section_rish {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tag_section_child {
+    flex:1 1 20%;
+    display: block;
+    margin:auto;
+}
+
+.tag_wrapper_rish {
+    height: 2rem;
+    width: 8rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border: 1px solid lightgray;
+    border-radius: .3rem;
+    padding: .2rem .4rem;
+    cursor: pointer;
+}
+
+.active_tag {
+    background-color: #f1f1f1 !important;
 }

@@ -30,8 +30,10 @@ import {
   } from 'react-phone-number-input';
 import validator from "validator"
 import { Link } from "react-router-dom"
-import { isEmpty, is_positive_real_number } from "../../utils/common_utilities"
+import { isEmpty, is_positive_real_number, get_circular_progress_data, get_slider_labels } from "../../utils/common_utilities"
 import NewNotif from '../functional/NewNotif';
+import CircularProgress from '../functional/CircularProgress'
+import Tag from '../functional/Tag'
 const customStyles = {
     content: {
         top: '50%',
@@ -86,7 +88,7 @@ class DashboardComponent extends React.PureComponent {
                 center:''
             },
             get_business:{
-                days:'7',
+                days:7,
                 center:''
             },
             act_as_admin_data:{
@@ -259,12 +261,12 @@ class DashboardComponent extends React.PureComponent {
         })
       };
 
-     handleDaysChange(e) {
+     handleDaysChange(value) {
         this.setState({
             get_business_loading:true,
             get_business:{
                 ...this.state.get_business,
-               days:e.target.value
+               days:value
             }
         },()=>this.props.get_business({...this.state.get_business}))
     }
@@ -475,9 +477,9 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        // console.log(this.props,"N")
-        // console.log(this.props.location_toggler,"this.props.location_toggler")
-        // console.log(!!this.props.business_data.businessGained,"!!this.props.business_data.businessGained")
+        console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
+        console.log(this.state,"this.state in dashboard")
+        console.log(this.props," this.props in dashboard component")
         let { percent } = this.state
         const options = {
             title: {
@@ -572,7 +574,8 @@ class DashboardComponent extends React.PureComponent {
                                                         s = {s}
                                                         handleRealPrice = {this.handleRealPrice}
                                                         index = {index}
-                                                        />)
+                                                        />
+                                                        )
                                                     )
                                                 }) : <div className="no_insights_wrapper_ris">
                                                     <div className="no_insight_image-wrapper">
@@ -651,6 +654,36 @@ class DashboardComponent extends React.PureComponent {
                                                            </select>}
                                                          </span>
                                                       </span>
+                                                    </div>
+                                                    <div className="tag_section_rish margin_top_small_rish">
+                                                            <span className='tag_section_child text-center'>
+                                                                    <Tag 
+                                                                        name="Today"
+                                                                        onClick = {()=>this.handleDaysChange(1)}
+                                                                        active ={this.state.get_business.days===1}
+                                                                    />
+                                                            </span>
+                                                            <span className='tag_section_child text-center'>
+                                                                    <Tag 
+                                                                     name="Weekly"
+                                                                     onClick = {()=>this.handleDaysChange(7)}
+                                                                     active ={this.state.get_business.days===7}
+                                                                    />
+                                                            </span>
+                                                            <span className='tag_section_child text-center'>
+                                                                    <Tag
+                                                                      name="Monthly"
+                                                                      onClick = {()=>this.handleDaysChange(30)}
+                                                                      active ={this.state.get_business.days===30}
+                                                                    />
+                                                            </span>
+                                                            <span className='tag_section_child text-center'>
+                                                                    <Tag
+                                                                     name="Yearly"
+                                                                     onClick = {()=>this.handleDaysChange(365)}
+                                                                     active ={this.state.get_business.days===365}
+                                                                    />
+                                                            </span>
                                                     </div>
                                         { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
                                             <div className='col text-center'>
@@ -778,24 +811,28 @@ class DashboardComponent extends React.PureComponent {
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
                                         ariaHideApp={false}
-                                        contentLabel="Example Modal" className='redeemModal modal_pdd'>
-                                        <div className='text-right'><button type='button' onClick={this.handleModal} className='redeemCross'><img src="/cross.jpg" alt="" style={{ width: "65%" }}></img></button></div>
-                                        <h2 className="update_price" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
-                                        <div clasname="dynmic_pra" style={ { color:'#333333',fontSize:'13px',textAlign: 'center', marginTop:'20px'} }>{this.state.serviceName}</div>
+                                        contentLabel="Example Modal" className='redeemModal modal_pdd tech_background'>
+                                        <div className='text-right'>
+                                            <text  onClick={this.handleModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text>
+                                        </div>
+                                        <span style={{marginBottom:'1rem'}} className="modal_heading center_align_rish"><b style={{color:'#fff'}}>Update Price in your catalogue <br></br>for Maximum Bookings</b></span>
+                                        {/* <h2 className="update_price" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2> */}
+                                       
+                                        <div><text className="serv_ces">{this.state.serviceName}</text></div>
                                         <div className="catlou_sli">     
                                         {this.state.actionablePriceLoading && <LoaderComponent />}      
-                                        <div className="text-center valu_second">
-                                               <b>{Math.floor( this.state.value )} % </b>
-                                            </div> 
-                                            <Slider
+                                        <div className="text-center margin_top_small_rish">
+                                        <Slider
                                             min={0}
                                             max={50}
+                                            labels={get_slider_labels({lower:this.state.updatePrice, upper:this.state.updatePrice/2})}
                                             value={this.state.value}
                                             onChange={this.handleSliderChange}
                                             onValueChange={value => this.setState({ value })}
-                                            valueLabelDisplay="on"
-                                            />
-                                            <div className="SliderUpdatedPrice">&#8377;
+                                      />
+                                            </div> 
+                                          
+                                            <div className="SliderUpdatedPrice margin_top_small_rish">&#8377;
                                             <span>
                                             {Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)} 
                                             </span>
@@ -804,15 +841,16 @@ class DashboardComponent extends React.PureComponent {
                                             </br>
                                            
                                         </div> 
-                                        <div className="row maxmin">
-                                            <div className="col-sm-6"><h4>&#8377;{this.state.updatePrice}</h4></div>
-                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.updatePrice / 2}</h4></div>
-                                        </div>
-                                       
-                                        <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.value===0?
-                                        <p style={{ fontWeight:'bold'}}><b>0%</b></p>:
-                                        <p style={{ fontWeight:'bold'}}><b>{10 + + this.state.value}% to {15 + + this.state.value}%</b></p>}</div>
-                                        <div className="text-center"><button style={{ fontSize: '17px', border: 'none' }} type='button' onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+
+                                    <div className="bookingChance text-center margin_top_small_rish">Chances of Conversion increases by
+                                    </div>
+
+                                    <div className='text-center margin_top_small_rish'><CircularProgress
+                                            data = {get_circular_progress_data()}
+                                            value={this.state.value}
+                                        />
+                                    </div>
+                                        <div className="text-center"><text style={{ fontSize: '17px', border: 'none' }}  onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                     </Modal>
                                     <Modal
                                         isOpen={this.state.realModalIsOpen}
@@ -820,33 +858,29 @@ class DashboardComponent extends React.PureComponent {
                                         onRequestClose={this.closeModal}
                                         style={customStyles}
                                         ariaHideApp={false}
-                                        contentLabel="Example Modal" className='redeemModal secon_modal'>
-                                        <div className='text-right'><button type='button' onClick={this.handleRealModal} className='redeemCross'><img src="/cross.jpg" style={{ width: "65%" }} alt=""></img></button></div>
-                                        <span style={{marginBottom:'2rem'}} className="modal_heading center_align_rish">Real Time Prediction</span>
-                                        <h2 className="yout_ctl" ref={subtitle => this.subtitle = subtitle}><b>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
-                                        <div><p className="serv_ces">{this.state.realServiceName}</p></div>
-                                        <div>   
-                                            {this.state.realUpdatePriceLoading && <LoaderComponent />}        
-                                            <div className="text-center valu_second">
-                                               <b>{Math.floor( this.state.solValue )} % </b>
-                                            </div>
-                                            <div className="row maxmin">
-                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
-                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
-                                               </div>
-                                            <Slider
+                                        contentLabel="Example Modal" className='redeemModal secon_modal tech_background'>
+                                        <div className='text-right'>
+                                            <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text>
+                                        </div>
+                                        <span style={{marginBottom:'1rem'}} className="modal_heading center_align_rish">Real Time Prediction</span>
+                                        <div><text className="serv_ces">{this.state.realServiceName}</text></div>
+                                        <div className='margin_top_small_rish'>   
+
+                                        <Slider
                                             min={0}
                                             max={50}
+                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:this.state.realUpdatePrice/2})}
                                             value={this.state.solValue}
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
-                                            <div className="SliderUpdatedPrice">&#8377;
+
+                                        <div className="SliderUpdatedPrice margin_top_small_rish">&#8377;
                                             <span style={{fontSize:'1rem'}}>
                                                 {((!!this.state.real_time_edit) && (!!this.state.realUpdateData.suggested))?
                                                 <React.Fragment>
                                                 <input onChange={(e)=>this.handle_real_time_edit_price(e)} value={this.state.real_time_edit_price} className="real_time_edit_input"  /> 
-                                                <i style={{color:'green', fontSize:'1rem',  marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:false})}  className="fas fa-edit cursor-pointer"></i>
+                                                <i style={{color:'#fff', fontSize:'1rem',  marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:false})}  className="fas fa-edit cursor-pointer"></i>
                                                 </React.Fragment>
                                                  :
                                                  <React.Fragment>
@@ -855,13 +889,30 @@ class DashboardComponent extends React.PureComponent {
                                                  </React.Fragment>
                                                 }
                                             </span>            
-                                                </div><br></br>
+                                        </div>
+
+
+                                    <div className="bookingChance text-center margin_top_small_rish">Chances of Conversion increases by
+                                    </div>
+                                        <div className='text-center margin_top_small_rish'><CircularProgress
+                                            data = {get_circular_progress_data()}
+                                            value={this.state.solValue}
+                                        /></div>
+                                        <h2 className="yout_ctl margin_top_small_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                            {this.state.realUpdatePriceLoading && <LoaderComponent />}        
+                                            {/* <div className="text-center valu_second">
+                                               <b>{Math.floor( this.state.solValue )} % </b>
+                                            </div>
+                                            <div className="row maxmin">
+                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
+                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
+                                               </div> */}
+                                           
+                                           <br></br>
                                         </div> 
                                        
-                                            <div className="bookingChance">Chances of Bookings increases by<br></br>{this.state.solValue===0?
-                                             <p style={{ fontWeight:'bold'}}><b>0%</b></p>
-                                            :<p style={{ fontWeight:'bold'}}><b>{10 + + this.state.solValue}% to {15 + + this.state.solValue}%</b></p>}</div>
-                                        <div className="text-center"><button style={{ fontSize: '18px', border: 'none' }} type='button' onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></button></div>
+                                         
+                                        <div className="text-center"><text style={{ fontSize: '1.2rem', border: 'none' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                     </Modal>
                                     <Modal
                                         isOpen={this.state.act_as_admin_flag}

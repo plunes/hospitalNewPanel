@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.ce00e831.css",
-  "main.css.map": "static/css/main.ce00e831.css.map",
-  "main.js": "static/js/main.1f10b419.js",
-  "main.js.map": "static/js/main.1f10b419.js.map",
+  "main.css": "static/css/main.468d9b04.css",
+  "main.css.map": "static/css/main.468d9b04.css.map",
+  "main.js": "static/js/main.3c9ab30d.js",
+  "main.js.map": "static/js/main.3c9ab30d.js.map",
   "static/media/arrow_left.svg": "static/media/arrow_left.11911410.svg",
   "static/media/arrow_right.svg": "static/media/arrow_right.8ef6a08c.svg",
   "static/media/blue_eclipsce.svg": "static/media/blue_eclipsce.d6baeb04.svg",
@@ -28,5 +28,6 @@
   "static/media/rw-widgets.eot": "static/media/rw-widgets.bc7c4a59.eot",
   "static/media/rw-widgets.svg?v=4.1.0": "static/media/rw-widgets.792dcd18.svg",
   "static/media/rw-widgets.ttf?v=4.1.0": "static/media/rw-widgets.eceddf47.ttf",
-  "static/media/rw-widgets.woff?v=4.1.0": "static/media/rw-widgets.12f0820c.woff"
+  "static/media/rw-widgets.woff?v=4.1.0": "static/media/rw-widgets.12f0820c.woff",
+  "static/media/tech_background.png": "static/media/tech_background.99600378.png"
 }

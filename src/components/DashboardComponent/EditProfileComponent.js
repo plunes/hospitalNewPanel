@@ -38,6 +38,7 @@ class EditProfileComponent extends React.PureComponent {
     }
     componentWillReceiveProps(nextProps){
         if(!!this.state.initRen){
+            console.log(nextProps.user,'NextProps.user')
             this.setState({
                 fullname:nextProps.user.name,
                 email:nextProps.user.email,

@@ -321,7 +321,6 @@ hr
 .InsightUpdate
       {
       overflow: visible;
-      background: white;
       border: none;
       color: #01D35A;position: relative;
       cursor: pointer;
@@ -423,15 +422,18 @@ hr
 .SliderUpdatedPrice
      {
       text-align: center;
+      color: #fff;
       /* font-size: 18px; 
       text-align:center; 
       margin-top:42px !important;    
       font-weight: bold; */
 }
 
-.bookingChance
-    {text-align: center;
-    font-size: 16px; }
+.bookingChance {
+      text-align: center;
+      font-size: 1rem;
+      color: #fff;
+}
 
 .slidecontainer 
     {width: 100%;}
@@ -440,28 +442,66 @@ hr
 .rangeslider-horizontal 
     {height: 8px !important;}
 
-.rangeslider-horizontal .rangeslider__fill 
-    {
-     height: 100%;
-     background-color: linear-gradient(red, yellow, blue) !important;
- }
-
-.rangeslider, .rangeslider .rangeslider__fill 
-    {background-color: #01D35A !important;
-    box-shadow: none !important;}
+.rangeslider__fill { 
+      background-image: linear-gradient(to right, #E24F85 , #EBCB7F) !important;
+}
+.rangeslider     
+{
+   background-color: #356595 !important;
+    box-shadow: none !important;
+}
 
 .rangeslider .rangeslider__handle 
-    {background: #01D35A !important;  border: none !important;
-    box-shadow: none !important;}
+    {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-image: linear-gradient(to right, #4BADF5 , #86F1CD) !important;
+    border: none !important;
+}
 
 .rangeslider-horizontal .rangeslider__handle:after 
-    {background-color: #ffffff !important;
-    width: 22px !important;
-    height: 22px !important;
-    top: 4px !important;
-    left: 4px !important;
-    box-shadow: none !important;}
+    {
+      background-color: #ffffff !important;
+      width: 1rem!important;
+      height: 1rem !important;
+      top: .5rem !important;
+      left: .5rem !important;
+      border: none !important;
+}
 
+
+.rangeslider-horizontal .rangeslider__handle-tooltip  {
+      background-color: #80F0F0 !important;
+      height: 1rem !important;
+      border-radius: 4px !important;
+      top: -30px !important;
+      height: 1.5rem !important;
+      border-radius: 8px !important;
+      border: none !important;
+}
+.rangeslider .rangeslider__handle-tooltip span {
+      margin-top: 0rem !important;
+      color: #000 !important;
+      border: none !important;
+}
+.rangeslider-horizontal .rangeslider__handle-tooltip:after {
+      border-left: 8px solid #083E79;
+      border-right: 8px solid #083E79;
+      border-top: 8px solid #80F0F0 !important;
+      /* color: #fff !important; */
+      left: 50%;
+      bottom: -8px;
+      -webkit-transform: translate3d(-50%, 0, 0);
+      transform: translate3d(-50%, 0, 0);
+}  
+.rangeslider-horizontal .rangeslider__handle:after {
+      top:0.6rem;
+      left: .6rem;
+}
+.rangeslider__label-item {
+      color: #fff;
+}
 /* Dashboard RealTime Insight Css */
 
 .realtimewidth
@@ -542,7 +582,7 @@ hr
     padding-right: 4px;
     margin-left: auto;
     margin-right: auto;
-    font-size: 12px;
+    font-size: 1.1rem;
     font-weight: 200;
 }
 
@@ -570,8 +610,17 @@ hr
 
   /* 2nd modal */
   .secon_modal{padding: 20px 60px 20px 60px;}
-  .yout_ctl{font-size: 16px;text-align: center;}
-  .serv_ces{font-size: 14px;margin-top: 20px;text-align: center;}
+  .yout_ctl{
+        font-size: 1.1rem ;
+        text-align: center;
+        color: #fff;
+      }
+  .serv_ces{
+      font-size: 1rem;
+      text-align: center;
+      display: block;
+      color: #fff;
+      }
   .valu_second{
       position: relative;
       /* right: 83px;
@@ -673,11 +722,14 @@ hr
   }
   .modal_heading {
       text-align: center;
-      font-size: 2rem;
-      font: Regular 40px/46px Proxima Nova;
+      text-decoration: underline;
+      font-weight: bold;
+      font-size: 1.5rem;
+      font: Regular Proxima Nova;
       letter-spacing: 0px;
       color: #333333;
       opacity: 1;
+      color: #fff;
   }
   .modal_content_rish{
         margin-top: 2rem;
@@ -714,6 +766,8 @@ hr
       border: none;
       border-bottom: 1px solid #01D35A;
       width: 7rem;
+      color:#fff;
+      background-color: #073D79;
   }
 
   .payment_flex_wrapper {

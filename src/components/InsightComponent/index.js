@@ -28,13 +28,15 @@ class InsightComponent extends React.PureComponent {
     render(){
         // console.log(this.props,"this.props in Insight")
         let seconds_diff = this.getSecondsDifferent(this.props.s.createdAt)
+        const index = this.props.index
       return (
-        <div className='row' key={this.props.index}>
-        <div className='col-md-2  realtime vertical_align_rish'>
-            <span className="realtimeicon1 center_align_rish vertical_align_rish"><img src="/icon/insight_image.svg" className="realtimeicon center_align_rish vertical_align_rish" alt=""></img></span>
-        </div>
-        <div className='col-md-7 vertical_align_rish'>
-            <div className="RealtimeUsername">
+          <React.Fragment>  
+                <div className="action_insight_wrapper" key={index}>
+                    <span className="action_insight_image_wrapper">
+                        <img src ="/icon/insight_image.svg" className="action_insight_image"/>
+                    </span>
+                    <span className="insight_component_info_wrap">
+                    <div className="RealtimeUsername">
                 {this.props.s.userName}
             </div>
             <div>
@@ -42,11 +44,11 @@ class InsightComponent extends React.PureComponent {
             </div>
             {
               seconds_diff>0?
-                    <button type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u></button>
+                    <text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u></text>
                     : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
             }
-        </div>
-        <div className='col-md-3 vertical_align_rish'>
+            </span>
+                 <span className='insight_component_time_wrap vertical_align_rish'>
             {
                true ?
                     <div style={{height:'100%'}} className="text-center">
@@ -61,9 +63,10 @@ class InsightComponent extends React.PureComponent {
                     : <div>
                     </div>
             }
-        </div><hr className="RealtimeHr"></hr>
-    </div>
-
+        </span>
+                </div>
+                <hr></hr>
+          </React.Fragment>
       )
     }
 }
