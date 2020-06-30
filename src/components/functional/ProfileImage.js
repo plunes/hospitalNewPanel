@@ -84,7 +84,7 @@ let url = ""
 
   return (
 <React.Fragment>
-  <div>
+  <div style={{position:'relative'}}>
     <input  
     style={{display:'inline',display:'none'}}
     id="uploadInput"
@@ -93,16 +93,19 @@ let url = ""
     ref = {profileImageRef}
     />
     {props.loading && <LoaderComponent style={{top:'30%'}} />}
+    <div style={{position:'relative'}} className=' blackdot'>
     <img 
     onClick={(e)=>handleImageClick(e)}
-    className="blackdot img-loading_rish"
+    className=" img-loading_rish profile_image_rish"
     style={{cursor:'pointer'}}
     src={(!!props.user?props.user.imageUrl:'/profile.jpg')} 
     alt=""> 
     </img>
+      <div className="edit_image2">
+          <img onClick={(e)=>handleImageClick(e)} className="edit_icn2 cursor-pointer"src={'/pen_editor.svg'} />
+      </div>
     </div>
-    <div className="edit_image2">
-        <img onClick={(e)=>handleImageClick(e)} className="edit_icn2 cursor-pointer"src={'/pen_editor.svg'}></img></div>
+    </div>
 </React.Fragment>
   )
 })

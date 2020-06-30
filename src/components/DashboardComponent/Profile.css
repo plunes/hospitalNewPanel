@@ -42,12 +42,6 @@
         {position: absolute;  
         margin: 384px 0px 0px 822px;}
 
-.blackdot
-        {margin-left: 3rem;
-        width: 66px;
-        border-radius: 50%;
-        height: 66px;
-        border: 1px solid #ced4da;}
 
 .ExpertsDetails
         {width: 50%; 
@@ -113,18 +107,7 @@
         padding: 2%;
 }
 /* alka-css */
-.mas_hos{
-        padding: 1rem 1.5rem;
-        width: 100%;
-        min-height: 20rem;
-        max-height: 30rem;
-        display: block;
-        /* height: 30rem; */
-}
-.edit_image{background: #01D35A;border-radius: 50%;width: 44px;height: 44px;text-align: center;cursor: pointer;float: right;position: relative;
-        right: 26px;
-        top: -45px;}
-.edit_icn {width:16px;padding-top: 15px;}
+
 .content_pos{
         /* padding-top: 11px;
         position: relative; */
@@ -159,7 +142,7 @@
 {
         /* margin-top: 2rem; */
 }
-.edit_image2{background: #01D35A;border-radius: 50%;width: 25px;height: 25px;text-align: center;position: relative; left: 74px; top: -23px;}
+
 .edit_icn2{width: 10px;padding-top: 4px;}
 .achivementlogo img{
         width: 7rem;

@@ -438,12 +438,10 @@ body {
 
 .multi-steps > li.not-paid_ris:before {
   display: block;
-  /* content: '100% ' !important; */
   margin: 0 auto 4px;
   background-color: #fff;
   width: 4rem;
   height: 4rem;
-  /* line-height: 10rem; */
   text-align: center;
   font-weight: bold;
   border-width: 2px;
@@ -774,3 +772,122 @@ html {
   color: #fff;
 }
 
+.mas_hos{
+  width: 100%;
+  min-height: 10rem;
+  max-height: 20rem;
+  display: block;
+  border-radius: 1rem;
+}
+.edit_image {
+  background: #01D35A;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  bottom: -1.5rem;
+}
+
+.edit_icn {
+  width: 1rem;
+  display: block;
+  margin: auto;
+  padding-top: 1rem;
+}
+
+
+.blackdot
+     {
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      width: 8rem;
+      border-radius: 50%;
+      display: block;
+      height: 8rem;
+      bottom: 2.5rem;
+      border: 3px solid #F9F9F9;
+}
+.profile_pic_name_parent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile_pic_child {
+  flex:1 1 2%;
+  margin: 0 1%;
+}
+.profile_name_child {
+  flex:1 1 65%;
+  margin: 1rem auto 1rem auto;
+}
+.flex_parent_rish {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex_child_rish {
+  flex:1 1 50%;
+  margin: auto;
+}
+
+.edit_image2 {
+  background: #01D35A;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  right: 0px;
+  text-align: center;
+  position: absolute;
+  border: none;
+  top: 6rem;
+}
+
+.profile_image_rish {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 8rem;
+  border-radius: 50%;
+  display: block;
+  height: 8rem;
+  border: 3px solid #F9F9F9;
+}
+.achievemnet_badge_wrapper {
+    margin: auto;
+    padding: 2rem;
+}
+.catalogue_badge_wrapper {
+    margin: auto;
+    padding: 1rem;
+}
+.achievement_badge {
+    background-color: #F2FFF9;
+    display: block;
+    margin: auto;
+    width: 20rem;
+    border-radius: 1rem;
+}
+.catalogue_badge {
+  background-color: #F2FFF9;
+  display: block;
+  margin: auto;
+  width: 20rem;
+  border-radius: 1rem;
+}
+.badge_image {
+  height: 5rem;
+  width: 5rem;
+  margin: auto;
+  display: inline;
+}
+.catalogue_badge_text {
+  display: inline;
+  font-size: 1.5rem;
+  color:#000;
+  border: none;
+  margin-left: 1rem;
+}

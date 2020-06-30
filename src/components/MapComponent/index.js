@@ -5,6 +5,9 @@ import Autocomplete from 'react-google-autocomplete';
 import { GoogleMapsAPI } from './client-config';
 import LoaderComponent from "../functional/LoaderComponent"
 import NewNotif from "../functional/NewNotif"
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+// If you want to use the provided css
+import 'react-google-places-autocomplete/dist/index.min.css';
 Geocode.setApiKey( GoogleMapsAPI );
 Geocode.enableDebug();
 
@@ -240,46 +243,65 @@ class Map extends Component{
 	 * @param place
 	 */
 	onPlaceSelected = ( place ) => {
+		let newLat = '',
+		    newLng = '';
 		console.log( 'plc', place );
-		const address = place.formatted_address,
-		      addressArray =  place.address_components,
-		      city = this.getCity( addressArray ),
-		      area = this.getArea( addressArray ),
-		      state = this.getState( addressArray ),
-		      latValue = place.geometry.location.lat(),
-		      lngValue = place.geometry.location.lng();
-		// Set these values in the state.
-
-		if(!!this.props.no_save_changes){
-			this.props.update_location({
-				location:{
-					type:'Point',
-					coordinates:[
-					   this.state.markerPosition.lng,
-					   this.state.markerPosition.lat
-					]
+		Geocode.fromAddress(place.description).then(
+			response => {
+			  const { lat, lng } = response.results[0].geometry.location;
+			  console.log(lat, lng);
+			  newLat = lat
+			  newLng = lng
+			  Geocode.fromLatLng( newLat , newLng ).then(
+				response => {
+					const address = response.results[0].formatted_address,
+						  addressArray =  response.results[0].address_components,
+						  city = this.getCity( addressArray ),
+						  area = this.getArea( addressArray ),
+						  state = this.getState( addressArray );
+						  
+						  if(!!this.props.no_save_changes){
+							this.props.update_location({
+								location:{
+									type:'Point',
+									coordinates:[
+									   this.state.markerPosition.lng,
+									   this.state.markerPosition.lat
+									]
+								},
+								area:this.getArea( addressArray ),
+								city:this.getCity( addressArray ),
+								address:address
+							})
+							 }
+					this.setState( {
+						address: ( address ) ? address : '',
+						area: ( area ) ? area : '',
+						city: ( city ) ? city : '',
+						state: ( state ) ? state : '',
+						markerPosition: {
+							lat: newLat,
+							lng: newLng
+						},
+						// mapPosition: {
+						// 	lat: newLat,
+						// 	lng: newLng
+						// },
+					} )
 				},
-				area:this.getArea( addressArray ),
-				city:this.getCity( addressArray ),
-				address:address
-			})
-		     }
-
-
-		this.setState({
-			address: ( address ) ? address : '',
-			area: ( area ) ? area : '',
-			city: ( city ) ? city : '',
-			state: ( state ) ? state : '',
-			markerPosition: {
-				lat: latValue,
-				lng: lngValue
+				error => {
+					console.log("some error")
+					console.error(error);
+				}
+			);
 			},
-			mapPosition: {
-				lat: latValue,
-				lng: lngValue
-			},
-		})
+			error => {
+			  console.error(error);
+			}
+		  )
+
+    console.log("this works", newLat, newLng)
+		
 	};
 
 
@@ -312,7 +334,7 @@ class Map extends Component{
 						/>
 						<Marker />
 						{/* For Auto complete Search Box */}
-						<Autocomplete
+						{/* <Autocomplete
 							style={{
 								width: '100%',
 								height: '40px',
@@ -321,7 +343,13 @@ class Map extends Component{
 							}}
 							onPlaceSelected={ this.onPlaceSelected }
 							types={['(regions)']}
-						/>
+							componentRestrictions={{country: "in"}}
+						/> */}
+
+					<GooglePlacesAutocomplete
+						onSelect={this.onPlaceSelected}
+						componentRestrictions={{country: "in"}}
+					/>
 					</GoogleMap>
 				)
 			)

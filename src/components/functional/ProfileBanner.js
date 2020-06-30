@@ -77,28 +77,15 @@ console.log(props,"props in ProfileBanner")
     onChange ={(e)=>handleUploadImage(e)}
     ref = {bannerImageRef}
     />
-   
-     <div  className="row sur">
-          <p className="HospitalCover">
-          <div style={{position:"relative"}}>
+     <div style={{position:'relative', border:'none'}}>
          {props.loading && <LoaderComponent />}
-            <img className="HospitalCoverImg mas_hos img-loading_rish" 
+            <img className=" mas_hos img-loading_rish" 
             src={(!!props.user?props.user.coverImageUrl===''?'/maxhos.jpg':props.user.coverImageUrl:'')} 
             alt=""></img>
-             </div>
-            </p>
-           
-        </div>
-        <div className="edit_image">
+             <div className="edit_image">
             <img className="edit_icn"  onClick={(e)=>handleImageClick(e)} src={'/pen_editor.svg'}></img>
         </div>
-    {/* <img 
-    onClick={(e)=>handleImageClick(e)}
-    className="blackdot"
-    style={{cursor:'pointer'}}
-    src={(!!props.user?props.user.imageUrl:'/profile.jpg')} 
-    alt=""> 
-    </img> */}
+        </div>
 </React.Fragment>
   )
 })

@@ -490,7 +490,8 @@ class ProfileContainer extends React.PureComponent {
             }
           })}
         />
-    <div id="profile_section_1" className="new_card_class">
+    <div>
+      <div className="new_card_class">
        <ProfileBanner
        user = {this.state.prof_data}
        updateBanner = {this.updateBanner}
@@ -505,8 +506,8 @@ class ProfileContainer extends React.PureComponent {
        loading  = {this.state.loadingBanner}
        />
         <div onSubmit={this.handleSubmit}>
-          <div className="row HospitalProfileRow1">
-            <div className="col-sm-2 col-lg-2">
+          <div className="profile_pic_name_parent">
+            <div className="profile_pic_child">
                <ProfileImage
                 user = {this.state.prof_data}
                 upload = {this.uploadProfleImage}
@@ -521,43 +522,49 @@ class ProfileContainer extends React.PureComponent {
                 loadingOff = {()=>this.setState({loadingProfileImage:false})}
                />
             </div>
-            <div className="col-sm-9 col-lg-9 maxhospitalrow1col2 content_pos">
+            <div className="profile_name_child">
               <p  style={{textTransform:'capitalize'}} className="maxhospital max_cnt"><b>{this.state.prof_data.name}</b></p>
               <p className="maxhospitaladd">{this.state.prof_data.centerLocation?this.state.prof_data.centerLocation:''}</p>
             </div>
           </div>
-          <div className="row achimen_pd">
-                <div class="col-md-2"></div>
-                <div class="col-md-4 achivementlogo text-center">
-                        <a><img  onClick={()=>this.setState({addAchievementFlag:true})} src="/achivement.jpg"></img></a>
-                        <p className="ach_mnt">Achievement</p>
+          <div style={{paddingBottom:'2rem'}} className="flex_parent_rish">
+                <div class="flex_child_rish">
+                   <div className="achievemnet_badge_wrapper">
+                     <div className='achievement_badge'>
+                        <img  onClick={()=>this.setState({addAchievementFlag:true})} className="badge_image" src="/icon/achievement_badge.svg"/>
+                        <text  className="catalogue_badge_text">Achievement</text>
+                     </div>
+                   </div>
                 </div>
-                <div class="col-md-4 achivementlogo text-center">        
+                <div class="flex_child_rish">
+                  <div className="catalogue_badge_wrapper">  
+                    <div className='catalogue_badge'>      
                           <Link to= {`/dashboard/my-catalogue${!!center_id?'?center='+center_id:''}`}
                           role="button"
                           onClick={()=>this.props.toggleMyCatalog()} >
-                          <img src="/cata.svg" className='catalogueImg '></img>
+                          <img src="/icon/catalogue_badge.svg" className='badge_image ' />
+                          <text className="catalogue_badge_text">Catalogue</text>
                           </Link>
-                          <br></br>
-                        <p className="ach_mnt">Catalogue</p>
+                     </div>
+                   </div>
                 </div>
-                <div class="col-md-2"></div>
           </div>
       </div>
-          <div className="bdyhs_mar">
-          <div class="row mainBodyMaxHospitalrow4 ">
-                    <div class="col-xs-1 col-sm-1 col-lg-1">
+      </div>
+      <div className="new_card_class">
+          <div class="flex_parent_rish">
+                    <div class="flex_child_rish">
                         <img src={locationImage} className="lction "></img>
                     </div>
-                    <div class="col-xs-9 col-sm-9 col-lg-9 mainBodyMaxHospitalrow4col2">
+                    <div class="flex_child_rish">
                         <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.state.prof_data.address }</span> 
                         </p>
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-lg-1">
+                    {/* <div class="col-xs-1 col-sm-1 col-lg-1">
                     <span onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} class="editmainbodymaxhospital cursor-pointer underline">{this.state.mapFlag?"Cancel":'Edit'}</span>
+                    </div> */}
                     </div>
-                    </div>
-                </div>
+          </div>
 
           {this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
            {!this.state.flag_for_map &&  <ScrollTo
