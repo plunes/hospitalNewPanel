@@ -5,6 +5,8 @@ import { getNotifications } from "../../actions/userActions";
 import { sendCounterZero } from "../../actions/userActions";
 import history from "../../history";
 import  { Link } from "react-router-dom"
+import NotificationBadge from 'react-notification-badge';
+import {Effect} from 'react-notification-badge';
 
 
 
@@ -70,8 +72,13 @@ class DashboardHeader extends Component {
 
                    <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/notification"
+                     style={{position:'relative'}}
                      onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleNotif())}>
-                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text></Link>
+                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
+                  <div className="notif_badge_wrapper_rish">
+                    <NotificationBadge count={this.props.count} effect={Effect.SCALE}/>
+                  </div>
+                  </Link>
                   </li> 
                   <li className="nav-item header_li_rish">
                   <Link to="/dashboard/profile"  

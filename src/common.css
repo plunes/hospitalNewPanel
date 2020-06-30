@@ -472,3 +472,35 @@ margin: 0 1%;
     left: 2.5rem;
     cursor: pointer;
 }
+.notif_badge_wrapper_rish {
+    position: absolute;
+    right: -1.1rem;
+    top: -4px;
+}
+
+.NotifyImg
+    {
+      background-color: #888888;
+      width: 4rem;
+      height: 4rem;
+      color: white;
+      font-weight: 400;
+      border-radius: 50%;
+      position: relative;
+      display: block;
+      margin: auto;
+   }
+
+.notif_wrap_parent {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.notif_wrap_image {
+    flex:1 1 20%;
+    margin: 0 1%;
+}
+.notif_wrap_content {
+    flex:1 1 75%;
+    margin: 0 1%;
+}

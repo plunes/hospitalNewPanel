@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from "react-router-dom"
 import "./AboutUs.css";
 import LoaderComponent from '../functional/LoaderComponent';
+import { get_notif_time } from "../../utils/common_utilities"
 class NotificationComponent extends Component {
     constructor(props) {
         super(props)
@@ -45,7 +46,7 @@ class NotificationComponent extends Component {
         // console.log(this.props.notification)
         return (
             <React.Fragment>
-                    <div  className='main_content_rish Notification'>
+                    <div  className='main_content_rish'>
                                 <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">Notifications</h4>
                         {
                             this.props.notifications ? this.props.notifications.slice(0, this.props.notifications.length).map((n, index) => (
@@ -57,17 +58,22 @@ class NotificationComponent extends Component {
                                     }}
                                     to= {n.notificationScreen==="booking"?'/dashboard/appointments':n.notificationScreen==="insight"?'/dashboard':''}
                                     >
-                                <div className='row' key={index}>
+                            <div>
+                                <div className="notif_wrap_parent" key={index}>
                                     <div className="col-sm-2">
                                         <img className="NotifyImg" src={n.senderImageUrl || '/profile.jpg'} alt="NoImg"></img>
                                     </div>
                                     <div className="col-sm-6">
                                         <p className="NotifierName">{n.senderName}</p>
                                         <span className="intro_di" key={index}>{n.notification}</span>
+                                        <div style={{marginTop:'.5rem'}}>
+                                         <text  className="intro_di" >{get_notif_time(n.createdTime)}</text>
+                                       </div>
                                     </div>
                                     <div className="col-sm-4"><p className="text-center"></p></div>
                                     <hr className="PaymentHR"></hr>
                                 </div>
+                           </div>
                               </Link>
                             )) : false
                         } 

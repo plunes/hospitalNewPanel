@@ -1,3 +1,75 @@
+ export const get_notif_time = (value) => {
+
+  let currentDate = new Date();
+  let previousDate = new Date(value)
+  let current = {
+    seconds:currentDate.getSeconds(),
+    minutes:currentDate.getMinutes(),
+    hour: currentDate.getHours(),
+    date: currentDate.getDate(),
+    month: currentDate.getMonth(),
+    year:currentDate.getFullYear()
+  }
+
+  let previous ={
+    seconds:previousDate.getSeconds(),
+    minutes:previousDate.getMinutes(),
+    hour: previousDate.getHours(),
+    date: previousDate.getDate(),
+    month: previousDate.getMonth(),
+    year:previousDate.getFullYear()
+  }
+  var d = Math.abs(currentDate - previousDate) / 1000;
+  var r = {};
+  var s = {
+      year: 31536000,
+      month: 2592000,
+      week: 604800,
+      day: 86400,
+      hour: 3600,
+      minute: 60,
+      second: 1
+  };
+
+  Object.keys(s).forEach(function(key){
+      r[key] = Math.floor(d / s[key]);
+      d -= r[key] * s[key];
+  });
+
+if(r.year!==0){
+    return `${previous.date}-${previous.month}-${previous.year}`
+}else if(r.month!==0){
+    return `${previous.date}-${previous.month}-${previous.year}`
+}else if(r.day!==0 && r.day <7){
+  if(r.day===1){
+    return `Yesterday`
+  }else{
+      return `${r.day} days ago`
+  }
+}else if(r.day>6){
+    return `${previous.date}-${previous.month}-${previous.year}`
+}else if(r.day===0 && r.hour===0){
+  if(r.minute!==0){
+    if(r.minute===1){
+        return `${r.minute} minute ago`
+    }else{
+        return `${r.minute} minutes ago`
+    }
+  }else {
+      return `${r.second} seconds ago`
+  }
+}else{
+  if(r.hour===1){
+    return `${r.hour} hour ago`
+  }else{
+      return `${r.hour} hours ago`
+  }
+
+}
+}
+
+
+
 export const  get_circular_progress_data = () =>{
   let arr = []
   let  i = 0

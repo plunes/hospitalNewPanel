@@ -530,7 +530,7 @@ export const get_centers_clr = (data) => dispatch =>{
 
 export const get_centers = (data) => async dispatch => {
   let token = localStorage.getItem('token')
-  return await axios.get(baseUrl + `/user/getAllCenters`,  { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + `/user/getAllCenters?day=7`,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         console.log(res,"res in get_Center");

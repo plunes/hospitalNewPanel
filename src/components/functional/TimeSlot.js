@@ -31,12 +31,18 @@ const TimeSlot = (props) => {
                     <li onClick= {()=>setHour(12)} className={hour===12?'active cursor-pointer':'cursor-pointer'}>12</li>
                 </ul>
              <ul className="tme_d">
-                    <li onClick= {()=>setMinutes(0)} className={minutes===0?'active cursor-pointer':' cursor-pointer'}>00</li>
-                    <li onClick= {()=>setMinutes(10)} className={minutes===10?'active cursor-pointer':' cursor-pointer'}>10</li>
-                    <li onClick= {()=>setMinutes(20)} className={minutes===20?'active cursor-pointer':' cursor-pointer'}>20</li>
-                    <li onClick= {()=>setMinutes(30)} className={minutes===30?'active cursor-pointer':' cursor-pointer'}>30</li>
-                    <li onClick= {()=>setMinutes(40)} className={minutes===40?'active cursor-pointer':' cursor-pointer'}>40</li>
-                    <li onClick= {()=>setMinutes(50)} className={minutes===50?'active cursor-pointer':'cursor-pointer'}>50</li>
+                        <li onClick= {()=>setMinutes(0)} className={minutes===0?'active cursor-pointer':' cursor-pointer'}>00</li>
+                        <li onClick= {()=>setMinutes(5)} className={minutes===5?'active cursor-pointer':' cursor-pointer'}>05</li>
+                        <li onClick= {()=>setMinutes(10)} className={minutes===10?'active cursor-pointer':' cursor-pointer'}>10</li>
+                        <li onClick= {()=>setMinutes(15)} className={minutes===15?'active cursor-pointer':' cursor-pointer'}>15</li>
+                        <li onClick= {()=>setMinutes(20)} className={minutes===20?'active cursor-pointer':' cursor-pointer'}>20</li>
+                        <li onClick= {()=>setMinutes(25)} className={minutes===25?'active cursor-pointer':' cursor-pointer'}>25</li>
+                        <li onClick= {()=>setMinutes(30)} className={minutes===30?'active cursor-pointer':'cursor-pointer'}>30</li>
+                        <li onClick= {()=>setMinutes(35)} className={minutes===35?'active cursor-pointer':' cursor-pointer'}>35</li>
+                        <li onClick= {()=>setMinutes(40)} className={minutes===40?'active cursor-pointer':' cursor-pointer'}>40</li>
+                        <li onClick= {()=>setMinutes(45)} className={minutes===40?'active cursor-pointer':' cursor-pointer'}>45</li>
+                        <li onClick= {()=>setMinutes(50)} className={minutes===50?'active cursor-pointer':'cursor-pointer'}>50</li>
+                        <li onClick= {()=>setMinutes(55)} className={minutes===55?'active cursor-pointer':'cursor-pointer'}>55</li>
              </ul>
                     </React.Fragment>
                 )
