@@ -810,7 +810,6 @@ html {
       display: block;
       height: 8rem;
       bottom: 2.5rem;
-      border: 3px solid #F9F9F9;
 }
 .profile_pic_name_parent {
   display: flex;
@@ -834,6 +833,23 @@ html {
   margin: auto;
 }
 
+.flex_child_rish-2 {
+  flex:1 1 5%;
+  margin: auto;
+}
+.flex_child_rish-8 {
+  flex: 1 1 70%;
+  display: flex;
+  flex-direction: column;
+}
+.location_icon_wrapper {
+  display: block;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background-color: #FAEBEC;
+  margin: auto;
+}
 .edit_image2 {
   background: #01D35A;
   border-radius: 50%;
@@ -890,4 +906,66 @@ html {
   color:#000;
   border: none;
   margin-left: 1rem;
+}
+
+#profile_section_2 {
+  display: block;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  min-height: 8rem;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+.location_profile_text {
+  font-size: 1.3rem;
+  border: none;
+  flex: 1 1 50%;
+}
+.location_profile_address {
+  font-size: 1rem;
+  border: none;
+}
+.link_text_rish {
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+.location_edit_parent {
+  display: flex;
+  
+}
+.edit_location_div {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: row-reverse;
+  
+}
+.edit_location_icon {
+  height: 1.5rem;
+  width: auto;
+  cursor: pointer;
+}
+
+#profile_section_3 {
+  display: block;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  min-height: 5rem;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+#profile_section_4 {
+  display: block;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  min-height: 15rem;
+  padding: 2rem 1rem 2rem 1rem;
+}
+
+#profile_section_5 {
+  display: block;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  min-height: 15rem;
+  padding: 2rem 1rem 2rem 1rem;
 }

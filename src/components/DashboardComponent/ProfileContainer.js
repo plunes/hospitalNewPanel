@@ -530,8 +530,8 @@ class ProfileContainer extends React.PureComponent {
           <div style={{paddingBottom:'2rem'}} className="flex_parent_rish">
                 <div class="flex_child_rish">
                    <div className="achievemnet_badge_wrapper">
-                     <div className='achievement_badge'>
-                        <img  onClick={()=>this.setState({addAchievementFlag:true})} className="badge_image" src="/icon/achievement_badge.svg"/>
+                     <div onClick={()=>this.setState({addAchievementFlag:true})} className='achievement_badge cursor-pointer'>
+                        <img   className="badge_image" src="/icon/achievement_badge.svg"/>
                         <text  className="catalogue_badge_text">Achievement</text>
                      </div>
                    </div>
@@ -551,22 +551,26 @@ class ProfileContainer extends React.PureComponent {
           </div>
       </div>
       </div>
-      <div className="new_card_class">
+      <div id="profile_section_2" className="new_card_class">
           <div class="flex_parent_rish">
-                    <div class="flex_child_rish">
-                        <img src={locationImage} className="lction "></img>
+                    <div class="flex_child_rish-2">
+                       <div className="location_icon_wrapper">
+                        <img src={locationImage} className="location_icon_rish"></img>
+                       </div>
                     </div>
-                    <div class="flex_child_rish">
-                        <p class="mainBodyMaxHospitalrow4col2para"><span class="loc">Location :</span><span className="vikas_marg">{this.state.prof_data.address }</span> 
-                        </p>
+                    <div class="flex_child_rish-8">
+                       <div style={{marginBottom:'1rem'}} className="location_edit_parent">
+                         <text className="location_profile_text">Location</text>
+                         <div className="edit_location_div">
+                          <img src="/icon/edit_icon_rish.svg" onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} className="edit_location_icon" />
+                         </div>
+                        </div>
+                       <div style={{marginBottom:'1rem'}}><text className="location_profile_address">{this.state.prof_data.address}</text></div>
+        <div style={{marginBottom:'1rem'}}><text onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} className="green_text_rish link_text_rish">{this.state.mapFlag?"Cancel":'View on Map'}</text></div>
                     </div>
-                    {/* <div class="col-xs-1 col-sm-1 col-lg-1">
-                    <span onClick={()=>this.setState({mapFlag:!this.state.mapFlag})} class="editmainbodymaxhospital cursor-pointer underline">{this.state.mapFlag?"Cancel":'Edit'}</span>
-                    </div> */}
                     </div>
-          </div>
 
-          {this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
+                    {this.state.mapFlag   &&  <div style={{marginBottom:'5rem'}} className="margin-top-medium_ris map-wrapper">
            {!this.state.flag_for_map &&  <ScrollTo
               remove_me = {()=>{
                 this.props.set_open_map(false)
@@ -588,29 +592,36 @@ class ProfileContainer extends React.PureComponent {
             </div>
             }
 
-          <hr className="Hospitalhr auto_center"></hr>
-            <EditBio 
-              set_user_info = {this.props.set_user_info}
-              user = {this.state.prof_data}
-              editBio = {this.editBio}
-              editBioRet = {this.props.editBioRet}
-              editBioClr = {this.props.editBioClr}
-              editBioFlag={this.state.editBioFlag}
-              handleBioChange = {this.handleBioChange}
-              loadingOff = {()=>this.setState({
-                editBioLoading:false
-              })}
-              biography = {this.state.biography}
-              toggleEditBio ={()=>this.setState({editBioFlag:!this.state.editBioFlag, biography:this.state.prof_data.biography})}
-              getDetails = {this.props.expertDetails}
-              loading = {this.state.editBioLoading}
-              getUserDetails = {this.props.getUserDetails}
-            />
-    <hr className="brdr_tm"></hr>
-          <div className="team_sec">
+          </div>
+
+          
+  <div  id="profile_section_3" className="new_card_class">
+  <EditBio 
+      set_user_info = {this.props.set_user_info}
+      user = {this.state.prof_data}
+      editBio = {this.editBio}
+      editBioRet = {this.props.editBioRet}
+      editBioClr = {this.props.editBioClr}
+      editBioFlag={this.state.editBioFlag}
+      handleBioChange = {this.handleBioChange}
+      loadingOff = {()=>this.setState({
+        editBioLoading:false
+      })}
+      biography = {this.state.biography}
+      toggleEditBio ={()=>this.setState({editBioFlag:!this.state.editBioFlag, biography:this.state.prof_data.biography})}
+      getDetails = {this.props.expertDetails}
+      loading = {this.state.editBioLoading}
+      getUserDetails = {this.props.getUserDetails}
+    />
+
+  </div>
+
+
+
+  <div  id="profile_section_4" className="new_card_class">
            {
              this.props.user.userType !=="Doctor" && <React.Fragment>
-                         <h3 className="team_of">Team of Experts</h3>
+                <text className="location_profile_text">Team of Experts</text>
              <div className="row">
      {this.state.prof_data?!!this.state.prof_data.doctors?this.state.prof_data.doctors.length !==0?this.state.prof_data.doctors.slice(0, this.state.prof_data.doctors.length>5?this.state.show_doctor_count:this.state.prof_data.doctors.length).map((item,i) =>{
        return (<DoctorComponent
@@ -645,6 +656,13 @@ class ProfileContainer extends React.PureComponent {
    </React.Fragment>
      }
 
+     </div>
+
+
+
+
+  <div  id="profile_section_5" className="new_card_class">
+    
 <div className="achivmnt_b profil_achevment">
   <h4 className="achiment_bk">Achievement Book</h4>
  
@@ -671,6 +689,7 @@ class ProfileContainer extends React.PureComponent {
 :'No achievements'}
        </div>
           </div>
+  </div>
           
           <ModalComponent 
                 open = {this.state.addAchievementFlag}
@@ -678,7 +697,7 @@ class ProfileContainer extends React.PureComponent {
                 modalBody = {this.generateAddAchievement}
                 />  
         </div>
-  </div>
+
       </React.Fragment>
     )
   }
