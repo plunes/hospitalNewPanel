@@ -251,7 +251,7 @@ class MyCatalogueComponent extends Component {
     }
 
     handleVarianceChange = (e,serviceId) =>{
-        let arr = JSON.parse(JSON.stringify(this.state.selected_procedures))
+        let arr = [...this.state.selected_procedures]
         let obj = {
         }
         let id= ''
@@ -269,10 +269,12 @@ class MyCatalogueComponent extends Component {
     let newArr = arr.filter((item,i)=>{
         return  item.serviceId!==serviceId
     })
-    newArr.push(obj)
-    this.setState({
-       selected_procedures:newArr
-    })
+    if(!isEmpty(obj)){
+        newArr.push(obj)
+        this.setState({
+            selected_procedures:[...newArr]
+         })
+    }
     }
 
     generateUploadBody = () =>{
@@ -387,6 +389,8 @@ class MyCatalogueComponent extends Component {
         }else{
             try {
                 let arr = [...this.state.selected_procedures]
+                console.log(arr,"arr in submit")
+                console.log(this.state.selected_procedures,"this.state selected_procedures")
                 let newArr = arr.map((item,i)=>{
                     let procedure_price = parseInt(item.price[0],10)
                     if(!!!procedure_price){
