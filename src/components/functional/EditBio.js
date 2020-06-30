@@ -47,19 +47,25 @@ import React, { useRef , useEffect} from "react"
 
 
   return (
-    <div className="row HospitalBio">
-    <p className="intro col-lg-9 auto_center"><strong>Introduction</strong> </p>
-    <p style={{position:'relative'}}  className="intro col-lg-2 save_edit_ris auto_center">
-    {props.editBioFlag && <span style={{position:'absolute',right:'4rem', width:'fit-content'}} onClick={()=>submitdetails()} className="edi_intr hover_underline">Save</span> }
-    <span onClick={()=>props.toggleEditBio()} className="edi_intr hover_underline">{props.editBioFlag?"Cancel":'Edit'}</span>
-    </p>
+    <div>
+        <div style={{marginBottom:'1rem'}} className="location_edit_parent">
+               <text style={{marginLeft:'1rem'}} className="location_profile_text">Introduction</text>
+               <div className="edit_location_div">
+                 {props.editBioFlag? 
+                 <React.Fragment>
+                 <span style={{width:'fit-content', marginLeft:'1rem'}} onClick={()=>props.toggleEditBio()} className="edi_intr hover_underline">Cancel</span>
+                 <span style={{width:'fit-content'}} onClick={()=>submitdetails()} className="edi_intr hover_underline">Save</span>
+                 </React.Fragment> 
+                : <img src="/icon/edit_icon_rish.svg" onClick={()=>props.toggleEditBio()} className="edit_location_icon" />
+                }
+              </div>
+         </div>
     <div className="col-lg-12 text_cmt">
     {props.loading && <LoaderComponent />}
    {((!props.editBioFlag) && (props.user.biography)) && <p className="loc">{props.user.biography}</p>}
   {props.editBioFlag &&  <textarea 
    name="biography" 
    ref={textareaRef}
-//    onKeyDown={keyPress}
    onChange ={props.handleBioChange}
    value={props.biography} 
    rows="4" 
