@@ -246,7 +246,6 @@
 .center_flex_child-2 {
     flex:1 1 100%;
     display: flex;
-    margin-left: auto;
     margin-right: auto;
     flex-direction: column;
     margin-top: .5rem;
@@ -254,11 +253,11 @@
 
 .orange_text {
     color:#F19602;
-    font-size: .8rem;
+    font-size: 1rem;
 }
 .black_text {
     color: #000;
-    font-size: .8rem;
+    font-size: 1rem;
 }
 
 .flex_parent {

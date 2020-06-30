@@ -739,8 +739,8 @@ class DashboardComponent extends React.PureComponent {
                                    <span className="heading_flex_child">  
                                   <span className="add_text_wrapper_span">
                                   <Link to="/dashboard/centers?addCenter=true">
-                                  <img src="/add_icon.svg" style={{height:'1.2rem'}} alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
-                                   <text  className="add_text">Add</text>
+                                  <img src="/add_icon.svg"  alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
+                                   {/* <text  className="add_text">Add</text> */}
                                    </Link>
                                   </span>
                                    </span>
@@ -766,11 +766,11 @@ class DashboardComponent extends React.PureComponent {
                                                             <div className="center_flex_child-2">
                                                                 <span className="business_earned_lost_span">
                                                                 <text className="black_text">Business earned- </text>
-                                                                <text style={{fontSize:'.8rem'}} className="green_text_rish">-----</text>
+                                                                <text style={{fontSize:'1rem'}} className="green_text_rish">{item.businessGained}</text>
                                                                 </span>
                                                                 <span className="business_earned_lost_span">
                                                                 <text className="black_text">Business lost- </text>
-                                                                <text className="orange_text">----</text>
+                                                                <text className="orange_text">{item.businessLost}</text>
                                                                 </span>
                                                             </div>
                                                         </div>
