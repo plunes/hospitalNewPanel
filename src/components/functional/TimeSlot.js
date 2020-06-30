@@ -28,7 +28,7 @@ const TimeSlot = (props) => {
                     <li onClick= {()=>setHour(9)} className={hour===9?'active cursor-pointer':'cursor-pointer'} >9</li>
                     <li onClick= {()=>setHour(10)} className={hour===10?'active cursor-pointer':' cursor-pointer'}>10</li>
                     <li onClick= {()=>setHour(11)} className={hour===11?'active cursor-pointer':'cursor-pointer'}>11</li>
-                    <li onClick= {()=>setHour(12)} className={hour===12?'active cursor-pointer':'cursor-pointer'}>12</li>
+                
                 </ul>
              <ul className="tme_d">
                         <li onClick= {()=>setMinutes(0)} className={minutes===0?'active cursor-pointer':' cursor-pointer'}>00</li>
@@ -50,6 +50,7 @@ const TimeSlot = (props) => {
                 return (
                     <React.Fragment>
                     <ul className="tme_d1">
+                        <li onClick= {()=>setHour(12)} className={hour===12?'active cursor-pointer':'cursor-pointer'}>12</li>
                         <li onClick= {()=>setHour(13)} className={hour===13?'active cursor-pointer':' cursor-pointer'}>13</li>
                         <li onClick= {()=>setHour(14)} className={hour===14?'active cursor-pointer':' cursor-pointer'}>14</li>
                         <li onClick= {()=>setHour(15)} className={hour===15?'active cursor-pointer':'cursor-pointer'} >15</li>
@@ -138,7 +139,7 @@ const TimeSlot = (props) => {
         <div className ='modal-wrapper-small_ris'>
         <div className="modal-heading_ris set_u_t">Set your Time</div>
         <div className="row modal-p_ris margin-top-small_ris text-center">
-    <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>12?'PM':'AM'}</small></h2>
+    <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>=12?'PM':'AM'}</small></h2>
         </div>
        <div className="new_scr2">
         <div className="new_scrol">

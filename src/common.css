@@ -453,6 +453,12 @@ margin: 0 1%;
     position: relative;
 }
 
+.transparent_main_content_rish {
+    width: 80%;
+    min-height: 30rem;
+    position: relative;
+}
+
 .navbar-collapse {
     margin-right: 0px;
 }

@@ -479,7 +479,7 @@ class ProfileContainer extends React.PureComponent {
     const { open } = this.state;
     return (
       <React.Fragment>
-     <div className="main_content_rish">
+     <div className="transparent_main_content_rish">
         <Notify 
           success ={this.state.notify.success}
           error ={this.state.notify.error}
@@ -490,6 +490,7 @@ class ProfileContainer extends React.PureComponent {
             }
           })}
         />
+    <div id="profile_section_1" className="new_card_class">
        <ProfileBanner
        user = {this.state.prof_data}
        updateBanner = {this.updateBanner}
@@ -542,6 +543,7 @@ class ProfileContainer extends React.PureComponent {
                 </div>
                 <div class="col-md-2"></div>
           </div>
+      </div>
           <div className="bdyhs_mar">
           <div class="row mainBodyMaxHospitalrow4 ">
                     <div class="col-xs-1 col-sm-1 col-lg-1">
