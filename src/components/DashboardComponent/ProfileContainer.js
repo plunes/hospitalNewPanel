@@ -531,20 +531,24 @@ class ProfileContainer extends React.PureComponent {
                 <div class="flex_child_rish">
                    <div className="achievemnet_badge_wrapper">
                      <div onClick={()=>this.setState({addAchievementFlag:true})} className='achievement_badge cursor-pointer'>
+                       <div style={{margin:'auto'}}>
                         <img   className="badge_image" src="/icon/achievement_badge.svg"/>
                         <text  className="catalogue_badge_text">Achievement</text>
+                       </div>
                      </div>
                    </div>
                 </div>
                 <div class="flex_child_rish">
                   <div className="catalogue_badge_wrapper">  
-                    <div className='catalogue_badge'>      
+                    <div className='catalogue_badge'>   
+                     <div style={{margin:'auto'}}>
                           <Link to= {`/dashboard/my-catalogue${!!center_id?'?center='+center_id:''}`}
                           role="button"
                           onClick={()=>this.props.toggleMyCatalog()} >
-                          <img src="/icon/catalogue_badge.svg" className='badge_image ' />
+                          <img src="/icon/catalogue_icon_rish.svg" className='badge_image ' />
                           <text className="catalogue_badge_text">Catalogue</text>
                           </Link>
+                      </div>
                      </div>
                    </div>
                 </div>
@@ -555,7 +559,7 @@ class ProfileContainer extends React.PureComponent {
           <div class="flex_parent_rish">
                     <div class="flex_child_rish-2">
                        <div className="location_icon_wrapper">
-                        <img src={locationImage} className="location_icon_rish"></img>
+                        <img src='/icon/location_icon_new.svg' className="location_icon_rish"></img>
                        </div>
                     </div>
                     <div class="flex_child_rish-8">

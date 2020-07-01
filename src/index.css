@@ -849,6 +849,7 @@ html {
   border-radius: 50%;
   background-color: #FAEBEC;
   margin: auto;
+  position: relative;
 }
 .edit_image2 {
   background: #01D35A;
@@ -874,25 +875,29 @@ html {
 }
 .achievemnet_badge_wrapper {
     margin: auto;
-    padding: 2rem;
+    padding: 1rem;
 }
 .catalogue_badge_wrapper {
     margin: auto;
     padding: 1rem;
 }
 .achievement_badge {
-    background-color: #F2FFF9;
-    display: block;
-    margin: auto;
-    width: 20rem;
-    border-radius: 1rem;
+  background-color: #F2FFF9;
+  display: block;
+  margin: auto;
+  width: 20rem;
+  height: 7rem;
+  border-radius: 1rem;
+  display: flex;
 }
 .catalogue_badge {
   background-color: #F2FFF9;
   display: block;
   margin: auto;
   width: 20rem;
+  height: 7rem;
   border-radius: 1rem;
+  display: flex;
 }
 .badge_image {
   height: 5rem;
@@ -905,7 +910,6 @@ html {
   font-size: 1.5rem;
   color:#000;
   border: none;
-  margin-left: 1rem;
 }
 
 #profile_section_2 {
@@ -968,4 +972,11 @@ html {
   margin-bottom: 2rem;
   min-height: 15rem;
   padding: 2rem 1rem 2rem 1rem;
+}
+
+.location_icon_rish {
+    display: block;
+    position: absolute;
+    top: 22%;
+    left: 30%;
 }
