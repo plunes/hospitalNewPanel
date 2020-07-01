@@ -170,6 +170,7 @@ let obj =   {
              setAvailabilityRet = {this.props.setAvailabilityRet}
              setAvailabilityClr = {this.props.setAvailabilityClr}
              loadingOff = {()=>this.setLoadingOff()}
+             selecteDaySlots = {this.state.selecteDaySlots}
             />
         </React.Fragment> 
     )
@@ -228,13 +229,14 @@ onCloseModal = () => {
 };
 
 slotClicked = (slot,a,b,item )  =>{
- 
+ console.log(item,"item in slotClicked")
   this.setState({
     selectedSlot:slot,
     selectedType:b,
     selectedshift:a,
     open:true,
-    selectedDay:item
+    selectedDay:item,
+    selecteDaySlots:item.slots
   })
 }
 
