@@ -121,7 +121,7 @@ class DashboardComponent extends React.PureComponent {
     handle_real_time_edit_price = (e) =>{
             let val = e.target.value
            if(is_positive_real_number(val))
-           this.setState({real_time_edit_price:val})
+           this.setState({real_time_edit_price:Math.round(val,2)})
            else{
             console.log("no_negative_value")
            }
