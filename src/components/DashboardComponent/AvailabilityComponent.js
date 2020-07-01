@@ -87,13 +87,15 @@ let obj =   {
         }
       }
       timeToString = (time) =>{
+        console.log(hour,"hour in timetostring")
          let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
+         console.log(hour,time,"hour in timetostring")
          let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
-         let timeString = `${hour}:${minutes} ${time.hour>=12?'PM':'AM'}`
+         let timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===24?'AM':'PM':'AM'}`
          return timeString
       }
       handleTimeSubmit = (data) =>{
-          let slot = JSON.parse(JSON.stringify(this.state.slots))
+          let slot = [...this.state.slots]
           let index  = ''
           let newSlot  = slot.filter((item,i)=>{
                     if(item.day === this.state.selectedDay.day){
