@@ -87,7 +87,7 @@ let obj =   {
         }
       }
       timeToString = (time) =>{
-         let  hour =  time.hour>12?time.hour-12:time.hour
+         let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
          let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
          let timeString = `${hour}:${minutes} ${time.hour>=12?'PM':'AM'}`
          return timeString

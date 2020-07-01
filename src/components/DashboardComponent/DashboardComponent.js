@@ -121,7 +121,7 @@ class DashboardComponent extends React.PureComponent {
     handle_real_time_edit_price = (e) =>{
             let val = e.target.value
            if(is_positive_real_number(val))
-           this.setState({real_time_edit_price:Math.round(val,2)})
+           this.setState({real_time_edit_price:val.toFixed(2)})
            else{
             console.log("no_negative_value")
            }
@@ -834,7 +834,7 @@ class DashboardComponent extends React.PureComponent {
                                           
                                             <div className="SliderUpdatedPrice margin_top_small_rish">&#8377;
                                             <span>
-                                            {Math.ceil(this.state.updatePrice - this.state.updatePrice * this.state.value / 100)} 
+                                            {(this.state.updatePrice - this.state.updatePrice * this.state.value / 100,2).toFixed(2)} 
                                             </span>
                                             </div>
                                             <br>
@@ -884,7 +884,7 @@ class DashboardComponent extends React.PureComponent {
                                                 </React.Fragment>
                                                  :
                                                  <React.Fragment>
-                                                 {Math.ceil(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice)}
+                                                 {(this.state.solUpdatedPrice===0?this.state.realUpdatePrice:this.state.solUpdatedPrice).toFixed(2)}
                                                     { (!!this.state.realUpdateData.suggested) && <i style={{color:'green', fontSize:'1rem', marginLeft:'.5rem'}} onClick={()=>this.setState({real_time_edit:true})} className="fas fa-edit cursor-pointer vertical_align_rish"></i>} 
                                                  </React.Fragment>
                                                 }

@@ -17,6 +17,7 @@ const TimeSlot = (props) => {
                     <React.Fragment>
                 <ul className="tme_d1">
                       {/* <li onClick= {()=>setHour(7)} className={hour===7?'active cursor-pointer':'cursor-pointer'} >7</li> */}
+                    <li onClick= {()=>setHour(0)} className={hour===0?'active cursor-pointer':'cursor-pointer'} >12</li>
                     <li onClick= {()=>setHour(1)} className={hour===1?'active cursor-pointer':'cursor-pointer'} >1</li>
                     <li onClick= {()=>setHour(2)} className={hour===2?'active cursor-pointer':'cursor-pointer'} >2</li>
                     <li onClick= {()=>setHour(3)} className={hour===3?'active cursor-pointer':'cursor-pointer'} >3</li>
@@ -139,7 +140,7 @@ const TimeSlot = (props) => {
         <div className ='modal-wrapper-small_ris'>
         <div className="modal-heading_ris set_u_t">Set your Time</div>
         <div className="row modal-p_ris margin-top-small_ris text-center">
-    <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>=12?'PM':'AM'}</small></h2>
+    <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour===0?12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>=12?'PM':'AM'}</small></h2>
         </div>
        <div className="new_scr2">
         <div className="new_scrol">
