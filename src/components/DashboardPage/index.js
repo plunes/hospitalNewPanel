@@ -592,7 +592,6 @@ authObject =()=> {
                         />
                 <div className="main-body-wrapper">
                     <div className="main_body_flex_parent">
-                        <div className="main_body_flex_sidebar">
                             <SidebarComponent
                               prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
@@ -607,7 +606,6 @@ authObject =()=> {
                               user_info = {this.state.user_info}
                               pathname ={this.props.location.pathname}
                             />
-                        </div>
                   <div className="main_body_flex_content">
                   {(this.props.location.pathname === '/dashboard')?
                   protected_route({

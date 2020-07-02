@@ -393,8 +393,10 @@ hr
 
 
 .businessPrice
-      {font-size: 30px;
-      font-weight: 700;}
+      {
+      font-size: 2rem;
+      font-weight: 700;
+}
 
 .businessEarn
       {color: #01D35A;}

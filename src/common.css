@@ -459,6 +459,13 @@ margin: 0 1%;
     position: relative;
 }
 
+
+@media screen and (max-width:700px) {
+    .transparent_main_content_rish {
+        width: 100%;
+    }
+}
+
 .navbar-collapse {
     margin-right: 0px;
 }
