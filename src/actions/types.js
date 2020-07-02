@@ -218,3 +218,7 @@ export const GET_CENTER_CRED_RET  = 'App/Profile/GET_CENTER_CRED_RET'
 export const GET_CENTER_CRED_CLR  = 'App/Profile/GET_CENTER_CRED_CLR'
 
 export const SET_NOTIF_ID = 'App/Notifications/SET_NOTIF_ID'
+
+export const GET_USER_SPECIALITIES = 'App/Catalogue/GET_USER_SPECIALITIES'
+export const GET_USER_SPECIALITIES_RET = 'App/Catalogue/GET_USER_SPECIALITIES_RET'
+export const GET_USER_SPECIALITIES_LOADING = 'App/Catalogue/GET_USER_SPECIALITIES_LOADING'

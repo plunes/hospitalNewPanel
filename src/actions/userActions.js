@@ -182,9 +182,12 @@ import {
 
   SET_CENTER_CRED,
 
-  SET_NOTIF_ID
+  SET_NOTIF_ID,
 
-
+  GET_USER_SPECIALITIES,
+  GET_USER_SPECIALITIES_RET,
+  GET_USER_SPECIALITIES_LOADING
+  
   } from './types';
 import history from '../history';
 import axios from 'axios';
@@ -228,6 +231,28 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('specialities')
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
+}
+
+
+export const get_user_specialities = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_USER_SPECIALITIES,
+    payload:data
+  })
+}
+
+export const get_user_specialities_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_USER_SPECIALITIES_RET,
+    payload:data
+  })
+}
+
+export const get_user_specialities_loading = (data) => dispatch =>{
+  return  dispatch({
+    type: GET_USER_SPECIALITIES_LOADING,
+    payload:data
+  })
 }
 
 

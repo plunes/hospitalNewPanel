@@ -23,7 +23,8 @@ get_remaining_specs,
 set_catalogue_data,
 get_remaining_specs_clr,
 add_specs,
-add_specs_clr
+add_specs_clr,
+get_user_specialities
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -89,9 +90,12 @@ class MyCatalogueComponent extends Component {
             loading:true
         })
         this.props.get_remaining_specs()
-        await this.props.getSpecs({
+        this.props.get_user_specialities({
             type:"getUserSpecialities"
         })
+        // await this.props.getSpecs({
+        //     type:"getUserSpecialities"
+        // })
     }
 
     componentWillReceiveProps(nextProps){
@@ -561,7 +565,7 @@ class MyCatalogueComponent extends Component {
 
     render() {
         console.log(this.state,"this.state in  Mycatalogue")
-        // console.log(this.props,"this.props. in Mycatalogue ")
+        console.log(this.props,"this.props. in Mycatalogue ")
                 return (
                     <React.Fragment>
                         <NotifFunc />
@@ -772,6 +776,7 @@ class MyCatalogueComponent extends Component {
 }
 
 const mapStateToProps = state => ({
+    data_from_catalogue_reducer:state.catalogue_reducer,
     catalogues: state.user.catalogues,
     uploadProceduresRet:state.user.uploadProceduresRet,
     uploadProceduresLoading:state.user.uploadProceduresLoading,
@@ -790,7 +795,7 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, { getUserCatalogue, 
     uploadProcedures, uploadProceduresClr, upload,
-    searchProcedures, searchProceduresClr,
+    searchProcedures, searchProceduresClr, get_user_specialities,
 uploadRetClr,
 downloadCatalogue,
 downloadCatalogueClr,
