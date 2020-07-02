@@ -749,8 +749,8 @@ html {
 
 @media screen and (min-width: 2200px) {
   .main-body-wrapper{
-    margin-left: 20rem !important;
-    margin-right: 20rem !important;
+    margin-left: 25rem !important;
+    margin-right: 25rem !important;
   
   }
   .sidenav{

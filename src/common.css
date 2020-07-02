@@ -96,8 +96,8 @@ display: flex;
 }
 @media screen and (min-width:2200px) {
     .oversize_wrap_rish {
-        margin-left: 30rem;
-        margin-right: 30rem;
+        margin-left: 25rem;
+        margin-right: 25rem;
         display: block;
     }
 }
