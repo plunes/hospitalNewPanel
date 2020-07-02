@@ -24,7 +24,8 @@ set_catalogue_data,
 get_remaining_specs_clr,
 add_specs,
 add_specs_clr,
-get_user_specialities
+get_user_specialities,
+get_user_specialities_loading
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -195,10 +196,10 @@ class MyCatalogueComponent extends Component {
                 }
                 nextProps.searchProceduresClr()
             }
-            if(!!nextProps.getSpecsRet){
-                if(nextProps.getSpecsRet.success){
+            if(!!nextProps.get_user_specialities_ret){
+                if(nextProps.get_user_specialities_ret.success){
                     let arr = []
-                    let specialities = [...nextProps.getSpecsRet.data]
+                    let specialities = [...nextProps.get_user_specialities_ret.data]
                     specialities.forEach((item,i)=>{
                       let obj = {
                         name:item.speciality,
@@ -218,7 +219,7 @@ class MyCatalogueComponent extends Component {
                         loading:false
                     })
                 }
-                nextProps.getSpecsClr()
+                nextProps.get_user_specialities_loading()
             }
     }
     
@@ -776,7 +777,7 @@ class MyCatalogueComponent extends Component {
 }
 
 const mapStateToProps = state => ({
-    data_from_catalogue_reducer:state.catalogue_reducer,
+    get_user_specialities_ret:state.catalogue_store.get_user_specs_ret,
     catalogues: state.user.catalogues,
     uploadProceduresRet:state.user.uploadProceduresRet,
     uploadProceduresLoading:state.user.uploadProceduresLoading,
@@ -796,6 +797,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { getUserCatalogue, 
     uploadProcedures, uploadProceduresClr, upload,
     searchProcedures, searchProceduresClr, get_user_specialities,
+    get_user_specialities_loading,
 uploadRetClr,
 downloadCatalogue,
 downloadCatalogueClr,

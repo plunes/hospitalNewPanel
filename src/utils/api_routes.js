@@ -32,6 +32,6 @@ export default {
                  console.log(res,'res in get_user_specialities')
                  return res
             })
-            .catch(err => err.response.data)
+            .catch(err => err.response)
     }
 }

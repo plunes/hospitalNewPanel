@@ -18,13 +18,13 @@ export default function (state = cat_init_state, action) {
         case GET_USER_SPECIALITIES_RET:
             return {
                 ...state,
-                get_user_specs:action.payload,
+                get_user_specs_ret:action.payload,
                 get_user_specs_loading:true
             }
         case GET_USER_SPECIALITIES_LOADING:
             return {
                 ...state,
-                get_user_specs:action.payload,
+                get_user_specs_ret:false,
                 get_user_specs_loading:true
             }
 
