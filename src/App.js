@@ -7,7 +7,7 @@ import RegistrationContainer from './components/RegistrationComponent/Registrati
 import LoginComponent from './components/LoginComponent/LoginComponent';
 import ForgotPasswordComponent from "./components/ChangePasswordComponent"
 import { getUserDetails } from "../src/actions/userActions";
-// import { messaging } from "./init-fcm";
+import { messaging } from "./init-fcm";
 import 'react-toastify/dist/ReactToastify.min.css'
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
@@ -32,31 +32,31 @@ class App extends Component {
     if (token) {
       await this.props.getUserDetails()
     }
-    // messaging.requestPermission()
-    //   .then(async function () {
+    messaging.requestPermission()
+      .then(async function () {
         
-    //     const token = await messaging.getToken();
-    //     console.log(token,"token In Messaging.request permissions")
-    //     localStorage.setItem('deviceId', token)
-    //   })
-    //   .catch(function (err) {
-    //     console.log("Unable to get permission to notify.", err);
-    //   });
-    // navigator.serviceWorker.addEventListener("message", async (message) => {
-    //   //console.log('message')
-    //   //console.log(message, 'message')
-    //   if(message.data.firebaseMessaging.payload.notification){
-    //     let obj = {
-    //       body: message.data.firebaseMessaging.payload.notification.body,
-    //       title: message.data.firebaseMessaging.payload.notification.title
-    //     }
-    //     // await this.props.getSolutionInsights()
-    //     // await this.props.getNotifications()
-    //     toast(<Greet message={obj} />)
-    //   }
-    //   //this.props.countNewNotification()
-    // }
-    // );
+        const token = await messaging.getToken();
+        console.log(token,"token In Messaging.request permissions")
+        localStorage.setItem('deviceId', token)
+      })
+      .catch(function (err) {
+        console.log("Unable to get permission to notify.", err);
+      });
+    navigator.serviceWorker.addEventListener("message", async (message) => {
+      //console.log('message')
+      //console.log(message, 'message')
+      if(message.data.firebaseMessaging.payload.notification){
+        let obj = {
+          body: message.data.firebaseMessaging.payload.notification.body,
+          title: message.data.firebaseMessaging.payload.notification.title
+        }
+        // await this.props.getSolutionInsights()
+        // await this.props.getNotifications()
+        toast(<Greet message={obj} />)
+      }
+      //this.props.countNewNotification()
+    }
+    );
   }
 
   render() {
