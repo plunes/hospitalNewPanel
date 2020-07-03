@@ -574,9 +574,121 @@ class MyCatalogueComponent extends Component {
                             ret = {this.state.ret}
                             retClr= {()=>this.setState({ret:false})}
                         />
-                    <div  style={{ padding:'0rem 1rem 1rem 1rem'}}  className='main_content_rish'>
+                <div className='catalogue_main_content_rish'>
+                   <div className='catalogue_wrapper_rish'>
+                        <div className='catalogue_section_1'>
+                           <div className="catalogue_section_1_upper new_card_class">
+                              <span className="catalogue_section_1_icon_wrapper">
+                                  <img className="catalogue-img" src="/upload.svg" alt=""/>
+                                  <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Upload File</text>
+                              </span>
+                              <span className="catalogue_section_1_icon_wrapper">
+                                  <img className="catalogue-img" src="/down.svg" alt="" />
+                                  <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish  '>Download Sample</text>
+                              </span>
+                              <span className="catalogue_section_1_icon_wrapper">
+                                 <img className="catalogue-img" src="/edit.svg" alt="" />
+                                 <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Add Catalogue</text>
+                              </span>
+                           </div>
+                           <div className="catalogue_section_1_bottom new_card_class">
+                                <div className="section_1_header">
+                                    <span className='section_1_header_child'>
+                                         <Select
+                                            options = {this.state.specialities}
+                                            handleChange = {this.handleSpecialitySelect}
+                                            placeholder= "Speciality"
+                                            input_text_class = "catalogue_dropdown"
+                                            wrapper_class = "catalogue_dropdown_wrapper"
+                                            value = {this.state.selected_speciality}
+                                            name = "speciality_chosen"
+                                            label = "Speciality" />
+                                    </span>
+                                    <span className='section_1_header_child'>
+                                        <SearchComponent 
+                                            searchProcedures = {this.searchProceduresFun}
+                                            searchProceduresClr = {this.props.searchProceduresClr}
+                                            searchProceduresRet = {this.props.searchProceduresRet}
+                                            selected_speciality = {this.state.selected_speciality}  />
+                                    </span>
+                                </div>
+
+                                <div className='catalogue_head_tabs margin_top_small_rish'>
+                                    <span className=' display_block_rish catalogue_circle_wrap'> <span className='catalogue_circle'></span> </span>
+                                    <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Test Name</text></span>
+                                    <span className='head_tabs_price display_block_rish text-center'> <text className='catalogue_test_name '>Price</text></span>
+                                    <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>Variance</text></span>
+                                    <span className='head_tabs_actions display_block_rish text-center'><text className='catalogue_test_name '>Actions</text></span>
+                                </div>
+
+                                {[1,2,3,4,5,6,7].map((item)=> <div className="catalogue_procedure_wrap">
+                                <div style={{background:'#fff'}} className='catalogue_head_tabs'>
+                                    <span className=' display_block_rish catalogue_circle_wrap'> <span className='catalogue_circle'></span> </span>
+                                    <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Colonoscopy and Sciero therepy of Ulcer</text></span>
+                                    <span className='head_tabs_price display_block_rish text-center'> <text className='catalogue_test_name '>&#8377; 227</text></span>
+                                    <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>20%</text></span>
+                                    <span className='head_tabs_actions display_block_rish text-center'>
+                                        <span><text style={{color:'#7DD55E'}} className='catalogue_test_name link_text_rish'>Edit</text></span>
+                                    </span>
+                                </div>
+                                <hr></hr>
+                                </div>)}
+                               
+                           </div>
+                        </div>
+                        <div className='catalogue_section_2'>
+                            <div className="catalogue_section_2_wrapper new_card_class">
+                                <span className='display_block_rish margin_bottom_medium_rish'><text className='catalogue_heading_text'>Details</text></span>
+                                <span className='display_block_rish '><text className='catalogue_secondary_heading_text'>Test Name</text></span>
+                                <span className='display_block_rish margin_bottom_small_rish '>  <text className='catalogue_test_name'>Colonoscopy and Sciero therepy of Ulcer Colonoscopy and Sciero therepy of Ulcer</text></span>
+                                <div className="location_edit_parent">
+                                    <text className="catalogue_secondary_heading_text">Price</text>
+                                    <div className="edit_location_div">
+                                         <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
+                                    </div>
+                                </div>
+                                <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>&#8377; 227</text></span>
+                                <div className="location_edit_parent">
+                                    <text className="catalogue_secondary_heading_text">Updated At</text>
+                                    <div className="edit_location_div">
+                                         {/* <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" /> */}
+                                    </div>
+                                </div>
+                                <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>05-7-20</text></span>
+
+                                <div className="location_edit_parent">
+                                    <text className="catalogue_secondary_heading_text">Variance</text>
+                                    <div className="edit_location_div">
+                                         <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
+                                    </div>
+                                </div>
+                                <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>20%</text></span>
+
+
+
+                                <div className="location_edit_parent">
+                                    <text className="catalogue_secondary_heading_text">Definition</text>
+                                    <div className="edit_location_div">
+                                         <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
+                                    </div>
+                                </div>
+                                <span style={{marginTop:'1rem'}}  className='display_block_rish'>  <text className='catalogue_test_name '>Space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text</text></span>
+
+                            </div>
+                        </div>
+                   </div>
+                </div>
+
+
+
+
+
+
+
+
+
+                    {/* <div  style={{ padding:'0rem 1rem 1rem 1rem'}}  className='main_content_rish'>
                         <div className='row justify-content-center'>
-                            {/* <p className='catalogue'>Catalogue</p> */}
                             <div className='text-center' >
                             <h4 style={{position:'relative', marginTop:'1rem'}} className="section_heading_rish">Catalogue</h4>
                             </div>
@@ -744,23 +856,12 @@ class MyCatalogueComponent extends Component {
                             )) : 
                            <div className='text-center'>No Procedures</div>)
                         }
-                       {/* {this.state.addProcedureFlag && <div className='text-center'>
-                            {this.state.procedures_toAdd.length !==0 && <button onClick={()=>this.handleNext_add_procedures({
-                                editFlag:true
-                            })} className="catalogueViewMore">View more</button> }    
-                        </div>} */}
-
                         {this.state.addProcedureFlag  && <div className='text-center'>
                             {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)) )  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
                         </div>}
-
                         </div>
-
-                    </div>
-                    <div className='col-md-3'></div>
-              
-                <br />
-            <ModalComponent 
+                    </div>*/}
+            <ModalComponent  
                 open = {this.state.uploadCatalogFlag}
                 handleClose = {this.handleCloseCataModal}
                 modalBody = {this.generateUploadBody}

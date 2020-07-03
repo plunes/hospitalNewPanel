@@ -43,12 +43,7 @@ body {
   box-shadow: none !important;
   outline: 0 !important;
 }
-.catalogueSearchbar:focus {
-  border: 1px solid #01D35A !important;
-}
-.catalogueSearchbar:hover {
-  border: 1px solid #01D35A !important;
-}
+
 
 .common-button{
   background: #01D35A 0% 0% no-repeat padding-box;

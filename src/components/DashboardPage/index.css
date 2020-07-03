@@ -4,6 +4,8 @@
 }
 .main_body_flex_sidebar {
     flex:1 1 15%;
+    transition: flex .3s;
+    transition-timing-function: ease-out;
     /* margin: 0 1%; */
 }
 .main_body_flex_content {
@@ -15,7 +17,8 @@
 .sidebar_collapse {
     width: 2rem;
     flex: 0.3 1;
-    transition: flex .2s;
+    transition: flex .3s;
+    transition-timing-function: ease-out;
 }
 
 .sidebar_hover {

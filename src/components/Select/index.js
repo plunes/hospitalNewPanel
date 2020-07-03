@@ -366,7 +366,7 @@ class Select extends Component {
 
     return (
       <div
-        className="select-component-wrapper"
+        className={`select-component-wrapper ${this.props.wrapper_class}`}
         tabIndex="0"
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }

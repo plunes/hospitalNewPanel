@@ -290,7 +290,7 @@ export class DashboardPage extends React.PureComponent {
       this.setState({
       ...initialState,editProf:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/my-catalogue') {
+    } else if (this.props.location.pathname == '/dashboard/catalogue') {
       this.setState({
       ...initialState,myCataloge:'active'
       });
@@ -596,6 +596,7 @@ authObject =()=> {
                               prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
                               toggleDash = {this.toggleDash}
+                              toggleMyCatalog = {this.toggleMyCatalog}
                               toggleAvail = {this.toggleAvail}
                               toggleAppoint = {this.toggleAppoint}
                               toggleSettings = {this.toggleSettings}
@@ -668,7 +669,7 @@ authObject =()=> {
                   authObject:this.authObject,
                   logout:this.props.logout
                 })(()=> <ProfileContainer />)
-                 :(this.props.location.pathname === '/dashboard/my-catalogue')?
+                 :(this.props.location.pathname === '/dashboard/catalogue')?
                  protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout

@@ -16,6 +16,7 @@ import { getSolutionInsights } from "../src/actions/userActions";
 import Development from './components/Development'
 import DashboardPage from './components/DashboardPage'
 import './common.css'
+import './catalogue.css'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
 
