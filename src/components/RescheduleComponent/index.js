@@ -176,7 +176,7 @@ class RescheduleComponent extends React.PureComponent {
                     autoFocus={true}
                     min={new Date()}
                     parse={str => new Date(str)}
-                    step={90}
+                    step={1}
                     onChange = {(value)=>this.setState({value})}
                 />
                  </div>
