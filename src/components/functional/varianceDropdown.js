@@ -10,6 +10,10 @@ export default function VarianceDropdown(props) {
           handleChange={props.handleChange}
           placeholder = "jkjk"
           name ="variance"
+          input_text_class = "catalogue_dropdown padding_none"
+          wrapper_class = "catalogue_dropdown_wrapper"
+          value_className = "padding_none"
+          arrow_class ="variance_arrow"
           disabled= {props.disabled}
           placeholder={0}
           options = {[

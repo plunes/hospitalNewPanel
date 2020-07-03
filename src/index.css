@@ -207,12 +207,12 @@ body {
 
 .no_brdr_input {
   outline: 0;
-  border-width: 0 0 2px;
-  border-color: lightgray;
+  border-width: 0 0 1px;
+  border-color: gray;
   width: 70%;
 }
 .no_brdr_input:focus {
-  border-color: lightgray;
+  border-color: gray;
 }
 .cdcd_sfd{
   display: flex;
@@ -321,9 +321,7 @@ body {
   content: "";
 }
 
-.catalogue-img{
-  width: 5rem;
-}
+
 .auto-center_ris {
   margin-left: auto;
   margin-right: auto;

@@ -57,7 +57,43 @@ const getVariance = () =>{
 }
   return (
 <React.Fragment>
-<div>
+
+<div className="catalogue_procedure_wrap">
+                                <div style={{background:'#fff'}} className='catalogue_head_tabs'>
+                                    <span className=' display_block_rish catalogue_circle_wrap'> <span   onClick = {()=>props.onEdit(props)} className={`catalogue_circle ${isSelected()?'green_background':''}`}></span> </span>
+                                    <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>{data.service}</text></span>
+                                    <span className='head_tabs_price display_block_rish text-center'>
+                                         {((!!props.editFlag) && (isSelected()))?<input
+                                                value={isSelected()?getValue():props.selectedProcedure.price}
+                                                onChange={
+                                                    e =>{
+                                                        console.log(is_positive_whole_number(e.target.value),"is_positive_whole_number(e.target.value)")
+                                                        if(is_positive_whole_number(e.target.value)){
+                                                        props.handleSelectedProcedureChange(e,props.data.serviceId)
+                                                        }else{
+                                                          e.preventDefault()
+                                                        }
+                                                        } 
+                                                         }
+                                                name="editPrice"
+                                                style={{marginLeft:'0.3rem'}}
+                                                className="no_brdr_input consultaion_input"
+                                                type="number"/>
+                                         :data.price?<text className='catalogue_test_name '> &#x20B9;{` ${data.price[0]}`}</text>:<text className='catalogue_test_name '>&#x20B9; 0</text>}
+                                       </span>
+                                                        <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>{isSelected()?< VarianceDropdown 
+                                                                                                             editFlag = {props.editFlag}
+                                                                                                             disabled = {props.disabled}
+                                                                                                             handleChange={(e)=>props.handleVarianceChange(e,props.data.serviceId)}
+                                                                                                              value = {isSelected()?getVariance():props.data.variance}
+                                                                                                         />:`${props.data.variance}%`}</text></span>
+                                    <span className='head_tabs_actions display_block_rish text-center'>
+                                        <span><text style={{color:'#7DD55E'}} className='catalogue_test_name link_text_rish'>Edit</text></span>
+                                    </span>
+                                </div>
+                                <hr></hr>
+</div>
+{/* <div>
     <div className="row listOfService">
     <div className="col-lg-6">
 <label className="cont_ter">{data.service}
@@ -90,7 +126,6 @@ const getVariance = () =>{
              type="number"
              />:data.price?` ${data.price[0]}`:' 0'}
         </div>
-      {/* <input type="text" value="200" className="btm_bdr" /> */}
       </div>
       <div className="col-md-3 text-center">
         <div className="price_se">
@@ -107,7 +142,7 @@ const getVariance = () =>{
     
     </div>
     <hr></hr>
-</div>
+</div> */}
 </React.Fragment>
   )
 }

@@ -106,3 +106,18 @@
     display: block;
     cursor: pointer;
 }
+
+.catalogue-img{
+    width: 5rem;
+    display: block;
+    margin: auto;
+  }
+.green_background {
+    background-color: #7DD55E;
+}
+.padding_none {
+    padding: 0px !important;
+}
+.variance_arrow {
+    top:-5px;
+}

@@ -298,7 +298,7 @@ class Select extends Component {
       }
 
       return (
-        <div className="value">
+        <div className={`value ${this.props.value_className}`}>
           {
             this.getValue(value)
             }

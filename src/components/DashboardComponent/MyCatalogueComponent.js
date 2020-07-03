@@ -64,7 +64,7 @@ class MyCatalogueComponent extends Component {
             loading : false,
             rowsToDisplay: 20,
             uploadCatalogFlag:false,
-            editFlag:false,
+            editFlag:true,
             editCatalogFlag:false,
             limit:50,
             searchQuery:'',
@@ -340,7 +340,6 @@ class MyCatalogueComponent extends Component {
         }else{
               this.props.searchProcedures(data)
         }
-      
     }
 
     viewMore = (obj) =>{
@@ -579,12 +578,19 @@ class MyCatalogueComponent extends Component {
                         <div className='catalogue_section_1'>
                            <div className="catalogue_section_1_upper new_card_class">
                               <span className="catalogue_section_1_icon_wrapper">
-                                  <img className="catalogue-img" src="/upload.svg" alt=""/>
+                                  <img onClick={(e)=>{
+                                     e.preventDefault()
+                                     this.setState({uploadCatalogFlag:true})
+                                    }}
+                                      className="catalogue-img cursor-pointer" src="/upload.svg" alt=""/>
                                   <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Upload File</text>
                               </span>
                               <span className="catalogue_section_1_icon_wrapper">
-                                  <img className="catalogue-img" src="/down.svg" alt="" />
-                                  <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish  '>Download Sample</text>
+                                <DownloadCatalogue
+                                    downloadCatalogueClr = {this.props.downloadCatalogueClr}
+                                    downloadCatalogueRet = {this.props.downloadCatalogueRet}
+                                    downloadCatalogue ={this.props.downloadCatalogue}
+                                />
                               </span>
                               <span className="catalogue_section_1_icon_wrapper">
                                  <img className="catalogue-img" src="/edit.svg" alt="" />
@@ -620,20 +626,26 @@ class MyCatalogueComponent extends Component {
                                     <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>Variance</text></span>
                                     <span className='head_tabs_actions display_block_rish text-center'><text className='catalogue_test_name '>Actions</text></span>
                                 </div>
-
-                                {[1,2,3,4,5,6,7].map((item)=> <div className="catalogue_procedure_wrap">
-                                <div style={{background:'#fff'}} className='catalogue_head_tabs'>
-                                    <span className=' display_block_rish catalogue_circle_wrap'> <span className='catalogue_circle'></span> </span>
-                                    <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Colonoscopy and Sciero therepy of Ulcer</text></span>
-                                    <span className='head_tabs_price display_block_rish text-center'> <text className='catalogue_test_name '>&#8377; 227</text></span>
-                                    <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>20%</text></span>
-                                    <span className='head_tabs_actions display_block_rish text-center'>
-                                        <span><text style={{color:'#7DD55E'}} className='catalogue_test_name link_text_rish'>Edit</text></span>
-                                    </span>
-                                </div>
-                                <hr></hr>
-                                </div>)}
-                               
+                                      { !this.state.addProcedureFlag &&
+                                        (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
+                                        <Procedure 
+                                        id = {i}
+                                        data = {c}
+                                        editFlag = {this.state.editFlag}
+                                        handleEditInclusion = {this.handleEditInclusion}
+                                        disabled={!this.state.editFlag}
+                                        onEdit = {this.onEdit}
+                                        selectedProcedure = {this.state.selectedProcedure}
+                                        selected_procedures = {this.state.selected_procedures}
+                                        handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
+                                        handleVarianceChange = {this.handleVarianceChange}
+                                        ret = {this.props.editProcedureRet}
+                                        clr = {this.props.editProcedureClr}
+                                        loadingOff = {()=>this.editProcedureLoadingOff()}
+                                        />
+                                        )) : 
+                                       <div className='text-center'>No Procedures</div>)
+                                    }
                            </div>
                         </div>
                         <div className='catalogue_section_2'>
@@ -673,7 +685,6 @@ class MyCatalogueComponent extends Component {
                                     </div>
                                 </div>
                                 <span style={{marginTop:'1rem'}}  className='display_block_rish'>  <text className='catalogue_test_name '>Space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text</text></span>
-
                             </div>
                         </div>
                    </div>

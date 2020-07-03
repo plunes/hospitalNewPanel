@@ -13,15 +13,14 @@ import React, { useLayoutEffect } from "react"
   }
 
   return (
-<React.Fragment>
-<div className='col-md-3 text-center'>
-<a onClick={(e)=>{
-    e.preventDefault()
-    props.downloadCatalogue()
-}} href=""><img className="catalogue-img" src="/down.svg" alt=""></img>
-<p className="uploadCata">Download Sample</p></a>
- </div>
-</React.Fragment>
+    <React.Fragment>
+       <img 
+       onClick={(e)=>{
+                 e.preventDefault()
+                 props.downloadCatalogue()  }}
+       className="catalogue-img cursor-pointer" src="/down.svg" alt="" />
+      <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish  '>Download Sample</text>
+    </React.Fragment>
   )
 }
  
