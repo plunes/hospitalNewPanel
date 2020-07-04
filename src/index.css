@@ -142,10 +142,21 @@ body {
   border-radius: 50%;
   -webkit-animation: spin 0.75s infinite linear;
   animation: spin 0.75s infinite linear;
-
 }
-.loader_ris::before,
-.loader_ris::after {
+.loader_ris_2 {
+  position: absolute;
+  bottom: -1.5rem;
+  width: 40px;
+  left: 35%;
+  z-index: 75;
+  height: 40px;
+  border: 2px solid #0cf;
+  border-radius: 50%;
+  -webkit-animation: spin 0.75s infinite linear;
+  animation: spin 0.75s infinite linear;
+}
+.loader-1_ris::before,
+.loader-1_ris::after {
   left: -2px;
   top: -2px;
   display: none;
@@ -157,13 +168,14 @@ body {
   border-radius: inherit;
 }
 
+.loader-1_ris {
+  border-top-width: 0;
+}
 
 /*
  * LOADER 1
  */
-.loader-1_ris {
-  border-top-width: 0;
-}
+
 
 @keyframes spin {
   from {

@@ -25,7 +25,9 @@ get_remaining_specs_clr,
 add_specs,
 add_specs_clr,
 get_user_specialities,
-get_user_specialities_loading
+get_user_specialities_loading,
+update_procedure_loading,
+update_procedure
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -101,7 +103,119 @@ class MyCatalogueComponent extends Component {
         // })
     }
 
+
+    get_update_procedure_loading = (data) =>{
+        console.log(this.state.procedure_for_update, data ,"data in get_update_procedure loading")
+        if(!!this.props.update_procedure_loading_flag){
+            let arr = [...this.state.selected_procedures]
+            let return_flag = false
+            arr.every((element, index) => {
+                  if(element.serviceId === data.serviceId){
+                    return_flag = true
+                      return false
+                  }
+                 return true
+              })
+              return return_flag
+        }else{
+            return false
+        }
+    }
+
+    update_procedure = (data)=> {
+        try {
+            let arr = !!data?this.state.selected_procedures.filter((item)=>item.serviceId === data.serviceId):this.state.selected_procedures
+            let newArr = arr.map((item,i)=>{
+                let procedure_price = parseInt(item.price[0],10)
+                if(!!!procedure_price){
+                   throw new MyError(`${item.service} price cannot be empty`)
+                }
+                return {
+                    ...item,
+                    price:procedure_price
+                }
+            })
+            let obj = {
+                specialityId:this.state.selected_procedures[0].specialityId,
+                services:newArr
+            }
+            this.setState({
+                procedure_for_update:!!data?data:false
+            },()=> this.props.update_procedure(obj))
+        } catch(e){
+            this.setState({
+                ret:{
+                    success:false,
+                    message:e.message
+                }
+            })
+        }  
+    }
+
     componentWillReceiveProps(nextProps){
+      if(nextProps.update_procedure_ret){
+          if(nextProps.update_procedure_ret.success){
+                    let arr = [...this.state.procedures]
+                    let selected_procedures = [...this.state.selected_procedures]
+                    let updated_procedure = false
+                    let updated_procedures = false
+
+                    if(!!this.state.procedure_for_update){
+                        selected_procedures.every((element, index) => {
+                            console.log(this.state,"state in selecetedProcedures")
+                              if(element.serviceId === this.state.procedure_for_update.serviceId){
+                                updated_procedure = element
+                                  return false
+                              }
+                             return true
+                          })
+                        console.log(updated_procedure,"sddsdsadasdsadasd")
+                         updated_procedures = arr.map((item)=>{
+                            if(item.serviceId === updated_procedure.serviceId){
+                                 return updated_procedure
+                            }else{
+                                return item
+                            }
+                        })
+                    }else{
+                        let procedures = [...this.state.procedures]
+                        let seleceted_procedures = [...this.state.selected_procedures]
+                         updated_procedures = procedures.map((item)=>{
+                             let return_item = {}
+                              seleceted_procedures.every((element)=>{
+                                 if(element.serviceId === item.serviceId){
+                                        return_item = element
+                                        return false
+                                    }
+                                    return true
+                             })
+                             return return_item
+                         }) 
+                    }
+               
+                    this.setState({
+                        procedures:updated_procedures,
+                        ret:{
+                            success:true,
+                            message:nextProps.update_procedure_ret.message
+                        },
+                        procedure_for_update:false,
+                        procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
+                        selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
+                    })
+          }else {
+              this.setState({
+                  ret:{
+                      success:false,
+                      message:nextProps.update_procedure_ret.message
+                  }
+              })
+          }
+          nextProps.update_procedure_loading()
+      }
+
+
+
         if(nextProps.add_specs_ret){
             if(nextProps.add_specs_ret.success){
                 let arr = []
@@ -358,6 +472,47 @@ class MyCatalogueComponent extends Component {
           } 
         ))
     }
+
+
+
+     isSelected = (data) =>{
+        let flag = false
+        let arr = [...this.state.selected_procedures]
+        arr.every(function(element, index) {
+          if(element.serviceId===data.serviceId){
+            flag = true
+            return false
+          }
+           return true
+        })
+        return flag;
+      }
+      
+       getValue = (data) =>{
+        let value= ""
+        let arr = [...this.state.selected_procedures]
+        arr.every(function(element, index) {
+          if(element.serviceId===data.serviceId){
+            value = !!element.price?element.price[0]:0
+            return false
+          }
+           return true
+        })
+        return value;
+      }
+      
+       getVariance = (data) =>{
+        let value= ""
+        let arr = [...this.state.selected_procedures]
+        arr.every(function(element, index) {
+          if(element.serviceId===data.serviceId){
+            value = element.variance
+            return false
+          }
+           return true
+        })
+        return value;
+      }
 
     handleSubmit = () =>{
         if(this.state.addProcedureFlag){
@@ -638,17 +793,26 @@ class MyCatalogueComponent extends Component {
                                         handleEditInclusion = {this.handleEditInclusion}
                                         disabled={!this.state.editFlag}
                                         onEdit = {this.onEdit}
-                                        selectedProcedure = {this.state.selectedProcedure}
-                                        selected_procedures = {this.state.selected_procedures}
+                                        // selectedProcedure = {this.state.selectedProcedure}
+                                        // selected_procedures = {this.state.selected_procedures}
                                         handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
                                         handleVarianceChange = {this.handleVarianceChange}
                                         ret = {this.props.editProcedureRet}
                                         clr = {this.props.editProcedureClr}
                                         loadingOff = {()=>this.editProcedureLoadingOff()}
+                                        isSelected = {this.isSelected(c)}
+                                        getVariance ={this.getVariance(c)}
+                                        getValue = {this.getValue(c)}
+                                        update_procedure = {this.update_procedure}
+                                        update_procedure_loading = {this.get_update_procedure_loading(c)}
                                         />
                                         )) : 
                                        <div className='text-center'>No Procedures</div>)
                                     }
+                                    {this.state.selected_procedures.length !==0 &&  <div className='text-center'>
+                                      <button onClick = {()=>this.update_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
+                                      </div>
+                                      }
                            </div>
                         </div>
                         <ProcedureView
@@ -856,6 +1020,8 @@ class MyCatalogueComponent extends Component {
 }
 
 const mapStateToProps = state => ({
+    update_procedure_ret:state.catalogue_store.update_procedure_ret,
+    update_procedure_loading_flag:state.catalogue_store.update_procedure_loading,
     get_user_specialities_ret:state.catalogue_store.get_user_specs_ret,
     catalogues: state.user.catalogues,
     uploadProceduresRet:state.user.uploadProceduresRet,
@@ -893,5 +1059,7 @@ get_remaining_specs_clr,
 set_catalogue_data,
 set_catalogue_data,
 add_specs_clr,
-add_specs
+add_specs,
+update_procedure,
+update_procedure_loading
 })(MyCatalogueComponent);

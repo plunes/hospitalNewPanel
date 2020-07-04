@@ -32,6 +32,14 @@ export default {
                  console.log(res,'res in get_user_specialities')
                  return res
             })
+            .catch(err => err.response),
+        update_procedures: (data, headers) =>
+        axios
+            .patch(`${base_url}/analytics/cataloguePriceUpdate${!!center_id?'?userId='+center_id:''}`, data, headers)
+            .then(res => {
+                  console.log(res,'res in update_procedure')
+                  return res
+            })
             .catch(err => err.response)
     }
 }

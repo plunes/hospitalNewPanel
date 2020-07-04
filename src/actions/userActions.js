@@ -186,7 +186,11 @@ import {
 
   GET_USER_SPECIALITIES,
   GET_USER_SPECIALITIES_RET,
-  GET_USER_SPECIALITIES_LOADING
+  GET_USER_SPECIALITIES_LOADING,
+
+  UPDATE_PROCEDURE,
+  UPDATE_PROCEDURE_LOADING,
+  UPDATE_PROCEDURE_RET
   
   } from './types';
 import history from '../history';
@@ -231,6 +235,27 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('specialities')
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
+}
+
+export const update_procedure = (data) => dispatch =>{
+  return  dispatch({
+    type: UPDATE_PROCEDURE,
+    payload:data
+  })
+}
+
+export const update_procedure_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: UPDATE_PROCEDURE_RET,
+    payload:data
+  })
+}
+
+export const update_procedure_loading = (data) => dispatch =>{
+  return  dispatch({
+    type: UPDATE_PROCEDURE_LOADING,
+    payload:data
+  })
 }
 
 

@@ -95,6 +95,7 @@
 }
 .head_tabs_actions {
     flex:1 1 20%;
+    position: relative;
 }
 
 .catalogue_circle {
