@@ -60,7 +60,7 @@ const getVariance = () =>{
 
 <div className="catalogue_procedure_wrap">
                                 <div style={{background:'#fff'}} className='catalogue_head_tabs'>
-                                    <span className=' display_block_rish catalogue_circle_wrap'> <span   onClick = {()=>props.onEdit(props)} className={`catalogue_circle ${isSelected()?'green_background':''}`}></span> </span>
+                                    <span className=' display_block_rish catalogue_circle_wrap'> <span   onClick = {()=>props.onEdit(props)} className={`catalogue_circle ${isSelected()?'green_background active_catalogue_circle':''}`}></span> </span>
                                     <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>{data.service}</text></span>
                                     <span className='head_tabs_price display_block_rish text-center'>
                                          {((!!props.editFlag) && (isSelected()))?<input
@@ -88,7 +88,9 @@ const getVariance = () =>{
                                                                                                               value = {isSelected()?getVariance():props.data.variance}
                                                                                                          />:`${props.data.variance}%`}</text></span>
                                     <span className='head_tabs_actions display_block_rish text-center'>
-                                        <span><text style={{color:'#7DD55E'}} className='catalogue_test_name link_text_rish'>Edit</text></span>
+                                          {isSelected()?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
+                                                <span><text style={{color:'#7DD55E', marginLeft:'1rem'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Submit</text></span></React.Fragment>:
+                                                 <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Edit</text></span>}
                                     </span>
                                 </div>
                                 <hr></hr>

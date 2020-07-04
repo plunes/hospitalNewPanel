@@ -35,6 +35,7 @@ import ModalComponent from "../ModalComponent"
 import DownloadCatalogue from "../functional/DownloadCatalogue"
 import Procedure from "../functional/Procedure"
 import EditProcedure from "../functional/editProcedure"
+import ProcedureView from "../functional/ProcedureView"
 import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
 import NewNotif from "../functional/NewNotif"
@@ -79,7 +80,8 @@ class MyCatalogueComponent extends Component {
             procedures_toAdd:[],
             selected_procedures:[],
             add_remaining_specs:false,
-            selected_remain_specs:[]
+            selected_remain_specs:[],
+            procedure_for_detail:false
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -439,7 +441,8 @@ class MyCatalogueComponent extends Component {
             selected_procedures = [...selected_data_removed]
         }
         this.setState({
-            selected_procedures:selected_procedures
+            selected_procedures:selected_procedures,
+            procedure_for_detail:selected_procedures.length ===0?false:selected_procedures[selected_procedures.length-1]
         },()=>this.setState({
             edit_Proc_flag:false
         }))
@@ -648,45 +651,9 @@ class MyCatalogueComponent extends Component {
                                     }
                            </div>
                         </div>
-                        <div className='catalogue_section_2'>
-                            <div className="catalogue_section_2_wrapper new_card_class">
-                                <span className='display_block_rish margin_bottom_medium_rish'><text className='catalogue_heading_text'>Details</text></span>
-                                <span className='display_block_rish '><text className='catalogue_secondary_heading_text'>Test Name</text></span>
-                                <span className='display_block_rish margin_bottom_small_rish '>  <text className='catalogue_test_name'>Colonoscopy and Sciero therepy of Ulcer Colonoscopy and Sciero therepy of Ulcer</text></span>
-                                <div className="location_edit_parent">
-                                    <text className="catalogue_secondary_heading_text">Price</text>
-                                    <div className="edit_location_div">
-                                         <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
-                                    </div>
-                                </div>
-                                <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>&#8377; 227</text></span>
-                                <div className="location_edit_parent">
-                                    <text className="catalogue_secondary_heading_text">Updated At</text>
-                                    <div className="edit_location_div">
-                                         {/* <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" /> */}
-                                    </div>
-                                </div>
-                                <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>05-7-20</text></span>
-
-                                <div className="location_edit_parent">
-                                    <text className="catalogue_secondary_heading_text">Variance</text>
-                                    <div className="edit_location_div">
-                                         <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
-                                    </div>
-                                </div>
-                                <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>20%</text></span>
-
-
-
-                                <div className="location_edit_parent">
-                                    <text className="catalogue_secondary_heading_text">Definition</text>
-                                    <div className="edit_location_div">
-                                         <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
-                                    </div>
-                                </div>
-                                <span style={{marginTop:'1rem'}}  className='display_block_rish'>  <text className='catalogue_test_name '>Space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text, space for text</text></span>
-                            </div>
-                        </div>
+                        <ProcedureView
+                         procedure_for_detail = {this.state.procedure_for_detail}
+                        />
                    </div>
                 </div>
 
