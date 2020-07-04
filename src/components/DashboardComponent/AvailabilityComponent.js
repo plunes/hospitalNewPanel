@@ -87,11 +87,12 @@ let obj =   {
         }
       }
       timeToString = (time) =>{
+
         console.log(hour,"hour in timetostring")
-         let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
+         let  hour =  time.hour>=12?time.hour-12:time.hour===0?12:time.hour
          console.log(hour,time,"hour in timetostring")
          let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
-         let timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===24?'AM':'PM':'AM'}`
+         let timeString = `${hour}:${minutes} ${hour>=12?hour===24?'AM':'PM':'AM'}`
          return timeString
       }
       handleTimeSubmit = (data) =>{
