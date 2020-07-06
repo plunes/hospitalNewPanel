@@ -476,9 +476,11 @@ class MyCatalogueComponent extends Component {
 
 
      isSelected = (data) =>{
+        console.log(data,"data in isSelected")
         let flag = false
         let arr = [...this.state.selected_procedures]
         arr.every(function(element, index) {
+            console.log(element,"element in isSelected")
           if(element.serviceId===data.serviceId){
             flag = true
             return false
