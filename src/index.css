@@ -388,17 +388,18 @@ body {
   display: block;
   margin: 0 auto 4px;
   background-color: #fff;
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   /* line-height: 10rem; */
   text-align: center;
+ 
   font-weight: bold;
   border-width: 2px;
   border-style: solid;
   border-color: #01D35A;
   background-color: #01D35A;
   border-radius: 50%;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #fff;
 }
 .multi-steps > li.active_ris:after {
@@ -407,9 +408,10 @@ body {
   width: 100%;
   background-color: #01D35A;
   position: absolute;
-  top: 2rem;
+  top: 1.5rem;
   bottom: auto;
-  z-index: 1;
+  z-index: 12121212121212121212;
+  left: 7rem;
 }
 .multi-steps > li:nth-child(2)::after{ 
   /* background-color: #DCDCDC; */
@@ -420,9 +422,10 @@ body {
   height: 3px;
   width: 100%;
   position: absolute;
-  top: 2rem;
+  top: 1.5rem;
   bottom: auto;
   z-index: -2;
+  left: 7rem;
 }
 .multi-steps > li:last-child:after {
   display: none;
@@ -445,16 +448,17 @@ body {
   display: block;
   margin: 0 auto 4px;
   background-color: #fff;
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   text-align: center;
   font-weight: bold;
   border-width: 2px;
+  /* left: 7rem; */
   border-style: solid;
   border-color:#DCDCDC;
   background-color :white ;
   border-radius: 50%;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #fff;
 }
 

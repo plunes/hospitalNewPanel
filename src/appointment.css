@@ -32,11 +32,13 @@
 .appointment_card_wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: 1rem;
+    padding: 0rem 1rem 0rem 1rem;
+    margin: 2rem 0rem;
 }
 .appointment_card_profile {
     flex:1 1 40%;
-    border-right: 2px solid #ACACAC;
+    border-right: 4px solid #F9F9F9;
+    padding: 1rem;
 }
 .appointment_card_data {
     flex:1 1 55%;
@@ -45,10 +47,16 @@
     display: block;
     margin: auto;
     width: 4rem;
+    height: 4rem;
     border-radius: 50%;
-    height: auto;
-    object-fit: cover;
+    -o-object-fit: cover;
+    object-fit: contain;
 }
 .appointment_text {
     color: #656565;
+}
+.align_right {
+    display: block;
+    margin-left: auto;
+    width: fit-content;
 }
