@@ -27,6 +27,9 @@ const should_render = (prevProps, nextProps) => {
   if(prevProps.update_procedure_loading !== nextProps.update_procedure_loading){
     return false
   }
+  if(prevProps.data.serviceId !== nextProps.data.serviceId){
+    return false
+  }
   return true
 }
  const Procedure= (props) => {

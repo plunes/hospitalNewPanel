@@ -523,3 +523,6 @@ margin: 0 1%;
     flex:1 1 75%;
     margin: 0 1%;
 }
+.display_block {
+    display: block;
+}

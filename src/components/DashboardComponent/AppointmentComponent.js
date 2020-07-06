@@ -442,21 +442,19 @@ class AppointmentComponent extends Component {
                 />
                 <div className='main_content_rish'>
                     <div>
-                        <div className="AppointBodyrow1">  <h4 style={{position:'relative'}} className="section_heading_rish">Appointments</h4></div>
-                        
-                            <Tabs 
-                            selectedIndex={this.state.tabIndex} 
-                            onSelect={tabIndex => this.setState({ tabIndex })} className="tab_pd">
-                                <TabList>
-                                <div className="row upcmg_fnt">
-                                <Tab className="col-lg-4"><a href="#">Upcoming</a></Tab>
-                                <Tab defaultFocus className="col-lg-4"><a href="#">Confirmed</a></Tab>
-                                <Tab className="col-lg-4"><a href="#">Cancelled</a></Tab>
-                                </div>
-                               
-                                </TabList>
-                              <div className="upcoming_bdr"></div>
-                                <TabPanel className="ardee_ci">
+                         <div className={`appointment_header_wrapper new_card_class ${this.state.tabIndex===0?'border_radius_fix_left':this.state.tabIndex===2?'border_radius_fix_right':''}`}>
+                             <span onClick = {() => this.setState({ tabIndex:0 })}  className={`appointment_header_child-1 ${this.state.tabIndex===0?'active_appointment_header':''}`}>
+                                <text className='appointment_header_text'>UPCOMING</text>
+                             </span>
+                             <span onClick = {() => this.setState({ tabIndex:1 })}  className={`appointment_header_child-1 ${this.state.tabIndex===1?'active_appointment_header':''}`}>
+                                 <text className='appointment_header_text'>CONFIRMED</text>
+                            </span>                     
+                            <span onClick = {() => this.setState({ tabIndex:2 })} className={`appointment_header_child-1 ${this.state.tabIndex===2?'active_appointment_header':''}`}>
+                               <text className='appointment_header_text'>CANCELLED</text>
+                            </span>
+                         </div>
+                         <div>
+                             {this.state.tabIndex ===0 && <div>
                                 {this.state.upcoming_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
                                         <h3>No New Appointments</h3>
                                         </div>}
@@ -522,33 +520,32 @@ class AppointmentComponent extends Component {
                                  <hr className="appoint-hr_ris"/>
                                    </React.Fragment>
                                })}
-                                </TabPanel>
-                                <TabPanel className="ardee_ci">
+                                 </div>}
+                         
+                              {this.state.tabIndex===1 && <div>
                                 {this.state.confirmed_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
                                         <h3>No  Appointments</h3>
                                         </div>}
                                     {this.state.confirmed_bookings.map((item,i)=>{
                                    return <React.Fragment>
-                                        <div className="row">
-                                        <div className="col-lg-3 nov_2">
-                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
-                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
-                                      </div>
-                                              <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
-                                                  </div>
-                                                  <div className="col-lg-4 nov_2">
-                                                  <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
-                                                  <p>{`Phone no: ${item.userMobileNumber}`}</p>
-                                                  <p>{item.professionalAddress}</p>
-                                                </div> 
-                                      <div className="col-lg-2 loc_tab">
-                                    <div className="round-image">
-                                      <img src={item.userImageUrl} className="rund_im "/>
-                                      </div>
-                                     </div>
-                                </div>
-                               {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
+                                       <div className='appointment_card_wrapper'>
+                                           <div className='appointment_card_profile'>
+                                              <div>
+                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                              </div>
+
+                                              <div  className='text-center'>
+                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                              </div> 
+                                              <div >
+                                                            <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
+                                                            <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
+                                                </div>
+                                            </div>
+                                           <div className='appointment_card_data'>
+                                           {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
                                 <div className="col-lg-4">
                                     <p className="gr_con "><text>Confirmed</text></p>
                                  </div>
@@ -568,8 +565,9 @@ class AppointmentComponent extends Component {
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings','cancelled_bookings')}>Cancel</text></p>
                                  </div>
                                 </div>}
-                                {/* 2nd--end */}
-                                <div className="row confrm_mar_sec">
+
+                                  {/* 2nd--end */}
+                                  <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
                                     <p className="brace_m">{item.serviceName}</p>
                                  </div>
@@ -582,15 +580,19 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
-                                 <hr className="appoint-hr_ris"/>
+                                           </div>
+                                       </div>
                                    </React.Fragment>
                                })} 
-                               <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
-                                </TabPanel>
-                                <TabPanel className="ardee_ci">
-                                {this.state.cancelled_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
+                                  <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                  </div>}
+                         
+                         </div>
+
+                               
+                    {this.state.tabIndex === 2 && <div>
+                        {this.state.cancelled_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
                                         <h3>No  Appointments</h3>
                                         </div>}
                                 {this.state.cancelled_bookings.map((item,i)=>{
@@ -655,13 +657,8 @@ class AppointmentComponent extends Component {
                            <hr className="appoint-hr_ris"/>
                              </React.Fragment>
                          })}                      
-                                 <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})} className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
-                                                           
-                                 </TabPanel>
-                                
-                               
-                            </Tabs>
-
+                                 <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})} className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>    
+                        </div>}       
                             <Modal
                             isOpen={this.state.confirm_modal_flag}
                             onAfterOpen={()=>console.log("On After modall gets called")}

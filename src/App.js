@@ -17,6 +17,7 @@ import Development from './components/Development'
 import DashboardPage from './components/DashboardPage'
 import './common.css'
 import './catalogue.css'
+import './appointment.css'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
 
