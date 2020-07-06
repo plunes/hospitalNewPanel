@@ -442,7 +442,7 @@ class AppointmentComponent extends Component {
                 />
                 <div className='transparent_main_content_rish'>
                     <div>
-                         <div className={`appointment_header_wrapper new_card_class ${this.state.tabIndex===0?'border_radius_fix_left':this.state.tabIndex===2?'border_radius_fix_right':''}`}>
+                         <div className={`appointment_header_wrapper new_card_class ${this.state.tabIndex===0?'border_radius_fix_right':this.state.tabIndex===2?'border_radius_fix_left':''}`}>
                              <span onClick = {() => this.setState({ tabIndex:0 })}  className={`appointment_header_child-1 ${this.state.tabIndex===0?'active_appointment_header':''}`}>
                                 <text className='appointment_header_text'>UPCOMING</text>
                              </span>
@@ -480,10 +480,10 @@ class AppointmentComponent extends Component {
                                             </div>
                                            <div className='appointment_card_data'>
                                            { (time_now<item.appointmentTime )  &&  <div className="row confrm_mar_sec">
-                                                <div className="col-lg-4">
+                                                <div className="col-lg-2">
                                                     <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
                                                 </div>
-                                                <div className="col-lg-4">
+                                                <div className="col-lg-8">
                                                 <RescheduleComponent
                                                 reschedule_appointment = {this.reschedule_appointment}
                                                 value = {item}
@@ -495,7 +495,7 @@ class AppointmentComponent extends Component {
                                                 type="upcoming_bookings"
                                                 />
                                                 </div>
-                                                <div className="col-lg-4">
+                                                <div className="col-lg-2">
                                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings","cancelled_bookings")}>Cancel</text></p>
                                                 </div>
                                                 </div>
@@ -549,10 +549,10 @@ class AppointmentComponent extends Component {
                                             </div>
                                            <div className='appointment_card_data'>
                                            {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
-                                <div className="col-lg-4">
+                                <div className="col-lg-2">
                                     <p className="gr_con "><text>Confirmed</text></p>
                                  </div>
-                                 <div className="col-lg-4">
+                                 <div className="col-lg-8">
                                  <RescheduleComponent
                                  reschedule_appointment = {this.reschedule_appointment}
                                  value = {item}
@@ -564,7 +564,7 @@ class AppointmentComponent extends Component {
                                  type="confirmed_bookings"
                                 />
                                  </div>
-                                 <div className="col-lg-4">
+                                 <div className="col-lg-2">
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings','cancelled_bookings')}>Cancel</text></p>
                                  </div>
                                 </div>}
@@ -620,11 +620,11 @@ class AppointmentComponent extends Component {
                                             </div>
                                            <div className='appointment_card_data'>
                                            { (time_now<item.appointmentTime)   &&  <div className="row confrm_mar_sec">
-                                                    <div className="col-lg-4">
+                                                    <div className="col-lg-2">
                                                         <p className="gr_con "><text></text></p>
                                                         {/* <p className="gr_con "><text>Confirm</text></p> */}
                                                     </div>
-                                                    <div className="col-lg-4">
+                                                    <div className="col-lg-8">
                                                     <RescheduleComponent
                                                     reschedule_appointment = {this.reschedule_appointment}
                                                     value = {item}
@@ -636,7 +636,7 @@ class AppointmentComponent extends Component {
                                                     type="cancelled_bookings"
                                                     />
                                                     </div>
-                                                    <div className="col-lg-4">
+                                                    <div className="col-lg-2">
                                                     <p className="con_re "><text></text></p>
                                                     {/* <p className="con_re "><text>Cancelled</text></p> */}
                                                     </div>
