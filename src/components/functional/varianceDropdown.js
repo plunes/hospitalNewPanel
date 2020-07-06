@@ -38,7 +38,7 @@ export default function VarianceDropdown(props) {
           name:'35'
         },
         {
-          value:'45',
+          value:45,
           name:'45'
         },
     ]}
