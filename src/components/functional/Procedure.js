@@ -123,7 +123,7 @@ console.log(props.data.service,"rerendering of Procedure")
                                                                                                               value = {props.isSelected?props.getVariance:props.data.variance}
                                                                                                          />:`${props.data.variance}%`}</text></span>
                                     <span className='head_tabs_actions display_block_rish text-center'>
-                                      {props.update_procedure_loading ? <LoaderComponent second_variant = {true} />:props.isSelected?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
+                                      {((props.update_procedure_loading) && (props.procedure_for_update.serviceId === props.data.serviceId)) ? <LoaderComponent second_variant = {true} />:props.isSelected?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
                                                 <span><text style={{color:'#7DD55E', marginLeft:'1rem'}}  onClick = {()=>props.update_procedure(props.data)}  className='catalogue_test_name link_text_rish'>Submit</text></span></React.Fragment>:
                                                  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Edit</text></span>}
                                     </span>

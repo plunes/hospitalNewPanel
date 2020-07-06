@@ -140,7 +140,8 @@ class MyCatalogueComponent extends Component {
                 services:newArr
             }
             this.setState({
-                procedure_for_update:!!data?data:false
+                procedure_for_update:!!data?data:false,
+                refresh:!this.state.refresh
             },()=> this.props.update_procedure(obj))
         } catch(e){
             this.setState({
@@ -187,14 +188,18 @@ class MyCatalogueComponent extends Component {
                                         return_item = element
                                         return false
                                     }
+                                    return_item = item
                                     return true
                              })
                              return return_item
                          }) 
                     }
+
+                    console.log(updated_procedures,"updated_procedures")
                
                     this.setState({
                         procedures:updated_procedures,
+                        refresh:!this.state.refresh,
                         ret:{
                             success:true,
                             message:nextProps.update_procedure_ret.message
@@ -805,6 +810,8 @@ class MyCatalogueComponent extends Component {
                                         isSelected = {this.isSelected(c)}
                                         getVariance ={this.getVariance(c)}
                                         getValue = {this.getValue(c)}
+                                        refresh = {this.state.refresh}
+                                        procedure_for_update = {this.state.procedure_for_update}
                                         update_procedure = {this.update_procedure}
                                         update_procedure_loading = {this.get_update_procedure_loading(c)}
                                         />
