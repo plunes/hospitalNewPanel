@@ -3,15 +3,17 @@ import { Link } from "react-router-dom"
 
 const DoctorComponent = (props) =>{
     return(
-        <div className="col-md-6 col-sm-12 col-lg-3">
+        <div className='doctor_wrapper' >
             <Link to={`add-doctor?id=${props.data._id}`} >
-        <div onClick={()=>props.onClick(props.data)} className="timelinebox4 cursor-pointer">
-            <img src={!!props.data?!!props.data.imageUrl?props.data.imageUrl:'/drshivani.jpg':'/drshivani.jpg'}/>
-            <div className="left_ali">
-             <h2>{!!props.data?props.data.name:'Not Available'}</h2>
-             <p>{!!props.data?props.data.department:'Not Available'}</p>
-            <p>{`${!!props.data?props.data.experience:''}  years of experience`}</p>
-            </div>
+        <div onClick={()=>props.onClick(props.data)} className="doctor_wrapper_rish">
+            <span className='doctor_wrapper_child_!'>
+              <img className='doctor_compo_img' src={!!props.data?!!props.data.imageUrl?props.data.imageUrl:'/drshivani.jpg':'/drshivani.jpg'}/>
+            </span>
+           <span className='doctor_wrapper_child_2'>
+             <text className='appointment_text display_block doctor_component_name'>{!!props.data?props.data.name:'Not Available'}</text>
+             <text  className='appointment_text display_block doctor_component_speciality'>{!!props.data?props.data.department:'Not Available'}</text>
+            <text  className='appointment_text display_block doctor_component_experience'>{`${!!props.data?props.data.experience:''}  years of experience`}</text>
+           </span>
         </div>
         </Link>
     </div>

@@ -174,6 +174,7 @@ class RescheduleComponent extends React.PureComponent {
                     <DateTimePicker
                     defaultValue={this.props.value.appointmentTime? new Date(parseInt(this.props.value.appointmentTime,10)): new Date()}
                     autoFocus={true}
+                    date = {false}
                     min={new Date()}
                     parse={str => new Date(str)}
                     step={1}

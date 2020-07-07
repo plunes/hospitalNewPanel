@@ -296,7 +296,7 @@
             } */
             .carousel-item{padding: 20px;}
             .card_im {
-                width: 28rem;
-                height: 23rem;
-                object-fit: cover;
+                /* width: 15rem; */
+                height: 15rem;
+                object-fit: contain;
             }

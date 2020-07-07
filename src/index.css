@@ -989,3 +989,53 @@ html {
     top: 22%;
     left: 30%;
 }
+
+.doctor_wrapper_rish {
+  display: flex;
+  flex-wrap: wrap;
+}
+.doctor_wrapper_child_1 {
+  flex: 1 1 30%;
+  margin: 0 1%;
+}
+.doctor_wrapper_child_2 {
+  flex: 1 1 60%;
+  margin: 0 1%;
+}
+.doctor_compo_img {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border: 2px solid lightgray;
+}
+
+.doctor_component_name {
+  font-size: 1rem;
+  font-weight: bold !important;
+}
+.doctor_component_speciality {
+  font-size: .8rem;
+}
+.doctor_component_experience {
+  font-size: .7rem;
+}
+
+.doctor_wrapper {
+  flex: 1 1 30%;
+  margin: 2% 0%;
+  padding:  0rem .5rem;
+}
+.add_doctor_plus {
+  height: 2rem;
+  width: 2rem;
+}
+.doctor_wrapper:nth-child(3n -1) {
+    color:#06a8f9 !important;
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+}
+.doctor_wrapper:last-child {
+  border: none;  
+}
