@@ -19,31 +19,30 @@ const TimeSlot = (props) => {
                     <React.Fragment>
                 <ul className="tme_d1">
                       {/* <li onClick= {()=>setHour(7)} className={hour===7?'active cursor-pointer':'cursor-pointer'} >7</li> */}
-                    <li onClick= {()=>setHour(0)} className={hour===0?'active cursor-pointer':'cursor-pointer'} >12</li>
-                    <li onClick= {()=>setHour(1)} className={hour===1?'active cursor-pointer':'cursor-pointer'} >1</li>
-                    <li onClick= {()=>setHour(2)} className={hour===2?'active cursor-pointer':'cursor-pointer'} >2</li>
-                    <li onClick= {()=>setHour(3)} className={hour===3?'active cursor-pointer':'cursor-pointer'} >3</li>
-                    <li onClick= {()=>setHour(4)} className={hour===4?'active cursor-pointer':'cursor-pointer'} >4</li>
-                    <li onClick= {()=>setHour(5)} className={hour===5?'active cursor-pointer':'cursor-pointer'} >5</li>
-                    <li onClick= {()=>setHour(6)} className={hour===6?'active cursor-pointer':'cursor-pointer'} >6</li>
-                    <li onClick= {()=>setHour(7)} className={hour===7?'active cursor-pointer':'cursor-pointer'} >7</li>
-                    <li onClick= {()=>setHour(8)} className={hour===8?'active cursor-pointer':'cursor-pointer'} >8</li>
-                    <li onClick= {()=>setHour(9)} className={hour===9?'active cursor-pointer':'cursor-pointer'} >9</li>
-                    <li onClick= {()=>setHour(10)} className={hour===10?'active cursor-pointer':' cursor-pointer'}>10</li>
-                    <li onClick= {()=>setHour(11)} className={hour===11?'active cursor-pointer':'cursor-pointer'}>11</li>
-                    <li onClick= {()=>setHour(12)} className={hour===12?'active cursor-pointer':'cursor-pointer'} >12</li>
-                    <li onClick= {()=>setHour(13)} className={hour===13?'active cursor-pointer':' cursor-pointer'}>13</li>
-                    <li onClick= {()=>setHour(14)} className={hour===14?'active cursor-pointer':' cursor-pointer'}>14</li>
-                    <li onClick= {()=>setHour(15)} className={hour===15?'active cursor-pointer':'cursor-pointer'} >15</li>
-                    <li onClick= {()=>setHour(16)} className={hour===16?'active cursor-pointer':'cursor-pointer'}>16</li>
-                    <li onClick= {()=>setHour(17)} className={hour===17?'active cursor-pointer':'cursor-pointer'}>17</li>
-                    <li onClick= {()=>setHour(18)} className={hour===18?'active cursor-pointer':'cursor-pointer'}>18</li>
-                    <li onClick= {()=>setHour(19)} className={hour===19?'active cursor-pointer':' cursor-pointer'}>19</li>
-                    <li onClick= {()=>setHour(20)} className={hour===20?'active cursor-pointer':' cursor-pointer'}>20</li>
-                    <li onClick= {()=>setHour(21)} className={hour===21?'active cursor-pointer':' cursor-pointer'}>21</li>
-                    <li onClick= {()=>setHour(22)} className={hour===22?'active cursor-pointer':' cursor-pointer'}>22</li>
-                    <li onClick= {()=>setHour(23)} className={hour===23?'active cursor-pointer':' cursor-pointer'}>23</li>
-                    
+                      <li onClick= {()=>setHour(0)} className={hour===0?'active cursor-pointer':'cursor-pointer'} >0</li>
+                     <li onClick= {()=>setHour(1)} className={hour===1?'active cursor-pointer':'cursor-pointer'} >1</li>
+                     <li onClick= {()=>setHour(2)} className={hour===2?'active cursor-pointer':'cursor-pointer'} >2</li>
+                     <li onClick= {()=>setHour(3)} className={hour===3?'active cursor-pointer':'cursor-pointer'} >3</li>
+                     <li onClick= {()=>setHour(4)} className={hour===4?'active cursor-pointer':'cursor-pointer'} >4</li>
+                     <li onClick= {()=>setHour(5)} className={hour===5?'active cursor-pointer':'cursor-pointer'} >5</li>
+                     <li onClick= {()=>setHour(6)} className={hour===6?'active cursor-pointer':'cursor-pointer'} >6</li>
+                     <li onClick= {()=>setHour(7)} className={hour===7?'active cursor-pointer':'cursor-pointer'} >7</li>
+                     <li onClick= {()=>setHour(8)} className={hour===8?'active cursor-pointer':'cursor-pointer'} >8</li>
+                     <li onClick= {()=>setHour(9)} className={hour===9?'active cursor-pointer':'cursor-pointer'} >9</li>
+                     <li onClick= {()=>setHour(10)} className={hour===10?'active cursor-pointer':' cursor-pointer'}>10</li>
+                     <li onClick= {()=>setHour(11)} className={hour===11?'active cursor-pointer':'cursor-pointer'}>11</li>
+                     <li onClick= {()=>setHour(12)} className={hour===12?'active cursor-pointer':'cursor-pointer'} >12</li>
+                     <li onClick= {()=>setHour(13)} className={hour===13?'active cursor-pointer':' cursor-pointer'}>13</li>
+                     <li onClick= {()=>setHour(14)} className={hour===14?'active cursor-pointer':' cursor-pointer'}>14</li>
+                     <li onClick= {()=>setHour(15)} className={hour===15?'active cursor-pointer':'cursor-pointer'} >15</li>
+                     <li onClick= {()=>setHour(16)} className={hour===16?'active cursor-pointer':'cursor-pointer'}>16</li>
+                     <li onClick= {()=>setHour(17)} className={hour===17?'active cursor-pointer':'cursor-pointer'}>17</li>
+                     <li onClick= {()=>setHour(18)} className={hour===18?'active cursor-pointer':'cursor-pointer'}>18</li>
+                     <li onClick= {()=>setHour(19)} className={hour===19?'active cursor-pointer':' cursor-pointer'}>19</li>
+                     <li onClick= {()=>setHour(20)} className={hour===20?'active cursor-pointer':' cursor-pointer'}>20</li>
+                     <li onClick= {()=>setHour(21)} className={hour===21?'active cursor-pointer':' cursor-pointer'}>21</li>
+                     <li onClick= {()=>setHour(22)} className={hour===22?'active cursor-pointer':' cursor-pointer'}>22</li>
+                     <li onClick= {()=>setHour(23)} className={hour===23?'active cursor-pointer':' cursor-pointer'}>23</li>
                 </ul>
              <ul className="tme_d">
                         <li onClick= {()=>setMinutes(0)} className={minutes===0?'active cursor-pointer':' cursor-pointer'}>00</li>
@@ -151,49 +150,57 @@ const TimeSlot = (props) => {
             let selecteDaySlots = props.selecteDaySlots
             let test = {}
             let other_shift = shift==='morning'?selecteDaySlots.evening:selecteDaySlots.morning
-            console.log(other_shift,"other_shift in Submit")
+            console.log(other_shift,selecteDaySlots,"other_shift in Submit")
             let error = false
             let message = ""
+            console.log(hour, minutes," hour and minutes in TimeSlots")
             if(type==="from"){
-                test = slot.to
-                if(hour>test.hour){
-                    error=true
-                    message = "Invalid time"
-                }else if(hour===test.hour){
-                    if(minutes>test.minutes){
-                        error=true
-                        message = "Invalid time"
-                    }
-                }else if(shift==='evening'){
-                    if(hour<other_shift.to.hour){
-                        error=true
-                        message = "Invalid time"
-                    }else if(hour===other_shift.to.hour){
-                        if(minutes<other_shift.to.minutes){
+                if(shift==='morning'){
+                      if((hour>selecteDaySlots.morning.to.hour||(hour>other_shift.from.hour)||(hour>other_shift.to.hour))){
+                          error=true
+                          message= "Invalid Time"
+                      }else if(hour===selecteDaySlots.morning.to.hour){
+                          if(minutes>=selecteDaySlots.morning.to.minutes){
                             error=true
-                            message = "Invalid time"
-                        }
+                            message= "Invalid Time"
+                          }
+                      }
+                }else if(shift==='evening'){
+                    if(((hour<other_shift.to.hour) || (hour<other_shift.from.hour) || (hour>selecteDaySlots.evening.to.hour))){
+                        error=true
+                        message= "Invalid Time"
+                    }else if(hour===selecteDaySlots.evening.to.hour){
+                            if(minutes>=selecteDaySlots.evening.to.minutes){
+                                error=true
+                                message= "Invalid Time"
+                              }
+                    }else if(hour===selecteDaySlots.morning.to.hour){
+                        if(minutes<=selecteDaySlots.morning.to.minutes){
+                            error=true
+                            message= "Invalid Time"
+                          }
                     }
                 }
             }else{
-                test = slot.from
-                if(hour<test.hour){
-                    error=true
-                    message = "Invalid time"
-                }else if(hour===test.hour){
-                    if(minutes<test.minutes){
+                if(shift==='morning'){
+                    if((hour<selecteDaySlots.morning.from.hour||(hour>other_shift.from.hour)||(hour>other_shift.to.hour))){
                         error=true
-                        message = "Invalid time"
-                    }
-                }else if(shift==='morning'){
-                    if(hour>other_shift.from.hour){
-                        error=true
-                        message = "Invalid time"
-                    }else if(hour===other_shift.from.hour){
-                        if(minutes>other_shift.from.minutes){
-                            error=true
-                            message = "Invalid time"
+                        message= "Invalid Time"
+                    }else if(hour===selecteDaySlots.morning.from.hour){
+                        if(minutes>=selecteDaySlots.morning.from.minutes){
+                          error=true
+                          message= "Invalid Time"
                         }
+                    }
+                }else if(shift==='evening'){
+                    if((hour<selecteDaySlots.evening.from.hour||(hour===0?false:hour<other_shift.from.hour)||(hour<other_shift.to.hour))){
+                        error=true
+                        message= "Invalid Time"
+                    }else  if((hour===selecteDaySlots.evening.from.to)){
+                        if(minutes<=selecteDaySlots.evening.from.minutes){
+                            error=true
+                            message= "Invalid Time"
+                          }
                     }
                 }
             }

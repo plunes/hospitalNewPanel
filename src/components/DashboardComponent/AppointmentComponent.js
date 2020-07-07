@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
+import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import MeasureTime from "../MeasureTime"
 
 import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/common_utilities"
