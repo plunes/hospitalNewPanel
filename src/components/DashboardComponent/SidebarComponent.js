@@ -217,7 +217,7 @@ const  SidebarComponent = (props) => {
                     </span>
            </Link>
         </div>
-         <div  className="sidebar_item_wraper " onClick={handlelogoutClick} >
+         <div  className="sidebar_item_wraper "  >
          <Link to= "/"
               
                
