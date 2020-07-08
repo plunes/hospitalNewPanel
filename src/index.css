@@ -833,6 +833,40 @@ html {
   flex:1 1 65%;
   margin: 1rem auto 1rem auto;
 }
+
+.manage_payment_heading_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #FCFCFC;
+}
+.manage_payments_heading_wrapper {
+  display: block;
+  margin-left: 2rem;
+  margin-top: 3rem;
+}
+.manage_payment_heading_sec_1 {
+  flex:1 1 60%;
+  /* margin: auto; */
+}
+.manage_payment_heading_sec_2 {
+  flex:1 1 30%;
+  margin: auto;
+}
+.manage_payment_img {
+  width: 20rem;
+  height: auto;
+  position: relative;
+  margin-top:1rem;
+}
+.flex_child_rish_manage_payments {
+  flex:1 1 40%;
+  margin: 0px 1rem;
+}
+
+.manage_payment_submit {
+    display: block !important;
+    margin: 0rem auto !important;
+}
 .flex_parent_rish {
   display: flex;
   flex-wrap: wrap;
