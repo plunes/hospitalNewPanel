@@ -594,7 +594,7 @@ console.log(data,'data in submit Details')
         return (
            <React.Fragment>
                 <div className='main_content_rish'>
-                    <div className="border_dev">
+                    <div >
                 <div className="add_dr">
                     <div className="add_srch_d">
                       <NewNotif 
