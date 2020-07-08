@@ -282,6 +282,7 @@ let obj =   {
                selectedshift = {this.state.selectedshift}
                submit = {this.handleTimeSubmit}
                setAvailabilityRet = {this.props.setAvailabilityRet}
+               selecteDaySlots = {this.state.selecteDaySlots}
                setAvailabilityClr = {this.props.setAvailabilityClr}
                loadingOff = {()=>this.setLoadingOff()}
               />
@@ -345,7 +346,8 @@ let obj =   {
       selectedType:b,
       selectedshift:a,
       open:true,
-      selectedDay:item
+      selectedDay:item,
+      selecteDaySlots:item.slots
     })
   }
 
