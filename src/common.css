@@ -517,3 +517,10 @@ margin: 0 1%;
     flex:1 1 75%;
     margin: 0 1%;
 }
+
+.availability_content_rish {
+    width: 92%;
+    background-color: #fff !important;
+    min-height: 30rem;
+    position: relative;
+}

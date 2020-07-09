@@ -256,7 +256,7 @@ setAvailabilityClr = () =>{
                         setAvailabilityRet:false
                       })}
                   />       
-                <div className='main_content_rish'>
+                <div className='availability_content_rish'>
                 <div className= 'text-center'>  <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">My Availability</h4></div>
                   <div className="time_she">
                   {this.state.loading &&  <LoaderComponent />}
