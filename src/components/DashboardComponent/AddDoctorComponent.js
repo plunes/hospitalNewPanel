@@ -197,13 +197,14 @@ class AddDoctorComponent extends Component {
       let toMinutes = arr[1].split(" ")[0].split(':')[1]
       let toHour = arr[1].split(" ")[0].split(':')[0]
       let toAmPm = arr[1].split(" ")[1]
+      console.log(fromHour==='12',"fromHour")
 let obj =   {
           from:{
-            hour:fromAmpm==="PM"?12+parseInt(fromHour,10):parseInt(fromHour,10),
+            hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
             minutes:parseInt(fromMinute,10)
           },
           to:{
-            hour:toAmPm==="PM"?12+parseInt(toHour,10):parseInt(toHour,10),
+            hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
             minutes:parseInt(toMinutes,10)
           }
       }
@@ -211,12 +212,13 @@ let obj =   {
       }
     
       timeToString = (time) =>{
-        let  hour =  time.hour>12?time.hour-12:time.hour
-        let minutes =  time.minutes<10?`0${time.minutes}`:time.minutes
-        let timeString = `${hour}:${minutes} ${time.hour>12?'PM':'AM'}`
-        return timeString
-     }
-
+        console.log(hour,"hour in timetostring")
+         let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
+         console.log(hour,time,"hour in timetostring")
+         let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
+         let timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
+         return timeString
+      }
      handleTimeSubmit = (data) =>{
       console.log(data,"data in handleTimeSubmit")
         let slot = JSON.parse(JSON.stringify(this.state.slots))
@@ -280,6 +282,7 @@ let obj =   {
                submit = {this.handleTimeSubmit}
                setAvailabilityRet = {this.props.setAvailabilityRet}
                setAvailabilityClr = {this.props.setAvailabilityClr}
+               selecteDaySlots = {this.state.selecteDaySlots}
                loadingOff = {()=>this.setLoadingOff()}
               />
           </React.Fragment> 
@@ -342,7 +345,8 @@ let obj =   {
       selectedType:b,
       selectedshift:a,
       open:true,
-      selectedDay:item
+      selectedDay:item,
+      selecteDaySlots:item.slots
     })
   }
 
