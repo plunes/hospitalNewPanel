@@ -48,6 +48,7 @@ export const UPDATE_IMAGE_CLR = 'App/UPDATE_IMAGE_CLR'
 export const SEARCH_PROCEDURE = 'App/Profile/SEARCH_PROCEDURE'
 export const SEARCH_PROCEDURE_RET = 'App/Profile/SEARCH_PROCEDURE_RET'
 export const SEARCH_PROCEDURE_CLR = 'App/Profile/SEARCH_PROCEDURE_CLR'
+export const SEARCH_PROCEDURE_LOADING = 'App/Profile/SEARCH_PROCEDURE_LOADING'
 
 // Upload Procedures
 export const UPLOAD_PROCEDURE = 'App/Profile/UPLOAD_PROCEDURE'

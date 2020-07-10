@@ -1,6 +1,7 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { GET_USER_SPECIALITIES, UPDATE_PROCEDURE , ADD_PROCEDURE} from '../actions/types'
-import { get_user_specialities_ret, get_user_specialities_loading, update_procedure_ret, update_procedure_loading, add_procedure_ret, add_procedure_loading } from '../actions/userActions'
+import { GET_USER_SPECIALITIES, UPDATE_PROCEDURE , ADD_PROCEDURE, SEARCH_PROCEDURE} from '../actions/types'
+import { get_user_specialities_ret, get_user_specialities_loading, update_procedure_ret, update_procedure_loading, add_procedure_ret,
+   add_procedure_loading, search_procedures_ret, search_procedures_loading } from '../actions/userActions'
 import api from '../utils/api_routes'
 import { get_url_params } from "../utils/common_utilities"
 import store from '../store'
@@ -145,10 +146,69 @@ function* add_procedure_saga(action) {
 }
 
 
+function* search_procedures_saga(action) {
+  console.log("Inside search_procedures_ret saga")
+
+ try {
+    const  search_procedures = yield store.getState().catalogue_store.search_procedures
+    const data = search_procedures
+    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    let dataObject = {
+      page:data.page,
+      searchQuery:data.searchQuery,
+      limit:data.limit,
+      specialityId:data.specialityId
+    }
+    console.log(data,"Just before api call")
+    const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, headers)
+    console.log(api_data.data,"api_data in add_procedure_saga")
+    if(!!api_data){
+      if (api_data.status === 201) {
+          if(!!api_data.data){
+            yield put(search_procedures_ret({
+              success:true,
+              message:'Procedure has been successfully fetched',
+              data:api_data.data.data
+             }))
+          }else {
+            yield put(search_procedures_ret({
+              success:false,
+              message:'Something went wrong try again later..',
+              data:[]
+             }))
+          }
+         
+        }else{
+          yield put(search_procedures_ret({
+              success:false,
+              message:'Something went wrong try again later..',
+              data:[]
+             }))
+        }
+    }
+ } catch (e) {
+  try{
+      yield put(search_procedures_ret({
+          success:false,
+          message:'Something went wrong try again later..',
+          data:[]
+         }))
+    }catch(x){
+      yield put(search_procedures_ret({
+          success:false,
+          message:'Something went wrong try again later..',
+          data:[]
+         }))
+      }
+ }
+}
+
+
 function* mySaga() {
   yield takeLatest(GET_USER_SPECIALITIES, get_user_specs_saga),
   yield takeLatest(UPDATE_PROCEDURE, update_procedure_saga),
-  yield takeLatest(ADD_PROCEDURE, add_procedure_saga)
+  yield takeLatest(ADD_PROCEDURE, add_procedure_saga),
+  yield takeLatest(SEARCH_PROCEDURE, search_procedures_saga)
 }
 
 export default mySaga

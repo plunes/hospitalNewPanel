@@ -1,5 +1,5 @@
 import React, { useRef, userEffect } from 'react'
-import {throttle} from 'throttle-debounce';
+import { debounce, throttle } from 'throttle-debounce';
 
 const SearchComponent = (props) =>{
   console.log(props.selected_speciality,"props.selected_speciality")
@@ -36,7 +36,7 @@ const SearchComponent = (props) =>{
               <input
                type="text" 
                ref= {searchRef} 
-               onChange={onChange} 
+               onChange={debounce(500, searchCall)} 
                placeholder="Name the procedure or test here." 
                name="search" 
                className='catalogueSearchbar no-border'

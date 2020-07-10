@@ -29,7 +29,9 @@ get_user_specialities_loading,
 update_procedure_loading,
 update_procedure,
 add_procedure,
-add_procedure_loading
+add_procedure_loading,
+search_procedures,
+search_procedures_loading
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -427,16 +429,16 @@ class MyCatalogueComponent extends Component {
             }
             nextProps.toAddServicesClr()
         }
-            if(!!nextProps.searchProceduresRet){
-                if(nextProps.searchProceduresRet.success){
-                    if(nextProps.searchProceduresRet.type==="servicestoAdd"){
+            if(!!nextProps.search_procedures_ret){
+                if(nextProps.search_procedures_ret.success){
+                    if(nextProps.search_procedures_ret.type==="servicestoAdd"){
 
                     }else{
                         this.setState({
                             selected_procedures:[],
-                            procedures:nextProps.searchProceduresRet.data,
+                            procedures:nextProps.search_procedures_ret.data,
                             loading:false,
-                            hide_view_more:nextProps.searchProceduresRet.data.length === this.state.procedures.length?true:false
+                            hide_view_more:nextProps.search_procedures_ret.data.length === this.state.procedures.length?true:false
                         })
                     }
                 }else{
@@ -444,7 +446,7 @@ class MyCatalogueComponent extends Component {
                         loading:false
                     })
                 }
-                nextProps.searchProceduresClr()
+                nextProps.search_procedures_loading()
             }
             if(!!nextProps.get_user_specialities_ret){
                 if(nextProps.get_user_specialities_ret.success){
@@ -462,7 +464,7 @@ class MyCatalogueComponent extends Component {
                             specialities:arr,
                             selected_speciality:arr[0].value,
                             loading:true
-                        },()=>{this.props.searchProcedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality})  })
+                        },()=>{this.props.search_procedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality})  })
                     }  
                 }else{
                     this.setState({
@@ -588,7 +590,7 @@ class MyCatalogueComponent extends Component {
                    specialityId:this.state.selected_speciality
                 })
         }else{
-              this.props.searchProcedures(data)
+              this.props.search_procedures(data)
         }
     }
 
@@ -597,7 +599,7 @@ class MyCatalogueComponent extends Component {
             ...obj,
             limit:this.state.limit + 50,
             loading:true
-        },()=>this.props.searchProcedures(
+        },()=>this.props.search_procedures(
           {
             limit:this.state.limit,
             page:1,
@@ -757,7 +759,7 @@ class MyCatalogueComponent extends Component {
                 selected_speciality:e.target.value,
                 loading:true
             },()=>{
-                this.props.searchProcedures({
+                this.props.search_procedures({
                     searchQuery:'',
                     page:'1',
                     limit:'50',
@@ -808,7 +810,7 @@ class MyCatalogueComponent extends Component {
             // selected_procedures:this.state.selected_procedures
         },()=>{
             this.props.editProcedureClr()
-            this.props.searchProcedures({
+            this.props.search_procedures({
                 limit:50,
                 searchQuery:'',
                 page:1,
@@ -879,7 +881,7 @@ class MyCatalogueComponent extends Component {
            selected_procedures:[],
            procedure_for_update:[],
            addProcedureFlag:false
-       },()=>this.props.searchProcedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality}))
+       },()=>this.props.search_procedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality}))
     }
 
     render() {
@@ -941,7 +943,7 @@ class MyCatalogueComponent extends Component {
                                         <SearchComponent 
                                             searchProcedures = {this.searchProceduresFun}
                                             searchProceduresClr = {this.props.searchProceduresClr}
-                                            searchProceduresRet = {this.props.searchProceduresRet}
+                                            searchProceduresRet = {this.props.search_procedures_ret}
                                             selected_speciality = {this.state.selected_speciality}  />
                                     </span>
                                 </div>
@@ -988,6 +990,8 @@ class MyCatalogueComponent extends Component {
 
 
                             {/* Add to Your Catalogue */}
+
+                        
                             {!!this.state.addProcedureFlag  &&    (this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
                             <Procedure 
                             id = {i}
@@ -1101,7 +1105,7 @@ class MyCatalogueComponent extends Component {
                                 </React.Fragment>
                                   ))}
                                 <div className="text-center">
-                                 <button onClick = {()=>this.add_selected_remain_specs()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add</button>
+                              consultationFee   <button onClick = {()=>this.add_selected_remain_specs()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add</button>
                                 </div>  
                               </div>
                               </React.Fragment>
@@ -1246,7 +1250,9 @@ const mapStateToProps = state => ({
     get_remain_specs_ret:state.user.get_remain_specs_ret,
     add_specs_ret:state.user.add_specs_ret,
     add_procedure_ret:state.catalogue_store.add_procedure_ret,
-    add_procedure_loading_flag:state.catalogue_store.add_procedure_loading
+    add_procedure_loading_flag:state.catalogue_store.add_procedure_loading,
+    search_procedures_loading_flag:state.catalogue_store.search_procedures_loading_flag,
+    search_procedures_ret:state.catalogue_store.search_procedures_ret
 })
 
 export default connect(mapStateToProps, { getUserCatalogue, 
@@ -1273,5 +1279,7 @@ add_specs,
 update_procedure,
 update_procedure_loading,
 add_procedure,
-add_procedure_loading
+add_procedure_loading,
+search_procedures,
+search_procedures_loading
 })(MyCatalogueComponent);

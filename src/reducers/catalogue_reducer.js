@@ -2,7 +2,11 @@ import { GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES
          UPDATE_PROCEDURE, UPDATE_PROCEDURE_RET, UPDATE_PROCEDURE_LOADING,
          ADD_PROCEDURE,
          ADD_PROCEDURE_RET,
-         ADD_PROCEDURE_LOADING
+         ADD_PROCEDURE_LOADING,
+
+         SEARCH_PROCEDURE,
+         SEARCH_PROCEDURE_RET,
+         SEARCH_PROCEDURE_LOADING
         
         
         } from '../actions/types';
@@ -19,7 +23,11 @@ const cat_init_state  = {
 
     add_procedure:false,
     add_procedure_ret:false,
-    add_procedure_loading:false
+    add_procedure_loading:false,
+
+    search_procedures:false,
+    search_procedures_ret:false,
+    search_procedures_loading:false
 }
 
 export default function (state = cat_init_state, action) {
@@ -42,6 +50,26 @@ export default function (state = cat_init_state, action) {
                 ...state,
                 add_procedure_ret:false,
                 add_procedure_loading:false
+            }
+
+
+        case SEARCH_PROCEDURE:
+            return {
+                ...state,
+                search_procedures:action.payload,
+                search_procedures_loading:true
+            }
+        case SEARCH_PROCEDURE_RET:
+            return {
+                ...state,
+                search_procedures_ret:action.payload,
+                search_procedures_loading:false
+            }
+        case SEARCH_PROCEDURE_LOADING:
+            return {
+                ...state,
+                search_procedures_ret:false,
+                search_procedures_loading:false
             }
 
 

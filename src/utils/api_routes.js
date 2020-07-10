@@ -49,5 +49,13 @@ export default {
                  return res
            })
            .catch(err => err.response),
+      search_procedures: (data, headers) =>
+      axios
+          .post(`${base_url}/analytics/getServices${!!center_id?'?userId='+center_id:''}`, data, headers)
+          .then(res => {
+                console.log(res,'res in add_procedure')
+                return res
+          })
+          .catch(err => err.response),
     }
 }

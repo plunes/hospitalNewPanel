@@ -194,7 +194,9 @@ import {
 
   ADD_PROCEDURE,
   ADD_PROCEDURE_RET,
-  ADD_PROCEDURE_LOADING
+  ADD_PROCEDURE_LOADING,
+
+  SEARCH_PROCEDURE_LOADING
   
   } from './types';
 import history from '../history';
@@ -240,6 +242,28 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
 }
+
+export const search_procedures = (data) => dispatch =>{
+  console.log("I am getting called")
+  return  dispatch({
+    type: SEARCH_PROCEDURE,
+    payload:data
+  })
+}
+
+export const search_procedures_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: SEARCH_PROCEDURE_RET,
+    payload:data
+  })
+}
+export const search_procedures_loading = (data) => dispatch =>{
+  return  dispatch({
+    type: SEARCH_PROCEDURE_LOADING,
+    payload:data
+  })
+}
+
 
 
 export const add_procedure = (data) => dispatch =>{
