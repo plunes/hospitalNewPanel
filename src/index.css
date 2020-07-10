@@ -941,6 +941,7 @@ html {
   height: 7rem;
   border-radius: 1rem;
   display: flex;
+  cursor: pointer;
 }
 .badge_image {
   height: 5rem;

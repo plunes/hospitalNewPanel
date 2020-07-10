@@ -583,13 +583,13 @@ class ProfileContainer extends React.PureComponent {
                 <div class="flex_child_rish">
                   <div className="catalogue_badge_wrapper">  
                     <div className='catalogue_badge'>   
-                    <Link to= {`/dashboard/catalogue${!!center_id?'?center='+center_id:''}`}
+                          <Link to= {`/dashboard/catalogue${!!center_id?'?center='+center_id:''}`}
                           role="button"
-                          style={{margin:'auto',display:'block'}}
+                          style={{display:'block', margin:'auto'}}
                           onClick={()=>this.props.toggleMyCatalog()} >
                           <img src="/icon/catalogue_icon_rish.svg" className='badge_image ' />
                           <text className="catalogue_badge_text">Catalogue</text>
-                      </Link>
+                          </Link>
                      </div>
                    </div>
                 </div>
