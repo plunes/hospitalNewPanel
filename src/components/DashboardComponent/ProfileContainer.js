@@ -58,6 +58,9 @@ class ProfileContainer extends React.PureComponent {
       get_profile_loading:false,
       show_doctor_count:4,
       scroll_to_active:false,
+      addAchievementFlag:false,
+      achievementImage:false,
+      achieveTitle:'',
       notify:{
         success:false,
         error:false
@@ -580,14 +583,13 @@ class ProfileContainer extends React.PureComponent {
                 <div class="flex_child_rish">
                   <div className="catalogue_badge_wrapper">  
                     <div className='catalogue_badge'>   
-                     <div style={{margin:'auto'}}>
-                          <Link to= {`/dashboard/my-catalogue${!!center_id?'?center='+center_id:''}`}
+                    <Link to= {`/dashboard/catalogue${!!center_id?'?center='+center_id:''}`}
                           role="button"
+                          style={{margin:'auto',display:'block'}}
                           onClick={()=>this.props.toggleMyCatalog()} >
                           <img src="/icon/catalogue_icon_rish.svg" className='badge_image ' />
                           <text className="catalogue_badge_text">Catalogue</text>
-                          </Link>
-                      </div>
+                      </Link>
                      </div>
                    </div>
                 </div>
