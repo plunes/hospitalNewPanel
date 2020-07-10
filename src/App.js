@@ -20,6 +20,7 @@ import './catalogue.css'
 import './appointment.css'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
+import no_auth_route from "./HOC/no_auth_route"
 
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
@@ -61,18 +62,32 @@ class App extends Component {
     );
   }
 
+  authObject =()=> {
+    return {
+     isAuthenticated: !!localStorage.getItem('token')
+    }
+ }
+ 
   render() {
   
     const App = () => (
     
       <Router history={history}>
           <Switch>
-            <Route exact path='/' component={()=><div className="container-fluid"><HomePage /></div>} />
-            <Route exact path ="/signin" component={()=><div className="container-fluid"><LoginComponent /></div>} />
-            <Route exact path='/signup' component={()=><div className="container-fluid"><RegistrationContainer /></div>} />
+            <Route exact path='/' component={()=>no_auth_route({
+                    authObject:this.authObject
+                  })(()=><div className="container-fluid"><HomePage /></div>)} />
+            <Route exact path ="/signin" component={()=>no_auth_route({
+                    authObject:this.authObject
+                  })(()=><div className="container-fluid"><LoginComponent /></div>)} />
+            <Route exact path='/signup' component={()=>no_auth_route({
+                    authObject:this.authObject
+                  })(()=><div className="container-fluid"><RegistrationContainer /></div>)} />
             <Route exact path='/home' component={Development} />
             <Route  path='/dashboard' component={DashboardPage} />
-            <Route exact path='/forgotPassword' component={ForgotPasswordComponent} />
+            <Route exact path='/forgotPassword' component={()=>no_auth_route({
+                    authObject:this.authObject
+                  })(()=><ForgotPasswordComponent />)} />
             <Route exact path='/devlopment' component={Development} />
           </Switch>
         

@@ -46,7 +46,7 @@ class DashboardHeader extends Component {
         <div className="header_wrapper_rish oversize_wrap_rish display_flex">
           <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
-              <Link to="/">
+              <Link to="/dashboard">
                 <img src="/logo.jpg" style={{marginLeft:'1rem'}} className="logo_rish cursor-pointer" />
               </Link>
             </div>
