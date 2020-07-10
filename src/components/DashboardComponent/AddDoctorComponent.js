@@ -377,6 +377,7 @@ let obj =   {
                 designation:data.designation,
                 department:data.department,
                 experience:data.experience,
+                consultationFee:data.consultationFee,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
                 specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',

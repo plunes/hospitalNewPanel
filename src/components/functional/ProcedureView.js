@@ -24,7 +24,7 @@ const ProcedureView = (props) => {
                      <img src="/icon/edit_icon_rish.svg"  className="edit_location_icon" />
                 </div>
             </div>
-            <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>{procedure? <text>&#8377;{` ${procedure.price[0]}`}</text>:`------`}</text></span>
+            <span style={{marginTop:'1rem'}}  className='display_block_rish margin_bottom_small_rish'>  <text className='catalogue_test_name '>{!!procedure?!!procedure.price? <text>&#8377;{` ${procedure.price[0]}`}</text>:'------':`------`}</text></span>
             <div className="location_edit_parent">
                 <text className="catalogue_secondary_heading_text">Updated At</text>
                 <div className="edit_location_div">

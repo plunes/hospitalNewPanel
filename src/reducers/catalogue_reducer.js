@@ -1,5 +1,11 @@
 import { GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES_LOADING,
-         UPDATE_PROCEDURE, UPDATE_PROCEDURE_RET, UPDATE_PROCEDURE_LOADING } from '../actions/types';
+         UPDATE_PROCEDURE, UPDATE_PROCEDURE_RET, UPDATE_PROCEDURE_LOADING,
+         ADD_PROCEDURE,
+         ADD_PROCEDURE_RET,
+         ADD_PROCEDURE_LOADING
+        
+        
+        } from '../actions/types';
 import { get_url_params } from "../utils/common_utilities"
 
 const cat_init_state  = {
@@ -9,11 +15,38 @@ const cat_init_state  = {
 
     update_procedure:false,
     update_procedure_ret:false,
-    update_procedure_loading:false
+    update_procedure_loading:false,
+
+    add_procedure:false,
+    add_procedure_ret:false,
+    add_procedure_loading:false
 }
 
 export default function (state = cat_init_state, action) {
     switch (action.type) {
+
+        case ADD_PROCEDURE:
+            return {
+                ...state,
+                add_procedure:action.payload,
+                add_procedure_loading:true
+            }
+        case ADD_PROCEDURE_RET:
+            return {
+                ...state,
+                add_procedure_ret:action.payload,
+                add_procedure_loading:false
+            }
+        case ADD_PROCEDURE_LOADING:
+            return {
+                ...state,
+                add_procedure_ret:false,
+                add_procedure_loading:false
+            }
+
+
+
+
         case GET_USER_SPECIALITIES:
             return {
                 ...state,
@@ -24,13 +57,13 @@ export default function (state = cat_init_state, action) {
             return {
                 ...state,
                 get_user_specs_ret:action.payload,
-                get_user_specs_loading:true
+                get_user_specs_loading:false
             }
         case GET_USER_SPECIALITIES_LOADING:
             return {
                 ...state,
                 get_user_specs_ret:false,
-                get_user_specs_loading:true
+                get_user_specs_loading:false
             }
 
         case UPDATE_PROCEDURE:

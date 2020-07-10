@@ -52,6 +52,7 @@ class Select extends Component {
 
   getValue(value){
       let val ;
+      // console.log(value,"value in getValue")
       this.props.options.forEach((item, i )=>{
          if(item.value===value){
            val = item.name
@@ -288,7 +289,7 @@ class Select extends Component {
   renderValues() {
     const { placeholder, multiple } = this.props
     const { value } = this.props
-    if(!!value){
+    if((!!value)|| (value===0)){
       if (value.length === 0) {
         return (
           <div className="placeholder">

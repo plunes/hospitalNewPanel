@@ -190,7 +190,11 @@ import {
 
   UPDATE_PROCEDURE,
   UPDATE_PROCEDURE_LOADING,
-  UPDATE_PROCEDURE_RET
+  UPDATE_PROCEDURE_RET,
+
+  ADD_PROCEDURE,
+  ADD_PROCEDURE_RET,
+  ADD_PROCEDURE_LOADING
   
   } from './types';
 import history from '../history';
@@ -235,6 +239,28 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('specialities')
   localStorage.removeItem('uploaderUserId')
   window.location.reload()
+}
+
+
+export const add_procedure = (data) => dispatch =>{
+  return  dispatch({
+    type: ADD_PROCEDURE,
+    payload:data
+  })
+}
+
+export const add_procedure_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: ADD_PROCEDURE_RET,
+    payload:data
+  })
+}
+
+export const add_procedure_loading = (data) => dispatch =>{
+  return  dispatch({
+    type: ADD_PROCEDURE_LOADING,
+    payload:data
+  })
 }
 
 export const update_procedure = (data) => dispatch =>{

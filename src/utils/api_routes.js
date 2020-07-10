@@ -40,6 +40,14 @@ export default {
                   console.log(res,'res in update_procedure')
                   return res
             })
-            .catch(err => err.response)
+            .catch(err => err.response),
+       add_procedure: (data, headers) =>
+       axios
+           .put(`${base_url}/user/addServices${!!center_id?'?userId='+center_id:''}`, data, headers)
+           .then(res => {
+                 console.log(res,'res in add_procedure')
+                 return res
+           })
+           .catch(err => err.response),
     }
 }

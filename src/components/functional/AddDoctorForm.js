@@ -61,6 +61,7 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
                  department:props.department,
                  experience:props.experience,
                  education:props.education,
+                 consultationFee:props.consultationFee,
                  services_chosen:props.services_chosen,
                  specialitie_chosen:props.specialitie_chosen,
                  doctorProfileImage:props.doctorProfileImage,

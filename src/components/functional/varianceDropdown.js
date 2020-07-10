@@ -3,6 +3,7 @@ import { useToasts } from 'react-toast-notifications'
 import Select from "../Select"
 
 export default function VarianceDropdown(props) {
+  console.log(props,"props in VarianceDropdown")
   return (
     <div>
         <Select
@@ -15,7 +16,7 @@ export default function VarianceDropdown(props) {
           value_className = "padding_none"
           arrow_class ="variance_arrow"
           disabled= {props.disabled}
-          placeholder={0}
+          placeholder={"Select"}
           options = {[
         {
               value:0,

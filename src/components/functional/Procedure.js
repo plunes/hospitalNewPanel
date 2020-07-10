@@ -5,7 +5,7 @@ import VarianceDropdown from "./varianceDropdown"
 import { is_positive_whole_number } from "../../utils/common_utilities"
 import LoaderComponent from "./LoaderComponent"
 const should_render = (prevProps, nextProps) => {
-  console.log(prevProps, nextProps,"preveProps, nextProps in should_render")
+  // console.log(prevProps, nextProps,"preveProps, nextProps in should_render")
   if(prevProps.ret !== nextProps.ret){
     return false
   }
@@ -92,7 +92,7 @@ const should_render = (prevProps, nextProps) => {
 //   return value;
 // }
 
-console.log(props.data.service,"rerendering of Procedure")
+// console.log(props,"rerendering of Procedure")
   return (
 <React.Fragment>
 
@@ -117,14 +117,14 @@ console.log(props.data.service,"rerendering of Procedure")
                                                 style={{marginLeft:'0.3rem'}}
                                                 className="no_brdr_input consultaion_input"
                                                 type="number"/>
-                                         :data.price?<text className='catalogue_test_name '> &#x20B9;{` ${data.price[0]}`}</text>:<text className='catalogue_test_name '>&#x20B9; 0</text>}
+                                         :!!data.price?<text className='catalogue_test_name '> &#x20B9;{` ${data.price[0]}`}</text>:<text className='catalogue_test_name '>NOT AVAILABLE</text>}
                                        </span>
                                                         <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>{props.isSelected?< VarianceDropdown 
                                                                                                              editFlag = {props.editFlag}
                                                                                                              disabled = {props.disabled}
                                                                                                              handleChange={(e)=>props.handleVarianceChange(e,props.data.serviceId)}
                                                                                                               value = {props.isSelected?props.getVariance:props.data.variance}
-                                                                                                         />:`${props.data.variance}%`}</text></span>
+                                                                                                         />:`${!!props.data.variance?props.data.variance+'%':'NOT AVAILABLE'}`}</text></span>
                                     <span className='head_tabs_actions display_block_rish text-center'>
                                       {((props.update_procedure_loading) && (props.procedure_for_update.serviceId === props.data.serviceId)) ? <LoaderComponent second_variant = {true} />:props.isSelected?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
                                                 <span><text style={{color:'#7DD55E', marginLeft:'1rem'}}  onClick = {()=>props.update_procedure(props.data)}  className='catalogue_test_name link_text_rish'>Submit</text></span></React.Fragment>:
