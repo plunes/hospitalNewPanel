@@ -675,13 +675,16 @@ class ProfileContainer extends React.PureComponent {
              i = {i}
          />)
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
-       <img  src="/Group 2096.svg" className="img-loading_rish"  />
+       <img style={{display:'block', margin:'auto !important'}}  src="/Group 2096.svg" className="img-loading_rish center_align_rish"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
-       {/* <Link to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
-             role="button"
-             onClick = {()=>this.props.toggleAddDoc()}>
-       <button className="common_button_rish" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
-       </Link> */}
+       <div className="text-center">
+           <Link  to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
+              role="button"
+              onClick = {()=>this.props.toggleAddDoc()}>
+              <img className='add_doctor_plus' src="/icon/add_doctor_plus.svg"/>
+              <text style={{marginTop:'.3rem', fontSize:'1.3rem'}} className='green_text_rish display_block'>Add More Doctors</text>
+            </Link>
+            </div>
      </div>:'':''}
    </div>
 
