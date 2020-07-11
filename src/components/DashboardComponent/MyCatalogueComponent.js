@@ -279,12 +279,6 @@ class MyCatalogueComponent extends Component {
             nextProps.add_procedure_loading()
         }
 
-
-
-
-
-
-
       if(nextProps.update_procedure_ret){
           if(nextProps.update_procedure_ret.success){
                     let arr = [...this.state.procedures]
@@ -652,74 +646,6 @@ class MyCatalogueComponent extends Component {
         return value;
       }
 
-    handleSubmit = () =>{
-        if(this.state.addProcedureFlag){
-            let procedure = this.state.selectedProcedure
-
-            try {
-                let arr = [...this.state.selected_procedures]
-                let newArr = arr.map((item,i)=>{
-                    console.log(item,"item in handleSubmit")
-                    if(!!!item.price){
-                        throw new MyError(`${item.service} price cannot be zero`)
-                     }else if(!!!parseInt(item.price[0],10)){
-                        throw new MyError(`${item.service} price cannot be empty`)
-                     }
-                    return {
-                        ...item,
-                        price: parseInt(item.price[0],10)
-                    }
-                })
-                let obj = {
-                    specialityId:this.state.selected_procedures[0].specialityId,
-                    services:newArr
-                }
-                this.setState({
-                    addProcedureLoading:true
-                },()=>this.props.addServices(obj))
-            }catch(e){
-                this.setState({
-                    ret:{
-                        success:false,
-                        message:e.message
-                    }
-                })
-            }    
-        }else{
-            try {
-                let arr = [...this.state.selected_procedures]
-                console.log(arr,"arr in submit")
-                console.log(this.state.selected_procedures,"this.state selected_procedures")
-                let newArr = arr.map((item,i)=>{
-                    let procedure_price = parseInt(item.price[0],10)
-                    if(!!!procedure_price){
-                       throw new MyError(`${item.service} price cannot be empty`)
-                    }
-                    return {
-                        ...item,
-                        price:procedure_price
-                    }
-                })
-                this.setState({
-                    editProcedureLoading:true
-                },()=>{
-                    let obj = {
-                        specialityId:this.state.selected_procedures[0].specialityId,
-                        services:newArr
-                    }
-                    this.props.editProcedure(obj)
-                })
-            } catch(e){
-                this.setState({
-                    ret:{
-                        success:false,
-                        message:e.message
-                    }
-                })
-            }  
-            
-        }
-    }
 
     onEdit = (data) =>{
         console.log(data,"data from on Edit")
@@ -786,52 +712,6 @@ class MyCatalogueComponent extends Component {
     })          
     }
 
-    handleNext_add_procedures = (obj) =>{
-        this.setState({
-            ...this.state,
-            ...obj,
-            loading:true,
-            addProcedureFlag:true,
-            to_add_service_page:this.state.to_add_service_page + 1
-        },()=>{
-            this.props.toAddServices({
-                searchQuery:'',
-                page:this.state.to_add_service_page,
-                limit:'50',
-                specialityId:this.state.selected_speciality
-     })  
-        })
-    }
-
-    editProcedureLoadingOff =()=>{
-        this.setState({
-            editProcedureLoading:false,
-            // editFlag:false,
-            // selected_procedures:this.state.selected_procedures
-        },()=>{
-            this.props.editProcedureClr()
-            this.props.search_procedures({
-                limit:50,
-                searchQuery:'',
-                page:1,
-                specialityId:this.state.selected_speciality 
-     })})
-    }
-
-    addProcedureLoadingOff =() =>{
-        this.setState({
-            addProcedureLoading:false,
-            // selected_procedures:[]
-        },()=>{
-            this.props.addServicesClr()
-            this.props.toAddServices({
-                searchQuery:'',
-                page:'1',
-                limit:'300',
-                specialityId:this.state.selected_speciality
-             })})
-    }
-
     handle_change_selected_remain_specs = (e) =>{
         try{
             let arr = [...this.state.selected_remain_specs]
@@ -886,7 +766,7 @@ class MyCatalogueComponent extends Component {
 
     render() {
         console.log(this.state,"this.state in  Mycatalogue")
-        console.log(this.props,"this.props. in Mycatalogue ")
+        console.log(this.props.search_procedures_loading_flag,"this.props. in Mycatalogue ")
                 return (
                     <React.Fragment>
                         <NotifFunc />
@@ -899,13 +779,13 @@ class MyCatalogueComponent extends Component {
                         <div className='catalogue_section_1'>
                            <div className="catalogue_section_1_upper new_card_class">
 
-                           <span  className="catalogue_section_1_icon_wrapper " onClick={(e)=>this.handle_your_catalogue_click()} ><img className="catalogue-img cursor-pointer" src="/edit.svg" alt=""></img>
+                           <span  className="catalogue_section_1_icon_wrapper " onClick={(e)=>this.handle_your_catalogue_click()} ><img className="catalogue-img cursor-pointer" src={this.state.addProcedureFlag?'/icon/add_catalogue_icon.svg':'/icon/add_catalogue_active_icon.svg'} alt=""></img>
                                   <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Your Catalogue</text>
                             </span>
 
 
                             <span className="catalogue_section_1_icon_wrapper"  onClick={(e)=>this.handleAddProcedureClick(e)} >
-                                 <img className="catalogue-img cursor-pointer" src="/edit.svg" alt="" />
+                                 <img className="catalogue-img cursor-pointer" src={this.state.addProcedureFlag?'/icon/add_speciality_active_icon.svg':'/icon/add_speciality_icon.svg'} alt="" />
                                  <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Add To Catalogue</text>
                               </span>
                              
@@ -948,6 +828,50 @@ class MyCatalogueComponent extends Component {
                                     </span>
                                 </div>
 
+
+
+                                {!!this.state.addProcedureFlag &&  <div style={{position:'relative'}} className="text-center">
+                          {this.state.add_specs_loading && <LoaderComponent />}
+                            <div style={{marginTop:'.5rem'}} className="add_specs_wrapper">
+                            {   
+                                this.state.add_remaining_specs? 
+                                <React.Fragment>
+                                <Select
+                                options = {this.props.catalogue_data.remaining_specs}
+                                handleChange = {this.handle_change_selected_remain_specs}
+                                placeholder= "Speciality"
+                                placeholder= "Speciality"
+                                input_text_class = "catalogue_dropdown"
+                                wrapper_class = "catalogue_dropdown_wrapper"
+                                value = {this.state.selected_remain_specs[0]}
+                                name = "remain_specs"
+                                label = "Speciality"
+                              />
+                              <div  style={{marginTop:'.5rem'}}>
+                              {this.state.selected_remain_specs.map((item,i)=>(
+                               <React.Fragment>
+                                    
+                            <div className="signup_specialities_wrapper_ris">
+                               <div className="signup_speciality">
+                                     <p className="signup_speciality_name">{item}</p>
+                                     <p onClick={()=>this.setState({selected_remain_specs:[...this.state.selected_remain_specs].filter((val=>val!==item))})} className="signup_speciality_X">X</p>
+                               </div>
+                            </div>
+                               <hr />
+                                </React.Fragment>
+                                  ))}
+                                <div className="text-center">
+                                 <button  style={{marginTop:'.5rem', width : '13rem !important', height:'3rem !important'}} onClick = {()=>this.add_selected_remain_specs()} className='button_rish color_white_rish  add_speciality_button'>Submit</button>
+                                </div>  
+                              </div>
+                              </React.Fragment>
+                              : 
+                              <button onClick = {()=>this.setState({add_remaining_specs: true})} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add Speciality</button>
+                            }
+                         </div>
+                        </div>
+}
+
                                 <div className='catalogue_head_tabs margin_top_small_rish'>
                                     <span className=' display_block_rish catalogue_circle_wrap'> <span className='catalogue_circle'></span> </span>
                                     <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Test Name</text></span>
@@ -956,7 +880,9 @@ class MyCatalogueComponent extends Component {
                                     <span className='head_tabs_actions display_block_rish text-center'><text className='catalogue_test_name '>Actions</text></span>
                                 </div>
                                       { !this.state.addProcedureFlag &&
-                                        (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
+                                      <div style={{position:'relative'}}>
+                                      {this.props.search_procedures_loading_flag && <LoaderComponent />}
+                                        {(this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                                         <Procedure 
                                         id = {i}
                                         data = {c}
@@ -970,7 +896,7 @@ class MyCatalogueComponent extends Component {
                                         handleVarianceChange = {this.handleVarianceChange}
                                         ret = {this.props.editProcedureRet}
                                         clr = {this.props.editProcedureClr}
-                                        loadingOff = {()=>this.editProcedureLoadingOff()}
+                                        loadingOff = {()=>console.log()}
                                         isSelected = {this.isSelected(c)}
                                         getVariance ={this.getVariance(c)}
                                         getValue = {this.getValue(c)}
@@ -980,7 +906,8 @@ class MyCatalogueComponent extends Component {
                                         update_procedure_loading = {this.get_update_procedure_loading(c)}
                                         />
                                         )) : 
-                                       <div className='text-center'>No Procedures</div>)
+                                       <div className='text-center'>No Procedures</div>)}
+                                       </div>
                                     }
                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
                                       <button onClick = {()=>this.update_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
@@ -989,10 +916,10 @@ class MyCatalogueComponent extends Component {
 
 
 
-                            {/* Add to Your Catalogue */}
-
-                        
-                            {!!this.state.addProcedureFlag  &&    (this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
+                            {/* Add to Your Catalogue */}                        
+                            {!!this.state.addProcedureFlag  &&    <div style={{position:'relative'}}>
+                                      {this.props.search_procedures_loading_flag && <LoaderComponent />} 
+                            {(this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
                             <Procedure 
                             id = {i}
                             data = {c}
@@ -1005,7 +932,7 @@ class MyCatalogueComponent extends Component {
                             handleVarianceChange = {this.handleVarianceChange}
                             ret = {this.props.addServicesRet}
                             clr = {this.props.addServicesClr}
-                            loadingOff = {()=>this.addProcedureLoadingOff()}
+                            loadingOff = {()=>this.console.log()}
                             // selected_procedures = {this.state.selected_procedures}
                             disabled={false}
                             isSelected = {this.isSelected(c)}
@@ -1017,8 +944,10 @@ class MyCatalogueComponent extends Component {
                             update_procedure_loading = {this.add_procedure_loading(c)}
                             />
                             )) : 
-                           <div className='text-center'>No Procedures</div>)
+                           <div className='text-center'>No Procedures</div>)}
+                           </div>
                         }
+                        
 
 
                                 {((this.state.selected_procedures.length !==0) && (!!this.state.addProcedureFlag)) &&  <div className='text-center'>
@@ -1251,7 +1180,7 @@ const mapStateToProps = state => ({
     add_specs_ret:state.user.add_specs_ret,
     add_procedure_ret:state.catalogue_store.add_procedure_ret,
     add_procedure_loading_flag:state.catalogue_store.add_procedure_loading,
-    search_procedures_loading_flag:state.catalogue_store.search_procedures_loading_flag,
+    search_procedures_loading_flag:state.catalogue_store.search_procedures_loading,
     search_procedures_ret:state.catalogue_store.search_procedures_ret
 })
 
@@ -1283,3 +1212,5 @@ add_procedure_loading,
 search_procedures,
 search_procedures_loading
 })(MyCatalogueComponent);
+
+

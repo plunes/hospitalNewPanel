@@ -649,7 +649,8 @@ outline: none;
 }
 
 .add_speciality_button {
-  width: 15rem;
+  width: 12rem !important;
+  height: 3rem !important;
 }
 .add_specs_wrapper {
   width:45rem;
