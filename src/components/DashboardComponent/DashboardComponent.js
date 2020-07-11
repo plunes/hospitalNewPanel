@@ -560,7 +560,7 @@ class DashboardComponent extends React.PureComponent {
                                         <span style = {{borderBottom:'2px solid black !important'}} className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                        <p style={{color:'#A6BDD7'}} className='business vertical_align_rish'>Real Time Insights</p>
+                                        <p style={{color:'#fff'}} className='business vertical_align_rish'>Real Time Insights</p>
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>

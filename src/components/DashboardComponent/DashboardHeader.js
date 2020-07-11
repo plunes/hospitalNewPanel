@@ -62,10 +62,12 @@ class DashboardHeader extends Component {
                 <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/payments"
                     onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.togglePayment())}>
+                       <img className="header_icon" src='/icon/payment_header_icon.svg' />
                   <text  className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
                   </li> 
                  <li className="nav-item header_li_rish">
-                 <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
+                 <a style={{background: 'transparent !important'}} className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
+                   <img className="header_icon" src='/icon/plockr_icon.svg' />
                   <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >Plockr</text>
                      </a>
                   </li> 
@@ -74,6 +76,7 @@ class DashboardHeader extends Component {
                 <Link to= "/dashboard/notification"
                      style={{position:'relative'}}
                      onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleNotif())}>
+                        <img className="header_icon" src='/icon/notification_header_icon.svg' />
                   <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
                   <div className="notif_badge_wrapper_rish">
                     <NotificationBadge count={this.props.count} effect={Effect.SCALE}/>

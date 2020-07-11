@@ -32,7 +32,8 @@
 
 .HeaderLink
        {padding: 1rem !important; 
-        background-color: white !important;}
+        /* background-color: white !important; */
+      }
 
 .HeaderArrowDown
        {width: 4%;
@@ -557,7 +558,7 @@ hr
 .RealtimeUsername
     {
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 700;
 }
 
 .kindlyUpdate

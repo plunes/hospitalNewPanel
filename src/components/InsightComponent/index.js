@@ -32,11 +32,11 @@ class InsightComponent extends React.PureComponent {
       return (
           <React.Fragment>  
                 <div className="action_insight_wrapper" key={index}>
-                    <span className="action_insight_image_wrapper">
+                    {/* <span className="action_insight_image_wrapper">
                         <img src ="/icon/insight_image.svg" className="action_insight_image"/>
-                    </span>
+                    </span> */}
                     <span className="insight_component_info_wrap">
-                    <div style={{color:'#A6BDD7'}} className="RealtimeUsername">
+                    <div style={{color:'#fff'}} className="RealtimeUsername">
                 {this.props.s.userName}
             </div>
             <div>

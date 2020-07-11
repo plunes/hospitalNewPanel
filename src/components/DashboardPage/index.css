@@ -76,7 +76,10 @@
         border-radius: 2rem;
         margin-bottom: 1rem;
       }
-      .HeaderLink a{color: #000000;}
+      .HeaderLink a{
+          color: #000000;
+          background: transparent !important;
+        }
       
 /* On mouse-over */
 .sidebar_wrapper a:hover, .dropdown-btn:hover 
