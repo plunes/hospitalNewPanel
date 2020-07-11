@@ -36,11 +36,11 @@ class InsightComponent extends React.PureComponent {
                         <img src ="/icon/insight_image.svg" className="action_insight_image"/>
                     </span>
                     <span className="insight_component_info_wrap">
-                    <div className="RealtimeUsername">
+                    <div style={{color:'#A6BDD7'}} className="RealtimeUsername">
                 {this.props.s.userName}
             </div>
             <div>
-      <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
+      <p style={{marginBottom:'.5rem', color:'#A6BDD7'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
             </div>
             {
               seconds_diff>0?

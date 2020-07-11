@@ -556,11 +556,11 @@ class DashboardComponent extends React.PureComponent {
 
                             <div className='insigts_section_wrapper'>
                                 <div className="real_insights_wrapper">
-                                <div style={{position:'relative'}} className='dashboardsection new_card_class'>
-                                        <span className='businessrow1col1 realtimewidth real_ti_bd'>
+                                <div style={{position:'relative'}} className='dashboardsection  tech_background_real new_card_class'>
+                                        <span style = {{borderBottom:'2px solid black !important'}} className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                        <p className='business vertical_align_rish'>Real Time Insights</p>
+                                        <p style={{color:'#A6BDD7'}} className='business vertical_align_rish'>Real Time Insights</p>
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
@@ -640,7 +640,7 @@ class DashboardComponent extends React.PureComponent {
                             <div className="insigts_section_wrapper">
                                 <div className="real_insights_wrapper">
 
-                                    <div style={{position:'relative'}} className='dashboardsection new_card_class add-center-wrapper'>
+                                    <div style={{position:'relative'}} className='dashboardsection new_card_class techno_background add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='businessrow1col1 heading_flex_child '>
