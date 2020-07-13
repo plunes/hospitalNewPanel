@@ -76,10 +76,7 @@
         border-radius: 2rem;
         margin-bottom: 1rem;
       }
-      .HeaderLink a{
-          color: #000000;
-          background: transparent !important;
-        }
+      .HeaderLink a{color: #000000;}
       
 /* On mouse-over */
 .sidebar_wrapper a:hover, .dropdown-btn:hover 
@@ -299,11 +296,6 @@
     background-size: cover !important;
 }
 
-.tech_background_real {
-    background: transparent url('../../images/tech_background.png') center no-repeat !important;
-    /* background-size: cover !important; */
-}
-
 .tag_section_rish {
     display: flex;
     flex-wrap: wrap;
@@ -377,16 +369,12 @@
     content: " ";
     display: table;
 }
-
 .cf:after {
     clear: both;
 }
-
 .cf {
     *zoom: 1;
 }
-
-
 .hamburger_icon_wrapper {
     display: inline-block;
 }

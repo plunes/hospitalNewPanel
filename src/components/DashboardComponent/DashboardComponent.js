@@ -556,11 +556,11 @@ class DashboardComponent extends React.PureComponent {
 
                             <div className='insigts_section_wrapper'>
                                 <div className="real_insights_wrapper">
-                                <div style={{position:'relative'}} className='dashboardsection  tech_background_real new_card_class'>
-                                        <span style = {{borderBottom:'2px solid black !important'}} className='businessrow1col1 realtimewidth real_ti_bd'>
+                                <div style={{position:'relative'}} className='dashboardsection new_card_class'>
+                                        <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                        <p style={{color:'#fff'}} className='business vertical_align_rish'>Real Time Insights</p>
+                                        <p  className='business vertical_align_rish'>Real Time Insights</p>
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
@@ -738,10 +738,14 @@ class DashboardComponent extends React.PureComponent {
                                   </span>
                                    <span className="heading_flex_child">  
                                   <span className="add_text_wrapper_span">
+
+                                  {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment>
+                                    <img  onClick={()=>this.open_act_as_admin()} src="/add_icon.svg"  alt="add_center_img" className="add_icon_center cursor-pointer vertical_align_rish" alt="" />           
+                                  </React.Fragment>:<React.Fragment>
                                   <Link to="/dashboard/centers?addCenter=true">
-                                  <img src="/add_icon.svg"  alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
-                                   {/* <text  className="add_text">Add</text> */}
+                                  <img src="/add_icon.svg"  alt="add_center_img" className="add_icon_center vertical_align_rish cursor-pointer" alt="" />           
                                    </Link>
+                                  </React.Fragment>}
                                   </span>
                                    </span>
                                     </span>   

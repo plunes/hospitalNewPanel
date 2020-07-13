@@ -47,7 +47,7 @@ class DashboardHeader extends Component {
           <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
               <Link to="/dashboard">
-                <img src="/icon/plunes_transparent_logo.svg" style={{marginLeft:'1rem'}} className="logo_rish cursor-pointer" />
+                <img src="/logo.jpg" style={{marginLeft:'1rem'}} className="logo_rish cursor-pointer" />
               </Link>
             </div>
           
@@ -62,12 +62,10 @@ class DashboardHeader extends Component {
                 <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/payments"
                     onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.togglePayment())}>
-                       <img className="header_icon" src='/icon/payment_header_icon.svg' />
                   <text  className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
                   </li> 
                  <li className="nav-item header_li_rish">
-                 <a style={{background: 'transparent !important'}} className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
-                   <img className="header_icon" src='/icon/plockr_icon.svg' />
+                 <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
                   <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >Plockr</text>
                      </a>
                   </li> 
@@ -76,7 +74,6 @@ class DashboardHeader extends Component {
                 <Link to= "/dashboard/notification"
                      style={{position:'relative'}}
                      onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleNotif())}>
-                        <img className="header_icon" src='/icon/notification_header_icon.svg' />
                   <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
                   <div className="notif_badge_wrapper_rish">
                     <NotificationBadge count={this.props.count} effect={Effect.SCALE}/>
