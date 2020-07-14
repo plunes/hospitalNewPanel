@@ -120,8 +120,10 @@ class DashboardComponent extends React.PureComponent {
 
     handle_real_time_edit_price = (e) =>{
             let val = e.target.value
+            // val = parseInt(val)
+            console.log(val,"val in handle Realt")
            if(is_positive_real_number(val))
-           this.setState({real_time_edit_price:val.toFixed(2)})
+           this.setState({real_time_edit_price:val})
            else{
             console.log("no_negative_value")
            }
@@ -308,7 +310,8 @@ class DashboardComponent extends React.PureComponent {
             solValue:0,
             value:0,
             real_time_edit:false,
-            realUpdatePriceLoading:false
+            realUpdatePriceLoading:false,
+            real_time_edit_price:false
         })
     }
 
@@ -333,17 +336,26 @@ class DashboardComponent extends React.PureComponent {
     }
      handleRealSubmit(e) {
         e.preventDefault();
-         if(this.state.realUpdatePrice !== this.state.real_time_edit_price){
-            let data = {
-                realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
-                realUpdateData: this.state.realUpdateData
-            }
-            this.setState({
-                realUpdatePriceLoading:true
-            },()=>{
-                this.props.updateRealPrice(data);
-            }) 
-         }
+        if((this.state.real_time_edit_price !== false) && (this.state.real_time_edit_price ==='')){
+                this.setState({
+                    ret:{
+                        message:'Please provide with some price',
+                        success:false
+                    }
+                })
+        }else{
+            if(this.state.realUpdatePrice !== this.state.real_time_edit_price){
+                let data = {
+                    realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
+                    realUpdateData: this.state.realUpdateData
+                }
+                this.setState({
+                    realUpdatePriceLoading:true
+                },()=>{
+                    this.props.updateRealPrice(data);
+                }) 
+             }
+        }
     }
     handleUpdatePrice(updateData) {
         this.setState({

@@ -154,7 +154,9 @@ export const is_positive_number =(value) =>{
 }
 
 export const is_positive_real_number = (value) =>{
+  console.log(value,"value in handle_real_submit")
   if(value===""){
+    console.log("I am getting called")
     return true
   }
       if (value.toString().match(/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/)){
