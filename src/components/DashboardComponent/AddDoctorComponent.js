@@ -281,6 +281,7 @@ let obj =   {
                selectedshift = {this.state.selectedshift}
                submit = {this.handleTimeSubmit}
                setAvailabilityRet = {this.props.setAvailabilityRet}
+               selecteDaySlots = {this.state.selecteDaySlots}
                setAvailabilityClr = {this.props.setAvailabilityClr}
                selecteDaySlots = {this.state.selecteDaySlots}
                loadingOff = {()=>this.setLoadingOff()}
@@ -376,7 +377,7 @@ let obj =   {
                 designation:data.designation,
                 department:data.department,
                 experience:data.experience,
-                consultationFee:data.consultationFee,
+                consultationFee:!!data.consultationFee?data.consultationFee:this.state.consultationFee,
                 doctorProfileImage:data.imageUrl,
                 doctorImageName:data.doctorImageName,
                 specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
@@ -595,8 +596,8 @@ console.log(data,'data in submit Details')
         return (
            <React.Fragment>
                 <div className='main_content_rish'>
-                    <div className="border_dev">
-                <div className="add_dr">
+                    <div >
+                <div style={{width:'90%'}} className="add_dr">
                     <div className="add_srch_d">
                       <NewNotif 
                         ret= {this.state.ret}

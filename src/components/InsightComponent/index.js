@@ -36,7 +36,7 @@ class InsightComponent extends React.PureComponent {
                         <img src ="/icon/insight_image.svg" className="action_insight_image"/>
                     </span>
                     <span className="insight_component_info_wrap">
-                    <div className="RealtimeUsername">
+                    <div  className="RealtimeUsername">
                 {this.props.s.userName}
             </div>
             <div>

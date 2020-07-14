@@ -20,7 +20,6 @@ class AvailabilityComponent extends Component {
           selectedDay:{},
           firstRender:true,
           slots:[]
-     
         }
       }
       async componentDidMount(){

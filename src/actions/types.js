@@ -48,6 +48,7 @@ export const UPDATE_IMAGE_CLR = 'App/UPDATE_IMAGE_CLR'
 export const SEARCH_PROCEDURE = 'App/Profile/SEARCH_PROCEDURE'
 export const SEARCH_PROCEDURE_RET = 'App/Profile/SEARCH_PROCEDURE_RET'
 export const SEARCH_PROCEDURE_CLR = 'App/Profile/SEARCH_PROCEDURE_CLR'
+export const SEARCH_PROCEDURE_LOADING = 'App/Profile/SEARCH_PROCEDURE_LOADING'
 
 // Upload Procedures
 export const UPLOAD_PROCEDURE = 'App/Profile/UPLOAD_PROCEDURE'
@@ -218,3 +219,15 @@ export const GET_CENTER_CRED_RET  = 'App/Profile/GET_CENTER_CRED_RET'
 export const GET_CENTER_CRED_CLR  = 'App/Profile/GET_CENTER_CRED_CLR'
 
 export const SET_NOTIF_ID = 'App/Notifications/SET_NOTIF_ID'
+
+export const GET_USER_SPECIALITIES = 'App/Catalogue/GET_USER_SPECIALITIES'
+export const GET_USER_SPECIALITIES_RET = 'App/Catalogue/GET_USER_SPECIALITIES_RET'
+export const GET_USER_SPECIALITIES_LOADING = 'App/Catalogue/GET_USER_SPECIALITIES_LOADING'
+
+export const UPDATE_PROCEDURE = 'App/Catalogue/UPDATE_PROCEDURE'
+export const UPDATE_PROCEDURE_RET = 'App/Catalogue/UPDATE_PROCEDURE_RET'
+export const UPDATE_PROCEDURE_LOADING = 'App/Catalogue/UPDATE_PROCEDURE_LOADING'
+
+export const ADD_PROCEDURE = 'App/Catalogue/ADD_PROCEDURE'
+export const ADD_PROCEDURE_RET = 'App/Catalogue/ADD_PROCEDURE_RET'
+export const ADD_PROCEDURE_LOADING = 'App/Catalogue/ADD_PROCEDURE_LOADING'

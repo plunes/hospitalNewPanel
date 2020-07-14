@@ -91,8 +91,6 @@ const  SidebarComponent = (props) => {
             </div>
             <div  className={`${props.pathname==='/dashboard/profile'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
               <Link to= "/dashboard/profile" 
-                
-                 
                   onClick={()=>
                           {
                           if(!!get_url_params('center')){
@@ -106,6 +104,23 @@ const  SidebarComponent = (props) => {
                       </span>
                      {!collapse &&  <span className="sidebar_list_text">
                        <text className={`${props.pathname==='/dashboard/profile'?'sidebar_list_text_active':''} `}>Profile</text>
+                      </span>}
+                    </span>
+              </Link>
+            </div>
+
+            <div  className={`${props.pathname==='/dashboard/catalogue'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
+              <Link to= "/dashboard/catalogue" 
+                  onClick={()=>
+                          {
+                          props.toggleMyCatalog()
+                        }}> 
+                   <span className="sidebar_list_item">
+                      <span className="sidebar_list_icon">
+                        <img className="sidebaricon" src={props.pathname==='/dashboard/catalogue'?'/icon/catalogue_icon_active.svg':'/icon/catalogue_icon.svg'} alt=""></img>
+                      </span>
+                     {!collapse &&  <span className="sidebar_list_text">
+                       <text className={`${props.pathname==='/dashboard/catalogue'?'sidebar_list_text_active':''} `}>Catalogue</text>
                       </span>}
                     </span>
               </Link>

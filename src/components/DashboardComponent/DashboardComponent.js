@@ -557,10 +557,10 @@ class DashboardComponent extends React.PureComponent {
                             <div className='insigts_section_wrapper'>
                                 <div className="real_insights_wrapper">
                                 <div style={{position:'relative'}} className='dashboardsection new_card_class'>
-                                        <span className='businessrow1col1 realtimewidth real_ti_bd'>
+                                        <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                        <p className='business vertical_align_rish'>Real Time Insights</p>
+                                        <p  className='business vertical_align_rish'>Real Time Insights</p>
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
@@ -640,7 +640,7 @@ class DashboardComponent extends React.PureComponent {
                             <div className="insigts_section_wrapper">
                                 <div className="real_insights_wrapper">
 
-                                    <div style={{position:'relative'}} className='dashboardsection new_card_class add-center-wrapper'>
+                                    <div style={{position:'relative'}} className='dashboardsection new_card_class techno_background add-center-wrapper'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='businessrow1col1 heading_flex_child '>
@@ -738,10 +738,14 @@ class DashboardComponent extends React.PureComponent {
                                   </span>
                                    <span className="heading_flex_child">  
                                   <span className="add_text_wrapper_span">
+
+                                  {((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment>
+                                    <img  onClick={()=>this.open_act_as_admin()} src="/add_icon.svg"  alt="add_center_img" className="add_icon_center cursor-pointer vertical_align_rish" alt="" />           
+                                  </React.Fragment>:<React.Fragment>
                                   <Link to="/dashboard/centers?addCenter=true">
-                                  <img src="/add_icon.svg"  alt="add_center_img" className="add_icon_center vertical_align_rish" alt="" />           
-                                   {/* <text  className="add_text">Add</text> */}
+                                  <img src="/add_icon.svg"  alt="add_center_img" className="add_icon_center vertical_align_rish cursor-pointer" alt="" />           
                                    </Link>
+                                  </React.Fragment>}
                                   </span>
                                    </span>
                                     </span>   
@@ -766,11 +770,11 @@ class DashboardComponent extends React.PureComponent {
                                                             <div className="center_flex_child-2">
                                                                 <span className="business_earned_lost_span">
                                                                 <text className="black_text">Business earned- </text>
-                                                                <text style={{fontSize:'1rem'}} className="green_text_rish">{item.businessGained}</text>
+                                                                <text style={{fontSize:'1rem'}} className="green_text_rish">{item.businessGained?item.businessGained:item.businessGained===0?0:'N/A'}</text>
                                                                 </span>
                                                                 <span className="business_earned_lost_span">
                                                                 <text className="black_text">Business lost- </text>
-                                                                <text className="orange_text">{item.businessLost}</text>
+                                                                <text className="orange_text">{item.businessLost?item.businessLost:item.businessLost===0?0:'N/A'}</text>
                                                                 </span>
                                                             </div>
                                                         </div>

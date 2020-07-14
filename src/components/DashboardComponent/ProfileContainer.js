@@ -58,6 +58,9 @@ class ProfileContainer extends React.PureComponent {
       get_profile_loading:false,
       show_doctor_count:4,
       scroll_to_active:false,
+      addAchievementFlag:false,
+      achievementImage:false,
+      achieveTitle:'',
       notify:{
         success:false,
         error:false
@@ -362,7 +365,7 @@ class ProfileContainer extends React.PureComponent {
         console.log("Case 1")
        newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
        <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <div className="card mb-2">
               <img className="card-img-top card_im img-loading_rish"
                 src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
@@ -374,11 +377,40 @@ class ProfileContainer extends React.PureComponent {
       </div>
         </div>)
        i = i+1
-      }else{
-        console.log("Case 2")
+      }else if(i=== arr.length-2){
+        console.log("Second Conditon")
+          console.log("Case 1")
+         newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+         <div className="row">
+            <div className="col-md-4">
+              <div className="card mb-2">
+                <img className="card-img-top card_im img-loading_rish"
+                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+    <p className="card-text">{arr[i].title}</p>
+                </div>
+              </div>
+            </div>    
+
+             <div className="col-md-4">
+              <div className="card mb-2">
+                <img className="card-img-top card_im img-loading_rish"
+                  src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+    <p className="card-text">{arr[i+1].title}</p>
+                </div>
+              </div>
+            </div>    
+
+
+        </div>
+          </div>)
+         i = i+2
+        }else {
+        console.log("Case 3")
        newarr.push( <div className={`carousel-item ${i ===0?"active":''}`}>
        <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="card mb-2">
                 <img className="card-img-top card_im"
                   src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement} data-iterate= {i} className="ceoss_icon"><i  data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
@@ -388,7 +420,7 @@ class ProfileContainer extends React.PureComponent {
               </div>
             </div>
       
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="card mb-2">
                 <img className="card-img-top card_im img-loading_rish"
                    src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
@@ -397,9 +429,19 @@ class ProfileContainer extends React.PureComponent {
                 </div>
               </div>
             </div>
+
+            <div className="col-md-4">
+              <div className="card mb-2">
+                <img className="card-img-top card_im img-loading_rish"
+                   src={arr[i+2].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+2}  className="ceoss_icon"><i data-iterate= {i+2} class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+                  <p className="card-text">{arr[i+2].title}</p>
+                </div>
+              </div>
+            </div>
       </div>
       </div>)
-       i = i+2
+       i = i+3
       }
     }
     console.log(newarr,"loremIpsume")
@@ -541,14 +583,13 @@ class ProfileContainer extends React.PureComponent {
                 <div class="flex_child_rish">
                   <div className="catalogue_badge_wrapper">  
                     <div className='catalogue_badge'>   
-                     <div style={{margin:'auto'}}>
-                          <Link to= {`/dashboard/my-catalogue${!!center_id?'?center='+center_id:''}`}
+                          <Link to= {`/dashboard/catalogue${!!center_id?'?center='+center_id:''}`}
                           role="button"
+                          style={{display:'block', margin:'auto'}}
                           onClick={()=>this.props.toggleMyCatalog()} >
                           <img src="/icon/catalogue_icon_rish.svg" className='badge_image ' />
                           <text className="catalogue_badge_text">Catalogue</text>
                           </Link>
-                      </div>
                      </div>
                    </div>
                 </div>
@@ -626,7 +667,7 @@ class ProfileContainer extends React.PureComponent {
            {
              this.props.user.userType !=="Doctor" && <React.Fragment>
                 <text className="location_profile_text">Team of Experts</text>
-             <div className="row">
+             <div className="flex_parent_rish doctors_list_wrapper">
      {this.state.prof_data?!!this.state.prof_data.doctors?this.state.prof_data.doctors.length !==0?this.state.prof_data.doctors.slice(0, this.state.prof_data.doctors.length>5?this.state.show_doctor_count:this.state.prof_data.doctors.length).map((item,i) =>{
        return (<DoctorComponent
                onClick = {this.onDoctorClick}
@@ -634,25 +675,29 @@ class ProfileContainer extends React.PureComponent {
              i = {i}
          />)
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
-       <img  src="/Group 2096.svg" className="img-loading_rish"  />
+       <img style={{display:'block', margin:'auto !important'}}  src="/Group 2096.svg" className="img-loading_rish center_align_rish"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
-       <Link to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
-             role="button"
-             onClick = {()=>this.props.toggleAddDoc()}>
-       <button className="common_button_rish" style={{marginTop:'2rem', fontSize:'1.5rem'}}>Add Doctor</button>
-       </Link>
+       <div className="text-center">
+           <Link  to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
+              role="button"
+              onClick = {()=>this.props.toggleAddDoc()}>
+              <img className='add_doctor_plus' src="/icon/add_doctor_plus.svg"/>
+              <text style={{marginTop:'.3rem', fontSize:'1.3rem'}} className='green_text_rish display_block'>Add More Doctors</text>
+            </Link>
+            </div>
      </div>:'':''}
-   
-   {this.state.prof_data?!!this.state.prof_data.doctors?this.state.prof_data.doctors.length !==0?<div className="col-md-6 col-sm-12 col-lg-3">
-           <div className="timelinebox4 timelinebox4_5">
-             <Link  to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
-             role="button"
-             onClick = {()=>this.props.toggleAddDoc()}>
-             <img  src="/plus_2.svg"/>
-             </Link>
-      </div>
-       </div>:'':'':''}
    </div>
+
+   {this.state.prof_data?!!this.state.prof_data.doctors?this.state.prof_data.doctors.length !==0?
+           <div className="text-center">
+           <Link  to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}
+              role="button"
+              onClick = {()=>this.props.toggleAddDoc()}>
+              <img className='add_doctor_plus' src="/icon/add_doctor_plus.svg"/>
+              <text style={{marginTop:'.3rem', fontSize:'1.3rem'}} className='green_text_rish display_block'>Add More Doctors</text>
+            </Link>
+      </div>
+       :'':'':''}
    
    {!!this.state.prof_data.doctors?((this.state.prof_data.doctors.length===this.state.show_doctor_count) || (this.state.prof_data.doctors.length==0))?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
    show_doctor_count:this.state.prof_data.doctors.length
@@ -666,10 +711,8 @@ class ProfileContainer extends React.PureComponent {
 
 
   <div  id="profile_section_5" className="new_card_class">
-    
+  <text className="location_profile_text">Achievements</text>
 <div className="achivmnt_b profil_achevment">
-  <h4 className="achiment_bk">Achievement Book</h4>
- 
 {!!this.state.prof_data.achievements?
   this.state.prof_data.achievements.length!==0?
   <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">

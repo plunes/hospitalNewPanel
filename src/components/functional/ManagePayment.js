@@ -57,42 +57,74 @@ MyError.prototype = new Error()
     }
     }
 
-
   return (
-<form onSubmit={submitdetails} className="ManagePayForm AllComponents">
+<form onSubmit={submitdetails} className='new_card_class'>
   {props.loading && <LoaderComponent />
  }  
- <div className="ManagePay"><h4><b>Manage Payment</b></h4></div>
- <div className="managePay">
- <input
+ <div>
+   <div className="manage_payment_heading_wrapper">
+     <span className='manage_payment_heading_sec_1'>
+        <span className='manage_payments_heading_wrapper'>
+        <h4><b>Manage Payment</b></h4>
+        <text className="manage_payments_sub_heading">
+           Space for text, space for text, space for text, space for text, space for text, space for text
+        </text>
+        </span>
+     
+     </span>
+     <span className='manage_payment_heading_sec_2'>
+        <img className="manage_payment_img" src= "/icon/manage_payment.svg"  />
+     </span>
+   </div>
+  </div>
+  <div style={{padding:'1rem'}}>
+ <div className="flex_parent_rish">
+   <span className="flex_child_rish_manage_payments">
+   <input
   type="text" 
-  className="form-control editbankdetailfield"
+  className="form-control editbankdetailfield flex_child_rish"
   placeholder="Bank Name" 
   name="bankname"
   onChange={props.handleChange} 
   value = {props.bankname}/>
 
- <input 
+   </span>
+
+   <span className="flex_child_rish_manage_payments">
+   <input 
  type="text"
- className="form-control editbankdetailfield" 
+ className="form-control editbankdetailfield " 
  placeholder="Account Number" 
  name="accnumber" 
  onChange={props.handleChange} 
  value= {props.accnumber }
  />
+   </span>
+ </div>
+ <div className="flex_parent_rish">
+
+ <span className="flex_child_rish_manage_payments">
  <input type="text" 
  className="form-control editbankdetailfield" 
  placeholder="IFSC Code" 
  name="ifsccode" 
  onChange={props.handleChange}  
  value= {props.ifsccode}/>
-
+ </span>
+ <span className="flex_child_rish_manage_payments">
  <input
  type="text" 
  className="form-control editbankdetailfield" 
  placeholder="Pan Number" name="pannumber" 
  onChange={props.handleChange} 
  value= {props.pannumber}/>
+   </span>
+
+
+ </div>
+
+ <div className="flex_parent_rish">
+ <span className="flex_child_rish_manage_payments">
  <input 
  type="text" 
  className="form-control editbankdetailfield" 
@@ -101,8 +133,13 @@ MyError.prototype = new Error()
  onChange={props.handleChange} 
  value= {props.accountname}
  />
- <button type="submit" className="btn btn-success proceedbtn">Proceed</button>
+   </span>
  </div>
+</div>
+<div style={{marginBottom:'1rem'}}>
+<button type="submit" style={{position:'relative', bottom:'1rem'}} className="btn btn-success proceedbtn manage_payment_submit">Proceed</button>
+</div>
+
 </form>
   )
 }

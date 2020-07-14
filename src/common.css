@@ -348,6 +348,8 @@ margin: 0 1%;
  }
 
 
+
+
  @media screen and (min-width: 767px) {
     .banner-outer-wrapper {
         margin-top: 3.5rem;
@@ -419,14 +421,17 @@ margin: 0 1%;
 
 .header_link_text {
     color: #9E9E9E !important;
+    font-size: 1.1rem;
 }
 .header_li_rish {
     margin: auto 0rem auto 3rem;
 }
 
 .logo_rish {
-    height: 3rem;
+    height: 2.5rem;
     width: auto;
+    display: block;
+    margin-top: .5rem;
     margin-left: 2rem;
 }
 
@@ -455,6 +460,12 @@ margin: 0 1%;
 
 .transparent_main_content_rish {
     width: 80%;
+    min-height: 30rem;
+    position: relative;
+}
+
+.catalogue_main_content_rish {
+    width: 100%;
     min-height: 30rem;
     position: relative;
 }

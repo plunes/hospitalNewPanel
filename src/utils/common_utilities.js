@@ -69,6 +69,13 @@ if(r.year!==0){
 }
 
 
+export const for_loop = (data, callback) => {
+  for (var i = 0, len = data.length; i < len; i++) {
+        callback(data[i])
+  }
+}
+
+
 
 export const  get_circular_progress_data = () =>{
   let arr = []

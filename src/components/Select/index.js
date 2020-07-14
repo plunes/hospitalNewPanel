@@ -52,6 +52,7 @@ class Select extends Component {
 
   getValue(value){
       let val ;
+      // console.log(value,"value in getValue")
       this.props.options.forEach((item, i )=>{
          if(item.value===value){
            val = item.name
@@ -288,7 +289,7 @@ class Select extends Component {
   renderValues() {
     const { placeholder, multiple } = this.props
     const { value } = this.props
-    if(!!value){
+    if((!!value)|| (value===0)){
       if (value.length === 0) {
         return (
           <div className="placeholder">
@@ -298,7 +299,7 @@ class Select extends Component {
       }
 
       return (
-        <div className="value">
+        <div className={`value ${this.props.value_className}`}>
           {
             this.getValue(value)
             }
@@ -366,7 +367,7 @@ class Select extends Component {
 
     return (
       <div
-        className="select-component-wrapper"
+        className={`select-component-wrapper ${this.props.wrapper_class}`}
         tabIndex="0"
         onFocus={ this.onFocus }
         onBlur={ this.onBlur }

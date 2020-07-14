@@ -67,8 +67,11 @@ const handleUpload = (e) => {
 
 const submitdetails = () => {
     if(props.achieveTitle ===''){
-        addToast("Enter title of Achievement",{ appearance: 'error', autoDismiss:true })
-    }else{
+        addToast("Add title to continue",{ appearance: 'error', autoDismiss:true })
+    }else if(!props.achievementImage){
+      addToast("Add an image to continue",{ appearance: 'error', autoDismiss:true })
+    }
+    else{
       let achievements = [...props.achievements]
       let newAchievements = []
       achievements.forEach((item,j)=>{
@@ -91,7 +94,7 @@ const submitdetails = () => {
 }
 
 
-
+  console.log(props,"prpops in add achievement")
 
     return (
         <div className ='modal-wrapper-medium_ris'>
@@ -121,7 +124,7 @@ const submitdetails = () => {
         {/* </div> */}
        
        <div className='margin-top-small_ris '>
-       <p className="intro col-lg-9"><strong>Title</strong> </p>
+       {/* <p className="intro col-lg-9"><strong>Title</strong> </p> */}
        <textarea 
             name="title" 
             ref={achievementRef}
@@ -130,6 +133,7 @@ const submitdetails = () => {
             value={props.achieveTitle} 
             rows="4" 
             cols="50"
+            placeholder="Enter title "
             name="comment" 
             form="usrform" /> 
        </div>

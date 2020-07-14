@@ -9,6 +9,7 @@ import Modal from 'react-modal';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
+import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import MeasureTime from "../MeasureTime"
 
 import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/common_utilities"
@@ -440,71 +441,69 @@ class AppointmentComponent extends Component {
                     ret = {this.state.ret}
                     retClr = {()=>this.setState({ret:false})}
                 />
-                <div className='main_content_rish'>
+                <div className='transparent_main_content_rish'>
                     <div>
-                        <div className="AppointBodyrow1">  <h4 style={{position:'relative'}} className="section_heading_rish">Appointments</h4></div>
-                        
-                            <Tabs 
-                            selectedIndex={this.state.tabIndex} 
-                            onSelect={tabIndex => this.setState({ tabIndex })} className="tab_pd">
-                                <TabList>
-                                <div className="row upcmg_fnt">
-                                <Tab className="col-lg-4"><a href="#">Upcoming</a></Tab>
-                                <Tab defaultFocus className="col-lg-4"><a href="#">Confirmed</a></Tab>
-                                <Tab className="col-lg-4"><a href="#">Cancelled</a></Tab>
-                                </div>
-                               
-                                </TabList>
-                              <div className="upcoming_bdr"></div>
-                                <TabPanel className="ardee_ci">
+                         <div className={`appointment_header_wrapper new_card_class ${this.state.tabIndex===0?'border_radius_fix_right':this.state.tabIndex===2?'border_radius_fix_left':''}`}>
+                             <span onClick = {() => this.setState({ tabIndex:0 })}  className={`appointment_header_child-1 ${this.state.tabIndex===0?'active_appointment_header':''}`}>
+                                <text className='appointment_header_text'>UPCOMING</text>
+                             </span>
+                             <span onClick = {() => this.setState({ tabIndex:1 })}  className={`appointment_header_child-1 ${this.state.tabIndex===1?'active_appointment_header':''}`}>
+                                 <text className='appointment_header_text'>CONFIRMED</text>
+                            </span>                     
+                            <span onClick = {() => this.setState({ tabIndex:2 })} className={`appointment_header_child-1 ${this.state.tabIndex===2?'active_appointment_header':''}`}>
+                               <text className='appointment_header_text'>CANCELLED</text>
+                            </span>
+                         </div>
+                         <div>
+                             {this.state.tabIndex ===0 && <div>
                                 {this.state.upcoming_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
-                                        <h3>No New Appointments</h3>
+                                        <h3>No  Appointments</h3>
                                         </div>}
-                               {this.state.upcoming_bookings.map((item,i)=>{
+                                    {this.state.upcoming_bookings.map((item,i)=>{
                                    return <React.Fragment>
-                                        <div className="row">
-                                  <div className="col-lg-3 nov_2">
-                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
-                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
-                                      </div>
-                                              <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
-                                                  </div>
-                                                  <div className="col-lg-4 nov_2">
-                                                    <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
-                                                  <p>{`Phone no: ${item.userMobileNumber}`}</p>
-                                                  <p>{item.professionalAddress}</p>
-                                                </div> 
-                                      <div className="col-lg-2 loc_tab">
-                                    <div className="round-image">
-                                      <img src={item.userImageUrl} className="rund_im"/>
-                                      </div>
-                                     </div>
-                                </div>
+                                       <div className='appointment_card_wrapper new_card_class'>
+                                           <div className='appointment_card_profile'>
+                                              <div>
+                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                              </div>
 
-                                { (time_now<item.appointmentTime )  &&  <div className="row confrm_mar_sec">
-                                <div className="col-lg-4">
-                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
-                                 </div>
-                                 <div className="col-lg-4">
-                                <RescheduleComponent
-                                 reschedule_appointment = {this.reschedule_appointment}
-                                 value = {item}
-                                 success_reschedule_id = {this.state.success_reschedule_id}
-                                 remove_success_id = {()=>this.setState({success_reschedule_id:false})}
-                                 slots = {this.state.slots}
-                                 selected_callback = {this.selected_callback}
-                                 defaultValue = {this.state.defaultDate}
-                                 type="upcoming_bookings"
-                                />
-                                 </div>
-                                 <div className="col-lg-4">
-                                 <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings","cancelled_bookings")}>Cancel</text></p>
-                                 </div>
-                                </div>
-}
-                            {/* 2nd--end */}
-                                <div className="row confrm_mar_sec">
+                                              <div  className='text-center'>
+                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                              </div> 
+                                              <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
+                                                            <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
+                                                            <div className='flex_child_rish'>
+                                                            <text className='align_right appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</text>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                           <div className='appointment_card_data'>
+                                           { (time_now<item.appointmentTime )  &&  <div className="row confrm_mar_sec">
+                                                <div className="col-lg-2">
+                                                    <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
+                                                </div>
+                                                <div className="col-lg-8">
+                                                <RescheduleComponent
+                                                reschedule_appointment = {this.reschedule_appointment}
+                                                value = {item}
+                                                success_reschedule_id = {this.state.success_reschedule_id}
+                                                remove_success_id = {()=>this.setState({success_reschedule_id:false})}
+                                                slots = {this.state.slots}
+                                                selected_callback = {this.selected_callback}
+                                                defaultValue = {this.state.defaultDate}
+                                                type="upcoming_bookings"
+                                                />
+                                                </div>
+                                                <div className="col-lg-2">
+                                                <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,"upcoming_bookings","cancelled_bookings")}>Cancel</text></p>
+                                                </div>
+                                                </div>
+                                                }
+
+                                  {/* 2nd--end */}
+                                  <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
                                     <p className="brace_m">{item.serviceName}</p>
                                  </div>
@@ -517,42 +516,44 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
-                                 <hr className="appoint-hr_ris"/>
+                                           </div>
+                                       </div>
                                    </React.Fragment>
-                               })}
-                                </TabPanel>
-                                <TabPanel className="ardee_ci">
+                               })} 
+                                  <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                 </div>}
+                         
+                              {this.state.tabIndex===1 && <div>
                                 {this.state.confirmed_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
                                         <h3>No  Appointments</h3>
                                         </div>}
                                     {this.state.confirmed_bookings.map((item,i)=>{
                                    return <React.Fragment>
-                                        <div className="row">
-                                        <div className="col-lg-3 nov_2">
-                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
-                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
-                                      </div>
-                                              <div className="col-lg-2">
-                                                  <img  src={item.professionalImageUrl} className="frame_de img-loading-small_rish" />
-                                                  </div>
-                                                  <div className="col-lg-4 nov_2">
-                                                  <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
-                                                  <p>{`Phone no: ${item.userMobileNumber}`}</p>
-                                                  <p>{item.professionalAddress}</p>
-                                                </div> 
-                                      <div className="col-lg-2 loc_tab">
-                                    <div className="round-image">
-                                      <img src={item.userImageUrl} className="rund_im "/>
-                                      </div>
-                                     </div>
-                                </div>
-                               {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
-                                <div className="col-lg-4">
+                                       <div className='appointment_card_wrapper new_card_class'>
+                                           <div className='appointment_card_profile'>
+                                              <div>
+                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                              </div>
+
+                                              <div  className='text-center'>
+                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                              </div> 
+                                              <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
+                                                            <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
+                                                            <div className='flex_child_rish'>
+                                                            <text className='align_right appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</text>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                           <div className='appointment_card_data'>
+                                           {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
+                                <div className="col-lg-2">
                                     <p className="gr_con "><text>Confirmed</text></p>
                                  </div>
-                                 <div className="col-lg-4">
+                                 <div className="col-lg-8">
                                  <RescheduleComponent
                                  reschedule_appointment = {this.reschedule_appointment}
                                  value = {item}
@@ -564,12 +565,13 @@ class AppointmentComponent extends Component {
                                  type="confirmed_bookings"
                                 />
                                  </div>
-                                 <div className="col-lg-4">
+                                 <div className="col-lg-2">
                                  <p className="con_re underline"><text onClick={()=>this.cancelBooking(item,'confirmed_bookings','cancelled_bookings')}>Cancel</text></p>
                                  </div>
                                 </div>}
-                                {/* 2nd--end */}
-                                <div className="row confrm_mar_sec">
+
+                                  {/* 2nd--end */}
+                                  <div className="row confrm_mar_sec">
                                 <div className="col-lg-6">
                                     <p className="brace_m">{item.serviceName}</p>
                                  </div>
@@ -582,86 +584,85 @@ class AppointmentComponent extends Component {
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
                                  <p className="pay_ptint">Payments done by patient</p>
-                                 {/* <p className="pay_green">Create Prescription</p> */}
                                  </div>
-                                 <hr className="appoint-hr_ris"/>
+                                           </div>
+                                       </div>
                                    </React.Fragment>
                                })} 
-                               <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
-                                </TabPanel>
-                                <TabPanel className="ardee_ci">
+                                  <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                  </div>}
+                         
+                         </div>
+
+                               
+                         {this.state.tabIndex===2 && <div>
                                 {this.state.cancelled_bookings.length==0 && <div className='text-center no-appointment_ris' style={{position:'relative'}}>
                                         <h3>No  Appointments</h3>
                                         </div>}
-                                {this.state.cancelled_bookings.map((item,i)=>{
-                                  return <React.Fragment>
-                                  <div className="row">
-                                  <div className="col-lg-3 nov_2">
-                                      <h4>{this.dateTimeObject(item.appointmentTime).monthAndDate}</h4>
-                                    <p>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</p>
-                                      </div>
-                                        <div className="col-lg-2">
-                                            <img  src={item.professionalImageUrl} className="frame_de" />
-                                            </div>
-                                            <div className="col-lg-4 nov_2">
-                                            <h4>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</h4>
-                                            <p>{`Phone no: ${item.userMobileNumber}`}</p>
-                                            <p>{item.professionalAddress}</p>
-                                          </div> 
-                                <div className="col-lg-2 loc_tab">
-                              <div className="round-image">
-                                <img src={item.userImageUrl} className="rund_im "/>
-                                </div>
-                               </div>
-                          </div>
-                     { (time_now<item.appointmentTime)   &&  <div className="row confrm_mar_sec">
-                                <div className="col-lg-4">
-                                    <p className="gr_con "><text></text></p>
-                                    {/* <p className="gr_con "><text>Confirm</text></p> */}
-                                 </div>
-                                 <div className="col-lg-4">
-                                 <RescheduleComponent
-                                 reschedule_appointment = {this.reschedule_appointment}
-                                 value = {item}
-                                 success_reschedule_id = {this.state.success_reschedule_id}
-                                 slots = {this.state.slots}
-                                 selected_callback = {this.selected_callback}
-                                 defaultValue = {this.state.defaultDate}
-                                 remove_success_id = {()=>this.setState({success_reschedule_id:false})}
-                                 type="cancelled_bookings"
-                                />
-                                 </div>
-                                 <div className="col-lg-4">
-                                 <p className="con_re "><text></text></p>
-                                 {/* <p className="con_re "><text>Cancelled</text></p> */}
-                                 </div>
-                          </div>}
-                          {/* 2nd--end */}
-                          <div className="row confrm_mar_sec">
-                          <div className="col-lg-6">
-                              <p className="brace_m">{item.serviceName}</p>
-                           </div>
-                           <div className="col-lg-6">
-                              <p className="dental_th"><i class="fa fa-rupee-sign"></i>{item.totalAmount}</p>
-                           </div>
-                          </div>
-                          {/* 3rd--end */}
-                          <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
-                          {this.getProgressbar(item)}                        
-                              <div className="two_chil">
-                           <p className="pay_ptint">Payments done by patient</p>
-                           {/* <p className="pay_green">Create Prescription</p> */}
-                           </div>
-                           <hr className="appoint-hr_ris"/>
-                             </React.Fragment>
-                         })}                      
-                                 <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})} className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>       
-                                                           
-                                 </TabPanel>
-                                
-                               
-                            </Tabs>
+                                    {this.state.cancelled_bookings.map((item,i)=>{
+                                   return <React.Fragment>
+                                       <div className='appointment_card_wrapper new_card_class'>
+                                           <div className='appointment_card_profile'>
+                                              <div>
+                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                              </div>
 
+                                              <div  className='text-center'>
+                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                              </div> 
+                                              <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
+                                                            <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
+                                                            <div className='flex_child_rish'>
+                                                            <text className='align_right appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</text>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                           <div className='appointment_card_data'>
+                                           { (time_now<item.appointmentTime)   &&  <div className="row confrm_mar_sec">
+                                                    <div className="col-lg-2">
+                                                        <p className="gr_con "><text></text></p>
+                                                        {/* <p className="gr_con "><text>Confirm</text></p> */}
+                                                    </div>
+                                                    <div className="col-lg-8">
+                                                    <RescheduleComponent
+                                                    reschedule_appointment = {this.reschedule_appointment}
+                                                    value = {item}
+                                                    success_reschedule_id = {this.state.success_reschedule_id}
+                                                    slots = {this.state.slots}
+                                                    selected_callback = {this.selected_callback}
+                                                    defaultValue = {this.state.defaultDate}
+                                                    remove_success_id = {()=>this.setState({success_reschedule_id:false})}
+                                                    type="cancelled_bookings"
+                                                    />
+                                                    </div>
+                                                    <div className="col-lg-2">
+                                                    <p className="con_re "><text></text></p>
+                                                    {/* <p className="con_re "><text>Cancelled</text></p> */}
+                                                    </div>
+                                                    </div>}
+                                
+                                  <div className="row confrm_mar_sec">
+                                <div className="col-lg-6">
+                                    <p className="brace_m">{item.serviceName}</p>
+                                 </div>
+                                 <div className="col-lg-6">
+                                    <p className="dental_th"><i class="fa fa-rupee-sign"></i>{item.totalAmount}</p>
+                                 </div>
+                                </div>
+                                {/* 3rd--end */}
+                                <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
+                                {this.getProgressbar(item)}                        
+                                    <div className="two_chil">
+                                 <p className="pay_ptint">Payments done by patient</p>
+                                 </div>
+                                           </div>
+                                       </div>
+                                   </React.Fragment>
+                               })} 
+                                  <div style={{cursor:'pointer'}} onClick={()=>this.setState({modalIsOpen:true})}  className="bg_bulb"><img src="/bulb.svg" /><p>Tips for more Conversions</p></div>
+                                  </div>}      
                             <Modal
                             isOpen={this.state.confirm_modal_flag}
                             onAfterOpen={()=>console.log("On After modall gets called")}
