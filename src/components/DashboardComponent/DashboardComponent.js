@@ -619,25 +619,28 @@ class DashboardComponent extends React.PureComponent {
                                       </span>
                                       <div  className="second_scro">
                                         {this.props.get_real_insight_loading_flag? <LoaderComponent/>:
-                                            this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
-                                                <React.Fragment>
-                                                    <div className="action_insight_wrapper" key={index}>
-                                                        <span className="action_insight_image_wrapper">
-                                                            <img src ="/icon/action_insight_image.svg" className="action_insight_image"/>
-                                                        </span>
-                                                        <span className="action_insight_text_wrapper">
-                                                        <div>
-                                                            <text className="light_text_rish">
-                                                            <text className="dark_text_rish">{i.serviceName} </text>were <text className="dark_text_rish">{i.percent}% </text>higher than the booked price
-                                                            </text>
-                                                         </div>
-                                                            <div  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}>Update here</div>
-                                                        </span>
-                                                    </div>
-                                                   
-                                                    <hr></hr>
-                                                </React.Fragment>
-                                            )) :  <div className="no_insights_wrapper_ris">
+                                            this.props.insight.length !==0 ? this.props.insight.map((i, index) => {
+                                                console.log(i, "I in Insihjflkdslkdsfkjdsf")
+                                                return (
+                                                    <React.Fragment>
+                                                        <div className="action_insight_wrapper" key={index}>
+                                                            <span className="action_insight_image_wrapper">
+                                                                <img src ="/icon/action_insight_image.svg" className="action_insight_image"/>
+                                                            </span>
+                                                            <span className="action_insight_text_wrapper">
+                                                            <div>
+                                                                <text className="light_text_rish">
+                                                                <text className="dark_text_rish">{i.serviceName} </text>were <text className="dark_text_rish">{i.percent}% </text>higher than the booked price
+                                                                </text>
+                                                             </div>
+                                                                <div  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}>Update here</div>
+                                                            </span>
+                                                        </div>
+                                                       
+                                                        <hr></hr>
+                                                    </React.Fragment>
+                                                )
+                                            }) :  <div className="no_insights_wrapper_ris">
                                             <div className="no_insight_image-wrapper">
                                               <img className="no_isights_image" src="./Group 2055.svg" />
                                             </div>

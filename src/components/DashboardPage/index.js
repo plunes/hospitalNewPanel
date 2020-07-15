@@ -115,9 +115,9 @@ export class DashboardPage extends React.PureComponent {
         console.log(nextProps.get_act_insight_ret,"nextProps.get_act_insight_ret")
         if(nextProps.get_act_insight_ret.success){
           this.setState({
-              solInsights:nextProps.get_act_insight_ret.data
+              insight:nextProps.get_act_insight_ret.data
           },()=>{
-            nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.get_act_insight_ret.data})
+            nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.get_act_insight_ret.data})
           })
         }else{
           this.setState({
@@ -134,7 +134,7 @@ export class DashboardPage extends React.PureComponent {
       
         if(nextProps.get_real_insight_ret.success){
           this.setState({
-            insight:nextProps.get_real_insight_ret.data
+            solInsights:nextProps.get_real_insight_ret.data
           },()=>{
             nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.get_real_insight_ret.data})
             // nextProps.clr_act_insght()
