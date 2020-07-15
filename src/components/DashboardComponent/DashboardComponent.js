@@ -326,13 +326,15 @@ class DashboardComponent extends React.PureComponent {
 
     async handleSubmit(e) {
         e.preventDefault();
-        let data = {
-            updatePrice: this.state.actionUpdatedPrice,
-            updateData: this.state.updateData
+        if(this.state.actionUpdatedPrice !== this.state.updateData.price){
+            let data = {
+                updatePrice: this.state.actionUpdatedPrice,
+                updateData: this.state.updateData
+            }
+            this.setState({
+                actionablePriceLoading:true
+            },()=>this.props.sendUpdateData(data))
         }
-        this.setState({
-            actionablePriceLoading:true
-        },()=>this.props.sendUpdateData(data))
     }
      handleRealSubmit(e) {
         e.preventDefault();
@@ -362,7 +364,8 @@ class DashboardComponent extends React.PureComponent {
             modalIsOpen: true,
             updatePrice: updateData.userPrice,
             updateData: updateData,
-            serviceName: updateData.serviceName
+            serviceName: updateData.serviceName,
+            actionUpdatedPrice:updateData.price
         })
     }
 

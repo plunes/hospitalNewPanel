@@ -3492,7 +3492,7 @@ export const bankDetails = bankData => dispatch => {
 
 export const getInsights = (data) => async dispatch => {
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + `/analytics/actionableInsight?userId=${data.center}`, { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + `/analytics/actionableInsight`, { 'headers': { 'Authorization': token } })
   .then(res => {
     console.log(res , 'res in getInsights')
     if (res.status=== 201) {
