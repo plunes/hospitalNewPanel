@@ -20,7 +20,7 @@ class InsightComponent extends React.PureComponent {
         let newSec = (new Date).getTime()
      //    console.log(newSec,"newSec in getSeconds Differnce")
         let seconds = (newSec-sec)/1000
-        return seconds>600?0:600-seconds
+        return seconds>900?0:900-seconds
  }
 
 
