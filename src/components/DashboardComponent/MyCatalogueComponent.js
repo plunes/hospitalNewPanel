@@ -956,9 +956,9 @@ class MyCatalogueComponent extends Component {
                                       }
                            </div>
                         </div>
-                        <ProcedureView
+                        {/* <ProcedureView
                          procedure_for_detail = {this.state.procedure_for_detail}
-                        />
+                        /> */}
                    </div>
                 </div>
 
