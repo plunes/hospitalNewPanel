@@ -638,9 +638,9 @@ console.log(data,'data in submit Details')
       
         return (
            <React.Fragment>
-                <div className='main_content_rish'>
+                <div  style={{width:'90%'}} className='main_content_rish'>
                     <div >
-                <div style={{width:'90%'}} className="add_dr">
+                <div className="add_dr">
                     <div className="add_srch_d">
                       <NewNotif 
                         ret= {this.state.ret}
