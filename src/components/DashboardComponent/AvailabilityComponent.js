@@ -206,7 +206,7 @@ getDay = (i) =>{
 }
 
 generateSlotsFormat = () =>{
-    let slots = JSON.parse(JSON.stringify(this.state.slots))
+    let slots = [...this.state.slots]
     let arr = []
     slots.forEach((item,i)=>{
       let obj = {}

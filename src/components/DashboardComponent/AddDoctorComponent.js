@@ -9,9 +9,9 @@ import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
 import ModalComponent from "../ModalComponent"
 import NewNotif from '../functional/NewNotif';
-import { get_url_params } from '../../utils/common_utilities';
+import { get_url_params, isEmpty } from '../../utils/common_utilities';
 import { Redirect } from "react-router-dom"
-
+let error_flag = false
 function MyError(message){
   this.message = message;
 }
@@ -108,7 +108,8 @@ class AddDoctorComponent extends Component {
             selectedshift:{},
             selectedDay:{},
             getUserLoading:false,
-            editConsultFlag:false
+            editConsultFlag:false,
+            error:false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -190,33 +191,47 @@ class AddDoctorComponent extends Component {
     };
 
     stringToTime =(str)=>{
-      let arr = str.split('-')
-      let fromMinute = arr[0].split(" ")[0].split(':')[1]
-      let fromHour = arr[0].split(" ")[0].split(':')[0]
-      let fromAmpm = arr[0].split(" ")[1]
-      let toMinutes = arr[1].split(" ")[0].split(':')[1]
-      let toHour = arr[1].split(" ")[0].split(':')[0]
-      let toAmPm = arr[1].split(" ")[1]
-      console.log(fromHour==='12',"fromHour")
-let obj =   {
-          from:{
-            hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
-            minutes:parseInt(fromMinute,10)
-          },
-          to:{
-            hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
-            minutes:parseInt(toMinutes,10)
-          }
+      let obj = {}
+      try {
+        let arr = str.split('-')
+        let fromMinute = arr[0].split(" ")[0].split(':')[1]
+        let fromHour = arr[0].split(" ")[0].split(':')[0]
+        let fromAmpm = arr[0].split(" ")[1]
+        let toMinutes = arr[1].split(" ")[0].split(':')[1]
+        let toHour = arr[1].split(" ")[0].split(':')[0]
+        let toAmPm = arr[1].split(" ")[1]
+        console.log(fromHour==='12',"fromHour")
+          obj =   {
+            from:{
+              hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
+              minutes:parseInt(fromMinute,10)
+            },
+            to:{
+              hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
+              minutes:parseInt(toMinutes,10)
+            }
+        }
+      } catch (error) {
+          console.log(error,"error in catch Block")
+         error_flag = true
       }
+
          return obj
       }
     
       timeToString = (time) =>{
-        console.log(hour,"hour in timetostring")
-         let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
-         console.log(hour,time,"hour in timetostring")
-         let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
-         let timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
+        let timeString = false
+        try {
+          console.log(hour,"hour in timetostring")
+          let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
+          console.log(hour,time,"hour in timetostring")
+          let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
+           timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
+        } catch (error) {
+          console.log(error,"Error  in TimeToString")
+         error_flag = true
+        }
+       
          return timeString
       }
      handleTimeSubmit = (data) =>{
@@ -341,14 +356,24 @@ let obj =   {
   
   slotClicked = (slot,a,b,item )  =>{
     console.log(slot, a, b, item,"SlotClicked")
-    this.setState({
-      selectedSlot:slot,
-      selectedType:b,
-      selectedshift:a,
-      open:true,
-      selectedDay:item,
-      selecteDaySlots:item.slots
-    })
+    if(!isEmpty(slot)){
+      this.setState({
+        selectedSlot:slot,
+        selectedType:b,
+        selectedshift:a,
+        open:true,
+        selectedDay:item,
+        selecteDaySlots:item.slots
+      })
+    }else{
+      this.setState({
+        ret:{
+          success:false,
+          message:'Hmmm .. Something seems wrong , Please contact our team to change these time slots'
+        }
+      })
+    }
+
   }
 
   
@@ -435,7 +460,7 @@ let obj =   {
           })
           this.setState({
             services:arr,
-            services_chosen:arr[0].service
+            services_chosen:!!arr[0]?arr[0].service:''
           })
         }else{
           console.log("Unable to get Specs")
@@ -512,22 +537,39 @@ let obj =   {
 
     submitdetails = (data) =>{
       console.log(data,"data in SubmitDetails")
+  console.log(error_flag,"error in submit DETAILS")
+      if(!!error_flag){
+        this.setState({
+          ret:{
+            success:false,
+            message:'Hmmm .. Something seems wrong , Please contact our team to add doctor to this profile'
+          }
+        })
+        return false
+      }
+
+     
       let services = JSON.parse(JSON.stringify(this.state.services))
       let service = services.filter((item,i)=>(
         item.name = data.services_chosen
       ))
+
+      let service_arr = []
+      if(!!service[0]){
+        service_arr =[
+          {
+            price:service[0].consultationFee,
+            category:["Consultation"],
+            homeCollection:false,
+            variance:0,
+            serviceId:service[0].serviceId
+          }
+        ]
+      }
       let specialities = [
         {
-         specialityId:service[0].specialityId,
-         services:[
-           {
-             price:service[0].consultationFee,
-             category:["Consultation"],
-             homeCollection:false,
-             variance:0,
-             serviceId:service[0].serviceId
-           }
-         ]
+         specialityId:this.state.specialitie_chosen,
+         services:service_arr
         }
 ]
 
@@ -582,6 +624,7 @@ console.log(data,'data in submit Details')
     }
 
     render() {
+      console.log(error_flag,"Error in Add Doctor")
       console.log(this.state,"this.state in AddComponent")
       console.log(this.props,"this.props in add Doctor component")
       let center_id = get_url_params('center')

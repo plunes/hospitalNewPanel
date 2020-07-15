@@ -50,7 +50,7 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
 }
 
    const submitdetails = () => {
-        if(props.name === '' || props.department === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " || (props.services_chosen.length===0) ){
+        if(props.name === '' || props.department === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
         }else if(!!!props.doctorProfileImage){
           addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
@@ -195,8 +195,8 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
        {props.slots.map((item,i)=>(
                       <div className="row text-center">
                       <div className="col-lg-2"><p className="m">{item.day.charAt(0).toUpperCase()}</p></div>
-                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.morning,'morning','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.from)}</span><span onClick={()=>props.slotClicked(item.slots.morning,'morning','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.to)}</span></p></div>
-                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.evening,'evening','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.from)}</span><span onClick={()=>props.slotClicked(item.slots.evening,'evening','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.to)}</span></p></div>
+                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.morning,'morning','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.from) || "N/A"}</span><span onClick={()=>props.slotClicked(item.slots.morning,'morning','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.to) || "N/A"}</span></p></div>
+                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.evening,'evening','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.from) || "N/A"}</span><span onClick={()=>props.slotClicked(item.slots.evening,'evening','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.to) || "N/A"}</span></p></div>
                       <div className="col-lg-2">
                          <div 
                       onClick = {(e)=>props.handleCloseDay(item,i,e)} 
