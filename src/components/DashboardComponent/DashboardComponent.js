@@ -850,7 +850,7 @@ class DashboardComponent extends React.PureComponent {
                                           
                                             <div className="SliderUpdatedPrice margin_top_small_rish">&#8377;
                                             <span>
-                                            {(this.state.updatePrice - this.state.updatePrice * this.state.value / 100,2).toFixed(2)} 
+                                            {(this.state.updatePrice - this.state.updatePrice * this.state.value / 100).toFixed(2)} 
                                             </span>
                                             </div>
                                             <br>
