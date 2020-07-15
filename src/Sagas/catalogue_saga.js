@@ -5,16 +5,17 @@ import { get_user_specialities_ret, get_user_specialities_loading, update_proced
 import api from '../utils/api_routes'
 import { get_url_params } from "../utils/common_utilities"
 import store from '../store'
-let center_id = get_url_params('center')
+
 function* get_user_specs_saga(action) {
     console.log("Inside get procedures saga")
 
    try {
+    let center_id = get_url_params('center')
       const  get_user_specs = yield store.getState().catalogue_store.get_user_specs
       const data = get_user_specs
       const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
       console.log("Just before api call")
-      const api_data = yield call(api.catalogue_routes.get_user_specialities, data, headers)
+      const api_data = yield call(api.catalogue_routes.get_user_specialities, data, center_id, headers)
       console.log(api_data.data,"api_data in get_user_specs_saga")
       if(!!api_data){
         if (api_data.status === 200) {
@@ -54,11 +55,12 @@ function* update_procedure_saga(action) {
   console.log("Inside get procedures saga")
 
  try {
+  let center_id = get_url_params('center')
     const  update_procedure = yield store.getState().catalogue_store.update_procedure
     const data = update_procedure
     const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
     console.log(data,"Just before api call")
-    const api_data = yield call(api.catalogue_routes.update_procedures, data, headers)
+    const api_data = yield call(api.catalogue_routes.update_procedures, data, center_id, headers)
     console.log(api_data.data,"api_data in get_user_specs_saga")
     if(!!api_data){
       if (api_data.status === 200) {
@@ -97,11 +99,12 @@ function* add_procedure_saga(action) {
   console.log("Inside get procedures saga")
 
  try {
+  let center_id = get_url_params('center')
     const  add_procedure = yield store.getState().catalogue_store.add_procedure
     const data = add_procedure
     const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
     console.log(data,"Just before api call")
-    const api_data = yield call(api.catalogue_routes.add_procedure, data, headers)
+    const api_data = yield call(api.catalogue_routes.add_procedure, data, center_id, headers)
     console.log(api_data.data,"api_data in add_procedure_saga")
     if(!!api_data){
       if (api_data.status === 200) {
@@ -149,6 +152,7 @@ function* add_procedure_saga(action) {
   console.log("Inside search_procedures_ret saga")
 
  try {
+  let center_id = get_url_params('center')
     const  search_procedures = yield store.getState().catalogue_store.search_procedures
     const data = search_procedures
     const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
@@ -159,7 +163,7 @@ function* add_procedure_saga(action) {
       specialityId:data.specialityId
     }
     console.log(data,"Just before api call")
-    const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, headers)
+    const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, center_id, headers)
     console.log(api_data.data,"api_data in add_procedure_saga")
     if(!!api_data){
       if (api_data.status === 201) {

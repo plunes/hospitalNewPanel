@@ -21,11 +21,10 @@ if(!!pathLocation) {
     // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
   }
 }
-let center_id = get_url_params('center')
 
 export default {
     catalogue_routes:{
-        get_user_specialities: (data, headers) =>
+        get_user_specialities: (data, center_id, headers) =>
         axios
             .get(`${base_url}/user/getUserSpecialities${!!center_id?'?userId='+center_id:''}`, headers)
             .then(res => {
@@ -33,7 +32,7 @@ export default {
                  return res
             })
             .catch(err => err.response),
-        update_procedures: (data, headers) =>
+        update_procedures: (data, center_id, headers) =>
         axios
             .patch(`${base_url}/analytics/cataloguePriceUpdate${!!center_id?'?userId='+center_id:''}`, data, headers)
             .then(res => {
@@ -41,7 +40,7 @@ export default {
                   return res
             })
             .catch(err => err.response),
-       add_procedure: (data, headers) =>
+       add_procedure: (data, center_id, headers) =>
        axios
            .put(`${base_url}/user/addServices${!!center_id?'?userId='+center_id:''}`, data, headers)
            .then(res => {
@@ -49,7 +48,7 @@ export default {
                  return res
            })
            .catch(err => err.response),
-      search_procedures: (data, headers) =>
+      search_procedures: (data, center_id, headers) =>
       axios
           .post(`${base_url}/analytics/getServices${!!center_id?'?userId='+center_id:''}`, data, headers)
           .then(res => {
@@ -61,7 +60,7 @@ export default {
 
 
     dash_routes:{
-      get_act_insight: (data, headers) =>
+      get_act_insight: (data, center_id,  headers) =>
       axios
           .get(`${base_url}/analytics/actionableInsight${!!center_id?'?userId='+center_id:''}`, headers)
           .then(res => {
@@ -69,7 +68,7 @@ export default {
                return res
           })
           .catch(err => err.response),
-      get_real_insight: (data, headers) =>
+      get_real_insight: (data, center_id,  headers) =>
        {
          console.log(headers,"headers in get_real_insight")
          return    axios

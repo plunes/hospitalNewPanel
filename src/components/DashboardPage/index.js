@@ -34,6 +34,7 @@ import admin_route from "../../HOC/admin_route"
 import protected_route from "../../HOC/protected_route"
 import NewNotif from '../functional/NewNotif';
 import FullPageLoader from '../functional/FullPageLoader';
+import { withRouter } from "react-router"
 import './index.css'
 
 
@@ -288,69 +289,69 @@ export class DashboardPage extends React.PureComponent {
 }
 
   componentDidMount() {
-    if (this.props.location.pathname === '/dashboard') {
+    if (window.location.pathname === '/dashboard') {
       this.setState({
       ...initialState,dash: 'active'
 
       });
-    } else if (this.props.location.pathname == '/dashboard/profile') {
+    } else if (window.location.pathname == '/dashboard/profile') {
       this.setState({
       ...initialState,prof:'active'
       });
-    }else if (this.props.location.pathname == '/dashboard/availability') {
+    }else if (window.location.pathname == '/dashboard/availability') {
       this.setState({
       ...initialState,avail:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/appointments') {
+    } else if (window.location.pathname == '/dashboard/appointments') {
       this.setState({
       ...initialState,appoint:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/settings') {
+    } else if (window.location.pathname == '/dashboard/settings') {
       this.setState({
       ...initialState, settings:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/manage-payments') {
+    } else if (window.location.pathname == '/dashboard/manage-payments') {
       this.setState({
     ...initialState,manage:'active'
       });
-    }else if (this.props.location.pathname == '/dashboard/help') {
+    }else if (window.location.pathname == '/dashboard/help') {
       this.setState({
     ...initialState,help:'active'
       });
-    }else if (this.props.location.pathname == '/dashboard/aboutus') {
+    }else if (window.location.pathname == '/dashboard/aboutus') {
       this.setState({
     ...initialState,about:'active'
       });
-    }else if (this.props.location.pathname == '/dashboard/notification') {
+    }else if (window.location.pathname == '/dashboard/notification') {
       this.setState({
       ...initialState,notif:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/payments') {
+    } else if (window.location.pathname == '/dashboard/payments') {
       this.setState({
     ...initialState,payment:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/editProfile') {
+    } else if (window.location.pathname == '/dashboard/editProfile') {
       this.setState({
       ...initialState,editProf:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/catalogue') {
+    } else if (window.location.pathname == '/dashboard/catalogue') {
       this.setState({
       ...initialState,myCataloge:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/add-doctor') {
+    } else if (window.location.pathname == '/dashboard/add-doctor') {
       this.setState({
       ...initialState, addDoc:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/develoment') {
+    } else if (window.location.pathname == '/dashboard/develoment') {
       this.setState({
       ...initialState, dev:'active'
       });
     }
-    else if (this.props.location.pathname == '/dashboard/change-password') {
+    else if (window.location.pathname == '/dashboard/change-password') {
       this.setState({
       ...initialState, changePass:'active'
       })
-    } else if (this.props.location.pathname == '/dashboard/centers') {
+    } else if (window.location.pathname == '/dashboard/centers') {
       this.setState({
       ...initialState, centers:'active'
       })
@@ -380,8 +381,11 @@ export class DashboardPage extends React.PureComponent {
     }
     
 
+   if(!!localStorage.getItem('token')){
+     console.log(localStorage.getItem('token')," localStorage.getItem")
     this.props.get_act_insight()
     this.props.get_real_insight()
+   }
     // this.props.getSolutionInsights()
     // this.props.getInsights({center:''})
     this.props.getNotifications({page:1})
@@ -601,12 +605,14 @@ authObject =()=> {
   render() {
   console.log(this.state,"state in state")
   console.log(this.props,"props in Dashboard page")
-
+ if(!!localStorage.getItem('token')){
   if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
-         return (
-     <FullPageLoader />
-   )
-  }
+    return (
+<FullPageLoader />
+)
+}
+ }
+
 
 
     if(!!!localStorage.getItem('token')){
@@ -655,10 +661,10 @@ authObject =()=> {
                               toggleAbout = {this.toggleAbout}
                               toggleCenters = {this.toggleCenters}
                               user_info = {this.state.user_info}
-                              pathname ={this.props.location.pathname}
+                              pathname ={window.location.pathname}
                             />
                   <div className="main_body_flex_content">
-                  {(this.props.location.pathname === '/dashboard')?
+                  {(window.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
@@ -674,7 +680,7 @@ authObject =()=> {
                     get_act_insight_loading_flag = {this.props.get_act_insight_loading_flag}
                     get_real_insight_loading_flag = {this.props.get_real_insight_loading_flag}            
                     />)
-                   :(this.props.location.pathname === '/dashboard/profile')?
+                   :(window.location.pathname === '/dashboard/profile')?
                    protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
@@ -683,17 +689,17 @@ authObject =()=> {
                   toggleMyCatalog = {this.toggleMyCatalog}
                   toggleAddDoc = {this.toggleAddDoc}
                   />)
-                  :(this.props.location.pathname === '/dashboard/appointments')?
+                  :(window.location.pathname === '/dashboard/appointments')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=><AppointmentComponent />)
-                  :(this.props.location.pathname === '/dashboard/availability')?
+                  :(window.location.pathname === '/dashboard/availability')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=><AvailabilityComponent />)
-                  :(this.props.location.pathname === '/dashboard/settings')?
+                  :(window.location.pathname === '/dashboard/settings')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
@@ -701,39 +707,39 @@ authObject =()=> {
                   toggleEditProf = {this.toggleEditProf}
                   toggleChangePass = {this.toggleChangePass}
                 />)
-                 :(this.props.location.pathname === '/dashboard/manage-payment')?
+                 :(window.location.pathname === '/dashboard/manage-payment')?
                  admin_route({
                   authObject:this.authObject,
                   passed_func:()=>console.log("From the passed Dunc")
                 })(()=> <ManagePaymentComponent />)
-                  :(this.props.location.pathname === '/dashboard/help')?
+                  :(window.location.pathname === '/dashboard/help')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=> <HelpComponent />)
-                  :(this.props.location.pathname === '/dashboard/aboutus')?
+                  :(window.location.pathname === '/dashboard/aboutus')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=>  <AboutUsComponent />)
-                 :(this.props.location.pathname === '/dashboard/aboutus')?
+                 :(window.location.pathname === '/dashboard/aboutus')?
                  protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout
                 })(()=> <ProfileContainer />)
-                 :(this.props.location.pathname === '/dashboard/catalogue')?
+                 :(window.location.pathname === '/dashboard/catalogue')?
                  protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout
                 })(()=> <MyCatalogueComponent />)
-                  :(this.props.location.pathname === '/dashboard/add-doctor')?
+                  :(window.location.pathname === '/dashboard/add-doctor')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=>  <AddDoctorComponent
-                  location = {this.props.location}
+                  location = {window.location}
                 />)
-                 :(this.props.location.pathname === '/dashboard/notification')?
+                 :(window.location.pathname === '/dashboard/notification')?
                  protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout
@@ -744,28 +750,28 @@ authObject =()=> {
                 getNotifications = {this.getNotifications}
                 page_count = {this.props.notif_data.page_count}
                 />)
-                :(this.props.location.pathname === '/dashboard/editProfile')?
+                :(window.location.pathname === '/dashboard/editProfile')?
                 protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout
                 })(()=><EditProfileComponent />)
-                  :(this.props.location.pathname === '/dashboard/change-password')?
+                  :(window.location.pathname === '/dashboard/change-password')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=> <ChangePassword />)
-                 :(this.props.location.pathname === '/dashboard/payments')?
+                 :(window.location.pathname === '/dashboard/payments')?
                  protected_route({
                   authObject:this.authObject,
                   logout:this.props.logout
                 })(()=> <PaymentComponent />)
-                  :(this.props.location.pathname === '/dashboard/centers')?
+                  :(window.location.pathname === '/dashboard/centers')?
                   admin_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=> <Centers
                    get_centers_loading ={this.state.get_centers_loading}
-                   location = {this.props.location}
+                   location = {window.location}
                   />):''}
               </div>
         </div>

@@ -240,7 +240,7 @@ export const Unauth_Logout = () =>{
   localStorage.removeItem('docDetails')
   localStorage.removeItem('specialities')
   localStorage.removeItem('uploaderUserId')
-  window.location.reload()
+  // window.location.reload()
 }
 
 export const search_procedures = (data) => dispatch =>{
@@ -3577,24 +3577,26 @@ export const logout = () => dispatch => {
     .then((response) => {
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
-      history.push('/')
+      history.push('/signin')
+      window.location.reload()
       window.onpopstate = (url) => {
         console.log(url)
         let token = localStorage.getItem('token');
         if (!token) {
-          history.push('/')
+          history.push('/signin')
         }
       }
     })
     .catch(error => {
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
-      history.push('/')
+      history.push('/signin')
+      window.location.reload()
       window.onpopstate = (url) => {
         console.log(url)
         let token = localStorage.getItem('token');
         if (!token) {
-          history.push('/')
+          history.push('/signin')
         }
       }
       console.log(error, 'error')

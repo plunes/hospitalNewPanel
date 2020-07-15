@@ -67,7 +67,8 @@ const  SidebarComponent = (props) => {
 
   
 
-  const handlelogoutClick=  async() => {
+  const handlelogoutClick=  async(e) => {
+    e.preventDefault()
     await props.logout()
   }
     return (
@@ -233,9 +234,7 @@ const  SidebarComponent = (props) => {
            </Link>
         </div>
          <div  className="sidebar_item_wraper "  >
-         <Link to= "/"
-              
-               
+         <Link to= "/signin"
                 onClick={handlelogoutClick}>
                    <span className="sidebar_list_item">
                       <span className="sidebar_list_icon">
