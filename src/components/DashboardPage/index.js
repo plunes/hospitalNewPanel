@@ -20,6 +20,8 @@ import { getEntity, getEntityClr, clearSolInsights,
    remove_notif_count_ret, set_notif_count, getUserDetails, get_user_info,
    get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url,
    get_centers, get_centers_clr , set_centers_data, set_location_toggler} from "../../actions/userActions"
+
+import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading } from "../../actions/dash_actions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -31,6 +33,7 @@ import ConnectivityListener from '../ConnectivityListener'
 import admin_route from "../../HOC/admin_route"
 import protected_route from "../../HOC/protected_route"
 import NewNotif from '../functional/NewNotif';
+import FullPageLoader from '../functional/FullPageLoader';
 import './index.css'
 
 
@@ -97,36 +100,76 @@ export class DashboardPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-        if(!!nextProps.solInsights){
+      //   if(!!nextProps.solInsights){
+      //     this.setState({
+      //         solInsights:nextProps.solInsights,
+      //         real_insight_loader:false
+      //     },()=>{
+      //         nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
+      //         nextProps.clearSolInsights()
+      //     })
+      // }
+
+      if(nextProps.get_act_insight_ret){
+        console.log(nextProps.get_act_insight_ret,"nextProps.get_act_insight_ret")
+        if(nextProps.get_act_insight_ret.success){
           this.setState({
-              solInsights:nextProps.solInsights,
-              real_insight_loader:false
+              solInsights:nextProps.get_act_insight_ret.data
           },()=>{
-              nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
-              nextProps.clearSolInsights()
+            nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.get_act_insight_ret.data})
           })
-      }
-      
-      if(!!nextProps.insight){
-        console.log(nextProps.insight,"nexrsadsd")
-        if(!!nextProps.insight.success){
-          this.setState({
-              insight:nextProps.insight.data,
-              act_insight_loader:false
-          },()=>{
-              nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.insight})
-              nextProps.clr_act_insght()
-          })
-      }else{
+        }else{
           this.setState({
             ret:{
               success:false,
-              message:nextProps.insight.message
+              message:nextProps.get_act_insight_ret.message
             }
           })
-          nextProps.clr_act_insght()
+        }
+        nextProps.get_act_insight_loading()
       }
+
+      if(nextProps.get_real_insight_ret){
+      
+        if(nextProps.get_real_insight_ret.success){
+          this.setState({
+            insight:nextProps.get_real_insight_ret.data
+          },()=>{
+            nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.get_real_insight_ret.data})
+            // nextProps.clr_act_insght()
+          })
+        }else{
+          this.setState({
+            ret:{
+              success:false,
+              message:nextProps.get_real_insight_ret.message
+            }
+          })
+        }
+        nextProps.get_real_insight_loading()
       }
+      
+      
+      // if(!!nextProps.insight){
+      //   console.log(nextProps.insight,"nexrsadsd")
+      //   if(!!nextProps.insight.success){
+      //     this.setState({
+      //         insight:nextProps.insight.data,
+      //         act_insight_loader:false
+      //     },()=>{
+      //         nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.insight})
+      //         nextProps.clr_act_insght()
+      //     })
+      // }else{
+      //     this.setState({
+      //       ret:{
+      //         success:false,
+      //         message:nextProps.insight.message
+      //       }
+      //     })
+      //     nextProps.clr_act_insght()
+      // }
+      // }
         
         if(!!nextProps.notificationData){
           // let data = !!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:{...nextProps.notif_data, ...this.state.notificationsData}
@@ -335,15 +378,14 @@ export class DashboardPage extends React.PureComponent {
           })
         }
     }
-    this.props.getSolutionInsights()
-    this.props.getInsights({center:''})
-    this.props.getNotifications({page:1})
-    this.props.get_business({days:7, center:''})
     
 
-    // need to remove this api call after refactoring
-    // this.props.getUserDetails()
-
+    this.props.get_act_insight()
+    this.props.get_real_insight()
+    // this.props.getSolutionInsights()
+    // this.props.getInsights({center:''})
+    this.props.getNotifications({page:1})
+    this.props.get_business({days:7, center:''})
     this.props.get_user_info({from_dash_page:true})
 
     // To Establish socket connection
@@ -559,6 +601,14 @@ authObject =()=> {
   render() {
   console.log(this.state,"state in state")
   console.log(this.props,"props in Dashboard page")
+
+  if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+         return (
+     <FullPageLoader />
+   )
+  }
+
+
     if(!!!localStorage.getItem('token')){
       return <Redirect
       to={{
@@ -619,8 +669,10 @@ authObject =()=> {
                     business_data = {this.props.dash_data.business_data}
                     solInsights = {this.state.solInsights}
                     insight = {this.state.insight}
-                    real_insight_loader = {this.state.real_insight_loader}
-                    act_insight_loader = {this.state.act_insight_loader}            
+                    get_act_insight_laoding_flag = {this.state.real_insight_loader}
+                    act_insight_loader = {this.state.act_insight_loader}
+                    get_act_insight_loading_flag = {this.props.get_act_insight_loading_flag}
+                    get_real_insight_loading_flag = {this.props.get_real_insight_loading_flag}            
                     />)
                    :(this.props.location.pathname === '/dashboard/profile')?
                    protected_route({
@@ -738,7 +790,11 @@ const mapStateToProps = state => ({
     prof_data:state.user.data.prof_data,
     get_user_info_ret:state.user.get_user_info_ret,
     get_centers_ret:state.user.get_centers_ret,
-    centers_data:state.user.data.centers_data
+    centers_data:state.user.data.centers_data,
+    get_act_insight_ret:state.dash_store.get_act_insight_ret,
+    get_act_insight_loading_flag:state.dash_store.get_act_insight_loading,
+    get_real_insight_ret:state.dash_store.get_real_insight_ret,
+    get_real_insight_loading_flag:state.dash_store.get_real_insight_loading
 })
 
 export default connect(mapStateToProps, { 
@@ -767,6 +823,10 @@ base_url,
 get_centers,
 get_centers_clr,
 set_location_toggler,
-set_centers_data
+set_centers_data,
+get_real_insight,
+get_real_insight_loading,
+get_act_insight,
+get_act_insight_loading
 })(DashboardPage);
 

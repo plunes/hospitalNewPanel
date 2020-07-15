@@ -57,5 +57,28 @@ export default {
                 return res
           })
           .catch(err => err.response),
-    }
+    },
+
+
+    dash_routes:{
+      get_act_insight: (data, headers) =>
+      axios
+          .get(`${base_url}/analytics/actionableInsight${!!center_id?'?userId='+center_id:''}`, headers)
+          .then(res => {
+               console.log(res,'res actionableInsight')
+               return res
+          })
+          .catch(err => err.response),
+      get_real_insight: (data, headers) =>
+       {
+         console.log(headers,"headers in get_real_insight")
+         return    axios
+         .get(`${base_url}/analytics/solutionSearch${!!center_id?'?userId='+center_id:''}`, headers)
+         .then(res => {
+               console.log(res,'res in update_procedure')
+               return res
+         })
+         .catch(err => err.response)
+       }
+  }
 }

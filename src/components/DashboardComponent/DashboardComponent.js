@@ -576,7 +576,7 @@ class DashboardComponent extends React.PureComponent {
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
-                                            {this.props.real_insight_loader?<LoaderComponent/>:
+                                            {this.props.get_real_insight_loading_flag?<LoaderComponent/>:
                                                 this.props.solInsights.length!==0 ? this.props.solInsights.map((s, index) =>{
                                                     let seconds_diff = this.getSecondsDifferent(s.createdAt)
                                                     return (
@@ -615,7 +615,7 @@ class DashboardComponent extends React.PureComponent {
                                        </span>
                                       </span>
                                       <div  className="second_scro">
-                                        {this.props.act_insight_loader? <LoaderComponent/>:
+                                        {this.props.get_real_insight_loading_flag? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => (
                                                 <React.Fragment>
                                                     <div className="action_insight_wrapper" key={index}>

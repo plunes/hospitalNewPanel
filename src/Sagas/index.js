@@ -1,7 +1,12 @@
 import catalogue_saga from "./catalogue_saga"
-console.log(catalogue_saga,'ctalogue_saga')
+import dash_saga from "./dash_saga"
+import { takeEvery, all } from 'redux-saga/effects';
 
-export default {
-    
-    catalogue_saga
-}
+function *rootSaga() {
+    yield all([
+        ...catalogue_saga,
+        ...dash_saga
+    ]);
+  }
+
+export default rootSaga

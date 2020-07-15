@@ -231,3 +231,11 @@ export const UPDATE_PROCEDURE_LOADING = 'App/Catalogue/UPDATE_PROCEDURE_LOADING'
 export const ADD_PROCEDURE = 'App/Catalogue/ADD_PROCEDURE'
 export const ADD_PROCEDURE_RET = 'App/Catalogue/ADD_PROCEDURE_RET'
 export const ADD_PROCEDURE_LOADING = 'App/Catalogue/ADD_PROCEDURE_LOADING'
+
+export const GET_ACT_INSIGHT = 'App/Catalogue/GET_ACT_INSIGHT'
+export const GET_ACT_INSIGHT_RET = 'App/Catalogue/GET_ACT_INSIGHT_RET'
+export const GET_ACT_INSIGHT_LOADING = 'App/Catalogue/GET_ACT_INSIGHT_LOADING'
+
+export const GET_REAL_INSIGHT = 'App/Catalogue/GET_REAL_INSIGHT'
+export const GET_REAL_INSIGHT_RET = 'App/Catalogue/GET_REAL_INSIGHT_RET'
+export const GET_REAL_INSIGHT_LOADING = 'App/Catalogue/GET_REAL_INSIGHT_LOADING'

@@ -6,7 +6,6 @@ import api from '../utils/api_routes'
 import { get_url_params } from "../utils/common_utilities"
 import store from '../store'
 let center_id = get_url_params('center')
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* get_user_specs_saga(action) {
     console.log("Inside get procedures saga")
 
@@ -146,7 +145,7 @@ function* add_procedure_saga(action) {
 }
 
 
-function* search_procedures_saga(action) {
+ function* search_procedures_saga(action) {
   console.log("Inside search_procedures_ret saga")
 
  try {
@@ -204,11 +203,11 @@ function* search_procedures_saga(action) {
 }
 
 
-function* mySaga() {
-  yield takeLatest(GET_USER_SPECIALITIES, get_user_specs_saga),
-  yield takeLatest(UPDATE_PROCEDURE, update_procedure_saga),
-  yield takeLatest(ADD_PROCEDURE, add_procedure_saga),
-  yield takeLatest(SEARCH_PROCEDURE, search_procedures_saga)
-}
+const catalogue_saga  = [
+   takeLatest(GET_USER_SPECIALITIES, get_user_specs_saga),
+   takeLatest(UPDATE_PROCEDURE, update_procedure_saga),
+   takeLatest(ADD_PROCEDURE, add_procedure_saga),
+   takeLatest(SEARCH_PROCEDURE, search_procedures_saga)
+]
 
-export default mySaga
+export default catalogue_saga
