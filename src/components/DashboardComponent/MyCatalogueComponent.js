@@ -961,15 +961,6 @@ class MyCatalogueComponent extends Component {
                         /> */}
                    </div>
                 </div>
-
-
-
-
-
-
-
-
-
                     {/* <div  style={{ padding:'0rem 1rem 1rem 1rem'}}  className='main_content_rish'>
                         <div className='row justify-content-center'>
                             <div className='text-center' >
