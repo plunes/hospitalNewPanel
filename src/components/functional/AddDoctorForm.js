@@ -169,7 +169,7 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
                      value = {props.services_chosen}
                      name = "services_chosen"
                      label = "Service"
-                     placeholder = "Choose Servives"
+                     placeholder = "Choose Service"
                    />
            </div>
             </div>
