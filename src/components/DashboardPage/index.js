@@ -151,26 +151,26 @@ export class DashboardPage extends React.PureComponent {
       }
       
       
-      // if(!!nextProps.insight){
-      //   console.log(nextProps.insight,"nexrsadsd")
-      //   if(!!nextProps.insight.success){
-      //     this.setState({
-      //         insight:nextProps.insight.data,
-      //         act_insight_loader:false
-      //     },()=>{
-      //         nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.insight})
-      //         nextProps.clr_act_insght()
-      //     })
-      // }else{
-      //     this.setState({
-      //       ret:{
-      //         success:false,
-      //         message:nextProps.insight.message
-      //       }
-      //     })
-      //     nextProps.clr_act_insght()
-      // }
-      // }
+      if(!!nextProps.insight){
+        console.log(nextProps.insight,"nexrsadsd")
+        if(!!nextProps.insight.success){
+          this.setState({
+              insight:nextProps.insight.data,
+              act_insight_loader:false
+          },()=>{
+              nextProps.set_dash_data({...nextProps.dash_data, insight:nextProps.insight})
+              nextProps.clr_act_insght()
+          })
+      }else{
+          this.setState({
+            ret:{
+              success:false,
+              message:nextProps.insight.message
+            }
+          })
+          nextProps.clr_act_insght()
+      }
+      }
         
         if(!!nextProps.notificationData){
           // let data = !!this.state.notif_socket_triggered?[...nextProps.notificationData.notifications]:{...nextProps.notif_data, ...this.state.notificationsData}

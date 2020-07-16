@@ -135,6 +135,12 @@ class DashboardComponent extends React.PureComponent {
 
     
     componentWillReceiveProps(nextProps){
+
+        if(nextProps.insight_flag !== this.props.insight_flag){
+            this.setState({
+                get_actionable_loading_other:false
+            })
+        }
         if(!!nextProps.act_as_admin_ret){
             // console.log(nextProps.act_as_admin_ret,"nextProps.act_as_admin_ret")
             if(nextProps.act_as_admin_ret.success){
@@ -622,7 +628,7 @@ class DashboardComponent extends React.PureComponent {
                                        </span>
                                       </span>
                                       <div  className="second_scro">
-                                        {this.props.get_real_insight_loading_flag? <LoaderComponent/>:
+                                        {(this.props.get_real_insight_loading_flag || this.state.get_actionable_loading_other)? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => {
                                                 console.log(i, "I in Insihjflkdslkdsfkjdsf")
                                                 return (
@@ -1040,7 +1046,8 @@ const mapStateToProps = state => ({
     admin_details_ret:state.user.admin_details_ret,
     location_toggler:state.user.location_toggler,
     open_map:state.user.open_map,
-    centers_data:state.user.data.centers_data
+    centers_data:state.user.data.centers_data,
+    insight_flag:state.user.insight_flag
 })
 
 // export default connect(mapStateToProps, {updateRealPriceClr, 
