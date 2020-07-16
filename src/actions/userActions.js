@@ -1799,7 +1799,7 @@ export const toAddServices = (data) => async dispatch => {
             type : TO_ADD_SERVICES_RET,
             payload :{
               success:true,
-              data:res.data
+              data:res.data.data
             }
           })
         }else{

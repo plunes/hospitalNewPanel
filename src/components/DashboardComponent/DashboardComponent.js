@@ -45,6 +45,12 @@ const customStyles = {
     }
 };
 
+function MyError(message){
+    this.message = message;
+}
+
+MyError.prototype = new Error()
+
 
 const default_state = {
     act_as_admin_ask:false,
@@ -121,11 +127,11 @@ class DashboardComponent extends React.PureComponent {
     handle_real_time_edit_price = (e) =>{
             let val = e.target.value
             // val = parseInt(val)
-            console.log(val,"val in handle Realt")
+            // console.log(val,"val in handle Realt")
            if(is_positive_real_number(val))
            this.setState({real_time_edit_price:val})
            else{
-            console.log("no_negative_value")
+            // console.log("no_negative_value")
            }
            
     }
@@ -280,7 +286,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
      handle_business_center_change = (e)=>{
-         console.log(e.target.value,"value in get_business_center_change")
+        //  console.log(e.target.value,"value in get_business_center_change")
          this.setState({
              get_business_loading:true,
              get_business:{
@@ -345,7 +351,14 @@ class DashboardComponent extends React.PureComponent {
     }
      handleRealSubmit(e) {
         e.preventDefault();
-        if((this.state.real_time_edit_price !== false) && (this.state.real_time_edit_price ==='')){
+
+        try {
+           
+            console.log(this.state,"this state in handleRealSubmit")
+            if(parseInt(this.state.real_time_edit_price,10)>=parseInt(this.state.realUpdatePrice, 10)){
+                throw new MyError(`Price must be less than ${this.state.realUpdatePrice}`)
+            }
+            if((this.state.real_time_edit_price !== false) && (this.state.real_time_edit_price ==='')){
                 this.setState({
                     ret:{
                         message:'Please provide with some price',
@@ -365,6 +378,17 @@ class DashboardComponent extends React.PureComponent {
                 }) 
              }
         }
+        } catch (error) {
+            console.log(error)
+            this.setState({
+                ret:{
+                    success:false,
+                    message:error.message
+                }
+            })
+        }
+      
+  
     }
     handleUpdatePrice(updateData) {
         this.setState({
@@ -499,7 +523,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
+        // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         console.log(this.state,"this.state in dashboard")
         console.log(this.props," this.props in dashboard component")
         let { percent } = this.state
@@ -627,7 +651,6 @@ class DashboardComponent extends React.PureComponent {
                                       <div  className="second_scro">
                                         {(this.props.get_real_insight_loading_flag || this.state.get_actionable_loading_other)? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => {
-                                                console.log(i, "I in Insihjflkdslkdsfkjdsf")
                                                 return (
                                                     <React.Fragment>
                                                         <div className="action_insight_wrapper" key={index}>
