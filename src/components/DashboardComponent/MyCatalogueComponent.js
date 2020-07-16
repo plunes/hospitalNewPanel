@@ -4,6 +4,7 @@ import DashboardHeader from './DashboardHeader';
 // import SelectComponent from "../SelectComponent"
 //import "./AvailabilityComponent.css";
 import CheckboxPill from '../functional/CheckboxPill'
+import AnimatedMount from "../../HOC/AnimatedMount"
 import "./MyCatalogueComponent.css";
 import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
 upload,
@@ -47,7 +48,9 @@ import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
 import NewNotif from "../functional/NewNotif"
 import Select from "../Select";
-import { is_positive_real_number } from "../../utils/common_utilities"
+import { is_positive_real_number, get_slider_labels } from "../../utils/common_utilities"
+import Slider from 'react-rangeslider'
+import Barchart from "../functional/Barchart"
 
 
  const isEmpty = function(obj) {
@@ -88,7 +91,9 @@ class MyCatalogueComponent extends Component {
             selected_procedures:[],
             add_remaining_specs:false,
             selected_remain_specs:[],
-            procedure_for_detail:false
+            procedure_for_detail:false,
+            global_variance_flag:true,
+            speciality_variance_flag:false
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -765,6 +770,18 @@ class MyCatalogueComponent extends Component {
        },()=>this.props.search_procedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality}))
     }
 
+    global_click =() => {
+       this.setState({
+           show_select:false
+       })
+    }
+
+    speciality_click =() => {
+        this.setState({
+            show_select:true
+        })
+     }
+
     render() {
         console.log(this.state,"this.state in  Mycatalogue")
         console.log(this.props.search_procedures_loading_flag,"this.props. in Mycatalogue ")
@@ -778,50 +795,79 @@ class MyCatalogueComponent extends Component {
                 <div className='catalogue_main_content_rish'>
                    <div className='catalogue_wrapper_rish'>
                         <div className='catalogue_section_1'>
-                           {/* <div className="catalogue_section_1_upper new_card_class">
-
-                           <span  className="catalogue_section_1_icon_wrapper " onClick={(e)=>this.handle_your_catalogue_click()} ><img className="catalogue-img cursor-pointer" src={this.state.addProcedureFlag?'/icon/add_catalogue_icon.svg':'/icon/add_catalogue_active_icon.svg'} alt=""></img>
-                                  <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Your Catalogue</text>
-                            </span>
-
-
-                            <span className="catalogue_section_1_icon_wrapper"  onClick={(e)=>this.handleAddProcedureClick(e)} >
-                                 <img className="catalogue-img cursor-pointer" src={this.state.addProcedureFlag?'/icon/add_speciality_active_icon.svg':'/icon/add_speciality_icon.svg'} alt="" />
-                                 <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Add To Catalogue</text>
-                              </span>
-                             
-
-                              <span className="catalogue_section_1_icon_wrapper">
-                                  <img onClick={(e)=>{
-                                     e.preventDefault()
-                                     this.setState({uploadCatalogFlag:true})
-                                    }}
-                                      className="catalogue-img cursor-pointer" src="/upload.svg" alt=""/>
-                                  <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Upload File</text>
-                              </span>
-                              <span className="catalogue_section_1_icon_wrapper">
-                                <DownloadCatalogue
-                                    downloadCatalogueClr = {this.props.downloadCatalogueClr}
-                                    downloadCatalogueRet = {this.props.downloadCatalogueRet}
-                                    downloadCatalogue ={this.props.downloadCatalogue}
-                                />
-                              </span>
-                           </div> */}
                            <div className="catalogue_section_1_bottom new_card_class">
-
                                <div className='catalogue_flex_parent'>
                                     <div className='catalogue_flex_child_4'>
                                          <div className='text-center margin_bottom_small_rish'><text className='catalogue_heading'>Variance</text></div>
+                                         <div className='margin_bottom_small_rish radio_button_wrapper'>
+                                        <CheckboxPill 
+                                            name_1 = "Whole Catalogue"
+                                            name_2 = "Speciality"
+                                            global_click = {()=>this.global_click()}
+                                            speciality_click = {()=>this.speciality_click()}
+                                        />    
                                     </div>
-                                    <div className='radio_button_wrapper'>
-                                        <CheckboxPill />    
+
+                                  
+                                    <div className='catalogue_slider_wrapper'>
+                                    <Slider
+                                            min={0}
+                                            max={50}
+                                            labels={get_slider_labels({lower:0, upper:100})}
+                                            value={10}
+                                            onChange={(val)=>console.log(val)}
+                                            onValueChange={val => this.setState({ val })} 
+                                            />
+
+                                    </div>
+
+                                    {this.state.show_select  && <div style={{margin:'0rem  Auto .5rem Auto', width:'15rem'}} >
+                                         <Select
+                                            options = {this.state.specialities}
+                                            handleChange = {()=>console.log()}
+                                            placeholder= "Speciality"
+                                            input_text_class = "catalogue_dropdown"
+                                            wrapper_class = "catalogue_dropdown_wrapper"
+                                            value = {this.state.selected_speciality}
+                                            name = "speciality_chosen"
+                                            label = "Speciality" />
+                                    </div>}
+
+                                    <div className="text variance_info_parent text-center">
+                                        <span className='variance_info_child'>
+                                        <text><text className='bold'>Current Variance: </text>10%</text>
+                                        </span>
+                                        <span className='variance_info_child'>
+                                        <text><text className='bold'>Expected Leads: </text>20</text>
+                                        </span>
+                                    </div>
+                                  
+                                    <div className='text-center'>
+                                    <button  style={{marginTop:'1rem', width :'13rem !important', height:'2rem'}} onClick = {()=>this.add_selected_remain_specs()} className='button_catalogue_rish'>Submit</button>
+                                    </div>
+                                    <div className='catalogue_note_wrapper margin_top_small_rish'>
+                                        <text className='catalogue_note'><text className='bold'>Note :</text> Please upload your best variance so that you receive maximum patient footfall and enhance your revenue</text>
+                                    </div>
                                     </div>
                                     <div className='catalogue_flex_child_6'>
-                                        
+                                       <div className="catalogue_chart_wrapper">
+                                         <Barchart />
+                                       </div>
+                                    </div>
+                               </div>
+                               <div className="tabs-header margin_top_small_rish">
+                                    <div className={`appointment_header_wrapper new_card_class`}>
+                                            <span onClick={(e)=>this.handle_your_catalogue_click()}  className={`appointment_header_child-1 ${!this.state.addProcedureFlag?'active_appointment_header':''}`}>
+                                                <text className={`appointment_header_text ${!this.state.addProcedureFlag?'green-text-rish':''}`}>MY CATALOGUE</text>
+                                            </span>                 
+                                            <span onClick={(e)=>this.handleAddProcedureClick(e)}  className={`appointment_header_child-1 ${this.state.addProcedureFlag?'active_appointment_header':''}`}>
+                                            <text className={`appointment_header_text ${this.state.addProcedureFlag?'green-text-rish':''}`}>AVAILABLE PROCEDuRES</text>
+                                            </span>
                                     </div>
                                </div>
                                 <div className="section_1_header">
                                     <span className='section_1_header_child'>
+                                       <div className="speciality_wrapper">
                                          <Select
                                             options = {this.state.specialities}
                                             handleChange = {this.handleSpecialitySelect}
@@ -831,13 +877,16 @@ class MyCatalogueComponent extends Component {
                                             value = {this.state.selected_speciality}
                                             name = "speciality_chosen"
                                             label = "Speciality" />
+                                        </div>
                                     </span>
                                     <span className='section_1_header_child'>
-                                        <SearchComponent 
-                                            searchProcedures = {this.searchProceduresFun}
-                                            searchProceduresClr = {this.props.searchProceduresClr}
-                                            searchProceduresRet = {this.props.search_procedures_ret}
-                                            selected_speciality = {this.state.selected_speciality}  />
+                                        <div className="speciality_wrapper">
+                                            <SearchComponent 
+                                                searchProcedures = {this.searchProceduresFun}
+                                                searchProceduresClr = {this.props.searchProceduresClr}
+                                                searchProceduresRet = {this.props.search_procedures_ret}
+                                                selected_speciality = {this.state.selected_speciality}  />
+                                        </div>
                                     </span>
                                 </div>
 
@@ -1011,7 +1060,20 @@ const mapStateToProps = state => ({
     search_procedures_ret:state.catalogue_store.search_procedures_ret
 })
 
-export default connect(mapStateToProps, { getUserCatalogue, 
+
+
+export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(connect(mapStateToProps, { getUserCatalogue, 
     uploadProcedures, uploadProceduresClr, upload,
     searchProcedures, searchProceduresClr, get_user_specialities,
     get_user_specialities_loading,
@@ -1038,6 +1100,6 @@ add_procedure,
 add_procedure_loading,
 search_procedures,
 search_procedures_loading
-})(MyCatalogueComponent);
+})(MyCatalogueComponent));
 
 

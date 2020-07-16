@@ -20,6 +20,7 @@ import Map from "../MapComponent/index.js"
 import { isEmpty , get_url_params} from "../../utils/common_utilities"
 import ScrollTo from "../functional/ScrollTo"
 import { compose } from 'redux';
+import AnimatedMount from "../../HOC/AnimatedMount"
 const options = {
   items: 2,
   margin: 0,
@@ -776,7 +777,18 @@ const mapStateToProps = state => ({
   location_toggler:state.user.location_toggler
 })
 
- export default compose(
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(compose(
   withRouter,
   connect(mapStateToProps, { 
     expertDetails, 
@@ -802,4 +814,4 @@ const mapStateToProps = state => ({
     get_center_profile_clr,
     set_location_toggler
    })
-)(ProfileContainer)
+)(ProfileContainer))

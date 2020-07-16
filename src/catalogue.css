@@ -171,3 +171,64 @@
     font-weight: bold;
     font-size: 1.1rem;
 }
+.radio_button_wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+.catalogue_slider_wrapper {
+    width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.catalogue_note {
+    font-size: .8rem;
+    font-family: 'ProximaNova';
+}
+.bold {
+    font-weight: bold;
+}
+.catalogue_note_wrapper {
+    width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button_catalogue_rish {
+    background: #01D35A 0% 0% no-repeat padding-box;
+    border-radius: 4rem !important;
+    opacity: 1;
+    padding: .8rem 2rem;
+    border: none;
+    font-weight: normal;
+    font-family: "ProximaNova";
+    font-size: 1rem;
+    color: #fff;
+    line-height: 0;
+    height: 2.5rem;
+}
+.button_catalogue_rish:focus{
+ outline: none; 
+}
+.catalogue_chart_wrapper {
+    /* height: 30rem; */
+    width: 40rem;
+}
+
+.green-text-rish {
+    color: #01D35A !important;
+}
+
+.speciality_wrapper {
+    width: 30rem;
+    margin: auto;
+}
+
+.variance_info_parent {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.variance_info_child {
+    font-size: .8rem;
+    margin: .3rem;
+}

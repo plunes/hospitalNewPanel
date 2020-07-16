@@ -101,15 +101,15 @@ export class DashboardPage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-      //   if(!!nextProps.solInsights){
-      //     this.setState({
-      //         solInsights:nextProps.solInsights,
-      //         real_insight_loader:false
-      //     },()=>{
-      //         nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
-      //         nextProps.clearSolInsights()
-      //     })
-      // }
+        if(!!nextProps.solInsights){
+          this.setState({
+              solInsights:nextProps.solInsights,
+              real_insight_loader:false
+          },()=>{
+              nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
+              nextProps.clearSolInsights()
+          })
+      }
 
       if(nextProps.get_act_insight_ret){
         console.log(nextProps.get_act_insight_ret,"nextProps.get_act_insight_ret")
@@ -606,8 +606,8 @@ authObject =()=> {
   console.log(this.state,"state in state")
   console.log(this.props,"props in Dashboard page")
  if(!!localStorage.getItem('token')){
-  // if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
-   if(false){
+  if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+  //  if(false){
     return (
 <FullPageLoader />
 )

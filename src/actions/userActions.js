@@ -1799,7 +1799,7 @@ export const toAddServices = (data) => async dispatch => {
             type : TO_ADD_SERVICES_RET,
             payload :{
               success:true,
-              data:res.data
+              data:res.data.data
             }
           })
         }else{
@@ -3491,6 +3491,7 @@ export const bankDetails = bankData => dispatch => {
 };
 
 export const getInsights = (data) => async dispatch => {
+  console.log(data,"data in getInsight")
   let token = localStorage.getItem('token');
   return await axios.get(baseUrl + `/analytics/actionableInsight`, { 'headers': { 'Authorization': token } })
   .then(res => {

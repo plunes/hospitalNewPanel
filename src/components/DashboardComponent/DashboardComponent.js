@@ -24,6 +24,7 @@ import 'react-rangeslider/lib/index.css'
 import AddLocationTab from "../AddLocationTab"
 // import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
+import ActionableInsight from "../functional/ActionableInsight"
 import InsightComponent from "../InsightComponent"
 import {
     isValidPhoneNumber,
@@ -34,6 +35,8 @@ import { isEmpty, is_positive_real_number, get_circular_progress_data, get_slide
 import NewNotif from '../functional/NewNotif';
 import CircularProgress from '../functional/CircularProgress'
 import Tag from '../functional/Tag'
+import AnimatedMount from "../../HOC/AnimatedMount"
+
 const customStyles = {
     content: {
         top: '50%',
@@ -286,6 +289,7 @@ class DashboardComponent extends React.PureComponent {
 
      handle_actionable_insights = (e) =>{
             this.setState({
+                get_actionable_loading_other:true,
                 get_actionable:{
                     center:e.target.value
                 }
@@ -622,23 +626,11 @@ class DashboardComponent extends React.PureComponent {
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => {
                                                 console.log(i, "I in Insihjflkdslkdsfkjdsf")
                                                 return (
-                                                    <React.Fragment>
-                                                        <div className="action_insight_wrapper" key={index}>
-                                                            <span className="action_insight_image_wrapper">
-                                                                <img src ="/icon/action_insight_image.svg" className="action_insight_image"/>
-                                                            </span>
-                                                            <span className="action_insight_text_wrapper">
-                                                            <div>
-                                                                <text className="light_text_rish">
-                                                                <text className="dark_text_rish">{i.serviceName} </text>were <text className="dark_text_rish">{i.percent}% </text>higher than the booked price
-                                                                </text>
-                                                             </div>
-                                                                <div  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}>Update here</div>
-                                                            </span>
-                                                        </div>
-                                                       
-                                                        <hr></hr>
-                                                    </React.Fragment>
+                                                   <ActionableInsight  
+                                                   data = {i} 
+                                                   index = {index} 
+                                                   handleUpdatePrice = {this.handleUpdatePrice}
+                                                   />
                                                 )
                                             }) :  <div className="no_insights_wrapper_ris">
                                             <div className="no_insight_image-wrapper">
@@ -1051,26 +1043,60 @@ const mapStateToProps = state => ({
     centers_data:state.user.data.centers_data
 })
 
-export default connect(mapStateToProps, {updateRealPriceClr, 
-     clearUpdatePriceData, 
-     getAllBookings,
-     getInsights,
-     sendUpdateData, 
-     getSolutionInsights,
-     getMonthWiseUsers,
-     updateRealPrice,
-     set_dash_data,
-     get_business,
-     act_as_admin_clr,
-     act_as_admin,
-     admin_otp_clr,
-     admin_otp,
-     admin_details,
-     admin_details_clr,
-     get_user_info,
-     set_user_info,
-     get_centers,
-     set_location_toggler,
-     set_open_map,
-     clearSolInsights, setMount })(DashboardComponent);
-// Call userdetails from
+// export default connect(mapStateToProps, {updateRealPriceClr, 
+//      clearUpdatePriceData, 
+//      getAllBookings,
+//      getInsights,
+//      sendUpdateData, 
+//      getSolutionInsights,
+//      getMonthWiseUsers,
+//      updateRealPrice,
+//      set_dash_data,
+//      get_business,
+//      act_as_admin_clr,
+//      act_as_admin,
+//      admin_otp_clr,
+//      admin_otp,
+//      admin_details,
+//      admin_details_clr,
+//      get_user_info,
+//      set_user_info,
+//      get_centers,
+//      set_location_toggler,
+//      set_open_map,
+//      clearSolInsights, setMount })(DashboardComponent)
+
+
+     export default AnimatedMount({
+        unmountedStyle: {
+          opacity: 0,
+          transform: 'translate3d(0, -2rem, 0)',
+          transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+        },
+        mountedStyle: {
+          opacity: 1,
+          transform: 'translate3d(0, 0, 0)',
+          transition: 'opacity .5s ease-out, transform .5s ease-out',
+        },
+      })(connect(mapStateToProps, {updateRealPriceClr, 
+        clearUpdatePriceData, 
+        getAllBookings,
+        getInsights,
+        sendUpdateData, 
+        getSolutionInsights,
+        getMonthWiseUsers,
+        updateRealPrice,
+        set_dash_data,
+        get_business,
+        act_as_admin_clr,
+        act_as_admin,
+        admin_otp_clr,
+        admin_otp,
+        admin_details,
+        admin_details_clr,
+        get_user_info,
+        set_user_info,
+        get_centers,
+        set_location_toggler,
+        set_open_map,
+        clearSolInsights, setMount })(DashboardComponent));
