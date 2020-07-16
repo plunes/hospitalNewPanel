@@ -3,6 +3,7 @@ import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 // import SelectComponent from "../SelectComponent"
 //import "./AvailabilityComponent.css";
+import CheckboxPill from '../functional/CheckboxPill'
 import "./MyCatalogueComponent.css";
 import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
 upload,
@@ -777,7 +778,7 @@ class MyCatalogueComponent extends Component {
                 <div className='catalogue_main_content_rish'>
                    <div className='catalogue_wrapper_rish'>
                         <div className='catalogue_section_1'>
-                           <div className="catalogue_section_1_upper new_card_class">
+                           {/* <div className="catalogue_section_1_upper new_card_class">
 
                            <span  className="catalogue_section_1_icon_wrapper " onClick={(e)=>this.handle_your_catalogue_click()} ><img className="catalogue-img cursor-pointer" src={this.state.addProcedureFlag?'/icon/add_catalogue_icon.svg':'/icon/add_catalogue_active_icon.svg'} alt=""></img>
                                   <text style={{marginTop:'.5rem'}} className='catalogue_test_name display_block_rish '>Your Catalogue</text>
@@ -805,8 +806,20 @@ class MyCatalogueComponent extends Component {
                                     downloadCatalogue ={this.props.downloadCatalogue}
                                 />
                               </span>
-                           </div>
+                           </div> */}
                            <div className="catalogue_section_1_bottom new_card_class">
+
+                               <div className='catalogue_flex_parent'>
+                                    <div className='catalogue_flex_child_4'>
+                                         <div className='text-center margin_bottom_small_rish'><text className='catalogue_heading'>Variance</text></div>
+                                    </div>
+                                    <div className='radio_button_wrapper'>
+                                        <CheckboxPill />    
+                                    </div>
+                                    <div className='catalogue_flex_child_6'>
+                                        
+                                    </div>
+                               </div>
                                 <div className="section_1_header">
                                     <span className='section_1_header_child'>
                                          <Select
@@ -956,185 +969,8 @@ class MyCatalogueComponent extends Component {
                                       }
                            </div>
                         </div>
-                        {/* <ProcedureView
-                         procedure_for_detail = {this.state.procedure_for_detail}
-                        /> */}
                    </div>
                 </div>
-                    {/* <div  style={{ padding:'0rem 1rem 1rem 1rem'}}  className='main_content_rish'>
-                        <div className='row justify-content-center'>
-                            <div className='text-center' >
-                            <h4 style={{position:'relative', marginTop:'1rem'}} className="section_heading_rish">Catalogue</h4>
-                            </div>
-                        </div>
-                        <div className='row listOfService'>
-                              <div className='col-md-3 text-center'>
-                                 <a onClick={(e)=>{
-                                     e.preventDefault()
-                                     this.setState({uploadCatalogFlag:true})
-                                    }
-                                     } href=""><img className="catalogue-img" src="/upload.svg" alt=""></img>
-                                 <p className="uploadCata">Upload File</p></a>
-                              </div>
-                             <DownloadCatalogue
-                                downloadCatalogueClr = {this.props.downloadCatalogueClr}
-                                downloadCatalogueRet = {this.props.downloadCatalogueRet}
-                                downloadCatalogue ={this.props.downloadCatalogue}
-                             />
-                              <div className='col-md-3 text-center'>
-                                 <a href="" onClick={(e)=>{
-                                     e.preventDefault()
-                                     this.setState({
-                                        editFlag:true,
-                                        selected_procedures:[],
-                                        addProcedureFlag:false})
-                                    }}><img className="catalogue-img" src="/edit.svg" alt=""></img>
-                                 <p className="uploadCata">Edit Catalogue</p></a>
-                              </div>
-                              <div className='col-md-3 text-center'>
-                                 <a href="" onClick={(e)=>this.handleAddProcedureClick(e)}><img className="catalogue-img" src="/edit.svg" alt=""></img>
-                                 <p className="uploadCata">Add Catalogue</p></a>
-                              </div>
-                        </div>
-                        {!this.state.addProcedureFlag &&  <div style={{position:'relative'}} className="text-center">
-                          {this.state.add_specs_loading && <LoaderComponent />}
-                            <div className="add_specs_wrapper">
-                            {   
-                                this.state.add_remaining_specs? 
-                                <React.Fragment>
-                                <Select
-                                options = {this.props.catalogue_data.remaining_specs}
-                                handleChange = {this.handle_change_selected_remain_specs}
-                                placeholder= "Speciality"
-                                input_text_class = "login_select"
-                                value = {this.state.selected_remain_specs[0]}
-                                name = "remain_specs"
-                                label = "Speciality"
-                              />
-                              <div className="margin_top_small_rish">
-                              {this.state.selected_remain_specs.map((item,i)=>(
-                               <React.Fragment>
-                                    
-                            <div className="signup_specialities_wrapper_ris">
-                               <div className="signup_speciality">
-                                     <p className="signup_speciality_name">{item}</p>
-                                     <p onClick={()=>this.setState({selected_remain_specs:[...this.state.selected_remain_specs].filter((val=>val!==item))})} className="signup_speciality_X">X</p>
-                               </div>
-                            </div>
-                               <hr />
-                                </React.Fragment>
-                                  ))}
-                                <div className="text-center">
-                              consultationFee   <button onClick = {()=>this.add_selected_remain_specs()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add</button>
-                                </div>  
-                              </div>
-                              </React.Fragment>
-                              : 
-                              <button onClick = {()=>this.setState({add_remaining_specs: true})} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add Speciality</button>
-                            }
-                         </div>
-                        </div>
-}
-                     <div className="row gastroent_mar">
-                       {
-                           !this.state.addProcedureFlag &&  <div className="text-center col-xl-6">
-                               <Select
-                                 options = {this.state.specialities}
-                                 handleChange = {this.handleSpecialitySelect}
-                                 placeholder= "Speciality"
-                                 input_text_class = "login_select"
-                                 value = {this.state.selected_speciality}
-                                 name = "speciality_chosen"
-                                 label = "Speciality"
-                               />
-                              
-                       </div>
-                       }   
-                      <div className="text-center col-xl-6 serc_mar_pad">
-                          <img src="/search.jpg" className="serc_icn"/>
-                            <SearchComponent 
-                                searchProcedures = {this.searchProceduresFun}
-                                searchProceduresClr = {this.props.searchProceduresClr}
-                                searchProceduresRet = {this.props.searchProceduresRet}
-                                selected_speciality = {this.state.selected_speciality}
-                                
-                            />     
-                        </div>
-                        </div>
-                        <div className='listOfService'>
-                            <div className='row listOfServiceHeading'>
-                                <div className='col-md-6 text-center test_tme'>
-                                    Test Name
-                                    </div>
-                                <div className='col-md-3 text-center'>
-                                    Price
-                                </div>
-                                <div className='col-md-3 text-center'>
-                                    Variance
-                                </div>
-                            </div>
-                        </div>
-                        <div className="procedures_container_rish">
-                        {
-                            this.state.loading &&    <div className="loading-wrapper_ris">
-                              <React.Fragment>
-                                 <LoaderComponent />
-                               </React.Fragment>
-                               </div>
-                        }
-                        {this.state.editProcedureLoading && <LoaderComponent />}
-                        { !this.state.addProcedureFlag &&
-                            (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
-                            <Procedure 
-                            id = {i}
-                            data = {c}
-                            editFlag = {this.state.editFlag}
-                            handleEditInclusion = {this.handleEditInclusion}
-                            disabled={!this.state.editFlag}
-                            onEdit = {this.onEdit}
-                            selectedProcedure = {this.state.selectedProcedure}
-                            selected_procedures = {this.state.selected_procedures}
-                            handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
-                            handleVarianceChange = {this.handleVarianceChange}
-                            ret = {this.props.editProcedureRet}
-                            clr = {this.props.editProcedureClr}
-                            loadingOff = {()=>this.editProcedureLoadingOff()}
-                            />
-                            )) : 
-                           <div className='text-center'>No Procedures</div>)
-                        }
-                        {!this.state.addProcedureFlag && <div className='text-center'>
-                            {((this.state.procedures.length !==0) && (!!!this.state.hide_view_more)) && <button onClick={()=>this.viewMore({})} className="catalogueViewMore">View more</button> }    
-                        </div>}
-                       {!this.state.addProcedureFlag && <div className='text-center'>
-                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
-                        </div>}
-                        {this.state.addProcedureLoading && <LoaderComponent />}
-                        {!!this.state.addProcedureFlag  &&    (this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
-                            <Procedure 
-                            id = {i}
-                            data = {c}
-                            editFlag = {this.state.editFlag}
-                            handleEditInclusion = {this.handleEditInclusion}
-                            onEdit = {this.onEdit}
-                            disabled={(!!((this.state.editFlag) && (this.state.selected_procedures.length !== 0)))}
-                            selectedProcedure = {this.state.selectedProcedure}
-                            handleSelectedProcedureChange = {this.handleSelectedProcedureChange}
-                            handleVarianceChange = {this.handleVarianceChange}
-                            ret = {this.props.addServicesRet}
-                            clr = {this.props.addServicesClr}
-                            loadingOff = {()=>this.addProcedureLoadingOff()}
-                            selected_procedures = {this.state.selected_procedures}
-                            disabled={false}
-                            />
-                            )) : 
-                           <div className='text-center'>No Procedures</div>)
-                        }
-                        {this.state.addProcedureFlag  && <div className='text-center'>
-                            {(((this.state.editFlag) && (this.state.selected_procedures.length !== 0)) )  && <button style={{marginBottom:'1rem',marginTop:'1rem'}} onClick={this.handleSubmit} className="common-button">Submit</button> }    
-                        </div>}
-                        </div>
-                    </div>*/}
             <ModalComponent  
                 open = {this.state.uploadCatalogFlag}
                 handleClose = {this.handleCloseCataModal}

@@ -606,7 +606,8 @@ authObject =()=> {
   console.log(this.state,"state in state")
   console.log(this.props,"props in Dashboard page")
  if(!!localStorage.getItem('token')){
-  if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+  // if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+   if(false){
     return (
 <FullPageLoader />
 )

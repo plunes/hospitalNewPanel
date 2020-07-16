@@ -152,3 +152,22 @@
 .variance_arrow {
     top:-5px;
 }
+
+.catalogue_flex_parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.catalogue_flex_child_4 {
+    flex:1 1 37%;
+}
+
+.catalogue_flex_child_6 {
+    flex:1 1 57%;
+}
+
+.catalogue_heading {
+    font-family: 'ProximaNova';
+    font-weight: bold;
+    font-size: 1.1rem;
+}
