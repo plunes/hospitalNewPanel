@@ -1,4 +1,3 @@
-
 import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, 
    BUSINESS_LOST, SOLUTION_USERS, GET_CATALOGUE, CLEAR_SUBMIT_PROFILE_RET,
@@ -227,6 +226,7 @@ const initialState = {
   edit_location_ret:false,
   get_user_info_ret:false,
   business_ret:false,
+  insight_flag:false,
   add_center_ret:false,
   location_toggler:false,
   open_map:false,
@@ -1070,7 +1070,8 @@ case GET_CENTER_PROFILE_CLR:
     case GET_INSIGHTS:
       return {
         ...state,
-        insightData: action.payload
+        insightData: action.payload,
+        insight_flag: !state.insight_flag
       }
 
     case CLEAR_ACT_INSIGHT:
