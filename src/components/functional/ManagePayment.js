@@ -67,7 +67,7 @@ MyError.prototype = new Error()
         <span className='manage_payments_heading_wrapper'>
         <h4><b>Manage Payment</b></h4>
         <text className="manage_payments_sub_heading">
-           Space for text, space for text, space for text, space for text, space for text, space for text
+           {/* Space for text, space for text, space for text, space for text, space for text, space for text */}
         </text>
         </span>
      
