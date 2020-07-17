@@ -128,7 +128,8 @@ export default function (state = cat_init_state, action) {
             return {
                 ...state,
                 search_procedures:action.payload,
-                search_procedures_loading:true
+                search_procedures_loading:true,
+                get_procedures_loading:true
             }
         case SEARCH_PROCEDURE_RET:
             console.log(action.payload,"SEARCH PROCEDURE RET ACTION GETTING CALLED")

@@ -51,19 +51,20 @@ export const paginate_data = (data, options) => {
      let  i= 1
      let serviceId = data[data.length -1].serviceId
      let modify_data = for_loop(data,(item)=>{
-            if(i<=parseInt(options.limit, 10)){
+            if(i<parseInt(options.limit, 10)){
               if(item.serviceId === serviceId){
                 arr.push(item)
                 new_arr.push(arr)
+                i=1
               }else{
                 arr.push(item)
                 i++
               }
             }else{
-              i=1
+              arr.push(item)
               new_arr.push(arr)
               arr = []
-              arr.push(item)
+              i=1
             }
      })
      let total_pages = Math.ceil(parseInt(data.length,10)/options.limit)

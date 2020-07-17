@@ -978,8 +978,7 @@ class MyCatalogueComponent extends Component {
                                 </div>
                                       { !this.state.addProcedureFlag &&
                                       <div style={{position:'relative'}}>
-                                      {this.props.search_procedures_loading_flag && <LoaderComponent />}
-                                        {(this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
+                                      {this.props.get_procedures_loading ? <LoaderComponent />: (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                                         <Procedure 
                                         id = {i}
                                         data = {c}
@@ -1006,6 +1005,7 @@ class MyCatalogueComponent extends Component {
                                        <div className='text-center'>No Procedures</div>)}
                                        </div>
                                     }
+                                       
                                     {!this.state.addProcedureFlag && <div>
                                         <ReactPaginate
                                          previousLabel={'previous'}
