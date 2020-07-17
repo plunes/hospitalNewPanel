@@ -239,3 +239,8 @@ export const GET_ACT_INSIGHT_LOADING = 'App/Catalogue/GET_ACT_INSIGHT_LOADING'
 export const GET_REAL_INSIGHT = 'App/Catalogue/GET_REAL_INSIGHT'
 export const GET_REAL_INSIGHT_RET = 'App/Catalogue/GET_REAL_INSIGHT_RET'
 export const GET_REAL_INSIGHT_LOADING = 'App/Catalogue/GET_REAL_INSIGHT_LOADING'
+
+
+export const GET_USER_SERVICES = 'App/Catalogue/GET_USER_SERVICES'
+export const GET_USER_SERVICES_RET = 'App/Catalogue/GET_USER_SERVICES_RET'
+export const GET_USER_SERVICES_ERROR = 'App/Catalogue/GET_USER_SERVICES_ERROR'

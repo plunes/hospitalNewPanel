@@ -164,7 +164,7 @@ function* add_procedure_saga(action) {
     }
     console.log(data,"Just before api call")
     const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, center_id, headers)
-    console.log(api_data.data,"api_data in add_procedure_saga")
+    console.log(api_data,"api_data in add_procedure_saga")
     if(!!api_data){
       if (api_data.status === 201) {
           if(!!api_data.data){
@@ -190,6 +190,7 @@ function* add_procedure_saga(action) {
         }
     }
  } catch (e) {
+   console.log(e,'e in search_procedure saga')
   try{
       yield put(search_procedures_ret({
           success:false,

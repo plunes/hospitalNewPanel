@@ -783,8 +783,7 @@ class MyCatalogueComponent extends Component {
      }
 
     render() {
-        console.log(this.state,"this.state in  Mycatalogue")
-        console.log(this.props.search_procedures_loading_flag,"this.props. in Mycatalogue ")
+        console.log(this.props,"this.props in  Mycatalogue")
                 return (
                     <React.Fragment>
                         <NotifFunc />
@@ -1057,7 +1056,8 @@ const mapStateToProps = state => ({
     add_procedure_ret:state.catalogue_store.add_procedure_ret,
     add_procedure_loading_flag:state.catalogue_store.add_procedure_loading,
     search_procedures_loading_flag:state.catalogue_store.search_procedures_loading,
-    search_procedures_ret:state.catalogue_store.search_procedures_ret
+    search_procedures_ret:state.catalogue_store.search_procedures_ret,
+    procedures_data:state.catalogue_store.procedures_data
 })
 
 

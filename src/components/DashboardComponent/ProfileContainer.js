@@ -78,8 +78,8 @@ class ProfileContainer extends React.PureComponent {
 
   componentWillReceiveProps(nextProps){
 
-    if(!!nextProps.location.state){
-      if(!!nextProps.location.state.add_success){
+    if(!!window.location.state){
+      if(!!window.location.state.add_success){
           this.setState({
               ret:{
                   success:true,
@@ -87,7 +87,7 @@ class ProfileContainer extends React.PureComponent {
               }
           })
           nextProps.history.replace({
-              pathname: nextProps.location.state.center_id?`${nextProps.location.pathname}?center=${nextProps.location.state.center_id}`:nextProps.location.pathname,
+              pathname: window.location.state.center_id?`${window.location.pathname}?center=${window.location.state.center_id}`:window.location.pathname,
               state: {}
           });
       let center_id =  get_url_params('center')

@@ -3,6 +3,12 @@ import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import { getDay, timeToString } from "../../utils/common_utilities"
 import NewNotif from "../functional/NewNotif"
 
+function MyError(message){
+    this.message = message;
+}
+
+MyError.prototype = new Error()
+
 class RescheduleComponent extends React.PureComponent {
         constructor(props){
             super(props)
@@ -23,10 +29,23 @@ class RescheduleComponent extends React.PureComponent {
         }
 
         reschedule_click = () =>{
-            this.setState(
-                {
-                reschedule_flag:true
-                },()=>this.props.selected_callback(this.props.value))
+             try {
+                 if(this.props.value.bookingStatus==="Cancellation Requested"){
+                    throw new MyError(`Cannot reschedule appointment, User have requested a cancellation`)
+                 }
+                this.setState(
+                    {
+                    reschedule_flag:true
+                    },()=>this.props.selected_callback(this.props.value))
+             } catch (error) {
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:error.message
+                    }
+                })
+             }
+           
         }
 
         get_slot = (day) =>{
@@ -153,7 +172,14 @@ class RescheduleComponent extends React.PureComponent {
            return <div></div>
             if(!this.state.reschedule_flag){
                 return(
-                    <p onClick={()=>this.reschedule_click()} className="res_udle underline">Reschedule</p>
+                    <React.Fragment>
+                        <NewNotif
+                            ret = {this.state.ret}
+                            retClr = {()=>this.setState({ret:false})}
+                />
+                <p onClick={()=>this.reschedule_click()} className="res_udle underline">Reschedule</p>
+                    </React.Fragment>
+                    
                 )
             }else{
                 return (

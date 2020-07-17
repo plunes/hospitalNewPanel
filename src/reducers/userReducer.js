@@ -1,4 +1,3 @@
-
 import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
    UNREAD_LENGTH, UNREAD_NOTIFICATION, GET_SOL_INSIGHTS, BUSINESS_EARN, 
    BUSINESS_LOST, SOLUTION_USERS, GET_CATALOGUE, CLEAR_SUBMIT_PROFILE_RET,
@@ -158,7 +157,7 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   SET_NOTIF_ID
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
-import { get_url_params } from "../utils/common_utilities"
+import { get_url_params, objectEquals } from "../utils/common_utilities"
 
 const initialState = {
   userDetail: {},

@@ -1,4 +1,87 @@
- export const get_notif_time = (value) => {
+export const  objectEquals = (x, y) => {
+  'use strict';
+
+  if (x === null || x === undefined || y === null || y === undefined) { return x === y; }
+  // after this just checking type of one would be enough
+  if (x.constructor !== y.constructor) { return false; }
+  // if they are functions, they should exactly refer to same one (because of closures)
+  if (x instanceof Function) { return x === y; }
+  // if they are regexps, they should exactly refer to same one (it is hard to better equality check on current ES)
+  if (x instanceof RegExp) { return x === y; }
+  if (x === y || x.valueOf() === y.valueOf()) { return true; }
+  if (Array.isArray(x) && x.length !== y.length) { return false; }
+
+  // if they are dates, they must had equal valueOf
+  if (x instanceof Date) { return false; }
+
+  // if they are strictly equal, they both need to be object at least
+  if (!(x instanceof Object)) { return false; }
+  if (!(y instanceof Object)) { return false; }
+
+  // recursive object equality check
+  var p = Object.keys(x);
+  return Object.keys(y).every(function (i) { return p.indexOf(i) !== -1; }) &&
+      p.every(function (i) { return objectEquals(x[i], y[i]); });
+}
+
+
+export const for_loop = (data, callback) => {
+  for (var i = 0, len = data.length; i < len; i++) {
+        callback(data[i])
+  }
+}
+
+
+export const paginate_data = (data, options) => {
+     if(data.length === 0){
+       return {
+         data:[],
+         parameters:{
+           limit:options.limit,
+           total:0,
+           next:false,
+           total_pages:0,
+           page:0
+         }
+       }
+     }
+     let arr = []
+     let new_arr = [{}]
+     let  i= 1
+     let serviceId = data[data.length -1].serviceId
+     let modify_data = for_loop(data,(item)=>{
+            if(i<=parseInt(options.limit, 10)){
+              if(item.serviceId === serviceId){
+                arr.push(item)
+                new_arr.push(arr)
+              }else{
+                arr.push(item)
+                i++
+              }
+            }else{
+              i=2
+              new_arr.push(arr)
+              arr = []
+              arr.push(item)
+            }
+     })
+     let total_pages = Math.ceil(parseInt(data.length,10)/options.limit)
+     return {
+       data:new_arr,
+       parameters : {
+        limit:options.limit,
+        total:data.length,
+        next:total_pages !== 1,
+        total_pages:total_pages,
+        page:1
+       }
+     }
+     
+}
+
+
+
+export const get_notif_time = (value) => {
 
   let currentDate = new Date();
   let previousDate = new Date(value)
@@ -69,11 +152,7 @@ if(r.year!==0){
 }
 
 
-export const for_loop = (data, callback) => {
-  for (var i = 0, len = data.length; i < len; i++) {
-        callback(data[i])
-  }
-}
+
 
 
 

@@ -6,11 +6,15 @@ import { GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES
 
          SEARCH_PROCEDURE,
          SEARCH_PROCEDURE_RET,
-         SEARCH_PROCEDURE_LOADING
+         SEARCH_PROCEDURE_LOADING,
+
+         GET_USER_SERVICES,
+         GET_USER_SERVICES_RET,
+         GET_USER_SERVICES_ERROR
         
         
         } from '../actions/types';
-import { get_url_params } from "../utils/common_utilities"
+import { get_url_params, paginate_data } from "../utils/common_utilities"
 
 const cat_init_state  = {
     get_user_specs:false,
@@ -27,7 +31,20 @@ const cat_init_state  = {
 
     search_procedures:false,
     search_procedures_ret:false,
-    search_procedures_loading:false
+    search_procedures_loading:false,
+
+
+    procedures_data:{
+        total_procedures:[],
+        modified_procedures:[],
+        query_param:{
+          limit:10,
+          total:'',
+          page:1,
+          total_pages:1,
+          next:false
+        }
+    }
 }
 
 export default function (state = cat_init_state, action) {
@@ -54,16 +71,23 @@ export default function (state = cat_init_state, action) {
 
 
         case SEARCH_PROCEDURE:
+
             return {
                 ...state,
                 search_procedures:action.payload,
                 search_procedures_loading:true
             }
         case SEARCH_PROCEDURE_RET:
+            console.log(action.payload,"SEARCH PROCEDURE RET ACTION GETTING CALLED")
             return {
                 ...state,
                 search_procedures_ret:action.payload,
-                search_procedures_loading:false
+                search_procedures_loading:false,
+                procedures_data:{
+                    total_procedures:[...action.payload.data],
+                    modified_procedures:paginate_data([...action.payload.data],{limit:10,page:1,search:'',total:''}).data,
+                    query_param:paginate_data([...action.payload.data],{limit:10,page:1,search:'',total:''}).parameters
+                }
             }
         case SEARCH_PROCEDURE_LOADING:
             return {
