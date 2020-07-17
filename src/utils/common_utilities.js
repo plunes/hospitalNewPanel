@@ -60,7 +60,7 @@ export const paginate_data = (data, options) => {
                 i++
               }
             }else{
-              i=2
+              i=1
               new_arr.push(arr)
               arr = []
               arr.push(item)

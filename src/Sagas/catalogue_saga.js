@@ -23,7 +23,7 @@ function* get_procedures_saga(action) {
       let arr = []
       if(params.search !== ''){
          arr = total_procedures.filter(item=>{
-          if(item.service.startsWith(params.search)){
+          if(item.service.toLowerCase().startsWith(params.search.toLowerCase())){
             return true
           }
           return false

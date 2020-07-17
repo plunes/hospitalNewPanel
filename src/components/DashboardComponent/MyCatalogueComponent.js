@@ -812,12 +812,9 @@ class MyCatalogueComponent extends Component {
 
      handle_procedure_page_change = (data) => {
          console.log(data.selected,"data in hande")
-        this.props.get_procedures({ limit:10,
-            total:'',
-            page:parseInt(data.selected +1, 10),
-            total_pages:1,
-            next:false,
-            search:''})
+        this.props.get_procedures({ ...this.state.get_procedures_params,
+            page:parseInt(data.selected +1, 10)
+        })
      }
 
     render() {
