@@ -244,3 +244,13 @@ export const GET_REAL_INSIGHT_LOADING = 'App/Catalogue/GET_REAL_INSIGHT_LOADING'
 export const GET_USER_SERVICES = 'App/Catalogue/GET_USER_SERVICES'
 export const GET_USER_SERVICES_RET = 'App/Catalogue/GET_USER_SERVICES_RET'
 export const GET_USER_SERVICES_ERROR = 'App/Catalogue/GET_USER_SERVICES_ERROR'
+
+
+export const GET_PROCEDURES = 'App/Catalogue/GET_PROCEDURES'
+export const RET_PROCEDURES = 'App/Catalogue/RET_PROCEDURES'
+export const GET_PROCEDURES_ERROR = 'App/Catalogue/GET_PROCEDURES_ERROR'
+export const CLR_PROCEDURES = 'App/Catalogue/CLR_PROCEDURES'
+export const UPDATE_PARAMS = 'App/Catalogue/UPDATE_PARAMS'
+
+
+

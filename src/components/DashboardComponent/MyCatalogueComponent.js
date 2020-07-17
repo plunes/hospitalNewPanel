@@ -52,6 +52,8 @@ import { is_positive_real_number, get_slider_labels } from "../../utils/common_u
 import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
 
+import { get_procedures, clr_procedures } from "../../actions/catalogue_actions"
+
 
  const isEmpty = function(obj) {
     for(var key in obj) {
@@ -223,6 +225,17 @@ class MyCatalogueComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+
+        if(!!nextProps.ret_procedures){
+            console.log(nextProps.ret_procedures,"nextProps.ret_procedures")
+            this.setState({
+                get_procedures_params:nextProps.ret_procedures.params,
+                procedures:nextProps.ret_procedures.data,
+                selected_procedures:[]
+            },()=>{
+                nextProps.clr_procedures()
+            })
+        }
 
         if(nextProps.add_procedure_ret){
             if(nextProps.add_procedure_ret.success){
@@ -434,12 +447,14 @@ class MyCatalogueComponent extends Component {
                     if(nextProps.search_procedures_ret.type==="servicestoAdd"){
 
                     }else{
-                        this.setState({
-                            selected_procedures:[],
-                            procedures:nextProps.search_procedures_ret.data,
-                            loading:false,
-                            hide_view_more:nextProps.search_procedures_ret.data.length === this.state.procedures.length?true:false
-                        })
+                        console.log("I am gettig called in nextProps.search_procedures")
+                        nextProps.get_procedures({...this.state.get_procedures_params})
+                        // this.setState({
+                        //     selected_procedures:[],
+                        //     procedures:nextProps.search_procedures_ret.data,
+                        //     loading:false,
+                        //     hide_view_more:nextProps.search_procedures_ret.data.length === this.state.procedures.length?true:false
+                        // })
                     }
                 }else{
                     this.setState({
@@ -1057,7 +1072,10 @@ const mapStateToProps = state => ({
     add_procedure_loading_flag:state.catalogue_store.add_procedure_loading,
     search_procedures_loading_flag:state.catalogue_store.search_procedures_loading,
     search_procedures_ret:state.catalogue_store.search_procedures_ret,
-    procedures_data:state.catalogue_store.procedures_data
+    procedures_data:state.catalogue_store.procedures_data,
+    ret_procedures:state.catalogue_store.ret_procedures,
+    ret_procedures_error:state.catalogue_store.ret_procedures_error,
+    get_procedures_loading:state.catalogue_store.get_procedures_loading
 })
 
 
@@ -1099,7 +1117,9 @@ update_procedure_loading,
 add_procedure,
 add_procedure_loading,
 search_procedures,
-search_procedures_loading
+search_procedures_loading,
+get_procedures,
+clr_procedures
 })(MyCatalogueComponent));
 
 

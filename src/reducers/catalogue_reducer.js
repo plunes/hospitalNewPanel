@@ -10,11 +10,18 @@ import { GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES
 
          GET_USER_SERVICES,
          GET_USER_SERVICES_RET,
-         GET_USER_SERVICES_ERROR
+         GET_USER_SERVICES_ERROR,
+
+         GET_PROCEDURES,
+         CLR_PROCEDURES,
+         RET_PROCEDURES,
+         GET_PROCEDURES_ERROR,
+         UPDATE_PARAMS
         
         
         } from '../actions/types';
 import { get_url_params, paginate_data } from "../utils/common_utilities"
+import { get_procedures } from '../actions/catalogue_actions';
 
 const cat_init_state  = {
     get_user_specs:false,
@@ -42,9 +49,15 @@ const cat_init_state  = {
           total:'',
           page:1,
           total_pages:1,
-          next:false
+          next:false,
+          search:''
         }
-    }
+    },
+
+    get_procedures:false,
+    ret_procedures:false,
+    get_procedures_loading:false,
+    get_procedures_error:false
 }
 
 export default function (state = cat_init_state, action) {
@@ -68,6 +81,45 @@ export default function (state = cat_init_state, action) {
                 add_procedure_ret:false,
                 add_procedure_loading:false
             }
+
+
+        case GET_PROCEDURES:
+            return {
+                ...state,
+                get_procedures:action.payload,
+                get_procedures_loading:true
+            }
+
+        case RET_PROCEDURES:
+            return {
+                ...state,
+                ret_procedures:action.payload,
+                get_procedures_loading:true
+            }
+
+        case CLR_PROCEDURES:
+            return {
+                ...state,
+                ret_procedures:false,
+                get_procedures_loading:false,
+                get_procedures_error:false
+            }
+
+        case GET_PROCEDURES_ERROR:
+            return {
+                ...state,
+                get_procedures_error:true
+            }
+
+
+        case UPDATE_PARAMS:
+        return {
+            ...state,
+            procedures_data:{
+                ...state.procedures_data,
+                query_param:action.payload
+            }
+        }
 
 
         case SEARCH_PROCEDURE:

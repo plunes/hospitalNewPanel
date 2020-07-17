@@ -1,10 +1,63 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { GET_USER_SPECIALITIES, UPDATE_PROCEDURE , ADD_PROCEDURE, SEARCH_PROCEDURE} from '../actions/types'
-import { get_user_specialities_ret, get_user_specialities_loading, update_procedure_ret, update_procedure_loading, add_procedure_ret,
-   add_procedure_loading, search_procedures_ret, search_procedures_loading } from '../actions/userActions'
+import { get_user_specialities_ret, get_user_specialities_loading, update_procedure_ret, update_procedure_loading, add_procedure_ret, add_procedure_loading, search_procedures_ret, search_procedures_loading } from '../actions/userActions'
 import api from '../utils/api_routes'
+import  {  ret_procedures, update_params, get_procedures_error }  from '../actions/catalogue_actions'
 import { get_url_params } from "../utils/common_utilities"
 import store from '../store'
+
+function* get_procedures_saga(action) {
+  console.log("Inside get procedures saga")
+
+ try {
+  let center_id = get_url_params('center')
+    const  get_procedures = yield store.getState().catalogue_store.get_procedures
+    const params = get_procedures
+    const store_param = yield store.getState().catalogue_store.procedures_data.query_param
+    const modified_procedures = yield store.getState().catalogue_store.procedures_data.modified_procedures
+    if(params.search !== store_param.search){
+        // SEARCH CASE
+    }else if(params.limit !== store_param.limit){
+        // Limit Change case
+    }else {
+      yield put (ret_procedures({
+           params: {...params},
+           data:modified_procedures[params.page]
+      }))
+      yield put ( update_params({
+        ...params
+      }))
+    }
+    // if(!!api_data){
+    //   if (api_data.status === 200) {
+    //       yield put(get_user_specialities_ret({
+    //           success:true,
+    //           message:' successfully updated',
+    //           data:api_data.data.data
+    //          }))
+    //     }else{
+    //       yield put(get_user_specialities_ret({
+    //           success:false,
+    //           message:'Something went wrong try again later..',
+    //           data:[]
+    //          }))
+    //     }
+    // }
+ } catch (e) {
+  try{
+      yield put(get_procedures_error())
+    }catch(x){
+      // yield put(get_user_specialities_ret({
+      //     success:false,
+      //     message:'Something went wrong try again later..',
+      //     data:[]
+      //    }))
+      }
+ }
+}
+
+
+
 
 function* get_user_specs_saga(action) {
     console.log("Inside get procedures saga")
