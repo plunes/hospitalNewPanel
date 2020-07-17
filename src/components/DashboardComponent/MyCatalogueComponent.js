@@ -6,6 +6,10 @@ import DashboardHeader from './DashboardHeader';
 import CheckboxPill from '../functional/CheckboxPill'
 import AnimatedMount from "../../HOC/AnimatedMount"
 import "./MyCatalogueComponent.css";
+// import Pagination from "../PaginateComponent";
+import ReactPaginate from 'react-paginate'
+
+
 import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
 upload,
 uploadRetClr,
@@ -95,7 +99,16 @@ class MyCatalogueComponent extends Component {
             selected_remain_specs:[],
             procedure_for_detail:false,
             global_variance_flag:true,
-            speciality_variance_flag:false
+            speciality_variance_flag:false,
+            get_procedures_params:{
+                limit:0,
+                total:0,
+                next:false,
+                total_pages:0,
+                page:1,
+                search:''
+            }
+        
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -139,8 +152,6 @@ class MyCatalogueComponent extends Component {
         try {
             let arr = !!data?this.state.selected_procedures.filter((item)=>item.serviceId === data.serviceId):this.state.selected_procedures
             let newArr = arr.map((item,i)=>{
-               console.log(item,"item in add_procedure")
-               console.log(this.state,"this.state in add_procedure")
                 if(!!!item.price){
                     throw new MyError(`${item.service} price cannot be empty`)
                 }
@@ -176,7 +187,6 @@ class MyCatalogueComponent extends Component {
 
 
     get_update_procedure_loading = (data) =>{
-        console.log(this.state.procedure_for_update, data ,"data in get_update_procedure loading")
         if(!!this.props.update_procedure_loading_flag){
             let arr = [...this.state.selected_procedures]
             let return_flag = false
@@ -243,21 +253,17 @@ class MyCatalogueComponent extends Component {
                       let selected_procedures = [...this.state.selected_procedures]
                       let updated_procedure = false
                       let updated_procedures = false
-                    console.log(this.state,"sdfsfsdfdfdfdfdsfdsfdsfdsfdsfdsf")
+                 
                       if(!!this.state.procedure_for_update){
                           selected_procedures.every((element, index) => {
-                              console.log(this.state,"state in selecetedProcedures")
+                              
                                 if(element.serviceId === this.state.procedure_for_update.serviceId){
                                   updated_procedure = element
                                     return false
                                 }
                                return true
                             })
-                          console.log(updated_procedure,"sddsdsadasdsadasd")
-                          console.log(arr,'arr in addProcedure ret')
                            updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
-
-                          console.log(updated_procedures,'updated_procedures in addProcedure ret')
                       }else{
                           let procedures = [...this.state.procedures_toAdd]
                           let seleceted_procedures = [...this.state.selected_procedures]
@@ -272,10 +278,7 @@ class MyCatalogueComponent extends Component {
                                })
                                return return_item
                            }) 
-                      }
-  
-                      console.log(updated_procedures,"updated_procedures")
-                 
+                      }               
                       this.setState({
                           procedures_toAdd:updated_procedures,
                           refresh:!this.state.refresh,
@@ -307,14 +310,14 @@ class MyCatalogueComponent extends Component {
 
                     if(!!this.state.procedure_for_update){
                         selected_procedures.every((element, index) => {
-                            console.log(this.state,"state in selecetedProcedures")
+                          
                               if(element.serviceId === this.state.procedure_for_update.serviceId){
                                 updated_procedure = element
                                   return false
                               }
                              return true
                           })
-                        console.log(updated_procedure,"sddsdsadasdsadasd")
+                      
                          updated_procedures = arr.map((item)=>{
                             if(item.serviceId === updated_procedure.serviceId){
                                  return updated_procedure
@@ -339,7 +342,7 @@ class MyCatalogueComponent extends Component {
                          }) 
                     }
 
-                    console.log(updated_procedures,"updated_procedures")
+                 
                
                     this.setState({
                         procedures:updated_procedures,
@@ -447,8 +450,13 @@ class MyCatalogueComponent extends Component {
                     if(nextProps.search_procedures_ret.type==="servicestoAdd"){
 
                     }else{
-                        console.log("I am gettig called in nextProps.search_procedures")
-                        nextProps.get_procedures({...this.state.get_procedures_params})
+                     
+                        nextProps.get_procedures({ limit:10,
+                            total:'',
+                            page:1,
+                            total_pages:1,
+                            next:false,
+                            search:''})
                         // this.setState({
                         //     selected_procedures:[],
                         //     procedures:nextProps.search_procedures_ret.data,
@@ -605,7 +613,12 @@ class MyCatalogueComponent extends Component {
                    specialityId:this.state.selected_speciality
                 })
         }else{
-              this.props.search_procedures(data)
+            //   this.props.search_procedures(data)
+             this.props.get_procedures({
+                 ...this.state.get_procedures_params,
+                 page:'1',
+                 search:data.searchQuery
+             })
         }
     }
 
@@ -669,7 +682,7 @@ class MyCatalogueComponent extends Component {
 
 
     onEdit = (data) =>{
-        console.log(data,"data from on Edit")
+      
         this.setState({
             edit_Proc_flag:true
         })
@@ -776,7 +789,7 @@ class MyCatalogueComponent extends Component {
     }
 
     handle_your_catalogue_click = () => {
-        console.log(this.state,"in handle_Your_catalogue_click")
+    
         this.setState({
            editFlag:true,
            selected_procedures:[],
@@ -797,8 +810,19 @@ class MyCatalogueComponent extends Component {
         })
      }
 
+     handle_procedure_page_change = (data) => {
+         console.log(data.selected,"data in hande")
+        this.props.get_procedures({ limit:10,
+            total:'',
+            page:parseInt(data.selected +1, 10),
+            total_pages:1,
+            next:false,
+            search:''})
+     }
+
     render() {
         console.log(this.props,"this.props in  Mycatalogue")
+        console.log(this.state,"this.state in  Mycatalogue")
                 return (
                     <React.Fragment>
                         <NotifFunc />
@@ -985,6 +1009,21 @@ class MyCatalogueComponent extends Component {
                                        <div className='text-center'>No Procedures</div>)}
                                        </div>
                                     }
+                                    {!this.state.addProcedureFlag && <div>
+                                        <ReactPaginate
+                                         previousLabel={'previous'}
+                                         nextLabel={'next'}
+                                         breakLabel={'...'}
+                                         breakClassName={'break-me'}
+                                         pageCount={this.state.get_procedures_params.total_pages}
+                                         marginPagesDisplayed={2}
+                                         pageRangeDisplayed={5}
+                                         onPageChange={(data)=>this.handle_procedure_page_change(data)}
+                                         containerClassName={'pagination'}
+                                         subContainerClassName={'pages pagination'}
+                                         activeClassName={'active-page-class'}
+        />
+                                    </div>}
                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
                                       <button onClick = {()=>this.update_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
                                       </div>
@@ -1074,7 +1113,7 @@ const mapStateToProps = state => ({
     search_procedures_ret:state.catalogue_store.search_procedures_ret,
     procedures_data:state.catalogue_store.procedures_data,
     ret_procedures:state.catalogue_store.ret_procedures,
-    ret_procedures_error:state.catalogue_store.ret_procedures_error,
+    get_procedures_error:state.catalogue_store.get_procedures_error,
     get_procedures_loading:state.catalogue_store.get_procedures_loading
 })
 

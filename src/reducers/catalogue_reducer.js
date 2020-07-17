@@ -16,8 +16,8 @@ import { GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES
          CLR_PROCEDURES,
          RET_PROCEDURES,
          GET_PROCEDURES_ERROR,
-         UPDATE_PARAMS
-        
+         UPDATE_PARAMS,
+         UPDATE_MODIFIED_PROCEDURES
         
         } from '../actions/types';
 import { get_url_params, paginate_data } from "../utils/common_utilities"
@@ -91,6 +91,7 @@ export default function (state = cat_init_state, action) {
             }
 
         case RET_PROCEDURES:
+            console.log("Inside ret Procedures", action.payload)
             return {
                 ...state,
                 ret_procedures:action.payload,
@@ -141,6 +142,18 @@ export default function (state = cat_init_state, action) {
                     query_param:paginate_data([...action.payload.data],{limit:10,page:1,search:'',total:''}).parameters
                 }
             }
+
+
+       case UPDATE_MODIFIED_PROCEDURES:
+           console.log(action, "action in update Modified procediures")
+           return {
+               ...state,
+               procedures_data:{
+                total_procedures:[...state.procedures_data.total_procedures],
+                modified_procedures:[...action.payload.modified_procedures],
+                query_param:{...action.payload.query_param}
+            }
+           }
         case SEARCH_PROCEDURE_LOADING:
             return {
                 ...state,

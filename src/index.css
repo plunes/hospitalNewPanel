@@ -1080,7 +1080,25 @@ html {
   padding: 2rem;
 }
 
-/* 
-.techno_background {
+#react-paginate ul {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
-} */
+#react-paginate li {
+  display: inline-block;
+}
+
+.pagination {
+  justify-content: space-around !important;
+  margin: 1rem 5rem 1rem 5rem;
+}
+
+.pagination > li {
+  cursor: pointer;
+}
+
+.active-page-class {
+  background-color: #01D35A;
+}

@@ -9,6 +9,7 @@ import ForgotPasswordComponent from "./components/ChangePasswordComponent"
 import { getUserDetails } from "../src/actions/userActions";
 import { messaging } from "./init-fcm";
 import 'react-toastify/dist/ReactToastify.min.css'
+// import 'bootstrap/less/bootstrap.less'
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { getNotifications } from "../src/actions/userActions";

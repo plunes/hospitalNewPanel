@@ -41,7 +41,8 @@ export const paginate_data = (data, options) => {
            total:0,
            next:false,
            total_pages:0,
-           page:0
+           page:0,
+           search:''
          }
        }
      }
@@ -73,7 +74,8 @@ export const paginate_data = (data, options) => {
         total:data.length,
         next:total_pages !== 1,
         total_pages:total_pages,
-        page:1
+        page:1,
+        search:''
        }
      }
      

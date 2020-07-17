@@ -1,7 +1,16 @@
-import { GET_USER_SERVICES, GET_USER_SERVICES_RET, GET_USER_SERVICES_ERROR, UPDATE_PARAMS, GET_PROCEDURES, RET_PROCEDURES, GET_PROCEDURES_ERROR, CLR_PROCEDURES } from "./types"
+import { GET_USER_SERVICES, GET_USER_SERVICES_RET, GET_USER_SERVICES_ERROR,
+   UPDATE_PARAMS, GET_PROCEDURES, RET_PROCEDURES,
+    GET_PROCEDURES_ERROR, CLR_PROCEDURES, UPDATE_MODIFIED_PROCEDURES } from "./types"
+
+
+export const update_modified_procedures = (data) => dispatch =>{
+  return  dispatch({
+    type: UPDATE_MODIFIED_PROCEDURES,
+    payload:data
+  })
+}
 
 export const get_user_services = (data) => dispatch =>{
-  console.log("get_real_insight conosleo")
     return  dispatch({
       type: GET_USER_SERVICES,
       payload:data

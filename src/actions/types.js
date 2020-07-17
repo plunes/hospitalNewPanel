@@ -252,5 +252,7 @@ export const GET_PROCEDURES_ERROR = 'App/Catalogue/GET_PROCEDURES_ERROR'
 export const CLR_PROCEDURES = 'App/Catalogue/CLR_PROCEDURES'
 export const UPDATE_PARAMS = 'App/Catalogue/UPDATE_PARAMS'
 
+export const UPDATE_MODIFIED_PROCEDURES = 'App/Catalogue/UPDATE_MODIFIED_PROCEDURES'
+
 
 
