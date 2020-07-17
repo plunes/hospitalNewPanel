@@ -2099,12 +2099,13 @@ export const getSpecsClr = () => dispatch =>{
 }
 
 export const getSpecs = (obj) => async dispatch => {
+  console.log(obj,"obj in getSpecs")
   console.log("Inside GetSPecs")
   let center_id = get_url_params('center')
-  let requestUrl ="/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`
+  let requestUrl ="/catalogue/getConsultationSpecialities"+`${!!center_id?'?userId='+center_id:''}`
   if(!!obj){
     if(obj.type === "getUserSpecialities"){
-      requestUrl = "/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`
+      requestUrl = "/catalogue/getConsultationSpecialities"+`${!!center_id?'?userId='+center_id:''}`
     }
   }
   

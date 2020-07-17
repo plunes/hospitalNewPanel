@@ -92,7 +92,7 @@ class AddDoctorComponent extends Component {
             specialities:[],
             services:[],
             specialitie_chosen:'',
-            services_chosen:'',
+            services_chosen:false,
             name:'',
             education:'',
             designation:'',
@@ -410,9 +410,9 @@ class AddDoctorComponent extends Component {
               },()=>{
                 if(data.specialities.length!==0){
                   try{
-                    this.setState({
-                      services_chosen:[]
-                    })
+                    // this.setState({
+                    //   services_chosen:[]
+                    // })
                     this.props.getServ({
                       name:data.specialities[0].specialityName
                     })
@@ -624,7 +624,6 @@ console.log(data,'data in submit Details')
     }
 
     render() {
-      console.log(error_flag,"Error in Add Doctor")
       console.log(this.state,"this.state in AddComponent")
       console.log(this.props,"this.props in add Doctor component")
       let center_id = get_url_params('center')
