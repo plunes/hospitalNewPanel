@@ -1102,3 +1102,10 @@ html {
 .active-page-class {
   background-color: #01D35A;
 }
+
+.my_catalogue_div_wrapper {
+  overflow:hidden;
+  transition:max-height 0.3s ease-out;
+  height:auto;
+  max-height:600px; 
+}

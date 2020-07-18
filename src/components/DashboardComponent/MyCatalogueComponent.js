@@ -977,7 +977,7 @@ class MyCatalogueComponent extends Component {
                                     <span className='head_tabs_actions display_block_rish text-center'><text className='catalogue_test_name '>Actions</text></span>
                                 </div>
                                       { !this.state.addProcedureFlag &&
-                                      <div style={{position:'relative'}}>
+                                      <div className="my_catalogue_div_wrapper" style={{position:'relative'}}>
                                       {this.props.get_procedures_loading ? <LoaderComponent />: (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                                         <Procedure 
                                         id = {i}
