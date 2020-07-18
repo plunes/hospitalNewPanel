@@ -47,7 +47,7 @@ export const paginate_data = (data, options) => {
        }
      }
      let arr = []
-     let new_arr = [{}]
+     let new_arr = [[]]
      let  i= 1
      let serviceId = data[data.length -1].serviceId
      let modify_data = for_loop(data,(item)=>{

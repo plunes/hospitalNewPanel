@@ -305,12 +305,14 @@ class MyCatalogueComponent extends Component {
         }
 
         if(!!nextProps.set_variance_ret){
+            let variance = this.state.variance
             if(!!nextProps.set_variance_ret.success){
                 this.setState({
                     ret:{
                         success:true,
                         message:"Variance successfully updated"
                     },
+                    procedures:this.state.selected_speciality === this.state.variance_speciality ?this.state.procedures.map(item=>{return{...item, variance}}):this.state.procedures,
                     variance:0
                 })
             }else{
@@ -321,6 +323,35 @@ class MyCatalogueComponent extends Component {
                     }
                 })
             }
+          if(!!this.state.global_flag){
+                nextProps.update_modified_procedures({
+                    total_procedures:[...nextProps.procedures_data.total_procedures.map(item=>{return {...item, variance}})],
+                    modified_procedures:[...nextProps.procedures_data.modified_procedures.map(item=>{return item.map(procedure =>{return{...procedure, variance}})})],
+                    query_param:{...nextProps.procedures_data.query_param}
+                })
+          }else{
+            nextProps.update_modified_procedures({
+                total_procedures:[...nextProps.procedures_data.total_procedures.map(item=>{
+                    console.log(item, this.state.variance_speciality, "ifjodsjfodsofjidsjfdsofdsf")
+                        if((item.specialityId === this.state.variance_speciality)){
+                            return {...item, variance}
+                        }else{
+                            return item
+                        }
+                })],
+                modified_procedures:[...nextProps.procedures_data.modified_procedures.map(item=>{
+                    return item.map(procedure => {
+                        if((procedure.specialityId === this.state.variance_speciality)){
+                            return {...procedure, variance}
+                        }else{
+                            return procedure
+                        }
+                    })
+                })],
+                query_param:{...nextProps.procedures_data.query_param}
+            })
+          }
+            
             nextProps.set_variance_loading()
         }
 
@@ -953,7 +984,7 @@ class MyCatalogueComponent extends Component {
      }
 
     render() {
-        console.log(this.props.set_variance_loading_flag,"this.props in  Mycatalogue")
+        console.log(this.props,"this.props in  Mycatalogue")
         console.log(this.state,"this.state in  Mycatalogue")
                 return (
                     <React.Fragment>

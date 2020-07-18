@@ -31,6 +31,9 @@ const should_render = (prevProps, nextProps) => {
   if(prevProps.data.serviceId !== nextProps.data.serviceId){
     return false
   }
+  if(prevProps.data.variance !== nextProps.data.variance){
+    return false
+  }
   return true
 }
  const Procedure= (props) => {
