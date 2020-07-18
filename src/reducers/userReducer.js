@@ -270,7 +270,8 @@ const initialState = {
         centers_cred:[]
     },
     catalogue_data:{
-      remaining_specs:[]
+      remaining_specs:[],
+      user_specialities:[]
     }
   }
 };

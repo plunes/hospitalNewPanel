@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
-// import SelectComponent from "../SelectComponent"
-//import "./AvailabilityComponent.css";
 import CheckboxPill from '../functional/CheckboxPill'
 import AnimatedMount from "../../HOC/AnimatedMount"
 import "./MyCatalogueComponent.css";
-// import Pagination from "../PaginateComponent";
 import ReactPaginate from 'react-paginate'
 
 
@@ -30,8 +27,6 @@ set_catalogue_data,
 get_remaining_specs_clr,
 add_specs,
 add_specs_clr,
-get_user_specialities,
-get_user_specialities_loading,
 update_procedure_loading,
 update_procedure,
 add_procedure,
@@ -56,7 +51,8 @@ import { is_positive_real_number, get_slider_labels } from "../../utils/common_u
 import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
 
-import { get_procedures, clr_procedures } from "../../actions/catalogue_actions"
+import { get_procedures, clr_procedures , update_modified_procedures, get_user_specialities,
+    get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading } from "../../actions/catalogue_actions"
 
 
  const isEmpty = function(obj) {
@@ -72,7 +68,6 @@ function MyError(message){
 }
 
 MyError.prototype = new Error()
-// import history from '../../history';
 
 class MyCatalogueComponent extends Component {
     constructor(props) {
@@ -83,6 +78,10 @@ class MyCatalogueComponent extends Component {
             uploadCatalogFlag:false,
             editFlag:true,
             editCatalogFlag:false,
+            current_variance:'',
+            variance:0,
+            variance_speciality:'',
+            global_flag:true,
             limit:50,
             searchQuery:'',
             page:1,
@@ -107,10 +106,68 @@ class MyCatalogueComponent extends Component {
                 total_pages:0,
                 page:1,
                 search:''
+            },
+            get_add_procedures_params:{
+                limit:0,
+                total:0,
+                next:false,
+                total_pages:0,
+                page:1,
+                search:''
             }
         
         }
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    get_leads_count = () => {
+        let variance = this.state.variance
+        if(variance >90){
+            return 240
+        }else if(variance >80){
+            return 220
+        }else if(variance >70){
+            return 200
+        }else if(variance >60){
+            return 160
+        }else if(variance >50){
+            return 140
+        }else if(variance >40){
+            return 100
+        }else if(variance >30){
+            return 70
+        }else if(variance >20){
+            return 40
+        }else if(variance >10){
+            return 20
+        }else if(variance >=0){
+            return 10
+        }
+    }
+
+    change_variance = (val) => {
+        this.setState({
+            variance:val
+        })
+    }
+
+    handle_variance_speciality_change = (e) => {
+        this.setState({
+            variance_speciality:e.target.value
+        })
+    }
+
+    set_variance = () =>{
+        if(!!this.state.global_flag){
+            this.props.set_variance({
+                variance:this.state.variance
+            })
+        }else{
+            this.props.set_variance({
+                specialityId:this.state.variance_speciality,
+                variance:this.state.variance
+            })
+        }
     }
 
 
@@ -120,12 +177,12 @@ class MyCatalogueComponent extends Component {
             loading:true
         })
         this.props.get_remaining_specs()
-        this.props.get_user_specialities({
-            type:"getUserSpecialities"
-        })
-        // await this.props.getSpecs({
-        //     type:"getUserSpecialities"
-        // })
+        this.props.get_procedures({ limit:10,
+            total:'',
+            page:1,
+            total_pages:1,
+            next:false,
+            search:''})
     }
 
 
@@ -236,14 +293,54 @@ class MyCatalogueComponent extends Component {
 
     componentWillReceiveProps(nextProps){
 
+        if(nextProps.catalogue_data.user_specialities.length !== this.state.specialities.length){
+            let arr = [...nextProps.catalogue_data.user_specialities]
+                    if(arr.length!==0){
+                        this.setState({
+                            specialities: arr,
+                            selected_speciality:arr[0].value,
+                            variance_speciality:arr[0].value
+                        })
+                    }
+        }
+
+        if(!!nextProps.set_variance_ret){
+            if(!!nextProps.set_variance_ret.success){
+                this.setState({
+                    ret:{
+                        success:true,
+                        message:"Variance successfully updated"
+                    },
+                    variance:0
+                })
+            }else{
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:"Unable to update variance now , try again later"
+                    }
+                })
+            }
+            nextProps.set_variance_loading()
+        }
+
         if(!!nextProps.ret_procedures){
-            console.log(nextProps.ret_procedures,"nextProps.ret_procedures")
             this.setState({
                 get_procedures_params:nextProps.ret_procedures.params,
                 procedures:nextProps.ret_procedures.data,
                 selected_procedures:[]
             },()=>{
                 nextProps.clr_procedures()
+            })
+        }
+
+        if(!!nextProps.ret_add_procedures){
+            this.setState({
+                get_add_procedures_params:nextProps.ret_add_procedures.params,
+                add_procedures:nextProps.ret_add_procedures.data,
+                selected_procedures:[]
+            },()=>{
+                nextProps.clr_add_procedures()
             })
         }
 
@@ -309,8 +406,7 @@ class MyCatalogueComponent extends Component {
                     let updated_procedures = false
 
                     if(!!this.state.procedure_for_update){
-                        selected_procedures.every((element, index) => {
-                          
+                        selected_procedures.every((element, index) => {   
                               if(element.serviceId === this.state.procedure_for_update.serviceId){
                                 updated_procedure = element
                                   return false
@@ -354,6 +450,17 @@ class MyCatalogueComponent extends Component {
                         procedure_for_update:false,
                         procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
                         selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
+                    })
+                    nextProps.update_modified_procedures({
+                        total_procedures:[...this.props.procedures_data.total_procedures],
+                        modified_procedures:[...this.props.procedures_data.modified_procedures.map((item,i)=>{
+                                if(i+1 === this.state.get_procedures_params.page){
+                                    return [...updated_procedures]
+                                }else {
+                                    return item
+                                }
+                        })],
+                        query_param:{...this.state.get_procedures_params}
                     })
           }else {
               this.setState({
@@ -431,19 +538,27 @@ class MyCatalogueComponent extends Component {
         }
 
 
-        if(!!nextProps.toAddServicesRet){
-            if(nextProps.toAddServicesRet.success){
+        if(!!nextProps.to_add_services_ret){
+            console.log(nextProps.to_add_services_ret,"nextProps ti_add_serives_ret")
+            if(nextProps.to_add_services_ret.success){
                 this.setState({
-                    procedures_toAdd:nextProps.toAddServicesRet.data,
+                    procedures_toAdd:nextProps.to_add_services_ret.data,
                     loading:false,
-                    selected_procedures:[]
+                    selected_procedures:[],
+                    get_add_procedures_params:{
+                        limit:nextProps.to_add_services_ret.limit,
+                        page:nextProps.to_add_services_ret.page,
+                        total:nextProps.to_add_services_ret.total,
+                        next:nextProps.to_add_services_ret.next,
+                        specialityId:this.state.selected_speciality
+                    }
                 })
             }else{
                 this.setState({
                     loading:false
                 })
             }
-            nextProps.toAddServicesClr()
+            nextProps.to_add_services_clr()
         }
             if(!!nextProps.search_procedures_ret){
                 if(nextProps.search_procedures_ret.success){
@@ -486,8 +601,15 @@ class MyCatalogueComponent extends Component {
                         this.setState({
                             specialities:arr,
                             selected_speciality:arr[0].value,
+                            variance_speciality:arr[0].value,
                             loading:true
-                        },()=>{this.props.search_procedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality})  })
+                        },()=>{
+                            nextProps.set_catalogue_data({
+                                ...nextProps.catalogue_data,
+                                user_specialities:arr
+                            })
+                            this.props.search_procedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality})  }
+                            )
                     }  
                 }else{
                     this.setState({
@@ -606,17 +728,16 @@ class MyCatalogueComponent extends Component {
             loading:true
         })
         if(this.state.addProcedureFlag){
-                this.props.toAddServices({
+                this.props.to_add_services({
+                    ...this.state.get_add_procedures_params,
                    searchQuery:data.searchQuery,
-                   page:'1',
-                   limit:'50',
-                   specialityId:this.state.selected_speciality
+                   page:1
                 })
         }else{
             //   this.props.search_procedures(data)
              this.props.get_procedures({
                  ...this.state.get_procedures_params,
-                 page:'1',
+                 page:1,
                  search:data.searchQuery
              })
         }
@@ -701,6 +822,12 @@ class MyCatalogueComponent extends Component {
         }))
     }
 
+    change_variance_speciality = (e) => {
+        this.setState({
+            variance_speciality:e.target.value
+        })
+    }
+
     handleSpecialitySelect = (e) =>{
         if(!!this.state.addProcedureFlag){
             this.setState({
@@ -737,12 +864,12 @@ class MyCatalogueComponent extends Component {
         selected_procedures:[],
         procedure_for_update:[],
     },()=>{
-        this.props.toAddServices({
-            searchQuery:'',
-            page:'1',
-            limit:'50',
-            specialityId:this.state.selected_speciality
- })  
+        this.props.to_add_services({
+            limit:10,
+            page:1,
+            specialityId:this.state.selected_speciality,
+            searchQuery:''
+        })
     })          
     }
 
@@ -795,30 +922,38 @@ class MyCatalogueComponent extends Component {
            selected_procedures:[],
            procedure_for_update:[],
            addProcedureFlag:false
-       },()=>this.props.search_procedures({limit:50, searchQuery:'', page:1, specialityId:this.state.selected_speciality}))
+       })
     }
 
     global_click =() => {
        this.setState({
-           show_select:false
+           global_flag:true,
+           variance:0
        })
     }
 
     speciality_click =() => {
         this.setState({
-            show_select:true
+            global_flag:false,
+            variance:0
         })
      }
 
      handle_procedure_page_change = (data) => {
-         console.log(data.selected,"data in hande")
         this.props.get_procedures({ ...this.state.get_procedures_params,
             page:parseInt(data.selected +1, 10)
         })
      }
 
+     handle_add_procedure_page_change =(data) => {
+         this.props.to_add_services({
+             ...this.state.get_add_procedures_params,
+             page:parseInt(data.selected +1, 10)
+         })
+     }
+
     render() {
-        console.log(this.props,"this.props in  Mycatalogue")
+        console.log(this.props.set_variance_loading_flag,"this.props in  Mycatalogue")
         console.log(this.state,"this.state in  Mycatalogue")
                 return (
                     <React.Fragment>
@@ -849,36 +984,36 @@ class MyCatalogueComponent extends Component {
                                             min={0}
                                             max={50}
                                             labels={get_slider_labels({lower:0, upper:100})}
-                                            value={10}
-                                            onChange={(val)=>console.log(val)}
-                                            onValueChange={val => this.setState({ val })} 
+                                            value={this.state.variance}
+                                            onValueChange={(val)=>console.log(val)}
+                                            onChange={val => this.change_variance(val)} 
                                             />
 
                                     </div>
 
-                                    {this.state.show_select  && <div style={{margin:'0rem  Auto .5rem Auto', width:'15rem'}} >
+                                    {!this.state.global_flag  && <div style={{margin:'0rem  Auto .5rem Auto', width:'15rem'}} >
                                          <Select
                                             options = {this.state.specialities}
-                                            handleChange = {()=>console.log()}
+                                            handleChange = {this.handle_variance_speciality_change}
                                             placeholder= "Speciality"
                                             input_text_class = "catalogue_dropdown"
                                             wrapper_class = "catalogue_dropdown_wrapper"
-                                            value = {this.state.selected_speciality}
+                                            value = {this.state.variance_speciality}
                                             name = "speciality_chosen"
                                             label = "Speciality" />
                                     </div>}
 
                                     <div className="text variance_info_parent text-center">
                                         <span className='variance_info_child'>
-                                        <text><text className='bold'>Current Variance: </text>10%</text>
+                                             <text><text className='bold'>Variance: </text>{this.state.variance}</text>
                                         </span>
                                         <span className='variance_info_child'>
-                                        <text><text className='bold'>Expected Leads: </text>20</text>
+                                           <text><text className='bold'>Expected Leads: </text>{this.get_leads_count()}</text>
                                         </span>
                                     </div>
                                   
-                                    <div className='text-center'>
-                                    <button  style={{marginTop:'1rem', width :'13rem !important', height:'2rem'}} onClick = {()=>this.add_selected_remain_specs()} className='button_catalogue_rish'>Submit</button>
+                                    <div style = {{position:'relative', height:'1rem'}} className='text-center'>
+                                        {this.props.set_variance_loading_flag?<LoaderComponent second_variant = {true} /> :<button  style={{marginTop:'1rem', width :'13rem !important', height:'2rem'}} onClick = {()=>this.set_variance()} className='button_catalogue_rish'>Submit</button>}
                                     </div>
                                     <div className='catalogue_note_wrapper margin_top_small_rish'>
                                         <text className='catalogue_note'><text className='bold'>Note :</text> Please upload your best variance so that you receive maximum patient footfall and enhance your revenue</text>
@@ -1030,8 +1165,8 @@ class MyCatalogueComponent extends Component {
 
                             {/* Add to Your Catalogue */}                        
                             {!!this.state.addProcedureFlag  &&    <div style={{position:'relative'}}>
-                                      {this.props.search_procedures_loading_flag && <LoaderComponent />} 
-                            {(this.state.procedures_toAdd.length > 0 ? this.state.procedures_toAdd.map( (c, i) => (
+                                      {/* {this.props.to_add_services_loading && <LoaderComponent />}  */}
+                            {(this.state.procedures_toAdd.length > 0 ?this.props.to_add_services_loading?<LoaderComponent /> : this.state.procedures_toAdd.map( (c, i) => (
                             <Procedure 
                             id = {i}
                             data = {c}
@@ -1059,8 +1194,22 @@ class MyCatalogueComponent extends Component {
                            <div className='text-center'>No Procedures</div>)}
                            </div>
                         }
-                        
 
+                        {this.state.addProcedureFlag && <div>
+                                        <ReactPaginate
+                                         previousLabel={'previous'}
+                                         nextLabel={'next'}
+                                         breakLabel={'...'}
+                                         breakClassName={'break-me'}
+                                         pageCount={Math.ceil(parseInt(this.state.get_add_procedures_params.total,10)/this.state.get_add_procedures_params.limit)}
+                                         marginPagesDisplayed={2}
+                                         pageRangeDisplayed={5}
+                                         onPageChange={(data)=>this.handle_add_procedure_page_change(data)}
+                                         containerClassName={'pagination'}
+                                         subContainerClassName={'pages pagination'}
+                                         activeClassName={'active-page-class'}
+        />
+                                    </div>} 
 
                                 {((this.state.selected_procedures.length !==0) && (!!this.state.addProcedureFlag)) &&  <div className='text-center'>
                                       <button onClick = {()=>this.add_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
@@ -1089,7 +1238,8 @@ class MyCatalogueComponent extends Component {
 const mapStateToProps = state => ({
     update_procedure_ret:state.catalogue_store.update_procedure_ret,
     update_procedure_loading_flag:state.catalogue_store.update_procedure_loading,
-    get_user_specialities_ret:state.catalogue_store.get_user_specs_ret,
+    get_user_specialities_ret:state.catalogue_store.get_user_specialities_ret,
+    get_user_specialities_loading_flag:state.catalogue_store.get_user_specialities_loading,
     catalogues: state.user.catalogues,
     uploadProceduresRet:state.user.uploadProceduresRet,
     uploadProceduresLoading:state.user.uploadProceduresLoading,
@@ -1111,7 +1261,11 @@ const mapStateToProps = state => ({
     procedures_data:state.catalogue_store.procedures_data,
     ret_procedures:state.catalogue_store.ret_procedures,
     get_procedures_error:state.catalogue_store.get_procedures_error,
-    get_procedures_loading:state.catalogue_store.get_procedures_loading
+    get_procedures_loading:state.catalogue_store.get_procedures_loading,
+    to_add_services_ret:state.catalogue_store.to_add_services_ret,
+    to_add_services_loading:state.catalogue_store.to_add_services_loading,
+    set_variance_ret:state.catalogue_store.set_variance_ret,
+    set_variance_loading_flag:state.catalogue_store.set_variance_loading
 })
 
 
@@ -1155,7 +1309,12 @@ add_procedure_loading,
 search_procedures,
 search_procedures_loading,
 get_procedures,
-clr_procedures
+clr_procedures,
+update_modified_procedures,
+to_add_services,
+to_add_services_clr,
+set_variance,
+set_variance_loading
 })(MyCatalogueComponent));
 
 

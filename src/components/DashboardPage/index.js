@@ -22,6 +22,7 @@ import { getEntity, getEntityClr, clearSolInsights,
    get_centers, get_centers_clr , set_centers_data, set_location_toggler} from "../../actions/userActions"
 
 import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading } from "../../actions/dash_actions"
+import  { get_user_specialities } from "../../actions/catalogue_actions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -391,7 +392,9 @@ export class DashboardPage extends React.PureComponent {
     this.props.getNotifications({page:1})
     this.props.get_business({days:7, center:''})
     this.props.get_user_info({from_dash_page:true})
-
+    this.props.get_user_specialities({
+      type:"getUserSpecialities"
+  })
     // To Establish socket connection
     this.socketEmit()
   }
@@ -604,14 +607,31 @@ authObject =()=> {
 
   render() {
   console.log(this.state,"state in state")
-  console.log(this.props,"props in Dashboard page")
+  console.log(this.props.get_user_specialities_loading_flag,"props in Dashboard page")
  if(!!localStorage.getItem('token')){
-  if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
-  //  if(false){
-    return (
-<FullPageLoader />
-)
-}
+  try {
+    if(window.location.pathname==='/dashboard'){
+      // if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+        if(false){
+          return (
+                  <FullPageLoader />
+                )
+        }else{
+          throw new Error("Dummy Error")
+        }
+    }else if(window.location.pathname==='/dashboard/catalogue'){
+      if(this.props.get_user_specialities_loading_flag){
+        // if(false){
+          return (
+                  <FullPageLoader />
+                )
+        }else {
+          throw new Error("Dummy Error")
+        }
+    }
+  } catch (error) {
+      console.log(error)
+  }
  }
 
 
@@ -801,7 +821,8 @@ const mapStateToProps = state => ({
     get_act_insight_ret:state.dash_store.get_act_insight_ret,
     get_act_insight_loading_flag:state.dash_store.get_act_insight_loading,
     get_real_insight_ret:state.dash_store.get_real_insight_ret,
-    get_real_insight_loading_flag:state.dash_store.get_real_insight_loading
+    get_real_insight_loading_flag:state.dash_store.get_real_insight_loading,
+    get_user_specialities_loading_flag:state.catalogue_store.get_user_specialities_loading
 })
 
 export default connect(mapStateToProps, { 
@@ -834,6 +855,7 @@ set_centers_data,
 get_real_insight,
 get_real_insight_loading,
 get_act_insight,
-get_act_insight_loading
+get_act_insight_loading,
+get_user_specialities
 })(DashboardPage);
 

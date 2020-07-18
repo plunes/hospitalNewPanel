@@ -56,8 +56,24 @@ export default {
                 return res
           })
           .catch(err => err.response),
+      to_add_services: (data, center_id, headers) =>
+      axios
+          .post(`${base_url}/catalogue/getServicesForDoctor${!!center_id?'?userId='+center_id:''}`, data, headers)
+          .then(res => {
+                console.log(res,'res in add_procedure')
+                return res
+          })
+          .catch(err => err.response),
+      set_variance: (data, center_id, headers) =>
+      axios
+          .post(`${base_url}/user/setGlobalVariance${!!center_id?'?userId='+center_id:''}`, data, headers)
+          .then(res => {
+                console.log(res,'res in add_procedure')
+                return res
+          })
+          .catch(err => err.response)
     },
-
+    
 
     dash_routes:{
       get_act_insight: (data, center_id,  headers) =>
