@@ -33,6 +33,8 @@ export const for_loop = (data, callback) => {
 
 
 export const paginate_data = (data, options) => {
+  console.log(data,"data in paginate_data")
+  console.log(data.length,'data.length')
      if(data.length === 0){
        return {
          data:[],
@@ -50,7 +52,9 @@ export const paginate_data = (data, options) => {
      let new_arr = [[]]
      let  i= 0
      let serviceId = data[data.length -1].serviceId
+     console.log(serviceId,"serviceId in paginate data")
       for_loop(data,(item)=>{
+        console.log(item,i," Item , i in for loop on data")
             if(i<parseInt(options.limit, 10)){
               if(item.serviceId === serviceId){
                 arr.push(item)

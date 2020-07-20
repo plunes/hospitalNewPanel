@@ -396,7 +396,7 @@ class MyCatalogueComponent extends Component {
 
                       console.log(selected_procedures,"this.state procedure for Update")
    
-                        let paginated_data = paginate_data([selected_procedures[0],...nextProps.procedures_data.total_procedures],{ limit:0, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                        let paginated_data = paginate_data([selected_procedures[0],...nextProps.procedures_data.total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
                            updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
                         nextProps.update_modified_procedures({
                                 total_procedures:[selected_procedures[0],...nextProps.procedures_data.total_procedures],
@@ -435,10 +435,51 @@ class MyCatalogueComponent extends Component {
                               success:true,
                               message:nextProps.add_procedure_ret.message
                           },
+                          get_procedures_params:{
+                            limit:0,
+                            total:0,
+                            next:false,
+                            total_pages:0,
+                            page:1,
+                            search:''
+                        },
+                        get_add_procedures_params:{
+                            limit:0,
+                            total:0,
+                            next:false,
+                            total_pages:0,
+                            page:1,
+                            search:''
+                        },
                           procedure_for_update:false,
                           procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
                           selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
                       })
+
+                      let paginated_data = paginate_data([...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                      updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
+                   nextProps.update_modified_procedures({
+                           total_procedures:[...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],
+                           modified_procedures:paginated_data.data,
+                           query_param:{
+                               ...paginated_data.parameters
+                           }
+                       })
+
+                   nextProps.get_procedures({ limit:10,
+                       total:'',
+                       page:1,
+                       total_pages:1,
+                       next:false,
+                       search:''
+                   })
+
+                  nextProps.to_add_services({
+                    limit:10,
+                    page:1,
+                    specialityId:this.state.selected_speciality,
+                    searchQuery:''
+                })
             }else {
                 this.setState({
                     ret:{
@@ -891,10 +932,16 @@ class MyCatalogueComponent extends Component {
             },()=>{
                 this.props.toAddServices({
                     searchQuery:'',
-                    page:'1',
-                    limit:'50',
+                    page:1,
+                    limit:10,
                     specialityId:this.state.selected_speciality
                  })
+                 this.props.search_procedures({
+                    searchQuery:'',
+                    page:1,
+                    limit:10,
+                    specialityId:this.state.selected_speciality
+                })
             })
         }else{
             this.setState({
@@ -907,6 +954,7 @@ class MyCatalogueComponent extends Component {
                     limit:'50',
                     specialityId:this.state.selected_speciality
                 })
+                
             })
         }
     }
@@ -1207,7 +1255,7 @@ class MyCatalogueComponent extends Component {
                                     }
                                        
                                     {!this.state.addProcedureFlag && <div>
-                                        <ReactPaginate
+                                        {!!this.state.procedures?(this.state.procedures.length !==0)?  <ReactPaginate
                                          previousLabel={'previous'}
                                          nextLabel={'next'}
                                          breakLabel={'...'}
@@ -1219,7 +1267,8 @@ class MyCatalogueComponent extends Component {
                                          containerClassName={'pagination'}
                                          subContainerClassName={'pages pagination'}
                                          activeClassName={'active-page-class'}
-        />
+                                           />:'':'' }
+                                       
                                     </div>}
                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
                                       <button onClick = {()=>this.update_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
@@ -1261,7 +1310,8 @@ class MyCatalogueComponent extends Component {
                         }
 
                         {this.state.addProcedureFlag && <div>
-                                        <ReactPaginate
+
+                            {this.state.procedures_toAdd?(this.state.procedures_toAdd.length !==0)? <ReactPaginate
                                          previousLabel={'previous'}
                                          nextLabel={'next'}
                                          breakLabel={'...'}
@@ -1273,7 +1323,8 @@ class MyCatalogueComponent extends Component {
                                          containerClassName={'pagination'}
                                          subContainerClassName={'pages pagination'}
                                          activeClassName={'active-page-class'}
-        />
+                                />:'':''}
+                                       
                                     </div>} 
 
                                 {((this.state.selected_procedures.length !==0) && (!!this.state.addProcedureFlag)) &&  <div className='text-center'>

@@ -302,7 +302,7 @@ export default function (state = cat_init_state, action) {
         return {
             ...state,
             procedures_data:{
-            total_procedures:[...state.procedures_data.total_procedures],
+            total_procedures:[...action.payload.total_procedures],
             modified_procedures:[...action.payload.modified_procedures],
             query_param:{...action.payload.query_param}
         }

@@ -13,7 +13,7 @@ function* get_procedures_saga(action) {
     const params = get_procedures
     const store_param = yield store.getState().catalogue_store.procedures_data.query_param
     const modified_procedures = yield store.getState().catalogue_store.procedures_data.modified_procedures
-    if(params.search !== store_param.search){
+    if(!!(params.search !== store_param.search)){
       // SEARCH CASE
       const total_procedures = yield store.getState().catalogue_store.procedures_data.total_procedures
       let arr = []
@@ -27,8 +27,8 @@ function* get_procedures_saga(action) {
       }else {
         arr = [...total_procedures]
       }
-
    let obj = {
+      total_procedures:total_procedures,
       modified_procedures:paginate_data([...arr],{...params}).data,
       query_param:{
         ...paginate_data([...arr],{...params}).parameters,
