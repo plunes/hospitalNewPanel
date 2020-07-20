@@ -570,6 +570,7 @@ class MyCatalogueComponent extends Component {
 
 
         if(nextProps.add_specs_ret){
+            console.log(nextProps.add_specs_ret,"nextProps.addSpecsRet")
             if(nextProps.add_specs_ret.success){
                 let arr = []
                 let added_specs = [...this.state.selected_remain_specs]
@@ -582,10 +583,9 @@ class MyCatalogueComponent extends Component {
                         value:[...nextProps.catalogue_data.remaining_specs].filter(val=>val.name===item)[0].id
                     }
                 })
-                nextProps.set_catalogue_data({
-                    ...nextProps.catalogue_data,
-                    remaining_specs:specialities
-                })
+
+                console.log(new_specs,"new_specs")
+              
                 this.setState({
                     add_specs_loading:false,
                     ret:{
@@ -595,7 +595,11 @@ class MyCatalogueComponent extends Component {
                     selected_remain_specs:[],
                     add_remaining_specs:false,
                     specialities:[...this.state.specialities, ...new_specs]
-                })
+                },()=>  nextProps.set_catalogue_data({
+                    ...nextProps.catalogue_data,
+                    user_specialities:[...this.state.specialities],
+                    remaining_specs:specialities
+                }))
             }else{
                 this.setState({
                     add_specs_loading:false,
