@@ -2933,13 +2933,9 @@ export const updateRealPriceClr = () => dispatch =>{
 }
 
 export const updateRealPrice = (uData) => async dispatch => {
-  let obj = {
-    "solutionId": uData.realUpdateData.solutionId,
-    "serviceId": uData.realUpdateData.serviceId,
-    "updatedPrice": Math.round(Number(uData.realUpdatePrice))
-  }
+
   let token = localStorage.getItem('token');
-  return await axios.put(baseUrl + '/solution', obj, { 'headers': { 'Authorization': token } })
+  return await axios.put(baseUrl + '/solution', uData, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         dispatch({

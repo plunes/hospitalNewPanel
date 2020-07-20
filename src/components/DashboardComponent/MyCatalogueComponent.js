@@ -1135,10 +1135,10 @@ class MyCatalogueComponent extends Component {
                                <div className="tabs-header margin_top_small_rish">
                                     <div className={`appointment_header_wrapper new_card_class`}>
                                             <span onClick={(e)=>this.handle_your_catalogue_click()}  className={`appointment_header_child-1 ${!this.state.addProcedureFlag?'active_appointment_header':''}`}>
-                                                <text className={`appointment_header_text ${!this.state.addProcedureFlag?'green-text-rish':''}`}>MY CATALOGUE</text>
+                                                <text className={`appointment_header_text ${!this.state.addProcedureFlag?'green-text-rish':''}`}>My Catalogue</text>
                                             </span>                 
                                             <span onClick={(e)=>this.handleAddProcedureClick(e)}  className={`appointment_header_child-1 ${this.state.addProcedureFlag?'active_appointment_header':''}`}>
-                                            <text className={`appointment_header_text ${this.state.addProcedureFlag?'green-text-rish':''}`}>AVAILABLE PROCEDuRES</text>
+                                            <text className={`appointment_header_text ${this.state.addProcedureFlag?'green-text-rish':''}`}>Available Procedures</text>
                                             </span>
                                     </div>
                                </div>

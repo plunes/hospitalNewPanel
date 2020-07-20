@@ -360,10 +360,22 @@ class DashboardComponent extends React.PureComponent {
                     realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
                     realUpdateData: this.state.realUpdateData
                 }
+
+
+                let obj = {
+                    solutionId: this.state.realUpdateData.solutionId,
+                    serviceId:  this.state.realUpdateData.serviceId
+                  }
+
+                  if(this.state.realUpdateData.suggested){
+                    obj.price =  Math.round(Number(this.state.solUpdatedPrice))
+                  }else{
+                      obj.discount = this.state.solValue
+                  }
                 this.setState({
                     realUpdatePriceLoading:true
                 },()=>{
-                    this.props.updateRealPrice(data);
+                    this.props.updateRealPrice(obj);
                 }) 
              }
         }
@@ -402,6 +414,8 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async componentDidMount() {
+
+
         if(!!!this.props.mount.dash_mount){
             this.setState({
                 loader:true
@@ -498,6 +512,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
+        // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         console.log(this.state,"this.state in dashboard")
         console.log(this.props," this.props in dashboard component")
         let { percent } = this.state
