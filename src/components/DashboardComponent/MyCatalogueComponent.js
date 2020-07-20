@@ -47,7 +47,7 @@ import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
 import NewNotif from "../functional/NewNotif"
 import Select from "../Select";
-import { is_positive_real_number, get_slider_labels } from "../../utils/common_utilities"
+import { is_positive_real_number, get_slider_labels, paginate_data } from "../../utils/common_utilities"
 import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
 
@@ -268,6 +268,9 @@ class MyCatalogueComponent extends Component {
                 if(!!!procedure_price){
                    throw new MyError(`${item.service} price cannot be empty`)
                 }
+                if(((!item.variance) && (parseInt(item.variance, 10) !== 0))){
+                    throw new MyError(`${item.service} variance cannot be empty`)
+                }
                 return {
                     ...item,
                     price:procedure_price
@@ -384,14 +387,32 @@ class MyCatalogueComponent extends Component {
                  
                       if(!!this.state.procedure_for_update){
                           selected_procedures.every((element, index) => {
-                              
                                 if(element.serviceId === this.state.procedure_for_update.serviceId){
                                   updated_procedure = element
                                     return false
                                 }
                                return true
                             })
+
+                      console.log(selected_procedures,"this.state procedure for Update")
+   
+                        let paginated_data = paginate_data([selected_procedures[0],...nextProps.procedures_data.total_procedures],{ limit:0, total:0,  next:false,  total_pages:0,  page:1, search:''})
                            updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
+                        nextProps.update_modified_procedures({
+                                total_procedures:[selected_procedures[0],...nextProps.procedures_data.total_procedures],
+                                modified_procedures:paginated_data.data,
+                                query_param:{
+                                    ...paginated_data.parameters
+                                }
+                            })
+
+                        nextProps.get_procedures({ limit:10,
+                            total:'',
+                            page:1,
+                            total_pages:1,
+                            next:false,
+                            search:''
+                        })
                       }else{
                           let procedures = [...this.state.procedures_toAdd]
                           let seleceted_procedures = [...this.state.selected_procedures]
@@ -1095,6 +1116,10 @@ class MyCatalogueComponent extends Component {
 
                                 {!!this.state.addProcedureFlag &&  <div style={{position:'relative'}} className="text-center">
                           {this.state.add_specs_loading && <LoaderComponent />}
+
+                          {false &&  <div style={{width:'10rem', height:'10rem'}} className="text-center">
+                                <img src="/icon/ruuning_dog.gif" />
+                              </div>}
                             <div style={{marginTop:'.5rem'}} className="add_specs_wrapper">
                             {   
                                 this.state.add_remaining_specs? 
@@ -1144,7 +1169,13 @@ class MyCatalogueComponent extends Component {
                                 </div>
                                       { !this.state.addProcedureFlag &&
                                       <div className="my_catalogue_div_wrapper" style={{position:'relative'}}>
-                                      {this.props.get_procedures_loading ? <LoaderComponent />: (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
+                                           {this.props.search_procedures_loading_flag &&  <div style={{ height:'Auto'}} className="text-center">
+                                              
+                                <img className="align_center_rish"  style={{height:'30rem', width:'Auto'}} src="/icon/running_dog.gif" />
+                              </div>}
+                                      {this.props.get_procedures_loading ?<div>
+                                        {/* <LoaderComponent /> */}
+                                      </div> : (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                                         <Procedure 
                                         id = {i}
                                         data = {c}
