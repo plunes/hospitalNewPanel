@@ -359,9 +359,10 @@ class MyCatalogueComponent extends Component {
         }
 
         if(!!nextProps.ret_procedures){
+            console.log(nextProps,"nextProps.retProcedure")
             this.setState({
                 get_procedures_params:nextProps.ret_procedures.params,
-                procedures:nextProps.ret_procedures.data,
+                procedures:!!nextProps.ret_procedures.data?nextProps.ret_procedures.data:[],
                 selected_procedures:[]
             },()=>{
                 nextProps.clr_procedures()
@@ -667,13 +668,12 @@ class MyCatalogueComponent extends Component {
                                 total_pages:1,
                                 next:false,
                                 search:''})
+                        }else {
+                            this.setState({
+                                procedures:[],
+                                seleceted_procedures:[]
+                            })
                         }
-                        // this.setState({
-                        //     selected_procedures:[],
-                        //     procedures:nextProps.search_procedures_ret.data,
-                        //     loading:false,
-                        //     hide_view_more:nextProps.search_procedures_ret.data.length === this.state.procedures.length?true:false
-                        // })
                     }
                 }else{
                     this.setState({
@@ -1224,7 +1224,7 @@ class MyCatalogueComponent extends Component {
                                               
                                 <img className="align_center_rish"  style={{height:'30rem', width:'Auto'}} src="/icon/running_dog.gif" />
                               </div>}
-                                      {this.props.get_procedures_loading ?<div>
+                                      {this.props.search_procedures_loading_loading_flag ?<div>
                                         {/* <LoaderComponent /> */}
                                       </div> : (this.state.procedures.length > 0 ? this.state.procedures.map( (c, i) => (
                                         <Procedure 
@@ -1250,7 +1250,15 @@ class MyCatalogueComponent extends Component {
                                         update_procedure_loading = {this.get_update_procedure_loading(c)}
                                         />
                                         )) : 
-                                       <div className='text-center'>No Procedures</div>)}
+                                        <div style={{ height:'20rem', position:'relative'}} className="text-center">
+                                            <div style={{position:'absolute', left:'23%', top:'25%'}}>
+                                            <img className="align_center_rish vertical_align_rish"  style={{height:'10rem', width:'Auto'}} src="/icon/no_service_found.svg" />
+                                           <div style={{fontWeight:'200', width:'40rem'}} className="text-center">Services not found, Go to Available Procedures and start adding to Receive Insights and get Patient Footfall</div>
+                                           
+                                            </div>
+                                                 
+                                                </div>
+                                      )}
                                        </div>
                                     }
                                        
@@ -1381,7 +1389,8 @@ const mapStateToProps = state => ({
     to_add_services_ret:state.catalogue_store.to_add_services_ret,
     to_add_services_loading:state.catalogue_store.to_add_services_loading,
     set_variance_ret:state.catalogue_store.set_variance_ret,
-    set_variance_loading_flag:state.catalogue_store.set_variance_loading
+    set_variance_loading_flag:state.catalogue_store.set_variance_loading,
+    search_procedures_loading_loading_flag:state.catalogue_store.search_procedures_loading
 })
 
 

@@ -253,6 +253,7 @@ export default function (state = cat_init_state, action) {
             get_procedures_loading:true
         }
     case SEARCH_PROCEDURE_RET:
+        console.log(action.payload,"action.Payload in Search Procedure Ret")
         return {
             ...state,
             search_procedures_ret:action.payload,

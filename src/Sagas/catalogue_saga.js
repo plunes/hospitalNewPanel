@@ -7,6 +7,7 @@ import { get_url_params, paginate_data } from "../utils/common_utilities"
 import store from '../store'
 
 function* get_procedures_saga(action) {
+  console.log("get_procedures saga called")
  try {
   let center_id = get_url_params('center')
     const  get_procedures = yield store.getState().catalogue_store.get_procedures
@@ -208,6 +209,7 @@ function* add_procedure_saga(action) {
     }
     const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, center_id, headers)
     if(!!api_data){
+      console.log(api_data,"api_data in search_procedure_saga")
       if (api_data.status === 201) {
           if(!!api_data.data){
             yield put(search_procedures_ret({

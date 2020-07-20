@@ -129,26 +129,19 @@ class DashboardComponent extends React.PureComponent {
 
     handle_real_time_edit_price = (e) =>{
             let val = e.target.value
-            // val = parseInt(val)
-            // console.log(val,"val in handle Realt")
            if(is_positive_real_number(val))
            this.setState({real_time_edit_price:val})
            else{
-            // console.log("no_negative_value")
-           }
-           
+           }   
     }
-
-    
+ 
     componentWillReceiveProps(nextProps){
-
         if(nextProps.insight_flag !== this.props.insight_flag){
             this.setState({
                 get_actionable_loading_other:false
             })
         }
         if(!!nextProps.act_as_admin_ret){
-            // console.log(nextProps.act_as_admin_ret,"nextProps.act_as_admin_ret")
             if(nextProps.act_as_admin_ret.success){
                 this.setState({
                     act_admin_loading:false,
@@ -162,7 +155,6 @@ class DashboardComponent extends React.PureComponent {
             nextProps.act_as_admin_clr()
         }
         if(!!nextProps.admin_otp_ret){
-            // console.log(nextProps.admin_otp_ret,"nextProps.admin_otp_ret")
             if(nextProps.admin_otp_ret.success){
                 if(this.state.act_as_admin_other){
                     nextProps.set_user_info({...this.props.prof_data,isCenter:true})
@@ -182,7 +174,6 @@ class DashboardComponent extends React.PureComponent {
         }
 
         if(!!nextProps.admin_details_ret){
-            // console.log(nextProps.admin_details_ret,"nextProps.admin_details_ret")
             if(nextProps.admin_details_ret.success){
                 this.setState({
                     submit_admin_details_loading:false,
@@ -200,7 +191,6 @@ class DashboardComponent extends React.PureComponent {
             if(!!!isEmpty(nextProps.prof_data)){
                 let coordinates = nextProps.prof_data.location.coordinates
                 if(!!coordinates){
-                    // console.log(!!!coordinates[0],"Cordinates[0] sdsd")
                     if(!!!coordinates[0]){
                         this.setState({
                             initial_render:false
@@ -289,7 +279,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
      handle_business_center_change = (e)=>{
-        //  console.log(e.target.value,"value in get_business_center_change")
          this.setState({
              get_business_loading:true,
              get_business:{
@@ -354,10 +343,7 @@ class DashboardComponent extends React.PureComponent {
     }
      handleRealSubmit(e) {
         e.preventDefault();
-
         try {
-           
-            console.log(this.state,"this state in handleRealSubmit")
             if(parseInt(this.state.real_time_edit_price,10)>=parseInt(this.state.realUpdatePrice, 10)){
                 throw new MyError(`Price must be less than ${this.state.realUpdatePrice}`)
             }
@@ -416,20 +402,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async componentDidMount() {
-    //      // to get the geo location tab
-    //      if(!!this.state.initial_render){
-    //         if(!!!isEmpty(this.props.prof_data)){
-    //             // console.log(this.props.prof_data,"prof_data")
-    //           if(!!!this.props.prof_data.geoLocation){
-    //             this.setState({
-    //                 initial_render:false
-    //             })
-    //             this.props.set_location_toggler(true)
-    //           }
-    //         }
-    //     }
-    
-    
         if(!!!this.props.mount.dash_mount){
             this.setState({
                 loader:true
@@ -526,7 +498,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         console.log(this.state,"this.state in dashboard")
         console.log(this.props," this.props in dashboard component")
         let { percent } = this.state
@@ -943,14 +914,6 @@ class DashboardComponent extends React.PureComponent {
                                         /></div>
                                         <h2 className="yout_ctl margin_top_small_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                             {this.state.realUpdatePriceLoading && <LoaderComponent />}        
-                                            {/* <div className="text-center valu_second">
-                                               <b>{Math.floor( this.state.solValue )} % </b>
-                                            </div>
-                                            <div className="row maxmin">
-                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
-                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
-                                               </div> */}
-                                           
                                            <br></br>
                                         </div> 
                                        
