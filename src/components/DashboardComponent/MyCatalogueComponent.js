@@ -613,17 +613,20 @@ class MyCatalogueComponent extends Component {
             nextProps.to_add_services_clr()
         }
             if(!!nextProps.search_procedures_ret){
+                console.log(nextProps.search_procedures_ret,"search_procedures_ret")
                 if(nextProps.search_procedures_ret.success){
                     if(nextProps.search_procedures_ret.type==="servicestoAdd"){
 
                     }else{
-                     
-                        nextProps.get_procedures({ limit:10,
-                            total:'',
-                            page:1,
-                            total_pages:1,
-                            next:false,
-                            search:''})
+
+                        if(nextProps.search_procedures_ret.data.length !==0){
+                            nextProps.get_procedures({ limit:10,
+                                total:'',
+                                page:1,
+                                total_pages:1,
+                                next:false,
+                                search:''})
+                        }
                         // this.setState({
                         //     selected_procedures:[],
                         //     procedures:nextProps.search_procedures_ret.data,
