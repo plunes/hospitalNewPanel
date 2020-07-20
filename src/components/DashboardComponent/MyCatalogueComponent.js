@@ -791,6 +791,11 @@ class MyCatalogueComponent extends Component {
                uploadRet = {this.props.uploadRet}
                uploadRetClr = {this.props.uploadRetClr}
                closeModal = {()=>this.setState({uploadCatalogFlag:false})}
+
+
+               downloadCatalogueClr = {this.props.downloadCatalogueClr}
+               downloadCatalogueRet = {this.props.downloadCatalogueRet}
+               downloadCatalogue ={this.props.downloadCatalogue}
                />        
             </React.Fragment>
           
@@ -808,6 +813,12 @@ class MyCatalogueComponent extends Component {
     handleCloseCataModal = () =>{
         this.setState({
             uploadCatalogFlag:false
+        })
+    }
+
+    open_catalogue_modal = () =>{
+        this.setState({
+            uploadCatalogFlag: true
         })
     }
 
@@ -1095,7 +1106,6 @@ class MyCatalogueComponent extends Component {
                                             onValueChange={(val)=>console.log(val)}
                                             onChange={val => this.change_variance(val)} 
                                             />
-
                                     </div>
 
                                     {!this.state.global_flag  && <div style={{margin:'0rem  Auto .5rem Auto', width:'15rem'}} >
@@ -1129,6 +1139,14 @@ class MyCatalogueComponent extends Component {
                                     <div className='catalogue_flex_child_6'>
                                        <div className="catalogue_chart_wrapper">
                                          <Barchart />
+                                        <div className="text-center">
+                                            <button onClick = {()=>this.open_catalogue_modal()} type="button" className="btn btn-default">
+                                                <span className="glyphicon glyphicon-search"></span> Upload Catalogue
+                                            </button>
+                                           <div>
+                                           <text className='catalogue_note'><text className='bold'>Note :</text>Upload your Catalogue from here in a file or go to "Available Procedures" section to add prices of services directly to your catalogue and start receiving Patients</text>
+                                           </div>
+                                        </div>
                                        </div>
                                     </div>
                                </div>
