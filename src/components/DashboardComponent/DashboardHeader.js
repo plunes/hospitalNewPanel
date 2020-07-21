@@ -24,8 +24,6 @@ class DashboardHeader extends Component {
 
   handleClick(){
     let unreadN = this.props.unreadNotification
-    //console.log(this.props.notificationCount, '656')
-    // this.props.sendCounterZero(unreadN);
     history.push('/notification')
   }
 
@@ -62,23 +60,26 @@ class DashboardHeader extends Component {
                 <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/payments"
                     onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.togglePayment())}>
+                   <img className='header_icon_rish' src="/icon/payment_header_icon.svg" />
                   <text   className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
                   </li> 
                  <li className="nav-item header_li_rish">
+                 <img className='header_icon_rish' src="/icon/plockr_icon.svg" />
                  <a  rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
                   <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >Plockr</text>
                      </a>
                   </li> 
-
+                  
                    <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/notification"
                      style={{position:'relative'}}
                      onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleNotif())}>
-                  <img className='' src="/icon/notification_header_icon.svg" />
-                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
+                  <img className='header_icon_rish' style={{position:'relative'}} src="/icon/notification_header_icon.svg" />
                   <div className="notif_badge_wrapper_rish">
                     <NotificationBadge count={this.props.count} effect={Effect.SCALE}/>
                   </div>
+                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
+                 
                   </Link>
                   </li> 
                   <li className="nav-item header_li_rish">

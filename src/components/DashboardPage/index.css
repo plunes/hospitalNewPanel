@@ -31,11 +31,12 @@
 .sidebar_wrapper 
     {
     z-index: 0;
+    margin-top: .1rem;
     padding: 2rem;
     background-color: none;
     overflow-x: hidden;
     font-size: 1rem;
-    background-color: #fff;
+    background-color: #3C464D;
     position: relative;
     height: 100%;
     box-shadow: 0px 8px 0.5rem #00000029;
@@ -98,13 +99,16 @@
     flex:1 1 75%;
     display: block;
     margin: auto;
+    color: #fff;
+    opacity: .8;
 }
 .sidebar_list_active {
     background-color: #F6F6F6 !important;
-    font-weight: 900;
+    /* font-weight: 900; */
     opacity: 1 !important;
     text-transform: capitalize;
     color: #000000 !important;
+    transition: all .9s ease-in-out;
 }
 .sidebar_list_text_active {
     color: #000;
