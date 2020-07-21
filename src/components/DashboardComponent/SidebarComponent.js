@@ -247,13 +247,13 @@ const  SidebarComponent = (props) => {
           </Link>
          </div>
 
-         <div className='hamburger-dic' >
+         {/* <div className='hamburger-dic' >
         <div className={` hamburger_icon_wrapper ${collapse?'display_block':''}`}>
               <div >
               <a onClick ={()=>setCollapse(!collapse)} className={`${!collapse?'active':''}`}  id="hamburger" href="#"><span></span></a>
               </div>
               </div>
-        </div>  
+        </div>   */}
 
       </div>
    </div>
