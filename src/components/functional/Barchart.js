@@ -1,8 +1,11 @@
 import React from "react"
 import {Bar} from 'react-chartjs-2';
+import AnimatedMount from "../../HOC/AnimatedMount"
 const should_render = (prevProps, nextProps) => {
     return true
 }
+
+
 
 const data = {
     labels: ['10-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
@@ -53,4 +56,15 @@ const Barchart = (props) => {
     )
 }
 
-export default React.memo(Barchart, should_render)
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(React.memo(Barchart, should_render));

@@ -664,7 +664,7 @@ outline: none;
   border-radius: 5px;
   padding: 2%;
   width: 10rem;
- 
+  margin-left: 1rem;
   min-height: 2.5rem
       /* width: 68%; */
 }
@@ -677,7 +677,18 @@ outline: none;
   margin: 0 1%;
   position: relative;
 }
-.add_icon_center{
+.heading_flex_child_1 {
+  flex:1 1 25%;
+  margin: 0 1%;
+  position: relative;
+}
+.heading_flex_child_2 {
+  flex:1 1 70%;
+  margin: 0 1%;
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+}.add_icon_center{
   margin-left: auto;
   height: 2.5rem;
   margin-right: 1rem;

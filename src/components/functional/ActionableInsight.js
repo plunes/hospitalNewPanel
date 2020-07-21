@@ -19,8 +19,7 @@ const ActionableInsight = (props) => {
                     </div>
                     <div  className="InsightUpdate" onClick={(e) => handleUpdatePrice(data)}>Update here</div>
                </span>
-             </div>                                              
-          <hr></hr>          
+             </div>                                                   
         </React.Fragment>
     )
 }

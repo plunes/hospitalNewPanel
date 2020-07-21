@@ -36,6 +36,8 @@ import NewNotif from '../functional/NewNotif';
 import CircularProgress from '../functional/CircularProgress'
 import Tag from '../functional/Tag'
 import AnimatedMount from "../../HOC/AnimatedMount"
+import PieChart from '../functional/PieChart'
+import LineChart from '../functional/LineChart'
 
 const customStyles = {
     content: {
@@ -88,7 +90,7 @@ class DashboardComponent extends React.PureComponent {
             value: 0,
             solValue: 0,
             distance: 30,
-            showBusiness :  true,
+            showBusiness :  false,
             ro_insight_count:50,
             user_map_loading:false,
             business_day:7,
@@ -273,7 +275,7 @@ class DashboardComponent extends React.PureComponent {
             get_business_loading:true,
             get_business:{
                 ...this.state.get_business,
-               days:value
+               days:parseInt(value, 10)
             }
         },()=>this.props.get_business({...this.state.get_business}))
     }
@@ -514,7 +516,7 @@ class DashboardComponent extends React.PureComponent {
     render() {
         // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         console.log(this.state,"this.state in dashboard")
-        console.log(this.props," this.props in dashboard component")
+        console.log(this.props,"this.props in dashboard component")
         let { percent } = this.state
         const options = {
             title: {
@@ -591,11 +593,15 @@ class DashboardComponent extends React.PureComponent {
 
                             <div className='insigts_section_wrapper'>
                                 <div className="real_insights_wrapper">
-                                <div style={{position:'relative'}} className='dashboardsection new_card_class'>
+                                <div style={{position:'relative', background:'transparent'}} className='dashboardsection '>
                                         <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
+                                       <div>
                                         <p  className='business vertical_align_rish'>Real Time Insights</p>
+                                        <text className='catalogue_note'><text className='bold'>Note :</text> These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.</text>
+                                       </div>
+                                        
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
@@ -625,12 +631,16 @@ class DashboardComponent extends React.PureComponent {
 
                                 <div className="action_insights_wrapper">
                                     
-                                <div className="dashboardsection dashrow2col2 new_card_class ">
+                                <div className="dashboardsection dashrow2col2">
                                     <div style={{height:'100%'}}>
                                        <span className='businessrow1col1 realtimewidth '>
                                        {/* <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img> */}
+                                     <div>
                                      <p className='business vertical_align_rish'>Actionable Insights</p>
-                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',bottom:'.5rem'}}>
+                                     <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text>
+                                     </div>
+                                   
+                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'.5rem'}}>
                                      {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
                                                                  <option value={''}>{this.props.prof_data.name}</option>
                                                                   {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
@@ -665,22 +675,54 @@ class DashboardComponent extends React.PureComponent {
                             <div className="insigts_section_wrapper">
                                 <div className="real_insights_wrapper">
 
-                                    <div style={{position:'relative'}} className='dashboardsection new_card_class techno_background add-center-wrapper'>
+                                    <div style={{position:'relative', height:'100%'}} className='dashboardsection add-center-wrapper new_card_class'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
-                                                         <span className='businessrow1col1 heading_flex_child '>
-                                                         {/* <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""> */}
+                                                         <span className='businessrow1col1 heading_flex_child_1 '>
                                                         <text className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
-                                                         <span className="heading_flex_child">  
-                                                          {this.props.centers_name_list.length !==0  &&  <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
+                                                         <span className="heading_flex_child_2">  
+                                                          {this.props.centers_name_list.length !==0  &&  <select style={{display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
                                                              <option value={''}>{this.props.prof_data.name}</option>
                                                                 {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                                            </select>}
+
+                                                            <select style={{display:'inlineBlock', marginLeft:'.5rem'}} onChange={(e)=>this.handleDaysChange(e.target.value)} name="days" value={this.state.get_business.days} className="select_class_rish">
+                                                                    <option value={1}>Today</option>
+                                                                    <option value={7}>Weekly</option>
+                                                                    <option value={30}>Monthly</option>
+                                                                    <option value={365}>Yearly</option>
+                                                           </select>
+                                                           
                                                          </span>
+                                                         
+                                                         
+                                                        
                                                       </span>
                                                     </div>
-                                                    <div className="tag_section_rish margin_top_small_rish">
+
+                                                    <div>
+
+                                                        {((!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):false ) || (!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):false))?
+                                                        <div className='margin_top_small_rish'>
+                                                            <PieChart
+                                                            data = {[!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):0, !!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):0]}
+                                                            />
+                                                        </div>
+                                                        : <div style={{marginTop:'2rem'}} className='row'>
+                                                        <div className='col text-center'>
+                                                            <p className="businessPrice businessEarn">&#8377; {!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):'0'}</p>
+                                                            <p className="Earn">Business <br></br>Earned</p>
+                                                        </div>
+                                                        <div className='col text-center'>
+                                                            <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
+                                                            <p className="Earn">Business<br></br> Lost</p>
+                                                        </div>
+                                                    </div>  }
+                                        
+                                                       
+                                                    </div>
+                                                    {/* <div className="tag_section_rish margin_top_small_rish">
                                                             <span className='tag_section_child text-center'>
                                                                     <Tag 
                                                                         name="Today"
@@ -709,8 +751,8 @@ class DashboardComponent extends React.PureComponent {
                                                                      active ={this.state.get_business.days===365}
                                                                     />
                                                             </span>
-                                                    </div>
-                                        { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
+                                                    </div> */}
+                                        {/* { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
                                             <div className='col text-center'>
                                                 <p className="businessPrice businessEarn">&#8377; {!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):'0'}</p>
                                                 <p className="Earn">Business <br></br>Earned</p>
@@ -719,7 +761,7 @@ class DashboardComponent extends React.PureComponent {
                                                 <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
                                                 <p className="Earn">Business<br></br> Lost</p>
                                             </div>
-                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
+                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>} */}
                                         <div className="text-center">
                                         {/* <select onChange={this.handleDaysChange} name="days" value={this.state.get_business.days} className="select_class_rish">
                                                                     <option value='1'>Today</option>
@@ -733,16 +775,7 @@ class DashboardComponent extends React.PureComponent {
                                         </div>
                                     </div> 
 
-                                   <div className='dashboardsection new_card_class'>
-                                    <span className='businessrow1col1 realtimewidth'>
-                                        {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
-                                        <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
-                                      </span>
-                                        <HighchartsReact
-                                            highcharts={Highcharts}
-                                            options={options}
-                                        />
-                                    </div>
+                                  
                                  
 
 
@@ -832,7 +865,26 @@ class DashboardComponent extends React.PureComponent {
                                     </div>}
                                 </div>
 
+                               
+
                             </div>
+
+                           <div className="insigts_section_wrapper">
+                            <div style={{width:'100%'}} className='dashboardsection new_card_class'>
+                                    <span className='businessrow1col1 realtimewidth'>
+                                        {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
+                                        <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
+                                      </span>
+                                        {/* <HighchartsReact
+                                            highcharts={Highcharts}
+                                            options={options}
+                                        /> */}
+                                        <div>
+                                          <LineChart />
+                                        </div>
+                                       
+                         </div>
+                        </div>
                            
                                     <Modal 
                                         isOpen={this.state.modalIsOpen}
