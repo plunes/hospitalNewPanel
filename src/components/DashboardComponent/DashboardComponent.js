@@ -344,8 +344,8 @@ class DashboardComponent extends React.PureComponent {
      handleRealSubmit(e) {
         e.preventDefault();
         try {
-            if(parseInt(this.state.real_time_edit_price,10)>=parseInt(this.state.realUpdatePrice, 10)){
-                throw new MyError(`Price must be less than ${this.state.realUpdatePrice}`)
+            if(parseInt(this.state.real_time_edit_price,10) === 0){
+                throw new MyError(`Price must be greater  than 0`)
             }
             if((this.state.real_time_edit_price !== false) && (this.state.real_time_edit_price ==='')){
                 this.setState({
@@ -368,7 +368,7 @@ class DashboardComponent extends React.PureComponent {
                   }
 
                   if(this.state.realUpdateData.suggested){
-                    obj.price =  Math.round(Number(this.state.solUpdatedPrice))
+                    obj.price =  Math.round(Number(this.state.real_time_edit_price))
                   }else{
                       obj.discount = this.state.solValue
                   }
