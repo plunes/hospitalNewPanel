@@ -1343,7 +1343,7 @@ class MyCatalogueComponent extends Component {
 
                         {this.state.addProcedureFlag && <div>
 
-                            {this.state.procedures_toAdd?(this.state.procedures_toAdd.length !==0)? <ReactPaginate
+                            {this.state.procedures_toAdd?(this.state.procedures_toAdd.length !==0)? <div className="text-center margin_top_small_rish"> <ReactPaginate
                                          previousLabel={'previous'}
                                          nextLabel={'next'}
                                          breakLabel={'...'}
@@ -1355,7 +1355,7 @@ class MyCatalogueComponent extends Component {
                                          containerClassName={'pagination'}
                                          subContainerClassName={'pages pagination'}
                                          activeClassName={'active-page-class'}
-                                />:'':''}
+                                /></div>:'':''}
                                        
                                     </div>} 
 
