@@ -392,9 +392,7 @@ export class DashboardPage extends React.PureComponent {
     this.props.getNotifications({page:1})
     this.props.get_business({days:7, center:''})
     this.props.get_user_info({from_dash_page:true})
-    this.props.get_user_specialities({
-      type:"getUserSpecialities"
-  })
+
     // To Establish socket connection
     this.socketEmit()
   }
@@ -619,7 +617,7 @@ authObject =()=> {
         }else{
           throw new Error("Dummy Error")
         }
-    }else if(window.location.pathname==='/dashboard/catalogue'){
+    }else if(false){
       if(this.props.get_user_specialities_loading_flag){
         // if(false){
           return (

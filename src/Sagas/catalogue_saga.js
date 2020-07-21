@@ -195,6 +195,7 @@ function* add_procedure_saga(action) {
 }
 
  function* search_procedures_saga(action) {
+   console.log("Inside search procedure saga")
 
  try {
   let center_id = get_url_params('center')

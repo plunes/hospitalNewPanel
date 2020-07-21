@@ -173,16 +173,18 @@ class MyCatalogueComponent extends Component {
 
 
     async componentDidMount() {
-        this.setState({
-            loading:true
-        })
+       
         this.props.get_remaining_specs()
-        this.props.get_procedures({ limit:10,
-            total:'',
-            page:1,
-            total_pages:1,
-            next:false,
-            search:''})
+        this.props.get_user_specialities({
+            type:"getUserSpecialities"
+        })
+        // this.props.get_procedures({ limit:10,
+        //     total:'',
+        //     page:1,
+        //     total_pages:1,
+        //     next:false,
+        //     search:''
+        // })
     }
 
 
