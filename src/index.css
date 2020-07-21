@@ -1091,28 +1091,64 @@ html {
   padding: 2rem;
 }
 
-#react-paginate ul {
-  display: inline-block;
-  padding-left: 15px;
-  padding-right: 15px;
-}
 
-#react-paginate li {
-  display: inline-block;
+.pagination .active a {
+  color: #000;
+  background-color: transparent;
+  font-weight: 600;
+}
+.pagination .active a:hover {
+  background-color: transparent;
+  color: #143361;
+  border: 0px;
+}
+.pagination .active a:focus {
+  background-color: transparent;
+  color: #000;
+  outline: none;
+}
+.pagination li a {
+  border: 1px;
+  margin-left: 0px;
+  color: #707070;
+  padding: 7px 2px;
+  margin: 0px 20px;
+}
+.pagination li a:hover {
+  background-color: transparent;
+  color: #4A90E2;
+  padding-bottom: 2px;
+  border-bottom: 1px solid;
+}
+.pagination li a:focus {
+  outline: none;
+  background-color: transparent;
+  /*color:#707070;*/
+}
+.pagination li:first-child a, .pagination li:last-child a {
+  border: 2px solid #3C464D !important;
+  border-radius: 6px;
+  margin: 0px;
+  padding: 6px 12px;
+  border: 2px solid;
+  font-size: 14px;
+  color: #143361;
+}
+.pagination li:first-child a:hover, .pagination li:last-child a:hover {
+  text-decoration: none !important;
+  color: #fff !important;
+  background-color: #01D35A;
+}
+.pagination li:first-child a:focus, .pagination li:last-child a:focus {
+  outline: none;
 }
 
 .pagination {
-  justify-content: space-around !important;
-  margin: 1rem 5rem 1rem 5rem;
+  display: inline-flex !important;
 }
 
-.pagination > li {
-  cursor: pointer;
-}
 
-.active-page-class {
-  background-color: #01D35A;
-}
+
 
 .my_catalogue_div_wrapper {
   overflow:hidden;
