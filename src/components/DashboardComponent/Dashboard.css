@@ -376,7 +376,8 @@ hr
 .businessrow1col1
     {
       display: inline-flex;
-      background-color: #fff !important;  
+      background-color: #EEEEEE !important;  
+      box-shadow: 0px 2px 5px #00000029;
     }
 
 .businessicon

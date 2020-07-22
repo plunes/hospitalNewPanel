@@ -599,7 +599,7 @@ class DashboardComponent extends React.PureComponent {
                                                 </img> */}
                                        <div>
                                         <p  className='business vertical_align_rish'>Real Time Insights</p>
-                                        <text className='catalogue_note'><text className='bold'>Note :</text> These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.</text>
+                                        {/* <text className='catalogue_note'><text className='bold'>Note :</text> These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.</text> */}
                                        </div>
                                         
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
@@ -637,11 +637,11 @@ class DashboardComponent extends React.PureComponent {
                                        {/* <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img> */}
                                      <div>
                                      <p className='business vertical_align_rish'>Actionable Insights</p>
-                                     <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text>
+                                     {/* <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text> */}
                                      </div>
                                    
                                        <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'.5rem'}}>
-                                     {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
+                                     {this.props.centers_name_list.length !==0 &&   <select style = {{background:'none', border:'none none 1px solid grey none'}} onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
                                                                  <option value={''}>{this.props.prof_data.name}</option>
                                                                   {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                           </select>}
@@ -682,7 +682,7 @@ class DashboardComponent extends React.PureComponent {
                                                         <text className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
                                                          <span className="heading_flex_child_2">  
-                                                          {this.props.centers_name_list.length !==0  &&  <select style={{display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
+                                                          {this.props.centers_name_list.length !==0  &&  <select  style = {{background:'none', border:'none none 1px solid grey none', display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
                                                              <option value={''}>{this.props.prof_data.name}</option>
                                                                 {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                                            </select>}

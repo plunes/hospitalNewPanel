@@ -56,7 +56,10 @@ export const paginate_data = (data, options) => {
      console.log(serviceId,"serviceId in paginate data")
       for_loop(data,(item)=>{
         console.log(item,i," Item , i in for loop on data")
-            if(i<parseInt(options.limit, 10)){
+        if(item.serviceId === serviceId){
+              arr.push(item)
+              new_arr.push(arr)
+        } else if(i<parseInt(options.limit, 10)){
                 arr.push(item)
                 i++
             }else{
