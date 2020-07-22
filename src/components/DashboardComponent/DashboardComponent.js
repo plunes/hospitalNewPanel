@@ -678,8 +678,8 @@ class DashboardComponent extends React.PureComponent {
                                     <div style={{position:'relative', height:'100%'}} className='dashboardsection add-center-wrapper new_card_class'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
-                                                         <span className='businessrow1col1 heading_flex_child_1 '>
-                                                        <text className='business vertical_align_rish cursor-pointer'>Total Business</text>
+                                                         <span className='heading_flex_child_1 '>
+                                                        <text style={{lineHeight:'2.5rem'}} className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
                                                          <span className="heading_flex_child_2">  
                                                           {this.props.centers_name_list.length !==0  &&  <select  style = {{background:'none', border:'none none 1px solid grey none', display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
@@ -687,7 +687,7 @@ class DashboardComponent extends React.PureComponent {
                                                                 {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
                                                            </select>}
 
-                                                            <select style={{display:'inlineBlock', marginLeft:'.5rem'}} onChange={(e)=>this.handleDaysChange(e.target.value)} name="days" value={this.state.get_business.days} className="select_class_rish">
+                                                            <select style={{display:'inlineBlock', marginLeft:'.5rem', background:'none', border:'none none 1px solid grey none'}} onChange={(e)=>this.handleDaysChange(e.target.value)} name="days" value={this.state.get_business.days} className="select_class_rish">
                                                                     <option value={1}>Today</option>
                                                                     <option value={7}>Weekly</option>
                                                                     <option value={30}>Monthly</option>
@@ -784,11 +784,11 @@ class DashboardComponent extends React.PureComponent {
                                 <div className="action_insights_wrapper">      
                                    {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper new_card_class'>
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
-                                    <span className='businessrow1col1 heading_flex_child '>
+                                    <span className=' heading_flex_child '>
                                    
                                                     { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment>
                                                         {/* <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""/> */}
-                                                        <p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Manage Centres</p></React.Fragment>:
+                                                        <p  style={{lineHeight:'2.5rem'}} onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Manage Centres</p></React.Fragment>:
                                                     <React.Fragment>
                                                         {/* <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""/> */}
                                                         <Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Manage Centres</p></Link></React.Fragment> 

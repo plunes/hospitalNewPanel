@@ -45,10 +45,12 @@
     background-color: none;
     overflow-x: hidden;
     font-size: 1rem;
-    background-color: #3C464D;
+    /* background-color: #3C464D; */
+    background-color: #fff;
+    box-shadow: 0px 6px 10px #0000000F;
     position: relative;
     height: 100%;
-    box-shadow: 0px 8px 0.5rem #00000029;
+    /* box-shadow: 0px 8px 0.5rem #00000029; */
     }
 .sidebar_wrapper_collapse {
     padding: .5rem !important;
@@ -108,7 +110,7 @@
     flex:1 1 75%;
     display: block;
     margin: auto;
-    color: #fff;
+    color: #000;
     opacity: .8;
 }
 .sidebar_list_active {
@@ -122,7 +124,7 @@
 .sidebar_list_text_active {
     color: #000;
     opacity: 1;
-    font-weight: bolder;
+    font-weight: 700;
 }
 .sidebaricon {
     width: 1.4rem;
