@@ -642,8 +642,7 @@ authObject =()=> {
     />
     }
     return (
-             <div>
-               <ConnectivityListener />
+           <React.Fragment>
                <NewNotif 
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
@@ -654,6 +653,7 @@ authObject =()=> {
                         error={this.state.Notify.error}
                         clear = {()=>this.setState({Notify:{success:false,error:false}})}
                         />
+                <div className="main-body-wrapper">
                         <DashboardHeader
                           toggleNotif = {this.toggleNotif}
                           togglePayment = {this.togglePayment}
@@ -665,8 +665,6 @@ authObject =()=> {
                           prof_data = {this.props.prof_data}
                           authObject = {this.authObject}
                         />
-                <div className="main-body-wrapper">
-                    <div className="main_body_flex_parent">
                             <SidebarComponent
                               prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
@@ -682,7 +680,7 @@ authObject =()=> {
                               user_info = {this.state.user_info}
                               pathname ={window.location.pathname}
                             />
-                  <div className="main_body_flex_content">
+                  <div id="content" className="main_body_flex_content">
                   {(window.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
@@ -794,8 +792,7 @@ authObject =()=> {
                   />):''}
               </div>
         </div>
-        </div>
-        </div>
+        </React.Fragment>
       
     )
   }

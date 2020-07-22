@@ -1,16 +1,25 @@
 .main_body_flex_parent {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
 }
 .main_body_flex_sidebar {
     flex:1 1 15%;
     transition: flex .3s;
     transition-timing-function: ease-out;
-    /* margin: 0 1%; */
+    height: 100%;
+    width: 160px;
+    /* position: fixed; */
+    z-index: 1;
+    top: 0;
+    left: 0;
+    verflow-x: hidden;
+    padding-top: 20px;
 }
 .main_body_flex_content {
     flex:1 1 80%;
     padding: 1.5rem !important;
+    margin-top: 5rem;
+    margin-left: 15rem;
     /* margin: 0 1%; */
 }
 
@@ -32,7 +41,7 @@
     {
     z-index: 0;
     margin-top: .1rem;
-    padding: 2rem;
+    padding: 1rem;
     background-color: none;
     overflow-x: hidden;
     font-size: 1rem;
@@ -450,3 +459,31 @@
     display: block;
     margin: auto;
 }
+.header_ul_rish {
+    display: flex;
+    flex-direction: inherit;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+div#header{
+    top:0;
+    left:0;
+    height:5rem;
+   }
+   div#left-sidebar{
+    position:absolute;
+    top: 3.9rem;
+    left: 0;
+    width: 15rem;
+    height: auto;
+    overflow-y: scroll;
+   }
+   @media screen{
+   div#header{
+     position:fixed;
+    }
+   div#left-sidebar{
+     position:fixed;
+    }
+   }

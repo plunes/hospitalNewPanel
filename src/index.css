@@ -772,7 +772,9 @@ html {
   .main-body-wrapper{
     margin-left: 25rem !important;
     margin-right: 25rem !important;
-  
+  }
+  div#left-sidebar { 
+    left: 25rem !important;
   }
   .sidenav{
     width: 100% !important;

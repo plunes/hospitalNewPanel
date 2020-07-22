@@ -40,8 +40,7 @@ class DashboardHeader extends Component {
     const authObject = this.props.authObject
     console.log(this.props,'props in HeaderCompoent');
   console.log(window.location.pathname,"window.location in header")
-        return   <nav className="navbar custom_ha navbar-expand-md custom-navbar ">
-        <div className="header_wrapper_rish oversize_wrap_rish display_flex">
+        return   <div id = "header" className="header_wrapper_rish oversize_wrap_rish display_flex">
           <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
               <Link to="/dashboard">
@@ -51,11 +50,7 @@ class DashboardHeader extends Component {
           
           </div>
         <div className="header_wrapper_links_child_rish mobile_header_links">
-           <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" >
-            <i className="fa fa-bars" aria-hidden="true"></i>
-           </button>
-             <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul className="navbar-nav ml-auto Three_butn dr_lis_mobile">
+                <ul className="header_ul_rish">
                   
                 <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/payments"
@@ -90,9 +85,7 @@ class DashboardHeader extends Component {
                   </li> 
                  </ul>
              </div>  
-        </div>
       </div>
-  </nav>
         }
   }
       

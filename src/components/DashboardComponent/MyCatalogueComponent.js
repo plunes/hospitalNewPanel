@@ -371,15 +371,15 @@ class MyCatalogueComponent extends Component {
             })
         }
 
-        if(!!nextProps.ret_add_procedures){
-            this.setState({
-                get_add_procedures_params:nextProps.ret_add_procedures.params,
-                add_procedures:nextProps.ret_add_procedures.data,
-                selected_procedures:[]
-            },()=>{
-                nextProps.clr_add_procedures()
-            })
-        }
+        // if(!!nextProps.ret_add_procedures){
+        //     this.setState({
+        //         get_add_procedures_params:nextProps.ret_add_procedures.params,
+        //         add_procedures:nextProps.ret_add_procedures.data,
+        //         selected_procedures:[]
+        //     },()=>{
+        //         nextProps.clr_add_procedures()
+        //     })
+        // }
 
         if(nextProps.add_procedure_ret){
             if(nextProps.add_procedure_ret.success){
@@ -446,14 +446,14 @@ class MyCatalogueComponent extends Component {
                             page:1,
                             search:''
                         },
-                        get_add_procedures_params:{
-                            limit:0,
-                            total:0,
-                            next:false,
-                            total_pages:0,
-                            page:1,
-                            search:''
-                        },
+                        // get_add_procedures_params:{
+                        //     limit:0,
+                        //     total:0,
+                        //     next:false,
+                        //     total_pages:0,
+                        //     page:1,
+                        //     search:''
+                        // },
                           procedure_for_update:false,
                           procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
                           selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
@@ -947,10 +947,10 @@ class MyCatalogueComponent extends Component {
                 selected_speciality:e.target.value,
                 loading:true
             },()=>{
-                this.props.toAddServices({
+                this.props.to_add_services({
                     searchQuery:'',
                     page:1,
-                    limit:10,
+                    limit:this.state.get_add_procedures_params.limit,
                     specialityId:this.state.selected_speciality
                  })
                  this.props.search_procedures({
@@ -1102,7 +1102,7 @@ class MyCatalogueComponent extends Component {
                                     <div className='catalogue_slider_wrapper'>
                                     <Slider
                                             min={0}
-                                            max={50}
+                                            max={100}
                                             labels={get_slider_labels({lower:0, upper:100})}
                                             value={this.state.variance}
                                             onValueChange={(val)=>console.log(val)}
@@ -1348,7 +1348,7 @@ class MyCatalogueComponent extends Component {
                                          nextLabel={'next'}
                                          breakLabel={'...'}
                                          breakClassName={'break-me'}
-                                         pageCount={Math.ceil(parseInt(this.state.get_add_procedures_params.total,10)/this.state.get_add_procedures_params.limit)}
+                                         pageCount={Math.ceil(parseInt(this.state.get_add_procedures_params.total,10)/parseInt(this.state.get_add_procedures_params.limit, 10))}
                                          marginPagesDisplayed={2}
                                          pageRangeDisplayed={5}
                                          onPageChange={(data)=>this.handle_add_procedure_page_change(data)}

@@ -52,18 +52,13 @@ export const paginate_data = (data, options) => {
      let new_arr = [[]]
      let  i= 0
      let serviceId = data[data.length -1].serviceId
+     console.log(options,"options in paginate data")
      console.log(serviceId,"serviceId in paginate data")
       for_loop(data,(item)=>{
         console.log(item,i," Item , i in for loop on data")
             if(i<parseInt(options.limit, 10)){
-              if(item.serviceId === serviceId){
-                arr.push(item)
-                new_arr.push(arr)
-                i=0
-              }else{
                 arr.push(item)
                 i++
-              }
             }else{
               new_arr.push(arr)
               arr = []

@@ -253,6 +253,7 @@ function* add_procedure_saga(action) {
 
 
 function* to_add_services_saga(action) {
+  console.log("Inside to add_service _saga")
   
  try {
   let center_id = get_url_params('center')
@@ -267,6 +268,7 @@ function* to_add_services_saga(action) {
     }
     const api_data = yield call(api.catalogue_routes.to_add_services, dataObject, center_id, headers)
     if(!!api_data){
+      console.log(api_data,"apidata in to_add_service_saga")
       if (api_data.status === 200) {
           if(!!api_data.data){
             yield put(to_add_services_ret({
