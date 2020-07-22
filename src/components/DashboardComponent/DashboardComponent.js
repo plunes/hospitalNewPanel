@@ -701,26 +701,26 @@ class DashboardComponent extends React.PureComponent {
                                                       </span>
                                                     </div>
 
-                                                    <div>
-
+                                                    <div style={{width:'100%'}} className='vertical_middle'>
+{/* 
                                                         {((!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):false ) || (!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):false))?
                                                         <div className='margin_top_small_rish'>
                                                             <PieChart
                                                             data = {[!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):0, !!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):0]}
                                                             />
                                                         </div>
-                                                        : <div style={{marginTop:'2rem'}} className='row'>
-                                                        <div className='col text-center'>
+                                                        : */}
+                                                         <div className="business_wrapper_rish" style={{marginTop:'4rem'}}>
+                                                        <div className=' text-center'>
                                                             <p className="businessPrice businessEarn">&#8377; {!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):'0'}</p>
                                                             <p className="Earn">Business <br></br>Earned</p>
                                                         </div>
-                                                        <div className='col text-center'>
+                                                        <div className=' text-center'>
                                                             <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
                                                             <p className="Earn">Business<br></br> Lost</p>
                                                         </div>
-                                                    </div>  }
-                                        
-                                                       
+                                                    </div> 
+                                                     {/* } */}
                                                     </div>
                                                     {/* <div className="tag_section_rish margin_top_small_rish">
                                                             <span className='tag_section_child text-center'>
@@ -770,8 +770,12 @@ class DashboardComponent extends React.PureComponent {
                                                                     <option value='365'>Yearly</option>
                                                                 </select> */}
                                         </div>
-                                        <div className="businessWarn">
-                                            <p>Please take action on real time insights to increase your business</p>
+                                        <div style={{marginTop:'1rem'}} className="text-center">
+                                            <p>Real Time Business </p>
+                                        </div>
+
+                                        <div style={{position:'absolute', bottom:'1%'}}>
+                                            <p className="businessWarn">Please take action on real time insights to increase your business</p>
                                         </div>
                                     </div> 
 
