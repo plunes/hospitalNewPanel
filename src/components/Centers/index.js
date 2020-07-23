@@ -9,6 +9,7 @@ import CenterComponent from "./CenterComponent"
 import NewNotif from '../functional/NewNotif';
 import { compose } from 'redux';
 import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from '../functional/Button';
 
 class Centers extends React.PureComponent{
         constructor(props){
@@ -79,9 +80,9 @@ class Centers extends React.PureComponent{
                     }
                     
                 </div>
-                <div className="text-center margin-top-medium_ris">
+                <div className="text-center margin-bottom-medium_ris margin-top-medium_ris">
                     {  !this.props.get_centers_loading &&  <Link to="/dashboard/centers?addCenter=true">
-                <button className="common_button_rish margin_top_medium_rish margin_bottom_medium_rish">Add Center</button>
+                <Button style={{marginBottom:'1rem'}} onClick = {()=>console.log()} >Add Center</Button>
                 </Link> }
                 </div>
                 </div>

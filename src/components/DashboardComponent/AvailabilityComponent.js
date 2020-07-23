@@ -8,6 +8,7 @@ import TimeSlot from '../functional/TimeSlot'
 import LoaderComponent from "../functional/LoaderComponent"
 import NewNotif from   '../functional/NewNotif'
 import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from '../functional/Button';
 
 class AvailabilityComponent extends Component {
    constructor(props) {
@@ -279,7 +280,7 @@ setAvailabilityClr = () =>{
                     </div>
                    ))}
                       <div className="time_clo my_avl text-center">
-                      <button onClick= {()=>this.handleSubmitAvail()} className="common-button">Submit</button>
+                      <Button style={{marginBottom:'1rem'}} onClick= {()=>this.handleSubmitAvail()}>Submit</Button>
                       </div>
                 </div>
                 </div>

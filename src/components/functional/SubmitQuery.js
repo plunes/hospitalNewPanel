@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import {  useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
+import Button from "./Button"
 
 
  const SubmitQuery= (props) => {
@@ -48,7 +49,7 @@ import LoaderComponent from "./LoaderComponent"
      onChange = {(e)=>setQuery(e.target.value)}
      />
     <div className="sub_que">
-     <span onClick={()=>submit_query()} style={{cursor:'pointer'}} className="sub_fr">Submit</span>
+     <Button onClick={()=>submit_query()} style={{cursor:'pointer'}} >Submit</Button>
     </div>
 </div>
 <div className="cal_nu">

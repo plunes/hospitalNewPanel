@@ -2,6 +2,7 @@ import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
 import React from "react"
 import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from './Button'
 
  const EditProfileForm= (props) => {
    console.log(props.loadingState,"props in EditProfileForm")
@@ -68,9 +69,10 @@ console.log(props.isCenter,"props.iscenter")
     disabled={true}
     onChange={props.handleChange} 
     value = {props.location}/>  
-
-     <button onClick={()=>submitdetails()} className="common-button">Submit</button>
-
+     
+     <div className='text-center'>
+     <Button onClick={()=>submitdetails()} >Submit</Button>
+     </div>
     </div>
   )
 }

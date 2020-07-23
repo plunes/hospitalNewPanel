@@ -4,6 +4,7 @@ import Select from "../Select"
 import React, { useRef, useState, useEffect } from "react"
 import { is_positive_whole_number, get_url_params } from "../../utils/common_utilities"
 import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from "./Button"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -128,7 +129,8 @@ import AnimatedMount from "../../HOC/AnimatedMount"
        </div>
        <div className="col-lg-3">
   <h6 className="fil_nm">{!!props.doctorImageName?props.doctorImageName:'File Name'}</h6>
-       <button  onClick={(e)=>handleImageClick(e)} className="upld common-button">Upload</button>
+         <Button  className="upld common-button" onClick={(e)=>handleImageClick(e)}>Upload</Button>
+       {/* <button >Upload</button> */}
        </div>
    </div>
    <form class="shake" role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
@@ -244,7 +246,8 @@ import AnimatedMount from "../../HOC/AnimatedMount"
               </div>
 
             <div className="time_clo text-center">
-            <button onClick={()=>submitdetails()} className="common-button">Submit</button>
+              <Button onClick = {submitdetails}>Submit</Button>
+            {/* <button onClick={()=>submitdetails()} className="common-button">Submit</button> */}
             </div>
          </div>}
    </div>

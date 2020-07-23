@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom"
 import Map from "../MapComponent"
 import LoaderComponent from "../functional/LoaderComponent";
 import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from "../functional/Button";
 function MyError(message){
     this.message = message;
 }
@@ -169,7 +170,7 @@ render(){
                         </div>
                 </div>
                 <div className="text-center margin-top-medium_ris">
-                  <button style={{marginTop:'3rem', marginBottom:'1rem'}} onClick={()=>this.handle_submit()} className="common_button_rish cursor-pointer">Submit</button>
+                  <Button style={{marginTop:'3rem', marginBottom:'1rem'}} onClick={()=>this.handle_submit()} >Submit</Button>
                 </div>
             </div>
         </div>

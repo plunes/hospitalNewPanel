@@ -244,6 +244,11 @@ display: flex;
    color:#01D35A !important;
 }
 
+.link_text {
+cursor: pointer;
+color:#01D35A !important;
+}
+
 .heading_footer_rish {
 text-align: left;
 font-weight:normal;
@@ -563,4 +568,8 @@ margin: 0 1%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+u {
+    text-decoration: none !important;
 }

@@ -50,6 +50,7 @@ import Select from "../Select";
 import { is_positive_real_number, get_slider_labels, paginate_data } from "../../utils/common_utilities"
 import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
+import Button from "../functional/Button"
 
 import { get_procedures, clr_procedures , update_modified_procedures, get_user_specialities,
     get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading } from "../../actions/catalogue_actions"
@@ -1234,12 +1235,14 @@ class MyCatalogueComponent extends Component {
                                 </React.Fragment>
                                   ))}
                                 <div className="text-center">
-                                 <button  style={{marginTop:'.5rem', width : '13rem !important', height:'3rem !important'}} onClick = {()=>this.add_selected_remain_specs()} className='button_rish color_white_rish  add_speciality_button'>Submit</button>
+                                <Button style={{marginTop:'.5rem', width : '13rem !important', height:'3rem !important'}} onClick = {()=>this.add_selected_remain_specs()} >Submit</Button>
+                                 {/* <button >Submit</button> */}
                                 </div>  
                               </div>
                               </React.Fragment>
                               : 
-                              <button onClick = {()=>this.setState({add_remaining_specs: true})} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Add Speciality</button>
+                              <Button  onClick = {()=>this.setState({add_remaining_specs: true})} className=' margin_top_small_rish margin_bottom_small_rish '>Add Speciality</Button>
+                             
                             }
                          </div>
                         </div>
@@ -1313,7 +1316,7 @@ class MyCatalogueComponent extends Component {
                                        
                                     </div>}
                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
-                                      <button onClick = {()=>this.update_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
+                                        <Button  onClick = {()=>this.update_procedure()} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
                                       </div>
                                       }
 
@@ -1370,7 +1373,8 @@ class MyCatalogueComponent extends Component {
                                     </div>} 
 
                                 {((this.state.selected_procedures.length !==0) && (!!this.state.addProcedureFlag)) &&  <div className='text-center'>
-                                      <button onClick = {()=>this.add_procedure()} className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button>
+                                <Button  onClick = {()=>this.add_procedure()} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
+                                      {/* <button  className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button> */}
                                       </div>
                                       }
                            </div>

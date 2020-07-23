@@ -207,7 +207,7 @@ body {
   position: relative;
 }
 .underline {
-      text-decoration: underline;
+      /* text-decoration: underline; */
       cursor: pointer;
 }
 .underline:hover{
@@ -988,9 +988,14 @@ html {
   border: none;
 }
 .link_text_rish {
-  text-decoration: underline;
+  color:  #01D35A;
   font-weight: 600;
   cursor: pointer;
+}
+.button_text_rish {
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 .location_edit_parent {
   display: flex;
