@@ -514,6 +514,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
+        console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
         // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         console.log(this.state,"this.state in dashboard")
         console.log(this.props,"this.props in dashboard component")

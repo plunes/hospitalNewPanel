@@ -3106,6 +3106,7 @@ export const sendUpdateData = (uData) => async dispatch => {
   return await axios.patch(base_url_without_v5 + '/admin/updatePrice', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       //console.log(res.data)
+      console.log(res,"res in send Update")
       if (res.data.status === 1) {
         //console.log(res.data, 'data')
         dispatch({
