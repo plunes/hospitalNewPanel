@@ -5,6 +5,7 @@ import React from "react"
 import validator from "validator"
 import { is_valid_pan } from '../../utils/common_utilities'
 import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from './Button'
 function  MyError(message){
   console.log(this,"this in myerror")
   this.message = message;
@@ -136,8 +137,8 @@ MyError.prototype = new Error()
    </span>
  </div>
 </div>
-<div style={{marginBottom:'1rem'}}>
-<button type="submit" style={{position:'relative', bottom:'1rem'}} className="btn btn-success proceedbtn manage_payment_submit">Proceed</button>
+<div className="text-center" style={{marginBottom:'1rem'}}>
+<Button type="submit" style={{position:'relative', bottom:'1rem'}} >Proceed</Button>
 </div>
 
 </form>
