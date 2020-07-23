@@ -1158,3 +1158,11 @@ html {
   height:auto;
   max-height:600px; 
 }
+
+.cancel_submit_wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+}

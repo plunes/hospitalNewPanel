@@ -82,6 +82,7 @@ class MyCatalogueComponent extends Component {
             variance:0,
             variance_speciality:'',
             global_flag:true,
+            global_variance:'',
             limit:50,
             searchQuery:'',
             page:1,
@@ -318,7 +319,8 @@ class MyCatalogueComponent extends Component {
                         message:"Variance successfully updated"
                     },
                     procedures:this.state.selected_speciality === this.state.variance_speciality ?this.state.procedures.map(item=>{return{...item, variance}}):this.state.procedures,
-                    variance:0
+                    variance:0,
+                    global_variance:this.state.variance
                 })
             }else{
                 this.setState({
@@ -704,7 +706,9 @@ class MyCatalogueComponent extends Component {
                             specialities:arr,
                             selected_speciality:arr[0].value,
                             variance_speciality:arr[0].value,
-                            loading:true
+                            loading:true,
+                            global_variance:nextProps.get_user_specialities_ret.global_variance,
+                            edit_variance_flag:false
                         },()=>{
                             nextProps.set_catalogue_data({
                                 ...nextProps.catalogue_data,
@@ -1104,7 +1108,7 @@ class MyCatalogueComponent extends Component {
                                             min={0}
                                             max={100}
                                             labels={get_slider_labels({lower:0, upper:100})}
-                                            value={this.state.variance}
+                                            value={this.state.edit_variance_flag?this.state.variance:this.state.global_variance}
                                             onValueChange={(val)=>console.log(val)}
                                             onChange={val => this.change_variance(val)} 
                                             />
@@ -1123,16 +1127,22 @@ class MyCatalogueComponent extends Component {
                                     </div>}
 
                                     <div className="text variance_info_parent text-center">
+                                       {this.state.edit_variance_flag ?<React.Fragment>
                                         <span className='variance_info_child'>
                                              <text><text className='bold'>Variance: </text>{this.state.variance}</text>
                                         </span>
                                         <span className='variance_info_child'>
                                            <text><text className='bold'>Expected Leads: </text>{this.get_leads_count()}</text>
                                         </span>
-                                    </div>
+                                       </React.Fragment>:<React.Fragment>
+                                        <span className='variance_info_child'>
+                                                <text><text className='bold'>Global Variance: </text>{this.state.global_variance}</text>
+                                            </span>
+                                           </React.Fragment>}
+                                        </div>
                                   
                                     <div style = {{position:'relative', height:'1rem'}} className='text-center'>
-                                        {this.props.set_variance_loading_flag?<LoaderComponent second_variant = {true} /> :<button  style={{marginTop:'1rem', width :'13rem !important', height:'2rem'}} onClick = {()=>this.set_variance()} className='button_catalogue_rish'>Submit</button>}
+                                        {this.props.set_variance_loading_flag?<LoaderComponent second_variant = {true} /> : this.state.edit_variance_flag ?<div className="cancel_submit_wrapper"> <text onClick={()=>this.setState({edit_variance_flag:false})} className="link_text_rish green_text_rish">Cancel</text> <text onClick={()=>this.set_variance()} className="link_text_rish green_text_rish">Submit</text>  </div> :<div> <text onClick={()=>this.setState({edit_variance_flag:true})} className="link_text_rish green_text_rish">Edit</text> </div>}
                                     </div>
                                     <div className='catalogue_note_wrapper margin_top_small_rish'>
                                         <text className='catalogue_note'><text className='bold'>Note :</text> Variance is a range which allows the marketing campaign to reach more people, do not confuse it with discount. Higher the variance higher the footfall.</text>

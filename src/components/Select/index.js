@@ -338,7 +338,7 @@ class Select extends Component {
 
     const selected = values.includes(value)
 
-    let className = "option"
+    let className = `option ${this.props.option_className}`
     if (selected) className += " selected"
     if (index === focusedValue) className += " focused"
 

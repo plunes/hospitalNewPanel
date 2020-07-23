@@ -251,8 +251,19 @@ hr
     max-height: 37rem;
     min-height: 20rem;
     overflow-x: hidden;
-    padding: 1rem 0rem;
+    padding: 0rem 0rem 1rem 0rem;
     position: relative;
+}
+.centers_dropdown_options {
+    font-size: .7rem !important;
+}
+
+.transparent_background {
+    background: transparent !important;
+}
+.business_center {
+    width: 10rem !important;
+    margin-left: 2rem !important; 
 }
 
 .dashrow2col1
@@ -642,7 +653,7 @@ hr
           overflow-x: hidden;
           max-height: 37rem;
           min-height: 20rem;
-          padding: 1rem 0rem;
+          padding: 0rem 0rem 1rem 0rem;
     }
     /* Scrollbar Styling */
     .custome_scrol ::-webkit-scrollbar {

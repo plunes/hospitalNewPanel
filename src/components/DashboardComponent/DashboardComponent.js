@@ -39,6 +39,7 @@ import AnimatedMount from "../../HOC/AnimatedMount"
 import PieChart from '../functional/PieChart'
 import LineChart from '../functional/LineChart'
 import ToolTip from "../Tooltip"
+import Select from "../Select";
 
 const customStyles = {
     content: {
@@ -642,11 +643,23 @@ class DashboardComponent extends React.PureComponent {
                                      {/* <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text> */}
                                      </div>
                                    
-                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'.5rem'}}>
-                                     {this.props.centers_name_list.length !==0 &&   <select style = {{background:'none', border:'none none 1px solid grey none'}} onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
-                                                                 <option value={''}>{this.props.prof_data.name}</option>
-                                                                  {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                          </select>}
+                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'0rem', width:'10rem'}}>
+                                     {this.props.centers_name_list.length !==0 &&   <Select
+                                            options = {this.props.centers_name_list}
+                                            handleChange = {this.handle_actionable_insights}
+                                            placeholder= "Centers"
+                                            input_text_class = "catalogue_dropdown transparent_background"
+                                            wrapper_class = "catalogue_dropdown_wrapper transparent_background"
+                                            value = {this.state.get_actionable.center}
+                                            name = "speciality_chosen"
+                                            option_className="centers_dropdown_options"
+                                            label = "Centers" /> 
+                                        //      <select style = {{background:'none', border:'none none 1px solid grey none'}} onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
+                                        //                          <option value={''}>{this.props.prof_data.name}</option>
+                                        //                           {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                        //   </select>
+                                          
+                                          }
                                        </span>
                                       </span>
                                       <div  className="second_scro">
@@ -684,17 +697,43 @@ class DashboardComponent extends React.PureComponent {
                                                         <text style={{lineHeight:'2.5rem'}} className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
                                                          <span className="heading_flex_child_2">  
-                                                          {this.props.centers_name_list.length !==0  &&  <select  style = {{background:'none', border:'none none 1px solid grey none', display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
-                                                             <option value={''}>{this.props.prof_data.name}</option>
-                                                                {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                                           </select>}
-
-                                                            <select style={{display:'inlineBlock', marginLeft:'.5rem', background:'none', border:'none none 1px solid grey none'}} onChange={(e)=>this.handleDaysChange(e.target.value)} name="days" value={this.state.get_business.days} className="select_class_rish">
+                                                          {this.props.centers_name_list.length !==0  &&  <Select
+                                                                options = {this.props.centers_name_list}
+                                                                handleChange = {this.handle_business_center_change}
+                                                                placeholder= "Centers"
+                                                                input_text_class = "catalogue_dropdown  transparent_background"
+                                                                wrapper_class = "catalogue_dropdown_wrapper business_center transparent_background"
+                                                                value = {this.state.get_business.center}
+                                                                name = "speciality_chosen"
+                                                                option_className="centers_dropdown_options"
+                                                                label = "Centers" /> 
+                                                          
+                                                          
+                                                          
+                                                          
+                                                        //   <select  style = {{background:'none', border:'none none 1px solid grey none', display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
+                                                        //      <option value={''}>{this.props.prof_data.name}</option>
+                                                        //         {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                                        //    </select>
+                                                           } 
+                                                           <div style={{marginLeft:'1rem'}}>
+                                                             <Select
+                                                                 options = {[{name:'Today', value:1},{name:'Last 7 days', value:7}, {name:'Last 30 days', value:30}, {name:'Last Year', value:365}]}
+                                                                  handleChange = {(e)=>this.handleDaysChange(e.target.value)}
+                                                                  placeholder= "Select days"
+                                                                 input_text_class = "catalogue_dropdown transparent_background"
+                                                                  wrapper_class = "catalogue_dropdown_wrapper business_center transparent_background"
+                                                                   value = {this.state.get_business.days}
+                                                                   name = "speciality_chosen"
+                                                                   option_className="centers_dropdown_options"
+                                                                    label = "Select days" /> 
+                                                            </div>
+                                                            {/* <select style={{display:'inlineBlock', marginLeft:'.5rem', background:'none', border:'none none 1px solid grey none'}} onChange={(e)=>this.handleDaysChange(e.target.value)} name="days" value={this.state.get_business.days} className="select_class_rish">
                                                                     <option value={1}>Today</option>
                                                                     <option value={7}>Weekly</option>
                                                                     <option value={30}>Monthly</option>
                                                                     <option value={365}>Yearly</option>
-                                                           </select>
+                                                           </select> */}
                                                            
                                                          </span>
                                                          

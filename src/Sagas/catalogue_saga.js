@@ -79,7 +79,8 @@ function* get_user_specs_saga(action) {
             yield put(get_user_specialities_ret({
                 success:true,
                 message:' successfully updated',
-                data:api_data.data.data
+                data:api_data.data.data,
+                global_variance:api_data.data.globalVariance
                }))
           }else{
             yield put(get_user_specialities_ret({
