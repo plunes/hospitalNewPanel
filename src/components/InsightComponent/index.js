@@ -1,6 +1,8 @@
 import React from "react"
 import TimerComponent from '../TimerComponent'
 import AnimatedMount from "../../HOC/AnimatedMount"
+import ProfileAvatar from "../functional/ProfileAvatar"
+
 class InsightComponent extends React.PureComponent {
     constructor(props){
         super(props)
@@ -33,7 +35,8 @@ class InsightComponent extends React.PureComponent {
           <React.Fragment>  
                 <div className="action_insight_wrapper" key={index}>
                     <span className="action_insight_image_wrapper">
-                        <img src ="/icon/insight_image.svg" className="action_insight_image"/>
+                        {/* <img src ="/icon/insight_image.svg" className="action_insight_image"/> */}
+                        <ProfileAvatar name = {this.props.s.userName} />
                     </span>
                     <span className="insight_component_info_wrap">
                     <div  className="RealtimeUsername">

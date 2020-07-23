@@ -3,7 +3,7 @@ import SubmitQuery from "../functional/SubmitQuery";
 import { connect } from 'react-redux';
 import { submit_query, submit_query_clr } from "../../actions/userActions"
 import  "./AboutUs.css";
-
+import AnimatedMount from "../../HOC/AnimatedMount"
  class HelpComponent extends React.PureComponent {
         constructor(props){
             super(props)
@@ -32,7 +32,7 @@ import  "./AboutUs.css";
         console.log(this.props,"this.props in helpCompoent")
         return (
             <React.Fragment>
-                <div className='main_content_rish'>
+                <div className='main_content_rish new_card_class'>
                   <div>
                   <div className="helppageBody">
                       <SubmitQuery 
@@ -207,6 +207,18 @@ import  "./AboutUs.css";
 const mapStateToProps = state => ({
     submit_query_ret : state.user.submit_query_ret
   })
-  export default connect(mapStateToProps, {
-  submit_query, submit_query_clr
-  })(HelpComponent)
+
+  export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(connect(mapStateToProps, {
+    submit_query, submit_query_clr
+    })(HelpComponent))

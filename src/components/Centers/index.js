@@ -8,6 +8,7 @@ import LoaderComponent from '../functional/LoaderComponent';
 import CenterComponent from "./CenterComponent"
 import NewNotif from '../functional/NewNotif';
 import { compose } from 'redux';
+import AnimatedMount from "../../HOC/AnimatedMount"
 
 class Centers extends React.PureComponent{
         constructor(props){
@@ -48,8 +49,8 @@ class Centers extends React.PureComponent{
             return <AddCenter />
         }
         return (
-            <div className= 'main_content_rish'>
-                <div style={{paddingLeft:'1rem'}} className="centers_wrapper">
+            <div className= 'main_content_rish new_card_class'>
+                <div style={{paddingLeft:'1rem'}} className="centers_wrapper ">
                     <NewNotif 
                     ret = {this.state.ret}
                     retClr = {()=>this.setState({ret:false})}
@@ -92,8 +93,19 @@ const mapStateToProps = state => ({
     centers_data:state.user.data.centers_data,
     get_center_cred_ret:state.user.get_center_cred_ret
   })
-  
-export default compose(
+
+export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(compose(
     withRouter,
     connect(mapStateToProps, { set_centers_data, get_center_cred, get_center_cred_clr , set_centers_cred})
-)(Centers)
+)(Centers))

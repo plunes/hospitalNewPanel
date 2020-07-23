@@ -541,3 +541,26 @@ margin: 0 1%;
  margin-right: .5rem;
  margin-bottom: .2rem;
 }
+
+.profile_avatar_span {
+    height: 5rem;
+    width: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: auto;
+    background: #AEAEAE;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 2.5rem;
+    line-height: 5rem;
+    opacity: 1;
+}
+
+.profile_avatar_div {
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}

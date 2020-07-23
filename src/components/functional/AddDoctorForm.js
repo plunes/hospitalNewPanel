@@ -3,6 +3,7 @@ import LoaderComponent from "./LoaderComponent"
 import Select from "../Select"
 import React, { useRef, useState, useEffect } from "react"
 import { is_positive_whole_number, get_url_params } from "../../utils/common_utilities"
+import AnimatedMount from "../../HOC/AnimatedMount"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -253,4 +254,15 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
 }
  
 
-export default AddDoctorForm
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(AddDoctorForm)

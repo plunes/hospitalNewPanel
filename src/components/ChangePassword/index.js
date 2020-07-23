@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ChangePassForm from "../functional/changePassForm"
 import NewNotif from "../functional/NewNotif";
 import './index.css'
+import AnimatedMount from "../../HOC/AnimatedMount"
 
 
 class ChangePassword extends React.PureComponent {
@@ -96,9 +97,20 @@ const mapStateToProps = state => ({
      resetPassRet: state.user.resetPassRet
 })
 
- export default connect(mapStateToProps, { 
+export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(connect(mapStateToProps, { 
     getUserDetails,
     clearResetRet,
     submitResetDetails,
     logout
-})(ChangePassword);
+})(ChangePassword))

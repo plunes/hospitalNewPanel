@@ -4,7 +4,7 @@ import LoaderComponent from "./LoaderComponent"
 import React from "react"
 import validator from "validator"
 import { is_valid_pan } from '../../utils/common_utilities'
-
+import AnimatedMount from "../../HOC/AnimatedMount"
 function  MyError(message){
   console.log(this,"this in myerror")
   this.message = message;
@@ -143,10 +143,21 @@ MyError.prototype = new Error()
 </form>
   )
 }
- 
 
-export default ManagePayment
 
+
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(ManagePayment)
 
 
 
