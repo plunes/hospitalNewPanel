@@ -38,6 +38,7 @@ import Tag from '../functional/Tag'
 import AnimatedMount from "../../HOC/AnimatedMount"
 import PieChart from '../functional/PieChart'
 import LineChart from '../functional/LineChart'
+import ToolTip from "../Tooltip"
 
 const customStyles = {
     content: {
@@ -510,7 +511,6 @@ class DashboardComponent extends React.PureComponent {
                 })
             }
         }
-      
     }
 
     render() {
@@ -599,7 +599,8 @@ class DashboardComponent extends React.PureComponent {
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
                                        <div>
-                                        <p  className='business vertical_align_rish'>Real Time Insights</p>
+                                        <p  data-tip='' data-for='toot_id' className='business vertical_align_rish'>Real Time Insights</p>
+                                        {/* <ToolTip id="toot_id" heading="some heading" infoText = "Some Info Text" /> */}
                                         {/* <text className='catalogue_note'><text className='bold'>Note :</text> These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.</text> */}
                                        </div>
                                         

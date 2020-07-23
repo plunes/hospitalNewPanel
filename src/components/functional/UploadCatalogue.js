@@ -79,13 +79,13 @@ const handleUpload = (e) => {
          <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
        </div> :
         <div className="text-center margin-top-medium_ris">
-        <button onClick={()=>handleButtonClick()} type="button" className="btn btn-default">
+        <button onClick={()=>handleButtonClick()} type="button" className="btn btn-light-green">
             <span className="glyphicon glyphicon-search"></span> Upload Catalogue
         </button>
        <div>
        <text className='catalogue_note'><text className='bold'>Note :</text>Upload your Catalogue from here in a file or go to "Available Procedures" section to add prices of services directly to your catalogue and start receiving Patients
        </text>
-       <div className="text-center"> <text onClick = {()=> props.downloadCatalogue()} className='link_text_rish'>Click to download a sample</text></div>
+       <div className="text-center margin_top_small_rish"> <text onClick = {()=> props.downloadCatalogue()} className='link_text_rish '>Click to download a sample</text></div>
        </div>
        <input  
     style={{display:'inline',display:'none'}}

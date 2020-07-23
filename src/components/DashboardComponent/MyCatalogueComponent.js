@@ -1135,21 +1135,21 @@ class MyCatalogueComponent extends Component {
                                         {this.props.set_variance_loading_flag?<LoaderComponent second_variant = {true} /> :<button  style={{marginTop:'1rem', width :'13rem !important', height:'2rem'}} onClick = {()=>this.set_variance()} className='button_catalogue_rish'>Submit</button>}
                                     </div>
                                     <div className='catalogue_note_wrapper margin_top_small_rish'>
-                                        <text className='catalogue_note'><text className='bold'>Note :</text> Please upload your best variance so that you receive maximum patient footfall and enhance your revenue</text>
+                                        <text className='catalogue_note'><text className='bold'>Note :</text> Variance is a range which allows the marketing campaign to reach more people, do not confuse it with discount. Higher the variance higher the footfall.</text>
                                     </div>
                                     </div>
                                     <div className='catalogue_flex_child_6'>
                                        <div className="catalogue_chart_wrapper">
                                          <Barchart />
-                                        <div className="text-center">
-                                            <button onClick = {()=>this.open_catalogue_modal()} type="button" className="btn btn-default">
-                                                <span className="glyphicon glyphicon-search"></span> Upload Catalogue
-                                            </button>
-                                           <div>
-                                           <text className='catalogue_note'><text className='bold'>Note :</text>Upload your Catalogue from here in a file or go to "Available Procedures" section to add prices of services directly to your catalogue and start receiving Patients</text>
                                            </div>
                                         </div>
                                        </div>
+                                       <div className="text-center">
+                                            <button onClick = {()=>this.open_catalogue_modal()} type="button" className="btn btn-light-green">
+                                                <span className="glyphicon glyphicon-search"></span> Upload Catalogue
+                                            </button>
+                                           <div>
+                                           <text className='catalogue_note'><text className='bold'>Note :</text>Upload your service catalog and get direct leads matching your catalog. It increases the footfall of clients, List your every possible service.</text>
                                     </div>
                                </div>
                                <div className="tabs-header margin_top_small_rish">
