@@ -711,9 +711,9 @@ class DashboardComponent extends React.PureComponent {
                                                          </span>
                                                          <span className="heading_flex_child_2">  
                                                           {this.props.centers_name_list.length !==0  &&  <Select
-                                                                options = {this.props.centers_name_list}
+                                                                options = {[{name:this.props.prof_data.name, value:''},...this.props.centers_name_list]}
                                                                 handleChange = {this.handle_business_center_change}
-                                                                placeholder= "Centers"
+                                                                placeholder= {this.props.prof_data.name}
                                                                 input_text_class = "catalogue_dropdown  transparent_background"
                                                                 wrapper_class = "catalogue_dropdown_wrapper business_center transparent_background"
                                                                 value = {this.state.get_business.center}
