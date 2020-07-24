@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 
 import "./AvailabilityComponent.css";
 // import history from '../../history';
-
+import AnimatedMount from "../../HOC/AnimatedMount"
 
  class SettingsComponent extends Component {
      constructor(props){
@@ -64,7 +64,7 @@ import "./AvailabilityComponent.css";
           console.log(this.state,"state in SettingsComponent")
           return (
                <React.Fragment>
-                  <div className='main_content_rish'>
+                  <div className='main_content_rish new_card_class'>
                               <div>
                                    <div className="settingpageBody">
                                    <h4 style={{position:'relative'}} className="section_heading_rish">Settings</h4>
@@ -139,7 +139,20 @@ const mapStateToProps = state => ({
      logoutDevicesLoading:state.user.logoutDevicesLoading
 })
 
-export default connect(mapStateToProps, { 
+
+
+ export default AnimatedMount({
+     unmountedStyle: {
+       opacity: 0,
+       transform: 'translate3d(0, -2rem, 0)',
+       transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+     },
+     mountedStyle: {
+       opacity: 1,
+       transform: 'translate3d(0, 0, 0)',
+       transition: 'opacity .5s ease-out, transform .5s ease-out',
+     },
+   })(connect(mapStateToProps, { 
      logoutOtherDevices,
      logoutDevicesClr
- })(SettingsComponent);
+ })(SettingsComponent))

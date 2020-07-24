@@ -1,12 +1,31 @@
 import React from 'react';
 import { useToasts } from 'react-toast-notifications'
 import Select from "../Select"
+import  { is_positive_whole_number } from "../../utils/common_utilities"
 
 export default function VarianceDropdown(props) {
   console.log(props,"props in VarianceDropdown")
   return (
     <div>
-        <Select
+      <input
+         value={props.value}
+         onChange={
+             e =>{if(((is_positive_whole_number(e.target.value)) || (e.target.value==='0'))){
+                       if(e.target.value<=100){
+                        props.handleChange(e)
+                       }         
+                      // props.handleSelectedProcedureChange(e,props.data.serviceId)
+                   }else{
+                      e.preventDefault()
+                    }
+                    } 
+                }
+                name="editPrice"
+                style={{marginLeft:'0.3rem'}}
+                className="no_brdr_input consultaion_input"
+                type="number"
+      />
+        {/* <Select
           value={props.value}
           handleChange={props.handleChange}
           placeholder = "jkjk"
@@ -44,7 +63,7 @@ export default function VarianceDropdown(props) {
         },
     ]}
           
-        />
+        /> */}
          </div>
   );
 }

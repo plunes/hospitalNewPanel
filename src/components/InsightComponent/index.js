@@ -1,5 +1,7 @@
 import React from "react"
 import TimerComponent from '../TimerComponent'
+import AnimatedMount from "../../HOC/AnimatedMount"
+import ProfileAvatar from "../functional/ProfileAvatar"
 
 class InsightComponent extends React.PureComponent {
     constructor(props){
@@ -33,7 +35,8 @@ class InsightComponent extends React.PureComponent {
           <React.Fragment>  
                 <div className="action_insight_wrapper" key={index}>
                     <span className="action_insight_image_wrapper">
-                        <img src ="/icon/insight_image.svg" className="action_insight_image"/>
+                        {/* <img src ="/icon/insight_image.svg" className="action_insight_image"/> */}
+                        <ProfileAvatar name = {this.props.s.userName} />
                     </span>
                     <span className="insight_component_info_wrap">
                     <div  className="RealtimeUsername">
@@ -43,7 +46,7 @@ class InsightComponent extends React.PureComponent {
       <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
             </div>
             {
-              seconds_diff>0?
+              12>0?
                     <text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u></text>
                     : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
             }
@@ -65,9 +68,21 @@ class InsightComponent extends React.PureComponent {
             }
         </span>
                 </div>
-                <hr></hr>
+                {/* <hr></hr> */}
           </React.Fragment>
       )
     }
 }
-export default InsightComponent
+
+export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(InsightComponent);

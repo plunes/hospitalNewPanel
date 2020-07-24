@@ -9,10 +9,10 @@ class LandinHeader extends Component {
           <React.Fragment>
      <nav className="navbar custom_ha navbar-expand-md custom-navbar ">
         <div className="header_wrapper_rish oversize_wrap_rish display_flex">
-          <div className="header_wrapper_logo_child_rish ">
+        <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
               <Link to="/">
-                <img src="/logo.jpg" className="logo_rish cursor-pointer" />
+                <img src="/icon/plunes_transparent_logo.svg" style={{marginLeft:'2rem'}} className="logo_rish cursor-pointer" />
               </Link>
             </div>
           

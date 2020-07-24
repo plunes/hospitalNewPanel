@@ -244,6 +244,11 @@ display: flex;
    color:#01D35A !important;
 }
 
+.link_text {
+cursor: pointer;
+color:#01D35A !important;
+}
+
 .heading_footer_rish {
 text-align: left;
 font-weight:normal;
@@ -420,7 +425,7 @@ margin: 0 1%;
 }
 
 .header_link_text {
-    color: #9E9E9E !important;
+    color: #fff !important;
     font-size: 1.1rem;
 }
 .header_li_rish {
@@ -498,8 +503,8 @@ margin: 0 1%;
 }
 .notif_badge_wrapper_rish {
     position: absolute;
-    right: -1.1rem;
-    top: -4px;
+    right: 6rem;
+    top: -10px;
 }
 
 .NotifyImg
@@ -519,6 +524,9 @@ margin: 0 1%;
    display: flex;
    flex-wrap: wrap;
 }
+.modal-heading_ris { 
+    font-weight: 600 !important;
+}
 
 .notif_wrap_image {
     flex:1 1 20%;
@@ -534,4 +542,51 @@ margin: 0 1%;
     background-color: #fff !important;
     min-height: 30rem;
     position: relative;
+}
+.header_icon_rish {
+ height: 2rem;
+ width: auto;
+ margin-right: .5rem;
+ margin-bottom: .2rem;
+}
+
+.profile_avatar_span {
+    height: 4.5rem;
+    width: 4.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: auto;
+    background: #AEAEAE;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 4.5rem;
+    opacity: 1;
+}
+
+.profile_avatar_div {
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+u {
+    text-decoration: none !important;
+}
+
+.display_none {
+    display: none !important;
+}
+
+.profile_name_icon {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.catalogue_profile_name_wrapper {
+    margin: 0rem .8rem 1rem 0.8rem;
 }

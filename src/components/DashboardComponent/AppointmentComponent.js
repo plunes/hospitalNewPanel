@@ -16,6 +16,7 @@ import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/c
 
 import RescheduleComponent from '../RescheduleComponent';
 import NewNotif from '../functional/NewNotif';
+import AnimatedMount from "../../HOC/AnimatedMount"
 function MyError(message){
     this.message = message;
 }
@@ -750,7 +751,19 @@ const mapStateToProps = state => ({
     notif_id:state.user.notif_id
 })
 
-export default connect(mapStateToProps, {
+    
+export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(connect(mapStateToProps, {
     getBooking, 
     getBookingClr, 
     changeAppoint, 
@@ -758,5 +771,5 @@ export default connect(mapStateToProps, {
     reschedule_appointment,
     reschedule_appointment_clr,
     set_notif_id,
-    getTimeslot })(AppointmentComponent);
+    getTimeslot })(AppointmentComponent))
 

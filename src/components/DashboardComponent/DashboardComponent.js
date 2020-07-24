@@ -24,6 +24,7 @@ import 'react-rangeslider/lib/index.css'
 import AddLocationTab from "../AddLocationTab"
 // import NotifFunc from "../functional/NotifFunc"
 import LoaderComponent from "../functional/LoaderComponent"
+import ActionableInsight from "../functional/ActionableInsight"
 import InsightComponent from "../InsightComponent"
 import {
     isValidPhoneNumber,
@@ -34,6 +35,12 @@ import { isEmpty, is_positive_real_number, get_circular_progress_data, get_slide
 import NewNotif from '../functional/NewNotif';
 import CircularProgress from '../functional/CircularProgress'
 import Tag from '../functional/Tag'
+import AnimatedMount from "../../HOC/AnimatedMount"
+import PieChart from '../functional/PieChart'
+import LineChart from '../functional/LineChart'
+import ToolTip from "../Tooltip"
+import Select from "../Select";
+
 const customStyles = {
     content: {
         top: '50%',
@@ -85,7 +92,7 @@ class DashboardComponent extends React.PureComponent {
             value: 0,
             solValue: 0,
             distance: 30,
-            showBusiness :  true,
+            showBusiness :  false,
             ro_insight_count:50,
             user_map_loading:false,
             business_day:7,
@@ -126,26 +133,24 @@ class DashboardComponent extends React.PureComponent {
 
     handle_real_time_edit_price = (e) =>{
             let val = e.target.value
-            // val = parseInt(val)
-            // console.log(val,"val in handle Realt")
            if(is_positive_real_number(val))
            this.setState({real_time_edit_price:val})
            else{
-            // console.log("no_negative_value")
-           }
-           
+           }   
     }
-
-    
+ 
     componentWillReceiveProps(nextProps){
 
+        if(((nextProps.actioanable_update_loading === false) && (this.props.actioanable_update_loading===true))){
+            this.handleModal()
+        }
+         
         if(nextProps.insight_flag !== this.props.insight_flag){
             this.setState({
                 get_actionable_loading_other:false
             })
         }
         if(!!nextProps.act_as_admin_ret){
-            // console.log(nextProps.act_as_admin_ret,"nextProps.act_as_admin_ret")
             if(nextProps.act_as_admin_ret.success){
                 this.setState({
                     act_admin_loading:false,
@@ -159,7 +164,6 @@ class DashboardComponent extends React.PureComponent {
             nextProps.act_as_admin_clr()
         }
         if(!!nextProps.admin_otp_ret){
-            // console.log(nextProps.admin_otp_ret,"nextProps.admin_otp_ret")
             if(nextProps.admin_otp_ret.success){
                 if(this.state.act_as_admin_other){
                     nextProps.set_user_info({...this.props.prof_data,isCenter:true})
@@ -179,7 +183,6 @@ class DashboardComponent extends React.PureComponent {
         }
 
         if(!!nextProps.admin_details_ret){
-            // console.log(nextProps.admin_details_ret,"nextProps.admin_details_ret")
             if(nextProps.admin_details_ret.success){
                 this.setState({
                     submit_admin_details_loading:false,
@@ -197,7 +200,6 @@ class DashboardComponent extends React.PureComponent {
             if(!!!isEmpty(nextProps.prof_data)){
                 let coordinates = nextProps.prof_data.location.coordinates
                 if(!!coordinates){
-                    // console.log(!!!coordinates[0],"Cordinates[0] sdsd")
                     if(!!!coordinates[0]){
                         this.setState({
                             initial_render:false
@@ -280,13 +282,12 @@ class DashboardComponent extends React.PureComponent {
             get_business_loading:true,
             get_business:{
                 ...this.state.get_business,
-               days:value
+               days:parseInt(value, 10)
             }
         },()=>this.props.get_business({...this.state.get_business}))
     }
 
      handle_business_center_change = (e)=>{
-        //  console.log(e.target.value,"value in get_business_center_change")
          this.setState({
              get_business_loading:true,
              get_business:{
@@ -339,24 +340,26 @@ class DashboardComponent extends React.PureComponent {
 
     async handleSubmit(e) {
         e.preventDefault();
-        if(this.state.actionUpdatedPrice !== this.state.updateData.price){
-            let data = {
-                updatePrice: this.state.actionUpdatedPrice,
-                updateData: this.state.updateData
+        console.log(this.state,"this.state in handleSubmit")
+        if((parseInt(this.state.actionUpdatedPrice,10).toFixed(2) !== parseInt(this.state.updateData.price,10).toFixed(2))){
+            if(this.state.value !==0 ){
+                let data = {
+                    updatePrice: this.state.actionUpdatedPrice.toFixed(2),
+                    updateData: this.state.updateData
+                }
+                this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
+                this.setState({
+                    actionablePriceLoading:true,
+                    selected_actionable:this.state.updateData
+                },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
             }
-            this.setState({
-                actionablePriceLoading:true
-            },()=>this.props.sendUpdateData(data))
         }
     }
      handleRealSubmit(e) {
         e.preventDefault();
-
         try {
-           
-            console.log(this.state,"this state in handleRealSubmit")
-            if(parseInt(this.state.real_time_edit_price,10)>=parseInt(this.state.realUpdatePrice, 10)){
-                throw new MyError(`Price must be less than ${this.state.realUpdatePrice}`)
+            if(parseInt(this.state.real_time_edit_price,10) === 0){
+                throw new MyError(`Price must be greater  than 0`)
             }
             if((this.state.real_time_edit_price !== false) && (this.state.real_time_edit_price ==='')){
                 this.setState({
@@ -371,10 +374,22 @@ class DashboardComponent extends React.PureComponent {
                     realUpdatePrice: this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice,
                     realUpdateData: this.state.realUpdateData
                 }
+
+
+                let obj = {
+                    solutionId: this.state.realUpdateData.solutionId,
+                    serviceId:  this.state.realUpdateData.serviceId
+                  }
+
+                  if(this.state.realUpdateData.suggested){
+                    obj.price =  Math.round(Number(this.state.real_time_edit_price))
+                  }else{
+                      obj.discount = this.state.solValue
+                  }
                 this.setState({
                     realUpdatePriceLoading:true
                 },()=>{
-                    this.props.updateRealPrice(data);
+                    this.props.updateRealPrice(obj);
                 }) 
              }
         }
@@ -391,6 +406,7 @@ class DashboardComponent extends React.PureComponent {
   
     }
     handleUpdatePrice(updateData) {
+        console.log(updateData,"update data in handleUpdatePrice")
         this.setState({
             modalIsOpen: true,
             updatePrice: updateData.userPrice,
@@ -413,20 +429,8 @@ class DashboardComponent extends React.PureComponent {
     }
 
     async componentDidMount() {
-    //      // to get the geo location tab
-    //      if(!!this.state.initial_render){
-    //         if(!!!isEmpty(this.props.prof_data)){
-    //             // console.log(this.props.prof_data,"prof_data")
-    //           if(!!!this.props.prof_data.geoLocation){
-    //             this.setState({
-    //                 initial_render:false
-    //             })
-    //             this.props.set_location_toggler(true)
-    //           }
-    //         }
-    //     }
-    
-    
+
+
         if(!!!this.props.mount.dash_mount){
             this.setState({
                 loader:true
@@ -519,13 +523,13 @@ class DashboardComponent extends React.PureComponent {
                 })
             }
         }
-      
     }
 
     render() {
-        // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
-        console.log(this.state,"this.state in dashboard")
-        console.log(this.props," this.props in dashboard component")
+        // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
+        // // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
+        // console.log(this.state,"this.state in dashboard")
+        console.log(this.props,"this.props in dashboard component")
         let { percent } = this.state
         const options = {
             title: {
@@ -577,10 +581,10 @@ class DashboardComponent extends React.PureComponent {
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
                         />
-                        <NewNotif 
+                        {/* <NewNotif 
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
-                        />
+                        /> */}
                         <NewNotif 
                             ret ={this.state.ret}
                             retClr = {()=>{this.setState({
@@ -588,7 +592,8 @@ class DashboardComponent extends React.PureComponent {
                             })}}
                         />
                         <div className="profile_name_wrapper">
-                           <div className="profile_name_name" >    
+                           <div className="profile_name_name" >   
+                              <img src='/icon/profile_name_icon.svg' className='profile_name_icon' /> 
                               <text style={{textTransform:'capitalize'}}>{this.props.prof_data.name}</text>
                            </div>
                            <div className="profile_name_number">
@@ -602,11 +607,16 @@ class DashboardComponent extends React.PureComponent {
 
                             <div className='insigts_section_wrapper'>
                                 <div className="real_insights_wrapper">
-                                <div style={{position:'relative'}} className='dashboardsection new_card_class'>
+                                <div style={{position:'relative', background:'transparent'}} className='dashboardsection '>
                                         <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                        <p  className='business vertical_align_rish'>Real Time Insights</p>
+                                       <div>
+                                        <p  data-tip='' data-for='toot_id' className='business vertical_align_rish'>Real Time Insights</p>
+                                        {/* <ToolTip id="toot_id" heading="some heading" infoText = "Some Info Text" /> */}
+                                        {/* <text className='catalogue_note'><text className='bold'>Note :</text> These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.</text> */}
+                                       </div>
+                                        
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
                                         <div className='scrolling_sec'>
@@ -636,39 +646,44 @@ class DashboardComponent extends React.PureComponent {
 
                                 <div className="action_insights_wrapper">
                                     
-                                <div className="dashboardsection dashrow2col2 new_card_class ">
+                                <div className="dashboardsection dashrow2col2">
                                     <div style={{height:'100%'}}>
                                        <span className='businessrow1col1 realtimewidth '>
                                        {/* <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img> */}
+                                     <div>
                                      <p className='business vertical_align_rish'>Actionable Insights</p>
-                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',bottom:'.5rem'}}>
-                                     {this.props.centers_name_list.length !==0 &&   <select onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
-                                                                 <option value={''}>{this.props.prof_data.name}</option>
-                                                                  {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                          </select>}
+                                     {/* <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text> */}
+                                     </div>
+                                   
+                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'0rem', width:'10rem'}}>
+                                     {this.props.centers_name_list.length !==0 &&   <Select
+                                            options = {[{name:this.props.prof_data.name, value:''},...this.props.centers_name_list]}
+                                            handleChange = {this.handle_actionable_insights}
+                                            placeholder= {this.props.prof_data.name}
+                                            input_text_class = "catalogue_dropdown transparent_background"
+                                            wrapper_class = "catalogue_dropdown_wrapper transparent_background"
+                                            value = {this.state.get_actionable.center}
+                                            name = "speciality_chosen"
+                                            option_className="centers_dropdown_options"
+                                            // arrow_class = "display_none"
+                                            label = "Centers" /> 
+                                        //      <select style = {{background:'none', border:'none none 1px solid grey none'}} onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
+                                        //                          <option value={''}>{this.props.prof_data.name}</option>
+                                        //                           {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                        //   </select>
+                                          
+                                          }
                                        </span>
                                       </span>
                                       <div  className="second_scro">
                                         {(this.props.get_real_insight_loading_flag || this.state.get_actionable_loading_other)? <LoaderComponent/>:
                                             this.props.insight.length !==0 ? this.props.insight.map((i, index) => {
                                                 return (
-                                                    <React.Fragment>
-                                                        <div className="action_insight_wrapper" key={index}>
-                                                            <span className="action_insight_image_wrapper">
-                                                                <img src ="/icon/action_insight_image.svg" className="action_insight_image"/>
-                                                            </span>
-                                                            <span className="action_insight_text_wrapper">
-                                                            <div>
-                                                                <text className="light_text_rish">
-                                                                <text className="dark_text_rish">{i.serviceName} </text>were <text className="dark_text_rish">{i.percent}% </text>higher than the booked price
-                                                                </text>
-                                                             </div>
-                                                                <div  className="InsightUpdate" onClick={(e) => this.handleUpdatePrice(i)}>Update here</div>
-                                                            </span>
-                                                        </div>
-                                                       
-                                                        <hr></hr>
-                                                    </React.Fragment>
+                                                   <ActionableInsight  
+                                                   data = {i} 
+                                                   index = {index} 
+                                                   handleUpdatePrice = {this.handleUpdatePrice}
+                                                   />
                                                 )
                                             }) :  <div className="no_insights_wrapper_ris">
                                             <div className="no_insight_image-wrapper">
@@ -688,22 +703,80 @@ class DashboardComponent extends React.PureComponent {
                             <div className="insigts_section_wrapper">
                                 <div className="real_insights_wrapper">
 
-                                    <div style={{position:'relative'}} className='dashboardsection new_card_class techno_background add-center-wrapper'>
+                                    <div style={{position:'relative', height:'100%'}} className='dashboardsection add-center-wrapper new_card_class'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
-                                                         <span className='businessrow1col1 heading_flex_child '>
-                                                         {/* <img src="/business.svg" alt="business" className="businessicon vertical_align_rish" alt=""> */}
-                                                        <text className='business vertical_align_rish cursor-pointer'>Total Business</text>
+                                                         <span className='heading_flex_child_1 '>
+                                                        <text style={{lineHeight:'2.5rem'}} className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
-                                                         <span className="heading_flex_child">  
-                                                          {this.props.centers_name_list.length !==0  &&  <select style={{display:'block', marginLeft:'auto'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
-                                                             <option value={''}>{this.props.prof_data.name}</option>
-                                                                {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
-                                                           </select>}
+                                                         <span className="heading_flex_child_2">  
+                                                          {this.props.centers_name_list.length !==0  &&  <Select
+                                                                options = {[{name:this.props.prof_data.name, value:''},...this.props.centers_name_list]}
+                                                                handleChange = {this.handle_business_center_change}
+                                                                placeholder= {this.props.prof_data.name}
+                                                                input_text_class = "catalogue_dropdown  transparent_background"
+                                                                wrapper_class = "catalogue_dropdown_wrapper business_center transparent_background"
+                                                                value = {this.state.get_business.center}
+                                                                name = "speciality_chosen"
+                                                                option_className="centers_dropdown_options"
+                                                                label = "Centers" /> 
+                                                          
+                                                          
+                                                          
+                                                          
+                                                        //   <select  style = {{background:'none', border:'none none 1px solid grey none', display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
+                                                        //      <option value={''}>{this.props.prof_data.name}</option>
+                                                        //         {this.props.centers_name_list.map(item=><option value={item.value}>{item.name}</option>)}
+                                                        //    </select>
+                                                           } 
+                                                           <div style={{marginLeft:'1rem'}}>
+                                                             <Select
+                                                                 options = {[{name:'Today', value:1},{name:'Last 7 days', value:7}, {name:'Last 30 days', value:30}, {name:'Last Year', value:365}]}
+                                                                  handleChange = {(e)=>this.handleDaysChange(e.target.value)}
+                                                                  placeholder= "Select days"
+                                                                 input_text_class = "catalogue_dropdown transparent_background"
+                                                                  wrapper_class = "catalogue_dropdown_wrapper business_center transparent_background"
+                                                                   value = {this.state.get_business.days}
+                                                                   name = "speciality_chosen"
+                                                                   option_className="centers_dropdown_options"
+                                                                    label = "Select days" /> 
+                                                            </div>
+                                                            {/* <select style={{display:'inlineBlock', marginLeft:'.5rem', background:'none', border:'none none 1px solid grey none'}} onChange={(e)=>this.handleDaysChange(e.target.value)} name="days" value={this.state.get_business.days} className="select_class_rish">
+                                                                    <option value={1}>Today</option>
+                                                                    <option value={7}>Weekly</option>
+                                                                    <option value={30}>Monthly</option>
+                                                                    <option value={365}>Yearly</option>
+                                                           </select> */}
+                                                           
                                                          </span>
+                                                         
+                                                         
+                                                        
                                                       </span>
                                                     </div>
-                                                    <div className="tag_section_rish margin_top_small_rish">
+
+                                                    <div style={{width:'100%'}} className='vertical_middle'>
+{/* 
+                                                        {((!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):false ) || (!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):false))?
+                                                        <div className='margin_top_small_rish'>
+                                                            <PieChart
+                                                            data = {[!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):0, !!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):0]}
+                                                            />
+                                                        </div>
+                                                        : */}
+                                                         <div className="business_wrapper_rish" style={{marginTop:'4rem'}}>
+                                                        <div className=' text-center'>
+                                                            <p className="businessPrice businessEarn">&#8377; {!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):'0'}</p>
+                                                            <p className="Earn">Business <br></br>Earned</p>
+                                                        </div>
+                                                        <div className=' text-center'>
+                                                            <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
+                                                            <p className="Earn">Business<br></br> Lost</p>
+                                                        </div>
+                                                    </div> 
+                                                     {/* } */}
+                                                    </div>
+                                                    {/* <div className="tag_section_rish margin_top_small_rish">
                                                             <span className='tag_section_child text-center'>
                                                                     <Tag 
                                                                         name="Today"
@@ -732,8 +805,8 @@ class DashboardComponent extends React.PureComponent {
                                                                      active ={this.state.get_business.days===365}
                                                                     />
                                                             </span>
-                                                    </div>
-                                        { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
+                                                    </div> */}
+                                        {/* { this.state.showBusiness ? <div style={{marginTop:'2rem'}} className='row'>
                                             <div className='col text-center'>
                                                 <p className="businessPrice businessEarn">&#8377; {!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):'0'}</p>
                                                 <p className="Earn">Business <br></br>Earned</p>
@@ -742,7 +815,7 @@ class DashboardComponent extends React.PureComponent {
                                                 <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
                                                 <p className="Earn">Business<br></br> Lost</p>
                                             </div>
-                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>}
+                                        </div> : <div className= "d-flex justify-content-center"><h3>Loading ...</h3></div>} */}
                                         <div className="text-center">
                                         {/* <select onChange={this.handleDaysChange} name="days" value={this.state.get_business.days} className="select_class_rish">
                                                                     <option value='1'>Today</option>
@@ -751,21 +824,16 @@ class DashboardComponent extends React.PureComponent {
                                                                     <option value='365'>Yearly</option>
                                                                 </select> */}
                                         </div>
-                                        <div className="businessWarn">
-                                            <p>Please take action on real time insights to increase your business</p>
+                                        <div style={{marginTop:'1rem'}} className="text-center">
+                                            <p  style={{fontSize:'1.2rem'}}>Real Time Business </p>
+                                        </div>
+
+                                        <div style={{position:'absolute', bottom:'1%'}}>
+                                            <p className="businessWarn">Please take action on real time insights to increase your business</p>
                                         </div>
                                     </div> 
 
-                                   <div className='dashboardsection new_card_class'>
-                                    <span className='businessrow1col1 realtimewidth'>
-                                        {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
-                                        <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
-                                      </span>
-                                        <HighchartsReact
-                                            highcharts={Highcharts}
-                                            options={options}
-                                        />
-                                    </div>
+                                  
                                  
 
 
@@ -774,11 +842,11 @@ class DashboardComponent extends React.PureComponent {
                                 <div className="action_insights_wrapper">      
                                    {((!this.props.prof_data.isCenter) && (!this.props.prof_data.isAdmin) || (!!this.props.prof_data.isAdmin)) && <div className='add-center-wrapper new_card_class'>
                                     <span className='businessrow1col1 realtimewidth heading_flex_wrapper'>
-                                    <span className='businessrow1col1 heading_flex_child '>
+                                    <span className=' heading_flex_child '>
                                    
                                                     { ((!this.props.prof_data.isAdmin) && (!this.props.prof_data.isCenter)) ? <React.Fragment>
                                                         {/* <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""/> */}
-                                                        <p onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Manage Centres</p></React.Fragment>:
+                                                        <p  style={{lineHeight:'2.5rem'}} onClick={()=>this.open_act_as_admin()} className='business vertical_align_rish cursor-pointer'>Manage Centres</p></React.Fragment>:
                                                     <React.Fragment>
                                                         {/* <img src="/add_center_img.svg" alt="add_center_img" className="businessicon vertical_align_rish" alt=""/> */}
                                                         <Link className='business vertical_align_rish cursor-pointer' to="/dashboard/centers?addCenter=true"> <p className='business vertical_align_rish cursor-pointer'>Manage Centres</p></Link></React.Fragment> 
@@ -838,7 +906,7 @@ class DashboardComponent extends React.PureComponent {
                                          {
                                             (this.props.centers_data.centers_list.length>4)  &&  <div className="text-center margin-top-small_ris">
                                             <Link to='/dashboard/centers' >
-                                            <p style={{textDecoration:'underline',fontSize:'1.3rem'}} className="green_text_rish">View More</p>
+                                            <p style={{textDecoration:'underline',fontSize:'1.3rem'}} className="green_text_rish">View More Centres</p>
                                             </Link>
                                      </div>
                                         }
@@ -855,7 +923,26 @@ class DashboardComponent extends React.PureComponent {
                                     </div>}
                                 </div>
 
+                               
+
                             </div>
+
+                           <div className="insigts_section_wrapper">
+                            <div style={{width:'100%', padding:'1%'}} className='dashboardsection new_card_class'>
+                                    <span className='businessrow1col1 realtimewidth'>
+                                        {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
+                                        <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
+                                      </span>
+                                        {/* <HighchartsReact
+                                            highcharts={Highcharts}
+                                            options={options}
+                                        /> */}
+                                        <div >
+                                          <LineChart />
+                                        </div>
+                                       
+                         </div>
+                        </div>
                            
                                     <Modal 
                                         isOpen={this.state.modalIsOpen}
@@ -872,7 +959,7 @@ class DashboardComponent extends React.PureComponent {
                                        
                                         <div><text className="serv_ces">{this.state.serviceName}</text></div>
                                         <div className="catlou_sli">     
-                                        {this.state.actionablePriceLoading && <LoaderComponent />}      
+                                        {this.props.actioanable_update_loading && <LoaderComponent />}      
                                         <div className="text-center margin_top_small_rish">
                                         <Slider
                                             min={0}
@@ -952,14 +1039,6 @@ class DashboardComponent extends React.PureComponent {
                                         /></div>
                                         <h2 className="yout_ctl margin_top_small_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
                                             {this.state.realUpdatePriceLoading && <LoaderComponent />}        
-                                            {/* <div className="text-center valu_second">
-                                               <b>{Math.floor( this.state.solValue )} % </b>
-                                            </div>
-                                            <div className="row maxmin">
-                                            <div className="col-sm-6"><h4>&#8377;{this.state.realUpdatePrice}</h4></div>
-                                            <div className="col-sm-6 text-right"><h4>&#8377;{this.state.realUpdatePrice / 2}</h4></div>
-                                               </div> */}
-                                           
                                            <br></br>
                                         </div> 
                                        
@@ -1081,27 +1160,36 @@ const mapStateToProps = state => ({
     centers_data:state.user.data.centers_data,
     insight_flag:state.user.insight_flag
 })
-
-export default connect(mapStateToProps, {updateRealPriceClr, 
-     clearUpdatePriceData, 
-     getAllBookings,
-     getInsights,
-     sendUpdateData, 
-     getSolutionInsights,
-     getMonthWiseUsers,
-     updateRealPrice,
-     set_dash_data,
-     get_business,
-     act_as_admin_clr,
-     act_as_admin,
-     admin_otp_clr,
-     admin_otp,
-     admin_details,
-     admin_details_clr,
-     get_user_info,
-     set_user_info,
-     get_centers,
-     set_location_toggler,
-     set_open_map,
-     clearSolInsights, setMount })(DashboardComponent);
-// Call userdetails from
+     export default AnimatedMount({
+        unmountedStyle: {
+          opacity: 0,
+          transform: 'translate3d(0, -2rem, 0)',
+          transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+        },
+        mountedStyle: {
+          opacity: 1,
+          transform: 'translate3d(0, 0, 0)',
+          transition: 'opacity .5s ease-out, transform .5s ease-out',
+        },
+      })(connect(mapStateToProps, {updateRealPriceClr, 
+        clearUpdatePriceData, 
+        getAllBookings,
+        getInsights,
+        sendUpdateData, 
+        getSolutionInsights,
+        getMonthWiseUsers,
+        updateRealPrice,
+        set_dash_data,
+        get_business,
+        act_as_admin_clr,
+        act_as_admin,
+        admin_otp_clr,
+        admin_otp,
+        admin_details,
+        admin_details_clr,
+        get_user_info,
+        set_user_info,
+        get_centers,
+        set_location_toggler,
+        set_open_map,
+        clearSolInsights, setMount })(DashboardComponent));

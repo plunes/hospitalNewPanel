@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-
+import AnimatedMount from "../../HOC/AnimatedMount"
 import './index.css'
 
 const ChevronDown = () => (
@@ -338,7 +338,7 @@ class Select extends Component {
 
     const selected = values.includes(value)
 
-    let className = "option"
+    let className = `option ${this.props.option_className}`
     if (selected) className += " selected"
     if (index === focusedValue) className += " focused"
 
@@ -389,4 +389,17 @@ class Select extends Component {
   }
 }
 
-export default Select;
+export default Select
+
+// export default AnimatedMount({
+//   unmountedStyle: {
+//     opacity: 0,
+//     transform: 'translate3d(0, -2rem, 0)',
+//     transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+//   },
+//   mountedStyle: {
+//     opacity: 1,
+//     transform: 'translate3d(0, 0, 0)',
+//     transition: 'opacity .5s ease-out, transform .5s ease-out',
+//   },
+// })(Select);

@@ -19,9 +19,10 @@ import { getEntity, getEntityClr, clearSolInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
    remove_notif_count_ret, set_notif_count, getUserDetails, get_user_info,
    get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url,
-   get_centers, get_centers_clr , set_centers_data, set_location_toggler} from "../../actions/userActions"
+   get_centers, get_centers_clr , set_centers_data, set_location_toggler, clearUpdatePriceData} from "../../actions/userActions"
 
 import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading } from "../../actions/dash_actions"
+import  { get_user_specialities } from "../../actions/catalogue_actions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
 import ManagePaymentComponent from '../DashboardComponent/ManagePaymentComponent';
@@ -100,7 +101,47 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
+  set_selected_actionable = (data, price) =>{
+    console.log(data,price," data, and price in set_selected_actionable")
+    this.setState({
+      selected_actionable:data,
+      updated_price:price,
+      actioanable_update_loading:true
+    })
+  }
+
   componentWillReceiveProps(nextProps){
+    if(nextProps.updatePriceDataRet){
+      if(nextProps.updatePriceDataRet.success){
+          let arr = [...this.state.insight]
+
+          let new_arr = arr.map(item=>{
+            if(item.serviceId === this.state.selected_actionable.serviceId){
+              return { ...this.state.selected_actionable, userPrice:this.state.updated_price  }
+            }else {
+              return {...item}
+            }
+          })
+         
+          this.setState({
+             insight:new_arr,
+              ret:{
+                  success:true,
+                  message:`${this.state.selected_actionable.serviceName} price successfully updated in catalogue`
+              },
+              actioanable_update_loading:false
+          })
+      }else{
+          this.setState({
+              ret:{
+                  success:false,
+                  message:`Unable to update price now, try again later`
+              },
+              actioanable_update_loading:false
+          })
+      }
+      nextProps.clearUpdatePriceData()
+  }
         if(!!nextProps.solInsights){
           this.setState({
               solInsights:nextProps.solInsights,
@@ -567,8 +608,9 @@ export class DashboardPage extends React.PureComponent {
 }
 
 add_insight = (data) =>{
+  console.log(data,"data in add_insight")
     this.setState({
-        solInsights:[data[0],...this.state.solInsights]
+        solInsights:[...data,...this.state.solInsights]
     },()=>this.props.set_dash_data({...this.props.dash_data, solInsights:this.state.solInsights}))
 }
 
@@ -603,15 +645,32 @@ authObject =()=> {
 }
 
   render() {
-  console.log(this.state,"state in state")
-  console.log(this.props,"props in Dashboard page")
+  console.log(this.state,"state in dashboard page")
+  // console.log(this.props.get_user_specialities_loading_flag,"props in Dashboard page")
  if(!!localStorage.getItem('token')){
-  if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
-  //  if(false){
-    return (
-<FullPageLoader />
-)
-}
+  try {
+    if(window.location.pathname==='/dashboard'){
+      if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+        // if(false){
+          return (
+                  <FullPageLoader />
+                )
+        }else{
+          throw new Error("Dummy Error")
+        }
+    }else if(false){
+      if(this.props.get_user_specialities_loading_flag){
+        // if(false){
+          return (
+                  <FullPageLoader />
+                )
+        }else {
+          throw new Error("Dummy Error")
+        }
+    }
+  } catch (error) {
+      console.log(error)
+  }
  }
 
 
@@ -624,8 +683,7 @@ authObject =()=> {
     />
     }
     return (
-             <div>
-               <ConnectivityListener />
+           <React.Fragment>
                <NewNotif 
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
@@ -636,6 +694,7 @@ authObject =()=> {
                         error={this.state.Notify.error}
                         clear = {()=>this.setState({Notify:{success:false,error:false}})}
                         />
+                <div className="main-body-wrapper">
                         <DashboardHeader
                           toggleNotif = {this.toggleNotif}
                           togglePayment = {this.togglePayment}
@@ -647,8 +706,6 @@ authObject =()=> {
                           prof_data = {this.props.prof_data}
                           authObject = {this.authObject}
                         />
-                <div className="main-body-wrapper">
-                    <div className="main_body_flex_parent">
                             <SidebarComponent
                               prompt_success_notify = {this.prompt_success_notify}
                               toggleProfile = {this.toggleProfile}
@@ -664,7 +721,7 @@ authObject =()=> {
                               user_info = {this.state.user_info}
                               pathname ={window.location.pathname}
                             />
-                  <div className="main_body_flex_content">
+                  <div id="content" className="main_body_flex_content">
                   {(window.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
@@ -679,7 +736,9 @@ authObject =()=> {
                     get_act_insight_laoding_flag = {this.state.real_insight_loader}
                     act_insight_loader = {this.state.act_insight_loader}
                     get_act_insight_loading_flag = {this.props.get_act_insight_loading_flag}
-                    get_real_insight_loading_flag = {this.props.get_real_insight_loading_flag}            
+                    get_real_insight_loading_flag = {this.props.get_real_insight_loading_flag}     
+                    set_selected_actionable = {this.set_selected_actionable}       
+                    actioanable_update_loading = {this.state.actioanable_update_loading}
                     />)
                    :(window.location.pathname === '/dashboard/profile')?
                    protected_route({
@@ -776,8 +835,7 @@ authObject =()=> {
                   />):''}
               </div>
         </div>
-        </div>
-        </div>
+        </React.Fragment>
       
     )
   }
@@ -801,7 +859,9 @@ const mapStateToProps = state => ({
     get_act_insight_ret:state.dash_store.get_act_insight_ret,
     get_act_insight_loading_flag:state.dash_store.get_act_insight_loading,
     get_real_insight_ret:state.dash_store.get_real_insight_ret,
-    get_real_insight_loading_flag:state.dash_store.get_real_insight_loading
+    get_real_insight_loading_flag:state.dash_store.get_real_insight_loading,
+    get_user_specialities_loading_flag:state.catalogue_store.get_user_specialities_loading,
+    updatePriceDataRet:state.user.updatePriceDataRet
 })
 
 export default connect(mapStateToProps, { 
@@ -834,6 +894,8 @@ set_centers_data,
 get_real_insight,
 get_real_insight_loading,
 get_act_insight,
-get_act_insight_loading
+get_act_insight_loading,
+get_user_specialities,
+clearUpdatePriceData
 })(DashboardPage);
 

@@ -4,7 +4,8 @@ import LoaderComponent from "./LoaderComponent"
 import React from "react"
 import validator from "validator"
 import { is_valid_pan } from '../../utils/common_utilities'
-
+import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from './Button'
 function  MyError(message){
   console.log(this,"this in myerror")
   this.message = message;
@@ -136,17 +137,28 @@ MyError.prototype = new Error()
    </span>
  </div>
 </div>
-<div style={{marginBottom:'1rem'}}>
-<button type="submit" style={{position:'relative', bottom:'1rem'}} className="btn btn-success proceedbtn manage_payment_submit">Proceed</button>
+<div className="text-center" style={{marginBottom:'1rem'}}>
+<Button type="submit" style={{position:'relative', bottom:'1rem'}} >Proceed</Button>
 </div>
 
 </form>
   )
 }
- 
 
-export default ManagePayment
 
+
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(ManagePayment)
 
 
 

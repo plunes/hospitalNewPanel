@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 import LoaderComponent from "./LoaderComponent"
+import Button from "./Button"
 
 
 const AddAchievement = React.memo((props) => {
@@ -101,8 +102,8 @@ const submitdetails = () => {
         <div className="modal-heading_ris">Add Achievement</div>
         {props.loading && <LoaderComponent/>}
         {!props.achievementImage && <div className='margin-top-small_ris text-center'>
-            <button onClick={()=>handleButtonClick()}
-         className="common-button">Upload</button>
+        <Button onClick={()=>handleButtonClick()}
+        >Upload</Button>
          <input
             style={{display:'inline',display:'none'}}
             id="uploatCatalogue"
@@ -125,7 +126,16 @@ const submitdetails = () => {
        
        <div className='margin-top-small_ris '>
        {/* <p className="intro col-lg-9"><strong>Title</strong> </p> */}
-       <textarea 
+       <input 
+         type="text"
+         className="form-control editbankdetailfield input-field-common"
+         placeholder="Enter title "
+         name="title" 
+         ref={achievementRef}
+         onChange ={props.handleAchievementChange}
+         value={props.achieveTitle} 
+         /> 
+       {/* <textarea 
             name="title" 
             ref={achievementRef}
             //    onKeyDown={keyPress}
@@ -135,12 +145,12 @@ const submitdetails = () => {
             cols="50"
             placeholder="Enter title "
             name="comment" 
-            form="usrform" /> 
+            form="usrform" />  */}
        </div>
 
        <div className='margin-top-small_ris text-center'>
-            <button onClick={()=>submitdetails()}
-            className="common-button">Save Achievement</button>
+
+       <Button onClick={()=>submitdetails()}>Save Achievement</Button>
        </div>
         
         </div>         

@@ -29,7 +29,7 @@
     font-size: 20px;
     letter-spacing: 1px;
     color: white;
-    content: "Please wait while we collect your Information.";
+    content: "Please wait while we get your Real Time insights.";
     position: absolute;
     top: 57%;
     text-align: center;
@@ -45,15 +45,4 @@
     50% {
       transform: rotate(360deg);
     }
-  }
-  
-  
-  #AliRanjbar {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-size: 13px;
-    color: #444;
-    font-family: 'Acme', sans-serif;
-    z-index: 99;
   }

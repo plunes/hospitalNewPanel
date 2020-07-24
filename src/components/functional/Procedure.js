@@ -4,6 +4,7 @@ import "./editProcedure.css"
 import VarianceDropdown from "./varianceDropdown"
 import { is_positive_whole_number } from "../../utils/common_utilities"
 import LoaderComponent from "./LoaderComponent"
+import AnimatedMount from "../../HOC/AnimatedMount"
 const should_render = (prevProps, nextProps) => {
   // console.log(prevProps, nextProps,"preveProps, nextProps in should_render")
   if(prevProps.ret !== nextProps.ret){
@@ -30,6 +31,9 @@ const should_render = (prevProps, nextProps) => {
   if(prevProps.data.serviceId !== nextProps.data.serviceId){
     return false
   }
+  if(prevProps.data.variance !== nextProps.data.variance){
+    return false
+  }
   return true
 }
  const Procedure= (props) => {
@@ -52,47 +56,6 @@ const should_render = (prevProps, nextProps) => {
       }
   }
  }, [props.ret])
-
-
-
-
-// const isSelected = () =>{
-//   let flag = false
-//   props.selected_procedures.every(function(element, index) {
-//     if(element.serviceId===props.data.serviceId){
-//       flag = true
-//       return false
-//     }
-//      return true
-//   })
-//   return flag;
-// }
-
-// const getValue = () =>{
-//   let value= ""
-//   props.selected_procedures.every(function(element, index) {
-//     if(element.serviceId===props.data.serviceId){
-//       value = !!element.price?element.price[0]:0
-//       return false
-//     }
-//      return true
-//   })
-//   return value;
-// }
-
-// const getVariance = () =>{
-//   let value= ""
-//   props.selected_procedures.every(function(element, index) {
-//     if(element.serviceId===props.data.serviceId){
-//       value = element.variance
-//       return false
-//     }
-//      return true
-//   })
-//   return value;
-// }
-
-// console.log(props,"rerendering of Procedure")
   return (
 <React.Fragment>
 
@@ -133,59 +96,21 @@ const should_render = (prevProps, nextProps) => {
                                 </div>
                                 <hr></hr>
 </div>
-{/* <div>
-    <div className="row listOfService">
-    <div className="col-lg-6">
-<label className="cont_ter">{data.service}
-{
-  props.editFlag?<React.Fragment>
-    <input type="checkbox" checked={isSelected()} onClick = {()=>props.onEdit(props)} />
-  <span className="check2"></span></React.Fragment>:''
-}
-  
-</label>
-      </div>
-      <div className="col-lg-3 col-md-3 text-center">
-        <div className="procedure_price_wrap">
-           &#x20B9;
-             {((!!props.editFlag) && (isSelected()))?<input
-              value={isSelected()?getValue():props.selectedProcedure.price}
-              onChange={
-                e =>{
-                     console.log(is_positive_whole_number(e.target.value),"is_positive_whole_number(e.target.value)")
-                    if(is_positive_whole_number(e.target.value)){
-                     props.handleSelectedProcedureChange(e,props.data.serviceId)
-                    }else{
-                      e.preventDefault()
-                    }
-                    }
-                }
-             name="editPrice"
-             style={{marginLeft:'0.3rem'}}
-             className="no_brdr_input consultaion_input"
-             type="number"
-             />:data.price?` ${data.price[0]}`:' 0'}
-        </div>
-      </div>
-      <div className="col-md-3 text-center">
-        <div className="price_se">
-          < VarianceDropdown 
-            editFlag = {props.editFlag}
-            disabled = {props.disabled}
-            handleChange={(e)=>props.handleVarianceChange(e,props.data.serviceId)}
-            value = {isSelected()?getVariance():props.data.variance}
-          />
-        </div>   
-      </div>
-      </div>
-    <div>
-    
-    </div>
-    <hr></hr>
-</div> */}
 </React.Fragment>
   )
 }
  
 
-export default React.memo(Procedure, should_render)
+
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(React.memo(Procedure, should_render));

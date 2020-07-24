@@ -72,7 +72,7 @@ const  SidebarComponent = (props) => {
     await props.logout()
   }
     return (
-      <div ref={wrapper_ref} id="sidebar_wrapper_id" className={`main_body_flex_sidebar    ${collapse?"sidebar_collapse":''}`}>
+      <div ref={wrapper_ref} id="left-sidebar" className={`main_body_flex_sidebar    ${collapse?"sidebar_collapse":''}`}>
         <div className={`sidebar_wrapper ${collapse?"sidebar_wrapper_collapse":''}`}>
        
             <div  className={`${props.pathname==='/dashboard'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>
@@ -247,13 +247,13 @@ const  SidebarComponent = (props) => {
           </Link>
          </div>
 
-         <div className='hamburger-dic' >
+         {/* <div className='hamburger-dic' >
         <div className={` hamburger_icon_wrapper ${collapse?'display_block':''}`}>
               <div >
               <a onClick ={()=>setCollapse(!collapse)} className={`${!collapse?'active':''}`}  id="hamburger" href="#"><span></span></a>
               </div>
               </div>
-        </div>  
+        </div>   */}
 
       </div>
    </div>

@@ -3,6 +3,8 @@ import LoaderComponent from "./LoaderComponent"
 import Select from "../Select"
 import React, { useRef, useState, useEffect } from "react"
 import { is_positive_whole_number, get_url_params } from "../../utils/common_utilities"
+import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from "./Button"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -57,17 +59,23 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
         }else if(!!!props.consultationFee){
           addToast("Please enter consultation fee",{ appearance: 'error', autoDismiss:true })
         }else{
+          let obj = {
+            name:props.name,
+            designation:props.designation,
+            department:props.department,
+            experience:props.experience,
+            education:props.education,
+            services_chosen:props.services_chosen,
+            specialitie_chosen:props.specialitie_chosen,
+            doctorProfileImage:props.doctorProfileImage,
+            doctorId:get_url_params('id')?get_url_params('id'):undefined
+          }
+
+          if(!!props.services_chosen) {
+            obj.consultationFee = props.consultationFee
+          }
             props.submitdetails({
-                 name:props.name,
-                 designation:props.designation,
-                 department:props.department,
-                 experience:props.experience,
-                 education:props.education,
-                 consultationFee:props.consultationFee,
-                 services_chosen:props.services_chosen,
-                 specialitie_chosen:props.specialitie_chosen,
-                 doctorProfileImage:props.doctorProfileImage,
-                 doctorId:get_url_params('id')?get_url_params('id'):undefined
+                ...obj   
             })
         }
     }
@@ -121,7 +129,8 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
        </div>
        <div className="col-lg-3">
   <h6 className="fil_nm">{!!props.doctorImageName?props.doctorImageName:'File Name'}</h6>
-       <button  onClick={(e)=>handleImageClick(e)} className="upld common-button">Upload</button>
+         <Button  className="upld common-button" onClick={(e)=>handleImageClick(e)}>Upload</Button>
+       {/* <button >Upload</button> */}
        </div>
    </div>
    <form class="shake" role="form" method="post" id="contactForm" name="contact-form" data-toggle="validator">
@@ -166,7 +175,7 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
                    <Select
                      options = {props.services}
                      handleChange = {props.handleSelectChange}
-                     value = {props.services_chosen}
+                     value = {!!props.services_chosen?props.services_chosen:''}
                      name = "services_chosen"
                      label = "Service"
                      placeholder = "Choose Service"
@@ -211,35 +220,36 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
                     </div>
                    ))}
       
-       <div className="consul_fee">
-    <div className="cdcd_sfd">           
-       {props.editConsultFlag && <span onClick={()=>props.submitConsultaion()} className="edi_intr hover_underline margin-5">Save</span> }
-    <span onClick={()=>props.toggleSubmitConultation()} className="edi_intr hover_underline margin-5">{props.editConsultFlag?"Cancel":'Edit'}</span>
-    </div>
+    {!!props.services_chosen &&     <div className="consul_fee">
+                  <div className="cdcd_sfd">           
+                      {props.editConsultFlag && <span onClick={()=>props.submitConsultaion()} className="edi_intr hover_underline margin-5">Save</span> }
+                      <span onClick={()=>props.toggleSubmitConultation()} className="edi_intr hover_underline margin-5">{props.editConsultFlag?"Cancel":'Edit'}</span>
+                  </div>
        <div className="row">
        
-         <div className="col-lg-8"><h2 className="fee_cun_ch">Consultation Fee</h2></div>
-         <div className="col-lg-4">
-             <h2 className="fee_ru">
-             &#x20B9;
-             {!!props.editConsultFlag?<input value={props.consultationFee} onChange={(e)=>{
-               if(is_positive_whole_number(e.target.value)){
-                props.handleChange(e)
-               }
-             }}
-             name="consultationFee"
-             className="no_brdr_input consultaion_input"
-             type="number"
-             />:props.consultationFee}
-              
-             </h2>
-             </div>
-       </div>
-       
-         <div className="time_clo text-center">
-         <button onClick={()=>submitdetails()} className="common-button">Submit</button>
-         </div>
-   </div>
+                <div className="col-lg-8"><h2 className="fee_cun_ch">Consultation Fee</h2></div>
+                <div className="col-lg-4">
+                    <h2 className="fee_ru">
+                    &#x20B9;
+                    {!!props.editConsultFlag?<input value={props.consultationFee} onChange={(e)=>{
+                      if(is_positive_whole_number(e.target.value)){
+                        props.handleChange(e)
+                      }
+                    }}
+                    name="consultationFee"
+                    className="no_brdr_input consultaion_input"
+                    type="number"
+                    />:props.consultationFee}
+                      
+                    </h2>
+                    </div>
+              </div>
+
+            <div className="time_clo text-center">
+              <Button onClick = {submitdetails}>Submit</Button>
+            {/* <button onClick={()=>submitdetails()} className="common-button">Submit</button> */}
+            </div>
+         </div>}
    </div>
   
   </React.Fragment>
@@ -247,4 +257,15 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
 }
  
 
-export default AddDoctorForm
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(AddDoctorForm)

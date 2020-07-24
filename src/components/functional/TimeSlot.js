@@ -191,6 +191,11 @@ const TimeSlot = (props) => {
                           error=true
                           message= "Invalid Time"
                         }
+                    }else if(hour===other_shift.from.hour){
+                        if(minutes>=other_shift.from.minutes){
+                          error=true
+                          message= "Invalid Time"
+                        }
                     }
                 }else if(shift==='evening'){
                     if((hour<selecteDaySlots.evening.from.hour||(hour===0?false:hour<other_shift.from.hour)||(hour<other_shift.to.hour))){

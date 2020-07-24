@@ -1,6 +1,7 @@
 import {  useToasts } from 'react-toast-notifications'
 import React from "react"
 import { Link } from "react-router-dom"
+import Button from './Button'
 
  const ChangePassForm= (props) => {
   const { addToast } = useToasts()
@@ -50,11 +51,13 @@ import { Link } from "react-router-dom"
     name="rePassword" 
     onChange={props.handleChange} 
     value = {props.rePassword}/>  
-     
+     <div className='text-center'>
      <Link to="/dashboard/settings">
-     <button onClick={()=>{}} className="common-button-white">Cancel</button>
+     <button onClick={()=>{console.log()}} className="common-button-white">Cancel</button>
      </Link>
-     <button onClick={()=>submitdetails()} className="common-button ml-5">Reset</button>
+     <Button style={{marginLeft:'2rem'}} onClick={()=>submitdetails()} >Reset</Button>
+
+     </div>
 
     </div>
   )

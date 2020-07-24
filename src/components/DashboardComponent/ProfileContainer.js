@@ -20,6 +20,7 @@ import Map from "../MapComponent/index.js"
 import { isEmpty , get_url_params} from "../../utils/common_utilities"
 import ScrollTo from "../functional/ScrollTo"
 import { compose } from 'redux';
+import AnimatedMount from "../../HOC/AnimatedMount"
 const options = {
   items: 2,
   margin: 0,
@@ -77,28 +78,7 @@ class ProfileContainer extends React.PureComponent {
 
   componentWillReceiveProps(nextProps){
 
-    if(!!nextProps.location.state){
-      if(!!nextProps.location.state.add_success){
-          this.setState({
-              ret:{
-                  success:true,
-                  message:'Doctor successfully added.'
-              }
-          })
-          nextProps.history.replace({
-              pathname: nextProps.location.state.center_id?`${nextProps.location.pathname}?center=${nextProps.location.state.center_id}`:nextProps.location.pathname,
-              state: {}
-          });
-      let center_id =  get_url_params('center')
-          if(nextProps.centers_list.length ===0){
-            console.log("calling for center profile")
-            nextProps.get_center_profile({center_id})
-          }else{
-            let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
-            nextProps.set_center_data({...center_data})
-          }
-      }
-  }
+  
 
     if(nextProps.get_center_profile_ret){
       if(nextProps.get_center_profile_ret.success){
@@ -197,6 +177,31 @@ class ProfileContainer extends React.PureComponent {
   }
 
   componentDidMount(){
+  console.log("Inside Component DidMunt")
+  //   if(!!window.location.state){
+  //     if(!!window.location.state.add_success){
+  //         this.setState({
+  //             ret:{
+  //                 success:true,
+  //                 message:'Doctor successfully added.'
+  //             }
+  //         })
+  //         window.history.replace({
+  //             pathname: window.location.state.center_id?`${window.location.pathname}?center=${window.location.state.center_id}`:window.location.pathname,
+  //             state: {}
+  //         });
+  //     let center_id =  get_url_params('center')
+  //         if(this.props.centers_list.length ===0){
+  //           console.log("calling for center profile")
+  //           this.props.get_center_profile({center_id})
+  //         }else{
+  //           let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
+  //           this.props.set_center_data({...center_data})
+  //         }
+  //     }
+  // }
+
+
     let center_id = get_url_params('center')
     if(this.state.flag_for_map){
       console.log(this.props.open_map,"this.props.open_map")
@@ -582,7 +587,7 @@ class ProfileContainer extends React.PureComponent {
                    <div className="achievemnet_badge_wrapper">
                      <div onClick={()=>this.setState({addAchievementFlag:true})} className='achievement_badge cursor-pointer'>
                        <div style={{margin:'auto'}}>
-                        <img   className="badge_image" src="/icon/achievement_badge.svg"/>
+                        <img   className="badge_image" src="/achivement.jpg"/>
                         <text  className="catalogue_badge_text">Achievement</text>
                        </div>
                      </div>
@@ -595,7 +600,7 @@ class ProfileContainer extends React.PureComponent {
                           role="button"
                           style={{display:'block', margin:'auto'}}
                           onClick={()=>this.props.toggleMyCatalog()} >
-                          <img src="/icon/catalogue_icon_rish.svg" className='badge_image ' />
+                          <img src="/cata.svg" className='badge_image ' />
                           <text className="catalogue_badge_text">Catalogue</text>
                           </Link>
                      </div>
@@ -706,10 +711,16 @@ class ProfileContainer extends React.PureComponent {
             </Link>
       </div>
        :'':'':''}
-   
-   {!!this.state.prof_data.doctors?((this.state.prof_data.doctors.length===this.state.show_doctor_count) || (this.state.prof_data.doctors.length==0))?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
-   show_doctor_count:this.state.prof_data.doctors.length
-   })} >See more Doctors</span></div> :'' }
+
+
+       {!!this.state.prof_data.doctors?
+          this.state.prof_data.doctors.length>4?
+          !!((this.state.prof_data.doctors.length) !== (this.state.show_doctor_count)) ?<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
+            show_doctor_count:this.state.prof_data.doctors.length
+            })} >See more Doctors</span></div>:''
+                    :''
+       :""}
+
    </React.Fragment>
      }
 
@@ -776,7 +787,18 @@ const mapStateToProps = state => ({
   location_toggler:state.user.location_toggler
 })
 
- export default compose(
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(compose(
   withRouter,
   connect(mapStateToProps, { 
     expertDetails, 
@@ -802,4 +824,4 @@ const mapStateToProps = state => ({
     get_center_profile_clr,
     set_location_toggler
    })
-)(ProfileContainer)
+)(ProfileContainer))

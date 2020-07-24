@@ -157,7 +157,7 @@ import { NEW_USER, GET_BOOKING, GET_INSIGHTS, GET_NOTIFICATIONS, GET_TIMESLOT,
   SET_NOTIF_ID
   } from '../actions/types';
 import { uploadProcedure } from '../actions/userActions';
-import { get_url_params } from "../utils/common_utilities"
+import { get_url_params, objectEquals } from "../utils/common_utilities"
 
 const initialState = {
   userDetail: {},
@@ -270,7 +270,8 @@ const initialState = {
         centers_cred:[]
     },
     catalogue_data:{
-      remaining_specs:[]
+      remaining_specs:[],
+      user_specialities:[]
     }
   }
 };

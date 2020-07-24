@@ -7,6 +7,8 @@ import ModalComponent from "../ModalComponent"
 import TimeSlot from '../functional/TimeSlot'
 import LoaderComponent from "../functional/LoaderComponent"
 import NewNotif from   '../functional/NewNotif'
+import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from '../functional/Button';
 
 class AvailabilityComponent extends Component {
    constructor(props) {
@@ -255,7 +257,7 @@ setAvailabilityClr = () =>{
                         setAvailabilityRet:false
                       })}
                   />       
-                <div className='availability_content_rish'>
+                <div className='availability_content_rish new_card_class'>
                 <div className= 'text-center'>  <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">My Availability</h4></div>
                   <div className="time_she">
                   {this.state.loading &&  <LoaderComponent />}
@@ -278,7 +280,7 @@ setAvailabilityClr = () =>{
                     </div>
                    ))}
                       <div className="time_clo my_avl text-center">
-                      <button onClick= {()=>this.handleSubmitAvail()} className="common-button">Submit</button>
+                      <Button style={{marginBottom:'1rem'}} onClick= {()=>this.handleSubmitAvail()}>Submit</Button>
                       </div>
                 </div>
                 </div>
@@ -297,4 +299,17 @@ const mapStateToProps = state => ({
    timeSlot : state.user.timeSlot,
    setAvailabilityRet:state.user.setAvailabilityRet
  })
-export default connect(mapStateToProps, {getTimeslot, setAvailability, setAvailabilityClr} )(AvailabilityComponent);
+
+
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(connect(mapStateToProps, {getTimeslot, setAvailability, setAvailabilityClr} )(AvailabilityComponent))

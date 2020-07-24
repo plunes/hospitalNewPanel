@@ -24,8 +24,6 @@ class DashboardHeader extends Component {
 
   handleClick(){
     let unreadN = this.props.unreadNotification
-    //console.log(this.props.notificationCount, '656')
-    // this.props.sendCounterZero(unreadN);
     history.push('/notification')
   }
 
@@ -42,42 +40,41 @@ class DashboardHeader extends Component {
     const authObject = this.props.authObject
     console.log(this.props,'props in HeaderCompoent');
   console.log(window.location.pathname,"window.location in header")
-        return   <nav className="navbar custom_ha navbar-expand-md custom-navbar ">
-        <div className="header_wrapper_rish oversize_wrap_rish display_flex">
+        return   <div id = "header" className="header_wrapper_rish oversize_wrap_rish display_flex">
           <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
               <Link to="/dashboard">
-                <img src="/logo.jpg" style={{marginLeft:'1rem'}} className="logo_rish cursor-pointer" />
+                <img src="/icon/plunes_transparent_logo.svg" style={{marginLeft:'2rem'}} className="logo_rish cursor-pointer" />
               </Link>
             </div>
           
           </div>
         <div className="header_wrapper_links_child_rish mobile_header_links">
-           <button className="navbar-toggler navbar-toggler-right custom-toggler" type="button" >
-            <i className="fa fa-bars" aria-hidden="true"></i>
-           </button>
-             <div className="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul className="navbar-nav ml-auto Three_butn dr_lis_mobile">
+                <ul className="header_ul_rish">
                   
                 <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/payments"
                     onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.togglePayment())}>
-                  <text  className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
+                   <img className='header_icon_rish' src="/icon/payment_header_icon.svg" />
+                  <text   className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
                   </li> 
                  <li className="nav-item header_li_rish">
-                 <a className=" nav-link HeaderLink" rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
+                 <img className='header_icon_rish' src="/icon/plockr_icon.svg" />
+                 <a  rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
                   <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >Plockr</text>
                      </a>
                   </li> 
-
+                  
                    <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/notification"
                      style={{position:'relative'}}
                      onClick = {()=>this.setState({valid:!this.state.valid},()=>this.props.toggleNotif())}>
-                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
+                  <img className='header_icon_rish' style={{position:'relative'}} src="/icon/notification_header_icon.svg" />
                   <div className="notif_badge_wrapper_rish">
                     <NotificationBadge count={this.props.count} effect={Effect.SCALE}/>
                   </div>
+                  <text  className={`${window.location.pathname==='/dashboard/notification'?'green_text_rish':'header_link_text'} `} >Notifications</text>
+                 
                   </Link>
                   </li> 
                   <li className="nav-item header_li_rish">
@@ -88,9 +85,7 @@ class DashboardHeader extends Component {
                   </li> 
                  </ul>
              </div>  
-        </div>
       </div>
-  </nav>
         }
   }
       

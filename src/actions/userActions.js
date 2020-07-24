@@ -2099,12 +2099,13 @@ export const getSpecsClr = () => dispatch =>{
 }
 
 export const getSpecs = (obj) => async dispatch => {
+  console.log(obj,"obj in getSpecs")
   console.log("Inside GetSPecs")
   let center_id = get_url_params('center')
-  let requestUrl ="/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`
+  let requestUrl ="/catalogue/getConsultationSpecialities"+`${!!center_id?'?userId='+center_id:''}`
   if(!!obj){
     if(obj.type === "getUserSpecialities"){
-      requestUrl = "/user/getUserSpecialities"+`${!!center_id?'?userId='+center_id:''}`
+      requestUrl = "/catalogue/getConsultationSpecialities"+`${!!center_id?'?userId='+center_id:''}`
     }
   }
   
@@ -2932,13 +2933,9 @@ export const updateRealPriceClr = () => dispatch =>{
 }
 
 export const updateRealPrice = (uData) => async dispatch => {
-  let obj = {
-    "solutionId": uData.realUpdateData.solutionId,
-    "serviceId": uData.realUpdateData.serviceId,
-    "updatedPrice": Math.round(Number(uData.realUpdatePrice))
-  }
+
   let token = localStorage.getItem('token');
-  return await axios.put(baseUrl + '/solution', obj, { 'headers': { 'Authorization': token } })
+  return await axios.put(baseUrl + '/solution', uData, { 'headers': { 'Authorization': token } })
     .then((res) => {
       if (res.status === 201) {
         dispatch({
@@ -3106,9 +3103,10 @@ export const sendUpdateData = (uData) => async dispatch => {
   }
   //console.log(typeof obj.newPrice, obj.newPrice)
   let token = localStorage.getItem('token');
-  return await axios.patch(base_url_without_v5 + '/admin/updatePrice', obj, { 'headers': { 'Authorization': token } })
+  return await axios.patch(base_url_without_v5 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       //console.log(res.data)
+      console.log(res,"res in send Update")
       if (res.data.status === 1) {
         //console.log(res.data, 'data')
         dispatch({
@@ -3492,8 +3490,9 @@ export const bankDetails = bankData => dispatch => {
 };
 
 export const getInsights = (data) => async dispatch => {
+  console.log(data,"data in getInsight")
   let token = localStorage.getItem('token');
-  return await axios.get(baseUrl + `/analytics/actionableInsight${!!data?'?center='+data.center:''}`, { 'headers': { 'Authorization': token } })
+  return await axios.get(baseUrl + `/analytics/actionableInsight${!!data?'?userId='+data.center:''}`, { 'headers': { 'Authorization': token } })
   .then(res => {
     console.log(res , 'res in getInsights')
     if (res.status=== 201) {

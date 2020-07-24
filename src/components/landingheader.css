@@ -88,11 +88,12 @@
 
 
 .header_wrapper_rish {
-    height: auto;
-    width: 100%;
+    width:-webkit-fill-available;
     padding: 1rem;
+    z-index: 999;
     display: flex;
     box-shadow: 0px 2px 0.5rem #00000029;
+    background-color: #3C464D;
 }
 
 .header_wrapper_logo_child_rish {

@@ -1,30 +1,48 @@
-import React from "react"
+import React , { useState , useEffect} from "react"
 import { ToastProvider, useToasts } from 'react-toast-notifications'
 
 const UploadCatalogue = (props) => {
     const { addToast } = useToasts()
-    if(!!props.uploadRet){
-        if(!!props.uploadRet.success){
-          addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
-        //   props.updateImage({
-        //       imageUrl:props.uploadRet.url
-        //   })
-        }else{
-          addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
-        }
-        props.uploadRetClr()
-    }
+    const [ success, setSuccess ] = useState(false)
+    // if(!!props.uploadRet){
+    //     if(!!props.uploadRet.success){
+    //       addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
+         
+
+    //     }else{
+    //       addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
+    //     }
+    //     // props.uploadRetClr()
+    // }
   
+
+
+
+  useEffect( () => {
     if(!!props.uploadProceduresRet){
       if(!!props.uploadProceduresRet.success){
         addToast(props.uploadProceduresRet.message, {appearance: 'success', autoDismiss:true}) 
         // props.getProfileDetails()
-        props.closeModal()
+        setSuccess(true)
+        setTimeout(()=>{
+           props.closeModal()
+        }, 5000)
+        // props.closeModal()
       }else{
         addToast(props.uploadProceduresRet.message, {appearance: 'error', autoDismiss:true})
       }
       props.uploadProceduresClr()
   }
+
+  if(!!props.downloadCatalogueRet){
+    if(!!props.downloadCatalogueRet.success){
+      addToast(props.downloadCatalogueRet.message, {appearance: 'success', autoDismiss:true}) 
+    }else{
+      addToast(props.downloadCatalogueRet.message, {appearance: 'error', autoDismiss:true})
+    }
+    props.downloadCatalogueClr()
+}
+ }, [props.uploadProceduresRet,  props.downloadCatalogueRet])
 
   const handleButtonClick = ()=>{
     let element = document.getElementById('uploatCatalogue')
@@ -56,21 +74,30 @@ const handleUpload = (e) => {
 
     return (
         <div className ='modal-wrapper-small_ris'>
-        <div className="modal-heading_ris">Add Catalogue</div>
-        <p className="modal-p_ris margin-top-medium_ris text-center">We'll update you when we upload your price</p>
-        <p className="modal-p_ris margin-top-small_ris text-center">Prefered format <strong>(xlsx)</strong></p>
+        <div style={{fontWeight:'600'}} className="modal-heading_ris">Add Catalogue</div>
+      {success ?  <div className="text-center margin-top-medium_ris">
+         <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
+       </div> :
         <div className="text-center margin-top-medium_ris">
-        <button onClick={()=>handleButtonClick()}
-         className="common-button">Upload</button>
-         <input  
+        <button onClick={()=>handleButtonClick()} type="button" className="btn btn-light-green">
+            <span className="glyphicon glyphicon-search"></span> Upload Catalogue
+        </button>
+       <div>
+       <text className='catalogue_note'><text className='bold'>Note :</text>Upload your Catalogue from here in a file or go to "Available Procedures" section to add prices of services directly to your catalogue and start receiving Patients
+       </text>
+       <div className="text-center margin_top_small_rish"> <text onClick = {()=> props.downloadCatalogue()} className='link_text_rish '>Click to download a sample</text></div>
+       </div>
+       <input  
     style={{display:'inline',display:'none'}}
     id="uploatCatalogue"
     type="file" 
     accept=".pdf, .docx, .xlsx"
     onChange ={(e)=>handleUpload(e)}
     />
-        </div>
-        </div>         
+</div>}
+      
+      
+        </div>   
     )
 }
 

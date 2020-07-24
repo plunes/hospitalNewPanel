@@ -239,3 +239,32 @@ export const GET_ACT_INSIGHT_LOADING = 'App/Catalogue/GET_ACT_INSIGHT_LOADING'
 export const GET_REAL_INSIGHT = 'App/Catalogue/GET_REAL_INSIGHT'
 export const GET_REAL_INSIGHT_RET = 'App/Catalogue/GET_REAL_INSIGHT_RET'
 export const GET_REAL_INSIGHT_LOADING = 'App/Catalogue/GET_REAL_INSIGHT_LOADING'
+
+
+export const GET_USER_SERVICES = 'App/Catalogue/GET_USER_SERVICES'
+export const GET_USER_SERVICES_RET = 'App/Catalogue/GET_USER_SERVICES_RET'
+export const GET_USER_SERVICES_ERROR = 'App/Catalogue/GET_USER_SERVICES_ERROR'
+
+
+export const GET_PROCEDURES = 'App/Catalogue/GET_PROCEDURES'
+export const RET_PROCEDURES = 'App/Catalogue/RET_PROCEDURES'
+export const GET_PROCEDURES_ERROR = 'App/Catalogue/GET_PROCEDURES_ERROR'
+export const CLR_PROCEDURES = 'App/Catalogue/CLR_PROCEDURES'
+export const UPDATE_PARAMS = 'App/Catalogue/UPDATE_PARAMS'
+export const UPDATE_MODIFIED_PROCEDURES = 'App/Catalogue/UPDATE_MODIFIED_PROCEDURES'
+
+
+export const GET_ADD_PROCEDURES = 'App/Catalogue/GET_ADD_PROCEDURES'
+export const RET_ADD_PROCEDURES = 'App/Catalogue/RET_ADD_PROCEDURES'
+export const GET_ADD_PROCEDURES_ERROR = 'App/Catalogue/GET_ADD_PROCEDURES_ERROR'
+export const CLR_ADD_PROCEDURES = 'App/Catalogue/CLR_ADD_PROCEDURES'
+export const UPDATE_ADD_PARAMS = 'App/Catalogue/UPDATE_ADD_PARAMS'
+export const UPDATE_ADD_MODIFIED_PROCEDURES = 'App/Catalogue/UPDATE_ADD_MODIFIED_PROCEDURES'
+
+export const SEARCH_ADD_PROCEDURE = 'App/Catalogue/SEARCH_ADD_PROCEDURE'
+export const SEARCH_ADD_PROCEDURE_RET = 'App/Catalogue/SEARCH_ADD_PROCEDURE_RET'
+export const SEARCH_ADD_PROCEDURE_LOADING = 'App/Catalogue/SEARCH_ADD_PROCEDURE_LOADING'
+
+export const SET_VARIANCE = 'App/Catalogue/SET_VARIANCE'
+export const SET_VARIANCE_RET = 'App/Catalogue/SET_VARIANCE_RET'
+export const SET_VARIANCE_LOADING = 'App/Catalogue/SET_VARIANCE_LOADING'

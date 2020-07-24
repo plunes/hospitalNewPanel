@@ -9,6 +9,7 @@ import ForgotPasswordComponent from "./components/ChangePasswordComponent"
 import { getUserDetails } from "../src/actions/userActions";
 import { messaging } from "./init-fcm";
 import 'react-toastify/dist/ReactToastify.min.css'
+// import 'bootstrap/less/bootstrap.less'
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import { getNotifications } from "../src/actions/userActions";
@@ -19,6 +20,7 @@ import './common.css'
 import './catalogue.css'
 import './appointment.css'
 import './full_page_loader.css'
+import './checkbox_pill.css'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
 import no_auth_route from "./HOC/no_auth_route"

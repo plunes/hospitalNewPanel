@@ -7,7 +7,8 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 import { Redirect } from "react-router-dom"
 import Map from "../MapComponent"
 import LoaderComponent from "../functional/LoaderComponent";
-
+import AnimatedMount from "../../HOC/AnimatedMount"
+import Button from "../functional/Button";
 function MyError(message){
     this.message = message;
 }
@@ -32,7 +33,7 @@ class AddCenter extends React.PureComponent{
             if(nextProps.add_center_ret.success){
                 nextProps.set_centers_data({
                         ...nextProps.centers_data,
-                        centers_list:[nextProps.add_center_ret.data,...nextProps.centers_data.centers_list]
+                        centers_list:[{...nextProps.add_center_ret.data, businessGained:0, businessLost:0},...nextProps.centers_data.centers_list]
                 })
                this.setState({
                    ret:{
@@ -122,7 +123,7 @@ render(){
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
             />
-             <div style={{position:'relative', padding:'1rem'}} className="centers_wrapper">
+             <div style={{position:'relative', padding:'1rem'}} className="centers_wrapper new_card_class">
                  {this.state.loading && <LoaderComponent />}
                     <div className="text-center">
                 <h4 style={{position:'relative',paddingTop:'1rem'}} className="margin-top-medium_ris center_align_rish " >Add Center</h4>
@@ -168,8 +169,8 @@ render(){
                           />
                         </div>
                 </div>
-                <div className="text-center margin-top-medium_ris">
-                  <button style={{marginTop:'3rem', marginBottom:'1rem'}} onClick={()=>this.handle_submit()} className="common_button_rish cursor-pointer">Submit</button>
+                <div style={{marginTop:'4rem'}} className="text-center margin-top-medium_ris">
+                  <Button style={{marginTop:'3rem', marginBottom:'1rem'}} onClick={()=>this.handle_submit()} >Submit</Button>
                 </div>
             </div>
         </div>
@@ -182,4 +183,16 @@ const mapStateToProps = state => ({
     centers_data:state.user.data.centers_data
   })
   
-export default connect(mapStateToProps, {add_center_clr, add_center, set_centers_data})(AddCenter);
+
+export default AnimatedMount({
+    unmountedStyle: {
+      opacity: 0,
+      transform: 'translate3d(0, -2rem, 0)',
+      transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+    },
+    mountedStyle: {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+      transition: 'opacity .5s ease-out, transform .5s ease-out',
+    },
+  })(connect(mapStateToProps, {add_center_clr, add_center, set_centers_data})(AddCenter))

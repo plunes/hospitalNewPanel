@@ -92,7 +92,7 @@ class AddDoctorComponent extends Component {
             specialities:[],
             services:[],
             specialitie_chosen:'',
-            services_chosen:'',
+            services_chosen:false,
             name:'',
             education:'',
             designation:'',
@@ -137,7 +137,7 @@ class AddDoctorComponent extends Component {
           console.log("calling for center profile")
           this.props.get_center_profile({center_id})
         }else{
-          let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
+          let center_data  = [...this.props.centers_list].filter(item=>(item._id === center_id))[0]
           this.props.set_center_data({...center_data})
         }
       }
@@ -410,9 +410,9 @@ class AddDoctorComponent extends Component {
               },()=>{
                 if(data.specialities.length!==0){
                   try{
-                    this.setState({
-                      services_chosen:[]
-                    })
+                    // this.setState({
+                    //   services_chosen:[]
+                    // })
                     this.props.getServ({
                       name:data.specialities[0].specialityName
                     })
@@ -624,16 +624,19 @@ console.log(data,'data in submit Details')
     }
 
     render() {
-      console.log(error_flag,"Error in Add Doctor")
       console.log(this.state,"this.state in AddComponent")
       console.log(this.props,"this.props in add Doctor component")
       let center_id = get_url_params('center')
       if(this.state.add_success){
-        return <Redirect to= {{
-         pathname: "/dashboard/profile",
-         state: { add_success: true,
-                  center_id:center_id}
-     }}  />
+        if(!!center_id){
+          return <Redirect to= {{
+            pathname: `/dashboard/profile`
+        }}  />
+        }else {
+          return <Redirect to= {{
+            pathname: `/dashboard/profile`
+        }}  />
+        }
      }
       
         return (
