@@ -33,7 +33,7 @@ class AddCenter extends React.PureComponent{
             if(nextProps.add_center_ret.success){
                 nextProps.set_centers_data({
                         ...nextProps.centers_data,
-                        centers_list:[nextProps.add_center_ret.data,...nextProps.centers_data.centers_list]
+                        centers_list:[{...nextProps.add_center_ret.data, businessGained:0, businessLost:0},...nextProps.centers_data.centers_list]
                 })
                this.setState({
                    ret:{

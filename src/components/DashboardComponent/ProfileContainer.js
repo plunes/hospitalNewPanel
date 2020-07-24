@@ -78,28 +78,7 @@ class ProfileContainer extends React.PureComponent {
 
   componentWillReceiveProps(nextProps){
 
-    if(!!window.location.state){
-      if(!!window.location.state.add_success){
-          this.setState({
-              ret:{
-                  success:true,
-                  message:'Doctor successfully added.'
-              }
-          })
-          nextProps.history.replace({
-              pathname: window.location.state.center_id?`${window.location.pathname}?center=${window.location.state.center_id}`:window.location.pathname,
-              state: {}
-          });
-      let center_id =  get_url_params('center')
-          if(nextProps.centers_list.length ===0){
-            console.log("calling for center profile")
-            nextProps.get_center_profile({center_id})
-          }else{
-            let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
-            nextProps.set_center_data({...center_data})
-          }
-      }
-  }
+  
 
     if(nextProps.get_center_profile_ret){
       if(nextProps.get_center_profile_ret.success){
@@ -198,6 +177,31 @@ class ProfileContainer extends React.PureComponent {
   }
 
   componentDidMount(){
+  console.log("Inside Component DidMunt")
+  //   if(!!window.location.state){
+  //     if(!!window.location.state.add_success){
+  //         this.setState({
+  //             ret:{
+  //                 success:true,
+  //                 message:'Doctor successfully added.'
+  //             }
+  //         })
+  //         window.history.replace({
+  //             pathname: window.location.state.center_id?`${window.location.pathname}?center=${window.location.state.center_id}`:window.location.pathname,
+  //             state: {}
+  //         });
+  //     let center_id =  get_url_params('center')
+  //         if(this.props.centers_list.length ===0){
+  //           console.log("calling for center profile")
+  //           this.props.get_center_profile({center_id})
+  //         }else{
+  //           let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
+  //           this.props.set_center_data({...center_data})
+  //         }
+  //     }
+  // }
+
+
     let center_id = get_url_params('center')
     if(this.state.flag_for_map){
       console.log(this.props.open_map,"this.props.open_map")
@@ -707,10 +711,16 @@ class ProfileContainer extends React.PureComponent {
             </Link>
       </div>
        :'':'':''}
-   
-   {!!this.state.prof_data.doctors?((this.state.prof_data.doctors.length===this.state.show_doctor_count) || (this.state.prof_data.doctors.length==0))?"":<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
-   show_doctor_count:this.state.prof_data.doctors.length
-   })} >See more Doctors</span></div> :'' }
+
+
+       {!!this.state.prof_data.doctors?
+          this.state.prof_data.doctors.length>4?
+          !!((this.state.prof_data.doctors.length) !== (this.state.show_doctor_count)) ?<div className="se-dr"><span className="pika cursor-pointer" onClick={()=>this.setState({
+            show_doctor_count:this.state.prof_data.doctors.length
+            })} >See more Doctors</span></div>:''
+                    :''
+       :""}
+
    </React.Fragment>
      }
 

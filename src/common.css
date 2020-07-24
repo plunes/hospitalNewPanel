@@ -573,3 +573,7 @@ margin: 0 1%;
 u {
     text-decoration: none !important;
 }
+
+.display_none {
+    display: none !important;
+}
