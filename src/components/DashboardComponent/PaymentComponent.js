@@ -114,7 +114,7 @@ class PaymentComponent extends Component {
        console.log(this.state, 'this.state in PaymentComponent')
         return (
            <React.Fragment>
-                    <div className='main_content_rish'>
+                    <div className='main_content_rish new_card_class'>
                     <div className= 'text-center paymnt_heding'><h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">Payments</h4></div><br></br>
                         {
                             this.state.payments.map((p, index) => {

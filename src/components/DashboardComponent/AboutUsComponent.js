@@ -16,7 +16,7 @@ export default class AboutUsComponent extends Component {
         }else{
             return (
               <React.Fragment>
-                            <div className='main_content_rish'>
+                            <div className='main_content_rish new_card_class'>
                                 <div>
                                 <div className="AboutHospitalBody">
                                 <h4 style={{position:'relative'}} className="section_heading_rish">About Us</h4>

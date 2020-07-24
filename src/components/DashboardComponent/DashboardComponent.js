@@ -825,7 +825,7 @@ class DashboardComponent extends React.PureComponent {
                                                                 </select> */}
                                         </div>
                                         <div style={{marginTop:'1rem'}} className="text-center">
-                                            <p>Real Time Business </p>
+                                            <p  style={{fontSize:'1.2rem'}}>Real Time Business </p>
                                         </div>
 
                                         <div style={{position:'absolute', bottom:'1%'}}>

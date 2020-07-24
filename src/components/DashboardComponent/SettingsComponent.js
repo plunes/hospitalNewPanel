@@ -64,7 +64,7 @@ import AnimatedMount from "../../HOC/AnimatedMount"
           console.log(this.state,"state in SettingsComponent")
           return (
                <React.Fragment>
-                  <div className='main_content_rish'>
+                  <div className='main_content_rish new_card_class'>
                               <div>
                                    <div className="settingpageBody">
                                    <h4 style={{position:'relative'}} className="section_heading_rish">Settings</h4>
