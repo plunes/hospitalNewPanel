@@ -169,7 +169,7 @@ render(){
                           />
                         </div>
                 </div>
-                <div className="text-center margin-top-medium_ris">
+                <div style={{marginTop:'4rem'}} className="text-center margin-top-medium_ris">
                   <Button style={{marginTop:'3rem', marginBottom:'1rem'}} onClick={()=>this.handle_submit()} >Submit</Button>
                 </div>
             </div>

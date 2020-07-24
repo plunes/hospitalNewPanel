@@ -32,7 +32,10 @@ update_procedure,
 add_procedure,
 add_procedure_loading,
 search_procedures,
-search_procedures_loading
+search_procedures_loading,
+get_center_profile,
+get_center_profile_clr,
+set_center_data
 } from '../../actions/userActions'
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner'
@@ -47,7 +50,7 @@ import LoaderComponent from "../functional/LoaderComponent"
 import NotifFunc from "../functional/NotifFunc"
 import NewNotif from "../functional/NewNotif"
 import Select from "../Select";
-import { is_positive_real_number, get_slider_labels, paginate_data } from "../../utils/common_utilities"
+import { is_positive_real_number, get_slider_labels, paginate_data, get_url_params } from "../../utils/common_utilities"
 import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
 import Button from "../functional/Button"
@@ -180,6 +183,12 @@ class MyCatalogueComponent extends Component {
         this.props.get_user_specialities({
             type:"getUserSpecialities"
         })
+        let center_id = get_url_params('center')
+        if(!!center_id){
+            if(this.props.centers_list.length ===0){
+               this.props.get_center_profile({center_id})
+            }
+        }
         // this.props.get_procedures({ limit:10,
         //     total:'',
         //     page:1,
@@ -299,6 +308,22 @@ class MyCatalogueComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+
+        if(nextProps.get_center_profile_ret){
+            if(nextProps.get_center_profile_ret.success){
+               this.setState({
+                 prof_data:nextProps.get_center_profile_ret.data
+               },()=>nextProps.set_center_data({...nextProps.get_center_profile_ret.data}))
+            }else{
+                this.setState({
+                  ret:{
+                    success:false,
+                    message:nextProps.get_center_profile_ret.message
+                  }
+                })
+            }
+            nextProps.get_center_profile_clr()
+          }
 
         if(nextProps.catalogue_data.user_specialities.length !== this.state.specialities.length){
             let arr = [...nextProps.catalogue_data.user_specialities]
@@ -1088,7 +1113,18 @@ class MyCatalogueComponent extends Component {
                             retClr= {()=>this.setState({ret:false})}
                         />
                 <div className='catalogue_main_content_rish'>
+                <div className="profile_name_wrapper catalogue_profile_name_wrapper">
+                           <div className="profile_name_name" >    
+                            <img src='/icon/profile_name_icon.svg' className='profile_name_icon' />
+                               <text style={{textTransform:'capitalize'}}>{!!get_url_params('center')? this.props.center_data.name:this.props.prof_data.name}</text>
+                           </div>
+                           <div className="profile_name_number">
+                              {/* <text > For any query - Call at +91 7011311900</text> */}
+                           </div>
+                        </div>
                    <div className='catalogue_wrapper_rish'>
+
+                       
                         <div className='catalogue_section_1'>
                            <div className="catalogue_section_1_bottom new_card_class">
                                <div className='catalogue_flex_parent'>
@@ -1428,7 +1464,11 @@ const mapStateToProps = state => ({
     to_add_services_loading:state.catalogue_store.to_add_services_loading,
     set_variance_ret:state.catalogue_store.set_variance_ret,
     set_variance_loading_flag:state.catalogue_store.set_variance_loading,
-    search_procedures_loading_loading_flag:state.catalogue_store.search_procedures_loading
+    search_procedures_loading_loading_flag:state.catalogue_store.search_procedures_loading,
+    prof_data:state.user.data.prof_data,
+    centers_list:state.user.data.centers_data.centers_list,
+    center_data:state.user.data.centers_data.center_data,
+    get_center_profile_ret:state.user.get_center_profile_ret
 })
 
 
@@ -1477,7 +1517,10 @@ update_modified_procedures,
 to_add_services,
 to_add_services_clr,
 set_variance,
-set_variance_loading
+get_center_profile,
+get_center_profile_clr,
+set_variance_loading,
+set_center_data
 })(MyCatalogueComponent));
 
 
