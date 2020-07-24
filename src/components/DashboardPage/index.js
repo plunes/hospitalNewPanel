@@ -19,7 +19,7 @@ import { getEntity, getEntityClr, clearSolInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
    remove_notif_count_ret, set_notif_count, getUserDetails, get_user_info,
    get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url,
-   get_centers, get_centers_clr , set_centers_data, set_location_toggler} from "../../actions/userActions"
+   get_centers, get_centers_clr , set_centers_data, set_location_toggler, clearUpdatePriceData} from "../../actions/userActions"
 
 import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading } from "../../actions/dash_actions"
 import  { get_user_specialities } from "../../actions/catalogue_actions"
@@ -101,7 +101,47 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
+  set_selected_actionable = (data, price) =>{
+    console.log(data,price," data, and price in set_selected_actionable")
+    this.setState({
+      selected_actionable:data,
+      updated_price:price,
+      actioanable_update_loading:true
+    })
+  }
+
   componentWillReceiveProps(nextProps){
+    if(nextProps.updatePriceDataRet){
+      if(nextProps.updatePriceDataRet.success){
+          let arr = [...this.state.insight]
+
+          let new_arr = arr.map(item=>{
+            if(item.serviceId === this.state.selected_actionable.serviceId){
+              return { ...this.state.selected_actionable, userPrice:this.state.updated_price  }
+            }else {
+              return {...item}
+            }
+          })
+         
+          this.setState({
+             insight:new_arr,
+              ret:{
+                  success:true,
+                  message:`${this.state.selected_actionable.serviceName} price successfully updated in catalogue`
+              },
+              actioanable_update_loading:false
+          })
+      }else{
+          this.setState({
+              ret:{
+                  success:false,
+                  message:`Unable to update price now, try again later`
+              },
+              actioanable_update_loading:false
+          })
+      }
+      nextProps.clearUpdatePriceData()
+  }
         if(!!nextProps.solInsights){
           this.setState({
               solInsights:nextProps.solInsights,
@@ -604,7 +644,7 @@ authObject =()=> {
 }
 
   render() {
-  console.log(this.state,"state in state")
+  console.log(this.state,"state in dashboard page")
   console.log(this.props.get_user_specialities_loading_flag,"props in Dashboard page")
  if(!!localStorage.getItem('token')){
   try {
@@ -695,7 +735,9 @@ authObject =()=> {
                     get_act_insight_laoding_flag = {this.state.real_insight_loader}
                     act_insight_loader = {this.state.act_insight_loader}
                     get_act_insight_loading_flag = {this.props.get_act_insight_loading_flag}
-                    get_real_insight_loading_flag = {this.props.get_real_insight_loading_flag}            
+                    get_real_insight_loading_flag = {this.props.get_real_insight_loading_flag}     
+                    set_selected_actionable = {this.set_selected_actionable}       
+                    actioanable_update_loading = {this.state.actioanable_update_loading}
                     />)
                    :(window.location.pathname === '/dashboard/profile')?
                    protected_route({
@@ -817,7 +859,8 @@ const mapStateToProps = state => ({
     get_act_insight_loading_flag:state.dash_store.get_act_insight_loading,
     get_real_insight_ret:state.dash_store.get_real_insight_ret,
     get_real_insight_loading_flag:state.dash_store.get_real_insight_loading,
-    get_user_specialities_loading_flag:state.catalogue_store.get_user_specialities_loading
+    get_user_specialities_loading_flag:state.catalogue_store.get_user_specialities_loading,
+    updatePriceDataRet:state.user.updatePriceDataRet
 })
 
 export default connect(mapStateToProps, { 
@@ -851,6 +894,7 @@ get_real_insight,
 get_real_insight_loading,
 get_act_insight,
 get_act_insight_loading,
-get_user_specialities
+get_user_specialities,
+clearUpdatePriceData
 })(DashboardPage);
 

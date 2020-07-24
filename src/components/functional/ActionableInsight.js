@@ -1,7 +1,7 @@
 import React from 'react'
 import AnimatedMount from "../../HOC/AnimatedMount"
 const should_render = (prevProps, nextProps) => {
-    return true
+    return false
 }
 const ActionableInsight = (props) => {
     const { data , index , handleUpdatePrice} = props

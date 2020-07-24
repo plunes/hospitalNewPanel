@@ -140,6 +140,11 @@ class DashboardComponent extends React.PureComponent {
     }
  
     componentWillReceiveProps(nextProps){
+
+        if(((nextProps.actioanable_update_loading === false) && (this.props.actioanable_update_loading===true))){
+            this.handleModal()
+        }
+         
         if(nextProps.insight_flag !== this.props.insight_flag){
             this.setState({
                 get_actionable_loading_other:false
@@ -337,11 +342,13 @@ class DashboardComponent extends React.PureComponent {
         e.preventDefault();
         if(this.state.actionUpdatedPrice !== this.state.updateData.price){
             let data = {
-                updatePrice: this.state.actionUpdatedPrice,
+                updatePrice: this.state.actionUpdatedPrice.toFixed(2),
                 updateData: this.state.updateData
             }
+            this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
             this.setState({
-                actionablePriceLoading:true
+                actionablePriceLoading:true,
+                selected_actionable:this.state.updateData
             },()=>this.props.sendUpdateData(data))
         }
     }
@@ -396,6 +403,7 @@ class DashboardComponent extends React.PureComponent {
   
     }
     handleUpdatePrice(updateData) {
+        console.log(updateData,"update data in handleUpdatePrice")
         this.setState({
             modalIsOpen: true,
             updatePrice: updateData.userPrice,
@@ -515,9 +523,9 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
-        // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
-        console.log(this.state,"this.state in dashboard")
+        // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
+        // // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
+        // console.log(this.state,"this.state in dashboard")
         console.log(this.props,"this.props in dashboard component")
         let { percent } = this.state
         const options = {
@@ -570,10 +578,10 @@ class DashboardComponent extends React.PureComponent {
                             ret ={this.props.updateRealPriceRet}
                             retClr = {this.updateRealPriceClr}
                         />
-                        <NewNotif 
+                        {/* <NewNotif 
                             ret ={this.props.updatePriceDataRet}
                             retClr = {this.clearUpdatePriceData}
-                        />
+                        /> */}
                         <NewNotif 
                             ret ={this.state.ret}
                             retClr = {()=>{this.setState({
@@ -946,7 +954,7 @@ class DashboardComponent extends React.PureComponent {
                                        
                                         <div><text className="serv_ces">{this.state.serviceName}</text></div>
                                         <div className="catlou_sli">     
-                                        {this.state.actionablePriceLoading && <LoaderComponent />}      
+                                        {this.props.actioanable_update_loading && <LoaderComponent />}      
                                         <div className="text-center margin_top_small_rish">
                                         <Slider
                                             min={0}
@@ -1147,31 +1155,6 @@ const mapStateToProps = state => ({
     centers_data:state.user.data.centers_data,
     insight_flag:state.user.insight_flag
 })
-
-// export default connect(mapStateToProps, {updateRealPriceClr, 
-//      clearUpdatePriceData, 
-//      getAllBookings,
-//      getInsights,
-//      sendUpdateData, 
-//      getSolutionInsights,
-//      getMonthWiseUsers,
-//      updateRealPrice,
-//      set_dash_data,
-//      get_business,
-//      act_as_admin_clr,
-//      act_as_admin,
-//      admin_otp_clr,
-//      admin_otp,
-//      admin_details,
-//      admin_details_clr,
-//      get_user_info,
-//      set_user_info,
-//      get_centers,
-//      set_location_toggler,
-//      set_open_map,
-//      clearSolInsights, setMount })(DashboardComponent)
-
-
      export default AnimatedMount({
         unmountedStyle: {
           opacity: 0,
