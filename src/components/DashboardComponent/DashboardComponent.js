@@ -340,16 +340,19 @@ class DashboardComponent extends React.PureComponent {
 
     async handleSubmit(e) {
         e.preventDefault();
-        if(this.state.actionUpdatedPrice !== this.state.updateData.price){
-            let data = {
-                updatePrice: this.state.actionUpdatedPrice.toFixed(2),
-                updateData: this.state.updateData
+        console.log(this.state,"this.state in handleSubmit")
+        if((parseInt(this.state.actionUpdatedPrice,10).toFixed(2) !== parseInt(this.state.updateData.price,10).toFixed(2))){
+            if(this.state.value !==0 ){
+                let data = {
+                    updatePrice: this.state.actionUpdatedPrice.toFixed(2),
+                    updateData: this.state.updateData
+                }
+                this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
+                this.setState({
+                    actionablePriceLoading:true,
+                    selected_actionable:this.state.updateData
+                },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
             }
-            this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
-            this.setState({
-                actionablePriceLoading:true,
-                selected_actionable:this.state.updateData
-            },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
         }
     }
      handleRealSubmit(e) {
@@ -653,9 +656,9 @@ class DashboardComponent extends React.PureComponent {
                                    
                                        <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'0rem', width:'10rem'}}>
                                      {this.props.centers_name_list.length !==0 &&   <Select
-                                            options = {this.props.centers_name_list}
+                                            options = {[{name:this.props.prof_data.name, value:''},...this.props.centers_name_list]}
                                             handleChange = {this.handle_actionable_insights}
-                                            placeholder= "Centers"
+                                            placeholder= {this.props.prof_data.name}
                                             input_text_class = "catalogue_dropdown transparent_background"
                                             wrapper_class = "catalogue_dropdown_wrapper transparent_background"
                                             value = {this.state.get_actionable.center}
