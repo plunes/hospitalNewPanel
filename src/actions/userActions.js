@@ -3103,7 +3103,7 @@ export const sendUpdateData = (uData) => async dispatch => {
   }
   //console.log(typeof obj.newPrice, obj.newPrice)
   let token = localStorage.getItem('token');
-  return await axios.patch(base_url_without_v5 + '/admin/updatePrice', obj, { 'headers': { 'Authorization': token } })
+  return await axios.patch(base_url_without_v5 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
       //console.log(res.data)
       console.log(res,"res in send Update")

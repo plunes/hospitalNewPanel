@@ -645,7 +645,7 @@ authObject =()=> {
 
   render() {
   console.log(this.state,"state in dashboard page")
-  console.log(this.props.get_user_specialities_loading_flag,"props in Dashboard page")
+  // console.log(this.props.get_user_specialities_loading_flag,"props in Dashboard page")
  if(!!localStorage.getItem('token')){
   try {
     if(window.location.pathname==='/dashboard'){

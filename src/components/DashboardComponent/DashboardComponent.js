@@ -349,7 +349,7 @@ class DashboardComponent extends React.PureComponent {
             this.setState({
                 actionablePriceLoading:true,
                 selected_actionable:this.state.updateData
-            },()=>this.props.sendUpdateData(data))
+            },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
         }
     }
      handleRealSubmit(e) {
