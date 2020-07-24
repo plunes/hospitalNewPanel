@@ -31,11 +31,11 @@ const LineChart = (props) => {
         ]
       };
     return (
-        <div>
+        <div style={{height:'25rem'}}>
             <Line 
             data={data}
             options={{
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 responsive: true,
                 startFrom:0,
                 scales: {

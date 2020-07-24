@@ -906,7 +906,7 @@ class DashboardComponent extends React.PureComponent {
                                          {
                                             (this.props.centers_data.centers_list.length>4)  &&  <div className="text-center margin-top-small_ris">
                                             <Link to='/dashboard/centers' >
-                                            <p style={{textDecoration:'underline',fontSize:'1.3rem'}} className="green_text_rish">View More</p>
+                                            <p style={{textDecoration:'underline',fontSize:'1.3rem'}} className="green_text_rish">View More Centres</p>
                                             </Link>
                                      </div>
                                         }
@@ -928,7 +928,7 @@ class DashboardComponent extends React.PureComponent {
                             </div>
 
                            <div className="insigts_section_wrapper">
-                            <div style={{width:'100%'}} className='dashboardsection new_card_class'>
+                            <div style={{width:'100%', padding:'1%'}} className='dashboardsection new_card_class'>
                                     <span className='businessrow1col1 realtimewidth'>
                                         {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
                                         <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
@@ -937,7 +937,7 @@ class DashboardComponent extends React.PureComponent {
                                             highcharts={Highcharts}
                                             options={options}
                                         /> */}
-                                        <div>
+                                        <div >
                                           <LineChart />
                                         </div>
                                        
