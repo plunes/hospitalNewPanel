@@ -20,7 +20,7 @@ function* get_procedures_saga(action) {
       let arr = []
       if(params.search !== ''){
          arr = total_procedures.filter(item=>{
-          if(item.service.toLowerCase().startsWith(params.search.toLowerCase())){
+          if(item.service.toLowerCase().includes(params.search.toLowerCase())){
             return true
           }
           return false
