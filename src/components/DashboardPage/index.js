@@ -608,6 +608,7 @@ export class DashboardPage extends React.PureComponent {
 }
 
 add_insight = (data) =>{
+  console.log(data,"data in add_insight")
     this.setState({
         solInsights:[...data,...this.state.solInsights]
     },()=>this.props.set_dash_data({...this.props.dash_data, solInsights:this.state.solInsights}))
