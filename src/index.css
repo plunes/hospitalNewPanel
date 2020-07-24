@@ -939,7 +939,7 @@ html {
     padding: 1rem;
 }
 .achievement_badge {
-  background-color: #F2FFF9;
+  /* background-color: #F2FFF9; */
   display: block;
   margin: auto;
   width: 20rem;
@@ -948,7 +948,7 @@ html {
   display: flex;
 }
 .catalogue_badge {
-  background-color: #F2FFF9;
+  /* background-color: #F2FFF9; */
   display: block;
   margin: auto;
   width: 20rem;
@@ -968,6 +968,7 @@ html {
   font-size: 1.5rem;
   color:#000;
   border: none;
+  margin-left: 1.5rem;
 }
 
 #profile_section_2 {

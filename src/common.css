@@ -524,6 +524,9 @@ margin: 0 1%;
    display: flex;
    flex-wrap: wrap;
 }
+.modal-heading_ris { 
+    font-weight: 600 !important;
+}
 
 .notif_wrap_image {
     flex:1 1 20%;

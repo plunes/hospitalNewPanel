@@ -587,7 +587,7 @@ class ProfileContainer extends React.PureComponent {
                    <div className="achievemnet_badge_wrapper">
                      <div onClick={()=>this.setState({addAchievementFlag:true})} className='achievement_badge cursor-pointer'>
                        <div style={{margin:'auto'}}>
-                        <img   className="badge_image" src="/icon/achievement_badge.svg"/>
+                        <img   className="badge_image" src="/achivement.jpg"/>
                         <text  className="catalogue_badge_text">Achievement</text>
                        </div>
                      </div>
@@ -600,7 +600,7 @@ class ProfileContainer extends React.PureComponent {
                           role="button"
                           style={{display:'block', margin:'auto'}}
                           onClick={()=>this.props.toggleMyCatalog()} >
-                          <img src="/icon/catalogue_icon_rish.svg" className='badge_image ' />
+                          <img src="/cata.svg" className='badge_image ' />
                           <text className="catalogue_badge_text">Catalogue</text>
                           </Link>
                      </div>

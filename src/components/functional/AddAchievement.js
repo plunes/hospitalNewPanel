@@ -126,7 +126,16 @@ const submitdetails = () => {
        
        <div className='margin-top-small_ris '>
        {/* <p className="intro col-lg-9"><strong>Title</strong> </p> */}
-       <textarea 
+       <input 
+         type="text"
+         className="form-control editbankdetailfield input-field-common"
+         placeholder="Enter title "
+         name="title" 
+         ref={achievementRef}
+         onChange ={props.handleAchievementChange}
+         value={props.achieveTitle} 
+         /> 
+       {/* <textarea 
             name="title" 
             ref={achievementRef}
             //    onKeyDown={keyPress}
@@ -136,7 +145,7 @@ const submitdetails = () => {
             cols="50"
             placeholder="Enter title "
             name="comment" 
-            form="usrform" /> 
+            form="usrform" />  */}
        </div>
 
        <div className='margin-top-small_ris text-center'>
