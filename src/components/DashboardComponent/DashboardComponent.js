@@ -592,7 +592,8 @@ class DashboardComponent extends React.PureComponent {
                             })}}
                         />
                         <div className="profile_name_wrapper">
-                           <div className="profile_name_name" >    
+                           <div className="profile_name_name" >   
+                              <img src='/icon/profile_name_icon.svg' className='profile_name_icon' /> 
                               <text style={{textTransform:'capitalize'}}>{this.props.prof_data.name}</text>
                            </div>
                            <div className="profile_name_number">
@@ -664,7 +665,7 @@ class DashboardComponent extends React.PureComponent {
                                             value = {this.state.get_actionable.center}
                                             name = "speciality_chosen"
                                             option_className="centers_dropdown_options"
-                                            arrow_class = "display_none"
+                                            // arrow_class = "display_none"
                                             label = "Centers" /> 
                                         //      <select style = {{background:'none', border:'none none 1px solid grey none'}} onChange={this.handle_actionable_insights} name="days" value={this.state.get_actionable.center} className="select_class_rish vertical_align_rish">
                                         //                          <option value={''}>{this.props.prof_data.name}</option>
