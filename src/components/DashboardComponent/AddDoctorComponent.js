@@ -137,7 +137,7 @@ class AddDoctorComponent extends Component {
           console.log("calling for center profile")
           this.props.get_center_profile({center_id})
         }else{
-          let center_data  = [...this.props.centers_list].filter(item=>(item._id === center_id))[0]
+          let center_data  = [...this.props.centers_list].filter(item=>(!!(item._id === center_id)))[0]
           this.props.set_center_data({...center_data})
         }
       }
@@ -630,7 +630,7 @@ console.log(data,'data in submit Details')
       if(this.state.add_success){
         if(!!center_id){
           return <Redirect to= {{
-            pathname: `/dashboard/profile`
+            pathname: `/dashboard/profile?center=${center_id}`
         }}  />
         }else {
           return <Redirect to= {{
@@ -755,7 +755,7 @@ console.log(data,'data in submit Details')
             <AddDoctorForm   
               upload = {this.upload}
               set_user_info = {this.props.set_user_info}
-              prof_data = {this.props.prof_data}
+              prof_data = {!!get_url_params('center')?this.props.center_data:this.props.prof_data}
               clear_data = {this.clear_data}
               uploadRet = {this.props.uploadRet}
               uploadRetClr = {this.props.uploadRetClr}
@@ -815,6 +815,7 @@ const mapStateToProps = state => ({
     addDoctorRet:state.user.addDoctorRet,
     getEntityRet:state.user.getEntityRet,
     prof_data:state.user.data.prof_data,
+    center_data:state.user.data.centers_data.center_data,
     centers_list:state.user.data.centers_data.centers_list,
     get_center_profile_ret:state.user.get_center_profile_ret
   })
