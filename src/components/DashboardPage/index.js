@@ -650,8 +650,8 @@ authObject =()=> {
  if(!!localStorage.getItem('token')){
   try {
     if(window.location.pathname==='/dashboard'){
-      // if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
-        if(true){
+      if(this.props.get_act_insight_loading_flag || this.props.get_real_insight_loading_flag){
+        // if(true){
           return (
                   <FullPageLoader />
                 )
