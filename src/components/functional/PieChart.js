@@ -23,8 +23,14 @@ const PieChart = (props) =>{
     }
 
     return (
-        <div>
-          <Pie data={data} />
+        <div style={{width:'25rem'}}>
+          <Pie data={data}
+             options={{
+              maintainAspectRatio: true,
+              responsive: true,
+              showLegend:false
+          }}
+          />
         </div>
       )
 }

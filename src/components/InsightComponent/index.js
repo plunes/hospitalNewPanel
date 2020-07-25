@@ -3,6 +3,8 @@ import TimerComponent from '../TimerComponent'
 import AnimatedMount from "../../HOC/AnimatedMount"
 import ProfileAvatar from "../functional/ProfileAvatar"
 
+import  { getDateFormat } from "../../utils/common_utilities"
+
 class InsightComponent extends React.PureComponent {
     constructor(props){
         super(props)
@@ -66,6 +68,7 @@ class InsightComponent extends React.PureComponent {
                     : <div>
                     </div>
             }
+            <span className='insight_time_span'>{getDateFormat(this.props.s.createdAt)}</span>
         </span>
                 </div>
                 {/* <hr></hr> */}

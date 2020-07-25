@@ -590,3 +590,17 @@ u {
 .catalogue_profile_name_wrapper {
     margin: 0rem .8rem 1rem 0.8rem;
 }
+
+.collumn_flex {
+    flex-direction: column;
+}
+
+.insight_time_span {
+    font-size: .9rem;
+    display: block;
+    /* margin-left: auto; */
+    text-align: center;
+    margin-top: 1rem;
+    color: lightgreen;
+    font-weight: bold;
+}

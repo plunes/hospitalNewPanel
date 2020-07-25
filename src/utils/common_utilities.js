@@ -14,6 +14,16 @@ export const  get_initials =  (name) => {
   }
 
 
+  export const  getDateFormat =(value)=>{
+    let currentDate = new Date(value);
+    let date = currentDate.getDate();
+    let month = currentDate.getMonth();
+    let year = currentDate.getFullYear();
+    return  (month+1) + "/" + date + "/" + year;
+  }
+  
+
+
 
 export const  objectEquals = (x, y) => {
   'use strict';

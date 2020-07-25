@@ -688,7 +688,6 @@ outline: none;
   position: relative;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-around;
 }.add_icon_center{
   margin-left: auto;
   height: 2.5rem;
