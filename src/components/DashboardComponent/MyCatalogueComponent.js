@@ -405,7 +405,9 @@ class MyCatalogueComponent extends Component {
             this.setState({
                 get_procedures_params:nextProps.ret_procedures.params,
                 procedures:!!nextProps.ret_procedures.data?nextProps.ret_procedures.data:[],
-                selected_procedures:[]
+                selected_procedures:[],
+                all_selected_avail:false,
+                all_selected_catalogue:false
             },()=>{
                 nextProps.clr_procedures()
             })
@@ -494,6 +496,8 @@ class MyCatalogueComponent extends Component {
                         //     page:1,
                         //     search:''
                         // },
+                          all_selected_avail:false,
+                          all_selected_catalogue:false,
                           procedure_for_update:false,
                           procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
                           selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
@@ -583,6 +587,8 @@ class MyCatalogueComponent extends Component {
                             success:true,
                             message:nextProps.update_procedure_ret.message
                         },
+                        all_selected_avail:false,
+                        all_selected_catalogue:false,
                         procedure_for_update:false,
                         procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
                         selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
@@ -685,6 +691,8 @@ class MyCatalogueComponent extends Component {
                     procedures_toAdd:nextProps.to_add_services_ret.data,
                     loading:false,
                     selected_procedures:[],
+                    all_selected_avail:false,
+                    all_selected_catalogue:false,
                     get_add_procedures_params:{
                         limit:nextProps.to_add_services_ret.limit,
                         page:nextProps.to_add_services_ret.page,
@@ -718,7 +726,9 @@ class MyCatalogueComponent extends Component {
                         }else {
                             this.setState({
                                 procedures:[],
-                                seleceted_procedures:[]
+                                seleceted_procedures:[],
+                                all_selected_avail:false,
+                                all_selected_catalogue:false
                             })
                         }
                     }
@@ -962,7 +972,9 @@ class MyCatalogueComponent extends Component {
     onEdit = (data) =>{
       
         this.setState({
-            edit_Proc_flag:true
+            edit_Proc_flag:true,
+            all_selected_avail:false,
+            all_selected_catalogue:false
         })
         let selected_data_removed = [...this.state.selected_procedures].filter((item=>item.serviceId !== data.data.serviceId))
         let selected_procedures = [...this.state.selected_procedures]
@@ -989,13 +1001,16 @@ class MyCatalogueComponent extends Component {
         if(!!this.state.addProcedureFlag){
             this.setState({
                 selected_speciality:e.target.value,
-                loading:true
+                loading:true,
+                all_selected_avail:false,
+                all_selected_catalogue:false
             },()=>{
                 this.props.to_add_services({
                     searchQuery:'',
                     page:1,
                     limit:this.state.get_add_procedures_params.limit,
                     specialityId:this.state.selected_speciality
+
                  })
                  this.props.search_procedures({
                     searchQuery:'',
