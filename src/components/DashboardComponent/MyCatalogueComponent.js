@@ -104,6 +104,8 @@ class MyCatalogueComponent extends Component {
             procedure_for_detail:false,
             global_variance_flag:true,
             speciality_variance_flag:false,
+            all_selected_catalogue:false,
+            all_selected_avail:false,
             get_procedures_params:{
                 limit:0,
                 total:0,
@@ -1025,6 +1027,8 @@ class MyCatalogueComponent extends Component {
         editFlag:true,
         selected_procedures:[],
         procedure_for_update:[],
+        all_selected_avail:false,
+        all_selected_catalogue:false
     },()=>{
         this.props.to_add_services({
             limit:10,
@@ -1082,7 +1086,9 @@ class MyCatalogueComponent extends Component {
            editFlag:true,
            selected_procedures:[],
            procedure_for_update:[],
-           addProcedureFlag:false
+           addProcedureFlag:false,
+           all_selected_avail:false,
+           all_selected_catalogue:false
        })
     }
 
@@ -1144,6 +1150,35 @@ class MyCatalogueComponent extends Component {
     })
 
     console.log(arr,"arr in get_variance")
+     }
+
+     select_all = (e) =>{
+         e.preventDefault()
+         if(!!this.state.addProcedureFlag){
+             if(this.state.all_selected_avail){
+                 this.setState({
+                     selected_procedures:[],
+                     all_selected_avail:false
+                 })
+             }else{
+                 this.setState({
+                     selected_procedures:[...this.state.procedures_toAdd],
+                     all_selected_avail:true
+                 })
+             }
+         }else{
+            if(this.state.all_selected_catalogue){
+                this.setState({
+                    selected_procedures:[],
+                    all_selected_catalogue:false
+                })
+            }else{
+                this.setState({
+                    selected_procedures:[...this.state.procedures],
+                    all_selected_catalogue:true
+                })
+            }
+         }
      }
 
     render() {
@@ -1213,7 +1248,7 @@ class MyCatalogueComponent extends Component {
                                              <text><text className='bold'>Variance: </text>{this.state.variance}</text>
                                         </span>
                                         <span className='variance_info_child'>
-                                           <text><text className='bold'>Expected Leads: </text>{this.get_leads_count()}</text>
+                                           <text><text className='bold'>Expected number of Bids: </text>{this.get_leads_count()}</text>
                                         </span>
                                        </React.Fragment>:<React.Fragment>
                                            {this.state.global_flag ?   <span className='variance_info_child'>
@@ -1318,7 +1353,9 @@ class MyCatalogueComponent extends Component {
                                 </React.Fragment>
                                   ))}
                                 <div className="text-center">
-                                <Button style={{marginTop:'.5rem', width : '13rem !important', height:'3rem !important'}} onClick = {()=>this.add_selected_remain_specs()} >Submit</Button>
+                                <div className="cancel_submit_wrapper"> 
+                                <Button style={{marginTop:'.5rem', fontSize:'1rem'}} onClick = {()=>this.setState({add_remaining_specs: false, selected_remain_specs:[]})}  className="link_text_rish green_text_rish">Cancel</Button> 
+                                <Button style={{marginTop:'.5rem', fontSize:'1rem'}} onClick = {()=>this.add_selected_remain_specs()} className="link_text_rish green_text_rish">Submit</Button>  </div>
                                  {/* <button >Submit</button> */}
                                 </div>  
                               </div>
@@ -1332,7 +1369,7 @@ class MyCatalogueComponent extends Component {
 }
 
                                 <div className='catalogue_head_tabs margin_top_small_rish'>
-                                    <span className=' display_block_rish catalogue_circle_wrap'> <span className='catalogue_circle'></span> </span>
+                                    <span className=' display_block_rish catalogue_circle_wrap'> <span onClick = {(e)=>this.select_all(e)} className={`catalogue_circle ${this.state.addProcedureFlag?this.state.all_selected_avail?'green_background active_catalogue_circle':'':this.state.all_selected_catalogue?'green_background active_catalogue_circle':''}`}></span> </span>
                                     <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Test Name</text></span>
                                     <span className='head_tabs_price display_block_rish text-center'> <text className='catalogue_test_name '>Price</text></span>
                                     <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>Variance</text></span>

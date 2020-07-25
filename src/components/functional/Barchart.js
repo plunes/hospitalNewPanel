@@ -39,7 +39,7 @@ const Barchart = (props) => {
                         yAxes: [{
                           scaleLabel: {
                             display: true,
-                            labelString: 'No. of Leads'
+                            labelString: 'No. of Bids'
                           }
                         }],
                         xAxes: [{
