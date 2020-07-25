@@ -2445,10 +2445,12 @@ export const downloadCatalogue = (data) => async dispatch => {
             type : DOWNLOAD_CATALOGUE_RET,
             payload :{
               success:true,
-              message:"Catalogue download successfull"
+              message:"Sample file download successfull"
             }
           })
       }else{
+        console.log(res,"res in download catalogue")
+        
         dispatch({
           type : DOWNLOAD_CATALOGUE_RET,
           payload :{
@@ -2458,7 +2460,7 @@ export const downloadCatalogue = (data) => async dispatch => {
         })
       }
     }).catch(e=>{
-      console.log(e,"pila")
+      console.log(e.response,e.error,"pila")
       try{
         dispatch({
           type : DOWNLOAD_CATALOGUE_RET,
