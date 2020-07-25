@@ -368,7 +368,7 @@ class ProfileContainer extends React.PureComponent {
         <div className="row">
            <div className="col-md-6">
              <div className="card mb-2">
-               <img className="card-img-top card_im img-loading_rish"
+               <img className="card-img-top card_im "
                  src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
                <div className="card-body">
    <p className="card-text">{arr[i].title}</p>
@@ -387,7 +387,7 @@ class ProfileContainer extends React.PureComponent {
        <div className="row">
           <div className="col-md-4">
             <div className="card mb-2">
-              <img className="card-img-top card_im img-loading_rish"
+              <img className="card-img-top card_im "
                 src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
               <div className="card-body">
   <p className="card-text">{arr[i].title}</p>
@@ -404,7 +404,7 @@ class ProfileContainer extends React.PureComponent {
          <div className="row">
             <div className="col-md-4">
               <div className="card mb-2">
-                <img className="card-img-top card_im img-loading_rish"
+                <img className="card-img-top card_im "
                   src={arr[i].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
     <p className="card-text">{arr[i].title}</p>
@@ -414,7 +414,7 @@ class ProfileContainer extends React.PureComponent {
 
              <div className="col-md-4">
               <div className="card mb-2">
-                <img className="card-img-top card_im img-loading_rish"
+                <img className="card-img-top card_im "
                   src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
     <p className="card-text">{arr[i+1].title}</p>
@@ -442,7 +442,7 @@ class ProfileContainer extends React.PureComponent {
       
             <div className="col-md-4">
               <div className="card mb-2">
-                <img className="card-img-top card_im img-loading_rish"
+                <img className="card-img-top card_im "
                    src={arr[i+1].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+1}  className="ceoss_icon"><i data-iterate= {i+1} class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
                   <p className="card-text">{arr[i+1].title}</p>
@@ -452,7 +452,7 @@ class ProfileContainer extends React.PureComponent {
 
             <div className="col-md-4">
               <div className="card mb-2">
-                <img className="card-img-top card_im img-loading_rish"
+                <img className="card-img-top card_im "
                    src={arr[i+2].imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}}  onClick={this.removeAchievement}  data-iterate= {i+2}  className="ceoss_icon"><i data-iterate= {i+2} class="fa fa-times" aria-hidden="true"></i></span>
                 <div className="card-body">
                   <p className="card-text">{arr[i+2].title}</p>
@@ -695,7 +695,7 @@ class ProfileContainer extends React.PureComponent {
              i = {i}
          />)
      }):<div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
-       <img style={{display:'block', margin:'auto !important'}}  src="/Group 2096.svg" className="img-loading_rish center_align_rish"  />
+       <img style={{display:'block', margin:'auto !important'}}  src="/Group 2096.svg" className=" center_align_rish"  />
        <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Doctors added</div>
        <div className="text-center">
            <Link  to={!!get_url_params('center')?`/dashboard/add-doctor?center=${get_url_params('center')}`:"/dashboard/add-doctor"}

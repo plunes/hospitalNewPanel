@@ -1342,7 +1342,7 @@ class MyCatalogueComponent extends Component {
                                       <div className="my_catalogue_div_wrapper" style={{position:'relative'}}>
                                            {this.props.search_procedures_loading_flag &&  <div style={{ height:'Auto'}} className="text-center">
                                               
-                                <img className="align_center_rish"  style={{height:'30rem', width:'Auto'}} src="/icon/running_dog.gif" />
+                                {/* <img className="align_center_rish"  style={{height:'30rem', width:'Auto'}} src="/icon/running_dog.gif" /> */}
                               </div>}
                                       {this.props.search_procedures_loading_loading_flag ?<div>
                                         {/* <LoaderComponent /> */}

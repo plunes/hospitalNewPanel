@@ -655,7 +655,7 @@ class DashboardComponent extends React.PureComponent {
                                      {/* <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text> */}
                                      </div>
                                    
-                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'0rem', width:'10rem'}}>
+                                       <span className="text-center vertical_align_rish" style={{position:'absolute', right:'2rem',top:'0rem', width:'15rem'}}>
                                      {this.props.centers_name_list.length !==0 &&   <Select
                                             options = {[{name:this.props.prof_data.name, value:''},...this.props.centers_name_list]}
                                             handleChange = {this.handle_actionable_insights}
@@ -710,7 +710,8 @@ class DashboardComponent extends React.PureComponent {
                                                         <text style={{lineHeight:'2.5rem'}} className='business vertical_align_rish cursor-pointer'>Total Business</text>
                                                          </span>
                                                          <span className="heading_flex_child_2">  
-                                                          {this.props.centers_name_list.length !==0  &&  <Select
+                                                       
+                                                          {this.props.centers_name_list.length !==0  &&   <div style={{width:'15rem'}}>  <Select
                                                                 options = {[{name:this.props.prof_data.name, value:''},...this.props.centers_name_list]}
                                                                 handleChange = {this.handle_business_center_change}
                                                                 placeholder= {this.props.prof_data.name}
@@ -720,8 +721,8 @@ class DashboardComponent extends React.PureComponent {
                                                                 name = "speciality_chosen"
                                                                 option_className="centers_dropdown_options"
                                                                 label = "Centers" /> 
-                                                          
-                                                          
+                                                              
+                                                              </div>
                                                           
                                                           
                                                         //   <select  style = {{background:'none', border:'none none 1px solid grey none', display:'inlineBlock'}} onChange={this.handle_business_center_change} name="days" value={this.state.get_business.center} className="select_class_rish">
