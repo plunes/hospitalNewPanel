@@ -96,7 +96,7 @@ let url = ""
     <div style={{position:'relative'}} className=' blackdot'>
     <img 
     onClick={(e)=>handleImageClick(e)}
-    className=" img-loading_rish profile_image_rish"
+    className="  profile_image_rish"
     style={{cursor:'pointer'}}
     src={(!!props.user?props.user.imageUrl:'/profile.jpg')} 
     alt=""> 

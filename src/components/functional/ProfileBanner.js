@@ -79,7 +79,7 @@ console.log(props,"props in ProfileBanner")
     />
      <div style={{position:'relative', border:'none'}}>
          {props.loading && <LoaderComponent />}
-            <img className=" mas_hos img-loading_rish" 
+            <img className=" mas_hos " 
             src={(!!props.user?props.user.coverImageUrl===''?'/maxhos.jpg':props.user.coverImageUrl:'')} 
             alt=""></img>
              <div className="edit_image">
