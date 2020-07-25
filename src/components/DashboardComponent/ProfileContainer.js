@@ -219,8 +219,15 @@ class ProfileContainer extends React.PureComponent {
         console.log("calling for center profile")
         this.props.get_center_profile({center_id})
       }else{
-        let center_data  = [...this.props.centers_list].filter(item=>item._id === center_id)[0]
-        this.props.set_center_data({...center_data})
+        let data = {}
+        let new_arr = [...this.props.centers_list].map(item => {
+              if(item._id === center_id){
+                data = {...item}
+              }
+            return item
+        })
+        console.log(data, center_id, "center_data and center_id")
+        this.props.set_center_data({...data})
       }
     }else{
       if(!!!this.props.mount.prof_mount){

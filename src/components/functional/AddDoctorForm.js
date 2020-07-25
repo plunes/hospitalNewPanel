@@ -36,7 +36,7 @@ import Button from "./Button"
 
   if(!!props.addDoctorRet){
     if(!!props.addDoctorRet.success){
-       addToast(props.addDoctorRet.message, {appearance: 'success', autoDismiss:true}) 
+       addToast("Doctor profile successfully submitted", {appearance: 'success', autoDismiss:true}) 
        console.log(props.addDoctorRet,"props.addDoctorRet")
        props.set_user_info({
         ...props.prof_data,
