@@ -403,7 +403,7 @@ class AddDoctorComponent extends Component {
               designation:data.designation,
               department:data.department,
               experience:data.experience,
-              consultationFee:data.specialities.length!==0?data.specialities[0].services[0].price[0]:'',
+              consultationFee:data.specialities.length!==0?data.specialities.services.length!==0?data.specialities[0].services[0].price.length!==0?data.specialities[0].services[0].price[0]:'':'':'',
               doctorProfileImage:data.imageUrl,
               doctorImageName:data.doctorImageName,
               specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
