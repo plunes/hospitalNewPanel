@@ -21,6 +21,7 @@ import './catalogue.css'
 import './appointment.css'
 import './full_page_loader.css'
 import './checkbox_pill.css'
+import './button.css'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
 import no_auth_route from "./HOC/no_auth_route"

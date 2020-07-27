@@ -604,3 +604,12 @@ u {
     color: lightgreen;
     font-weight: bold;
 }
+
+.info_icon_rish {
+    height: 1.2rem;
+    width: auto;
+    margin-left: .5rem;
+    position: relative;
+    top: .4rem;
+    cursor: pointer;
+}

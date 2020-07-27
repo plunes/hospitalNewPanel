@@ -102,8 +102,8 @@ const submitdetails = () => {
         <div className="modal-heading_ris">Add Achievement</div>
         {props.loading && <LoaderComponent/>}
         {!props.achievementImage && <div className='margin-top-small_ris text-center'>
-        <Button onClick={()=>handleButtonClick()}
-        >Upload</Button>
+        <Button type='button' onClick={()=>handleButtonClick()}
+        >Add Image</Button>
          <input
             style={{display:'inline',display:'none'}}
             id="uploatCatalogue"

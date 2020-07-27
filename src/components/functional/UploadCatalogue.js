@@ -1,22 +1,10 @@
 import React , { useState , useEffect} from "react"
 import { ToastProvider, useToasts } from 'react-toast-notifications'
+import Button  from "./Button"
 
 const UploadCatalogue = (props) => {
     const { addToast } = useToasts()
     const [ success, setSuccess ] = useState(false)
-    // if(!!props.uploadRet){
-    //     if(!!props.uploadRet.success){
-    //       addToast(props.uploadRet.message, {appearance: 'success', autoDismiss:true}) 
-         
-
-    //     }else{
-    //       addToast(props.uploadRet.message, {appearance: 'error', autoDismiss:true})
-    //     }
-    //     // props.uploadRetClr()
-    // }
-  
-
-
 
   useEffect( () => {
     if(!!props.uploadProceduresRet){
@@ -70,8 +58,6 @@ const handleUpload = (e) => {
 }
 }
 
-
-
     return (
         <div className ='modal-wrapper-small_ris'>
         <div style={{fontWeight:'600'}} className="modal-heading_ris">Add Catalogue</div>
@@ -79,9 +65,9 @@ const handleUpload = (e) => {
          <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
        </div> :
         <div className="text-center margin-top-medium_ris">
-        <button onClick={()=>handleButtonClick()} type="button" className="btn btn-light-green">
-            <span className="glyphicon glyphicon-search"></span> Upload Catalogue
-        </button>
+        <Button onClick={()=>handleButtonClick()} type="button">
+           Upload Catalogue
+        </Button>
        <div>
        <text className='catalogue_note'><text className='bold'>Note :</text>Upload your Catalogue from here in a file or go to "Available Procedures" section to add prices of services directly to your catalogue and start receiving Patients
        </text>
@@ -94,9 +80,7 @@ const handleUpload = (e) => {
     accept=".pdf, .docx, .xlsx"
     onChange ={(e)=>handleUpload(e)}
     />
-</div>}
-      
-      
+</div>}    
         </div>   
     )
 }

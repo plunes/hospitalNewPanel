@@ -38,8 +38,8 @@ import Tag from '../functional/Tag'
 import AnimatedMount from "../../HOC/AnimatedMount"
 import PieChart from '../functional/PieChart'
 import LineChart from '../functional/LineChart'
-import ToolTip from "../Tooltip"
 import Select from "../Select";
+import ToolTip from '../functional/Tooltip'
 
 const customStyles = {
     content: {
@@ -334,26 +334,45 @@ class DashboardComponent extends React.PureComponent {
             modalIsOpen: false,
             solValue:0,
             value:0,
-            actionablePriceLoading:false
+            actionablePriceLoading:false,
+            actionable_insight_edit:false,
+            actionable_insight_edit_price:0
         })
     }
 
     async handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state,"this.state in handleSubmit")
-        if((parseInt(this.state.actionUpdatedPrice,10).toFixed(2) !== parseInt(this.state.updateData.price,10).toFixed(2))){
-            if(this.state.value !==0 ){
-                let data = {
-                    updatePrice: this.state.actionUpdatedPrice.toFixed(2),
-                    updateData: this.state.updateData
+
+
+        try {
+            if(!!this.state.actionable_insight_edit){
+                if(!this.state.actionable_insight_edit_price){
+                    throw new MyError('Please enter price to update in catalogue')
                 }
-                this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
-                this.setState({
-                    actionablePriceLoading:true,
-                    selected_actionable:this.state.updateData
-                },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
             }
+
+            if((parseInt(this.state.actionUpdatedPrice,10).toFixed(2) !== parseInt(this.state.updateData.price,10).toFixed(2))){
+                if(this.state.value !==0 ){
+                    let data = {
+                        updatePrice: this.state.actionable_insight_edit?this.state.actionable_insight_edit_price:this.state.actionUpdatedPrice.toFixed(2),
+                        updateData: this.state.updateData
+                    }
+                    this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
+                    this.setState({
+                        actionablePriceLoading:true,
+                        selected_actionable:this.state.updateData
+                    },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
+                }
+            }
+        } catch (error) {
+            this.setState({
+                ret: {
+                    success:false,
+                    message:error.message
+                }
+            })
         }
+    
     }
      handleRealSubmit(e) {
         e.preventDefault();
@@ -525,6 +544,16 @@ class DashboardComponent extends React.PureComponent {
         }
     }
 
+    handle_actionable_insight_edit_price = (e) => {
+        let val = e.target.value
+        if(is_positive_real_number(val)){
+            this.setState({
+                actionable_insight_edit_price:val
+            })
+        }
+       
+    }
+
     render() {
         // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
         // // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
@@ -611,10 +640,12 @@ class DashboardComponent extends React.PureComponent {
                                         <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                       <div>
-                                        <p  data-tip='' data-for='toot_id' className='business vertical_align_rish'>Real Time Insights</p>
-                                        {/* <ToolTip id="toot_id" heading="some heading" infoText = "Some Info Text" /> */}
-                                        {/* <text className='catalogue_note'><text className='bold'>Note :</text> These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.</text> */}
+                                       <div className='flex_parent_rish'>
+                                        <p   className='business vertical_align_rish '>Real Time Insights</p>
+                                        <ToolTip
+                                         title="Real Time Insights"
+                                         content = 'These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.'
+                                         />
                                        </div>
                                         
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
@@ -650,8 +681,12 @@ class DashboardComponent extends React.PureComponent {
                                     <div style={{height:'100%'}}>
                                        <span className='businessrow1col1 realtimewidth '>
                                        {/* <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img> */}
-                                     <div>
+                                     <div className='flex_parent_rish' >
                                      <p className='business vertical_align_rish'>Actionable Insights</p>
+                                     <ToolTip
+                                         title="Actionable Insights"
+                                         content = 'These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.'
+                                         />
                                      {/* <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text> */}
                                      </div>
                                    
@@ -958,9 +993,20 @@ class DashboardComponent extends React.PureComponent {
                                             </div> 
                                           
                                             <div className="SliderUpdatedPrice margin_top_small_rish">&#8377;
-                                            <span>
+                                            {/* <span>
                                             {(this.state.updatePrice - this.state.updatePrice * this.state.value / 100).toFixed(2)} 
-                                            </span>
+                                            </span> */}
+                                            {((!!this.state.actionable_insight_edit))?
+                                                <React.Fragment>
+                                                <input onChange={(e)=>this.handle_actionable_insight_edit_price(e)} value={this.state.actionable_insight_edit_price} className="real_time_edit_input"  /> 
+                                                <i style={{color:'#fff', fontSize:'1rem',  marginLeft:'.5rem'}} onClick={()=>this.setState({actionable_insight_edit:false})}  className="fas fa-edit cursor-pointer"></i>
+                                                </React.Fragment>
+                                                 :
+                                                 <React.Fragment>
+                                                 {(this.state.updatePrice - this.state.updatePrice * this.state.value / 100).toFixed(2)}
+                                                     <i style={{color:'green', fontSize:'1rem', marginLeft:'.5rem'}} onClick={()=>this.setState({actionable_insight_edit:true})} className="fas fa-edit cursor-pointer vertical_align_rish"></i>
+                                                 </React.Fragment>
+                                                }
                                             </div>
                                             <br>
                                             </br>

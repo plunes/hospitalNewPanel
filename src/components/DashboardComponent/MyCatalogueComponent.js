@@ -1289,9 +1289,9 @@ class MyCatalogueComponent extends Component {
                                         </div>
                                        </div>
                                        <div className="text-center">
-                                            <button onClick = {()=>this.open_catalogue_modal()} type="button" className="btn btn-light-green">
-                                                <span className="glyphicon glyphicon-search"></span> Upload Catalogue
-                                            </button>
+                                            <Button onClick = {()=>this.open_catalogue_modal()} type="button" >
+                                                Upload Catalogue
+                                            </Button>
                                            <div>
                                            <text className='catalogue_note'><text className='bold'>Note :</text>Upload your service catalog and get direct leads matching your catalog. It increases the footfall of clients, List your every possible service.</text>
                                     </div>
