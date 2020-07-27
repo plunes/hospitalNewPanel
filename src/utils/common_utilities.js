@@ -4,7 +4,7 @@ export const  get_initials =  (name) => {
   if(parts.length < 2){
     return parts[0].substring(0,2).toUpperCase()
   }else{
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < parts.length; i++) {
       if (parts[i].length > 0 && parts[i] !== '') {
         initials += parts[i][0].toUpperCase()
       }
