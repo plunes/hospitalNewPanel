@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background:  #f1f1f1;;
+    background:  #fff;;
     z-index: 99;
   }
   .loading-full_page:after {
@@ -13,15 +13,15 @@
     width: 50px;
     height: 50px;
     position: absolute;
-    color: #000;
+    color: #0AD560;
     top: -30px;
     right: 0;
     left: 0;
     bottom: 0;
     margin: auto;
-    border: 6px solid #000;
-    border-top: 6px dotted #000;
-    border-bottom: 6px dotted #000;
+    border: 6px solid #0AD560;
+    border-top: 6px dotted #0AD560;
+    border-bottom: 6px dotted #0AD560;
     border-radius: 50%;
     animation: loading 2s infinite;
   }
