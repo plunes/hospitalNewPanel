@@ -15,9 +15,9 @@ const AddAchievement = React.memo((props) => {
                console.log("SetLoading in updateAchhievementRet")
                 props.toggleLoading()
                 props.achievementSuccess()
-                addToast(props.updateAchievementRet.message, {appearance: 'success', autoDismiss:true}) 
+                // addToast(props.updateAchievementRet.message, {appearance: 'success', autoDismiss:true}) 
               }else{
-                addToast(props.updateAchievementRet.message, {appearance: 'error', autoDismiss:true})
+                // addToast(props.updateAchievementRet.message, {appearance: 'error', autoDismiss:true})
               }
               props.updateAchievementClr()
         }

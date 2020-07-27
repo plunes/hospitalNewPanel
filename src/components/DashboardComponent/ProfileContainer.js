@@ -21,6 +21,8 @@ import { isEmpty , get_url_params} from "../../utils/common_utilities"
 import ScrollTo from "../functional/ScrollTo"
 import { compose } from 'redux';
 import AnimatedMount from "../../HOC/AnimatedMount"
+import ImageGallery from 'react-image-gallery';
+import NewNotif from '../functional/NewNotif';
 const options = {
   items: 2,
   margin: 0,
@@ -33,6 +35,8 @@ const events = {
   onDragged: function(event) {},
   onChanged: function(event) {}
 };
+
+
 class ProfileContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -116,23 +120,21 @@ class ProfileContainer extends React.PureComponent {
       }
     }
       if(!!nextProps.updateAchievementRet){
-          if(nextProps.updateAchievementRet.type==='delete'){
+          if(true){
             if(nextProps.updateAchievementRet.success){
               this.setState({
                 prof_data:{
                   ...this.state.prof_data,
-                  achievements:this.state.updated_achieve_remove
+                  achievements:nextProps.updateAchievementRet.type==='delete'?this.state.updated_achieve_remove:this.state.updated_achievement_array
                 },
-                notify:{
-                  ...this.state.notify,
-                  success:{
-                    message:nextProps.updateAchievementRet.message
-                  }
+                ret: {
+                  success:true,
+                  message:nextProps.updateAchievementRet.message
                 }
               })
               this.props.set_user_info({
                 ...this.props.prof_data,
-                achievements:this.state.updated_achieve_remove
+                achievements:nextProps.updateAchievementRet.type==='delete'?this.state.updated_achieve_remove:this.state.updated_achievement_array
               })
             }else{
               this.setState({
@@ -144,7 +146,6 @@ class ProfileContainer extends React.PureComponent {
                 }
               })
             }
-            // nextProps.getUserDetails()
             nextProps.updateAchievementClr()
           }
       }
@@ -336,6 +337,8 @@ class ProfileContainer extends React.PureComponent {
       achievements:newAchievements,
       type:'delete'
     }))
+
+
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -351,6 +354,23 @@ class ProfileContainer extends React.PureComponent {
     this.setState({
       biography:e.target.value
     })
+  }
+
+
+  get_images = () => {
+    if(!!this.state.prof_data.achievements){
+        let arr = [...this.state.prof_data.achievements]
+
+        let images = arr.map(item=>{
+          let obj = {}
+          obj.original = item.imageUrl
+          obj.thumbnail = item.imageUrl
+          return obj
+        })
+
+        return images
+    }
+    else return []
   }
 
   achievement_slider = ()=>{
@@ -383,7 +403,7 @@ class ProfileContainer extends React.PureComponent {
     else if(i=== arr.length-1){
       console.log("Second Conditon")
         console.log("Case 1")
-       newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+       newarr.push( <div className={`carousel-item ${arr.length ===1?"active":''}`}>
        <div className="row">
           <div className="col-md-4">
             <div className="card mb-2">
@@ -400,7 +420,7 @@ class ProfileContainer extends React.PureComponent {
       }else if(i=== arr.length-2){
         console.log("Second Conditon")
           console.log("Case 1")
-         newarr.push( <div className={`carousel-item ${arr.length ===1?"acive":''}`}>
+         newarr.push( <div className={`carousel-item ${arr.length ===2?"active":''}`}>
          <div className="row">
             <div className="col-md-4">
               <div className="card mb-2">
@@ -537,6 +557,9 @@ class ProfileContainer extends React.PureComponent {
     console.log(this.state,"this.state in ProfileContainer")
     let center_id = get_url_params('center')
     let achievementArray  = this.achievement_slider()
+
+    const images = this.get_images()
+    
     console.log(achievementArray,"achievementArray")
     const { open } = this.state;
     return (
@@ -551,6 +574,11 @@ class ProfileContainer extends React.PureComponent {
               notify:false
             }
           })}
+        />
+
+        <NewNotif 
+          ret = {this.state.ret}
+          retClr = {()=>this.setState({ret:false})}
         />
     <div>
       <div className="new_card_class">
@@ -761,6 +789,8 @@ class ProfileContainer extends React.PureComponent {
   </div>
 :'No achievements'}
        </div>
+
+       {/* <ImageGallery items={images} /> */}
           </div>
   </div>
           
