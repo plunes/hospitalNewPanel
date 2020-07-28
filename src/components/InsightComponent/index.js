@@ -24,14 +24,17 @@ class InsightComponent extends React.PureComponent {
         let newSec = (new Date).getTime()
      //    console.log(newSec,"newSec in getSeconds Differnce")
         let seconds = (newSec-sec)/1000
-        return seconds>900?0:900-seconds
+        return {
+            timer:seconds>900?0:900-seconds,
+            active:seconds>3600?0:3600-seconds
+        }
  }
 
 
 
     render(){
         // console.log(this.props,"this.props in Insight")
-        let seconds_diff = this.getSecondsDifferent(this.props.s.createdAt)
+        let obj = this.getSecondsDifferent(this.props.s.createdAt)
         const index = this.props.index
       return (
           <React.Fragment>  
@@ -48,7 +51,7 @@ class InsightComponent extends React.PureComponent {
       <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
             </div>
             {
-              seconds_diff>0?
+              obj.active>0?
                     <text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u></text>
                     : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
             }
@@ -59,7 +62,7 @@ class InsightComponent extends React.PureComponent {
                     <div style={{height:'100%'}} className="text-center">
                         <React.Fragment>
                         <TimerComponent 
-                          seconds = {seconds_diff}
+                          seconds = {obj.timer}
                           key={Math.random()}
                           toggler = {this.toggler}
                         />
