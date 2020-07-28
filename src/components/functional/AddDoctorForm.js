@@ -54,9 +54,13 @@ import Button from "./Button"
    const submitdetails = () => {
         if(props.name === '' || props.department === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
-        }else if(!!!props.doctorProfileImage){
-          addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
-        }else if(!!!props.consultationFee){
+        }
+        // else if(!!!props.doctorProfileImage){
+        //   addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
+        // }
+        
+        
+        else if(!!!props.consultationFee){
           addToast("Please enter consultation fee",{ appearance: 'error', autoDismiss:true })
         }else{
           let obj = {
