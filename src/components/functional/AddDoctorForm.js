@@ -71,7 +71,7 @@ import Button from "./Button"
             education:props.education,
             services_chosen:props.services_chosen,
             specialitie_chosen:props.specialitie_chosen,
-            doctorProfileImage:props.doctorProfileImage,
+            doctorProfileImage:!!props.doctorProfileImage?props.doctorProfileImage:'',
             doctorId:get_url_params('id')?get_url_params('id'):undefined
           }
 
