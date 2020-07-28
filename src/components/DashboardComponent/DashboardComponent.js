@@ -342,26 +342,41 @@ class DashboardComponent extends React.PureComponent {
 
     async handleSubmit(e) {
         e.preventDefault();
-
+     console.log(this.state,"this.state in handleSubmit")
 
         try {
             if(!!this.state.actionable_insight_edit){
-                if(!this.state.actionable_insight_edit_price){
+                if(!!!this.state.actionable_insight_edit_price){
                     throw new MyError('Please enter price to update in catalogue')
                 }
-            }
-
-            if((parseInt(this.state.actionUpdatedPrice,10).toFixed(2) !== parseInt(this.state.updateData.price,10).toFixed(2))){
-                if(this.state.value !==0 ){
-                    let data = {
-                        updatePrice: this.state.actionable_insight_edit?this.state.actionable_insight_edit_price:this.state.actionUpdatedPrice.toFixed(2),
-                        updateData: this.state.updateData
+                console.log(parseInt(this.state.actionable_insight_edit_price,10).toFixed(2),'this.state.actionable_insight_edit_price,10')
+                
+                if((parseInt(this.state.actionable_insight_edit_price,10).toFixed(2) !== parseInt(this.state.updateData.userPrice,10).toFixed(2))){
+                    if(!!this.state.actionable_insight_edit_price  ){
+                        let data = {
+                            updatePrice: this.state.actionable_insight_edit?this.state.actionable_insight_edit_price:this.state.actionUpdatedPrice.toFixed(2),
+                            updateData: this.state.updateData
+                        }
+                        this.props.set_selected_actionable(this.state.updateData, parseInt(this.state.actionable_insight_edit_price,10).toFixed(2))
+                        this.setState({
+                            actionablePriceLoading:true,
+                            selected_actionable:this.state.updateData
+                        },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
                     }
-                    this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
-                    this.setState({
-                        actionablePriceLoading:true,
-                        selected_actionable:this.state.updateData
-                    },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
+                }
+            }else{
+                if((parseInt(this.state.actionUpdatedPrice,10).toFixed(2) !== parseInt(this.state.updateData.userPrice,10).toFixed(2))){
+                    if(!!this.state.actionUpdatedPrice  ){
+                        let data = {
+                            updatePrice: this.state.actionable_insight_edit?this.state.actionable_insight_edit_price:this.state.actionUpdatedPrice.toFixed(2),
+                            updateData: this.state.updateData
+                        }
+                        this.props.set_selected_actionable(this.state.updateData, this.state.actionUpdatedPrice.toFixed(2))
+                        this.setState({
+                            actionablePriceLoading:true,
+                            selected_actionable:this.state.updateData
+                        },()=>this.props.sendUpdateData({...data, center:this.state.get_actionable.center}))
+                    }
                 }
             }
         } catch (error) {
@@ -431,7 +446,7 @@ class DashboardComponent extends React.PureComponent {
             updatePrice: updateData.userPrice,
             updateData: updateData,
             serviceName: updateData.serviceName,
-            actionUpdatedPrice:updateData.price
+            actionUpdatedPrice:!!updateData.price?parseInt(updateData.price, 10):0
         })
     }
 
