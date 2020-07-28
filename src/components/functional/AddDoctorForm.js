@@ -52,9 +52,12 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
    const submitdetails = () => {
         if(props.name === '' || props.department === '' ||props.designation==='' || props.experience==="" || props.education==="" || props.specialitie_chosen===" " ){
             addToast("Enter all the details",{ appearance: 'error', autoDismiss:true })
-        }else if(!!!props.doctorProfileImage){
-          addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
-        }else if(!!!props.consultationFee){
+        }
+        // else if(!!!props.doctorProfileImage){
+        //   addToast("Please provide a profile image",{ appearance: 'error', autoDismiss:true })
+        // }
+        
+        else if(!!!props.consultationFee){
           addToast("Please enter consultation fee",{ appearance: 'error', autoDismiss:true })
         }else{
             props.submitdetails({
