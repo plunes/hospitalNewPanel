@@ -103,11 +103,11 @@ display: flex;
 }
 
 @media (min-width:1600px) and (max-width:2200px) {
-    .oversize_wrap_rish {
+    /* .oversize_wrap_rish {
        margin-left: 10rem;
        margin-right: 10rem;
        display: block;
-    }
+    } */
 }
   
 .flex_child_one_rish {
