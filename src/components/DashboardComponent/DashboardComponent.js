@@ -656,7 +656,7 @@ class DashboardComponent extends React.PureComponent {
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
                                      <div className='flex_parent_rish'>  
-                                       <div className='collumn_flex_rish' >
+                                       <div className='collumn_flex_rish div_class' >
                                             <div className='flex_parent_rish' >
                                                 <p   className='business vertical_align_rish '>Real Time Insights</p>
                                                 <ToolTip
@@ -669,7 +669,7 @@ class DashboardComponent extends React.PureComponent {
                                             </div>
                                        </div>
 
-                                       <div className='collumn_flex_rish' >
+                                       <div  className='collumn_flex_rish div_class flex-end' >
                                             <div>
                                                 <span className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
                                             </div>
@@ -713,11 +713,14 @@ class DashboardComponent extends React.PureComponent {
                                        <span className='businessrow1col1 realtimewidth '>
                                        {/* <img src="/Outline.svg" className="businessicon vertical_align_rish" alt=""></img> */}
                                      <div className='flex_parent_rish' >
-                                     <p className='business vertical_align_rish'>Actionable Insights</p>
-                                     <ToolTip
-                                         title="Actionable Insights"
-                                         content = 'These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.'
-                                         />
+                                     <p className='business '>Actionable Insights</p>
+                                      
+                                            <ToolTip
+                                                style={{lineHeight:'-1'}}
+                                                title="Actionable Insights"
+                                                content = 'These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.'
+                                                />
+                                       
                                      {/* <text className='catalogue_note'><text className='bold'>Note :</text> These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.</text> */}
                                      </div>
                                    

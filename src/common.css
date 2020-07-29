@@ -624,3 +624,9 @@ u {
     margin-left: .5rem;
     width: 1.5rem;
 }
+.div_class {
+    flex:1 1 40%;
+}
+.flex-end {
+    align-items: flex-end;
+}

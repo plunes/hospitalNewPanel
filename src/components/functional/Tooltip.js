@@ -17,7 +17,7 @@ const Tooltip = (props) => {
       </Popover>
     }
   >
-    <p><img className='info_icon_rish' src='/icon/info_icon_rish.svg' /></p>
+    <p style={{...props.style}}><img className='info_icon_rish' src='/icon/info_icon_rish.svg' /></p>
   </OverlayTrigger>
 }
 
