@@ -146,6 +146,9 @@ class ProfileContainer extends React.PureComponent {
                 }
               })
             }
+            if(nextProps.updateAchievementRet.type==='delete'){
+              window.location.reload()
+            }
             nextProps.updateAchievementClr()
           }
       }

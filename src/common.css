@@ -613,3 +613,14 @@ u {
     top: .4rem;
     cursor: pointer;
 }
+
+.collumn_flex_rish {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.arrow_class {
+    margin-left: .5rem;
+    width: 1.5rem;
+}

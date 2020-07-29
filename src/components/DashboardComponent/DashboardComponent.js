@@ -655,13 +655,29 @@ class DashboardComponent extends React.PureComponent {
                                         <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                       <div className='flex_parent_rish'>
-                                        <p   className='business vertical_align_rish '>Real Time Insights</p>
-                                        <ToolTip
-                                         title="Real Time Insights"
-                                         content = 'These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.'
-                                         />
+                                     <div className='flex_parent_rish'>  
+                                       <div className='collumn_flex_rish' >
+                                            <div className='flex_parent_rish' >
+                                                <p   className='business vertical_align_rish '>Real Time Insights</p>
+                                                <ToolTip
+                                                title="Real Time Insights"
+                                                content = 'These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.'
+                                                />
+                                            </div>
+                                            <div>
+                                                <span className="maximum_time vertical_align_rish">Make sure to Update price in the Preferred time to ensure booking</span> 
+                                            </div>
                                        </div>
+
+                                       <div className='collumn_flex_rish' >
+                                            <div>
+                                                <span className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
+                                            </div>
+                                            <div>
+                                                <span className="maximum_time vertical_align_rish">Maximum Time : 1 hour</span> 
+                                            </div>
+                                       </div>
+                                     </div>
                                         
                                         {/* <span className="maximum_time vertical_align_rish">Maximum time limit 10 minutes</span> */}
                                         </span><br></br>
