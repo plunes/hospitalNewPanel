@@ -624,8 +624,12 @@ u {
     margin-left: .5rem;
     width: 1.5rem;
 }
-.div_class {
-    flex:1 1 40%;
+.div_class_1 {
+    flex:1 1 60%;
+}
+.div_class_2 {
+    flex:1 1 35%;
+    align-items: flex-end;
 }
 .flex-end {
     align-items: flex-end;

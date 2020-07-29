@@ -655,8 +655,8 @@ class DashboardComponent extends React.PureComponent {
                                         <span  className='businessrow1col1 realtimewidth real_ti_bd'>
                                             {/* <img src="/realtime.svg" className="businessicon vertical_align_rish" alt="">
                                                 </img> */}
-                                     <div className='flex_parent_rish'>  
-                                       <div className='collumn_flex_rish div_class' >
+                                     <div style={{width:'100%'}} className='flex_parent_rish'>  
+                                       <div className='collumn_flex_rish div_class_1' >
                                             <div className='flex_parent_rish' >
                                                 <p   className='business vertical_align_rish '>Real Time Insights</p>
                                                 <ToolTip
@@ -669,7 +669,7 @@ class DashboardComponent extends React.PureComponent {
                                             </div>
                                        </div>
 
-                                       <div  className='collumn_flex_rish div_class flex-end' >
+                                       <div  className='collumn_flex_rish div_class_2 flex-end' >
                                             <div>
                                                 <span className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
                                             </div>
