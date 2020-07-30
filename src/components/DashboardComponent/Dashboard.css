@@ -215,6 +215,10 @@ a:hover
     margin: 15px;
     cursor: pointer;}
 
+    .fil_nm {
+        margin-left: .5rem !important;
+    }
+
 
   /* DASHBOARD CSS */
 hr 
@@ -527,7 +531,7 @@ hr
     width: 100%;
     padding: 1rem;
     position: relative;
-    height: 7rem;
+    /* height: 7rem; */
 }
 
 .realtime

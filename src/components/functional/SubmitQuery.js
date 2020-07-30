@@ -54,7 +54,7 @@ import Button from "./Button"
 </div>
 <div className="cal_nu">
 <h6  className="or_frm">OR</h6>
-<h5  className="or_frm">Call at : 7701805081</h5>
+<h5  className="or_frm">Call at : 7011311900</h5>
 </div>
 </React.Fragment>
   )

@@ -716,7 +716,7 @@ class DashboardComponent extends React.PureComponent {
                                      <p className='business '>Actionable Insights</p>
                                       
                                             <ToolTip
-                                                style={{lineHeight:'-1'}}
+                                                style={{lineHeight:'0'}}
                                                 title="Actionable Insights"
                                                 content = 'These insights are predicted by our AI so that you get maximum conversions. Make sure to act on Actionable Insights so that You increase your Revenue.'
                                                 />
@@ -772,7 +772,7 @@ class DashboardComponent extends React.PureComponent {
                             <div className="insigts_section_wrapper">
                                 <div className="real_insights_wrapper">
 
-                                    <div style={{position:'relative', height:'100%'}} className='dashboardsection add-center-wrapper new_card_class'>
+                                    <div style={{position:'relative', height:'100%'}} className='dashboardsection add-center-wrapper new_card_class rish_1'>
                                                     <div style={{width:'100%'}} className=' businessrow1col1'>
                                                       <span className="realtimewidth heading_flex_wrapper">
                                                          <span className='heading_flex_child_1 '>
@@ -810,8 +810,8 @@ class DashboardComponent extends React.PureComponent {
                                                       </span>
                                                     </div>
 
-                                                    <div style={{width:'100%'}} className='vertical_middle'>
-                                                       <div className='flex_parent_rish'>
+                                                    <div style={{width:'100%'}}>
+                                                       <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
                                                        { ((!!this.props.business_data.businessGained?this.props.business_data.businessGained.toFixed(2):false ) || (!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):false)) &&
                                                         <div>
                                                             <PieChart
@@ -961,7 +961,7 @@ class DashboardComponent extends React.PureComponent {
                                          {
                                             (this.props.centers_data.centers_list.length>4)  &&  <div className="text-center margin-top-small_ris">
                                             <Link to='/dashboard/centers' >
-                                            <p style={{textDecoration:'underline',fontSize:'1.3rem'}} className="green_text_rish">View More Centres</p>
+                                            <p style={{fontSize:'1.3rem'}} className="green_text_rish">View More Centres</p>
                                             </Link>
                                      </div>
                                         }
@@ -983,7 +983,7 @@ class DashboardComponent extends React.PureComponent {
                             </div>
 
                            <div className="insigts_section_wrapper">
-                            <div style={{width:'100%', padding:'1%'}} className='dashboardsection new_card_class'>
+                            <div style={{width:'100%'}} className='dashboardsection new_card_class'>
                                     <span className='businessrow1col1 realtimewidth'>
                                         {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
                                         <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
@@ -992,7 +992,7 @@ class DashboardComponent extends React.PureComponent {
                                             highcharts={Highcharts}
                                             options={options}
                                         /> */}
-                                        <div >
+                                        <div style={{padding:'1rem'}} >
                                           <LineChart />
                                         </div>
                                        
