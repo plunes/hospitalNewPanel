@@ -12,7 +12,7 @@ class LandinHeader extends Component {
         <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
               <Link to="/">
-                <img src="/icon/plunes_transparent_logo.svg" style={{marginLeft:'2rem'}} className="logo_rish cursor-pointer" />
+                <img src="/icon/plunes_logo.png" style={{marginLeft:'2rem'}} className="logo_rish cursor-pointer" />
               </Link>
             </div>
           
