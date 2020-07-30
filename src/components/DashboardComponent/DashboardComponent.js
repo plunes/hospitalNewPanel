@@ -661,20 +661,21 @@ class DashboardComponent extends React.PureComponent {
                                                 <p   className='business vertical_align_rish '>Real Time Insights</p>
                                                 <ToolTip
                                                 title="Real Time Insights"
+                                                style={{position:'relative', bottom:'4px'}}
                                                 content = 'These are real Time requests from Patients near you who are looking for Procedures and are viewing your Profiles. Make sure to take action on the insights to achieve successful conversion.'
                                                 />
                                             </div>
                                             <div>
-                                                <span className="maximum_time vertical_align_rish">Make sure to Update price in the Preferred time to ensure booking</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Make sure to Update price in the Preferred time to ensure booking</span> 
                                             </div>
                                        </div>
 
                                        <div  className='collumn_flex_rish div_class_2 flex-end' >
                                             <div>
-                                                <span className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
                                             </div>
                                             <div>
-                                                <span className="maximum_time vertical_align_rish">Maximum Time : 1 hour</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 1 hour</span> 
                                             </div>
                                        </div>
                                      </div>
