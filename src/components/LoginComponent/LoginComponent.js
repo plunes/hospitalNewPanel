@@ -50,6 +50,7 @@ class LoginComponent extends Component {
             //     }
             // }
          let txt = this.state.email
+         
             data = {
                       // 'mobileNumber': this.state.type==="admin"?txt.substring(3):this.state.email,
                       'mobileNumber':this.state.email,
