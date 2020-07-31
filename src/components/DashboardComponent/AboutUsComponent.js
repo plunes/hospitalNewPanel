@@ -3,8 +3,9 @@ import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 import  "./AboutUs.css";
 import { Redirect } from 'react-router-dom';
+import AnimatedMount from "../../HOC/AnimatedMount"
 
-export default class AboutUsComponent extends Component {
+class AboutUsComponent extends Component {
     render() {
         let isAuth = localStorage.getItem('token')
         if(!isAuth){
@@ -37,3 +38,17 @@ export default class AboutUsComponent extends Component {
        
     }
 }
+
+    
+export default AnimatedMount({
+  unmountedStyle: {
+    opacity: 0,
+    transform: 'translate3d(0, -2rem, 0)',
+    transition: 'opacity 100ms ease-out, transform 100ms ease-out',
+  },
+  mountedStyle: {
+    opacity: 1,
+    transform: 'translate3d(0, 0, 0)',
+    transition: 'opacity .5s ease-out, transform .5s ease-out',
+  },
+})(AboutUsComponent)
