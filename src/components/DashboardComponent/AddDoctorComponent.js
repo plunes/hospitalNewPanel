@@ -99,7 +99,7 @@ class AddDoctorComponent extends Component {
             experience:'',
             doctorProfileImage:false,
             doctorImageName:false,
-            consultationFee:3000,
+            consultationFee:0,
             addDoctorLoading:false,
             slots:this.transformData(slots),
             open:false,
