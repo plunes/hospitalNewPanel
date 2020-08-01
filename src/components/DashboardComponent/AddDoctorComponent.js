@@ -396,31 +396,36 @@ class AddDoctorComponent extends Component {
                 }
                 arr.push(obj)
           })
-              this.setState({
-                name:data.name,
-                education:data.education,
-                designation:data.designation,
-                department:data.department,
-                experience:data.experience,
-                consultationFee:!!data.consultationFee?data.consultationFee:this.state.consultationFee,
-                doctorProfileImage:data.imageUrl,
-                doctorImageName:data.doctorImageName,
-                specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
-                slots:arr
-              },()=>{
-                if(data.specialities.length!==0){
-                  try{
-                    // this.setState({
-                    //   services_chosen:[]
-                    // })
-                    this.props.getServ({
-                      name:data.specialities[0].specialityName
-                    })
-                  }catch(e) {
-                    console.log(e,"e in catch block")
-                  }
+          try {
+            this.setState({
+              name:data.name,
+              education:data.education,
+              designation:data.designation,
+              department:data.department,
+              experience:data.experience,
+              consultationFee:data.specialities.length!==0?!!(data.specialities[0].services.length!==0)?data.specialities[0].services[0].price[0]:'':'',
+              doctorProfileImage:data.imageUrl,
+              doctorImageName:data.doctorImageName,
+              specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
+              slots:arr
+            },()=>{
+              if(data.specialities.length!==0){
+                try{
+                  this.setState({
+                    services_chosen:[]
+                  })
+                  this.props.getServ({
+                    name:data.specialities[0].specialityName
+                  })
+                }catch(e) {
+                  console.log(e,"e in catch block")
                 }
-              })
+              }
+            })
+          } catch (error) {
+            console.log(error,"erron in catch block")
+            throw new MyError("Unable to get doctor profile , try again later.")
+          }
         }else{
 
         }
