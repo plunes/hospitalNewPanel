@@ -261,14 +261,14 @@ setAvailabilityClr = () =>{
                 <div className= 'text-center'>  <h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">My Availability</h4></div>
                   <div className="time_she">
                   {this.state.loading &&  <LoaderComponent />}
-                    <div className="row text-center">
+                    <div className="row text-center mb_1rem">
                       <div className="col-lg-2"><h4>All</h4></div>
                       <div className="col-lg-4"><h4>From - To</h4></div>
                       <div className="col-lg-4"><h4>From - To</h4></div>
                       <div className="col-lg-2"><h4>Closed</h4></div>
                     </div>
                    {this.state.slots.map((item,i)=>(
-                      <div className="row text-center">
+                      <div className="row text-center mb_1rem">
                       <div className="col-lg-2"><p className="m">{item.day.charAt(0).toUpperCase()}</p></div>
                       <div className="col-lg-4"><p><span onClick={()=>this.slotClicked(item.slots.morning,'morning','from', item)} className="time_bor cursor-pointer">{this.timeToString(item.slots.morning.from)}</span><span onClick={()=>this.slotClicked(item.slots.morning,'morning','to', item)} className="time_bor cursor-pointer">{this.timeToString(item.slots.morning.to)}</span></p></div>
                       <div className="col-lg-4"><p><span onClick={()=>this.slotClicked(item.slots.evening,'evening','from', item)} className="time_bor cursor-pointer">{this.timeToString(item.slots.evening.from)}</span><span onClick={()=>this.slotClicked(item.slots.evening,'evening','to', item)} className="time_bor cursor-pointer">{this.timeToString(item.slots.evening.to)}</span></p></div>

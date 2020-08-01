@@ -233,7 +233,8 @@ const  SidebarComponent = (props) => {
                     </span>
            </Link>
         </div>
-         <div  className="sidebar_item_wraper "  >
+
+         <div  className="sidebar_item_wraper align_center_rish "  >
          <Link to= "/signin"
                 onClick={handlelogoutClick}>
                    <span className="sidebar_list_item">
@@ -241,19 +242,13 @@ const  SidebarComponent = (props) => {
                         <img className="sidebaricon" src="/icon/logout_icon.svg" alt=""></img>
                       </span>
                      {!collapse &&  <span className="sidebar_list_text">
-                       <text className="">Logout</text>
+                       <text className=" ">Logout</text>
                       </span>}
                    </span>
           </Link>
          </div>
 
-         {/* <div className='hamburger-dic' >
-        <div className={` hamburger_icon_wrapper ${collapse?'display_block':''}`}>
-              <div >
-              <a onClick ={()=>setCollapse(!collapse)} className={`${!collapse?'active':''}`}  id="hamburger" href="#"><span></span></a>
-              </div>
-              </div>
-        </div>   */}
+        
 
       </div>
    </div>

@@ -558,7 +558,7 @@ class AddDoctorComponent extends Component {
       if(!!service[0]){
         service_arr =[
           {
-            price:service[0].consultationFee,
+            price:[parseInt(this.state.consultationFee,10)],
             category:["Consultation"],
             homeCollection:false,
             variance:0,

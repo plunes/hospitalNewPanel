@@ -198,7 +198,7 @@ import Button from "./Button"
 
    <div className="time_she">
        <h3 className="abaily text-center">Availability</h3>
-       <div className="row text-center">
+       <div className="row text-center mb_1rem">
          <div className="col-lg-2"><h4>All</h4></div>
          <div className="col-lg-4"><h4>From - To</h4></div>
          <div className="col-lg-4"><h4>From - To</h4></div>
@@ -206,7 +206,7 @@ import Button from "./Button"
        </div>
      
        {props.slots.map((item,i)=>(
-                      <div className="row text-center">
+                      <div className="row text-center mb_1rem">
                       <div className="col-lg-2"><p className="m">{item.day.charAt(0).toUpperCase()}</p></div>
                       <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.morning,'morning','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.from) || "N/A"}</span><span onClick={()=>props.slotClicked(item.slots.morning,'morning','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.to) || "N/A"}</span></p></div>
                       <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.evening,'evening','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.from) || "N/A"}</span><span onClick={()=>props.slotClicked(item.slots.evening,'evening','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.to) || "N/A"}</span></p></div>

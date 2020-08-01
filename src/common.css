@@ -639,3 +639,7 @@ u {
     min-height: 30rem;
     height: 100%;
 }
+
+.mb_1rem {
+    margin-bottom: 1rem;
+}
