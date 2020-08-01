@@ -643,3 +643,10 @@ u {
 .mb_1rem {
     margin-bottom: 1rem;
 }
+.main-body-wrapper {
+    height: 100%;
+    min-height: 100vh;
+}
+.left_7rem {
+ left: 7rem;
+}

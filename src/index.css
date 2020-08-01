@@ -410,7 +410,7 @@ body {
   position: absolute;
   top: 1.5rem;
   bottom: auto;
-  z-index: 12121212121212121212;
+  z-index: -12121212121212121212;
   left: 7rem;
 }
 .multi-steps > li:nth-child(2)::after{ 
