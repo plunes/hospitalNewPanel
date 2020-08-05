@@ -2982,8 +2982,6 @@ export const getMonthWiseUsers = (days) => async dispatch => {
                   for_loop(monthWiseCount,(data,i)=>{
                      result[parseInt(data.month, 10)] = data.count
                   })
-                  
-                  
                   dispatch({
                     type: SOLUTION_USERS,
                     payload : result
