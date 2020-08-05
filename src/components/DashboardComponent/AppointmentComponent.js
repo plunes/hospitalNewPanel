@@ -360,7 +360,7 @@ class AppointmentComponent extends Component {
     return <ul className="list-unstyled multi-steps">
         {item.paymentProgress.map((payment,i)=>{
             if(i===0){
-                return   <li className={!!payment.status?'active_ris':'not_active_ris'}>Booked</li>
+                return   <li className={!!payment.status?'active_ris ':'not_active_ris'}>Booked</li>
             }else if(i===(item.paymentProgress.length-1)){
                 return <li className={!!payment.status?"not_active_ris":"not_active_ris not-paid_ris"} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
             }else{

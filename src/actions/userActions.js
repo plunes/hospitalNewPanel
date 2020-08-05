@@ -201,7 +201,7 @@ import {
   } from './types';
 import history from '../history';
 import axios from 'axios';
-import { get_url_params } from '../utils/common_utilities';
+import { get_url_params, for_loop } from '../utils/common_utilities';
 // import { connect } from 'react-redux';
 
 
@@ -2974,29 +2974,30 @@ export const getMonthWiseUsers = (days) => async dispatch => {
                 //console.log(res.data, 'data')
                 //[0, 54, 62, null,null, null, null, null, null, null, null, null]
                 let result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                let monthWiseCount = res.data.data;
-                //console.log(monthWiseCount)
-                if(monthWiseCount.length > 0){
-                //let currentMonth = monthWiseCount[monthWiseCount.length - 1].month
-                //console.log(curr)
-                var d = new Date();
-                var currentMonth = d.getMonth();
-                var nextMonth = currentMonth+1;
-                for(var i =0; i < monthWiseCount.length; i++){
-                  let month = monthWiseCount[i].month;
-                  let count  = monthWiseCount[i].count;
-                  result[month] = count;
-                  //console.log(result, 'result')
-                }
-                for (var j = nextMonth ;  j < result.length ; j++){
-                    result[j] = null
-                }
-                dispatch({
-                  type: SOLUTION_USERS,
-                  payload : result
-                })
-                console.log(result, 'result')
-              }
+                try {
+                  let monthWiseCount = res.data.data[0];
+                  let keys = Object.keys(monthWiseCount)
+              
+                  for_loop(result,(data,i)=>{
+                    let month = keys.indexOf(i.toString())
+                
+                        if(month>=0){
+                          result[parseInt(i, 10)] = monthWiseCount[i]
+                        }
+                  })
+                  
+                  
+                  dispatch({
+                    type: SOLUTION_USERS,
+                    payload : result
+                  })
+                } catch (e) {
+                  console.log(e,"e in try catch")
+                  dispatch({
+                    type: SOLUTION_USERS,
+                    payload : [0,0,0,0,0,0,0,0,0,0,0,0]
+                  })
+                }          
               }).catch(e=>{
                 console.log(e)
               })

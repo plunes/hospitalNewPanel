@@ -54,7 +54,7 @@ export const  objectEquals = (x, y) => {
 
 export const for_loop = (data, callback) => {
   for (var i = 0, len = data.length; i < len; i++) {
-        callback(data[i])
+        callback(data[i],i)
   }
 }
 

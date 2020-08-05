@@ -3,9 +3,11 @@ import {Line} from 'react-chartjs-2';
 
 import AnimatedMount from "../../HOC/AnimatedMount"
 const LineChart = (props) => {
-
+  let users = []
+  console.log(props,"props in linechange")
+  users = [...props.data]
     const data = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', "November",'December'],
         datasets: [
           {
             label: 'Number of Users',
@@ -26,7 +28,7 @@ const LineChart = (props) => {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: users
           }
         ]
       };
