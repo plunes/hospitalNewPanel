@@ -2980,7 +2980,7 @@ export const getMonthWiseUsers = (days) => async dispatch => {
                   let keys = Object.keys(monthWiseCount)
               
                   for_loop(monthWiseCount,(data,i)=>{
-                     result[parseInt(data.month, 10)] = data.count
+                     result[parseInt(data.month -1, 10)] = data.count
                   })
                   dispatch({
                     type: SOLUTION_USERS,
