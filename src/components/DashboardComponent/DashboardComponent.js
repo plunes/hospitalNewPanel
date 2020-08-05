@@ -570,6 +570,12 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
+        let arr = []
+        if(typeof this.props.solutionUsers === `object`){
+            let data = [...this.props.solutionUsers]
+            console.log(data,"data in DashboardComponent")
+        }
+
         // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
         // // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         // console.log(this.state,"this.state in dashboard")
@@ -994,7 +1000,9 @@ class DashboardComponent extends React.PureComponent {
                                             options={options}
                                         /> */}
                                         <div style={{padding:'1rem'}} >
-                                          <LineChart />
+                                          <LineChart
+                                           data = {this.props.solutionUsers}
+                                          />
                                         </div>
                                        
                          </div>
@@ -1259,4 +1267,4 @@ const mapStateToProps = state => ({
         get_centers,
         set_location_toggler,
         set_open_map,
-        clearSolInsights, setMount })(DashboardComponent));
+        clearSolInsights, setMount })(DashboardComponent))
