@@ -21,6 +21,22 @@ import Button from "./Button"
   const { addToast } = useToasts()
   const doctorImageRef = useRef()
 
+  useEffect(() => {
+     if(props.delete_profile_ret){
+       if(!!props.delete_profile_ret.success){
+        addToast(props.delete_profile_ret.message, {appearance: 'success', autoDismiss:true}) 
+        props.set_user_info({
+          ...props.prof_data,
+          doctors:[...props.prof_data.doctors.filter(item=>(item._id !== get_url_params('id')))]
+         })
+        props.clear_data()
+       }else{
+        addToast(props.delete_profile_ret.message, {appearance: 'error', autoDismiss:true}) 
+       }
+       props.delete_profile_loading()
+     }
+}, [props.delete_profile_ret])
+
 
   if(!!props.uploadRet){
       if(!!props.uploadRet.success){
@@ -117,7 +133,10 @@ import Button from "./Button"
     <div className="profile_secti">
       <div style={{height:'10px',width:'10px',position:'absolute',top:'-10px'}} ref={myRef}></div>
        {props.addDoctorLoading && <LoaderComponent />}
-    <h5 className="pfo_im">Profile Image</h5>
+    <h5 className="pfo_im">Profile Image
+    
+   
+    </h5>
    <div className="row">
      <div className="col-lg-2 col-md-4 image_wrapper_add_doctor position-relative">
    {props.laodingImage &&  <LoaderComponent />}
@@ -133,7 +152,8 @@ import Button from "./Button"
        </div>
        <div className="col-lg-3">
   <h6 className="fil_nm">{!!props.doctorImageName?props.doctorImageName:'File Name'}</h6>
-         <Button  className="upld common-button" onClick={(e)=>handleImageClick(e)}>Upload</Button>
+    <Button type='button' onClick={(e)=>handleImageClick(e)}>Upload</Button>
+         {/* <Button  className="upld common-button" onClick={(e)=>handleImageClick(e)}>Upload</Button> */}
        {/* <button >Upload</button> */}
        </div>
    </div>
@@ -253,6 +273,9 @@ import Button from "./Button"
               <Button onClick = {submitdetails}>Submit</Button>
             {/* <button onClick={()=>submitdetails()} className="common-button">Submit</button> */}
             </div>
+            {!!get_url_params('id') &&  <div className='text-center'>
+               <Button className='margin_top_medium_rish' type='button' icon = "delete" onClick={(e)=>props.delete_profile({doctor_id:get_url_params('id')})}>Delete Profile</Button>
+             </div>} 
          </div>}
    </div>
   

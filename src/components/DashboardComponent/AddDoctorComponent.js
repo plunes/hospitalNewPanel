@@ -4,6 +4,7 @@ import { bankDetails, submitBankDetailsClr, upload,
    uploadRetClr, getServ, getServClr, getSpecs,
     getSpecsClr, addDoctor, addDoctorClr, getEntityClr, getEntity, getUserDetails, set_user_info,
      get_center_profile,  set_center_data, get_center_profile_clr } from "../../actions/userActions";
+import  { delete_profile, delete_profile_loading } from "../../actions/dash_actions";
 import AddDoctorForm from '../functional/AddDoctorForm'
 import "../DEvelopment.css"
 import TimeSlot from '../functional/TimeSlot'
@@ -116,11 +117,9 @@ class AddDoctorComponent extends Component {
     }
 
     componentWillMount(){
-      console.log(this.props.location,"Inside compoent Will Mount")
       const urlParams = new URLSearchParams(this.props.location.search);
       const id = urlParams.get('id');
       if(!!id){
-        // console.log("True case in DidMount")
         this.setState({
           getUserLoading:true,
           doctorProfileFlag:true
@@ -134,7 +133,7 @@ class AddDoctorComponent extends Component {
     let center_id = get_url_params('center')
       if(!!center_id){
         if(this.props.centers_list.length ===0){
-          console.log("calling for center profile")
+        
           this.props.get_center_profile({center_id})
         }else{
           let center_data  = [...this.props.centers_list].filter(item=>(!!(item._id === center_id)))[0]
@@ -200,7 +199,7 @@ class AddDoctorComponent extends Component {
         let toMinutes = arr[1].split(" ")[0].split(':')[1]
         let toHour = arr[1].split(" ")[0].split(':')[0]
         let toAmPm = arr[1].split(" ")[1]
-        console.log(fromHour==='12',"fromHour")
+       
           obj =   {
             from:{
               hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
@@ -212,7 +211,7 @@ class AddDoctorComponent extends Component {
             }
         }
       } catch (error) {
-          console.log(error,"error in catch Block")
+        
          error_flag = true
       }
 
@@ -222,20 +221,20 @@ class AddDoctorComponent extends Component {
       timeToString = (time) =>{
         let timeString = false
         try {
-          console.log(hour,"hour in timetostring")
+       
           let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
-          console.log(hour,time,"hour in timetostring")
+         
           let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
            timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
         } catch (error) {
-          console.log(error,"Error  in TimeToString")
+         
          error_flag = true
         }
        
          return timeString
       }
      handleTimeSubmit = (data) =>{
-      console.log(data,"data in handleTimeSubmit")
+     
         let slot = JSON.parse(JSON.stringify(this.state.slots))
         let index  = ''
         let newSlot  = slot.filter((item,i)=>{
@@ -255,7 +254,7 @@ class AddDoctorComponent extends Component {
           }
         }
         newSlot.splice(index,0,newObject)
-        console.log(newSlot,"newSliot in handleTimeSubmit")
+      
         this.setState({
           slots:newSlot,
           selectedSlot:{},
@@ -346,7 +345,7 @@ class AddDoctorComponent extends Component {
         }
         arr.push(obj)
       })
-      console.log(arr,"arr in generate slot");
+     
       
       return arr
   
@@ -355,7 +354,7 @@ class AddDoctorComponent extends Component {
 
   
   slotClicked = (slot,a,b,item )  =>{
-    console.log(slot, a, b, item,"SlotClicked")
+    
     if(!isEmpty(slot)){
       this.setState({
         selectedSlot:slot,
@@ -382,7 +381,7 @@ class AddDoctorComponent extends Component {
 
       if(nextProps.getEntityRet){
         if(nextProps.getEntityRet.success){
-          console.log(nextProps.getEntityRet,"nextProps.getEntityRet in WillReceiveProps")
+       
           let data = nextProps.getEntityRet.data
 
           let arr = []
@@ -423,7 +422,7 @@ class AddDoctorComponent extends Component {
               }
             })
           } catch (error) {
-            console.log(error,"erron in catch block")
+           
             throw new MyError("Unable to get doctor profile , try again later.")
           }
         }else{
@@ -432,10 +431,9 @@ class AddDoctorComponent extends Component {
         nextProps.getEntityClr()
       }
 
-      console.log(this.props,"props in compoentWo")
       if(nextProps.getSpecsRet){
         if(nextProps.getSpecsRet.success){
-          console.log(nextProps.getSpecsRet,"nextProps.getSpecsRet")
+
           let arr = []
           let specialities = [...nextProps.getSpecsRet.data]
           specialities.forEach((item,i)=>{
@@ -456,7 +454,7 @@ class AddDoctorComponent extends Component {
 
       if(nextProps.getServRet){
         if(nextProps.getServRet.success){
-          console.log(nextProps.getServRet,"nextProps.getServRet")
+     
           let specialities = JSON.parse(JSON.stringify(nextProps.getServRet.data))
           let   arr = specialities.map((item,i)=>{
                   item.name = item.service
@@ -509,13 +507,13 @@ class AddDoctorComponent extends Component {
           try{
             let arr = [...this.state.specialities]
             arr.forEach((item)=>{
-              console.log(item,"item in loop")
+     
               if(item.value === e.target.value){
                 throw new MyError(item.name)
               }
             })
           }catch(e){
-              console.log(e.message,"e.message in handelSelectChange")
+          
               this.setState({
                 services_chosen:[]
               })
@@ -541,8 +539,7 @@ class AddDoctorComponent extends Component {
     }
 
     submitdetails = (data) =>{
-      console.log(data,"data in SubmitDetails")
-  console.log(error_flag,"error in submit DETAILS")
+ 
       if(!!error_flag){
         this.setState({
           ret:{
@@ -578,7 +575,6 @@ class AddDoctorComponent extends Component {
         }
 ]
 
-console.log(data,'data in submit Details')
       let obj = {
         name:data.name,
         education:data.education,
@@ -596,7 +592,7 @@ console.log(data,'data in submit Details')
       this.setState({
         addDoctorLoading:true
       },()=>this.props.addDoctor(obj))
-      console.log(obj,"Obj submitDoctor")
+
     }
     upload = (data) =>{
       this.setState({
@@ -629,8 +625,7 @@ console.log(data,'data in submit Details')
     }
 
     render() {
-      console.log(this.state,"this.state in AddComponent")
-      console.log(this.props,"this.props in add Doctor component")
+   
       let center_id = get_url_params('center')
       if(this.state.add_success){
         if(!!center_id){
@@ -795,6 +790,10 @@ console.log(data,'data in submit Details')
               slots ={this.state.slots.length===0?[]:this.state.slots}
               getUserDetails = {this.props.getUserDetails}
               department = {this.state.department}
+              delete_profile = {this.props.delete_profile}
+              delete_profile_ret = {this.props.delete_profile_ret}
+              delete_profile_loading_flag = {this.props.delete_profile_loading_flag}
+              delete_profile_loading = {this.props.delete_profile_loading}
             />
         </div>
         <ModalComponent 
@@ -822,7 +821,9 @@ const mapStateToProps = state => ({
     prof_data:state.user.data.prof_data,
     center_data:state.user.data.centers_data.center_data,
     centers_list:state.user.data.centers_data.centers_list,
-    get_center_profile_ret:state.user.get_center_profile_ret
+    get_center_profile_ret:state.user.get_center_profile_ret,
+    delete_profile_ret:state.dash_store.delete_profile_ret,
+    delete_profile_loading_flag:state.dash_store.delete_profile_loading
   })
   export default connect(mapStateToProps, {bankDetails,
   submitBankDetailsClr,
@@ -840,6 +841,8 @@ const mapStateToProps = state => ({
   set_user_info,
   get_center_profile,
   set_center_data,
-  get_center_profile_clr
+  get_center_profile_clr,
+  delete_profile,
+  delete_profile_loading
   })(AddDoctorComponent)
 

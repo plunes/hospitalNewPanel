@@ -77,11 +77,35 @@
 }
 
 /* Button 2 */
+
+
+.btn_rish-3 {
+	background: red;
+	color: #fff;
+}
+
+.btn_rish-3:hover {
+	background: #27ae60;
+}
+
+.btn_rish-3:active {
+	background: #27ae60;
+	top: 2px;
+}
+
+.btn_rish-3:before {
+	position: absolute;
+	height: 100%;
+	left: 0;
+	top: 0;
+	line-height: 2.5;
+	font-size: 140%;
+	width: 4rem;
+}
 .btn_rish-2 {
 	background: #2ecc71;
 	color: #fff;
 }
-
 .btn_rish-2:hover {
 	background: #27ae60;
 }
@@ -155,6 +179,10 @@
 
 .icon-cart:before {
 	content: "\f093";
+}
+
+.icon-delete:before {
+	content: "\f014";
 }
 
 .icon-heart:before {

@@ -1,4 +1,8 @@
-import { GET_ACT_INSIGHT, GET_ACT_INSIGHT_RET, GET_ACT_INSIGHT_LOADING, GET_REAL_INSIGHT, GET_REAL_INSIGHT_RET, GET_REAL_INSIGHT_LOADING   } from '../actions/types';
+import { GET_ACT_INSIGHT, GET_ACT_INSIGHT_RET, GET_ACT_INSIGHT_LOADING, 
+    GET_REAL_INSIGHT, GET_REAL_INSIGHT_RET, GET_REAL_INSIGHT_LOADING, DELETE_PROFILE,
+    DELETE_PROFILE_LOADING, DELETE_PROFILE_RET
+    
+} from '../actions/types';
 import { get_url_params } from "../utils/common_utilities"
 
 const cat_init_state  = {
@@ -9,11 +13,35 @@ const cat_init_state  = {
 
     get_real_insight:false,
     get_real_insight_ret:false,
-    get_real_insight_loading:true
+    get_real_insight_loading:true,
+
+    delete_profile:false,
+    delete_profile_ret:false,
+    delete_profile_loading:false
 }
 
 export default function (state = cat_init_state, action) {
 switch (action.type) {
+
+    case DELETE_PROFILE:
+        return {
+            ...state,
+            delete_profile:action.payload,
+            delete_profile_loading:true
+        }
+    case DELETE_PROFILE_RET:
+        return {
+            ...state,
+            delete_profile_ret:action.payload,
+         //    get_act_insight_loading:false
+        }
+    case DELETE_PROFILE_LOADING:
+        return {
+            ...state,
+            delete_profile_ret:false,
+            delete_profile_loading:false
+        }
+ 
 
    case GET_ACT_INSIGHT:
        return {

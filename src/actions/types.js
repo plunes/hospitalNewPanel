@@ -268,3 +268,7 @@ export const SEARCH_ADD_PROCEDURE_LOADING = 'App/Catalogue/SEARCH_ADD_PROCEDURE_
 export const SET_VARIANCE = 'App/Catalogue/SET_VARIANCE'
 export const SET_VARIANCE_RET = 'App/Catalogue/SET_VARIANCE_RET'
 export const SET_VARIANCE_LOADING = 'App/Catalogue/SET_VARIANCE_LOADING'
+
+export const DELETE_PROFILE = 'App/Catalogue/DELETE_PROFILE'
+export const DELETE_PROFILE_RET = 'App/Catalogue/DELETE_PROFILE_RET'
+export const DELETE_PROFILE_LOADING = 'App/Catalogue/DELETE_PROFILE_LOADING'

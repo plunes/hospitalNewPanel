@@ -76,6 +76,14 @@ export default {
     
 
     dash_routes:{
+      delete_profile:(data, center_id,  headers) =>
+      axios
+          .delete(`${base_url}/user/deleteDoctor/${data.doctor_id}${!!center_id?'?userId='+center_id:''}`, headers)
+          .then(res => {
+               console.log(res,'res delete doctor')
+               return res
+          })
+          .catch(err => err.response),
       get_act_insight: (data, center_id,  headers) =>
       axios
           .get(`${base_url}/analytics/actionableInsight${!!center_id?'?userId='+center_id:''}`, headers)
