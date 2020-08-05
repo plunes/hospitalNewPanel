@@ -1312,6 +1312,7 @@ class MyCatalogueComponent extends Component {
                                          <Select
                                             options = {this.state.specialities}
                                             handleChange = {this.handleSpecialitySelect}
+                                        
                                             placeholder= "Speciality"
                                             input_text_class = "catalogue_dropdown"
                                             wrapper_class = "catalogue_dropdown_wrapper"

@@ -2971,19 +2971,16 @@ export const getMonthWiseUsers = (days) => async dispatch => {
     //console.log(token, 'monthWise')
     return await axios.get(baseUrl + '/analytics/solutionUsers', { 'headers': { 'Authorization': token } })
               .then((res) => {
-                //console.log(res.data, 'data')
+                console.log(res.data, 'data')
                 //[0, 54, 62, null,null, null, null, null, null, null, null, null]
                 let result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 try {
-                  let monthWiseCount = res.data.data[0];
+                  let monthWiseCount = res.data.data
+                
                   let keys = Object.keys(monthWiseCount)
               
-                  for_loop(result,(data,i)=>{
-                    let month = keys.indexOf(i.toString())
-                
-                        if(month>=0){
-                          result[parseInt(i, 10)] = monthWiseCount[i]
-                        }
+                  for_loop(monthWiseCount,(data,i)=>{
+                     result[parseInt(data.month, 10)] = data.count
                   })
                   
                   

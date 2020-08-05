@@ -331,7 +331,7 @@ class Select extends Component {
   }
 
   renderOption(option, index) {
-    const { multiple } = this.props
+    const { multipl, allow_delete } = this.props
     const { values, focusedValue } = this.state
 
     const { value, name } = option
@@ -350,9 +350,9 @@ class Select extends Component {
         onMouseOver={ this.onHoverOption }
         onClick={ this.onClickOption }
         >
-        { multiple ?
+        { allow_delete ?
           <span className="checkbox">
-            { selected ? <Check /> : null }
+            { true ?<img src="https://img.icons8.com/wired/64/000000/delete-forever.png"/> : null }
           </span> :
           null
         }
