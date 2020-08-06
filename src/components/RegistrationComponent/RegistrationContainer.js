@@ -287,7 +287,7 @@ class RegistrationContainer extends  React.Component {
    }else {
     this.setState({
         hospital:{
-            ...this.state.doctor,
+            ...this.state.hospital,
             ...data
         }
       })
