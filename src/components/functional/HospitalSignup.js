@@ -6,6 +6,8 @@ import { isValidPhoneNumber } from 'react-phone-number-input';
 import validator from 'validator'
 import Select from "../Select"
 import { only_alphabets } from  "../../utils/common_utilities"
+import Map from "../MapComponent"
+
 // let { DateTimePicker } = ReactWidgets;
 
 // let formatter = Globalize.dateFormatter({ raw: 'MMM dd, yyyy' })
@@ -63,6 +65,8 @@ import { only_alphabets } from  "../../utils/common_utilities"
         }
         else if(props.data.regno === ''){
           addToast("Please enter registration number",{ appearance: 'error', autoDismiss:true })
+        }else if(props.data.location === ''){
+          addToast("Please provide your location",{ appearance: 'error', autoDismiss:true })
         }
         else{
             let specialitiesArr = [...props.specialities]
@@ -87,6 +91,7 @@ import { only_alphabets } from  "../../utils/common_utilities"
                 userType:!!props.lab?"Lab":"Hospital",
                 biography:props.data.about,
                 registrationNumber:props.data.regno,
+                location:props.data.location,
                 specialities:arr,
                 email:props.data.email,
                 password:props.data.password,
@@ -116,7 +121,30 @@ import { only_alphabets } from  "../../utils/common_utilities"
           customborder="true">
         </textarea>
       </div>
-      <div className="form-group">
+      <div style={{display:'block'}}>
+                        <Map
+                          google={props.google}
+                          label = 'Location'
+                          no_save_changes = {true}
+                          center={{lat: 18.5204, lng: 73.8567}}
+                          location = {{
+                              coordinates:[77.026344,28.457523]
+                          }}
+                          update_location = {(data)=>props.handle_location_change({
+                              location:data.location
+                          })}
+                          set_cordinates = {()=>console.log()}
+                          search_label = {true}
+                          set_user_info =  {()=>console.log()}
+                          height='300px'
+                          zoom={15}
+                          edit_location_loading = {props.edit_location_loading}
+                          edit_location = {()=>console.log()}
+                          edit_location_clr = {()=>console.log()}
+                          edit_location_ret = {false}
+                          />
+                        </div>
+      <div className="form-group margin_top_medium_rish">
         <input
           className="form-control customborder"
           name="mobile"

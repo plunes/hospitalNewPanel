@@ -17,6 +17,7 @@ class HospitalRegistrationForm extends Component {
       pictures: [],
       name: "",
       address: "",
+      location:'',
       mobileno: "",
       regno: "",
       email: "",
@@ -47,6 +48,13 @@ class HospitalRegistrationForm extends Component {
       [e.target.name]: e.target.value
     });
     // console.log(e.target.name);
+  }
+
+  handle_location_change = (data) =>{
+    this.setState({
+      ...this.state,
+      ...data
+    })
   }
   handleDoctorSubmit(e) {
     e.preventDefault();

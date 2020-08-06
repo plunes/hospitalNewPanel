@@ -349,6 +349,7 @@ class Map extends Component{
 					<GooglePlacesAutocomplete
 						onSelect={this.onPlaceSelected}
 						componentRestrictions={{country: "in"}}
+						placeholder = "Search Location"
 					/>
 					</GoogleMap>
 				)
@@ -379,7 +380,7 @@ class Map extends Component{
 					 }} class="editmainbodymaxhospital cursor-pointer underline">Save Changes</span>
 					 </div>}
 					<div className="form-group">
-						<label htmlFor="">Address</label>
+						<label htmlFor="">{!!this.props.label?this.props.label:'Address'}</label>
 						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
 					</div>
 				</div>

@@ -7,6 +7,7 @@ import validator from 'validator'
 import Select from "../Select";
 import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import { only_alphabets, is_positive_real_number } from "../../utils/common_utilities"
+import Map from "../MapComponent"
 
 
 
@@ -45,6 +46,8 @@ import { only_alphabets, is_positive_real_number } from "../../utils/common_util
                 addToast("Experience must be a number",{ appearance: 'error', autoDismiss:true })
             }else if(props.specialities_selected.length ===0){
               addToast("Please select a speciality",{ appearance: 'error', autoDismiss:true })
+            }else if(props.data.location ===''){
+              addToast("Please provide your location",{ appearance: 'error', autoDismiss:true })
             }
             else{
               let specialitiesArr = JSON.parse(JSON.stringify(props.specialities))
@@ -169,7 +172,7 @@ import { only_alphabets, is_positive_real_number } from "../../utils/common_util
       </div>
 
       <div className="form-group">
-        <label className="">Location</label>
+        <label className="">Address</label>
         <textarea name="address"
           className="form-control customborder"
           onChange={props.handleChange}
@@ -177,8 +180,32 @@ import { only_alphabets, is_positive_real_number } from "../../utils/common_util
           customborder="true">
         </textarea>
       </div>
+
+      <div style={{display:'block'}}>
+                        <Map
+                          google={props.google}
+                          label = 'Location'
+                          no_save_changes = {true}
+                          center={{lat: 18.5204, lng: 73.8567}}
+                          location = {{
+                              coordinates:[77.026344,28.457523]
+                          }}
+                          update_location = {(data)=>props.handle_location_change({
+                              location:data.location
+                          })}
+                          set_cordinates = {()=>console.log()}
+                          search_label = {true}
+                          set_user_info =  {()=>console.log()}
+                          height='300px'
+                          zoom={15}
+                          edit_location_loading = {props.edit_location_loading}
+                          edit_location = {()=>console.log()}
+                          edit_location_clr = {()=>console.log()}
+                          edit_location_ret = {false}
+                          />
+                        </div>
       
-      <div className="form-group">
+      <div className="form-group margin_top_medium_rish">
         <input
           className="form-control customborder"
           name="regno"

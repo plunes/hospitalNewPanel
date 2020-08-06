@@ -37,6 +37,7 @@ class RegistrationContainer extends  React.Component {
                 name:'',
                 address:'',
                 mobile:'+91',
+                location:'',
                 registrationNo:'',
                 about:'',
                 specialities_selected:[],
@@ -48,6 +49,7 @@ class RegistrationContainer extends  React.Component {
             doctor:{
                 name:'',
                 address:'',
+                location:'',
                 email:'',
                 password:'',
                 mobile:'+91',
@@ -273,6 +275,25 @@ class RegistrationContainer extends  React.Component {
          loading:false
      })
  }
+
+ handle_location_change = (data,type) =>{
+   if(type === 'doctor'){
+    this.setState({
+        doctor:{
+            ...this.state.doctor,
+            ...data
+        }
+      })
+   }else {
+    this.setState({
+        hospital:{
+            ...this.state.doctor,
+            ...data
+        }
+      })
+   }
+   
+  }
    
     render() {
         const { showLogin } = this.state
@@ -371,6 +392,7 @@ class RegistrationContainer extends  React.Component {
                                     registerUserClr = {this.props.registerUserClr}
                                     loading = {this.state.loading}
                                     successRegister = {this.successRegister}
+                                    handle_location_change = {this.handle_location_change}
                                     lab = {this.state.type==="Lab"}
                                     handlePhoneChangeDHospital = {this.handlePhoneChangeDHospital}
                                 /> : null 
@@ -394,6 +416,7 @@ class RegistrationContainer extends  React.Component {
                                 registerUserRet = {this.props.registerUserRet}
                                 registerUserClr = {this.props.registerUserClr}
                                 handlePhoneChangeDoctor = {this.handlePhoneChangeDoctor}
+                                handle_location_change = {this.handle_location_change}
                                 />:null
                             }
                         </div>
