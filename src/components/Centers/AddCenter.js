@@ -79,7 +79,10 @@ class AddCenter extends React.PureComponent{
                 throw new MyError('Please enter centers name')
             }
             if(!!!this.state.location){
-                throw new MyError('Please enter your locality')
+                throw new MyError("Please enter center's location")
+            }
+            if(!!!this.state.location){
+                throw new MyError("Please enter center's location")
             }
             this.setState({
                 loading:true
@@ -141,12 +144,16 @@ render(){
                         <div className="col-md-12">
                         <input type="tel" placeholder="Email" value={this.state.email}  onChange={(e)=>this.setState({[e.target.name]:e.target.value})} name="email" className="input_typt_ris form-control editbankdetailfield input-field-common" />
                         </div>  
+                        <div className="col-md-12">
+                        <input type="tel" placeholder="Address" value={this.state.address}  onChange={(e)=>this.setState({[e.target.name]:e.target.value})} name="address" className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                        </div>  
                         {/* <div className="col-md-6">
                         <input type="tel" placeholder="Location"  value={this.state.location} onChange={(e)=>this.setState({[e.target.name]:e.target.value})}  name="location" className="input_typt_ris form-control editbankdetailfield input-field-common" />
                         </div> */}
                     </div>
                     <div style={{display:'block'}}>
                         <Map
+                          label = 'Location'
                           google={this.props.google}
                           no_save_changes = {true}
                           center={{lat: 18.5204, lng: 73.8567}}
@@ -156,12 +163,12 @@ render(){
                           update_location = {(data)=>this.setState({
                               centerLocation: ` ${data.city}, ${data.area} `,
                               location:data.location,
-                              address:data.address
                           })}
                           set_cordinates = {this.set_cordinates}
                           set_user_info = {this.props.set_user_info}
                           height='300px'
                           zoom={15}
+                          search_label = {true}
                           edit_location_loading = {this.props.edit_location_loading}
                           edit_location = {this.edit_location}
                           edit_location_clr = {this.edit_location_clr}

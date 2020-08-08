@@ -180,7 +180,6 @@ if(r.year!==0){
   }else{
       return `${r.hour} hours ago`
   }
-
 }
 }
 
