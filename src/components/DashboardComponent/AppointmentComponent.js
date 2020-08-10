@@ -471,7 +471,7 @@ class AppointmentComponent extends Component {
                                               <div  className='text-center'>
                                                   <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
                                                   <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.userAddress}</text>
                                               </div> 
                                               <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
                                                             <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
@@ -540,7 +540,7 @@ class AppointmentComponent extends Component {
                                               <div  className='text-center'>
                                                   <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
                                                   <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.userAddress}</text>
                                               </div> 
                                               <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
                                                             <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
@@ -611,7 +611,7 @@ class AppointmentComponent extends Component {
                                               <div  className='text-center'>
                                                   <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
                                                   <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.professionalAddress}</text>
+                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.userAddress}</text>
                                               </div> 
                                               <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
                                                             <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>

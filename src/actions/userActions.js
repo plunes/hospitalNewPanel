@@ -3398,6 +3398,7 @@ export const getBooking = () => async  dispatch => {
           let bookDet = {
             '_id': b._id,
             'userName': b.userName,
+            'userAddress':b.userAddress,
             'bookingStatus': b.bookingStatus,
             'appointmentTime': b.appointmentTime,
             'serviceName': b.serviceName,
