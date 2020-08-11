@@ -163,6 +163,7 @@ render(){
                           update_location = {(data)=>this.setState({
                               centerLocation: ` ${data.city}, ${data.area} `,
                               location:data.location,
+                              googleAddress:data.address
                           })}
                           set_cordinates = {this.set_cordinates}
                           set_user_info = {this.props.set_user_info}

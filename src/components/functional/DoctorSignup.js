@@ -191,7 +191,8 @@ import Map from "../MapComponent"
                               coordinates:[77.026344,28.457523]
                           }}
                           update_location = {(data)=>props.handle_location_change({
-                              location:data.location
+                              location:data.location,
+                              googleAddress:data.address
                           })}
                           set_cordinates = {()=>console.log()}
                           search_label = {true}
