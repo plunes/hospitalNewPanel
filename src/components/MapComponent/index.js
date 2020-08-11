@@ -208,8 +208,8 @@ class Map extends Component{
 							location:{
 								type:'Point',
 								coordinates:[
-								   this.state.markerPosition.lng,
-								   this.state.markerPosition.lat
+								   newLng,
+								   newLat
 								]
 							},
 							area:this.getArea( addressArray ),
