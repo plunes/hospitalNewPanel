@@ -96,7 +96,8 @@ class AddCenter extends React.PureComponent{
                 centerLocation:this.state.centerLocation,
                 centerMobileNumber:this.state.phone==='+91'?"":this.state.phone,
                 location:this.state.location,
-                address:this.state.address
+                address:this.state.address,
+                googleAddress:this.state.googleAddress
             })
         }catch(e){
             console.log(e,"error in Catch Block")
