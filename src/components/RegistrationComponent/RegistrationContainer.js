@@ -11,7 +11,7 @@ import { registerUser, registerUserClr } from "../../actions/userActions";
 import HospitalSignup from "../functional/HospitalSignup"
 import DoctorSignup from '../functional/DoctorSignup'
 import AuthHeader from '../functional/AuthHeader'
-import { get_url } from '../../utils/common_utilities'
+import { get_url, getDateFormat } from '../../utils/common_utilities'
 import { connect } from "react-redux"
 import axios from "axios";
 import NewNotif from '../functional/NewNotif';
@@ -156,10 +156,11 @@ class RegistrationContainer extends  React.Component {
     }
 
     handleDateChange = (val) => {
+        let data = (new Date(val)).getTime()
         this.setState({
             doctor:{
                 ...this.state.doctor,
-                'dob':(new Date(val)).getTime()
+                'dob':getDateFormat(data)
             }
         })
     }
