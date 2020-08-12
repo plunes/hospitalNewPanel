@@ -75,7 +75,7 @@ import Map from "../MapComponent"
                     specialities:arr,
                     email:props.data.email,
                     password:props.data.password,
-                    dob:props.data.dob,
+                    birthDate:props.data.dob,
                     experience:props.data.experience,
                     googleAddress:props.data.googleAddress
                })
