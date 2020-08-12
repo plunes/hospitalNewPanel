@@ -76,7 +76,8 @@ import Map from "../MapComponent"
                     email:props.data.email,
                     password:props.data.password,
                     dob:props.data.dob,
-                    experience:props.data.experience
+                    experience:props.data.experience,
+                    googleAddress:props.data.googleAddress
                })
 
             //     props.submitProfileDetails({

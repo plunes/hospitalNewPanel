@@ -95,7 +95,8 @@ import Map from "../MapComponent"
                 specialities:arr,
                 email:props.data.email,
                 password:props.data.password,
-                regno:props.data.regno
+                regno:props.data.regno,
+                googleAddress:props.data.googleAddress
            })
         }
     }
