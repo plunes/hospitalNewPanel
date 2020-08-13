@@ -11,7 +11,7 @@ class TimerComponent extends React.Component {
       super();
       this.state = { 
           time: {},
-          seconds: 10,
+          seconds: 0,
           firstRender:true };
       this.timer = 0;
       this.startTimer = this.startTimer.bind(this);
