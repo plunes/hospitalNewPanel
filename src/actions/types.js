@@ -272,3 +272,7 @@ export const SET_VARIANCE_LOADING = 'App/Catalogue/SET_VARIANCE_LOADING'
 export const DELETE_PROFILE = 'App/Catalogue/DELETE_PROFILE'
 export const DELETE_PROFILE_RET = 'App/Catalogue/DELETE_PROFILE_RET'
 export const DELETE_PROFILE_LOADING = 'App/Catalogue/DELETE_PROFILE_LOADING'
+
+export const CHANGE_ADDRESS = 'App/Catalogue/CHANGE_ADDRESS'
+export const CHANGE_ADDRESS_RET = 'App/Catalogue/CHANGE_ADDRESS_RET'
+export const CHANGE_ADDRESS_LOADING = 'App/Catalogue/CHANGE_ADDRESS_LOADING'

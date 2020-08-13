@@ -23,6 +23,16 @@ if(!!pathLocation) {
 }
 
 export default {
+   profile_routes:{
+    change_address: (data, center_id, headers) =>
+    axios
+        .put(`${base_url}/user${!!center_id?'?userId='+center_id:''}`, data, headers)
+        .then(res => {
+              console.log(res,'res in change_address')
+              return res
+        })
+        .catch(err => err.response),
+   },
     catalogue_routes:{
         get_user_specialities: (data, center_id, headers) =>
         axios

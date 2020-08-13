@@ -50,8 +50,7 @@ class Map extends Component{
 					   this.state.markerPosition.lng,
 					   this.state.markerPosition.lat
 					]
-				},
-				address:this.state.address
+				}
 			  })
 			  nextProps.set_location_toggler(false)
 			}else{
@@ -375,12 +374,12 @@ class Map extends Component{
 								   this.state.markerPosition.lat
 								]
 							},
-							address:this.state.address
+							googleAddress:this.state.address
 						 })
 					 }} class="editmainbodymaxhospital cursor-pointer underline">Save Changes</span>
 					 </div>}
 					<div className="form-group">
-						<label htmlFor="">{!!this.props.label?this.props.label:'Address'}</label>
+						<label htmlFor="">{!!this.props.label?this.props.label:'Location'}</label>
 						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
 					</div>
 				</div>

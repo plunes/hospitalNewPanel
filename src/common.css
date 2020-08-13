@@ -1,3 +1,11 @@
+.address_field {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid gray;
+    width: 30rem;
+}
+
 .green_text_rish{
     color: #01D35A;;
   }
