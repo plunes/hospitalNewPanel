@@ -56,7 +56,7 @@ import Barchart from "../functional/Barchart"
 import Button from "../functional/Button"
 
 import { get_procedures, clr_procedures , update_modified_procedures, get_user_specialities,
-    get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading } from "../../actions/catalogue_actions"
+    get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading, remove_speciality, remove_speciality_loading } from "../../actions/catalogue_actions"
 
 
  const isEmpty = function(obj) {
@@ -313,6 +313,74 @@ class MyCatalogueComponent extends Component {
 
     componentWillReceiveProps(nextProps){
 
+        if(nextProps.remove_speciality_ret){
+            if(nextProps.remove_speciality_ret.success){
+                let speciality_removed = {}
+                let arr = [...this.state.specialities].filter((item)=>{
+                    console.log(item, this.state.selected_speciality)
+                    if(item.value===this.state.selected_speciality){
+                        speciality_removed = {...item}
+                    }
+                    return !!( item.value !== this.state.selected_speciality)
+                })
+                    let new_arr = [...nextProps.catalogue_data.remaining_specs]
+                    let obj = {
+                        name:speciality_removed.name,
+                        value:speciality_removed.name,
+                        id:speciality_removed.value
+                    }
+                    new_arr.push(obj)
+                 let total_procedures = [...nextProps.procedures_data.total_procedures].filter(item=>!!(item.specialityId !== obj.id))
+                let paginated_data = paginate_data([...total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                  
+                    this.setState({
+                        specialities:arr,
+                        selected_speciality:arr.length!==0?arr[0].value:'',
+                        ret:{
+                            success:true,
+                            message:nextProps.remove_speciality_ret.message
+                        }
+                    },()=>  {
+                        nextProps.set_catalogue_data({
+                            ...nextProps.catalogue_data,
+                            remaining_specs:new_arr,
+                            user_specialities:arr
+                        })
+                        nextProps.update_modified_procedures({
+                            total_procedures:[...total_procedures],
+                            modified_procedures:paginated_data.data,
+                            query_param:{
+                                ...paginated_data.parameters
+                            }
+                        })
+                        if(this.state.selected_speciality.length!==0){
+                            nextProps.search_procedures({
+                                searchQuery:'',
+                                page:1,
+                                limit:10,
+                                specialityId:this.state.selected_speciality
+                            })
+                        }else{
+                            nextProps.get_procedures({ limit:10,
+                                total:'',
+                                page:1,
+                                total_pages:1,
+                                next:false,
+                                search:''
+                            })
+                        }
+                    })
+            }else {
+                this.setState({
+                    ret:{
+                        success:true,
+                        message:nextProps.remove_speciality_ret.message
+                    }
+                })
+            }
+            nextProps.remove_speciality_loading()
+        }
+
         if(nextProps.get_center_profile_ret){
             if(nextProps.get_center_profile_ret.success){
                this.setState({
@@ -505,7 +573,7 @@ class MyCatalogueComponent extends Component {
 
                       let paginated_data = paginate_data([...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
                       updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
-                   nextProps.update_modified_procedures({
+                     nextProps.update_modified_procedures({
                            total_procedures:[...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],
                            modified_procedures:paginated_data.data,
                            query_param:{
@@ -1449,15 +1517,16 @@ class MyCatalogueComponent extends Component {
                                          subContainerClassName={'pages pagination'}
                                          activeClassName={'active'}
                                            />:'':'':'' }
-                                       
+                                       <div style={{position:'relative'}} className="margin_top_small_rish text-center">
+                                                     {this.props.remove_speciality_loading_flag && <LoaderComponent />}
+                                               {this.state.specialities.length >0 && <text onClick={()=>this.props.remove_speciality({speciality_id:this.state.selected_speciality})} className="remove_speciality_text">Remove Speciallity from catlalogue</text> }  
+                                        </div>
                                     </div>}
                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
                                         <Button  onClick = {()=>this.update_procedure()} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
                                       </div>
                                       }
-
-
-
+                                  
                             {/* Add to Your Catalogue */}                        
                             {!!this.state.addProcedureFlag  &&    <div style={{position:'relative'}}>
                                       {/* {this.props.to_add_services_loading && <LoaderComponent />}  */}
@@ -1563,7 +1632,8 @@ const mapStateToProps = state => ({
     to_add_services_ret:state.catalogue_store.to_add_services_ret,
     to_add_services_loading:state.catalogue_store.to_add_services_loading,
     set_variance_ret:state.catalogue_store.set_variance_ret,
-    set_variance_loading_flag:state.catalogue_store.set_variance_loading,
+    remove_speciality_ret:state.catalogue_store.remove_speciality_ret,
+    remove_speciality_loading_flag:state.catalogue_store.remove_speciality_loading_flag,
     search_procedures_loading_loading_flag:state.catalogue_store.search_procedures_loading,
     prof_data:state.user.data.prof_data,
     centers_list:state.user.data.centers_data.centers_list,
@@ -1620,7 +1690,9 @@ set_variance,
 get_center_profile,
 get_center_profile_clr,
 set_variance_loading,
-set_center_data
+set_center_data,
+remove_speciality,
+remove_speciality_loading
 })(MyCatalogueComponent));
 
 

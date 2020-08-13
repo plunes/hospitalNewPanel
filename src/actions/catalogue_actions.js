@@ -8,10 +8,32 @@ import {
   TO_ADD_SERVICES, TO_ADD_SERVICES_RET, TO_ADD_SERVICES_CLR,
   SET_VARIANCE_LOADING, SET_VARIANCE_RET, SET_VARIANCE,
 
-  GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES_LOADING
+  GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES_LOADING,
+
+  REMOVE_SPECIALITY, REMOVE_SPECIALITY_RET, REMOVE_SPECIALITY_LOADING
 
 } from "./types"
 
+
+export const remove_speciality = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_SPECIALITY,
+    payload:data
+  })
+}
+
+export const remove_speciality_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_SPECIALITY_RET,
+    payload:data
+  })
+}
+export const remove_speciality_loading = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_SPECIALITY_LOADING,
+    payload:data
+  })
+}
 
 export const get_user_specialities = (data) => dispatch =>{
   return  dispatch({

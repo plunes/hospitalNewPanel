@@ -1,3 +1,10 @@
+.remove_speciality_text {
+    font-size: 1rem;
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .address_field {
     border-left: none;
     border-right: none;

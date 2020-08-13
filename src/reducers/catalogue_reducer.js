@@ -40,7 +40,11 @@ import {
 
          GET_USER_SPECIALITIES, 
          GET_USER_SPECIALITIES_RET, 
-         GET_USER_SPECIALITIES_LOADING
+         GET_USER_SPECIALITIES_LOADING,
+
+         REMOVE_SPECIALITY,
+         REMOVE_SPECIALITY_RET,
+         REMOVE_SPECIALITY_LOADING
         
         } from '../actions/types';
 import { get_url_params, paginate_data } from "../utils/common_utilities"
@@ -71,6 +75,9 @@ const cat_init_state  = {
     get_user_specialities_ret:false,
     get_user_specialities_loading:false,
 
+    remove_speciality:false,
+    remove_speciality_ret:false,
+    remove_speciality_loading:false,
 
     procedures_data:{
         total_procedures:[],
@@ -146,6 +153,27 @@ export default function (state = cat_init_state, action) {
         to_add_services_ret:false,
         to_add_services_loading:false
     };
+
+    case REMOVE_SPECIALITY:
+        return {
+            ...state,
+            remove_speciality:action.payload,
+            remove_speciality_loading:true
+        }
+
+    case REMOVE_SPECIALITY_RET:
+        return {
+            ...state,
+            remove_speciality_ret:action.payload,
+            remove_speciality_loading:false
+        }
+
+    case REMOVE_SPECIALITY_LOADING:
+        return {
+            ...state,
+            remove_speciality_ret:false,
+            remove_speciality_loading:false
+        }
 
     case ADD_PROCEDURE:
         return {
