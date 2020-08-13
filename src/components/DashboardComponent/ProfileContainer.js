@@ -713,8 +713,7 @@ class ProfileContainer extends React.PureComponent {
   </div>
 
 
-
-  <div  id="profile_section_4" className="new_card_class">
+  {this.props.user.userType !=="Doctor"  &&  <div  id="profile_section_4" className="new_card_class">
            {
              this.props.user.userType !=="Doctor" && <React.Fragment>
                 <text className="location_profile_text">Team of Experts</text>
@@ -762,7 +761,7 @@ class ProfileContainer extends React.PureComponent {
    </React.Fragment>
      }
 
-     </div>
+     </div>}
 
 
 
