@@ -659,7 +659,7 @@ u {
     margin-bottom: 1rem;
 }
 .main-body-wrapper {
-    height: 100vh;
+    height: 100%;
 }
 .left_7rem {
     left: 7rem;

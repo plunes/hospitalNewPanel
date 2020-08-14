@@ -192,7 +192,7 @@ import Button from "./Button"
                     multiple ={false}
                     name = "specialitie_chosen"
                     label = "Speciality"
-                    placeholder = "Choose Spectiality"
+                    placeholder = "Choose speciality"
                    />
            </div>
            <div class="col-lg-6 col-12">
@@ -202,7 +202,7 @@ import Button from "./Button"
                      value = {!!props.services_chosen?props.services_chosen:''}
                      name = "services_chosen"
                      label = "Service"
-                     placeholder = "Choose Service"
+                     placeholder = "Choose service"
                    />
            </div>
             </div>
