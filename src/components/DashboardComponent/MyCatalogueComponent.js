@@ -920,6 +920,8 @@ class MyCatalogueComponent extends Component {
                downloadCatalogueClr = {this.props.downloadCatalogueClr}
                downloadCatalogueRet = {this.props.downloadCatalogueRet}
                downloadCatalogue ={this.props.downloadCatalogue}
+
+               specialities = {this.state.specialities}
                />        
             </React.Fragment>
           
@@ -1358,7 +1360,7 @@ class MyCatalogueComponent extends Component {
                                        </div>
                                        <div className="text-center">
                                             <Button onClick = {()=>this.open_catalogue_modal()} type="button" >
-                                                Upload Catalogue
+                                                Update Catalogue
                                             </Button>
                                            <div>
                                            <text className='catalogue_note'><text className='bold'>Note :</text>Upload your service catalog and get direct leads matching your catalog. It increases the footfall of clients, List your every possible service.</text>

@@ -23,6 +23,7 @@ import './full_page_loader.css'
 import './checkbox_pill.css'
 import './button.css'
 import "react-image-gallery/styles/css/image-gallery.css";
+import './sass/main.scss'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
 import no_auth_route from "./HOC/no_auth_route"

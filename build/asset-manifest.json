@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.1811ccf6.css",
   "main.css.map": "static/css/main.1811ccf6.css.map",
-  "main.js": "static/js/main.bddac127.js",
-  "main.js.map": "static/js/main.bddac127.js.map",
+  "main.js": "static/js/main.6d49da8f.js",
+  "main.js.map": "static/js/main.6d49da8f.js.map",
   "static/media/arrow_left.svg": "static/media/arrow_left.11911410.svg",
   "static/media/arrow_right.svg": "static/media/arrow_right.8ef6a08c.svg",
   "static/media/blue_eclipsce.svg": "static/media/blue_eclipsce.d6baeb04.svg",
@@ -23,6 +23,7 @@
   "static/media/fa-solid-900.woff2": "static/media/fa-solid-900.b15db15f.woff2",
   "static/media/loader-big.gif": "static/media/loader-big.a770b679.gif",
   "static/media/loading-spinner.gif": "static/media/loading-spinner.40a317fd.gif",
+  "static/media/main.scss": "static/media/main.f063fbf8.scss",
   "static/media/pink_circle.svg": "static/media/pink_circle.930ac455.svg",
   "static/media/proxima.otf": "static/media/proxima.410504d4.otf",
   "static/media/rw-widgets.eot": "static/media/rw-widgets.bc7c4a59.eot",

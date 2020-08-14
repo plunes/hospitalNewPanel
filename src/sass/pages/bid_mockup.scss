@@ -1,0 +1,14 @@
+.upload_section_wrapper {
+    transition: all .2s;
+    backface-visibility: hidden;
+    position: relative;
+    animation-name: moveInLeft;
+    animation-timing-function: ease;
+    animation-duration: 0.3s; 
+}
+.catalogue_note {
+    font-size: 8rem !important;
+    font-family: 'ProximaNova';
+    color: $color-black;
+
+}
