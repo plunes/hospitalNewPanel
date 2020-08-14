@@ -2423,7 +2423,7 @@ export const downloadCatalogue = (data) => async dispatch => {
       payload : "no-data-required"
     })
 
-  return await axios.get(baseUrl + '/user/downloadCatalogue', 
+  return await axios.get(baseUrl + `/user/downloadCatalogue${!!data?'?id='+data:''}`, 
    { 'headers': {
       'Authorization': token,
       type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -2507,7 +2507,7 @@ export const uploadProcedures = (data) => async dispatch => {
     const body = new FormData();
     body.append(data.field, data.file)
 
-  return await axios.post(baseUrl + '/upload/catalogue', body, { 'headers': { 'Authorization': token },'content-type':'multipart/form-data' })
+  return await axios.post(baseUrl + `/upload/catalogue${!!data.id?'?id='+data.id:''}`, body, { 'headers': { 'Authorization': token },'content-type':'multipart/form-data' })
     .then((res) => {
       console.log(res, 'res in searchProcedures')
       if (res.status === 201) {

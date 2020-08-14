@@ -54,7 +54,7 @@ const handleUpload = (e) => {
       console.log("File Tooo Big")
       addToast('File size should be less than 2MB', {appearance: 'error', autoDismiss:true})
     } else {
-      props.uploadProcedures({ file: file, field: 'file'})
+      props.uploadProcedures({ file: file, field: 'file',id:speciality.value==="Complete Catlogue"?false:speciality.value})
       reader.onloadend = () => {
       reader.readAsDataURL(file);
     }
@@ -88,7 +88,7 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
               </div>
 
          {upload?<div className="upload_section_wrapper">
-          {success ?  <div className="text-center margin-top-medium_ris">
+          {success ?  <div  style={{width:'70%',margin:'auto'}} className="text-center margin-top-medium_ris">
                <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
               </div> :
         <React.Fragment>
@@ -131,8 +131,8 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
                </div>
              
               <div className="text-center margin-top-medium_ris">
-              <Button onClick={()=>handleButtonClick()} type="button">
-               {speciality.name==="Complete Catlogue"?"Dowload Catalogue":`Download ${speciality_name[0].name} Sample`}
+              <Button onClick={()=>props.downloadCatalogue(speciality.value==="Complete Catlogue"?false:speciality.value)} icon="download" type="button">
+               {speciality.name==="Complete Catlogue"?"Dowload Sample":`Download ${speciality_name[0].name} Sample`}
               </Button>
           </div>
           </React.Fragment>

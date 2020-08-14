@@ -40,6 +40,9 @@
 .catalogue_section_1_bottom {
     padding: 1rem 0rem;
 }
+.upload_section_wrapper {
+    height: 20rem;
+}
 
 .section_1_header {
     display: flex;

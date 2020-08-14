@@ -196,3 +196,7 @@
 .icon-send:before {
 	content: "\f1d8";
 }
+
+.icon-download:before {
+	content: "\f019";
+}
