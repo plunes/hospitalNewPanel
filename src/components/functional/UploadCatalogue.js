@@ -69,10 +69,8 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
 })
 
     return (
-        <div className ='modal-wrapper-medium_rish'>
+        <div className ='modal-wrapper-medium_rish margin_top_medium_rish'>
              <div style={{fontWeight:'600'}} className="modal-heading_ris">Update Catalogue</div>
-
-
               <div className="tabs-header margin_top_small_rish">
                           <div style={{marginBottom:'1rem'}} className={`appointment_header_wrapper new_card_class`}>
                                   <span onClick={(e)=>set_upload(true)}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>
@@ -88,7 +86,7 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
               </div>
 
          {upload?<div className="upload_section_wrapper">
-          {success ?  <div  style={{width:'70%',margin:'auto'}} className="text-center margin-top-medium_ris">
+          {success ?  <div  style={{width:'95%',margin:'auto'}} className="text-center margin-top-medium_ris">
                <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
               </div> :
         <React.Fragment>
