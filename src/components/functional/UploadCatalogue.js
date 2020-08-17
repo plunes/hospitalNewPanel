@@ -8,8 +8,8 @@ const UploadCatalogue = (props) => {
     const [ success, setSuccess ] = useState(false)
     const [upload, set_upload] = useState(true)
     const [speciality, set_speciality] = useState({
-      name:'Complete Catlogue',
-      value:'Complete Catlogue'
+      name:'All specialities',
+      value:'All specialities'
     })
 
   useEffect( () => {
@@ -54,7 +54,7 @@ const handleUpload = (e) => {
       console.log("File Tooo Big")
       addToast('File size should be less than 2MB', {appearance: 'error', autoDismiss:true})
     } else {
-      props.uploadProcedures({ file: file, field: 'file',id:speciality.value==="Complete Catlogue"?false:speciality.value})
+      props.uploadProcedures({ file: file, field: 'file',id:speciality.value==="All specialities"?false:speciality.value})
       reader.onloadend = () => {
       reader.readAsDataURL(file);
     }
@@ -64,7 +64,7 @@ const handleUpload = (e) => {
 }
 }
 
-const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},...props.specialities].filter(item=>{
+const speciality_name = [{name:'All specialities',value:'All specialities'},...props.specialities].filter(item=>{
      return !!(item.value === speciality.value)
 })
 
@@ -95,7 +95,7 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
            </div>
           <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
-                  options = {[{name:'Complete Catlogue',value:'Complete Catlogue'},...props.specialities]}
+                  options = {[{name:'All specialities',value:'All specialities'},...props.specialities]}
                   handleChange = {(e)=>set_speciality({name:e.target.name ,value:e.target.value})}
                   placeholder= "Speciality"
                   input_text_class = "catalogue_dropdown"
@@ -106,7 +106,7 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
        </div>
            <div className="text-center margin-top-medium_ris">
                 <Button onClick={()=>handleButtonClick()} type="button">
-                  {speciality.name==="Complete Catlogue"?"Upload Catalogue":`Upload ${speciality_name[0].name} `}
+                  {speciality.name==="All specialities"?"Upload Catalogue":`Upload ${speciality_name[0].name} `}
                 </Button>
               </div>
        </React.Fragment>
@@ -118,7 +118,7 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
 
               <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
-                    options = {[{name:'Complete Catlogue',value:'Complete Catlogue'},...props.specialities]}
+                    options = {[{name:'All specialities',value:'All specialities'},...props.specialities]}
                   handleChange = {(e)=>set_speciality({name:e.target.name ,value:e.target.value})}
                   placeholder= "Speciality"
                   input_text_class = "catalogue_dropdown"
@@ -129,8 +129,8 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
                </div>
              
               <div className="text-center margin-top-medium_ris">
-              <Button onClick={()=>props.downloadCatalogue(speciality.value==="Complete Catlogue"?false:speciality.value)} icon="download" type="button">
-               {speciality.name==="Complete Catlogue"?"Dowload Sample":`Download ${speciality_name[0].name} Sample`}
+              <Button onClick={()=>props.downloadCatalogue(speciality.value==="All specialities"?false:speciality.value)} icon="download" type="button">
+               {speciality.name==="All specialities"?"Dowload Sample":`Download ${speciality_name[0].name} Sample`}
               </Button>
           </div>
           </React.Fragment>
