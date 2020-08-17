@@ -54,6 +54,7 @@ import { is_positive_real_number, get_slider_labels, paginate_data, get_url_para
 import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
 import Button from "../functional/Button"
+import  DeleteSpeciality from '../functional/DeleteSpeciality'
 
 import { get_procedures, clr_procedures , update_modified_procedures, get_user_specialities,
     get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading, remove_speciality, remove_speciality_loading } from "../../actions/catalogue_actions"
@@ -106,6 +107,7 @@ class MyCatalogueComponent extends Component {
             speciality_variance_flag:false,
             all_selected_catalogue:false,
             all_selected_avail:false,
+            delete_speciality_flag:false,
             get_procedures_params:{
                 limit:0,
                 total:0,
@@ -177,6 +179,12 @@ class MyCatalogueComponent extends Component {
                 variance:this.state.variance
             })
         }
+    }
+
+    toggle_delete_speciality = () =>{
+      this.setState({
+        delete_speciality_flag:!this.state.delete_speciality_flag
+      })
     }
 
 
@@ -334,6 +342,7 @@ class MyCatalogueComponent extends Component {
                 let paginated_data = paginate_data([...total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
                   
                     this.setState({
+                        delete_speciality_flag:false,
                         specialities:arr,
                         selected_speciality:arr.length!==0?arr[0].value:'',
                         ret:{
@@ -901,6 +910,17 @@ class MyCatalogueComponent extends Component {
             selected_procedures:[...newArr]
          })
     }
+    }
+
+    generate_delete_speciality = () =>{
+        return (<React.Fragment>
+             <DeleteSpeciality   
+                remove_speciality= {this.props.remove_speciality}
+                specialities = {this.state.specialities}
+                selected_speciality = {this.state.selected_speciality}
+                toggle_delete_speciality = {this.toggle_delete_speciality}
+             />
+        </React.Fragment>)
     }
 
     generateUploadBody = () =>{
@@ -1545,7 +1565,8 @@ class MyCatalogueComponent extends Component {
                                            />:'':'':'' }
                                        <div style={{position:'relative'}} className="margin_top_small_rish text-center">
                                                      {this.props.remove_speciality_loading_flag && <LoaderComponent />}
-                                               {this.state.specialities.length >0 && <text onClick={()=>this.props.remove_speciality({speciality_id:this.state.selected_speciality})} className="remove_speciality_text">Remove Speciallity from catlalogue</text> }  
+                                               {this.state.specialities.length >0 && <text onClick  = {()=>this.toggle_delete_speciality()}  className="remove_speciality_text">Remove Speciallity from catlalogue</text> } 
+                                               {/* onClick={()=>this.props.remove_speciality({speciality_id:this.state.selected_speciality})}  */}
                                         </div>
                                     </div>}
                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
@@ -1622,6 +1643,12 @@ class MyCatalogueComponent extends Component {
                 open = {this.state.editCatalogFlag}
                 handleClose = {this.handleCloseEditModal}
                 modalBody = {this.generateEditCatalogue}
+                />  
+
+            <ModalComponent 
+                open = {this.state.delete_speciality_flag}
+                handleClose = {this.toggle_delete_speciality}
+                modalBody = {this.generate_delete_speciality}
                 />  
             </React.Fragment>
         )

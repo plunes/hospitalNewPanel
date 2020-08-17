@@ -70,7 +70,7 @@ const speciality_name = [{name:'Complete Catlogue',value:'Complete Catlogue'},..
 
     return (
         <div className ='modal-wrapper-medium_rish margin_top_medium_rish'>
-             <div style={{fontWeight:'600'}} className="modal-heading_ris">Update Catalogue</div>
+             <div style={{fontWeight:'600'}} className="modal-heading_ris">Catalogue Manager</div>
               <div className="tabs-header margin_top_small_rish">
                           <div style={{marginBottom:'1rem'}} className={`appointment_header_wrapper new_card_class`}>
                                   <span onClick={(e)=>set_upload(true)}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>

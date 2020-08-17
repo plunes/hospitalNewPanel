@@ -665,3 +665,12 @@ u {
     left: 7rem;
 }
 
+.flex_parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex_parent_child {
+    flex: 1 1 45%;
+}
+
