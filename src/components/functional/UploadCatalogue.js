@@ -6,7 +6,7 @@ import Select from "../Select"
 const UploadCatalogue = (props) => {
     const { addToast } = useToasts()
     const [ success, setSuccess ] = useState(false)
-    const [upload, set_upload] = useState(true)
+    const [upload, set_upload] = useState(false)
     const [speciality, set_speciality] = useState({
       name:'All specialities',
       value:'All specialities'
@@ -73,15 +73,14 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
              <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1">Upload Catalogue</div>
               <div className="tabs-header margin_top_small_rish">
                           <div style={{marginBottom:'1rem'}} className={`appointment_header_wrapper new_card_class`}>
-                                  <span onClick={(e)=>set_upload(true)}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>
-                                      <text className={`appointment_header_text ${upload?'green-text-rish':''}`}>Upload Catalogue</text>
-                                      <div>
-                                     
-                                      </div>
-                                  </span>                 
-                                  <span onClick={(e)=>set_upload(false)}    className={`appointment_header_child-1 ${!upload?'active_appointment_header':''}`}>
+
+                          <span onClick={(e)=>set_upload(false)}    className={`appointment_header_child-1 ${!upload?'active_appointment_header':''}`}>
                                   <text className={`appointment_header_text ${!upload?'green-text-rish':''}`}>Download Sample</text>
                                   </span>
+                                  <span onClick={(e)=>set_upload(true)}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>
+                                      <text className={`appointment_header_text ${upload?'green-text-rish':''}`}>Upload Catalogue</text>
+                                  </span>                 
+                                
                           </div>
               </div>
 
@@ -91,7 +90,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
               </div> :
         <React.Fragment>
           <div style={{width:'95%',margin:'auto'}} className='catalogue_note'>
-            <text className='bold'>Note :</text>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            <text className='bold'>Note :</text> Upload a File of your Service list , to start receiving Patients ( Preferably Excel format) 
            </div>
           <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
@@ -114,7 +113,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
          </div>:
          <div  className="upload_section_wrapper">
               <React.Fragment>
-              <div  style={{width:'95%', margin:'auto'}} className='catalogue_note'><text className='bold'>Note :</text>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </div>
+              <div  style={{width:'95%', margin:'auto'}} className='catalogue_note'><text className='bold'>Note :</text> Download our catalog format and start filling prices, and make your profile Live for extensive</div>
 
               <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
