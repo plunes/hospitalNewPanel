@@ -10,14 +10,14 @@ const DeleteSpeciality = (props) => {
 
     return (
         <div className ='modal-wrapper-small_rish'>
-             <div style={{fontWeight:'600'}} className="modal-heading_ris">Delete Speciality</div>
-                 <div className="upload_section_wrapper">
+             <div style={{fontWeight:'600'}} className="modal-heading_ris margin_top_small_rish">  { `Are you sure you want remove ${[...props.specialities].filter(item=>!!(item.value === props.selected_speciality))[0].name} from catalogue?`}</div>
+                 <div style={{height:'5rem'}}>
                     <span className="modal_content_description center_align_rish margin_top_small_rish">
-                        { `Are you sure you want remove ${[...props.specialities].filter(item=>!!(item.value === props.selected_speciality))[0].name} from catalogue?`}
+                        {/* { `Are you sure you want remove ${[...props.specialities].filter(item=>!!(item.value === props.selected_speciality))[0].name} from catalogue?`} */}
                      </span>
                      <div className="flex_parent  margin_top_small_rish">
                             <span className="flex_parent_child text-center">
-                                <Button id="make_transaction_button" onClick={()=>props.remove_speciality(props.selected_speciality)}  >Delete </Button>
+                                <Button id="make_transaction_button" onClick={()=>props.remove_speciality(props.selected_speciality)}  >Remove </Button>
                             </span>
                             <span className="flex_parent_child text-center">
                                 <Button id="cancel_button"  onClick={()=>props.toggle_delete_speciality()} >Cancel</Button>

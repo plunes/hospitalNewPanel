@@ -1307,11 +1307,10 @@ class MyCatalogueComponent extends Component {
                            </div>
                         </div>
                    <div className='catalogue_wrapper_rish'>
-
-                       
                         <div className='catalogue_section_1'>
-                           <div className="catalogue_section_1_bottom new_card_class">
-                           <div style={{fontWeight:'600'}} className="modal-heading_ris">Update Variance</div>
+                           <div className="catalogue_section_1_bottom ">
+                            <div className="new_card_class">
+                              <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1 margin_bottom_small_rish">Update Variance</div>
                                <div className='catalogue_flex_parent'>
                                     <div className='catalogue_flex_child_4'>
                                          <div className='text-center margin_bottom_small_rish'><text className='catalogue_heading'>Variance</text></div>
@@ -1323,8 +1322,6 @@ class MyCatalogueComponent extends Component {
                                             speciality_click = {()=>this.speciality_click()}
                                         />    
                                     </div>
-
-                                  
                                     <div className='catalogue_slider_wrapper'>
                                     <Slider
                                             min={0}
@@ -1378,17 +1375,9 @@ class MyCatalogueComponent extends Component {
                                          <Barchart />
                                            </div>
                                         </div>
-                                       </div>
-                                       {/* <div className="text-center">
-                                            <Button onClick = {()=>this.open_catalogue_modal()} type="button" >
-                                                Update Catalogue
-                                            </Button>
-                                           <div>
-                                           <text className='catalogue_note'><text className='bold'>Note :</text>Upload your service catalog and get direct leads matching your catalog. It increases the footfall of clients, List your every possible service.</text>
-                                    </div> 
-                               </div>*/}
-
-                               <UploadCatalogue
+                                       </div>  
+                            </div>
+                             <UploadCatalogue
                                     uploadProceduresClr ={this.props.uploadProceduresClr}
                                     uploadProceduresRet ={this.props.uploadProceduresRet}
                                     uploadProcedures = {this.props.uploadProcedures}
@@ -1408,8 +1397,8 @@ class MyCatalogueComponent extends Component {
 
 
 
-
-                    <div style={{fontWeight:'600'}} className="modal-heading_ris margin_top_medium_rish">Update Prices</div>
+                 <div className="new_card_class margin_top_medium_rish">
+                    <div style={{fontWeight:'600'}} className="modal-heading_ris  realtimewidth businessrow1col1">Catalogue Manager</div>
                                <div className="tabs-header margin_top_small_rish">
                                     <div className={`appointment_header_wrapper new_card_class`}>
                                             <span onClick={(e)=>this.handle_your_catalogue_click()}  className={`appointment_header_child-1 ${!this.state.addProcedureFlag?'active_appointment_header':''}`}>
@@ -1632,6 +1621,7 @@ class MyCatalogueComponent extends Component {
                            </div>
                         </div>
                    </div>
+                   </div>
                 </div>
             <ModalComponent  
                 open = {this.state.uploadCatalogFlag}
@@ -1649,6 +1639,7 @@ class MyCatalogueComponent extends Component {
                 open = {this.state.delete_speciality_flag}
                 handleClose = {this.toggle_delete_speciality}
                 modalBody = {this.generate_delete_speciality}
+                no_cross= {true}
                 />  
             </React.Fragment>
         )

@@ -69,18 +69,18 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
 })
 
     return (
-        <div className ='modal-wrapper-medium_rish margin_top_medium_rish'>
-             <div style={{fontWeight:'600'}} className="modal-heading_ris">Catalogue Manager</div>
+        <div style={{paddingBottom:'2rem'}} className ='modal-wrapper-medium_rish margin_top_medium_rish new_card_class'>
+             <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1">Upload Catalogue</div>
               <div className="tabs-header margin_top_small_rish">
                           <div style={{marginBottom:'1rem'}} className={`appointment_header_wrapper new_card_class`}>
                                   <span onClick={(e)=>set_upload(true)}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>
-                                      <text className={`appointment_header_text ${upload?'green-text-rish':''}`}>Upload Services</text>
+                                      <text className={`appointment_header_text ${upload?'green-text-rish':''}`}>Upload Catalogue</text>
                                       <div>
                                      
                                       </div>
                                   </span>                 
                                   <span onClick={(e)=>set_upload(false)}    className={`appointment_header_child-1 ${!upload?'active_appointment_header':''}`}>
-                                  <text className={`appointment_header_text ${!upload?'green-text-rish':''}`}>Download Samples</text>
+                                  <text className={`appointment_header_text ${!upload?'green-text-rish':''}`}>Download Sample</text>
                                   </span>
                           </div>
               </div>
@@ -90,7 +90,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
                <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
               </div> :
         <React.Fragment>
-          <div style={{width:'80%'}} className='catalogue_note'>
+          <div style={{width:'95%',margin:'auto'}} className='catalogue_note'>
             <text className='bold'>Note :</text>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
            </div>
           <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
@@ -114,7 +114,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
          </div>:
          <div  className="upload_section_wrapper">
               <React.Fragment>
-              <div  style={{width:'80%'}} className='catalogue_note'><text className='bold'>Note :</text>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </div>
+              <div  style={{width:'95%', margin:'auto'}} className='catalogue_note'><text className='bold'>Note :</text>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </div>
 
               <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
