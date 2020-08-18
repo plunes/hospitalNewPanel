@@ -57,7 +57,8 @@ import Button from "../functional/Button"
 import  DeleteSpeciality from '../functional/DeleteSpeciality'
 
 import { get_procedures, clr_procedures , update_modified_procedures, get_user_specialities,
-    get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading, remove_speciality, remove_speciality_loading } from "../../actions/catalogue_actions"
+    get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading, 
+    remove_speciality, remove_speciality_loading , remove_service, remove_service_loading } from "../../actions/catalogue_actions"
 
 
  const isEmpty = function(obj) {
@@ -320,6 +321,25 @@ class MyCatalogueComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps){
+
+        if(nextProps.remove_service_ret){
+            if(!!nextProps.remove_service_ret.success){
+                    this.setState({
+                        ret:{
+                            success:true,
+                            message:nextProps.remove_service_ret.message
+                        }
+                    })
+            }else{
+                this.setState({
+                    ret:{
+                        success:false,
+                        message:nextProps.remove_service_ret.message
+                    }
+                })
+            }
+            nextProps.remove_service_loading()
+        }
 
         if(nextProps.remove_speciality_ret){
             if(nextProps.remove_speciality_ret.success){
@@ -1524,6 +1544,8 @@ class MyCatalogueComponent extends Component {
                                         refresh = {this.state.refresh}
                                         procedure_for_update = {this.state.procedure_for_update}
                                         update_procedure = {this.update_procedure}
+                                        remove_service = {this.props.remove_service}
+                                        remove_service_loading_flag = {this.props.remove_service_loading_flag}
                                         update_procedure_loading = {this.get_update_procedure_loading(c)}
                                         />
                                         )) : 
@@ -1684,7 +1706,9 @@ const mapStateToProps = state => ({
     prof_data:state.user.data.prof_data,
     centers_list:state.user.data.centers_data.centers_list,
     center_data:state.user.data.centers_data.center_data,
-    get_center_profile_ret:state.user.get_center_profile_ret
+    get_center_profile_ret:state.user.get_center_profile_ret,
+    remove_service_ret:state.catalogue_store.remove_service_ret,
+    remove_service_loading_flag:state.catalogue_store.remove_service_loading
 })
 
 
@@ -1738,7 +1762,9 @@ get_center_profile_clr,
 set_variance_loading,
 set_center_data,
 remove_speciality,
-remove_speciality_loading
+remove_speciality_loading,
+remove_service,
+remove_service_loading
 })(MyCatalogueComponent));
 
 

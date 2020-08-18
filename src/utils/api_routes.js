@@ -34,6 +34,14 @@ export default {
         .catch(err => err.response),
    },
     catalogue_routes:{
+      remove_service: (data, center_id, headers) =>
+      axios
+          .delete(`${base_url}/user/deleteService/${data.serviceId}${!!center_id?'?userId='+center_id:''}`, headers)
+          .then(res => {
+                console.log(res,'res in update_procedure')
+                return res
+          })
+          .catch(err => err.response),
       remove_speciality: (data, center_id, headers) =>
       axios
           .delete(`${base_url}/user/deleteSpeciality/${data.speciality_id}${!!center_id?'?userId='+center_id:''}`, headers)

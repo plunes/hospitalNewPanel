@@ -5,6 +5,7 @@ import VarianceDropdown from "./varianceDropdown"
 import { is_positive_whole_number } from "../../utils/common_utilities"
 import LoaderComponent from "./LoaderComponent"
 import AnimatedMount from "../../HOC/AnimatedMount"
+import DeletePopup from "./DeletePopup"
 const should_render = (prevProps, nextProps) => {
   // console.log(prevProps, nextProps,"preveProps, nextProps in should_render")
   if(prevProps.ret !== nextProps.ret){
@@ -89,8 +90,20 @@ const should_render = (prevProps, nextProps) => {
                                                                                                               value = {props.isSelected?props.getVariance:props.data.variance}
                                                                                                          />:`${!!props.data.variance?props.data.variance+'%':props.data.variance===0?0+'%':'N/A'}`}</text></span>
                                     <span className='head_tabs_actions display_block_rish text-center'>
-                                      {((props.update_procedure_loading) && (props.procedure_for_update.serviceId === props.data.serviceId)) ? <LoaderComponent second_variant = {true} />:props.isSelected?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
-                                                <span><text style={{color:'#7DD55E', marginLeft:'1rem'}}  onClick = {()=>props.update_procedure(props.data)}  className='catalogue_test_name link_text_rish'>Submit</text></span></React.Fragment>:
+                                      {((props.update_procedure_loading || props.remove_service_loading_flag) && (props.procedure_for_update.serviceId === props.data.serviceId)) ? <LoaderComponent second_variant = {true} />:props.isSelected?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
+                                                <span><text style={{color:'#7DD55E', marginLeft:'1rem'}}  onClick = {()=>props.update_procedure(props.data)}  className='catalogue_test_name link_text_rish'>Submit</text></span>
+                                                
+                                                <DeletePopup 
+                                                    yesClick = {(e)=>props.remove_service({
+                                                      serviceId:data.serviceId
+                                                    })}
+                                                    title="Are you sure you want to remove this procedure?"
+                                                    id={props.id}
+                                                    >
+                                                <span><text style={{color:'#c0392b;', marginLeft:'1rem'}}    id={props.id} className='catalogue_test_name red_text link_text_rish'>Remove</text>
+                                                </span>
+                                                </DeletePopup>
+                                                </React.Fragment>:
                                                  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Edit</text></span>}
                                     </span>
                                 </div>

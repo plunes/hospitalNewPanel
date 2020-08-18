@@ -10,9 +10,31 @@ import {
 
   GET_USER_SPECIALITIES, GET_USER_SPECIALITIES_RET, GET_USER_SPECIALITIES_LOADING,
 
-  REMOVE_SPECIALITY, REMOVE_SPECIALITY_RET, REMOVE_SPECIALITY_LOADING
+  REMOVE_SPECIALITY, REMOVE_SPECIALITY_RET, REMOVE_SPECIALITY_LOADING,
+  REMOVE_SERVICE, REMOVE_SERVICE_RET, REMOVE_SERVICE_LOADING
 
 } from "./types"
+
+export const remove_service = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_SERVICE,
+    payload:data
+  })
+}
+
+export const remove_service_ret = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_SERVICE_RET,
+    payload:data
+  })
+}
+
+export const remove_service_loading = (data) => dispatch =>{
+  return  dispatch({
+    type: REMOVE_SERVICE_LOADING,
+    payload:data
+  })
+}
 
 
 export const remove_speciality = (data) => dispatch =>{

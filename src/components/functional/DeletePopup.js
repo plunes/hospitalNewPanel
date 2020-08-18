@@ -28,13 +28,17 @@ const DeletePopup = (props) => {
         <Popover.Title as="h3">{`${props.title}`}</Popover.Title>
         <Popover.Content>
            <div className="flex_parent">
-               <div className="flex_parent_child text-center ">
-                    <Button onClick={onClick} >
+               <div className="flex_parent_child text-center  ">
+                    <Button
+                    className="thin_button_text"
+                    onClick={onClick} >
                        Yes
                     </Button>{' '}
                </div>
                <div className="flex_parent_child text-center">
-                        <Button onClick={noClick} >
+                        <Button
+                        className="thin_button_text"
+                        onClick={noClick} >
                            No
                         </Button>{' '}
                </div>

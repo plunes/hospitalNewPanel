@@ -1,8 +1,10 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { GET_USER_SPECIALITIES, UPDATE_PROCEDURE , ADD_PROCEDURE, SEARCH_PROCEDURE, GET_PROCEDURES, TO_ADD_SERVICES, SET_VARIANCE, REMOVE_SPECIALITY} from '../actions/types'
+import { GET_USER_SPECIALITIES, UPDATE_PROCEDURE , REMOVE_SERVICE, ADD_PROCEDURE, SEARCH_PROCEDURE, GET_PROCEDURES, TO_ADD_SERVICES, SET_VARIANCE, REMOVE_SPECIALITY} from '../actions/types'
 import { update_procedure_ret, update_procedure_loading, add_procedure_ret, add_procedure_loading, search_procedures_ret, search_procedures_loading } from '../actions/userActions'
 import api from '../utils/api_routes'
-import  {  ret_procedures, update_params, get_procedures_error, update_modified_procedures, to_add_services_ret, to_add_services_clr, set_variance_ret , get_user_specialities_ret, get_user_specialities_loading, remove_speciality_ret, remove_speciality_loading}  from '../actions/catalogue_actions'
+import  {  ret_procedures, update_params, remove_service, remove_service_ret, remove_service_loading,
+   get_procedures_error, update_modified_procedures, to_add_services_ret, to_add_services_clr, set_variance_ret ,
+    get_user_specialities_ret, get_user_specialities_loading, remove_speciality_ret, remove_speciality_loading}  from '../actions/catalogue_actions'
 import { get_url_params, paginate_data } from "../utils/common_utilities"
 import store from '../store'
 
@@ -405,6 +407,54 @@ function* set_variance_saga(action) {
 }
 
 
+function* remove_service_saga(action) {
+  try {
+   let center_id = get_url_params('center')
+     const  data = yield store.getState().catalogue_store.remove_service
+     console.log(data,"data in remove_service")
+     const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+     const api_data = yield call(api.catalogue_routes.remove_service, data, center_id, headers)
+     if(!!api_data){
+       if (api_data.status === 200) {
+           if(!!api_data.data){
+             yield put(remove_service_ret({
+               success:true,
+               message:'Catalogue updated successfully'
+              }))
+           }else {
+             yield put(remove_service_ret({
+               success:false,
+               message:'Something went wrong try again later..',
+               data:[]
+              }))
+           }
+          
+         }else{
+           yield put(remove_service_ret({
+               success:false,
+               message:'Something went wrong try again later..',
+               data:[]
+              }))
+         }
+     }
+  } catch (e) {
+    console.log(e,'e in search_procedure saga')
+   try{
+       yield put(remove_service_ret({
+           success:false,
+           message:'Something went wrong try again later..',
+           data:[]
+          }))
+     }catch(x){
+       yield put(remove_service_ret({
+           success:false,
+           message:'Something went wrong try again later..',
+           data:[]
+          }))
+       }
+  }
+ }
+
 
 
 
@@ -416,7 +466,8 @@ const catalogue_saga  = [
    takeLatest(GET_PROCEDURES, get_procedures_saga),
    takeLatest(TO_ADD_SERVICES, to_add_services_saga),
    takeLatest(SET_VARIANCE, set_variance_saga),
-   takeLatest(REMOVE_SPECIALITY, remove_speciality_saga)
+   takeLatest(REMOVE_SPECIALITY, remove_speciality_saga),
+   takeLatest(REMOVE_SERVICE, remove_service_saga)
 ]
 
 export default catalogue_saga
