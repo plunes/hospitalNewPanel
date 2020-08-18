@@ -11,7 +11,7 @@ const data = {
     labels: ['10-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71-80', '81-90', '91-100'],
     datasets: [
       {
-        label: 'Number of Leads',
+        label: 'Number of Leads( Per day)',
         backgroundColor: 'rgb(73, 157, 204)',
         borderColor: 'rgb(73, 157, 204)',
         borderWidth: 1,
@@ -39,7 +39,7 @@ const Barchart = (props) => {
                         yAxes: [{
                           scaleLabel: {
                             display: true,
-                            labelString: 'No. of Bids'
+                            labelString: 'No. of Bids( Per day)'
                           }
                         }],
                         xAxes: [{

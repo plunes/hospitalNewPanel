@@ -1162,7 +1162,7 @@ html {
   overflow:hidden;
   transition:max-height 0.3s ease-out;
   height:auto;
-  max-height:600px; 
+  /* max-height:600px;  */
 }
 
 .cancel_submit_wrapper {

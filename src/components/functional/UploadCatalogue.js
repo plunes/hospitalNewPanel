@@ -70,14 +70,18 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
 
     return (
         <div style={{paddingBottom:'2rem'}} className ='modal-wrapper-medium_rish margin_top_medium_rish new_card_class'>
-             <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1">Upload Catalogue</div>
+             <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1">Catalogue Manager</div>
               <div className="tabs-header margin_top_small_rish">
-                          <div style={{marginBottom:'1rem'}} className={`appointment_header_wrapper new_card_class`}>
-
+              <div style={{fontWeight:'600'}} className="modal-heading_ris">Upload Catalogue</div>
+                          <div style={{marginBottom:'1rem'}} className={`appointment_header_wrapper new_card_class margin_top_small_rish`}>
+                        
                           <span onClick={(e)=>set_upload(false)}    className={`appointment_header_child-1 ${!upload?'active_appointment_header':''}`}>
                                   <text className={`appointment_header_text ${!upload?'green-text-rish':''}`}>Download Sample</text>
                                   </span>
-                                  <span onClick={(e)=>set_upload(true)}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>
+                                  <span onClick={(e)=>{
+                                    set_upload(true)
+                                    setSuccess(false)
+                                  }}   className={`appointment_header_child-1 ${upload?'active_appointment_header':''}`}>
                                       <text className={`appointment_header_text ${upload?'green-text-rish':''}`}>Upload Catalogue</text>
                                   </span>                 
                                 
@@ -85,8 +89,8 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
               </div>
 
          {upload?<div className="upload_section_wrapper">
-          {success ?  <div  style={{width:'95%',margin:'auto'}} className="text-center margin-top-medium_ris">
-               <text style={{fontSize:'1.5rem'}}>We have received your catalog, We would be uploading it after verification in the next 24-48 hours</text>
+          {success ?  <div  style={{width:'95%',margin:'5rem auto'}} className="text-center margin-top-medium_ris">
+               <text style={{fontSize:'1.5rem', marginTop:'2rem'}}>We have received your Catalogue, We would be uploading it after verification in the next 24-48 hours</text>
               </div> :
         <React.Fragment>
           <div style={{width:'95%',margin:'auto'}} className='catalogue_note'>
@@ -113,7 +117,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
          </div>:
          <div  className="upload_section_wrapper">
               <React.Fragment>
-              <div  style={{width:'95%', margin:'auto'}} className='catalogue_note'><text className='bold'>Note :</text> Download our catalog format and start filling prices, and make your profile Live for extensive</div>
+              <div  style={{width:'95%', margin:'auto'}} className='catalogue_note'><text className='bold'>Note :</text> Download the Catalogue format and fill prices, to start receiving direct leads</div>
 
               <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select

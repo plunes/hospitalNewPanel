@@ -60,13 +60,13 @@ export const for_loop = (data, callback) => {
 
 
 export const paginate_data = (data, options) => {
-  console.log(data,"data in paginate_data")
+  console.log(options.limit,"data in paginate_data")
   console.log(data.length,'data.length')
      if(data.length === 0){
        return {
          data:[],
          parameters:{
-           limit:options.limit,
+           limit:options.limit<20?20:options.limit,
            total:0,
            next:false,
            total_pages:0,
@@ -83,7 +83,7 @@ export const paginate_data = (data, options) => {
         if(item.serviceId === serviceId){
               arr.push(item)
               new_arr.push(arr)
-        } else if(i<parseInt(options.limit, 10)){
+        } else if(i<parseInt(options.limit<20?20:options.limit, 10)){
                 arr.push(item)
                 i++
             }else{
@@ -93,11 +93,11 @@ export const paginate_data = (data, options) => {
               i=1
             }
      })
-     let total_pages = Math.ceil(parseInt(data.length,10)/options.limit)
+     let total_pages = Math.ceil(parseInt(data.length,10)/(options.limit<20?20:options.limit))
      return {
        data:new_arr,
        parameters : {
-        limit:options.limit,
+        limit:options.limit<20?20:options.limit,
         total:data.length,
         next:total_pages !== 1,
         total_pages:total_pages,

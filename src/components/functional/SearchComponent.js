@@ -37,7 +37,7 @@ const SearchComponent = (props) =>{
                type="text" 
                ref= {searchRef} 
                onChange={debounce(500, searchCall)} 
-               placeholder="Name the procedure or test here." 
+               placeholder="Search a procedure" 
                name="search" 
                className='catalogueSearchbar no-border'
                

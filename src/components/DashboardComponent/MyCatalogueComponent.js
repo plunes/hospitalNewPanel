@@ -109,7 +109,7 @@ class MyCatalogueComponent extends Component {
             all_selected_avail:false,
             delete_speciality_flag:false,
             get_procedures_params:{
-                limit:0,
+                limit:20,
                 total:0,
                 next:false,
                 total_pages:0,
@@ -117,7 +117,7 @@ class MyCatalogueComponent extends Component {
                 search:''
             },
             get_add_procedures_params:{
-                limit:0,
+                limit:20,
                 total:0,
                 next:false,
                 total_pages:0,
@@ -339,7 +339,7 @@ class MyCatalogueComponent extends Component {
                     }
                     new_arr.push(obj)
                  let total_procedures = [...nextProps.procedures_data.total_procedures].filter(item=>!!(item.specialityId !== obj.id))
-                let paginated_data = paginate_data([...total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                let paginated_data = paginate_data([...total_procedures],{ limit:20, total:0,  next:false,  total_pages:0,  page:1, search:''})
                   
                     this.setState({
                         delete_speciality_flag:false,
@@ -366,11 +366,11 @@ class MyCatalogueComponent extends Component {
                             nextProps.search_procedures({
                                 searchQuery:'',
                                 page:1,
-                                limit:10,
+                                limit:20,
                                 specialityId:this.state.selected_speciality
                             })
                         }else{
-                            nextProps.get_procedures({ limit:10,
+                            nextProps.get_procedures({ limit:20,
                                 total:'',
                                 page:1,
                                 total_pages:1,
@@ -518,7 +518,7 @@ class MyCatalogueComponent extends Component {
 
                       console.log(selected_procedures,"this.state procedure for Update")
    
-                        let paginated_data = paginate_data([selected_procedures[0],...nextProps.procedures_data.total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                        let paginated_data = paginate_data([selected_procedures[0],...nextProps.procedures_data.total_procedures],{ limit:20, total:0,  next:false,  total_pages:0,  page:1, search:''})
                            updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
                         nextProps.update_modified_procedures({
                                 total_procedures:[selected_procedures[0],...nextProps.procedures_data.total_procedures],
@@ -528,7 +528,7 @@ class MyCatalogueComponent extends Component {
                                 }
                             })
 
-                        nextProps.get_procedures({ limit:10,
+                        nextProps.get_procedures({ limit:20,
                             total:'',
                             page:1,
                             total_pages:1,
@@ -580,7 +580,7 @@ class MyCatalogueComponent extends Component {
                           selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
                       })
 
-                      let paginated_data = paginate_data([...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],{ limit:10, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                      let paginated_data = paginate_data([...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],{ limit:20, total:0,  next:false,  total_pages:0,  page:1, search:''})
                       updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
                      nextProps.update_modified_procedures({
                            total_procedures:[...this.state.selected_procedures,...nextProps.procedures_data.total_procedures],
@@ -590,7 +590,7 @@ class MyCatalogueComponent extends Component {
                            }
                        })
 
-                   nextProps.get_procedures({ limit:10,
+                   nextProps.get_procedures({ limit:20,
                        total:'',
                        page:1,
                        total_pages:1,
@@ -599,7 +599,7 @@ class MyCatalogueComponent extends Component {
                    })
 
                   nextProps.to_add_services({
-                    limit:10,
+                    limit:20,
                     page:1,
                     specialityId:this.state.selected_speciality,
                     searchQuery:''
@@ -794,7 +794,7 @@ class MyCatalogueComponent extends Component {
                     }else{
 
                         if(nextProps.search_procedures_ret.data.length !==0){
-                            nextProps.get_procedures({ limit:10,
+                            nextProps.get_procedures({ limit:20,
                                 total:'',
                                 page:1,
                                 total_pages:1,
@@ -1105,7 +1105,7 @@ class MyCatalogueComponent extends Component {
                  this.props.search_procedures({
                     searchQuery:'',
                     page:1,
-                    limit:10,
+                    limit:20,
                     specialityId:this.state.selected_speciality
                 })
             })
@@ -1136,7 +1136,7 @@ class MyCatalogueComponent extends Component {
         all_selected_catalogue:false
     },()=>{
         this.props.to_add_services({
-            limit:10,
+            limit:20,
             page:1,
             specialityId:this.state.selected_speciality,
             searchQuery:''
@@ -1325,8 +1325,8 @@ class MyCatalogueComponent extends Component {
                                     <div className='catalogue_slider_wrapper'>
                                     <Slider
                                             min={0}
-                                            max={100}
-                                            labels={get_slider_labels({lower:0, upper:100})}
+                                            max={80}
+                                            labels={get_slider_labels({lower:0, upper:80})}
                                             value={this.get_variance_value()}
                                             onValueChange={(val)=>console.log(val)}
                                             onChange={val => this.change_variance(val)} 
@@ -1348,16 +1348,16 @@ class MyCatalogueComponent extends Component {
                                     <div className="text variance_info_parent text-center">
                                        {this.state.edit_variance_flag ?<React.Fragment>
                                         <span className='variance_info_child'>
-                                             <text><text className='bold'>Variance: </text>{this.state.variance}</text>
+                                             <text><text className='bold'>Variance: </text>{this.state.variance}%</text>
                                         </span>
                                         <span className='variance_info_child'>
                                            <text><text className='bold'>Expected number of Bids: </text>{this.get_leads_count()}</text>
                                         </span>
                                        </React.Fragment>:<React.Fragment>
                                            {this.state.global_flag ?   <span className='variance_info_child'>
-                                                <text><text className='bold'>Global Variance: </text>{this.state.global_variance}</text>
+                                                <text><text className='bold'>Global Variance: </text>{this.state.global_variance}%</text>
                                         </span>  :  <span className='variance_info_child'>
-                                                <text><text className='bold'>Speciality Variance: </text>{this.get_variance_value()}</text>
+                                                <text><text className='bold'>Speciality Variance: </text>{this.get_variance_value()}%</text>
                                         </span>}
                                       
                                            </React.Fragment>}
@@ -1395,10 +1395,11 @@ class MyCatalogueComponent extends Component {
                                     specialities = {this.state.specialities}
                                  />        
 
+                    {/* <div className="new_card_class margin_top_medium_rish">
+                    <div style={{fontWeight:'600'}} className="modal-heading_ris  realtimewidth businessrow1col1">Catalogue Manager</div> */}
 
-
-                 <div className="new_card_class margin_top_medium_rish">
-                    <div style={{fontWeight:'600'}} className="modal-heading_ris  realtimewidth businessrow1col1">Catalogue Manager</div>
+                 <div className="new_card_class">
+                    <div style={{fontWeight:'600'}} className="modal-heading_ris relative_heading">Edit Catalogue</div>
                                <div className="tabs-header margin_top_small_rish">
                                     <div className={`appointment_header_wrapper new_card_class`}>
                                             <span onClick={(e)=>this.handle_your_catalogue_click()}  className={`appointment_header_child-1 ${!this.state.addProcedureFlag?'active_appointment_header':''}`}>
@@ -1554,7 +1555,7 @@ class MyCatalogueComponent extends Component {
                                            />:'':'':'' }
                                        <div style={{position:'relative'}} className="margin_top_small_rish text-center">
                                                      {this.props.remove_speciality_loading_flag && <LoaderComponent />}
-                                               {this.state.specialities.length >0 && <text onClick  = {()=>this.toggle_delete_speciality()}  className="remove_speciality_text">Remove Speciallity from catlalogue</text> } 
+                                               {this.state.specialities.length >1 && <text onClick  = {()=>this.toggle_delete_speciality()}  className="remove_speciality_text">Remove Speciallity from catlalogue</text> } 
                                                {/* onClick={()=>this.props.remove_speciality({speciality_id:this.state.selected_speciality})}  */}
                                         </div>
                                     </div>}

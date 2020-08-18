@@ -674,3 +674,8 @@ u {
     flex: 1 1 45%;
 }
 
+.relative_heading {
+    position: relative;
+    top: 1rem;
+}
+
