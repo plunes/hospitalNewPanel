@@ -1555,14 +1555,15 @@ class MyCatalogueComponent extends Component {
                                            />:'':'':'' }
                                        <div style={{position:'relative'}} className="margin_top_small_rish text-center">
                                                      {this.props.remove_speciality_loading_flag && <LoaderComponent />}
-                                               {this.state.specialities.length >1 && <text onClick  = {()=>this.toggle_delete_speciality()}  className="remove_speciality_text">Remove Speciallity from catlalogue</text> } 
+                                                     {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
+                                                     <Button  onClick = {()=>this.update_procedure()} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
+                                      </div>
+                                      }
+                                               {this.state.specialities.length >1 && <text onClick  = {()=>this.toggle_delete_speciality()}  className="remove_speciality_text">Remove Speciality from catalogue</text> } 
                                                {/* onClick={()=>this.props.remove_speciality({speciality_id:this.state.selected_speciality})}  */}
                                         </div>
                                     </div>}
-                                    {((this.state.selected_procedures.length !==0) && (!this.state.addProcedureFlag)) &&  <div className='text-center'>
-                                        <Button  onClick = {()=>this.update_procedure()} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
-                                      </div>
-                                      }
+                                  
                                   
                             {/* Add to Your Catalogue */}                        
                             {!!this.state.addProcedureFlag  &&    <div style={{position:'relative'}}>
