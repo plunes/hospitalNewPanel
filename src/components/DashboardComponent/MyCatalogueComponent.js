@@ -1310,10 +1310,10 @@ class MyCatalogueComponent extends Component {
                         <div className='catalogue_section_1'>
                            <div className="catalogue_section_1_bottom ">
                             <div className="new_card_class">
-                              <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1 margin_bottom_small_rish">Update Variance</div>
+                              <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1 margin_bottom_small_rish">Variance</div>
                                <div className='catalogue_flex_parent'>
                                     <div className='catalogue_flex_child_4'>
-                                         <div className='text-center margin_bottom_small_rish'><text className='catalogue_heading'>Variance</text></div>
+                                         <div className='text-center margin_bottom_small_rish'><text className='catalogue_heading'>Update Variance</text></div>
                                          <div className='margin_bottom_small_rish radio_button_wrapper'>
                                         <CheckboxPill 
                                             name_1 = "Whole Catalogue"

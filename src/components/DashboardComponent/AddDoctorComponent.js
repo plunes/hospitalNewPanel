@@ -110,7 +110,8 @@ class AddDoctorComponent extends Component {
             selectedDay:{},
             getUserLoading:false,
             editConsultFlag:false,
-            error:false
+            error:false,
+            delete_doctor_flag:false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -302,6 +303,10 @@ class AddDoctorComponent extends Component {
               />
           </React.Fragment> 
       )
+  }
+
+  generate_delete_doctor = () => {
+    
   }
   
   getDay = (i) =>{
@@ -800,6 +805,12 @@ class AddDoctorComponent extends Component {
                 open = {this.state.open}
                 handleClose = {this.onCloseModal}
                 modalBody = {this.generateTimeSlot}
+                />  
+
+          <ModalComponent 
+                open = {this.state.delete_doctor_flag}
+                handleClose = {this.toggle_delete_doctor}
+                modalBody = {this.generate_delete_doctor}
                 />  
         </div>
                 </div>
