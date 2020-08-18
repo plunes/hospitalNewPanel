@@ -5,6 +5,7 @@ import React, { useRef, useState, useEffect } from "react"
 import { is_positive_whole_number, get_url_params } from "../../utils/common_utilities"
 import AnimatedMount from "../../HOC/AnimatedMount"
 import Button from "./Button"
+import DeletePopup from "./DeletePopup"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -264,7 +265,6 @@ import Button from "./Button"
                     className="no_brdr_input consultaion_input"
                     type="number"
                     />:props.consultationFee}
-                      
                     </h2>
                     </div>
               </div>
@@ -274,7 +274,14 @@ import Button from "./Button"
             {/* <button onClick={()=>submitdetails()} className="common-button">Submit</button> */}
             </div>
             {!!get_url_params('id') &&  <div className='text-center'>
-               <Button className='margin_top_medium_rish' type='button' icon = "delete" onClick={(e)=>props.delete_profile({doctor_id:get_url_params('id')})}>Delete Profile</Button>
+              <DeletePopup 
+              yesClick = {(e)=>props.delete_profile({doctor_id:get_url_params('id')})}
+              title="Are you sure you want to remove this profile?"
+              id="delete_button"
+              >
+              <Button className='margin_top_medium_rish' type='button' id="delete_button" icon = "delete" >Delete Profile</Button>
+              </DeletePopup>
+              
              </div>} 
          </div>}
    </div>
