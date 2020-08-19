@@ -146,7 +146,7 @@ const speciality_name = [...props.specialities].filter(item=>{
                </div>
              
               <div className="text-center margin-top-medium_ris">
-              <Button onClick={()=>props.downloadCatalogue(speciality.value==="All specialities"?false:speciality.value)} icon="download" type="button">
+              <Button onClick={()=>props.downloadCatalogue(speciality.value==="All specialities"?false:{name:speciality_name[0].name, value:speciality.value})} icon="download" type="button">
                {speciality.name==="All specialities"?"Download Sample":`Download ${speciality_name[0].name} Sample`}
               </Button>
           </div>

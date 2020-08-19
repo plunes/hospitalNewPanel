@@ -2423,7 +2423,7 @@ export const downloadCatalogue = (data) => async dispatch => {
       payload : "no-data-required"
     })
 
-  return await axios.get(baseUrl + `/user/downloadCatalogue${!!data?'?id='+data:''}`, 
+  return await axios.get(baseUrl + `/user/downloadCatalogue${!!data?'?id='+data.value:''}`, 
    { 'headers': {
       'Authorization': token,
       type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -2438,7 +2438,7 @@ export const downloadCatalogue = (data) => async dispatch => {
         let fileURL = URL.createObjectURL(file)
         var element = document.createElement('a');
         element.setAttribute('href', fileURL);
-        element.setAttribute('download','file.xlsx');
+        element.setAttribute('download',`${data.name}.xlsx`);
         document.body.appendChild(element)
         element.click();
           dispatch({
