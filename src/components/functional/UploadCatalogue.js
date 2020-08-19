@@ -28,6 +28,8 @@ const UploadCatalogue = (props) => {
       props.uploadProceduresClr()
   }
 
+
+
   if(!!props.downloadCatalogueRet){
     if(!!props.downloadCatalogueRet.success){
       addToast(props.downloadCatalogueRet.message, {appearance: 'success', autoDismiss:true}) 
@@ -36,7 +38,19 @@ const UploadCatalogue = (props) => {
     }
     props.downloadCatalogueClr()
 }
- }, [props.uploadProceduresRet,  props.downloadCatalogueRet])
+
+if(props.specialities.length !==0){
+  set_speciality({
+    name:'speciality_name',
+    value:props.specialities[0].value
+  })
+}
+ }, [props.uploadProceduresRet,  props.downloadCatalogueRet, props.specialities])
+
+ useEffect(()=>{
+   console.log(props.specialities.length,"props.specialities.length")
+  
+},[])
 
   const handleButtonClick = ()=>{
     let element = document.getElementById('uploatCatalogue')
@@ -64,10 +78,10 @@ const handleUpload = (e) => {
 }
 }
 
-const speciality_name = [{name:'All specialities',value:'All specialities'},...props.specialities].filter(item=>{
+const speciality_name = [...props.specialities].filter(item=>{
      return !!(item.value === speciality.value)
 })
-
+  console.log(speciality,"speciality in UpdateCatalogue")
     return (
         <div style={{paddingBottom:'2rem'}} className ='modal-wrapper-medium_rish margin_top_medium_rish new_card_class'>
              <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1">Catalogue Manager</div>
@@ -98,7 +112,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
            </div>
           <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
-                  options = {[{name:'All specialities',value:'All specialities'},...props.specialities]}
+                  options = {[...props.specialities]}
                   handleChange = {(e)=>set_speciality({name:e.target.name ,value:e.target.value})}
                   placeholder= "Speciality"
                   input_text_class = "catalogue_dropdown"
@@ -121,7 +135,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
 
               <div style={{width:'50%',margin:'auto'}} className="text-center margin-top-medium_ris">
               <Select
-                    options = {[{name:'All specialities',value:'All specialities'},...props.specialities]}
+                    options = {[...props.specialities]}
                   handleChange = {(e)=>set_speciality({name:e.target.name ,value:e.target.value})}
                   placeholder= "Speciality"
                   input_text_class = "catalogue_dropdown"
