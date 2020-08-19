@@ -133,7 +133,7 @@ const speciality_name = [{name:'All specialities',value:'All specialities'},...p
              
               <div className="text-center margin-top-medium_ris">
               <Button onClick={()=>props.downloadCatalogue(speciality.value==="All specialities"?false:speciality.value)} icon="download" type="button">
-               {speciality.name==="All specialities"?"Dowload Sample":`Download ${speciality_name[0].name} Sample`}
+               {speciality.name==="All specialities"?"Download Sample":`Download ${speciality_name[0].name} Sample`}
               </Button>
           </div>
           </React.Fragment>
