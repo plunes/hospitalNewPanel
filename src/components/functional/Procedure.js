@@ -93,7 +93,7 @@ const should_render = (prevProps, nextProps) => {
                                       {((props.update_procedure_loading || props.remove_service_loading_flag) && (props.procedure_for_update.serviceId === props.data.serviceId)) ? <LoaderComponent second_variant = {true} />:props.isSelected?<React.Fragment>  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Cancel</text></span>
                                                 <span><text style={{color:'#7DD55E', marginLeft:'1rem'}}  onClick = {()=>props.update_procedure(props.data)}  className='catalogue_test_name link_text_rish'>Submit</text></span>
                                                 
-                                                <DeletePopup 
+                                               {props.my_catalogue? <DeletePopup 
                                                     yesClick = {(e)=>props.remove_service({
                                                       serviceId:data.serviceId,
                                                       specialityId:data.specialityId
@@ -103,7 +103,7 @@ const should_render = (prevProps, nextProps) => {
                                                     >
                                                 <span><text style={{color:'#c0392b;', marginLeft:'1rem'}}    id={props.id} className='catalogue_test_name red_text link_text_rish'>Remove</text>
                                                 </span>
-                                                </DeletePopup>
+                                                </DeletePopup>:''}
                                                 </React.Fragment>:
                                                  <span><text style={{color:'#7DD55E'}}  onClick = {()=>props.onEdit(props)}  className='catalogue_test_name link_text_rish'>Edit</text></span>}
                                     </span>

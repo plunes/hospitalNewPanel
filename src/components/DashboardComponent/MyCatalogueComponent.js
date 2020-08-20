@@ -1575,6 +1575,7 @@ class MyCatalogueComponent extends Component {
                                         remove_service = {this.remove_service}
                                         remove_service_loading_flag = {this.props.remove_service_loading_flag}
                                         update_procedure_loading = {this.get_update_procedure_loading(c)}
+                                        my_catalogue = {true}
                                         />
                                         )) : 
                                         <div style={{ height:'20rem', position:'relative'}} className="text-center">
