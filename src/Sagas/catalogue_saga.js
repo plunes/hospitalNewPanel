@@ -75,6 +75,7 @@ function* remove_speciality_saga(action) {
  let center_id = get_url_params('center')
    const  data = yield store.getState().catalogue_store.remove_speciality
    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+  //  console.log(data,"data in remove_speciality saga")
    const api_data = yield call(api.catalogue_routes.remove_speciality, data, center_id, headers)
    if(!!api_data){
      if (api_data.status === 200) {

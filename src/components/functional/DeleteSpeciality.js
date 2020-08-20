@@ -6,8 +6,8 @@ import Select from "../Select"
 const DeleteSpeciality = (props) => {
     const { addToast } = useToasts()
     const [ success, setSuccess ] = useState(false)
-
-
+ 
+//  console.log(props.selected_speciality,"props.selected_speciality")
     return (
         <div className ='modal-wrapper-small_rish'>
              <div style={{fontWeight:'600'}} className="modal-heading_ris margin_top_small_rish">  { `Are you sure you want remove ${[...props.specialities].filter(item=>!!(item.value === props.selected_speciality))[0].name} from catalogue?`}</div>

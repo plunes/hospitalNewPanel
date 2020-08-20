@@ -44,7 +44,7 @@ export default {
           .catch(err => err.response),
       remove_speciality: (data, center_id, headers) =>
       axios
-          .delete(`${base_url}/user/deleteSpeciality/${data.speciality_id}${!!center_id?'?userId='+center_id:''}`, headers)
+          .delete(`${base_url}/user/deleteSpeciality/${data}${!!center_id?'?userId='+center_id:''}`, headers)
           .then(res => {
                 console.log(res,'res in update_procedure')
                 return res

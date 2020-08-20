@@ -48,7 +48,7 @@ if(props.specialities.length !==0){
  }, [props.uploadProceduresRet,  props.downloadCatalogueRet, props.specialities])
 
  useEffect(()=>{
-   console.log(props.specialities.length,"props.specialities.length")
+  //  console.log(props.specialities.length,"props.specialities.length")
   
 },[])
 
@@ -65,7 +65,7 @@ const handleUpload = (e) => {
 
   if(!!file){
     if (file.size > 2 * 1024 * 1024) {
-      console.log("File Tooo Big")
+      // console.log("File Tooo Big")
       addToast('File size should be less than 2MB', {appearance: 'error', autoDismiss:true})
     } else {
       props.uploadProcedures({ file: file, field: 'file',id:speciality.value==="All specialities"?false:speciality.value})
@@ -81,7 +81,12 @@ const handleUpload = (e) => {
 const speciality_name = [...props.specialities].filter(item=>{
      return !!(item.value === speciality.value)
 })
-  console.log(speciality,"speciality in UpdateCatalogue")
+
+let name = ""
+if(!!(speciality_name.length !== 0 )){
+  name = speciality_name[0].name
+}
+  // console.log(speciality,name,speciality_name,"speciality in UpdateCatalogue")
     return (
         <div style={{paddingBottom:'2rem'}} className ='modal-wrapper-medium_rish margin_top_medium_rish new_card_class'>
              <div style={{fontWeight:'600'}} className="modal-heading_ris realtimewidth businessrow1col1">Catalogue Manager</div>
@@ -123,7 +128,7 @@ const speciality_name = [...props.specialities].filter(item=>{
        </div>
            <div className="text-center margin-top-medium_ris">
                 <Button onClick={()=>handleButtonClick()} type="button">
-                  {speciality.name==="All specialities"?"Upload Catalogue":`Upload ${speciality_name[0].name} `}
+                  {speciality.name==="All specialities"?"Upload Catalogue":`Upload ${name} `}
                 </Button>
               </div>
        </React.Fragment>
@@ -146,8 +151,8 @@ const speciality_name = [...props.specialities].filter(item=>{
                </div>
              
               <div className="text-center margin-top-medium_ris">
-              <Button onClick={()=>props.downloadCatalogue(speciality.value==="All specialities"?false:{name:speciality_name[0].name, value:speciality.value})} icon="download" type="button">
-               {speciality.name==="All specialities"?"Download Sample":`Download ${speciality_name[0].name} Sample`}
+              <Button onClick={()=>props.downloadCatalogue({name:name, value:speciality.value})} icon="download" type="button">
+               {`Download ${name} Sample`}
               </Button>
           </div>
           </React.Fragment>
