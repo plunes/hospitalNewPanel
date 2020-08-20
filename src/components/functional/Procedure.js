@@ -95,7 +95,8 @@ const should_render = (prevProps, nextProps) => {
                                                 
                                                 <DeletePopup 
                                                     yesClick = {(e)=>props.remove_service({
-                                                      serviceId:data.serviceId
+                                                      serviceId:data.serviceId,
+                                                      specialityId:data.specialityId
                                                     })}
                                                     title="Are you sure you want to remove this procedure?"
                                                     id={props.id}

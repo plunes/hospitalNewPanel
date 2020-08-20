@@ -324,11 +324,31 @@ class MyCatalogueComponent extends Component {
 
         if(nextProps.remove_service_ret){
             if(!!nextProps.remove_service_ret.success){
+
+                let total_procedures = [...nextProps.procedures_data.total_procedures].filter(item=>!!(item.serviceId !== this.state.service_for_removal.serviceId))
+                let paginated_data = paginate_data([...total_procedures],{ limit:20, total:0,  next:false,  total_pages:0,  page:1, search:''})
+                  
                     this.setState({
+                        service_for_removal:false,
                         ret:{
                             success:true,
                             message:nextProps.remove_service_ret.message
                         }
+                    },()=>  {
+                        nextProps.update_modified_procedures({
+                            total_procedures:[...total_procedures],
+                            modified_procedures:paginated_data.data,
+                            query_param:{
+                                ...paginated_data.parameters
+                            }
+                        })
+                        nextProps.get_procedures({ limit:20,
+                            total:'',
+                            page:1,
+                            total_pages:1,
+                            next:false,
+                            search:''
+                        })
                     })
             }else{
                 this.setState({
@@ -1306,6 +1326,14 @@ class MyCatalogueComponent extends Component {
          }
      }
 
+     remove_service = (data) => {
+         this.setState({
+             service_for_removal:{...data}
+         },()=>{
+             this.props.remove_service({...data})
+         })
+     }
+
     render() {
         console.log(this.props,"this.props in  Mycatalogue")
         console.log(this.state,"this.state in  Mycatalogue")
@@ -1544,7 +1572,7 @@ class MyCatalogueComponent extends Component {
                                         refresh = {this.state.refresh}
                                         procedure_for_update = {this.state.procedure_for_update}
                                         update_procedure = {this.update_procedure}
-                                        remove_service = {this.props.remove_service}
+                                        remove_service = {this.remove_service}
                                         remove_service_loading_flag = {this.props.remove_service_loading_flag}
                                         update_procedure_loading = {this.get_update_procedure_loading(c)}
                                         />

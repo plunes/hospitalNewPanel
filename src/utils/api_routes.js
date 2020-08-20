@@ -36,7 +36,7 @@ export default {
     catalogue_routes:{
       remove_service: (data, center_id, headers) =>
       axios
-          .delete(`${base_url}/user/deleteService/${data.serviceId}${!!center_id?'?userId='+center_id:''}`, headers)
+          .delete(`${base_url}/user/deleteService/${data.specialityId}/${data.serviceId}${!!center_id?'?userId='+center_id:''}`, headers)
           .then(res => {
                 console.log(res,'res in update_procedure')
                 return res
