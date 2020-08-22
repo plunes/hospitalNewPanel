@@ -681,3 +681,10 @@ u {
 .red_text {
     color:#c0392b !important; 
 }
+.fullpage_loader_icon {
+    display: block;
+    margin: auto;
+    position: relative;
+    top: 10rem;
+    width: 20rem;
+}
