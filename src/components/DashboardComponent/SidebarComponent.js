@@ -187,7 +187,7 @@ const  SidebarComponent = (props) => {
                     </span>
                </Link> 
             </div>
-            {!!props.prof_data.isAdmin &&
+            {!props.prof_data.isCenter &&
             <div  className={`${props.pathname==='/dashboard/manage-payment'?'sidebar_item_wraper align_center_rish sidebar_list_active':'sidebar_item_wraper align_center_rish '} `}>  
                <Link to= "/dashboard/manage-payment"
                   

@@ -138,7 +138,7 @@ MyError.prototype = new Error()
  </div>
 </div>
 <div className="text-center" style={{marginBottom:'1rem'}}>
-<Button type="submit" style={{position:'relative', bottom:'1rem'}} >Proceed</Button>
+<Button type="submit" onClick = {(e)=>submitdetails(e)} style={{position:'relative', bottom:'1rem'}} >Proceed</Button>
 </div>
 
 </form>
