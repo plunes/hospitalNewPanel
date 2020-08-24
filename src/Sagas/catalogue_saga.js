@@ -254,7 +254,7 @@ function* add_procedure_saga(action) {
     const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, center_id, headers)
     if(!!api_data){
       console.log(api_data,"api_data in search_procedure_saga")
-      if (api_data.status === 201) {
+      if (api_data.status === 200) {
           if(!!api_data.data){
             yield put(search_procedures_ret({
               success:true,
@@ -317,12 +317,12 @@ function* to_add_services_saga(action) {
             yield put(to_add_services_ret({
               success:true,
               message:'Services have been successfully fetched',
-              limit:api_data.data.limit,
-              page:api_data.data.page,
-              total:api_data.data.total,
-              next:api_data.data.next,
-              data:api_data.data.data,
-              searchQuery:api_data.data.searchQuery
+              limit:api_data.data.data.limit,
+              page:api_data.data.data.page,
+              total:api_data.data.data.total,
+              next:api_data.data.data.next,
+              data:api_data.data.data.data,
+              searchQuery:api_data.data.data.searchQuery
              }))
           }else {
             yield put(to_add_services_ret({

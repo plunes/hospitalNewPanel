@@ -481,7 +481,7 @@ class AppointmentComponent extends Component {
                                                 </div>
                                             </div>
                                            <div className='appointment_card_data'>
-                                           { (time_now<item.appointmentTime )  &&  <div className="row confrm_mar_sec">
+                                           { (true)  &&  <div className="row confrm_mar_sec">
                                                 <div className="col-lg-2">
                                                     <p className="gr_con underline"><text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm</text></p>
                                                 </div>
