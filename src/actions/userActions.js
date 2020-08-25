@@ -2947,7 +2947,7 @@ export const updateRealPrice = (uData) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/solution', uData, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 201) {
+      if (res.status === 200) {
         dispatch({
           type : UPDATE_REAL_PRICE_RET,
           payload :{
