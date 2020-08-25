@@ -2970,6 +2970,7 @@ export const updateRealPrice = (uData) => async dispatch => {
 
 export const getMonthWiseUsers = (days) => async dispatch => {
     let token = localStorage.getItem('token');
+    
     //console.log(token, 'monthWise')
     return await axios.get(baseUrl + '/analytics/solutionUsers', { 'headers': { 'Authorization': token } })
               .then((res) => {
