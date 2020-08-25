@@ -3513,7 +3513,7 @@ export const getInsights = (data) => async dispatch => {
  return await axios.get(baseUrl + `/analytics/actionableInsight${!!data?'?userId='+data.center:''}`, { 'headers': { 'Authorization': token } })
  .then(res => {
    console.log(res , 'res in getInsights')
-   if (res.status=== 201) {
+   if (res.status=== 200) {
      dispatch({
        type: GET_INSIGHTS,
        payload: {

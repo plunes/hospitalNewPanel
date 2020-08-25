@@ -112,6 +112,7 @@ function* get_act_insight_saga() {
     console.log(api_data,"api_data in get_user_specs_saga")
     if(!!api_data){
       if (api_data.status === 200) {
+        console.log("this.getting called", api_data)
           yield put(get_act_insight_ret({
               success:true,
               message:'Successfully fetched your actionable Insights',
