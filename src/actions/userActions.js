@@ -375,7 +375,7 @@ export const get_center_cred = (data) => async dispatch => {
   return await axios.put(baseUrl + `/user/getCenterCred?location=${data.centerLocation}`, {},  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in get_remaining_specs");
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type: GET_CENTER_CRED_RET,
           payload: {
@@ -559,7 +559,7 @@ export const get_remaining_specs = (data) => async dispatch => {
           type: GET_REMAIN_SPECS_RET,
           payload: {
             success:true,
-            data:res.data.data
+            data:res.data
           }
         })
       }else{
@@ -632,8 +632,8 @@ export const get_centers = (data) => async dispatch => {
   let token = localStorage.getItem('token')
   return await axios.get(baseUrl + `/user/getAllCenters?days=7`,  { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res,"res in get_Center");
-      if (res.status === 200) {  
+      if (res.status === 201) {
+        console.log(res,"res in get_Center");
         dispatch({
           type: GET_CENTERS_RET,
           payload: {
@@ -691,7 +691,7 @@ export const add_center = (data) => async dispatch => {
   return await axios.post(baseUrl + `/admin/addCenter`, data, { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in add_center")
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type: ADD_CENTER_RET,
           payload: {
@@ -923,8 +923,8 @@ export const reschedule_appointment = (data) => async dispatch => {
   let body =  data.body 
   return await axios.put(baseUrl + `/booking/${data.params.bookingId}/${data.params.bookingStatus}`, body, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res,"res in reschedule_appointment");
-      if (res.status === 200) {
+      if (res.status === 201) {
+        console.log(res,"res in reschedule_appointment");
         dispatch({
           type: RESCHEDULE_APPOINTMENT_RET,
           payload: {
@@ -998,7 +998,7 @@ export const get_business = (data) => async dispatch => {
           type: GET_BUSINESS_RET,
           payload: {
             success:true,
-            data:res.data.data
+            data:res.data
           }
         })
       }else{
@@ -1063,13 +1063,13 @@ export const get_user_info = (data) => async dispatch => {
   return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
     .then((res) => {
       // console.log(res, 'data');
-      if (res.status === 200) {
+      if (res.status === 201) {
         //console.log(res);
         dispatch({
           type: GET_USER_INFO_RET,
           payload: {
             success:true,
-            data:res.data.data,
+            data:res.data,
             from_dash_page
           }
         })
@@ -1127,7 +1127,7 @@ export const edit_location = (data) => async dispatch => {
   return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': token } })
   .then((res) => {
     console.log(res, 'res in submit_enquiry')
-    if (res.status === 200) {
+    if (res.status === 201) {
         dispatch({
           type : EDIT_LOCATION_RET,
           payload :{
@@ -1242,13 +1242,13 @@ export const get_user_profile = () => async dispatch => {
   return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
     .then((res) => {
       // console.log(res, 'data');
-      if (res.status === 200) {
+      if (res.status === 201) {
         //console.log(res);
         dispatch({
           type: GET_PROFILE_RET,
           payload: {
             success:true,
-            data:res.data.data
+            data:res.data
           }
         })
       }else{
@@ -1307,7 +1307,7 @@ export const remove_notif_count = (data) => async dispatch =>{
   return await axios.put(baseUrl + `/notification/`, {} , { 'headers': { 'Authorization': token } })
      .then((res) => {
        console.log(res, 'res in getOTP')
-       if (res.status === 200) {
+       if (res.status === 201) {
          //dispatch(getSolutionInsights()
          if(!!res.data.success){
            dispatch({
@@ -1583,7 +1583,7 @@ export const changeAppoint = (data) => async dispatch => {
   return await axios.put(baseUrl + requestUrl, {}  ,{ 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res, 'res in changeAppoint')
-      if (res.status === 200) {
+      if (res.status === 201) {
         //dispatch(getSolutionInsights())
         console.log(res.data, 'data in update Image')
         if(!!res.data){
@@ -1855,7 +1855,7 @@ export const setAvailability = (obj) => async dispatch => {
   return await axios.put(baseUrl + '/user', obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
       console.log(res,"res in setResposnibikity")
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type:SET_AVAILABILITY_RET,
            payload:{
@@ -1917,7 +1917,7 @@ export const registerUser = (obj) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.post(baseUrl + '/user/register', obj,  { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type:REGISTER_USER_RET,
            payload:{
@@ -2237,7 +2237,7 @@ export const editBio = (obj) => async dispatch => {
   let center_id = get_url_params('center')
   return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type:EDIT_BIO_RET,
            payload:{
@@ -2294,7 +2294,7 @@ export const updateAchievement = (obj) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type:UPDATE_ACHIEVEMENT_RET,
            payload:{
@@ -2359,7 +2359,7 @@ let center_id = get_url_params('center')
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type:UPDATE_BANNER_RET,
            payload:{
@@ -2653,23 +2653,15 @@ let center_id = get_url_params('center')
     .then((res) => {
       console.log(res, 'res in Upload')
     
-      if (res.status === 200) {
+      if (res.status === 201) {
         //dispatch(getSolutionInsights())
         console.log(res.data, 'data in update Image')
         if(!!res.data){
           dispatch({
             type : UPDATE_IMAGE_RET,
             payload :{
-              success:true,
-              message:"Profile Image Updated"
-            }
-          })
-        }else{
-          dispatch({
-            type : UPDATE_IMAGE_RET,
-            payload :{
-              success:false,
-              message:"Unable to process your request now. try later"
+              success:res.data.success,
+              message:res.data.success?"Profile Image Updated":"Unable to process your request now. try later"
             }
           })
         }
@@ -2832,7 +2824,7 @@ export const getProfileDetails = () => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         //dispatch(getSolutionInsights())
         console.log(res.data, 'data')
         if(res.data.data && res.data.data.length > 0){
@@ -2911,7 +2903,7 @@ export const submitProfileDetails = (uData) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.put(baseUrl + '/user/', obj, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({
           type:SUBMIT_PROFILE_RET,
            payload:{
@@ -3014,8 +3006,8 @@ export const getAllBookings = (days) => async dispatch => {
   //console.log(days, 'user id')
   return await axios.get(baseUrl + '/booking/all/' + days)
     .then((res) => {
-      console.log(res.data, 'res in business api')
-      if (res.status === 201) {
+      //console.log(res.data, 'data')
+      if (res.status === 201 && res.data.success) {
         //console.log(res.data.booking.length)
         let bookings = res.data.booking.filter((b) => b.bookingStatus === 'Confirmed')
         //console.log(bookings)
@@ -3180,15 +3172,14 @@ export const getNotifications = (data) => async dispatch => {
   let token = localStorage.getItem('token');
   return await axios.get(baseUrl + `/notification/0/${data.page}`, { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res,"res in getNotifications")
-      if (res.status === 200) {
-        let notifications = res.data.data.notifications
+      if (res.status === 201 && res.data.success) {
+        let notifications = res.data.notifications
         let unreadNotifications = notifications.filter((f) =>
           f.read === false
         )
         dispatch({
           type: GET_NOTIFICATIONS,
-          payload: res.data.data
+          payload: res.data
         })
         console.log(unreadNotifications.length, 'unread notifications')
         if (unreadNotifications.length === 0) {
@@ -3238,8 +3229,8 @@ export const getTimeslot = () => async dispatch => {
   let userId = localStorage.getItem('userId')
   return await axios.get(baseUrl + '/user/' + userId + '/timeSlots', { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res, 'data');
-      if (res.status === 200) {
+      // console.log(res, 'data');
+      if (res.status === 201 && res.data.success) {
         // console.log(res.data.field, 'data');
         let field = res.data.field;
         let array = []
@@ -3266,12 +3257,12 @@ export const getUserDetails = () => async dispatch => {
   let token = localStorage.getItem('token')
   return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
     .then((res) => {
-      console.log(res, 'data');
-      if (res.status === 200) {
+      // console.log(res, 'data');
+      if (res.status === 201) {
         //console.log(res);
         dispatch({
           type: NEW_USER,
-          payload: res.data.data
+          payload: res.data
         })
       }
     })
@@ -3320,6 +3311,7 @@ export const getUserDetails = () => async dispatch => {
   }
 
 export const createLogin = loginData => async dispatch => {
+  console.log(loginData, "login data")
   let type = loginData.type
   delete loginData.type
   let new_url = ""
@@ -3333,12 +3325,12 @@ export const createLogin = loginData => async dispatch => {
      default:
        break;
    }
+   console.log(new_url,"new_url")
   return await axios.post(new_url, loginData)
     .then(res => {
       console.log(res , 'res in create Login')
-      console.log(res.status === 200)
-      if(res.status === 200){
-        if(!!(res.data.data.userType === "User")){
+      if (res.data.success === true) {
+         if(res.data.user.userType==="User"){
           dispatch({
             type : NEW_USER_RET,
             payload :{
@@ -3350,14 +3342,13 @@ export const createLogin = loginData => async dispatch => {
          }else{
           dispatch({
             type: NEW_USER,
-            payload: res.data.data
+            payload: res.data.user
           })
           localStorage.setItem('token', res.data.token)
-          localStorage.setItem('userId', res.data.data._id)
+          localStorage.setItem('userId', res.data.user._id)
           history.push('/dashboard');
          }
-      }
-      else{
+      }else{
         dispatch({
           type : NEW_USER_RET,
           payload :{
@@ -3394,9 +3385,8 @@ export const getBooking = () => async  dispatch => {
   let token = localStorage.getItem('token');
   return await axios.get(baseUrl + '/booking', { 'headers': { 'Authorization': token } })
     .then(res => {
-      console.log(res,'res in getBooking')
-      if (res.status === 200 ) {
-        let bookings = res.data.data.bookings;
+      if (res.status === 201 && res.data.success) {
+        let bookings = res.data.bookings;
         let userId = localStorage.getItem('userId')
         let businessBooking = []
         bookings.filter((b) => userId === b.professionalId)
@@ -3449,14 +3439,6 @@ export const getBooking = () => async  dispatch => {
       }
     }).catch(e=>{
       console.log(e)
-      dispatch({
-        type : GET_BOOKING_RET,
-        payload :{
-          success:false,
-          data:[],
-          message:"Something went wrong. try again later"
-        }
-      })
     })
 
 
@@ -3483,7 +3465,6 @@ export const bankDetails = bankData => dispatch => {
   })
     .then(res => res.json())
     .then(res => {
-      console.log(res,"res in submitbank details")
       if (res.success === true) {
         dispatch({
           type:SUBMIT_BANK_DETAILS_RET,
