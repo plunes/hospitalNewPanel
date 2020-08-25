@@ -436,12 +436,12 @@ export const get_center_profile = () => async dispatch => {
  return await axios.get(baseUrl + `/user?userId=${center_id}`,  { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res,"res in get_remaining_specs");
-     if (res.status === 201) {
+     if (res.status === 200) {
        dispatch({
          type: GET_CENTER_PROFILE_RET,
          payload: {
            success:true,
-           data:res.data.user,
+           data:res.data.data,
            message:"Successfully fetched center's Details"
          }
        })
