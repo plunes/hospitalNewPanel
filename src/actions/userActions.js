@@ -2940,6 +2940,8 @@ export const updateRealPriceClr = () => dispatch =>{
     type: UPDATE_REAL_PRICE_CLR,
     payload:{}
   })
+
+  
 }
 
 export const updateRealPrice = (uData) => async dispatch => {
