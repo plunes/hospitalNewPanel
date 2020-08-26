@@ -1396,7 +1396,7 @@ console.log(data,"data in getEntity")
  return await axios.put(baseUrl + `/user/updatePassword`, data , { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res, 'res in submitOtp')
-     if (res.status === 201) {
+     if (res.status === 200) {
        //dispatch(getSolutionInsights()
        if(!!res.data.success){
          dispatch({
