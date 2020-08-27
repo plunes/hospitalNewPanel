@@ -696,7 +696,7 @@ export const add_center = (data) => async dispatch => {
          type: ADD_CENTER_RET,
          payload: {
            success:true,
-           data:res.data.user
+           data:res.data.data
          }
        })
      }else{
