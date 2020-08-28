@@ -317,7 +317,7 @@ class MyCatalogueComponent extends Component {
             }
             if(!!get_url_params('center')){
                 this.props.update_procedure({...data})
-            }else if(!this.props.prof_data.isCenter){
+            }else if(!this.props.prof_data.isAdmin){
                     this.props.update_procedure({...data})
                 }else {
                 this.setState({
@@ -1361,6 +1361,7 @@ class MyCatalogueComponent extends Component {
      }
 
     render() {
+        console.log(this.props,"this.props in Catalogue page")
                 return (
                     <React.Fragment>
                         <NotifFunc />

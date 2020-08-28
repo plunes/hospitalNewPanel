@@ -541,10 +541,10 @@ margin: 0 1%;
 }
 .modal-heading_ris { 
     font-weight: 600 !important;
-    font-size: 2rem;
+    /* font-size: 2rem; */
 }
 .modal_button {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .notif_wrap_image {

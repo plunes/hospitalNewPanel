@@ -6,7 +6,8 @@ const UploadPrice = (props) => {
 
     return (
         <React.Fragment>
-                <div className ='modal-wrapper-small_rish'>
+                <div style={{position:'relative'}} className ='modal-wrapper-small_rish'>
+                {props.update_procedure_loading_flag && <LoaderComponent />}
              <div style={{fontWeight:'600'}} className="modal-heading_ris margin_top_small_rish update_price_heading">  { `Update price`}</div>
                  <div style={{height:'5rem'}}>
                     <span className="modal_content_description center_align_rish margin_top_small_rish">
@@ -14,7 +15,7 @@ const UploadPrice = (props) => {
                      </span>
                      <div style={{position:'relative'}} className="flex_parent  margin_top_small_rish">
 
-                         {props.update_procedure_loading_flag && <LoaderComponent />}
+                     
                             <span className="flex_parent_child text-center">
                                 <Button id="make_transaction_button" className="modal_button" onClick={()=>props.update_procedure({...props.update_procedure_obj, updateAllCenter:false})}>Update this Profile</Button>
                             </span>
