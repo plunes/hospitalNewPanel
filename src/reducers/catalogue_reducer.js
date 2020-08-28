@@ -355,6 +355,7 @@ export default function (state = cat_init_state, action) {
     
 
     case UPDATE_MODIFIED_PROCEDURES:
+        console.log({...action.payload},"action.payload in Upade modified Porcedures")
         return {
             ...state,
             procedures_data:{
