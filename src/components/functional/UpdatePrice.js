@@ -16,10 +16,10 @@ const UploadPrice = (props) => {
 
                          {props.update_procedure_loading_flag && <LoaderComponent />}
                             <span className="flex_parent_child text-center">
-                                <Button id="make_transaction_button" className="modal_button" onClick={()=>props.update_procedure({...props.update_procedure_obj})}  >Update this Profile</Button>
+                                <Button id="make_transaction_button" className="modal_button" onClick={()=>props.update_procedure({...props.update_procedure_obj, updateAllCenter:false})}>Update this Profile</Button>
                             </span>
                             <span className="flex_parent_child text-center">
-                                <Button id="cancel_button" className="modal_button" onClick={()=>console.log()}  >Update all centres</Button>
+                                <Button id="cancel_button" className="modal_button" onClick={()=>props.update_procedure({...props.update_procedure_obj, updateAllCenter:true})} >Update all centres</Button>
                             </span>
                      </div>
                  </div>

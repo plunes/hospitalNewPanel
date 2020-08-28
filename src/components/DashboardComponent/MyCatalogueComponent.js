@@ -315,11 +315,17 @@ class MyCatalogueComponent extends Component {
                 specialityId:this.state.selected_procedures[0].specialityId,
                 services:newArr
             }
-            this.setState({
-                procedure_for_update:!!data?data:false,
-                refresh:!this.state.refresh,
-                update_procedure_obj:obj
-            },()=> this.toggle_update_price_flag())
+            if(!!get_url_params('center')){
+                this.props.update_procedure({...data})
+            }else if(!this.props.prof_data.isCenter){
+                    this.props.update_procedure({...data})
+                }else {
+                this.setState({
+                    procedure_for_update:!!data?data:false,
+                    refresh:!this.state.refresh,
+                    update_procedure_obj:obj
+                },()=> this.toggle_update_price_flag())
+            }
         } catch(e){
             this.setState({
                 ret:{
@@ -1762,7 +1768,8 @@ const mapStateToProps = state => ({
     center_data:state.user.data.centers_data.center_data,
     get_center_profile_ret:state.user.get_center_profile_ret,
     remove_service_ret:state.catalogue_store.remove_service_ret,
-    remove_service_loading_flag:state.catalogue_store.remove_service_loading
+    remove_service_loading_flag:state.catalogue_store.remove_service_loading,
+    profile_store:state.profile_store
 })
 
 
