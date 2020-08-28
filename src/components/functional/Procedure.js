@@ -35,9 +35,9 @@ const should_render = (prevProps, nextProps) => {
   if(prevProps.data.variance !== nextProps.data.variance){
     return false
   }
-  if(prevProps.data.price[0] !== nextProps.data.price[0]){
-    return false
-  }
+  // if(prevProps.data.price[0] !== nextProps.data.price[0]){
+  //   return false
+  // }
   return true
 }
  const Procedure= (props) => {
