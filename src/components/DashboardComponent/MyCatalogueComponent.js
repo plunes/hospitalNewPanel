@@ -315,17 +315,20 @@ class MyCatalogueComponent extends Component {
                 specialityId:this.state.selected_procedures[0].specialityId,
                 services:newArr
             }
-            if(!!get_url_params('center')){
-                this.props.update_procedure({...data})
-            }else if(!this.props.prof_data.isAdmin){
-                    this.props.update_procedure({...data})
-                }else {
                 this.setState({
                     procedure_for_update:!!data?data:false,
-                    refresh:!this.state.refresh,
-                    update_procedure_obj:obj
-                },()=> this.toggle_update_price_flag())
-            }
+                    refresh:!this.state.refresh
+                },()=> {
+                    if(!!get_url_params('center')){
+                        this.props.update_procedure(obj)
+                    }else if(!this.props.prof_data.isAdmin){
+                            this.props.update_procedure(obj)
+                        }else {
+                            this.setState({
+                                update_procedure_obj:obj
+                            },()=>this.toggle_update_price_flag())
+                        }
+                })
         } catch(e){
             this.setState({
                 ret:{

@@ -3,7 +3,7 @@ import Button from "./Button"
 import LoaderComponent from "./LoaderComponent"
 
 const UploadPrice = (props) => {
-
+console.log(props,"props in update price")
     return (
         <React.Fragment>
                 <div style={{position:'relative'}} className ='modal-wrapper-small_rish'>
@@ -17,10 +17,10 @@ const UploadPrice = (props) => {
 
                      
                             <span className="flex_parent_child text-center">
-                                <Button id="make_transaction_button" className="modal_button" onClick={()=>props.update_procedure({...props.update_procedure_obj, updateAllCenter:false})}>Update this Profile</Button>
+                                <Button id="make_transaction_button" className="modal_button" onClick={()=>props.update_procedure({ ...props.update_procedure_obj, updateAllCenter:false})}>Update this Profile</Button>
                             </span>
                             <span className="flex_parent_child text-center">
-                                <Button id="cancel_button" className="modal_button" onClick={()=>props.update_procedure({...props.update_procedure_obj, updateAllCenter:true})} >Update all centres</Button>
+                                <Button id="cancel_button" className="modal_button" onClick={()=>props.update_procedure({ ...props.update_procedure_obj, updateAllCenter:true})} >Update all centres</Button>
                             </span>
                      </div>
                  </div>
