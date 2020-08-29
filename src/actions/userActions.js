@@ -803,7 +803,7 @@ export const admin_otp = (data) => async dispatch => {
  let token = localStorage.getItem('token')
  return await axios.put(baseUrl + `/user/verifyAndAddAdmin`, data, { 'headers': { 'Authorization': token } })
    .then((res) => {
-     if (res.status === 201) {
+     if (res.status === 200) {
        console.log(res,"res in admin_otp");
        dispatch({
          type: ADMIN_OTP_RET,
