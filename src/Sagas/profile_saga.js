@@ -17,9 +17,9 @@ function* change_address_saga() {
         const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
         console.log("Just before api call")
         const api_data = yield call(api.profile_routes.change_address, data, center_id, headers)
-        console.log(api_data,"api_data in get_user_specs_saga")
+        console.log(api_data,"api_data change_address_saga")
         if(!!api_data){
-          if (api_data.status === 201) {
+          if (api_data.status === 200) {
               yield put(change_address_ret({
                   success:true,
                   message:'Profile updated successfully',

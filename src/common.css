@@ -541,6 +541,10 @@ margin: 0 1%;
 }
 .modal-heading_ris { 
     font-weight: 600 !important;
+    /* font-size: 2rem; */
+}
+.modal_button {
+    font-size: 1rem;
 }
 
 .notif_wrap_image {
@@ -680,4 +684,11 @@ u {
 }
 .red_text {
     color:#c0392b !important; 
+}
+.fullpage_loader_icon {
+    display: block;
+    margin: auto;
+    position: relative;
+    top: 10rem;
+    width: 20rem;
 }

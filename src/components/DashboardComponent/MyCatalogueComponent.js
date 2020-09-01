@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import SidebarComponent from './SidebarComponent';
 import DashboardHeader from './DashboardHeader';
 import CheckboxPill from '../functional/CheckboxPill'
+import UpdatePrice from '../functional/UpdatePrice'
 import AnimatedMount from "../../HOC/AnimatedMount"
 import "./MyCatalogueComponent.css";
 import ReactPaginate from 'react-paginate'
+
 
 
 import { getUserCatalogue, uploadProcedures, uploadProceduresClr ,
@@ -109,6 +111,7 @@ class MyCatalogueComponent extends Component {
             all_selected_catalogue:false,
             all_selected_avail:false,
             delete_speciality_flag:false,
+            update_price_flag:false,
             get_procedures_params:{
                 limit:20,
                 total:0,
@@ -153,6 +156,12 @@ class MyCatalogueComponent extends Component {
         }else if(variance >=0){
             return 10
         }
+    }
+
+    toggle_update_price_flag = (props) => {
+        this.setState({
+            update_price_flag:!this.state.update_price_flag
+        })
     }
 
     change_variance = (val) => {
@@ -306,10 +315,20 @@ class MyCatalogueComponent extends Component {
                 specialityId:this.state.selected_procedures[0].specialityId,
                 services:newArr
             }
-            this.setState({
-                procedure_for_update:!!data?data:false,
-                refresh:!this.state.refresh
-            },()=> this.props.update_procedure(obj))
+                this.setState({
+                    procedure_for_update:!!data?data:false,
+                    refresh:!this.state.refresh
+                },()=> {
+                    if(!!get_url_params('center')){
+                        this.props.update_procedure(obj)
+                    }else if(!this.props.prof_data.isAdmin){
+                            this.props.update_procedure(obj)
+                        }else {
+                            this.setState({
+                                update_procedure_obj:obj
+                            },()=>this.toggle_update_price_flag())
+                        }
+                })
         } catch(e){
             this.setState({
                 ret:{
@@ -365,7 +384,6 @@ class MyCatalogueComponent extends Component {
             if(nextProps.remove_speciality_ret.success){
                 let speciality_removed = {}
                 let arr = [...this.state.specialities].filter((item)=>{
-                    console.log(item, this.state.selected_speciality)
                     if(item.value===this.state.selected_speciality){
                         speciality_removed = {...item}
                     }
@@ -494,7 +512,6 @@ class MyCatalogueComponent extends Component {
           }else{
             nextProps.update_modified_procedures({
                 total_procedures:[...nextProps.procedures_data.total_procedures.map(item=>{
-                    console.log(item, this.state.variance_speciality, "ifjodsjfodsofjidsjfdsofdsf")
                         if((item.specialityId === this.state.variance_speciality)){
                             return {...item, variance}
                         }else{
@@ -518,7 +535,6 @@ class MyCatalogueComponent extends Component {
         }
 
         if(!!nextProps.ret_procedures){
-            console.log(nextProps,"nextProps.retProcedure")
             this.setState({
                 get_procedures_params:nextProps.ret_procedures.params,
                 procedures:!!nextProps.ret_procedures.data?nextProps.ret_procedures.data:[],
@@ -556,8 +572,6 @@ class MyCatalogueComponent extends Component {
                                return true
                             })
 
-                      console.log(selected_procedures,"this.state procedure for Update")
-   
                         let paginated_data = paginate_data([selected_procedures[0],...nextProps.procedures_data.total_procedures],{ limit:20, total:0,  next:false,  total_pages:0,  page:1, search:''})
                            updated_procedures = arr.filter((item)=>(  !!(item.serviceId !== updated_procedure.serviceId) ))
                         nextProps.update_modified_procedures({
@@ -707,20 +721,30 @@ class MyCatalogueComponent extends Component {
                         all_selected_avail:false,
                         all_selected_catalogue:false,
                         procedure_for_update:false,
+                        update_price_flag:false,
                         procedure_for_detail:this.state.procedure_for_detail.serviceId===updated_procedure.serviceId?updated_procedure:this.state.procedure_for_detail,
                         selected_procedures:updated_procedure?[...this.state.selected_procedures].filter((item)=>item.serviceId!==updated_procedure.serviceId):[]
-                    })
-                    nextProps.update_modified_procedures({
-                        total_procedures:[...this.props.procedures_data.total_procedures],
-                        modified_procedures:[...this.props.procedures_data.modified_procedures.map((item,i)=>{
-                                if(i+1 === this.state.get_procedures_params.page){
-                                    return [...updated_procedures]
-                                }else {
-                                    return item
-                                }
-                        })],
-                        query_param:{...this.state.get_procedures_params}
-                    })
+                    },()=>{
+                        let total_procedures = [...this.props.procedures_data.total_procedures.map((item,i)=>{
+                            let return_item = ''
+                              this.state.procedures.every((element)=>{
+                                 if(element.serviceId === item.serviceId){
+                                        return_item = element
+                                        return false
+                                    }
+                                    return_item = item
+                                    return true
+                             })
+                             return return_item
+                 })]
+
+                 let data =paginate_data(total_procedures, this.state.get_procedures_params)
+                        nextProps.update_modified_procedures({
+                            total_procedures:total_procedures,
+                            modified_procedures:data.data,
+                            query_param:data.parameters
+                        })
+                    })                 
           }else {
               this.setState({
                   ret:{
@@ -735,7 +759,6 @@ class MyCatalogueComponent extends Component {
 
 
         if(nextProps.add_specs_ret){
-            console.log(nextProps.add_specs_ret,"nextProps.addSpecsRet")
             if(nextProps.add_specs_ret.success){
                 let arr = []
                 let added_specs = [...this.state.selected_remain_specs]
@@ -748,9 +771,7 @@ class MyCatalogueComponent extends Component {
                         value:[...nextProps.catalogue_data.remaining_specs].filter(val=>val.name===item)[0].id
                     }
                 })
-
-                console.log(new_specs,"new_specs")
-              
+  
                 this.setState({
                     add_specs_loading:false,
                     ret:{
@@ -802,7 +823,6 @@ class MyCatalogueComponent extends Component {
 
 
         if(!!nextProps.to_add_services_ret){
-            console.log(nextProps.to_add_services_ret,"nextProps ti_add_serives_ret")
             if(nextProps.to_add_services_ret.success){
                 this.setState({
                     procedures_toAdd:nextProps.to_add_services_ret.data,
@@ -827,7 +847,6 @@ class MyCatalogueComponent extends Component {
             nextProps.to_add_services_clr()
         }
             if(!!nextProps.search_procedures_ret){
-                console.log(nextProps.search_procedures_ret,"search_procedures_ret")
                 if(nextProps.search_procedures_ret.success){
                     if(nextProps.search_procedures_ret.type==="servicestoAdd"){
 
@@ -985,6 +1004,18 @@ class MyCatalogueComponent extends Component {
                />        
             </React.Fragment>
           
+        )
+    }
+
+    generate_update_price =() =>{
+        return (
+            <React.Fragment>
+                <UpdatePrice 
+                    update_procedure_obj = {this.state.update_procedure_obj}
+                    update_procedure = {this.props.update_procedure}
+                    update_procedure_loading_flag = {this.state.update_procedure_loading_flag}
+                />
+            </React.Fragment>
         )
     }
 
@@ -1293,8 +1324,6 @@ class MyCatalogueComponent extends Component {
             return false
         }
     })
-
-    console.log(arr,"arr in get_variance")
      }
 
      select_all = (e) =>{
@@ -1335,8 +1364,7 @@ class MyCatalogueComponent extends Component {
      }
 
     render() {
-        console.log(this.props,"this.props in  Mycatalogue")
-        console.log(this.state,"this.state in  Mycatalogue")
+        console.log(this.props,"this.props in Catalogue page")
                 return (
                     <React.Fragment>
                         <NotifFunc />
@@ -1694,6 +1722,13 @@ class MyCatalogueComponent extends Component {
                 modalBody = {this.generate_delete_speciality}
                 no_cross= {true}
                 />  
+
+            <ModalComponent 
+                open = {this.state.update_price_flag}
+                handleClose = {this.toggle_update_price_flag}
+                modalBody = {this.generate_update_price}
+                no_cross= {true}
+                />  
             </React.Fragment>
         )
     }
@@ -1737,7 +1772,8 @@ const mapStateToProps = state => ({
     center_data:state.user.data.centers_data.center_data,
     get_center_profile_ret:state.user.get_center_profile_ret,
     remove_service_ret:state.catalogue_store.remove_service_ret,
-    remove_service_loading_flag:state.catalogue_store.remove_service_loading
+    remove_service_loading_flag:state.catalogue_store.remove_service_loading,
+    profile_store:state.profile_store
 })
 
 

@@ -51,9 +51,10 @@ import Button from './Button'
     name="rePassword" 
     onChange={props.handleChange} 
     value = {props.rePassword}/>  
+    
      <div className='text-center'>
      <Link to="/dashboard/settings">
-     <button onClick={()=>{console.log()}} className="common-button-white">Cancel</button>
+     <Button   onClick={()=>{console.log()}} >Cancel</Button>
      </Link>
      <Button style={{marginLeft:'2rem'}} onClick={()=>submitdetails()} >Reset</Button>
 

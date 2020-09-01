@@ -35,6 +35,9 @@ const should_render = (prevProps, nextProps) => {
   if(prevProps.data.variance !== nextProps.data.variance){
     return false
   }
+  // if(prevProps.data.price[0] !== nextProps.data.price[0]){
+  //   return false
+  // }
   return true
 }
  const Procedure= (props) => {
@@ -69,7 +72,6 @@ const should_render = (prevProps, nextProps) => {
                                                 value={props.isSelected?props.getValue:props.getValue}
                                                 onChange={
                                                     e =>{
-                                                        console.log(is_positive_whole_number(e.target.value),"is_positive_whole_number(e.target.value)")
                                                         if(is_positive_whole_number(e.target.value)){
                                                         props.handleSelectedProcedureChange(e,props.data.serviceId)
                                                         }else{

@@ -9,14 +9,18 @@ import { get_url_params, paginate_data } from "../utils/common_utilities"
 import store from '../store'
 
 function* get_procedures_saga(action) {
-  console.log("get_procedures saga called")
+  // console.log("get_procedures saga called")
  try {
   let center_id = get_url_params('center')
     const  get_procedures = yield store.getState().catalogue_store.get_procedures
     const params = get_procedures
     const store_param = yield store.getState().catalogue_store.procedures_data.query_param
     const modified_procedures = yield store.getState().catalogue_store.procedures_data.modified_procedures
+
+    // console.log(get_procedures,"data in get_procedures_saga")
+    // console.log(store_param,"store_params in get_procedures_saga")
     if(!!(params.search !== store_param.search)){
+        // console.log("inside search case saga")
       // SEARCH CASE
       const total_procedures = yield store.getState().catalogue_store.procedures_data.total_procedures
       let arr = []
@@ -50,6 +54,7 @@ function* get_procedures_saga(action) {
     }else if(params.limit !== store_param.limit){
         // Limit Change case
     }else {
+      // console.log(modified_procedures, params,"modified_procedures in saga")
       yield put (ret_procedures({
            params: {...store_param, page:params.page},
            data:modified_procedures[params.page]
@@ -63,7 +68,7 @@ function* get_procedures_saga(action) {
   try{
       yield put(get_procedures_error())
     }catch(x){
-       console.log(x,"in get_procedure saga")
+      //  console.log(x,"in get_procedure saga")
       }
  }
 }
@@ -238,7 +243,7 @@ function* add_procedure_saga(action) {
 }
 
  function* search_procedures_saga(action) {
-   console.log("Inside search procedure saga")
+  //  console.log("Inside search procedure saga")
 
  try {
   let center_id = get_url_params('center')
@@ -253,8 +258,8 @@ function* add_procedure_saga(action) {
     }
     const api_data = yield call(api.catalogue_routes.search_procedures, dataObject, center_id, headers)
     if(!!api_data){
-      console.log(api_data,"api_data in search_procedure_saga")
-      if (api_data.status === 201) {
+      // console.log(api_data,"api_data in search_procedure_saga")
+      if (api_data.status === 200) {
           if(!!api_data.data){
             yield put(search_procedures_ret({
               success:true,
@@ -296,7 +301,7 @@ function* add_procedure_saga(action) {
 
 
 function* to_add_services_saga(action) {
-  console.log("Inside to add_service _saga")
+  // console.log("Inside to add_service _saga")
   
  try {
   let center_id = get_url_params('center')
@@ -317,12 +322,12 @@ function* to_add_services_saga(action) {
             yield put(to_add_services_ret({
               success:true,
               message:'Services have been successfully fetched',
-              limit:api_data.data.limit,
-              page:api_data.data.page,
-              total:api_data.data.total,
-              next:api_data.data.next,
-              data:api_data.data.data,
-              searchQuery:api_data.data.searchQuery
+              limit:api_data.data.data.limit,
+              page:api_data.data.data.page,
+              total:api_data.data.data.total,
+              next:api_data.data.data.next,
+              data:api_data.data.data.data,
+              searchQuery:api_data.data.data.searchQuery
              }))
           }else {
             yield put(to_add_services_ret({
@@ -412,7 +417,7 @@ function* remove_service_saga(action) {
   try {
    let center_id = get_url_params('center')
      const  data = yield store.getState().catalogue_store.remove_service
-     console.log(data,"data in remove_service")
+    //  console.log(data,"data in remove_service")
      const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
      const api_data = yield call(api.catalogue_routes.remove_service, data, center_id, headers)
      if(!!api_data){

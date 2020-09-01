@@ -20,11 +20,11 @@ function* delete_profile_saga() {
         const api_data = yield call(api.dash_routes.delete_profile, data, center_id, headers)
         console.log(api_data,"api_data in get_user_specs_saga")
         if(!!api_data){
-          if (api_data.status === 201) {
+          if (api_data.status === 200) {
               yield put(delete_profile_ret({
                   success:true,
                   message:'Profile deleted successfully',
-                  data:api_data.data.data
+                  data:{}
                 }))
             }else{
               yield put(delete_profile_ret({
@@ -65,7 +65,7 @@ function* get_real_insight_saga() {
       const api_data = yield call(api.dash_routes.get_real_insight, data, center_id, headers)
       console.log(api_data,"api_data in get_user_specs_saga")
       if(!!api_data){
-        if (api_data.status === 201) {
+        if (api_data.status === 200) {
             yield put(get_real_insight_ret({
                 success:true,
                 message:'Successfully fetched real time insights',
@@ -111,7 +111,8 @@ function* get_act_insight_saga() {
     const api_data = yield call(api.dash_routes.get_act_insight, data, center_id, headers)
     console.log(api_data,"api_data in get_user_specs_saga")
     if(!!api_data){
-      if (api_data.status === 201) {
+      if (api_data.status === 200) {
+        console.log("this.getting called", api_data)
           yield put(get_act_insight_ret({
               success:true,
               message:'Successfully fetched your actionable Insights',

@@ -93,7 +93,7 @@ class App extends Component {
             <Route  path='/dashboard' component={DashboardPage} />
             <Route exact path='/forgotPassword' component={()=>no_auth_route({
                     authObject:this.authObject
-                  })(()=><ForgotPasswordComponent />)} />
+                  })(()=><div className="container-fluid"><ForgotPasswordComponent /></div>)} />
             <Route exact path='/devlopment' component={Development} />
           </Switch>
         
