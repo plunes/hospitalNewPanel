@@ -20,6 +20,116 @@ class HomePage extends Component {
         }
     }
 
+    componentDidMount(){
+        const runScript = () => {
+            if( window.$ ) {
+              // do your action that depends on jQuery.
+             let  script = document.createElement("script");
+          
+              script.src = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/bootstrap/js/bootstrap.bundle.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/js/jquery.countto.js?1485983083";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/js/slick/slick.js?1485983083";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/js/core.js?1507873861";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/owl.carousel/owl.carousel.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/jquery.easing/jquery.easing.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/waypoints/jquery.waypoints.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/jquery-sticky/jquery.sticky.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/counterup/counterup.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/js/marquee.js?1485983083";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/venobox/venobox.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+              script = document.createElement("script");
+              script.src = "/assets/lib/owl.carousel/owl.carousel.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+          
+              script = document.createElement("script");
+              script.src = "/assets/js/main.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+              document.head.appendChild(script);
+          
+          } else {
+              // Load Jquey in to window
+              let script = document.createElement("script");
+          
+              script.src = "https://code.jquery.com/jquery-2.2.4.min.js";
+              script.async = true;
+              script.crossorigin="anonymous"
+            
+              document.head.appendChild(script);
+          
+               // wait 50 milliseconds and try again.
+              window.setTimeout( runScript, 50 );
+          }
+           }
+
+           runScript()
+    }
+
     render() {
         
         return (
@@ -46,6 +156,96 @@ class HomePage extends Component {
                             </div>
                         </div>
                     </section>
+                    <section id="counts" className="counts section-bg">
+            <div className="container">
+      
+              <div className="row justify-content-end">
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="assets/img/icons/balance.svg" className="img-fluid" />
+                      <span data-toggle="counter-up">1349</span>
+                    <p>Contract Balance</p>
+                  </div>
+                </div>
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="assets/img/icons/participants.svg" className="img-fluid" />
+                      <span data-toggle="counter-up">65</span>
+                    <p>Participants</p>
+                  </div>
+                </div>
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="assets/img/icons/withdrawal.svg" className="img-fluid" />
+                      <span data-toggle="counter-up">960</span>
+                    <p>Today's withdrawal</p>
+                  </div>
+                </div>
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="assets/img/icons/secure-fund.svg" className="img-fluid" />
+                      <span data-toggle="counter-up">500</span>
+                    <p>Secure Fund</p>
+                  </div>
+                </div>
+      
+              </div>
+      
+            </div>
+          </section>
+
+
+          <section className="user-land-advantages  cryp-section translate40 js-animate" style={{background:'#2a2d33'}}>
+      
+      <span className="user-land-advantages__left"></span>
+      <span className="user-land-advantages__right"></span>
+      <div className="container">
+          <div className="section-title">
+            <h2 style={{color:'#fff'}}>Advantages</h2>
+          </div>
+          
+          <div className="row">
+              <div className="col-md-5">
+                  <div className="user-land-advantage__item js-animate translate40">
+                      <div className="user-land-advantage__value">Smart</div>
+                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                  </div>
+                  <div className="user-land-advantage__item js-animate translate40">
+                      <div className="user-land-advantage__value">Simple</div>
+                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                  </div>
+              </div>
+              
+                  
+              <div className="col-md-2 text-center js-animate translate40">
+                <img src="assets/img/ether-logo.png" className="img-fluid" style={{height:'60%'}} />
+              </div>
+              
+              <div className="col-md-5 ">
+                  <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
+                    
+                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                      <div className="user-land-advantage__value">Secure</div>
+                  </div>
+                  <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
+                    
+                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                      <div className="user-land-advantage__value">Stable</div>
+                  </div>
+  
+              </div>
+          </div>
+          
+      </div>
+  
+  </section>
+  
+  
+
                     <section id="section_rish" className="home_page_sec2 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">

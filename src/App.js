@@ -37,6 +37,14 @@ const Greet = ({ message }) => <div>
 class App extends Component {
 
   async componentDidMount() {
+    console.log("Injecting jquery")
+    let script = document.createElement("script");
+
+    script.src = "https://code.jquery.com/jquery-2.2.4.min.js";
+    script.async = true;
+    script.crossorigin="anonymous"
+  
+    document.head.appendChild(script);
     let token = localStorage.getItem('token');
     if (token) {
       await this.props.getUserDetails()
