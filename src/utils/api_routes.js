@@ -16,7 +16,7 @@ if(!!pathLocation) {
     base_url = 'https://api.plunes.com/v6'
     base_url_without_v6 = 'https://api.plunes.com'
   }else{
-    base_url = "https://devapi.plunes.com/v6"
+    base_url = "https://devapi.plunes.com/v5"
     base_url_without_v6 ="https://devapi.plunes.com"
     // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
   }
