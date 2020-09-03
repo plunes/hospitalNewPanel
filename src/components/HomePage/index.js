@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import LandingHeader from '../LandingHeader'
 import "./index.css"
 import LandingFooter from '../LandingFooter';
+import Button from "../functional/Button"
 
 var rootStyle = {
     backgroundColor : 'green',
@@ -138,8 +139,39 @@ class HomePage extends Component {
                 <div className='row'>
                     <LandingHeader />
                 </div>
-                <div className="main_content_wrapper_rish page_min_height_rish oversize_wrap_rish">
-                    <section id="section_rish" className="home_page_sec1">
+                <div className=" page_min_height_rish oversize_wrap_rish">
+                <section id="hero">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6  pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+              <div>
+                {/* <img
+                  src="assets/img/ethertree.png"
+                  className="img-fluid"
+                  style={{ height: "50px" }}
+                /> */}
+                {/* <br />
+                <br /> */}
+                <h2>Welcome to India's First Utility Network</h2>
+                <h4>Smart, Simple, Secure, Stable</h4>
+                <p>
+                 Plunes is the AI powered utility network, which helps you find curated, validated & cost effective solutions to your healthcare problems.
+                </p>
+                <Button className="margin_top_small_rish" type="no_icon" >Join Plunes</Button>
+              </div>
+            </div>
+            <div className="col-lg-6 order-1 order-lg-2 hero-img in-down">
+              <img
+                src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/home_page_image-min.png"
+                className="img-fluid home_section_1_image"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+                    {/* <section id="section_rish" className="home_page_sec1">
                         <div className="text-center">
                             <h1 className="primary_heading_rish ">Welcome to India's First Utility Network</h1>
                             <h3 className="sub_heading_rish grey_color">Create your profile for free to get started</h3>
@@ -155,81 +187,39 @@ class HomePage extends Component {
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <section id="counts" className="counts section-bg">
-            <div className="container">
-      
-              <div className="row justify-content-end">
-      
-                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
-                  <div className="count-box">
-                      <img src="assets/img/icons/balance.svg" className="img-fluid" />
-                      <span data-toggle="counter-up">1349</span>
-                    <p>Contract Balance</p>
-                  </div>
-                </div>
-      
-                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
-                  <div className="count-box">
-                      <img src="assets/img/icons/participants.svg" className="img-fluid" />
-                      <span data-toggle="counter-up">65</span>
-                    <p>Participants</p>
-                  </div>
-                </div>
-      
-                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
-                  <div className="count-box">
-                      <img src="assets/img/icons/withdrawal.svg" className="img-fluid" />
-                      <span data-toggle="counter-up">960</span>
-                    <p>Today's withdrawal</p>
-                  </div>
-                </div>
-      
-                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
-                  <div className="count-box">
-                      <img src="assets/img/icons/secure-fund.svg" className="img-fluid" />
-                      <span data-toggle="counter-up">500</span>
-                    <p>Secure Fund</p>
-                  </div>
-                </div>
-      
-              </div>
-      
-            </div>
-          </section>
-
-
-          <section className="user-land-advantages  cryp-section translate40 js-animate" style={{background:'#2a2d33'}}>
+                    </section> */}
+                 
+          <section className="user-land-advantages  cryp-section translate40 js-animate section-bg"  >
       
       <span className="user-land-advantages__left"></span>
       <span className="user-land-advantages__right"></span>
       <div className="container">
           <div className="section-title">
-            <h2 style={{color:'#fff'}}>Advantages</h2>
+            <h2 style={{color:'#000'}}>Why Plunes</h2>
           </div>
           
           <div className="row">
-              <div className="col-md-5">
+              <div className="col-md-4">
                   <div className="user-land-advantage__item js-animate translate40">
-                      <div className="user-land-advantage__value">Smart</div>
+                      <div className="user-land-advantage__value">Real Time Insights</div>
                       <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
                   </div>
                   <div className="user-land-advantage__item js-animate translate40">
-                      <div className="user-land-advantage__value">Simple</div>
+                      <div className="user-land-advantage__value">Actionable Insights</div>
                       <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
                   </div>
               </div>
               
                   
-              <div className="col-md-2 text-center js-animate translate40">
-                <img src="assets/img/ether-logo.png" className="img-fluid" style={{height:'60%'}} />
+              <div className="col-md-4 text-center js-animate translate40">
+                <img src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/why_plunes-min.png" className="img-fluid why_plunes_center_image"  />
               </div>
               
-              <div className="col-md-5 ">
+              <div className="col-md-4 ">
                   <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
                       <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
-                      <div className="user-land-advantage__value">Secure</div>
+                      <div className="user-land-advantage__value">Extensive Marketing</div>
                   </div>
                   <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
@@ -244,9 +234,69 @@ class HomePage extends Component {
   
   </section>
   
-  
+  <section id="counts" className="counts section-bg">
+            <div className="container">
+      
+              <div className="row justify-content-end">
 
-                    <section id="section_rish" className="home_page_sec2 margin_top_medium_rish">
+              <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                    <div className="count-box">
+                        <img src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/stats_image4-min.png" className="img-fluid" />
+                        <span className="count_wrap"> <span  data-toggle="counter-up">100000 </span> <span className="plus_icon"> + </span>  </span>
+                        <p>Users</p>
+                    </div>
+                </div>
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/stats_image1-min.png" className="img-fluid" />
+                      <span className="count_wrap"> <span  data-toggle="counter-up">30000 </span> <span className="plus_icon"> + </span>  </span>
+                    <p>Procedures</p>
+                  </div>
+                </div>
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/stats_image2-min.png" className="img-fluid" />
+                      <span className="count_wrap"> <span  data-toggle="counter-up">1500 </span> <span className="plus_icon"> + </span>  </span>
+                    <p className="count-text">Doctors</p>
+                  </div>
+                </div>
+      
+                <div className="col-lg-3 col-md-3 col-sm-6 col-6 d-md-flex align-items-md-stretch">
+                  <div className="count-box">
+                      <img src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/stats_image3-min.png" className="img-fluid" />
+                      <span className="count_wrap"> <span  data-toggle="counter-up">500 </span> <span className="plus_icon"> + </span>  </span>
+                    <p>Hospitals</p>
+                  </div>
+                </div>
+      
+               
+      
+              </div>
+      
+            </div>
+          </section>
+
+          <section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
+                        <div className="what_we_do_wrapper">
+                            <h2 className="heading_rish align_center text-center">See How we Work?</h2>
+                            <div className="see_how_we_work_iframe_wrap">
+                              <iframe 
+                                    className="see_how_we_work_iframe"
+                                    src="https://www.youtube.com/embed/QwCxu5BgJQg"
+                                    frameBorder="0"
+                                    alt = "Check how it work" 
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                                   allowFullScreen>
+                         </iframe>
+                        </div>   
+                        </div>
+             </section>
+
+
+
+                    {/* <section id="section_rish" className="home_page_sec2 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <img src="/home_page_section_2.png" className="align_center_rish image_class_rish" alt="Real Time Insights" />
@@ -258,9 +308,9 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                        </div>
-                    </section>
+                    </section> */}
 
-                    <section id="section_rish" className="home_page_sec3 margin_top_medium_rish">
+                    {/* <section id="section_rish" className="home_page_sec3 margin_top_medium_rish">
                        <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish home_page__sect3_heading_wrapper">
@@ -275,9 +325,9 @@ class HomePage extends Component {
                                     <img src="/real_time_prediction.png" className="image_class_rish align_center_rish" alt="Real Time Insights" />
                                 </div>
                        </div>
-                    </section>
+                    </section> */}
 
-                    <section id="section_rish" className="home_page_sec4 margin_top_medium_rish">
+                    {/* <section id="section_rish" className="home_page_sec4 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div   className="flex_child_five_rish vertical_align_flex_rish">
                                   <div id="how_it_works_div" className="home_page_how_works_div">
@@ -301,10 +351,10 @@ class HomePage extends Component {
                                 
                        </div>
                     </section>
+ */}
 
 
-
-                    <section id="section_rish" className="home_page_sec5 margin_top_medium_rish">
+                    {/* <section id="section_rish" className="home_page_sec5 margin_top_medium_rish">
                        <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish">
@@ -322,9 +372,9 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                        </div>
-                    </section>
+                    </section> */}
 
-                    <section id="section_rish" className="home_page_sec6 margin_top_medium_rish">
+                    {/* <section id="section_rish" className="home_page_sec6 margin_top_medium_rish">
                        <div className="flex_wrap_rish margin_top_medium_rish">
                                 <div   className="flex_child_five_rish vertical_align_flex_rish">
                                   <div id="why_plunes_home_div" className="why_plunes_home_div">
@@ -338,11 +388,11 @@ class HomePage extends Component {
                                     </div>
                                 </div>  
                        </div>
-                    </section>
+                    </section> */}
 
 
-                    <section id="section_rish" className="home_page_sec7 margin_top_medium_rish">
-                       <div className="flex_wrap_rish_column-reverse margin_top_medium_rish">
+                    <section id="section_rish" className="home_page_sec7 ">
+                       <div className="flex_wrap_rish_column-reverse ">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish">
                                             <h2 className="secondary-heading_rish bold_text_rish home_page_section3_secondary ">An intelligent Cloud Solution for EMR, Integrated with profiles of Users and Hospitals for a seamless experience.</h2>

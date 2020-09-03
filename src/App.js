@@ -90,7 +90,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={()=>no_auth_route({
                     authObject:this.authObject
-                  })(()=><div className="container-fluid"><HomePage /></div>)} />
+                  })(()=><HomePage />)} />
             <Route exact path ="/signin" component={()=>no_auth_route({
                     authObject:this.authObject
                   })(()=><div className="container-fluid"><LoginComponent /></div>)} />

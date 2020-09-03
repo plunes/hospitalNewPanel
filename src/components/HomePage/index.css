@@ -206,3 +206,46 @@
 .sub_heading_home_page_rish {
     line-height: 2.6rem;
 }
+
+
+.see_how_we_work_iframe {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 20rem;
+    width: 40rem;
+  }
+  .see_how_we_work_iframe_wrap {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+  }
+
+  #how_we_do_section  {
+      margin-top: 3rem;
+  }
+
+  @media screen and (max-width:767px) {
+
+    .cryp-section {
+        padding: 0;
+    }
+    .see_how_we_work_iframe {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 20rem;
+        width: 40rem;
+      }
+      .see_how_we_work_iframe_wrap {
+        width: 100%;
+        padding: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2rem;
+      }
+      #how_we_do_section  {
+        margin-top: 1rem;
+    }
+  }

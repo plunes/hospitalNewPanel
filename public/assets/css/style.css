@@ -1,20 +1,3 @@
-body {
-  font-family: "Open Sans", sans-serif;
-  color: #444444;
-}
-
-a {
-  color: #2448ac;
-}
-
-a:hover {
-  color: #0dd3fe;
-  text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
-}
 
 .back-to-top {
   position: fixed;
@@ -354,17 +337,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero h2 {
-  color: #576971;
+  /* color: #576971; */
   margin-bottom: 30px;
-  font-size: 24px;
+  font-size: 3rem;
+  color: #3ab83a;
 }
-#hero span {
+/* #hero span {
   color: #753900;
   font-weight: 700;
-}
+} */
 
 #hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 13px;
   text-transform: uppercase;
@@ -694,7 +677,6 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Raleway", sans-serif;
   color: #fff;
 }
 
@@ -961,7 +943,6 @@ section {
 }
 
 .cta .cta-btn {
-  font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 1px;
@@ -1108,25 +1089,61 @@ section {
 }
 
 .counts .count-box img {
-  height: 60px;
+  height: 7rem;
   margin-bottom: 10px;
 }
 
 .counts .count-box span {
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 48px;
-  display: block;
-  font-weight: 600;
-  color: #254eb7;
-  margin: auto;
+  /* display: block; */
+  color: #000;
+  margin: 1rem 0;
+}
+
+.count_wrap {
+  display: block !important;
+  
 }
 
 .counts .count-box p {
   padding: 8px 0 0 0;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
-  font-size: 14px;
-  color: #254eb7;
+  font-size: 1.5rem !important;
+  color: #000;
+}
+.home_section_1_image {
+  height: 25rem !important;
+}
+
+.why_plunes_center_image {
+  height: 100%;
+}
+
+
+@media screen and (max-width:767px){
+  .counts .count-box span {
+    font-size: 3rem;
+  }
+  .home_section_1_image {
+     display: none;
+  }
+  .counts .count-box span {
+      /* line-height: 0; */
+      margin: 0;
+  }
+
+  .counts .count-box p {
+    padding: 8px 0 0 0;
+    font-weight: 600;
+    font-size: 2.5rem !important;
+    color: #000;
+    position: relative;
+    bottom: 2rem;
+
+  }
+  
 }
 
 .timeline {
