@@ -278,22 +278,7 @@ class HomePage extends Component {
             </div>
           </section>
 
-          <section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
-                        <div className="what_we_do_wrapper">
-                            <h2 className="heading_rish align_center text-center">See How we Work?</h2>
-                            <div className="see_how_we_work_iframe_wrap">
-                              <iframe 
-                                    className="see_how_we_work_iframe"
-                                    src="https://www.youtube.com/embed/QwCxu5BgJQg"
-                                    frameBorder="0"
-                                    alt = "Check how it work" 
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                                   allowFullScreen>
-                         </iframe>
-                        </div>   
-                        </div>
-             </section>
-
+         
 
 
                     {/* <section id="section_rish" className="home_page_sec2 margin_top_medium_rish">
@@ -389,9 +374,127 @@ class HomePage extends Component {
                                 </div>  
                        </div>
                     </section> */}
+                     <section className="about">
+  <div className="container">
+    <div className="icon-boxes text-center">
+     <h2 className="heading_rish align_center text-center">Onboarding Process</h2>
+    </div>
+  </div>
+</section>
+
+<section id="section_hiw" className="user-land-history cryp-section" style={{paddingTop:0}} >
+    <div className="our_proccess_wrapper"  style={{position:'relative', zIndex:2}} >
+        
+        
+        <div className="user-land-history__items">
+            <div className="row">
+                
+                
+                <div className="col-md-6 js-animate translate40">
+                    <div className="history-item history-item--congress history-item--congress-spain history-item--left">
+                        <div className="history-item__wrapper">
+                            {/* <img src="assets/img/icons/registration.svg"  style={{position:'absolute', top:'-32px', left:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
+                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <div className="history-item__place history-item__place-guarantee"> Step 1</div>
+                            <p className="history-item__desc">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                                 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-6 js-animate translate40">
+                    <div className="history-item history-item--blockchain history-item--right">
+                        <div className="history-item__wrapper">
+                            {/* <img src="assets/img/icons/wallet.svg"  style={{position:'absolute', top:'-32px', right:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
+                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <div className="history-item__place history-item__place-guarantee"> Step 2</div>
+                            <p className="history-item__desc">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-6 js-animate translate40">
+                    <div className="history-item history-item--leadership history-item--munich history-item--left">
+                        <div className="history-item__wrapper">
+                            {/* <img src="assets/img/icons/deposit.svg"  style={{position:'absolute', top:'-32px', left:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
+                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <div className="history-item__place history-item__place-guarantee"> Step 3</div>
+                            <p className="history-item__desc">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-6 js-animate translate40">
+                    <div className="history-item history-item--blockchain history-item--right">
+                        <div className="history-item__wrapper" >
+                            {/* <img src="assets/img/icons/growth.svg"  style={{position:'absolute', top:'-32px', right:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
+                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <div className="history-item__place history-item__place-guarantee"> Step 4</div>
+                            <p className="history-item__desc">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-6 js-animate translate40">
+                    <div className="history-item history-item--leadership history-item--berlin history-item--left">
+                        <div className="history-item__wrapper">
+                            {/* <img src="assets/img/icons/withdraw.svg"  style={{position:'absolute', top:'-32px', left:'-32px', display:'block', width:'128px', height:'128px'}}  /> */}
+                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <div className="history-item__place history-item__place-guarantee"> Step 5</div>
+                            <p className="history-item__desc">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                            </p>
+                           
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="col-md-6 js-animate translate40" >
+                    <div className="history-item history-item--leadership history-item--koln history-item--right">
+                        <div className="history-item__wrapper" style={{background:'#3bb83b'}} >
+                            {/* <img src="assets/img/icons/restart-cycle.svg"  style={{position:'absolute', top:'-32px', right:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
+                            
+                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <div className="history-item__place history-item__place-guarantee"> Step 6</div>
+                            <p className="history-item__desc">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+
+    </div>
+ 
+</section>
+
+<section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
+                        <div className="what_we_do_wrapper">
+                            <h2 className="heading_rish align_center text-center">See How we Work?</h2>
+                            <div className="see_how_we_work_iframe_wrap">
+                              <iframe 
+                                    className="see_how_we_work_iframe"
+                                    src="https://www.youtube.com/embed/QwCxu5BgJQg"
+                                    frameBorder="0"
+                                    alt = "Check how it work" 
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                                   allowFullScreen>
+                         </iframe>
+                        </div>   
+                        </div>
+             </section>
 
 
-                    <section id="section_rish" className="home_page_sec7 ">
+
+
+                    {/* <section id="section_rish" className="home_page_sec7 ">
                        <div className="flex_wrap_rish_column-reverse ">
                                 <div className="flex_child_five_rish vertical_align_flex_rish">
                                     <div className="margin_top_medium_rish">
@@ -418,7 +521,7 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                        </div>
-                    </section>
+                    </section> */}
                 </div>
             </div>
           <LandingFooter />
