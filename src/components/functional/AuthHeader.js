@@ -8,7 +8,7 @@ const AuthHeader = (props) =>{
       <div className="header_wrapper_rish oversize_wrap_rish display_flex">
       <div className="header_wrapper_logo_child_rish ">
             <div style={{position:'relative',width:'100%', height:'100%'}} className='center_align_rish' >
-              <Link to="/dashboard">
+              <Link to="/">
                 <img src="/icon/plunes_logo.png" style={{marginLeft:'2rem'}} className="logo_rish cursor-pointer" />
               </Link>
             </div>

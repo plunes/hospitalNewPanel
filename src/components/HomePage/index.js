@@ -153,7 +153,7 @@ class HomePage extends Component {
                 {/* <br />
                 <br /> */}
                 <h2>Welcome to India's First Utility Network</h2>
-                <h4>Smart, Simple, Secure, Stable</h4>
+                <h4>Smart, Simple, Secure</h4>
                 <p>
                  Plunes is the AI powered utility network, which helps you find curated, validated & cost effective solutions to your healthcare problems.
                 </p>
@@ -202,11 +202,11 @@ class HomePage extends Component {
               <div className="col-md-4">
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Real Time Insights</div>
-                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                      <div className="user-land-advantage__desc">Information packets about users searhing for medical procedures and consultations. They enable search specific price alloaction for differnet procedures and consultations.</div>
                   </div>
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Actionable Insights</div>
-                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                      <div className="user-land-advantage__desc">With the help of our powerfull AI Tool we help you to maintain your catalogue for best profits against your competitor in the markets.</div>
                   </div>
               </div>
               
@@ -216,16 +216,17 @@ class HomePage extends Component {
               </div>
               
               <div className="col-md-4 ">
+              <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
+                    
+                    <div className="user-land-advantage__desc">Our AI Tool helps you to rapidly analyze the abundant amount of data, we help you to enhance customer interactions as well as drive workflow-process proficiencies.</div>
+                    <div className="user-land-advantage__value">Powerfull AI</div>
+                </div>
                   <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
-                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
+                      <div className="user-land-advantage__desc">Stong marketing team would extensively promote your Institutes services to targeted audiences</div>
                       <div className="user-land-advantage__value">Extensive Marketing</div>
                   </div>
-                  <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
-                    
-                      <div className="user-land-advantage__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</div>
-                      <div className="user-land-advantage__value">Stable</div>
-                  </div>
+                 
   
               </div>
           </div>
@@ -394,11 +395,10 @@ class HomePage extends Component {
                     <div className="history-item history-item--congress history-item--congress-spain history-item--left">
                         <div className="history-item__wrapper">
                             {/* <img src="assets/img/icons/registration.svg"  style={{position:'absolute', top:'-32px', left:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
-                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <h3 className="history-item__title">Signup</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 1</div>
                             <p className="history-item__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
-                                 
+                                Signup on the platform with the help of an phone number and specify specialities provided in your institute.  
                             </p>
                         </div>
                     </div>
@@ -407,10 +407,10 @@ class HomePage extends Component {
                     <div className="history-item history-item--blockchain history-item--right">
                         <div className="history-item__wrapper">
                             {/* <img src="assets/img/icons/wallet.svg"  style={{position:'absolute', top:'-32px', right:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
-                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <h3 className="history-item__title">Add Services</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 2</div>
                             <p className="history-item__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                                 You can add services from our master catalogue or upload the list of services offered via .pdf , .xlsx document.
                             </p>
                         </div>
                     </div>
@@ -419,10 +419,10 @@ class HomePage extends Component {
                     <div className="history-item history-item--leadership history-item--munich history-item--left">
                         <div className="history-item__wrapper">
                             {/* <img src="assets/img/icons/deposit.svg"  style={{position:'absolute', top:'-32px', left:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
-                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <h3 className="history-item__title">Act on Insights</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 3</div>
                             <p className="history-item__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe</p>
+                                update prices for insights provided by us to increase the conversion rate of users</p>
                         </div>
                     </div>
                 </div>
@@ -430,10 +430,10 @@ class HomePage extends Component {
                     <div className="history-item history-item--blockchain history-item--right">
                         <div className="history-item__wrapper" >
                             {/* <img src="assets/img/icons/growth.svg"  style={{position:'absolute', top:'-32px', right:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
-                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <h3 className="history-item__title">Update Variance</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 4</div>
                             <p className="history-item__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                                 Our AI will help you to update variance in catalogue for better patients footfall and maximum profit.
                             </p>
                         </div>
                     </div>
@@ -442,12 +442,11 @@ class HomePage extends Component {
                     <div className="history-item history-item--leadership history-item--berlin history-item--left">
                         <div className="history-item__wrapper">
                             {/* <img src="assets/img/icons/withdraw.svg"  style={{position:'absolute', top:'-32px', left:'-32px', display:'block', width:'128px', height:'128px'}}  /> */}
-                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <h3 className="history-item__title">Confirm appointments</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 5</div>
                             <p className="history-item__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                               Confirm and reschedule appointment time and date from admin dashboard according to feasibility and availability of resourses. 
                             </p>
-                           
                         </div>
                     </div>
                 </div>
@@ -457,10 +456,10 @@ class HomePage extends Component {
                         <div className="history-item__wrapper" style={{background:'#3bb83b'}} >
                             {/* <img src="assets/img/icons/restart-cycle.svg"  style={{position:'absolute', top:'-32px', right:'-32px', display:'block', width:'128px', height:'128px'}} /> */}
                             
-                            <h3 className="history-item__title">Lorem Ipsum</h3>
+                            <h3 className="history-item__title">Monitor payments</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 6</div>
                             <p className="history-item__desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione omnis alias cupiditate saepe
+                                Monitor complete payment funnel for every confirmed appointments
                             </p>
                         </div>
                     </div>
