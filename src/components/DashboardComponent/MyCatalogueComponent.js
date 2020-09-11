@@ -57,6 +57,7 @@ import Slider from 'react-rangeslider'
 import Barchart from "../functional/Barchart"
 import Button from "../functional/Button"
 import  DeleteSpeciality from '../functional/DeleteSpeciality'
+import  AddServiceConfirm from '../functional/AddServiceConfirm'
 
 import { get_procedures, clr_procedures , update_modified_procedures, get_user_specialities,
     get_user_specialities_loading, to_add_services, to_add_services_clr, set_variance, set_variance_loading, 
@@ -112,6 +113,7 @@ class MyCatalogueComponent extends Component {
             all_selected_avail:false,
             delete_speciality_flag:false,
             update_price_flag:false,
+            add_service_confirm_flag:false,
             get_procedures_params:{
                 limit:20,
                 total:0,
@@ -240,7 +242,8 @@ class MyCatalogueComponent extends Component {
         }
     }
 
-    add_procedure = (data)=> {
+    add_procedure = (data, type)=> {
+        
         try {
             let arr = !!data?this.state.selected_procedures.filter((item)=>item.serviceId === data.serviceId):this.state.selected_procedures
             let newArr = arr.map((item,i)=>{
@@ -266,7 +269,7 @@ class MyCatalogueComponent extends Component {
             this.setState({
                 procedure_for_update:!!data?data:false,
                 refresh:!this.state.refresh
-            },()=> this.props.add_procedure(obj))
+            },()=> this.props.add_procedure({obj, addToAllCenters:type, selectedCenter:false}))
         } catch(e){
             this.setState({
                 ret:{
@@ -1019,6 +1022,18 @@ class MyCatalogueComponent extends Component {
         )
     }
 
+    generate_service_confirm_body=() => {
+        return (
+            <React.Fragment>
+                <AddServiceConfirm   
+                add_procedure = {this.add_procedure}
+                data = {this.state.add_procedure_data}
+                close_modal= {()=>this.setState({add_service_confirm_flag:false})}
+                />
+            </React.Fragment>
+        )
+    }
+
     generateEditCatalogue = () =>{
         return(
             <EditProcedure
@@ -1363,8 +1378,19 @@ class MyCatalogueComponent extends Component {
          })
      }
 
+     confirm_procedure = (data) => {
+        if(!!this.props.prof_data.isAdmin){
+            this.setState({
+                add_procedure_data:!!data?data:false,
+                add_service_confirm_flag:true
+            })
+        }else{
+            this.add_procedure(!!data?data:false)
+        }
+     }
+
     render() {
-        console.log(this.props,"this.props in Catalogue page")
+        console.log(this.props.prof_data,"this.props in Catalogue page")
                 return (
                     <React.Fragment>
                         <NotifFunc />
@@ -1668,7 +1694,7 @@ class MyCatalogueComponent extends Component {
                             getValue = {this.getValue(c)}
                             refresh = {this.state.refresh}
                             procedure_for_update = {this.state.procedure_for_update}
-                            update_procedure = {this.add_procedure}
+                            update_procedure = {this.confirm_procedure}
                             update_procedure_loading = {this.add_procedure_loading(c)}
                             />
                             )) : 
@@ -1695,7 +1721,7 @@ class MyCatalogueComponent extends Component {
                                     </div>} 
 
                                 {((this.state.selected_procedures.length !==0) && (!!this.state.addProcedureFlag)) &&  <div className='text-center'>
-                                <Button  onClick = {()=>this.add_procedure()} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
+                                <Button  onClick = {()=>this.confirm_procedure(false)} className=' margin_top_small_rish margin_bottom_small_rish '>Submit</Button>
                                       {/* <button  className='button_rish color_white_rish margin_top_small_rish margin_bottom_small_rish add_speciality_button'>Submit</button> */}
                                       </div>
                                       }
@@ -1708,6 +1734,13 @@ class MyCatalogueComponent extends Component {
                 open = {this.state.uploadCatalogFlag}
                 handleClose = {this.handleCloseCataModal}
                 modalBody = {this.generateUploadBody}
+            />
+
+
+            <ModalComponent  
+                open = {this.state.add_service_confirm_flag}
+                handleClose = {()=>{this.setState({add_service_confirm_flag:false})}}
+                modalBody = {this.generate_service_confirm_body}
             />
 
             <ModalComponent 

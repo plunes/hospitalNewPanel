@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getBooking, getBookingClr } from '../../actions/userActions'
 import { initiatePayment } from '../../actions/userActions'
 import Modal from 'react-modal';
+import Payments from "../Payments"
 import './Dashboard.css';
 
 const customStyles = {
@@ -112,6 +113,12 @@ class PaymentComponent extends Component {
     render() {
        console.log(this.props, 'this.props in PaymentComponent')
        console.log(this.state, 'this.state in PaymentComponent')
+    //  return  (
+    //      <React.Fragment>
+    //          <Payments />
+    //      </React.Fragment>
+    //  )
+
         return (
            <React.Fragment>
                     <div className='main_content_rish new_card_class'>

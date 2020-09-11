@@ -201,7 +201,7 @@ function* add_procedure_saga(action) {
     const  add_procedure = yield store.getState().catalogue_store.add_procedure
     const data = add_procedure
     const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
-    const api_data = yield call(api.catalogue_routes.add_procedure, data, center_id, headers)
+    const api_data = yield call(api.catalogue_routes.add_procedure,{ ...data.obj,addToAllCenters:data.addToAllCenters, selectedCenter:data.selectedCenter }, center_id, headers)
     if(!!api_data){
       if (api_data.status === 200) {
           if(!!api_data.data){
