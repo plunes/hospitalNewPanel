@@ -380,7 +380,8 @@ class Map extends Component{
 					 </div>}
 					<div className="form-group">
 						<label htmlFor="">{!!this.props.label?this.props.label:'Location'}</label>
-						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
+						<div><text>{this.state.address}</text></div>
+						{/* <input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/> */}
 					</div>
 				</div>
 

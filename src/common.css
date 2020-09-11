@@ -692,3 +692,8 @@ u {
     top: 10rem;
     width: 20rem;
 }
+
+.toggle-password {
+    position: relative !important;
+    left: 0rem !important;
+}
