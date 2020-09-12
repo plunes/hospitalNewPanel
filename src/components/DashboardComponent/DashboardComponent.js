@@ -142,6 +142,7 @@ class DashboardComponent extends React.PureComponent {
     componentWillReceiveProps(nextProps){
 
         if(((nextProps.actioanable_update_loading === false) && (this.props.actioanable_update_loading===true))){
+            console.log(this.state.realUpdateData,"this.state.====>>>>")
             this.handleModal()
         }
          
@@ -342,7 +343,7 @@ class DashboardComponent extends React.PureComponent {
 
     async handleSubmit(e) {
         e.preventDefault();
-     console.log(this.state,"this.state in handleSubmit")
+     console.log(this.props.solInsights,"this.props.solInsights")
 
         try {
             if(!!this.state.actionable_insight_edit){
@@ -421,7 +422,8 @@ class DashboardComponent extends React.PureComponent {
                       obj.discount = this.state.solValue
                   }
                 this.setState({
-                    realUpdatePriceLoading:true
+                    realUpdatePriceLoading:true,
+                    realUpdateData:{...this.state.realUpdateData, userPrice:Math.round(Number(this.state.real_time_edit_price))}
                 },()=>{
                     this.props.updateRealPrice(obj);
                 }) 
@@ -479,6 +481,15 @@ class DashboardComponent extends React.PureComponent {
     updateRealPriceClr = () =>{
         this.props.updateRealPriceClr()
         this.handleRealModal()
+        let insight = [...this.props.solInsights]
+         let updated_insight =  insight.map((item,i)=>{
+            if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
+                return this.state.realUpdateData
+            }else{
+                return item
+            }
+        })
+        this.props.update_real_insights(updated_insight)
       
     }
 
@@ -570,6 +581,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
+        console.log(this.state.realUpdateData,"this.state.realUpdateData")
         let arr = []
         if(typeof this.props.solutionUsers === `object`){
             let data = [...this.props.solutionUsers]
@@ -579,7 +591,7 @@ class DashboardComponent extends React.PureComponent {
         // console.log(this.props.updatePriceDataRet,"this.props.updatePriceDataRet")
         // // console.log(this.state.get_business.days===1,"this.state.get_business.days===1")
         // console.log(this.state,"this.state in dashboard")
-        console.log(this.props,"this.props in dashboard component")
+      
         let { percent } = this.state
         const options = {
             title: {
@@ -1009,6 +1021,7 @@ class DashboardComponent extends React.PureComponent {
                         </div>
                            
                                     <Modal 
+                                    // Actionable Insight Modal
                                         isOpen={this.state.modalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
                                         onRequestClose={this.closeModal}
@@ -1067,6 +1080,7 @@ class DashboardComponent extends React.PureComponent {
                                         <div className="text-center"><text style={{ fontSize: '17px', border: 'none' }}  onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                     </Modal>
                                     <Modal
+                                      // Real Time Insight Modal
                                         isOpen={this.state.realModalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
                                         onRequestClose={this.closeModal}

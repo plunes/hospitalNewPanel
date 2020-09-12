@@ -112,6 +112,7 @@ export class DashboardPage extends React.PureComponent {
 
   componentWillReceiveProps(nextProps){
     if(nextProps.updatePriceDataRet){
+      console.log(nextProps.updatePriceDataRet,"nextProps.updatePriceDataRet")
       if(nextProps.updatePriceDataRet.success){
           let arr = [...this.state.insight]
 
@@ -143,6 +144,7 @@ export class DashboardPage extends React.PureComponent {
       nextProps.clearUpdatePriceData()
   }
         if(!!nextProps.solInsights){
+          console.log(nextProps.solInsights,"NextProps.solInsights")
           this.setState({
               solInsights:nextProps.solInsights,
               real_insight_loader:false
@@ -643,6 +645,11 @@ authObject =()=> {
     isCenter:this.props.prof_data.isCenter
    }
 }
+update_real_insights = (data) => {
+  this.setState({
+    solInsights:[...data]
+  })
+}
 
   render() {
   console.log(this.state,"state in dashboard page")
@@ -733,6 +740,7 @@ authObject =()=> {
                     business_data = {this.props.dash_data.business_data}
                     solInsights = {this.state.solInsights}
                     insight = {this.state.insight}
+                    update_real_insights = {this.update_real_insights}
                     get_act_insight_laoding_flag = {this.state.real_insight_loader}
                     act_insight_loader = {this.state.act_insight_loader}
                     get_act_insight_loading_flag = {this.props.get_act_insight_loading_flag}

@@ -213,13 +213,6 @@ class MyCatalogueComponent extends Component {
                this.props.get_center_profile({center_id})
             }
         }
-        // this.props.get_procedures({ limit:10,
-        //     total:'',
-        //     page:1,
-        //     total_pages:1,
-        //     next:false,
-        //     search:''
-        // })
     }
 
 

@@ -14,9 +14,14 @@ const UploadCatalogue = (props) => {
 
   useEffect( () => {
     if(!!props.uploadProceduresRet){
+      let element = document.getElementById('uploatCatalogue')
+      element.type="text"
+      element.type="file"
+      element.value=""
       if(!!props.uploadProceduresRet.success){
         addToast(props.uploadProceduresRet.message, {appearance: 'success', autoDismiss:true}) 
         // props.getProfileDetails()
+       
         setSuccess(true)
         setTimeout(()=>{
            props.closeModal()
