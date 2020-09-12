@@ -155,9 +155,11 @@ class HomePage extends Component {
                 <h2>Welcome to India's First Utility Network</h2>
                 <h4>Smart, Simple, Secure</h4>
                 <p>
-                 Plunes is the AI powered utility network, which helps you find curated, validated & cost effective solutions to your healthcare problems.
+                Plunes is an AI powered utility network, which helps you find curated, validated & cost effective solutions to your healthcare problems.
                 </p>
+                <Link to="/signup">
                 <Button className="margin_top_small_rish" type="no_icon" >Join Plunes</Button>
+                </Link>
               </div>
             </div>
             <div className="col-lg-6 order-1 order-lg-2 hero-img in-down">
@@ -202,11 +204,11 @@ class HomePage extends Component {
               <div className="col-md-4">
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Real Time Insights</div>
-                      <div className="user-land-advantage__desc">Information packets about users searhing for medical procedures and consultations. They enable search specific price alloaction for differnet procedures and consultations.</div>
+                      <div className="user-land-advantage__desc">Time requests from Patients near you who are looking for Medical Services and are viewing your Profiles.</div>
                   </div>
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Actionable Insights</div>
-                      <div className="user-land-advantage__desc">With the help of our powerfull AI Tool we help you to maintain your catalogue for best profits against your competitor in the markets.</div>
+                      <div className="user-land-advantage__desc">With the help of our powerful AI , we help you maintain your catalog Prices according to the competition rate in the market to get you maximum bookings.</div>
                   </div>
               </div>
               
@@ -218,12 +220,12 @@ class HomePage extends Component {
               <div className="col-md-4 ">
               <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
-                    <div className="user-land-advantage__desc">Our AI Tool helps you to rapidly analyze the abundant amount of data, we help you to enhance customer interactions as well as drive workflow-process proficiencies.</div>
-                    <div className="user-land-advantage__value">Powerfull AI</div>
+                    <div className="user-land-advantage__desc">Track your Business including your centres from one platform only, monitor performance and enhance your revenues by acting on intelligent insights.</div>
+                    <div className="user-land-advantage__value">Easy Business Management</div>
                 </div>
                   <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
-                      <div className="user-land-advantage__desc">Stong marketing team would extensively promote your Institutes services to targeted audiences</div>
+                      <div className="user-land-advantage__desc">Strong marketing on our platform will extensively promote your facility to targeted audiences and hence enhanced revenue</div>
                       <div className="user-land-advantage__value">Extensive Marketing</div>
                   </div>
                  

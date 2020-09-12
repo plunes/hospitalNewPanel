@@ -310,11 +310,21 @@ class Map extends Component{
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (
+					<React.Fragment>
+						<div>
+						<div>
+                   	<GooglePlacesAutocomplete
+						onSelect={this.onPlaceSelected}
+						componentRestrictions={{country: "in"}}
+						placeholder = "Search Location"	
+					/>
+					</div>
 					<GoogleMap 
 					google={ this.props.google }
 					defaultZoom={ this.props.zoom }
 					defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
 					>
+									
 						{/* InfoWindow on top of marker */}
 						<InfoWindow
 							onClose={this.onInfoWindowClose}
@@ -345,12 +355,11 @@ class Map extends Component{
 							componentRestrictions={{country: "in"}}
 						/> */}
 
-					<GooglePlacesAutocomplete
-						onSelect={this.onPlaceSelected}
-						componentRestrictions={{country: "in"}}
-						placeholder = "Search Location"
-					/>
+					
 					</GoogleMap>
+					</div>
+					</React.Fragment>
+					
 				)
 			)
 		);
@@ -378,11 +387,11 @@ class Map extends Component{
 						 })
 					 }} class="editmainbodymaxhospital cursor-pointer underline">Save Changes</span>
 					 </div>}
-					<div className="form-group">
+					{/* <div className="form-group">
 						<label htmlFor="">{!!this.props.label?this.props.label:'Location'}</label>
 						<div><text>{this.state.address}</text></div>
-						{/* <input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/> */}
-					</div>
+						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
+					</div> */}
 				</div>
 
 				<AsyncMap

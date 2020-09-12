@@ -2970,7 +2970,14 @@ export const updateRealPrice = (uData) => async dispatch => {
        })
      }
    }).catch(e=>{
-     console.log(e)
+    dispatch({
+      type : UPDATE_REAL_PRICE_RET,
+      payload :{
+        success:false,
+        data:[],
+        message: e.response.data.error  || 'Unable to proccess now try again later'
+      }
+    })
    })
 }
 
