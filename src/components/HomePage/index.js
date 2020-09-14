@@ -5,6 +5,8 @@ import LandingHeader from '../LandingHeader'
 import "./index.css"
 import LandingFooter from '../LandingFooter';
 import Button from "../functional/Button"
+import AliceCarousel from 'react-alice-carousel';
+
 
 var rootStyle = {
     backgroundColor : 'green',
@@ -13,13 +15,21 @@ var rootStyle = {
   
   }
 
+   
 class HomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
             loading:false
         }
+        this.responsive = {
+            0: { items: 1 },
+            1024: { items: 1 },
+          }
+        
     }
+
+
 
     componentDidMount(){
         const runScript = () => {
@@ -155,7 +165,7 @@ class HomePage extends Component {
                 <h2>Welcome to India's First Utility Network</h2>
                 <h4>Smart, Simple, Secure</h4>
                 <p>
-                Plunes is an AI powered utility network, which helps you find curated, validated & cost effective solutions to your healthcare problems.
+                 Plunes is the AI powered utility network, which helps you find curated, validated & cost effective solutions to your healthcare problems.
                 </p>
                 <Link to="/signup">
                 <Button className="margin_top_small_rish" type="no_icon" >Join Plunes</Button>
@@ -204,11 +214,11 @@ class HomePage extends Component {
               <div className="col-md-4">
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Real Time Insights</div>
-                      <div className="user-land-advantage__desc">Time requests from Patients near you who are looking for Medical Services and are viewing your Profiles.</div>
+                      <div className="user-land-advantage__desc">Information packets about users searhing for medical procedures and consultations. They enable search specific price alloaction for differnet procedures and consultations.</div>
                   </div>
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Actionable Insights</div>
-                      <div className="user-land-advantage__desc">With the help of our powerful AI , we help you maintain your catalog Prices according to the competition rate in the market to get you maximum bookings.</div>
+                      <div className="user-land-advantage__desc">With the help of our powerfull AI Tool we help you to maintain your catalogue for best profits against your competitor in the markets.</div>
                   </div>
               </div>
               
@@ -220,12 +230,12 @@ class HomePage extends Component {
               <div className="col-md-4 ">
               <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
-                    <div className="user-land-advantage__desc">Track your Business including your centres from one platform only, monitor performance and enhance your revenues by acting on intelligent insights.</div>
-                    <div className="user-land-advantage__value">Easy Business Management</div>
+                    <div className="user-land-advantage__desc">Our AI Tool helps you to rapidly analyze the abundant amount of data, we help you to enhance customer interactions as well as drive workflow-process proficiencies.</div>
+                    <div className="user-land-advantage__value">Powerfull AI</div>
                 </div>
                   <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
                     
-                      <div className="user-land-advantage__desc">Strong marketing on our platform will extensively promote your facility to targeted audiences and hence enhanced revenue</div>
+                      <div className="user-land-advantage__desc">Stong marketing team would extensively promote your Institutes services to targeted audiences</div>
                       <div className="user-land-advantage__value">Extensive Marketing</div>
                   </div>
                  
@@ -475,6 +485,56 @@ class HomePage extends Component {
     </div>
  
 </section>
+
+
+<div className="how_we_do_slider_wrapper" >
+                        <AliceCarousel
+                             items={[
+                             <div  key={1} className="how_we_do_item_wrap " >
+                                        <div className="how_we_do_item_child how_we_do_item_child_1">
+                                            <img className="how_we_do_image" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_image1.png" />
+                                        </div>
+                                        <div className="how_we_do_item_child how_we_do_child_2">
+                                            <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_icon1.png"/>
+                                            <text className="how_we_do_child_2_text">We connect you with Top Professionals near you regarding any medical Services.</text>
+                                        </div>
+                             </div>,
+                             
+                             <div  key={2} className="how_we_do_item_wrap " >
+                                        <div className="how_we_do_item_child how_we_do_item_child_1">
+                                            <img className="how_we_do_image" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/happy-doctor-holding-clipboard-with-patients_1098-2176+(1)%402x-min.png" />
+                                        </div>
+                                        <div className="how_we_do_item_child how_we_do_child_2">
+                                            <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_icon2-min.png"/>
+                                            <text className="how_we_do_child_2_text">Select professional of your choice and Lock the deal in Rs 100/-</text>
+                                        </div>
+                             </div>, <div  key={3} className="how_we_do_item_wrap " >
+                                        <div className="how_we_do_item_child how_we_do_item_child_1">
+                                            <img className="how_we_do_image" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_image3-min.png" />
+                                        </div>
+                                        <div className="how_we_do_item_child how_we_do_child_2">
+                                            <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_icon3-min.png"/>
+                                            <text className="how_we_do_child_2_text">Pay the rest later when you visit the Professional.</text>
+                                        </div>
+                             </div>,<div  key={4} className="how_we_do_item_wrap " >
+                                        <div className="how_we_do_item_child how_we_do_item_child_1">
+                                            <img className="how_we_do_image" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_image4-min.png" />
+                                        </div>
+                                        <div className="how_we_do_item_child how_we_do_child_2">
+                                            <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/how_we_do_icon4-min.png"/>
+                                            <text className="how_we_do_child_2_text">Payments are secure and Refundable.</text>
+                                        </div>
+                             </div>]}
+                             responsive={this.responsive}
+                              autoPlayInterval={2000}
+                              autoPlayDirection="rtl"
+                              autoPlay={false}
+                              buttonsDisabled ={true}
+                            fadeOutAnimation={false}
+                            mouseTrackingEnabled={true}
+                            disableAutoPlayOnAction={true}
+  />
+  </div>
 
 <section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
                         <div className="what_we_do_wrapper">

@@ -315,3 +315,50 @@
             width: 70%;
         }
     }
+
+
+
+    .how_we_do_slider_wrapper {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1rem;
+      }
+      
+      .how_we_do_item_wrap {
+        display: flex;
+        flex-direction: row;
+      }
+      
+      .how_we_do_item_child {
+        flex: 1 1 45%;
+        margin: 1%;
+      }
+      
+      .how_we_do_image{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 15rem;
+      }
+      
+      .how_we_do_child_2 {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .how_we_do_child_2_icon {
+        height: 5rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .how_we_do_child_2_text {
+        font-size: 1.5rem;
+        font-family: light_proxima;
+        margin-top: 2rem;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }

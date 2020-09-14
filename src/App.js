@@ -27,7 +27,7 @@ import './sass/main.scss'
 import HomePage from './components/HomePage';
 import Login from './components/functional/Login';
 import no_auth_route from "./HOC/no_auth_route"
-
+import "react-alice-carousel/lib/alice-carousel.css";
 const Greet = ({ message }) => <div>
   <div>{message.title}</div>
   <div>{message.body}</div>
