@@ -466,7 +466,7 @@ class HomePage extends Component {
                             <h3 className="history-item__title">Signup</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 1</div>
                             <p className="history-item__desc">
-                                Signup on the platform with the help of an phone number and specify specialities provided in your institute.  
+                                 Signup on the platform with your Primary phone number and specify specialities that are available at your facility.  
                             </p>
                         </div>
                     </div>
