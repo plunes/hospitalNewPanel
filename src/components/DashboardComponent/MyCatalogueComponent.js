@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import SidebarComponent from './SidebarComponent';
-import DashboardHeader from './DashboardHeader';
 import CheckboxPill from '../functional/CheckboxPill'
 import UpdatePrice from '../functional/UpdatePrice'
 import AnimatedMount from "../../HOC/AnimatedMount"

@@ -348,17 +348,20 @@
       }
       
       .how_we_do_child_2_icon {
-        height: 5rem;
+        height: 8rem;
         display: block;
         margin-left: auto;
         margin-right: auto;
       }
       .how_we_do_child_2_text {
         font-size: 1.5rem;
-        font-family: light_proxima;
+        font-family: "ProximaNova";
         margin-top: 2rem;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
         display: block;
+      }
+      .how_we_do_child_2_head {
+          font-size: 2rem !important;
       }
