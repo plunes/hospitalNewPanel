@@ -478,7 +478,7 @@ class HomePage extends Component {
                             <h3 className="history-item__title">Add Services</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 2</div>
                             <p className="history-item__desc">
-                                 You can add services from our master catalogue or upload the list of services offered via .pdf , .xlsx document.
+                            You can add service prices from our Universal catalog or upload list of services offered by your facility via .pdf , .xlsx document in our "Catalog Section"
                             </p>
                         </div>
                     </div>
@@ -490,7 +490,8 @@ class HomePage extends Component {
                             <h3 className="history-item__title">Act on Insights</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 3</div>
                             <p className="history-item__desc">
-                                update prices for insights provided by us to increase the conversion rate of users</p>
+                            Update prices according to intelligent insights provided by us to increase the conversion rates of patients.
+Update Variance</p>
                         </div>
                     </div>
                 </div>
@@ -501,7 +502,8 @@ class HomePage extends Component {
                             <h3 className="history-item__title">Update Variance</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 4</div>
                             <p className="history-item__desc">
-                                 Our AI will help you to update variance in catalogue for better patients footfall and maximum profit.
+                            Our AI will suggest the right variance to you for better patient footfall and enhanced revenue.
+Confirm appointments
                             </p>
                         </div>
                     </div>
@@ -513,7 +515,8 @@ class HomePage extends Component {
                             <h3 className="history-item__title">Confirm appointments</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 5</div>
                             <p className="history-item__desc">
-                               Confirm and reschedule appointment time and date from admin dashboard according to feasibility and availability of resourses. 
+                            Confirm and track  appointments of your facility and all respective centres from only one Admin Profile
+                            Monitor Business/Payments
                             </p>
                         </div>
                     </div>
@@ -527,7 +530,7 @@ class HomePage extends Component {
                             <h3 className="history-item__title">Monitor payments</h3>
                             <div className="history-item__place history-item__place-guarantee"> Step 6</div>
                             <p className="history-item__desc">
-                                Monitor complete payment funnel for every confirmed appointments
+                            Monitor complete payment funnel for every confirmed appointment and Monitor your business easily.
                             </p>
                         </div>
                     </div>
