@@ -9405,13 +9405,13 @@ tr:nth-last-child(2) td.ui-sgcollapsed.sgexpanded:before {
 	line-height: 1.5;
 	position: relative;
 	display: inline-block;
-	width: 128px;
-	/* width: 100%;
-    text-align: center; */
+	/* width: 128px; */
+	width: 100%;
+   
 
 	vertical-align: middle;
 	line-height: normal;
-	text-align: right;
+	text-align: center;
 	padding-right: 15px;
 }
 .user-land-advantage__desc {

@@ -211,7 +211,7 @@ class HomePage extends Component {
           </div>
           
           <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-4 text-center vertical_space_around">
                   <div className="user-land-advantage__item js-animate translate40">
                       <div className="user-land-advantage__value">Real Time Insights</div>
                       <div className="user-land-advantage__desc"></div>
@@ -227,13 +227,13 @@ class HomePage extends Component {
                 <img src="https://profile-image-plunes.s3.amazonaws.com/Plunes.com+images/About-Us/why_plunes-min.png" className="img-fluid why_plunes_center_image"  />
               </div>
               
-              <div className="col-md-4 ">
-              <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
+              <div className="col-md-4 text-center vertical_space_around">
+              <div className="user-land-advantage__item user-land-advantage js-animate translate40">
                     
                     <div className="user-land-advantage__desc"></div>
-                    <div className="user-land-advantage__value">Powerfull AI</div>
+                    <div className="user-land-advantage__value">Easy Business Management</div>
                 </div>
-                  <div className="user-land-advantage__item user-land-advantage__item--right js-animate translate40">
+                  <div className="user-land-advantage__item user-land-advantage js-animate translate40">
                     
                       <div className="user-land-advantage__desc"></div>
                       <div className="user-land-advantage__value">Extensive Marketing</div>
@@ -258,7 +258,7 @@ class HomePage extends Component {
                                         <div className="how_we_do_item_child how_we_do_child_2">
                                             <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/AnalyticPanel/realtime_icon.svg"/>
                                             <text style={{fontSize:'1rem'}} className="how_we_do_child_2_text how_we_do_child_2_head">Realtime Insights</text>
-                                            <text className="how_we_do_child_2_text">Information packets about users searhing for medical procedures and consultations. They enable search specific price alloaction for differnet procedures and consultations.</text>
+                                            <text className="how_we_do_child_2_text">Real Time requests from Patients near you who are looking for Medical Services and are viewing your Profiles.</text>
                                         </div>
                              </div>,
                              
@@ -269,7 +269,7 @@ class HomePage extends Component {
                                         <div className="how_we_do_item_child how_we_do_child_2">
                                             <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/AnalyticPanel/actionable_icon.png"/>
                                             <text className="how_we_do_child_2_text how_we_do_child_2_head ">Actionable Insights</text>
-                                            <text className="how_we_do_child_2_text">With the help of our powerfull AI Tool we help you to maintain your catalogue for best profits against your competitor in the markets.</text>
+                                            <text className="how_we_do_child_2_text">With the help of our powerful AI , we help you maintain your catalog Prices according to the competition rate in the market to get you maximum bookings.</text>
                                         </div>
                              </div>, <div  key={3} className="how_we_do_item_wrap " >
                                         <div className="how_we_do_item_child how_we_do_item_child_1">
@@ -277,8 +277,10 @@ class HomePage extends Component {
                                         </div>
                                         <div className="how_we_do_item_child how_we_do_child_2">
                                             <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/AnalyticPanel/ai_icon.svg"/>
-                                            <text style={{fontSize:'1rem'}} className="how_we_do_child_2_text how_we_do_child_2_head">Powerfull AI</text>
-                                            <text className="how_we_do_child_2_text">Our AI Tool helps you to rapidly analyze the abundant amount of data, we help you to enhance customer interactions as well as drive workflow-process proficiencies..</text>
+                                            <text style={{fontSize:'1rem'}} className="how_we_do_child_2_text how_we_do_child_2_head">Easy Business Management</text>
+                                            <text className="how_we_do_child_2_text">Track your Business including your centres from one platform only, monitor performance and enhance your revenues by acting on intelligent insights.
+
+</text>
                                         </div>
                              </div>,<div  key={4} className="how_we_do_item_wrap " >
                                         <div className="how_we_do_item_child how_we_do_item_child_1">
@@ -287,7 +289,7 @@ class HomePage extends Component {
                                         <div className="how_we_do_item_child how_we_do_child_2">
                                             <img  className="how_we_do_child_2_icon" src="https://profile-image-plunes.s3.amazonaws.com/AnalyticPanel/marketting_icon.svg"/>
                                             <text style={{fontSize:'1rem'}} className="how_we_do_child_2_text how_we_do_child_2_head">Strong Marketing</text>
-                                            <text className="how_we_do_child_2_text">Stong marketing team would extensively promote your Institutes services to targeted audiences</text>
+                                            <text className="how_we_do_child_2_text">Strong marketing on our platform will extensively promote your facility to targeted audiences and hence enhanced revenue </text>
                                         </div>
                              </div>]}
                              responsive={this.responsive}

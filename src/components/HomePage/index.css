@@ -367,3 +367,10 @@
       .how_we_do_child_2_head {
           font-size: 2rem !important;
       }
+
+      .vertical_space_around {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	
+	}
