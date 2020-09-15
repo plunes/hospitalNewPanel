@@ -1,4 +1,6 @@
-
+#root {
+  height: 100vh;
+}
 
 .App {
   width: 90%;

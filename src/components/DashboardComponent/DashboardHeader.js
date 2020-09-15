@@ -58,12 +58,12 @@ class DashboardHeader extends Component {
                    <img className='header_icon_rish' src="/icon/payment_header_icon.svg" />
                   <text   className={`${window.location.pathname==='/dashboard/payments'?'green_text_rish':'header_link_text'} `} >Payments</text></Link>
                   </li> 
-                 <li className="nav-item header_li_rish">
+                 {/* <li className="nav-item header_li_rish">
                  <img className='header_icon_rish' src="/icon/plockr_icon.svg" />
                  <a  rel= "noopener" target="_blanck" href={`https://plockr.plunes.com/auth/${localStorage.getItem('token')}`}>
                   <text   className={`${window.location.pathname==='/signin'?'green_text_rish':'header_link_text'} `} >Plockr</text>
                      </a>
-                  </li> 
+                  </li>  */}
                   
                    <li className="nav-item header_li_rish">
                 <Link to= "/dashboard/notification"

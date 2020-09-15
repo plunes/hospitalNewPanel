@@ -448,7 +448,10 @@ class HomePage extends Component {
                      <section className="about">
   <div className="container">
     <div className="icon-boxes text-center">
-     <h2 className="heading_rish align_center text-center">Onboarding Process</h2>
+          <div className="section-title">
+             <h2 style={{color:'#000'}}>Onboarding Process</h2>
+          </div>
+    
     </div>
   </div>
 </section>
@@ -551,7 +554,9 @@ Confirm appointments
 
 <section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
                         <div className="what_we_do_wrapper">
-                            <h2 className="heading_rish align_center text-center">See How we Work?</h2>
+                        <div className="section-title">
+                           <h2 style={{color:'#000'}}>See How we Work?</h2>
+                        </div>
                             <div className="see_how_we_work_iframe_wrap">
                               <iframe 
                                     className="see_how_we_work_iframe"

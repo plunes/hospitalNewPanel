@@ -72,11 +72,14 @@ form
     margin-top: 1rem !important;
   }
   
-.editbankdetailfield 
-    {border: none !important;
+
+.editbankdetailfield {
+    border: none !important;
     border-bottom: 1px solid #B5B3B3 !important;
-    border-radius: 0px !important;     
-    margin: 35px 0px;font-size: 1.2rem !important;}
+    border-radius: 0px !important;
+    margin: 1rem 0rem;
+    font-size: 1rem !important;
+}
 
 .managePay
     {margin: 30px;}

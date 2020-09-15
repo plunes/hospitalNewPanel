@@ -1024,7 +1024,7 @@ class DashboardComponent extends React.PureComponent {
                                     // Actionable Insight Modal
                                         isOpen={this.state.modalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
-                                        onRequestClose={this.closeModal}
+                                        onRequestClose={this.handleModal}
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal modal_pdd tech_background'>
@@ -1083,7 +1083,7 @@ class DashboardComponent extends React.PureComponent {
                                       // Real Time Insight Modal
                                         isOpen={this.state.realModalIsOpen}
                                         onAfterOpen={this.afterOpenModal}
-                                        onRequestClose={this.closeModal}
+                                        onRequestClose={this.handleRealModal}
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal secon_modal tech_background'>
