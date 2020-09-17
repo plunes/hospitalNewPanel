@@ -252,17 +252,19 @@ class RegistrationContainer extends  React.Component {
   }
 
   registerUser =(data)=>{
+      console.log(data, "data in register User")
+      console.log(typeof(data), "data  type in register User")
       this.setState({
           loading:true
       },()=>{
         if((this.state.type==="Hospital" || (this.state.type==="Lab"))){
-            console.log(...data,"data in register User")
+          
             this.props.registerUser({
                 ...data,
                 userType:this.state.type
             })
         }else if(this.state.type==="Doctors"){
-            console.log(...data,"data in register User")
+           
           this.props.registerUser({
               ...data,
               userType:'Doctor'
