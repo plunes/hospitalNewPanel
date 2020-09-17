@@ -57,24 +57,9 @@ html {
    }
 }
 
-/* tab-land */
-  @media screen and (max-width: 75em) {
-    html {
-     
-     }
-}
-
-/* big-desktop */
 @media screen and (max-width: 112.5em) {
   html {
     font-size: 75%;
-   }
-}
-
-@media screen and (max-width: 112.5em) {
-  .container-fluid {
-    margin-left: 20%;
-    margin-right: 20%;
    }
 }
 
