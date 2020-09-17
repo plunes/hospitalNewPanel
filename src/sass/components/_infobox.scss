@@ -1,0 +1,13 @@
+.info-box-wrapper {
+  display: flex;
+  flex-direction: row;
+  background-color: $color-white;
+}
+.info-box-wrapper-child-1 {
+  flex: 1 1 30%;
+  margin: 0;
+}
+.info-box-wrapper-child-2 {
+   flex: 1 1 65%;
+  margin: 0;
+}

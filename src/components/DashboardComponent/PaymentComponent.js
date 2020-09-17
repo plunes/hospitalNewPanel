@@ -6,6 +6,8 @@ import { initiatePayment } from '../../actions/userActions'
 import Modal from 'react-modal';
 import Payments from "../Payments"
 import './Dashboard.css';
+import Heading from '../functional/Heading';
+import InfoBox from '../functional/InfoBox';
 
 const customStyles = {
     content: {
@@ -121,8 +123,15 @@ class PaymentComponent extends Component {
 
         return (
            <React.Fragment>
+                <Heading>
+                    <h4 style={{position:'relative',paddingTop:'1rem'}}>Payments</h4>
+                </Heading>
+                <div>
+                    <InfoBox  
+                    />
+                </div>
                     <div className='main_content_rish new_card_class'>
-                    <div className= 'text-center paymnt_heding'><h4 style={{position:'relative',paddingTop:'1rem'}} className="section_heading_rish">Payments</h4></div><br></br>
+                   
                         {
                             this.state.payments.map((p, index) => {
                                  console.log(p.bookingStatus,"bookingStatus")
