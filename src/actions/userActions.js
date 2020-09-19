@@ -206,7 +206,7 @@ import { get_url_params, for_loop } from '../utils/common_utilities';
 
 
 
-let baseUrl = "https://devapi.plunes.com/v6"
+let baseUrl = "https://devapi.plunes.com/v61"
 let base_url_without_v6 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
@@ -215,10 +215,10 @@ if(!!pathLocation) {
  if(pathLocation === 'analytics.plunes.com') {
    console.log('PROD');
    // Production baseUrl
-   baseUrl = 'https://api.plunes.com/v6'
+   baseUrl = 'https://api.plunes.com/v61'
    base_url_without_v6 = 'https://api.plunes.com'
  }else{
-   baseUrl = "https://devapi.plunes.com/v5"
+   baseUrl = "https://devapi.plunes.com/v61"
    base_url_without_v6 ="https://devapi.plunes.com"
    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
  }
