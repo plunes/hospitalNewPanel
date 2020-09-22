@@ -442,6 +442,7 @@ margin: 0 1%;
 .header_link_text {
     color: #fff !important;
     font-size: 1.1rem;
+    -webkit-appearance: inherit !important;
 }
 .header_li_rish {
     margin: auto 0rem auto 3rem;

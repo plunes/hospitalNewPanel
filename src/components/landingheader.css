@@ -89,6 +89,7 @@
 
 .header_wrapper_rish {
     width:-webkit-fill-available;
+    width: -moz-available;
     padding: 1rem;
     z-index: 999;
     display: flex;
