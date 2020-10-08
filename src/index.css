@@ -125,9 +125,7 @@ body {
 .display-none{
   display: none;
 }
-.modal-heading_ris{
-  /* width: 40rem; */
-}
+
 
 .loader_ris {
   position: absolute;
@@ -414,9 +412,7 @@ body {
   z-index: -12121212121212121212;
   left: 7rem;
 }
-.multi-steps > li:nth-child(2)::after{ 
-  /* background-color: #DCDCDC; */
-}
+
 .multi-steps > li.not_active_ris:after {
   background-color: #DCDCDC;
   content: '';

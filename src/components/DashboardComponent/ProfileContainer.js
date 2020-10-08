@@ -25,6 +25,7 @@ import AnimatedMount from "../../HOC/AnimatedMount"
 import ImageGallery from 'react-image-gallery';
 import NewNotif from '../functional/NewNotif';
 import LoaderComponent from '../functional/LoaderComponent';
+import AliceCarousel from 'react-alice-carousel';
 const options = {
   items: 2,
   margin: 0,
@@ -37,7 +38,12 @@ const events = {
   onDragged: function(event) {},
   onChanged: function(event) {}
 };
-
+const responsive = {
+  0: { items: 1 },
+  568: { items: 3 },
+  1024: { items: 4 },
+  1724: { items: 6 }
+};
 
 class ProfileContainer extends React.PureComponent {
   constructor(props) {
@@ -575,6 +581,22 @@ class ProfileContainer extends React.PureComponent {
     let achievementArray  = this.achievement_slider()
 
     const images = this.get_images()
+    let arr = []
+    if(!!this.state.prof_data.achievements){
+      arr = [...this.state.prof_data.achievements.map((item,i)=>{
+        return <React.Fragment>
+           <div key={i} className="col-md-12">
+              <div className="card mb-2">
+                <img className="card-img-top card_im "
+                  src={item.imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+                <div className="card-body">
+    <p className="card-text">{item.title}</p>
+                </div>
+              </div>
+            </div>    
+        </React.Fragment>
+      })]
+    }
     
     console.log(achievementArray,"achievementArray")
     const { open } = this.state;
@@ -805,8 +827,19 @@ class ProfileContainer extends React.PureComponent {
 <div className="achivmnt_b profil_achevment">
 {!!this.state.prof_data.achievements?
   this.state.prof_data.achievements.length!==0?
-  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-  {/* {true && <LoaderComponent />} */}
+  <React.Fragment>
+    <AliceCarousel
+                             items={arr}
+                             responsive={responsive}
+                              autoPlayInterval={2000}
+                              autoPlayDirection="rtl"
+                              autoPlay={false}
+                              buttonsDisabled ={true}
+                            fadeOutAnimation={false}
+                            mouseTrackingEnabled={true}
+                            disableAutoPlayOnAction={true}
+  />
+   {/* <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
       {achievementArray.map((item,i)=>{
         return item
@@ -817,7 +850,9 @@ class ProfileContainer extends React.PureComponent {
       <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
           class="fas fa-chevron-right"></i></a>
     </div>
-</div>:<div className="row">
+</div> */}
+  </React.Fragment>
+ :<div className="row">
 <div style={{marginLeft:'auto', marginRight:'auto'}} className='text-cener margin-top-medium_ris'>
     <img style={{marginLeft:'3rem'}} src="/no_achievement.svg"  alt="no_achivement_added" />
     <div style={{marginTop:'2rem', fontSize:'1.5rem'}}>No Achievement added</div>
