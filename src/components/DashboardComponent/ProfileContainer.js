@@ -585,7 +585,7 @@ class ProfileContainer extends React.PureComponent {
     if(!!this.state.prof_data.achievements){
       arr = [...this.state.prof_data.achievements.map((item,i)=>{
         return <React.Fragment>
-           <div key={i} className="col-md-12">
+           <div style={{maxWidth:'35rem'}} key={i} className="col-md-12">
               <div className="card mb-2">
                 <img className="card-img-top card_im "
                   src={item.imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
@@ -831,13 +831,14 @@ class ProfileContainer extends React.PureComponent {
     <AliceCarousel
                              items={arr}
                              responsive={responsive}
-                              autoPlayInterval={2000}
+                              autoPlayInterval={1500}
                               autoPlayDirection="rtl"
-                              autoPlay={false}
+                              autoPlay={true}
+                              infinite={true}
                               buttonsDisabled ={true}
-                            fadeOutAnimation={false}
-                            mouseTrackingEnabled={true}
-                            disableAutoPlayOnAction={true}
+                            fadeOutAnimation={true}
+                            mouseTrackingEnabled={false}
+                            disableAutoPlayOnAction={false}
   />
    {/* <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
     <div class="carousel-inner" role="listbox">

@@ -67,7 +67,8 @@ const handleUpload = (e) => {
 
 
 const submitdetails = () => {
-    if(props.achieveTitle ===''){
+    // if(props.achieveTitle ===''){
+      if(false){
         addToast("Add title to continue",{ appearance: 'error', autoDismiss:true })
     }else if(!props.achievementImage){
       addToast("Add an image to continue",{ appearance: 'error', autoDismiss:true })
