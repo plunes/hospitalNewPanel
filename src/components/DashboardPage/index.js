@@ -695,6 +695,12 @@ update_real_insights = (data) => {
                 ret = {this.state.ret}
                 retClr = {()=>this.setState({ret:false})}
                />
+
+<div id="myModal_rish" className="modal_rish">
+                <span className="close_rish">X</span>
+        <img className="modal-content_rish" id="img01_rish"/>
+        <div id="caption_rish"></div>
+</div>
                  <Notify  
                         success={this.state.Notify.success}
                         autoDismiss = {this.state.initial_render?false:true}

@@ -66,6 +66,28 @@ let url = ""
   }
 }
 
+const on_click = () => {
+  var modal = document.getElementById("myModal_rish");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg_rish");
+var modalImg = document.getElementById("img01_rish");
+var captionText = document.getElementById("caption_rish");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = (!!props.user?props.user.coverImageUrl===''?'/maxhos.jpg':props.user.coverImageUrl:'')
+  captionText.innerHTML = "Cover Image";
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close_rish")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+}
+
 console.log(props,"props in ProfileBanner")
 
   return (
@@ -79,12 +101,15 @@ console.log(props,"props in ProfileBanner")
     />
      <div style={{position:'relative', border:'none'}}>
          {props.loading && <LoaderComponent />}
-            <img className=" mas_hos " 
+            <img className="mas_hos " 
+            onClick ={on_click}
+            id="myImg_rish"
             src={(!!props.user?props.user.coverImageUrl===''?'/maxhos.jpg':props.user.coverImageUrl:'')} 
             alt=""></img>
              <div className="edit_image">
             <img className="edit_icn"  onClick={(e)=>handleImageClick(e)} src={'/pen_editor.svg'}></img>
         </div>
+       
         </div>
 </React.Fragment>
   )
