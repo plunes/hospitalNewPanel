@@ -304,5 +304,11 @@
             .card_im {
                 /* width: 15rem; */
                 height: 15rem;
-                object-fit: contain;
+                object-fit: cover;
+                cursor: pointer;
+            }
+            .card_im:hover {
+                /* width: 15rem; */
+                height: 15rem;
+                opacity: .7;
             }

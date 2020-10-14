@@ -73,6 +73,7 @@ const on_click = () => {
 var img = document.getElementById("myImg_rish");
 var modalImg = document.getElementById("img01_rish");
 var captionText = document.getElementById("caption_rish");
+console.log(img,"img")
 img.onclick = function(){
   modal.style.display = "block";
   modalImg.src = (!!props.user?props.user.coverImageUrl===''?'/maxhos.jpg':props.user.coverImageUrl:'')

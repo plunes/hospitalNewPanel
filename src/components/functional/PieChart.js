@@ -7,13 +7,13 @@ const PieChart = (props) =>{
     const data = {
         labels: [
             'Business Gained',
-            'Business Lost'
+            'Potential business'
         ],
         datasets: [{
             data: props.data,
             backgroundColor: [
-            '#01D35A',
-            '#F3E520'
+            '#00BC8B',
+            '#FFB800'
             ],
             hoverBackgroundColor: [
             '#01D35A',

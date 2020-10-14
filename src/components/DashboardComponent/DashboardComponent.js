@@ -844,7 +844,7 @@ class DashboardComponent extends React.PureComponent {
                                                         </div>
                                                         <div className=' text-center'>
                                                             <p className="businessPrice businessLost">&#8377; {!!this.props.business_data.businessLost?this.props.business_data.businessLost.toFixed(2):'0'}</p>
-                                                            <p className="Earn">Business Lost</p>
+                                                            <p className="Earn">Potential business</p>
                                                         </div>
                                                     </div> 
                                                     </div>
@@ -963,7 +963,7 @@ class DashboardComponent extends React.PureComponent {
                                                                 <text style={{fontSize:'1rem'}} className="green_text_rish">{item.businessGained?item.businessGained:item.businessGained===0?0:'N/A'}</text>
                                                                 </span>
                                                                 <span className="business_earned_lost_span">
-                                                                <text className="black_text">Business lost- </text>
+                                                                <text className="black_text">Potential business- </text>
                                                                 <text className="orange_text">{item.businessLost?item.businessLost:item.businessLost===0?0:'N/A'}</text>
                                                                 </span>
                                                             </div>

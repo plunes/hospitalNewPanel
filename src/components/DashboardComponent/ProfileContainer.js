@@ -95,6 +95,34 @@ class ProfileContainer extends React.PureComponent {
       manual_address:e.target.value
      })
    }
+
+    on_click = (id, src, text) => {
+    console.log("Modal_onclick")
+    var modal = document.getElementById("myModal_rish");
+  
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById(id);
+  var modalImg = document.getElementById("img01_rish");
+  var captionText = document.getElementById("caption_rish");
+  modal.style.display = "block";
+  modalImg.src = (src)
+  captionText.innerHTML = !!text?text:'Achievement'
+  console.log(text,"img on on_click")
+  // img.onclick = function(){
+  //   console.log("Inside imag onclick")
+  //   modal.style.display = "block";
+  //   modalImg.src = (src)
+  //   captionText.innerHTML = !!text?text:'Achievement';
+  // }
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close_rish")[0];
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() { 
+    modal.style.display = "none";
+  }
+  }
   componentWillReceiveProps(nextProps){
 
     if(!!nextProps.change_address_ret){
@@ -585,13 +613,14 @@ class ProfileContainer extends React.PureComponent {
     if(!!this.state.prof_data.achievements){
       arr = [...this.state.prof_data.achievements.map((item,i)=>{
         return <React.Fragment>
-           <div style={{maxWidth:'35rem'}} key={i} className="col-md-12">
+           <div style={{maxWidth:'20rem'}} key={i} className="col-md-12">
               <div className="card mb-2">
                 <img className="card-img-top card_im "
-                  src={item.imageUrl} alt="Card image cap"/><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
-                <div className="card-body">
-    <p className="card-text">{item.title}</p>
-                </div>
+                id={`achieve-${i}`}
+                  src={item.imageUrl} onClick={()=>this.on_click(`achieve-${i}`, item.imageUrl, item.title)} /><span style={{cursor:'pointer'}} onClick={this.removeAchievement}   data-iterate= {i}  className="ceoss_icon"><i data-iterate= {i} class="fa fa-times" aria-hidden="true"></i></span>
+                {/* <div className="card-body">
+ <p className="card-text">{item.title}</p>
+                </div> */}
               </div>
             </div>    
         </React.Fragment>
