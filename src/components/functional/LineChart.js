@@ -11,9 +11,9 @@ const LineChart = (props) => {
         datasets: [
           {
             label: 'Number of Users',
-            fill: false,
+            fill: props.fill?true:false,
             lineTension: 0.1,
-            backgroundColor: 'rgba(75,192,192,0.4)',
+            backgroundColor: '#000',
             borderColor: 'rgba(75,192,192,1)',
             borderCapStyle: 'butt',
             borderDash: [],
@@ -33,11 +33,11 @@ const LineChart = (props) => {
         ]
       };
     return (
-        <div style={{height:'25rem'}}>
+        <div style={{height:'15rem'}}>
             <Line 
             data={data}
             options={{
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
                 responsive: true,
                 startFrom:0,
                 scales: {

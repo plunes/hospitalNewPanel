@@ -906,11 +906,6 @@ class DashboardComponent extends React.PureComponent {
                                             <p className="businessWarn">Please take action on real time insights to increase your business</p>
                                         </div>
                                     </div> 
-
-                                  
-                                 
-
-
                                 </div>
 
                                 <div className="action_insights_wrapper">      
@@ -1088,15 +1083,19 @@ class DashboardComponent extends React.PureComponent {
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal secon_modal tech_background'>
                                         <div className='text-right'>
-                                            <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text>
+                                            {/* <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text> */}
                                         </div>
-                                        <span style={{marginBottom:'1rem'}} className="modal_heading center_align_rish">Real Time Prediction</span>
+                                        <span  className="modal_heading center_align_rish">Real Time Prediction</span>
                                         <div><text className="serv_ces">{this.state.realServiceName}</text></div>
-                                        <div className='margin_top_small_rish'>   
-
+                                        <h2 className="yout_ctl margin_top_mini_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update your best price for maximum bookings</b></h2>
+                                        <div className='margin_top_medium_rish'>   
                                         <Slider
                                             min={0}
                                             max={50}
+                                            tooltip={true}
+                                            format={(val)=>{
+                                                return <p>{this.state.solUpdatedPrice.toFixed(2)}</p>
+                                            }}
                                             labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:this.state.realUpdatePrice/2})}
                                             value={this.state.solValue}
                                             onChange={this.handleSolutionSliderChange}
@@ -1118,21 +1117,26 @@ class DashboardComponent extends React.PureComponent {
                                                 }
                                             </span>            
                                         </div>
-
-
-                                    <div className="bookingChance text-center margin_top_small_rish">Chances of Conversion increases by
-                                    </div>
-                                        <div className='text-center margin_top_small_rish'><CircularProgress
+                                        <div className="text-center margin_top_mini_rish"><text style={{ fontSize: '.8rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                        <div><text className="serv_ces margin_top_mini_rish">Chances of Conversion increases by</text></div>
+                                       
+                                        <div className='text-center margin_top_mini_rish'><CircularProgress
                                             data = {get_circular_progress_data()}
                                             value={this.state.solValue}
                                         /></div>
-                                        <h2 className="yout_ctl margin_top_small_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update Price in your catalogue <br></br>for Maximum Bookings</b></h2>
+                                       <div style={{height:'10rem'}}>
+                                         <LineChart
+                                           data = {this.props.solutionUsers}
+                                           fill={true}
+                                          />
+                                          </div>
+                                       
                                             {this.state.realUpdatePriceLoading && <LoaderComponent />}        
                                            <br></br>
                                         </div> 
                                        
                                          
-                                        <div className="text-center"><text style={{ fontSize: '1.2rem', border: 'none' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                       
                                     </Modal>
                                     <Modal
                                         isOpen={this.state.act_as_admin_flag}
