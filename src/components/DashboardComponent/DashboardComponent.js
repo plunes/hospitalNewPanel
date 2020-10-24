@@ -16,6 +16,7 @@ import { getInsights, updateRealPriceClr, clearUpdatePriceData,
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import InsightGraph from "../functional/InsightGraph"
 import './Dashboard.css';
 import Modal from 'react-modal';
 import Loader from 'react-loader-spinner'
@@ -97,6 +98,7 @@ class DashboardComponent extends React.PureComponent {
             user_map_loading:false,
             business_day:7,
             act_as_admin_flag:false,
+            real_time_data_points:[],
             get_actionable:{
                 center:''
             },
@@ -308,13 +310,23 @@ class DashboardComponent extends React.PureComponent {
     }   
 
      handleRealPrice(select) {
-        this.setState({
-            realModalIsOpen :  true,
-            realServiceName: select.serviceName,
-            realUpdatePrice : select.userPrice,
-            realUpdateData : select,
-            real_time_edit_price:select.userPrice
-        })
+        var header = document.getElementById("header");
+        if(header){
+            console.log("Header is there", header)
+            header.setAttribute("style", "z-index:-9999;");
+        }
+       
+        setTimeout(()=>{
+            this.setState({
+                realModalIsOpen :  true,
+                realServiceName: select.serviceName,
+                realUpdatePrice : select.userPrice,
+                realUpdateData : select,
+                real_time_edit_price:select.userPrice,
+                real_time_data_points:select.dataPoints || []
+            })
+        }, 500)
+       
     }
 
     handleRealModal() {
@@ -326,8 +338,18 @@ class DashboardComponent extends React.PureComponent {
             value:0,
             real_time_edit:false,
             realUpdatePriceLoading:false,
-            real_time_edit_price:false
+            real_time_edit_price:false,
+            real_time_data_points:[]
         })
+       
+        setTimeout(()=>{
+            var header = document.getElementById("header");
+            if(header){
+                console.log("Header is there", header)
+                header.setAttribute("style", "z-index:9999;");
+            }
+        },500)
+       
     }
 
     handleModal() {
@@ -1088,7 +1110,7 @@ class DashboardComponent extends React.PureComponent {
                                         <span  className="modal_heading center_align_rish">Real Time Prediction</span>
                                         <div><text className="serv_ces">{this.state.realServiceName}</text></div>
                                         <h2 className="yout_ctl margin_top_mini_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update your best price for maximum bookings</b></h2>
-                                        <div className='margin_top_medium_rish'>   
+                                        <div className='margin_top_medium-2_rish'>   
                                         <Slider
                                             min={0}
                                             max={50}
@@ -1102,7 +1124,7 @@ class DashboardComponent extends React.PureComponent {
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
 
-                                        <div className="SliderUpdatedPrice margin_top_small_rish">&#8377;
+                                        <div className="SliderUpdatedPrice margin_top_mini_rish">&#8377;
                                             <span style={{fontSize:'1rem'}}>
                                                 {((!!this.state.real_time_edit) && (!!this.state.realUpdateData.suggested))?
                                                 <React.Fragment>
@@ -1117,16 +1139,16 @@ class DashboardComponent extends React.PureComponent {
                                                 }
                                             </span>            
                                         </div>
-                                        <div className="text-center margin_top_mini_rish"><text style={{ fontSize: '.8rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                        <div className="text-center "><text style={{ fontSize: '.8rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                         <div><text className="serv_ces margin_top_mini_rish">Chances of Conversion increases by</text></div>
                                        
                                         <div className='text-center margin_top_mini_rish'><CircularProgress
                                             data = {get_circular_progress_data()}
                                             value={this.state.solValue}
                                         /></div>
-                                       <div style={{height:'10rem'}}>
-                                         <LineChart
-                                           data = {this.props.solutionUsers}
+                                       <div className="modal_graph_wrapper">
+                                         <InsightGraph
+                                           data = {this.state.real_time_data_points}
                                            fill={true}
                                           />
                                           </div>

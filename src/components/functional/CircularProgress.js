@@ -16,6 +16,7 @@ const CircularProgress = (props) => {
         dataIndex={props.value}
         width={100}
         tooltipColor="#000"
+        labelColor='#000'
         knobDraggable ={false}
         valueFontSize='2rem'
         valueColor="#fff"
