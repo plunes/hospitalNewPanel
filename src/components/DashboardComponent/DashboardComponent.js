@@ -41,6 +41,7 @@ import PieChart from '../functional/PieChart'
 import LineChart from '../functional/LineChart'
 import Select from "../Select";
 import ToolTip from '../functional/Tooltip'
+import InsightProgressBar from '../functional/InsightProgressBar';
 
 const customStyles = {
     content: {
@@ -317,13 +318,17 @@ class DashboardComponent extends React.PureComponent {
         }
        
         setTimeout(()=>{
+            console.log(parseInt(((select.userPrice) * (select.recommendation/100)),10),"parseInt(((select.userPrice) * (select.recommendation/100)),10)")
             this.setState({
+                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):0,
+                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):0,
                 realModalIsOpen :  true,
                 realServiceName: select.serviceName,
                 realUpdatePrice : select.userPrice,
                 realUpdateData : select,
                 real_time_edit_price:select.userPrice,
-                real_time_data_points:select.dataPoints || []
+                real_time_data_points:select.dataPoints || [],
+                solValue:select.recommendation?100-select.recommendation:0
             })
         }, 500)
        
@@ -603,7 +608,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.state.realUpdateData,"this.state.realUpdateData")
+        console.log(this.state,"this.state.solValue")
         let arr = []
         if(typeof this.props.solutionUsers === `object`){
             let data = [...this.props.solutionUsers]
@@ -1113,12 +1118,12 @@ class DashboardComponent extends React.PureComponent {
                                         <div className='margin_top_medium-2_rish'>   
                                         <Slider
                                             min={0}
-                                            max={50}
+                                            max={100}
                                             tooltip={true}
                                             format={(val)=>{
                                                 return <p>{this.state.solUpdatedPrice.toFixed(2)}</p>
                                             }}
-                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:this.state.realUpdatePrice/2})}
+                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:0})}
                                             value={this.state.solValue}
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
@@ -1146,7 +1151,17 @@ class DashboardComponent extends React.PureComponent {
                                             data = {get_circular_progress_data()}
                                             value={this.state.solValue}
                                         /></div>
-                                       <div className="modal_graph_wrapper">
+                                        {this.state.realUpdateData.competitionRate &&  <div className="insight_progress_wrapper margin_top_mini_rish">
+                                            <InsightProgressBar
+                                             progress = {parseInt(this.state.realUpdateData.competitionRate, 10)}
+                                            />
+                                            <span className="competition-text">Competition Rate</span>
+                                        </div> }
+                                   
+                                       <div className="modal_graph_wrapper margin_top_small_rish">
+                                      <hr className="comp_insight_hr" />
+                                       <div style={{marginRight:'auto'}} className="competition_insight margin_top_mini_rish">Competition Insight
+                                    </div>
                                          <InsightGraph
                                            data = {this.state.real_time_data_points}
                                            fill={true}

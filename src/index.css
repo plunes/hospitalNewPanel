@@ -1260,5 +1260,98 @@ html {
 
 }
 .modal_graph_wrapper {
+    width: 90%;
+    margin: auto;
+}
+.competition_insight {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+hr.comp_insight_hr {
+ border-top:  1px solid #fff !important;
+}
+
+
+#progressbar {
+  background-color: #EAEAEA;
+  border-radius: 13px;
+  /* (height of inner div) / 2 + padding */
+  padding: 0px;
+}
+
+#progressbar>div {
+  /* background-color: orange; */
+  background-image: linear-gradient(to right, #FFF1B7, #F3CF3D);
+  /* width: 40%; */
+  /* Adjust with JavaScript */
+  height: .6rem;
+  border-radius: 10px;
+}
+.insight_progress_handle{
+  /* left: 25%; */
+  /* background: red; */
+  /* position: absolute; */
+  /* width: 175px; */
+  /* width: 1rem;
+  height: 1rem; */
+  border-radius: 50%;
+  position: relative;
+  /* background-color: blueviolet; */
+}
+
+.insight_progress_toottip {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-weight: normal;
+  font-size: 14px;
+  transition: all 100ms ease-in;
+  border-radius: 4px;
+  display: inline-block;
+  color: white;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.insight_progress_tooltip > span {
+
+  display: inline-block;
+  line-height: 100%;
+  position: relative;
+  left: 1rem;
+  text-align: right;
+  /* display: flex;
+  align-items: center; */
+  display: block;
+  top: -2rem;
+  position: relative;
+  color: #fff;
+  font-size: 1rem;
   
+
+}
+
+.insight_progress_handle::after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #fff;
+  left: 100%;
+  bottom: -8px;
+  transform: translate3d(-50%, 0, 0);
+  top: -1rem;
+}
+
+.competition-text {
+  color: #fff;
+  display: block;
+  text-align: center;
+  margin: auto;
+  margin-top: .5rem;
 }

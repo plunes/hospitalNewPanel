@@ -4,17 +4,15 @@ import {Line} from 'react-chartjs-2';
 import AnimatedMount from "../../HOC/AnimatedMount"
 const InsightGraph = (props) => {
 
-   
-  let users = []
   const points = [...props.data]
- let labels = []
- let data_points = []
- points.forEach(item=>{
-     if(!item.self){
-        labels.push(item.x)
-        data_points.push(`${item.y}`)
-     }
- })
+  let labels = []
+  let data_points = []
+  points.forEach(item=>{
+      if(!item.self){
+          labels.push(item.x)
+          data_points.push(item.y)
+      }
+  })
  var ctx = document.getElementsByClassName('chartjs-render-monitor')[0].getContext('2d');
  console.log(ctx,"ctx")
  var gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -28,7 +26,7 @@ gradient.addColorStop(1, '#003B78');
           {
             label: 'Users',
             fill: props.fill?true:false,
-            lineTension: 0.2,
+            lineTension: 0.1,
             backgroundColor: gradient,
             borderColor: '#002448',
             borderCapStyle: 'butt',
@@ -73,7 +71,10 @@ gradient.addColorStop(1, '#003B78');
                         fontColor:'#fff',
                       },
                       ticks: {
-                        fontColor: "white"
+                        fontColor: "white",
+                        maxTicksLimit:7,
+                        stepSize: 0,
+                        autoSkip:true
                     }
                     }],
                     xAxes: [{
