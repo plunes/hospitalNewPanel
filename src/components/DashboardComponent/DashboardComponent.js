@@ -1059,7 +1059,7 @@ class DashboardComponent extends React.PureComponent {
                                         <div><text className="serv_ces">{this.state.serviceName}</text></div>
                                         <div className="catlou_sli">     
                                         {this.props.actioanable_update_loading && <LoaderComponent />}      
-                                        <div className="text-center margin_top_small_rish">
+                                        <div className="text-center margin_top_mini_rish">
                                         <Slider
                                             min={0}
                                             max={50}
@@ -1158,7 +1158,7 @@ class DashboardComponent extends React.PureComponent {
                                             <span className="competition-text">Competition Rate</span>
                                         </div> }
                                    
-                                       <div className="modal_graph_wrapper margin_top_small_rish">
+                                       <div className="modal_graph_wrapper margin_top_mini_rish">
                                       <hr className="comp_insight_hr" />
                                        <div style={{marginRight:'auto'}} className="competition_insight margin_top_mini_rish">Competition Insight
                                     </div>
