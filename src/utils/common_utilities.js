@@ -184,10 +184,11 @@ if(r.year!==0){
 
 
 
-export const  get_circular_progress_data = () =>{
+export const  get_circular_progress_data = (val) =>{
   let arr = []
   let  i = 0
-   while(i<51){
+  let  limit = val?val:51
+   while(i<limit){
      arr.push(`${i}%`)
      i++
    }

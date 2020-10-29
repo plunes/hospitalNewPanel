@@ -265,6 +265,7 @@ class DashboardComponent extends React.PureComponent {
         console.log(value,"value in handleSolutionsSliderChage")
         const { realUpdatePrice } = this.state
         let newPrice =  (realUpdatePrice )- ((realUpdatePrice) *( value /100))
+       
         this.setState({
             solValue : value,
             solUpdatedPrice : newPrice,
@@ -280,7 +281,7 @@ class DashboardComponent extends React.PureComponent {
           value: value,
           actionUpdatedPrice : newPrice
         })
-      };
+      }
 
      handleDaysChange(value) {
         this.setState({
@@ -609,6 +610,10 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
+
+        let   circular_progress_limit = this.state.realUpdateData.recommendation?100 - (this.state.realUpdateData.recommendation -10):71
+        let update_solValue = 100 * (this.state.solValue/circular_progress_limit)
+        console.log(update_solValue,"update_solValue")
         console.log(this.state,"this.state.realUpdateData")
         let arr = []
         if(typeof this.props.solutionUsers === `object`){
@@ -1150,8 +1155,8 @@ class DashboardComponent extends React.PureComponent {
                                         <div><text className="serv_ces margin_top_mini_rish">Chances of Conversion increases by</text></div>
                                        
                                         <div className='text-center margin_top_mini_rish'><CircularProgress
-                                            data = {get_circular_progress_data()}
-                                            value={this.state.solValue}
+                                            data = {get_circular_progress_data(71)}
+                                            value={update_solValue}
                                         /></div>
                                         {this.state.realUpdateData.competitionRate &&  <div className="insight_progress_wrapper margin_top_mini_rish">
                                             <InsightProgressBar
