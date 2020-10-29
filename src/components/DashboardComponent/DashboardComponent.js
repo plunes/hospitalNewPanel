@@ -262,8 +262,9 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handleSolutionSliderChange(value){
+        console.log(value,"value in handleSolutionsSliderChage")
         const { realUpdatePrice } = this.state
-        let newPrice = realUpdatePrice - realUpdatePrice * value /100
+        let newPrice =  (realUpdatePrice )- ((realUpdatePrice) *( value /100))
         this.setState({
             solValue : value,
             solUpdatedPrice : newPrice,
@@ -314,7 +315,7 @@ class DashboardComponent extends React.PureComponent {
         var header = document.getElementById("header");
         if(header){
             console.log("Header is there", header)
-            header.setAttribute("style", "z-index:-9999;");
+            header.setAttribute("style", "z-index:-9999;")
         }
        
         setTimeout(()=>{
@@ -330,7 +331,7 @@ class DashboardComponent extends React.PureComponent {
                 real_time_data_points:select.dataPoints || [],
                 solValue:select.recommendation?100-select.recommendation:0
             })
-        }, 500)
+        }, 300)
        
     }
 
@@ -608,7 +609,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.state,"this.state.solValue")
+        console.log(this.state,"this.state.realUpdateData")
         let arr = []
         if(typeof this.props.solutionUsers === `object`){
             let data = [...this.props.solutionUsers]
@@ -1118,12 +1119,13 @@ class DashboardComponent extends React.PureComponent {
                                         <div className='margin_top_medium-2_rish'>   
                                         <Slider
                                             min={0}
-                                            max={100}
+                                            // max={55}
+                                            max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):50}
                                             tooltip={true}
                                             format={(val)=>{
                                                 return <p>{this.state.solUpdatedPrice.toFixed(2)}</p>
                                             }}
-                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:0})}
+                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:this.state.realUpdateData.recommendation?parseInt((((this.state.realUpdatePrice) * ((this.state.realUpdateData.recommendation -10)/100))),10):0})}
                                             value={this.state.solValue}
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
