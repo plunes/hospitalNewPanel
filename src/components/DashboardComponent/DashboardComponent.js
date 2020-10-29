@@ -612,8 +612,8 @@ class DashboardComponent extends React.PureComponent {
     render() {
 
         let   circular_progress_limit = this.state.realUpdateData.recommendation?100 - (this.state.realUpdateData.recommendation -10):71
-        let update_solValue = 100 * (this.state.solValue/circular_progress_limit)
-        console.log(update_solValue,"update_solValue")
+        let update_solValue = 71 * (this.state.solValue/circular_progress_limit)
+        console.log(update_solValue, circular_progress_limit,this.state.solValue,"update_solValue")
         console.log(this.state,"this.state.realUpdateData")
         let arr = []
         if(typeof this.props.solutionUsers === `object`){
