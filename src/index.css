@@ -1072,11 +1072,9 @@ html {
 }
 .link_text_rish {
   color:  #01D35A;
-  font-weight: 600;
   cursor: pointer;
 }
 .button_text_rish {
-  font-weight: 600;
   cursor: pointer;
   font-size: 1.5rem;
 }

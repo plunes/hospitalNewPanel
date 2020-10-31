@@ -14,6 +14,7 @@ import AboutUsComponent from '../DashboardComponent/AboutUsComponent';
 import MyCatalogueComponent from '../DashboardComponent/MyCatalogueComponent';
 import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
+import AvailabilityPage from "../AvailabilityPage"
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
@@ -772,7 +773,7 @@ update_real_insights = (data) => {
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
-                  })(()=><AvailabilityComponent />)
+                  })(()=><AvailabilityPage />)
                   :(window.location.pathname === '/dashboard/settings')?
                   protected_route({
                     authObject:this.authObject,
