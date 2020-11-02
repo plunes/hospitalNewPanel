@@ -40,12 +40,23 @@ class TimerComponent extends React.Component {
     }
     componentDidMount() {
      
-      let timeLeftVar = this.secondsToTime(this.props.seconds);
-      // console.log(timeLeftVar,this.props.seconds(),"timeLeftVar in timeer")
-      this.setState(
-          { time: timeLeftVar,
-            seconds: this.props.seconds}
-          ,()=>this.startTimer());
+      if(this.props.data.booked){
+            this.setState({
+              time:{
+                "h": '00',
+                "m": '00',
+                "s": '00'
+              },
+              seconds: 0
+            })
+      }else {
+        let timeLeftVar = this.secondsToTime(this.props.seconds);
+        this.setState(
+            { time: timeLeftVar,
+              seconds: this.props.seconds}
+            ,()=>this.startTimer())
+      }
+     
     }
   
     startTimer() {
