@@ -53,9 +53,8 @@ class InsightComponent extends React.PureComponent {
             {
              !this.props.s.booked?
                     <text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u> <img className='arrow_class' src='/icon/green_arrow.svg' /> </text>
-                    :this.props.s.services?this.props.s.services.booked? 
-                     <text className="InsightUpdate kindlyUpdate"><u>Booking Confirmed</u></text>:<span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>:<span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>} 
-            
+                    :this.props.s.professionalBooked?
+                    <text className="InsightUpdate kindlyUpdate"><u>Booking Confirmed.</u></text>:<span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>}
             </span>
                  <span className='insight_component_time_wrap vertical_align_rish'>
             {
