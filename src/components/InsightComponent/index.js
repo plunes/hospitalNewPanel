@@ -38,7 +38,7 @@ class InsightComponent extends React.PureComponent {
         const index = this.props.index
       return (
           <React.Fragment>  
-                <div className="action_insight_wrapper" key={index}>
+                <div className={`${this.props.s.suggested?"action_insight_wrapper with_suggested":'action_insight_wrapper'}`} key={index}>
                     <span className="action_insight_image_wrapper">
                         {/* <img src ="/icon/insight_image.svg" className="action_insight_image"/> */}
                         <ProfileAvatar name = {this.props.s.userName} />
@@ -74,7 +74,22 @@ class InsightComponent extends React.PureComponent {
             }
             <span className='insight_time_span'>{getDateFormat(this.props.s.createdAt)}</span>
         </span>
+     {this.props.s.suggested &&  <div onClick={()=>this.props.not_notify_toggle(this.props.s)} className="service_not_available_wrapper">
+        <div className="service_not_available_parent">
+            <span className="service_not_available_icon_wrap">
+                <img src="/email.svg"  className="service_not_available_img" />
+            </span> 
+            <span className="service_not_available_text_wrap">
+                  <text className="service_not_available_text">
+                        Service Not Available
+                  </text>
+            </span>
+        </div>
+    </div> }
+        
+       
                 </div>
+                
                 {/* <hr></hr> */}
           </React.Fragment>
       )

@@ -1,12 +1,57 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import {  GET_ACT_INSIGHT, GET_REAL_INSIGHT, DELETE_PROFILE} from '../actions/types'
-import { get_act_insight_ret, get_real_insight_ret, get_act_insight_loading, get_real_insight_loading, delete_profile_ret, delete_profile_loading } from '../actions/dash_actions'
+import {  GET_ACT_INSIGHT, GET_REAL_INSIGHT, DELETE_PROFILE, DO_NOT_NOTIFY } from '../actions/types'
+import { get_act_insight_ret, get_real_insight_ret, get_act_insight_loading,
+   get_real_insight_loading, delete_profile_ret, delete_profile_loading, do_not_notify_loading, do_not_notify_ret } from '../actions/dash_actions'
 import api from '../utils/api_routes'
 import { get_url_params } from "../utils/common_utilities"
 import store from '../store'
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 
+
+function* do_not_notify_saga() {
+  console.log("Inside get_real_insight_saga")
+
+    try {
+        let center_id = get_url_params('center')
+        const  data = yield store.getState().dash_store.do_not_notify
+        
+        const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+        console.log("Just before api call")
+        const api_data = yield call(api.dash_routes.do_not_notify, data, headers)
+        console.log(api_data,"api_data in get_user_specs_saga")
+        if(!!api_data){
+          if (api_data.status === 200) {
+              yield put(do_not_notify_ret({
+                  success:true,
+                  message:'You will not receive insights relate to this service now',
+                  data:{}
+                }))
+            }else{
+              yield put(do_not_notify_ret({
+                  success:false,
+                  message:'Something went wrong try again later..',
+                  data:[]
+                }))
+            }
+        }
+    } catch (e) {
+      console.log(e,"e in get_act insigt saga")
+      try{
+          yield put(do_not_notify_ret({
+              success:false,
+              message:'Something went wrong try again later..',
+              data:[]
+            }))
+        }catch(x){
+          yield put(do_not_notify_ret({
+              success:false,
+              message:'Something went wrong try again later..',
+              data:[]
+            }))
+          }
+    }
+}
 
 function* delete_profile_saga() {
   console.log("Inside get_real_insight_saga")
@@ -149,7 +194,8 @@ function* get_act_insight_saga() {
 export const dash_saga = [
    takeLatest(GET_ACT_INSIGHT, get_act_insight_saga),
    takeLatest(GET_REAL_INSIGHT, get_real_insight_saga),
-   takeLatest(DELETE_PROFILE, delete_profile_saga)
+   takeLatest(DELETE_PROFILE, delete_profile_saga),
+   takeLatest(DO_NOT_NOTIFY, do_not_notify_saga)
 ]
 
 export default dash_saga

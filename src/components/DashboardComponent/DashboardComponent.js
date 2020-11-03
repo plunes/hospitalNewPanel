@@ -13,6 +13,7 @@ import { getInsights, updateRealPriceClr, clearUpdatePriceData,
        set_location_toggler,
        set_open_map
     } from '../../actions/userActions'
+import { do_not_notify, do_not_notify_loading } from "../../actions/dash_actions"
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
@@ -42,6 +43,8 @@ import LineChart from '../functional/LineChart'
 import Select from "../Select";
 import ToolTip from '../functional/Tooltip'
 import InsightProgressBar from '../functional/InsightProgressBar';
+import NoNotify from '../functional/NoNotify';
+
 
 const customStyles = {
     content: {
@@ -100,6 +103,8 @@ class DashboardComponent extends React.PureComponent {
             business_day:7,
             act_as_admin_flag:false,
             real_time_data_points:[],
+            not_notify_modal:false,
+            not_notify_insight:false,
             get_actionable:{
                 center:''
             },
@@ -214,6 +219,15 @@ class DashboardComponent extends React.PureComponent {
             }
         }
      }   
+
+     not_notify_toggle = (data) => {
+         console.log(data,"data in not_notify_toggle")
+         this.setState({
+             not_notify_modal:!this.state.not_notify_modal,
+             not_notify_insight:!!data?data:false
+         })
+
+     }
 
     send_details = () =>{
         if(!isValidPhoneNumber(this.state.act_as_admin_data.phone)){
@@ -744,6 +758,7 @@ class DashboardComponent extends React.PureComponent {
                                                         s = {s}
                                                         handleRealPrice = {this.handleRealPrice}
                                                         index = {index}
+                                                        not_notify_toggle = {this.not_notify_toggle}
                                                         />
                                                         )
                                                     )
@@ -1273,6 +1288,18 @@ class DashboardComponent extends React.PureComponent {
                                         </div>
                                         </div>
                                     </Modal>
+
+                                    <NoNotify
+                                        open={this.state.not_notify_modal}
+                                        toggle={this.not_notify_toggle}
+                                        
+                                        data= {this.state.not_notify_insight}
+                                        do_not_notify = {this.props.do_not_notify}
+                                        do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
+                                        do_not_notify_loading = {this.props.do_not_notify_loading}
+                                        do_not_notify_loading_flag = {this.props.dash_store.do_not_notify_loading}
+
+                                    />
                   </React.Fragment>
             )
         }
@@ -1295,7 +1322,8 @@ const mapStateToProps = state => ({
     location_toggler:state.user.location_toggler,
     open_map:state.user.open_map,
     centers_data:state.user.data.centers_data,
-    insight_flag:state.user.insight_flag
+    insight_flag:state.user.insight_flag,
+    dash_store:state.dash_store
 })
      export default AnimatedMount({
         unmountedStyle: {
@@ -1329,4 +1357,6 @@ const mapStateToProps = state => ({
         get_centers,
         set_location_toggler,
         set_open_map,
+        do_not_notify,
+        do_not_notify_loading,
         clearSolInsights, setMount })(DashboardComponent))

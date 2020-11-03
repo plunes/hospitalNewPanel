@@ -315,3 +315,98 @@
       color: #000;
       text-align: center;
   }
+
+
+  // Insight component css
+.service_not_available_wrapper {
+  width: 100%;
+}
+  .service_not_available_parent {
+     display: flex;
+     width: 10rem;
+     height: 1.5rem;
+     background-color: #C5E2FC;
+     border: 1px solid #72B2FF;
+     border-radius: .2rem;
+     padding: .2rem;
+     margin-left: 8rem;
+     cursor: pointer;
+  }
+  .service_not_available_img {
+    height: 95%;
+    display: block;
+    margin: auto;
+  }
+  .service_not_available_icon_wrap {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .service_not_available_text_wrap {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      margin-left: .2rem;
+  }
+
+  .service_not_available_text {
+      font-family: alt_thin_proxima;
+      font-size: .8rem;
+      color: #3084E9;
+  }
+
+
+  //  No Notif Css
+
+  .no_notif_image {
+    display: block;
+    margin: 2rem auto 1rem auto;
+  }
+  .no_notif-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+  }
+  .no_notify-text-bold {
+    font-size: 1.5rem;
+    font-family: regular_proxima;
+    color: #000;
+  }
+  .no_notify-text-small {
+    font-size: 1rem;
+    font-family: regular_proxima;
+    opacity: .8;
+  }
+  .no_notif-buttons-wrapper {
+    padding: .4rem;
+    display: flex;
+    width: 96%;
+    border-top: 2px solid #ECEBEC;
+    margin: auto;
+    opacity: .7;
+
+  }
+  .no_notif_button-left {
+    flex: 1 1 50%;
+    font-size: 1.5rem;
+    color: #0AD460;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+  }
+  .no_notif_button-right {
+    font-size: 1.5rem;
+    color: #0AD460;
+    text-align: center;
+    font-weight: bold;
+    flex: 1 1 50%;
+    cursor: pointer;
+  }
+
+  // .no_notif-modal {
+  //   width: 30%;
+  // }

@@ -102,6 +102,14 @@ export default {
     
 
     dash_routes:{
+      do_not_notify:(data,  headers) =>
+      axios
+          .put(`${base_url}/user/serviceNotificationException/${data.serviceId}`,{}, headers)
+          .then(res => {
+               console.log(res,'res delete doctor')
+               return res
+          })
+          .catch(err => err.response),
       delete_profile:(data, center_id,  headers) =>
       axios
           .delete(`${base_url}/user/deleteDoctor/${data.doctor_id}${!!center_id?'?userId='+center_id:''}`, headers)

@@ -286,3 +286,7 @@ export const REMOVE_SPECIALITY_LOADING = 'App/Catalogue/REMOVE_SPECIALITY_LOADIN
 export const REMOVE_SERVICE = 'App/Catalogue/REMOVE_SERVICE'
 export const REMOVE_SERVICE_RET = 'App/Catalogue/REMOVE_SERVICE_RET'
 export const REMOVE_SERVICE_LOADING = 'App/Catalogue/REMOVE_SERVICE_LOADING'
+
+export const DO_NOT_NOTIFY = 'App/Catalogue/DO_NOT_NOTIFY'
+export const DO_NOT_NOTIFY_RET = 'App/Catalogue/DO_NOT_NOTIFY_RET'
+export const DO_NOT_NOTIFY_LOADING = 'App/Catalogue/DO_NOT_NOTIFY_LOADING'

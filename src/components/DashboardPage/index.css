@@ -196,11 +196,15 @@
     /* text-decoration: underline; */
 }
 
+.with_suggested {
+    height: auto !important;
+}
+
 .action_insight_wrapper {
     display: flex;
     flex-wrap: wrap;
     padding: 1rem .2rem 1rem .2rem;
-    height: 8rem;
+    /* height: 8rem; */
     margin: .4rem 0rem;
     background-color: #fff;
     box-shadow:  0px 2px 5px #00000029;

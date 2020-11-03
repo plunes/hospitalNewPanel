@@ -1,6 +1,6 @@
 import { GET_ACT_INSIGHT, GET_ACT_INSIGHT_RET, GET_ACT_INSIGHT_LOADING, 
     GET_REAL_INSIGHT, GET_REAL_INSIGHT_RET, GET_REAL_INSIGHT_LOADING, DELETE_PROFILE,
-    DELETE_PROFILE_LOADING, DELETE_PROFILE_RET
+    DELETE_PROFILE_LOADING, DELETE_PROFILE_RET, DO_NOT_NOTIFY_LOADING, DO_NOT_NOTIFY_RET, DO_NOT_NOTIFY
     
 } from '../actions/types';
 import { get_url_params } from "../utils/common_utilities"
@@ -17,11 +17,39 @@ const cat_init_state  = {
 
     delete_profile:false,
     delete_profile_ret:false,
-    delete_profile_loading:false
+    delete_profile_loading:false,
+
+    do_not_notify:false,
+    do_not_notify_ret:false,
+    do_not_notify_loading:false
 }
 
 export default function (state = cat_init_state, action) {
 switch (action.type) {
+
+    case DO_NOT_NOTIFY:
+        return {
+            
+            ...state,
+            do_not_notify:action.payload,
+            do_not_notify_loading:true
+        }
+    case DO_NOT_NOTIFY_RET:
+
+        return {
+            ...state,
+            do_not_notify_ret:action.payload,
+            do_not_notify_loading:true
+        }
+
+    case DO_NOT_NOTIFY_LOADING:
+
+        return {
+            ...state,
+            do_not_notify_ret:false,
+            do_not_notify_loading:false
+        }
+
 
     case DELETE_PROFILE:
         return {
