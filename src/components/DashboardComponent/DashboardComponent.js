@@ -44,6 +44,7 @@ import Select from "../Select";
 import ToolTip from '../functional/Tooltip'
 import InsightProgressBar from '../functional/InsightProgressBar';
 import NoNotify from '../functional/NoNotify';
+import SaveService from '../functional/SaveService';
 
 
 const customStyles = {
@@ -105,6 +106,8 @@ class DashboardComponent extends React.PureComponent {
             real_time_data_points:[],
             not_notify_modal:false,
             not_notify_insight:false,
+            save_service_modal:false,
+            save_service_insight:false,
             get_actionable:{
                 center:''
             },
@@ -151,6 +154,7 @@ class DashboardComponent extends React.PureComponent {
 
         if(((nextProps.actioanable_update_loading === false) && (this.props.actioanable_update_loading===true))){
             console.log(this.state.realUpdateData,"this.state.====>>>>")
+        
             this.handleModal()
         }
          
@@ -229,6 +233,14 @@ class DashboardComponent extends React.PureComponent {
 
      }
 
+     save_service_toggle = (data) => {
+        console.log(data,"data in save_service_toggle")
+        this.setState({
+            save_service_modal:!this.state.save_service_modal,
+            save_service_insight:!!data?data:false
+        })
+
+    }
     send_details = () =>{
         if(!isValidPhoneNumber(this.state.act_as_admin_data.phone)){
             this.setState({
@@ -464,12 +476,18 @@ class DashboardComponent extends React.PureComponent {
                   }else{
                       obj.discount = this.state.solValue
                   }
-                this.setState({
+              
+                if(!!this.state.realUpdateData.suggested){
+                    this.save_service_toggle(obj)
+                }else {
+                      this.setState({
                     realUpdatePriceLoading:true,
                     realUpdateData:{...this.state.realUpdateData, userPrice:Math.round(Number(this.state.real_time_edit_price))}
                 },()=>{
-                    this.props.updateRealPrice(obj);
+                   this.props.updateRealPrice({...obj})
                 }) 
+                }
+                
              }
         }
         } catch (error) {
@@ -524,6 +542,7 @@ class DashboardComponent extends React.PureComponent {
     updateRealPriceClr = () =>{
         this.props.updateRealPriceClr()
         this.handleRealModal()
+        this.save_service_toggle()
         let insight = [...this.props.solInsights]
          let updated_insight =  insight.map((item,i)=>{
             if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
@@ -1298,6 +1317,17 @@ class DashboardComponent extends React.PureComponent {
                                         do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
                                         do_not_notify_loading = {this.props.do_not_notify_loading}
                                         do_not_notify_loading_flag = {this.props.dash_store.do_not_notify_loading}
+
+                                    />
+                                     <SaveService
+                                        open={this.state.save_service_modal}
+                                        toggle={this.save_service_toggle}
+                                        
+                                        data= {this.state.save_service_insight}
+                                        updateRealPrice = {this.props.updateRealPrice}
+                                        // do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
+                                        // do_not_notify_loading = {this.props.do_not_notify_loading}
+                                        // do_not_notify_loading_flag = {this.props.dash_store.do_not_notify_loading}
 
                                     />
                   </React.Fragment>
