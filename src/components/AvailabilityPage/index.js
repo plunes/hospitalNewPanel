@@ -24,7 +24,10 @@ class AvailabilityPage extends Component {
           selectedshift:{},
           selectedDay:{},
           firstRender:true,
-          slots:[]
+          slots:[],
+          selected_slot:{
+            slots:[]
+          }
         }
       }
       async componentDidMount(){
@@ -52,45 +55,49 @@ class AvailabilityPage extends Component {
            return obj
         }
       componentWillReceiveProps(nextProps){
-        // if(((!!nextProps.timeSlot) && (this.state.firstRender))){
-        //   let arr = []
-        //   nextProps.timeSlot.forEach((item,i)=>{
-        //       console.log(!!item.slots[1],"!!item.slots[1]")
-        //         let obj = {}
-        //         obj.day =this.getDay(i)
-        //         obj.closed = item.closed==="false"?false:true
-        //         obj.slots = {
-        //         morning: this.stringToTime(item.slots[0]),
-        //         evening: this.stringToTime(!!item.slots[1]?item.slots[1]:'')
-        //         }
-        //         arr.push(obj)
-        //   })
-        //   this.setState({
-        //     slots:arr,
-        //     firstRender:false
-        //   })
-        // }
+        if(((!!nextProps.timeSlot) && (this.state.firstRender))){
+          console.log(nextProps.timeSlot,"time Slot in Availability page")
+          let arr = []
+          nextProps.timeSlot.forEach((item,i)=>{
+              console.log(item.slots,"=====================================>")
+              let time_slots = [...item.slots]
+              let slots_arr = []
+              time_slots.forEach(data=>{
+                slots_arr.push(this.stringToTime(data))
+              })
+                let obj = {}
+                obj.day =this.getDay(i)
+                obj.closed = item.closed==="false"?false:true
+                obj.slots = slots_arr
+                arr.push(obj)
+          })
+          this.setState({
+            slots:arr,
+            firstRender:false,
+            selected_slot:arr[0]
+          })
+        }
 
-        // if(nextProps.setAvailabilityRet){
-        //   if(nextProps.setAvailabilityRet.success){
-        //       this.setState({
-        //         ret:{
-        //           success:true,
-        //           message:nextProps.setAvailabilityRet.message
-        //         },
-        //         loading:false
-        //       })
-        //   }else{
-        //     this.setState({
-        //       ret:{
-        //         success:false,
-        //         message:nextProps.setAvailabilityRet.message
-        //       },
-        //       loading:false
-        //     })
-        //   }
-        //   nextProps.setAvailabilityClr()
-        // }
+        if(nextProps.setAvailabilityRet){
+          if(nextProps.setAvailabilityRet.success){
+              this.setState({
+                ret:{
+                  success:true,
+                  message:nextProps.setAvailabilityRet.message
+                },
+                loading:false
+              })
+          }else{
+            this.setState({
+              ret:{
+                success:false,
+                message:nextProps.setAvailabilityRet.message
+              },
+              loading:false
+            })
+          }
+          nextProps.setAvailabilityClr()
+        }
       }
       timeToString = (time) =>{
         // console.log(hour,"hour in timetostring")
@@ -246,6 +253,14 @@ slotClicked = (slot,a,b,item )  =>{
   })
 }
 
+set_slot = (day) => {
+  this.setState({
+    selected_slot:[...this.state.slots].filter(item=>{
+      return (item.day === day)
+    })[0]
+  })
+}
+
 setAvailabilityClr = () =>{
   this.setState({
     loading:false
@@ -270,37 +285,25 @@ setAvailabilityClr = () =>{
                             <div className="u-margin-5-auto u-margin-top-small">
                                  <WeekWidget
                                    variant = {"box"}
-
+                                   data={this.state.selected_slot}
+                                   onClick={this.set_slot}
                                  />
                                 
                             </div>
                             <div className=" u-margin-top-small">
                               <div className="checkbox-input checkbox-big u-display-flex">
-                                  <input type="checkbox" id="html"/>
-                                  <label  className="u-margin-auto" for="html">OPEN</label>
+                                  <input checked={!this.state.selected_slot.closed} type="checkbox" id="html"/>
+                                   <label  className="u-margin-auto" for="html">{!this.state.selected_slot.closed?'OPEN':'CLOSED'}</label>
                               </div>
                             </div>
-                            <div className="u-margin-top-small">
-                                <Timerow 
-
-                                  />
-                              </div>
-                              <div className="u-margin-top-small">
-                                <Timerow 
-
-                                  />
-                              </div>
-                              <div className="u-margin-top-small">
-                                <Timerow 
-
-                                  />
-                              </div>
-                              <div className="u-margin-top-small">
-                                <Timerow 
-
-                                  />
-                              </div>
-                             
+                            {this.state.selected_slot.slots.map(item=>{
+                              return   <div className="u-margin-top-small">
+                                    <Timerow 
+                                        data = {item}
+                                        timeToString = {this.timeToString}
+                                      />  
+                            </div>
+                            })}
                              <div className="u-margin-top-small">
                                  <img src="/add_icon.svg" className="add-icon-time-row" />
                              </div>
@@ -320,7 +323,8 @@ setAvailabilityClr = () =>{
                   <div className="u-margin-5-auto u-margin-top-small">
                                  <WeekWidget
                                    variant = {"circle"}
-
+                                   data={this.state.selected_slot}
+                                   onClick={this.set_slot}
                                  />
                                 
                     </div>
