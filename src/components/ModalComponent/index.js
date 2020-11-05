@@ -31,7 +31,7 @@ const customStyles = {
             style={customStyles}
           //   contentLabel="Example Modal"
          >
-          {this.props.no_cross?'':<div className="text-right"><button onClick={this.props.handleClose} className="cross no-border"><img src="/cross.png" alt="" className="covidCross"></img></button></div>} 
+          {this.props.no_cross?'':<div style={{padding:'.5rem'}} className="text-right"><button onClick={this.props.handleClose} className="cross no-border"><img src="/cross.png" alt="" className="covidCross"></img></button></div>} 
             <div className="bdu_content">{this.props.modalBody()}</div>
           </Modal>
          

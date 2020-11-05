@@ -1189,7 +1189,7 @@ class DashboardComponent extends React.PureComponent {
                                         <div><text className="serv_ces margin_top_mini_rish">Chances of Conversion increases by</text></div>
                                        
                                         <div className='text-center margin_top_mini_rish'><CircularProgress
-                                            data = {get_circular_progress_data(!!this.state.realUpdateData.recommendation?71:51)}
+                                            data = {get_circular_progress_data(!!this.state.realUpdateData.recommendation?71:100)}
                                             value={update_solValue}
                                         /></div>
                                         {this.state.realUpdateData.competitionRate &&  <div className="insight_progress_wrapper margin_top_mini_rish">

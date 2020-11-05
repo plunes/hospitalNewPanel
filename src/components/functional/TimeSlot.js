@@ -19,6 +19,7 @@ const TimeSlot = (props) => {
         const {addToast} = useToasts()
 
         useEffect(() => {
+            console.log(props.selected_time.time,"props.selected_time.time")
             setHour((props.selected_time.time.hour))
             setMinutes((props.selected_time.time.minutes))
           
@@ -34,6 +35,7 @@ const TimeSlot = (props) => {
           }, [])
 
           console.log(props,"props in TimeSlots Component")
+          console.log(timestamp, timestamps_arr,"timestamp, timestamps")
       const  getTimeOptions = (shift) =>{
             if(shift==='morning'){
                 return (
@@ -310,7 +312,7 @@ const TimeSlot = (props) => {
                             ret ={error}
                             retClr = {()=>set_error(false)}
              />
-        <div className="modal-heading_ris set_u_t">Set your Time</div>
+        <div className="modal-heading_ris set_u_t">Select your Time</div>
         <div className="row modal-p_ris margin-top-small_ris text-center">
     <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour===0?12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>=12?hour===24?'AM':'PM':'AM'}</small></h2>
         </div>

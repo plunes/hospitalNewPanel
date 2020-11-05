@@ -114,6 +114,8 @@ class AvailabilityPage extends Component {
          return timeString
       }
       add_slot = () => {
+        if(!!this.state.selected_slot.slots[this.state.selected_slot.slots.length -1].from)
+       {
         let updated_selected_slot = [...this.state.selected_slot.slots]
         updated_selected_slot.push({
           from: false,
@@ -141,6 +143,7 @@ class AvailabilityPage extends Component {
                }
           })
         })
+       }
       }
 
       handleTimeSubmit = (data) =>{
