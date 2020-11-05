@@ -264,13 +264,18 @@ class AppointmentComponent extends Component {
         if(((!!nextProps.timeSlot) && (this.state.firstRender))){
             let arr = []
             nextProps.timeSlot.forEach((item,i)=>{
+
+                let time_slots = [...item.slots]
+                let slots_arr = []
+                time_slots.forEach(data=>{
+                  slots_arr.push(this.stringToTime(data))
+                })
+
+
                   let obj = {}
                   obj.day = getDay(i)
                   obj.closed = item.closed==="false"?false:true
-                  obj.slots = {
-                  morning: stringToTime(item.slots[0]),
-                  evening: stringToTime(item.slots[1])
-                  }
+                  obj.slots = slots_arr
                   arr.push(obj)
             })
             this.setState({
@@ -302,6 +307,30 @@ class AppointmentComponent extends Component {
               }
           }
     }
+
+    stringToTime =(str)=>{
+        let arr = str.split('-')
+        let fromMinute = arr[0].split(" ")[0].split(':')[1]
+        let fromHour = arr[0].split(" ")[0].split(':')[0]
+        let fromAmpm = arr[0].split(" ")[1]
+        let toMinutes = arr[1].split(" ")[0].split(':')[1]
+        let toHour = arr[1].split(" ")[0].split(':')[0]
+        let toAmPm = arr[1].split(" ")[1]
+        console.log(fromHour==='12',"fromHour")
+  let obj =   {
+            from:{
+              hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
+              minutes:parseInt(fromMinute,10),
+              timestamp:new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime()
+            },
+            to:{
+              hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
+              minutes:parseInt(toMinutes,10),
+              timestamp:new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime()
+            }
+        }
+           return obj
+        }
 
     confirmBooking = (item,type) =>{
         if(item.bookingStatus==="Cancellation Requested"){
