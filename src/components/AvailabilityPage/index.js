@@ -254,37 +254,26 @@ getDay = (i) =>{
 generateSlotsFormat = () =>{
     let slots = [...this.state.slots]
     let arr = []
+    console.log(slots,"slots in generateSlotsFormat")
     slots.forEach((item,i)=>{
       let obj = {}
       obj = {
         closed:item.closed,
         day:item.day,
-        slots:[`${this.timeToString(item.slots.morning.from)}-${this.timeToString(item.slots.morning.to)}`,`${this.timeToString(item.slots.evening.from)}-${this.timeToString(item.slots.evening.to)}`]
+        slots:item.slots.map(slot=>{
+          return `${this.timeToString(slot.from)}-${this.timeToString(slot.to)}`
+        })
       }
       arr.push(obj)
     })
+    console.log(arr,"arr")
     return arr   
 }
-
-onOpenModal = () => {
-  this.setState({ open: true });
-};
 
 onCloseModal = () => {
   this.setState({ open: false });
 };
 
-slotClicked = (slot,a,b,item )  =>{
- console.log(item,"item in slotClicked")
-  this.setState({
-    selectedSlot:slot,
-    selectedType:b,
-    selectedshift:a,
-    open:true,
-    selectedDay:item,
-    selecteDaySlots:item.slots
-  })
-}
 
 time_selected = (data) => {
   console.log(data,"data in time_selected")
@@ -299,6 +288,22 @@ set_slot = (day) => {
     selected_slot:[...this.state.slots].filter(item=>{
       return (item.day === day)
     })[0]
+  })
+}
+
+sloct_checkbox = () => {
+  let updated_selected_slot = {...this.state.selected_slot, closed: !this.state.selected_slot.closed}
+  this.setState({
+    selected_slot:{
+      ...updated_selected_slot
+    },
+    slots:[...this.state.slots].map(item=>{
+         if(item.day===this.state.selected_slot.day){
+             return {...updated_selected_slot}
+         }else{
+           return item
+         }
+    })
   })
 }
 
@@ -360,7 +365,7 @@ setAvailabilityClr = () =>{
                             </div>
                             <div className=" u-margin-top-small">
                               <div className="checkbox-input checkbox-big u-display-flex">
-                                  <input checked={!this.state.selected_slot.closed} type="checkbox" id="html"/>
+                                  <input checked={!this.state.selected_slot.closed} onClick={()=>this.sloct_checkbox()} type="checkbox" id="html"/>
                                    <label  className="u-margin-auto" for="html">{!this.state.selected_slot.closed?'OPEN':'CLOSED'}</label>
                               </div>
                             </div>
@@ -383,7 +388,7 @@ setAvailabilityClr = () =>{
                                  <span className="add-more-slots">Add more slots</span>
                              </div>
                              <div className='u-margin-top-mini text-center'>
-                                  <Button style={{fontSize:"3rem"}}  onClick={()=>console.log()}>Submit</Button>
+                                  <Button style={{fontSize:"3rem"}}  onClick={()=>this.handleSubmitAvail()}>Submit</Button>
                              </div> 
                            
                  </div>

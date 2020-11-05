@@ -24,12 +24,12 @@ console.log(key_prop,"key_prop")
                 <div className="delete-icon-wrapper">
                      <i onClick={()=>props.remove_slot(key_prop)} className="fa fa-trash delete-icon cursor-pointer" aria-hidden="true"></i>
                 </div>
-                <div className="slot-check-box">
+                {/* <div className="slot-check-box">
                     <div className="checkbox-input checkbox-small ">
                         <input type="checkbox" id={Math.random()}/>
                         <label  className="u-margin-auto"></label>
                     </div>
-                </div>
+                </div> */}
            </div>
     </React.Fragment>
 }

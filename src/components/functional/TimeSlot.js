@@ -182,24 +182,28 @@ const TimeSlot = (props) => {
              })
 
              if(na){
+                 console.log('1st ====>>>>>>')
                 if((new_time > timestamps[timestamps.length -3]) ){
 
                 }else {
                     throw new MyError('Please enter a valid time')
                 } 
              }else if(index===0){
+                console.log('2nd ====>>>>>>')
                     if((new_time < timestamps[1]) && (new_time < timestamps[timestamps.length -1]) ){
 
                     }else {
                         throw new MyError('Please enter a valid time')
                     }
              }else if((index===(timestamps.length-1))){
+                console.log('3rd ====>>>>>>')
                 if((new_time > timestamps[0]) && (new_time > timestamps[timestamps.length -2]) ){
 
                 }else {
                     throw new MyError('Please enter a valid time')
                 } 
              }else {
+                console.log('4th ====>>>>>>')
                 if((new_time > timestamps[index -1]) && (new_time > timestamps[index +1 ]) ){
 
                 }else {
