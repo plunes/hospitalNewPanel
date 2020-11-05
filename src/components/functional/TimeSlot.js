@@ -204,7 +204,8 @@ const TimeSlot = (props) => {
                 } 
              }else {
                 console.log('4th ====>>>>>>')
-                if((new_time > timestamps[index -1]) && (new_time > timestamps[index +1 ]) ){
+                console.log(index,timestamps,new_time,"asdasdasdasdasdasdsadasd")
+                if((new_time > timestamps[index -1]) && (new_time < timestamps[index +1 ]) ){
 
                 }else {
                     throw new MyError('Please enter a valid time')
