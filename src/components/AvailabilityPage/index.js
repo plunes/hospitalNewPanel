@@ -45,11 +45,13 @@ class AvailabilityPage extends Component {
   let obj =   {
             from:{
               hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
-              minutes:parseInt(fromMinute,10)
+              minutes:parseInt(fromMinute,10),
+              timestamp:new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime()
             },
             to:{
               hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
-              minutes:parseInt(toMinutes,10)
+              minutes:parseInt(toMinutes,10),
+              timestamp:new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime()
             }
         }
            return obj
@@ -78,6 +80,7 @@ class AvailabilityPage extends Component {
           })
         }
 
+     
         if(nextProps.setAvailabilityRet){
           if(nextProps.setAvailabilityRet.success){
               this.setState({
@@ -100,6 +103,9 @@ class AvailabilityPage extends Component {
         }
       }
       timeToString = (time) =>{
+        if(!time){
+          return 'N/A'
+        }
         // console.log(hour,"hour in timetostring")
          let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
          console.log(hour,time,"hour in timetostring")
@@ -107,35 +113,60 @@ class AvailabilityPage extends Component {
          let timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
          return timeString
       }
-      handleTimeSubmit = (data) =>{
-          let slot = [...this.state.slots]
-          let index  = ''
-          let newSlot  = slot.filter((item,i)=>{
-                    if(item.day === this.state.selectedDay.day){
-                      index = i
-                    }
-                  return item.day !== this.state.selectedDay.day
-          })
-          let newObject = {
-            ...this.state.selectedDay,
-            slots: {...this.state.selectedDay.slots,
-                  [this.state.selectedshift]:{
-                    ...this.state.selectedDay.slots[this.state.selectedshift],[this.state.selectedType]:{
-                      ...data
-                    }
+      add_slot = () => {
+        let updated_selected_slot = [...this.state.selected_slot.slots]
+        updated_selected_slot.push({
+          from: false,
+          to: false
+        })
+        console.log(updated_selected_slot,"updated_selected_slot")
+        this.setState({
+          selected_slot:{
+            ...this.state.selected_slot,
+            slots:updated_selected_slot
+          },
+          slots:[...this.state.slots].map(item=>{
+               if(item.day===this.state.selected_slot.day){
+                 let arr =  [...item.slots]
+                 arr.push({
+                  from: false,
+                  to: false
+                })
+                  return  {
+                    ...item,
+                    slots:arr
                   }
-            }
-          }
-          newSlot.splice(index,0,newObject)
-        
-          this.setState({
-            slots:newSlot,
-            selectedSlot:{},
-            selectedType:{},
-            selectedshift:{},
-            selectedDay:{},
-            open:false
+               }else{
+                 return item
+               }
           })
+        })
+      }
+
+      handleTimeSubmit = (data) =>{
+  console.log(data,"data in handleTimeSubmit")
+
+  let slots = this.state.slots
+   let updated_slots = slots.map(item=>{
+     if(item.day === data.day){
+       return {
+         ...item,
+         slots:data.slots,
+       }
+     }else{
+       return item
+     }
+   })
+
+
+   console.log(updated_slots,"updated_slots")
+
+   this.setState({
+     slots:[...updated_slots],
+     selected_slot:data,
+     open:false
+   })
+
       }
      
       handleCloseDay = (data,i,e) => {
@@ -176,14 +207,13 @@ class AvailabilityPage extends Component {
     return(
         <React.Fragment>
             <TimeSlot
-             selectedSlot = {this.state.selectedSlot}
-             selectedType = {this.state.selectedType}
-             selectedshift = {this.state.selectedshift}
+             selected_time = {this.state.selected_time}
+           
              submit = {this.handleTimeSubmit}
              setAvailabilityRet = {this.props.setAvailabilityRet}
              setAvailabilityClr = {this.props.setAvailabilityClr}
              loadingOff = {()=>this.setLoadingOff()}
-             selecteDaySlots = {this.state.selecteDaySlots}
+             selected_slot = {this.state.selected_slot}
             />
         </React.Fragment> 
     )
@@ -253,11 +283,46 @@ slotClicked = (slot,a,b,item )  =>{
   })
 }
 
+time_selected = (data) => {
+  console.log(data,"data in time_selected")
+  this.setState({
+    selected_time:data,
+    open:true,
+  })
+}
+
 set_slot = (day) => {
   this.setState({
     selected_slot:[...this.state.slots].filter(item=>{
       return (item.day === day)
     })[0]
+  })
+}
+
+remove_slot = (val) => {
+  console.log(val,"val in remove_slot")
+  let updated_selected_slot = [...this.state.selected_slot.slots].filter((item,key)=>{
+    return val!==key
+  })
+  console.log(updated_selected_slot,"updated_selected_slot")
+  this.setState({
+    selected_slot:{
+      ...this.state.selected_slot,
+      slots:updated_selected_slot
+    },
+    slots:[...this.state.slots].map(item=>{
+         if(item.day===this.state.selected_slot.day){
+           let arr =  [...item.slots].filter((item,key)=>{
+            return val!==key
+          })
+            return  {
+              ...item,
+              slots:arr
+            }
+         }else{
+           return item
+         }
+    })
   })
 }
 
@@ -296,16 +361,20 @@ setAvailabilityClr = () =>{
                                    <label  className="u-margin-auto" for="html">{!this.state.selected_slot.closed?'OPEN':'CLOSED'}</label>
                               </div>
                             </div>
-                            {this.state.selected_slot.slots.map(item=>{
+                            {this.state.selected_slot.slots.map((item, i)=>{
+                              console.log(i,"i in map")
                               return   <div className="u-margin-top-small">
                                     <Timerow 
                                         data = {item}
+                                        remove_slot = {this.remove_slot}
+                                        key_prop={i}
                                         timeToString = {this.timeToString}
+                                        time_selected = {this.time_selected}
                                       />  
                             </div>
                             })}
                              <div className="u-margin-top-small">
-                                 <img src="/add_icon.svg" className="add-icon-time-row" />
+                                 <img onClick={this.add_slot}   src="/add_icon.svg" className="add-icon-time-row cursor-pointer" />
                              </div>
                              <div className="u-margin-top-mini">
                                  <span className="add-more-slots">Add more slots</span>

@@ -8,7 +8,7 @@ const InsightGraph = (props) => {
   let labels = []
   let data_points = []
   points.forEach(item=>{
-      if(!item.self){
+      if(true){
           labels.push(item.x)
           data_points.push(item.y)
       }

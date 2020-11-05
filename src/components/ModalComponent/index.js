@@ -2,12 +2,14 @@ import Modal from 'react-modal';
 import React from 'react'
 const customStyles = {
     content : {
-      top                   : '50%',
+      top                   : '55%',
       left                  : '50%',
       right                 : 'auto',
       bottom                : 'auto',
       marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
+      transform             : 'translate(-50%, -50%)',
+      padding:'0px',
+      boxShadow:"0px 3px 6px #00000029"
     }
   };
   

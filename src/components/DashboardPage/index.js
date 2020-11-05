@@ -177,8 +177,18 @@ export class DashboardPage extends React.PureComponent {
       if(nextProps.get_real_insight_ret){
       
         if(nextProps.get_real_insight_ret.success){
+          console.log(nextProps.get_real_insight_ret.data,"nextProps.get_real_insight_ret.data")
           this.setState({
-            solInsights:nextProps.get_real_insight_ret.data
+            solInsights:nextProps.get_real_insight_ret.data.map(item=>{
+               if(item.recommendation){
+                 return {
+                   ...item,
+                   recommendation:100 - item.recommendation
+                 }
+               }else{
+                 return item
+               }
+            })
           },()=>{
             nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.get_real_insight_ret.data})
             // nextProps.clr_act_insght()
@@ -591,7 +601,14 @@ export class DashboardPage extends React.PureComponent {
     socket.on('realtimeInsight',(data)=>{
         console.log("RealTimeInsights event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         console.log(data, "data in realTimeInsight Event")
-        this.add_insight(data)
+        if(data.recommendation){
+          this.add_insight({
+            ...data,
+            recommendation:100 - data.recommendation
+          })
+        }else {
+          this.add_insight(data)
+        }
     })
     socket.on('notification',(data)=>{
         console.log("Notification event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
