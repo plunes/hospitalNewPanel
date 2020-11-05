@@ -14,7 +14,11 @@ console.log(key_prop,"key_prop")
                                 <span className="arrow arrow-bar is-right"></span>
                             </span>
                             <span className="time-row-child">
-                                <text onClick={()=>props.time_selected({ time:data.to, timestamp:data.to.timestamp, index:key_prop, type:'to'})} className="time-text">{timeToString(data.to)}</text>
+                                <text onClick={()=>{
+                                    if(!!data.from){
+                                        props.time_selected({ time:data.to, timestamp:data.to.timestamp, index:key_prop, type:'to'})
+                                    }
+                                }} className="time-text">{timeToString(data.to)}</text>
                             </span>
                     </div>
                 <div className="delete-icon-wrapper">

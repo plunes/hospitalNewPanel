@@ -16,6 +16,7 @@ const TimeSlot = (props) => {
         const [ timestamps_arr, set_timestamps_arr ] = useState([])
         const [ timestamp, set_timestamp ] = useState()
         const [ error, set_error ] = useState(false)
+        const [ na, set_na ] = useState(false)
         const {addToast} = useToasts()
 
         useEffect(() => {
@@ -23,7 +24,9 @@ const TimeSlot = (props) => {
             setHour((props.selected_time.time.hour))
             setMinutes((props.selected_time.time.minutes))
           
-
+            if(!props.selected_time.time){
+                set_na(true)
+            }
             let timestamps_arr = []
             props.selected_slot.slots.map(item=>{
                 timestamps_arr.push(item.from.timestamp)
@@ -34,7 +37,7 @@ const TimeSlot = (props) => {
            
           }, [])
 
-          console.log(props,"props in TimeSlots Component")
+          console.log(props,na,"props in TimeSlots Component")
           console.log(timestamp, timestamps_arr,"timestamp, timestamps")
       const  getTimeOptions = (shift) =>{
             if(shift==='morning'){
@@ -178,7 +181,13 @@ const TimeSlot = (props) => {
                  }
              })
 
-             if(index===0){
+             if(na){
+                if((new_time > timestamps[timestamps.length -3]) ){
+
+                }else {
+                    throw new MyError('Please enter a valid time')
+                } 
+             }else if(index===0){
                     if((new_time < timestamps[1]) && (new_time < timestamps[timestamps.length -1]) ){
 
                     }else {
