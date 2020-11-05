@@ -1159,7 +1159,7 @@ class DashboardComponent extends React.PureComponent {
                                         <Slider
                                             min={0}
                                             // max={55}
-                                            max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):50}
+                                            max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):100}
                                             tooltip={true}
                                             format={(val)=>{
                                                 return <p>{this.state.solUpdatedPrice.toFixed(2)}</p>
