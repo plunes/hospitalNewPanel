@@ -20,6 +20,9 @@ function* do_not_notify_saga() {
         console.log("Just before api call")
         const api_data = yield call(api.dash_routes.do_not_notify, data, headers)
         console.log(api_data,"api_data in get_user_specs_saga")
+        // const api_data = {
+        //   status: 200
+        // }
         if(!!api_data){
           if (api_data.status === 200) {
               yield put(do_not_notify_ret({

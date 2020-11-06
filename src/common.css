@@ -513,11 +513,13 @@ margin: 0 1%;
     margin-bottom: .5rem !important;
 }
 .modal_cross_icon {
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 1rem;
+    width: 1rem;
     position: relative;
-    left: 2.5rem;
+    left: 1.5rem;
+    top: .5rem;
     cursor: pointer;
+    
 }
 .notif_badge_wrapper_rish {
     position: absolute;

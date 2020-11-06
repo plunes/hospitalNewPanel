@@ -29,6 +29,12 @@ const NoNotify = (props) => {
               success:true,
               message:props.do_not_notify_ret.message
             })
+
+            let updated_arr = [...props.solInsights].filter(item=>{
+              return (item.solutionId !== props.no_notif_id)
+            })
+            props.update_real_insights([...updated_arr])
+            
             props.toggle()
           }else{
             set_ret({

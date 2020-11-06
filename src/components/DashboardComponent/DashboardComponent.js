@@ -540,7 +540,6 @@ class DashboardComponent extends React.PureComponent {
     }
 
     updateRealPriceClr = () =>{
-        window.alert("asdasd")
         console.log(this.state,"this.state in UpdateRealPriceClr")
         this.props.updateRealPriceClr()
         this.handleRealModal()
@@ -568,12 +567,14 @@ class DashboardComponent extends React.PureComponent {
     }
 
     do_not_notify = (data) => {
-        console.log(data,"data")
+        console.log(data,"data======>>>>>>")
+        // window.alert()
         this.setState({
             no_notif_id:data.solutionId
         },()=>{
             this.props.do_not_notify({
-                serviceId:data.serviceId
+                serviceId:data.serviceId,
+                solutionId:data.solutionId
             })
         })
     }
@@ -666,7 +667,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-
+        console.log(this.state,"this.state in Dashboard component")
         let   circular_progress_limit = this.state.realUpdateData.recommendation?100 - (this.state.realUpdateData.recommendation -10):100
         let update_solValue = 71 * (this.state.solValue/circular_progress_limit)
         console.log(update_solValue, circular_progress_limit,this.state.solValue,"update_solValue")
@@ -1172,8 +1173,8 @@ class DashboardComponent extends React.PureComponent {
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal secon_modal tech_background'>
-                                        <div className='text-right'>
-                                            {/* <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text> */}
+                                        <div style={{height:'0rem'}} className='text-right'>
+                                            <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text>
                                         </div>
                                         <span  className="modal_heading center_align_rish">Real Time Prediction</span>
                                         <div><text className="serv_ces">{this.state.realServiceName}</text></div>
@@ -1334,7 +1335,9 @@ class DashboardComponent extends React.PureComponent {
                                     <NoNotify
                                         open={this.state.not_notify_modal}
                                         toggle={this.not_notify_toggle}
-                                        
+                                        update_real_insights ={this.props.update_real_insights}
+                                        solInsights = {this.props.solInsights}
+                                        no_notif_id = {this.state.no_notif_id}
                                         data= {this.state.not_notify_insight}
                                         do_not_notify = {this.do_not_notify}
                                         do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
