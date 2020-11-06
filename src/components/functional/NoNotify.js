@@ -81,7 +81,8 @@ const NoNotify = (props) => {
                                         </span>
                                         <span onClick={()=>{
                                           props.do_not_notify({
-                                            serviceId:props.data.serviceId
+                                            serviceId:props.data.serviceId,
+                                            solutionId:props.data.solutionId
                                           })
                                         }} className="no_notif_button-right">
                                             Yes
