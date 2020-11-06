@@ -29,11 +29,11 @@ const TimeSlot = (props) => {
             }
             let timestamps_arr = []
             props.selected_slot.slots.map(item=>{
-                timestamps_arr.push(item.from.timestamp)
-                timestamps_arr.push(item.to.timestamp)
+                timestamps_arr.push(item.from.timestamp?item.from.timestamp:0)
+                timestamps_arr.push(item.to.timestamp?item.to.timestamp:0)
             })
             set_timestamps_arr(timestamps_arr)
-            set_timestamp(props.selected_time.timestamp)
+            set_timestamp(props.selected_time.timestamp?props.selected_time.timestamp:0)
            
           }, [])
 
@@ -183,7 +183,8 @@ const TimeSlot = (props) => {
 
              if(na){
                  console.log('1st ====>>>>>>')
-                if((new_time > timestamps[timestamps.length -3]) ){
+                 
+                if((new_time > (timestamps[timestamps.length -3]?timestamps[timestamps.length -3]:0)) ){
 
                 }else {
                     throw new MyError('Please enter a valid time')

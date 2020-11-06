@@ -2,7 +2,8 @@ import React from "react"
 import CircularSlider from '@fseehawer/react-circular-slider';
 
 const CircularProgress = (props) => {
-
+ console.log(props.data,"props.data")
+ console.log(props.value,"props.value")
     return (
         <CircularSlider
         hideKnob = {true}

@@ -23,6 +23,7 @@ class AvailabilityPage extends Component {
           selectedType:{},
           selectedshift:{},
           selectedDay:{},
+          selected_days:[],
           firstRender:true,
           slots:[],
           selected_slot:{
@@ -46,12 +47,12 @@ class AvailabilityPage extends Component {
             from:{
               hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
               minutes:parseInt(fromMinute,10),
-              timestamp:new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime()
+              timestamp:new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime()?new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime():0
             },
             to:{
               hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
               minutes:parseInt(toMinutes,10),
-              timestamp:new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime()
+              timestamp:new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime()?new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime():0
             }
         }
            return obj
@@ -76,7 +77,8 @@ class AvailabilityPage extends Component {
           this.setState({
             slots:arr,
             firstRender:false,
-            selected_slot:arr[0]
+            selected_slot:arr[0],
+            selected_days:[]
           })
         }
 
@@ -114,36 +116,50 @@ class AvailabilityPage extends Component {
          return timeString
       }
       add_slot = () => {
-        if(!!this.state.selected_slot.slots[this.state.selected_slot.slots.length -1].from)
-       {
-        let updated_selected_slot = [...this.state.selected_slot.slots]
-        updated_selected_slot.push({
-          from: false,
-          to: false
-        })
-        console.log(updated_selected_slot,"updated_selected_slot")
-        this.setState({
-          selected_slot:{
-            ...this.state.selected_slot,
-            slots:updated_selected_slot
-          },
-          slots:[...this.state.slots].map(item=>{
-               if(item.day===this.state.selected_slot.day){
-                 let arr =  [...item.slots]
-                 arr.push({
-                  from: false,
-                  to: false
-                })
-                  return  {
-                    ...item,
-                    slots:arr
+        if(this.state.selected_slot.slots.length!==0){
+          if(!!this.state.selected_slot.slots[this.state.selected_slot.slots.length -1].from)
+          {
+           let updated_selected_slot = [...this.state.selected_slot.slots]
+           updated_selected_slot.push({
+             from: false,
+             to: false
+           })
+           console.log(updated_selected_slot,"updated_selected_slot")
+           this.setState({
+             selected_slot:{
+               ...this.state.selected_slot,
+               slots:updated_selected_slot
+             },
+             slots:[...this.state.slots].map(item=>{
+                  if(item.day===this.state.selected_slot.day){
+                    let arr =  [...item.slots]
+                    arr.push({
+                     from: false,
+                     to: false
+                   })
+                     return  {
+                       ...item,
+                       slots:arr
+                     }
+                  }else{
+                    return item
                   }
-               }else{
-                 return item
-               }
+             })
+           })
+          }
+        }else {
+          this.setState({
+            selected_slot:{
+              ...this.state.selected_slot,
+              slots:[{
+                from: false,
+                to: false,
+                timestamp:undefined
+              }]
+            }
           })
-        })
-       }
+        }
+        
       }
 
       handleTimeSubmit = (data) =>{
@@ -199,11 +215,22 @@ class AvailabilityPage extends Component {
       }
 
       handleSubmitAvail = () =>{
-        this.setState({
-          loading:true
-        },()=>this.props.setAvailability({
-          timeSlots:this.generateSlotsFormat()
-        }))
+        let slots = this.generateSlotsFormat()
+        if(!!slots){
+          console.log("Succcess")
+            this.setState({
+                    loading:true
+                  },()=>this.props.setAvailability({
+                    timeSlots:this.generateSlotsFormat()
+                  }))
+        }else {
+          this.setState({
+            ret:{
+              success:false,
+              message:'Please select valid time slots'
+            }
+          })
+        }
       }
       
   generateTimeSlot = () =>{
@@ -255,19 +282,35 @@ generateSlotsFormat = () =>{
     let slots = [...this.state.slots]
     let arr = []
     console.log(slots,"slots in generateSlotsFormat")
-    slots.forEach((item,i)=>{
-      let obj = {}
-      obj = {
-        closed:item.closed,
-        day:item.day,
-        slots:item.slots.map(slot=>{
-          return `${this.timeToString(slot.from)}-${this.timeToString(slot.to)}`
+
+    try {
+      slots.forEach((item,i)=>{
+        let push_flag = true
+        let obj = {}
+        let slots = []
+        item.slots.forEach(slot=>{
+          console.log(slot,"slot")
+          if(!((!slot.from) || (!slot.to))){
+            slots.push(`${this.timeToString(slot.from)}-${this.timeToString(slot.to)}`)
+        } 
         })
-      }
-      arr.push(obj)
-    })
-    console.log(arr,"arr")
-    return arr   
+        obj = {
+          closed:item.closed,
+          day:item.day,
+          slots:slots
+        }
+        if(obj.slots.length===0){
+          throw new Error("Invalid Time Slots")
+        }
+        arr.push(obj)
+      })
+     
+     
+    } catch(e) {
+      console.log(e)
+      arr = false
+    }
+    return arr 
 }
 
 onCloseModal = () => {
@@ -339,6 +382,42 @@ setAvailabilityClr = () =>{
     loading:false
   },()=>this.props.setAvailabilityClr())
 }
+
+set_selected_days =(day) => {
+  let arr = [...this.state.selected_days]
+  arr.push(day)
+      this.setState({
+        selected_days:arr
+      })
+}
+
+apply_to_all = () => {
+  console.log(this.state.selected_slot,this.state.selected_days, this.state.slots,"===============>>>")
+  this.setState({
+    slots:[...this.state.slots].map(item=>{
+        let slot = item
+        try {
+            this.state.selected_days.forEach(data=>{
+               if(data === item.day){
+                    slot = {
+                      ...this.state.selected_slot,
+                      day:item.day
+                     }
+                     throw new Error('Dummy error')
+               }
+            })
+        }catch (e) {
+          console.log(e)
+
+        }
+        return slot
+    }),
+    selected_days:[]
+    
+  })
+}
+
+
     render() {
        console.log(this.state,"this.state in availability")
         return (
@@ -401,12 +480,14 @@ setAvailabilityClr = () =>{
                                  <WeekWidget
                                    variant = {"circle"}
                                    data={this.state.selected_slot}
-                                   onClick={this.set_slot}
+                                   selected_days={this.state.selected_days}
+                                   onClick={this.set_selected_days}
+                                   alternate = {true}
                                  />
                                 
                     </div>
                     <div className='u-margin-top-small text-center'>
-                                  <Button style={{fontSize:"3rem"}}  onClick={()=>console.log()}>Apply</Button>
+                                  <Button style={{fontSize:"3rem"}}  onClick={()=>this.apply_to_all()}>Apply</Button>
                       </div> 
                  </div>
                    
