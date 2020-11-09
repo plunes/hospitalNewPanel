@@ -288,9 +288,9 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handleSolutionSliderChange(value){
-        console.log(value,"value in handleSolutionsSliderChage")
-        const { realUpdatePrice } = this.state
-        let newPrice =  (realUpdatePrice )- ((realUpdatePrice) *( value /100))
+
+        let margin = this.state.realUpdateData.max - this.state.realUpdateData.min 
+        let newPrice =  (this.state.realUpdateData.max )- ((margin) *( value /100))
        
         this.setState({
             solValue : value,
@@ -348,13 +348,13 @@ class DashboardComponent extends React.PureComponent {
         setTimeout(()=>{
             console.log(parseInt(((select.userPrice) * (select.recommendation/100)),10),"parseInt(((select.userPrice) * (select.recommendation/100)),10)")
             this.setState({
-                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):0,
-                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):0,
+                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.max,
+                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.max,
                 realModalIsOpen :  true,
                 realServiceName: select.serviceName,
                 realUpdatePrice : select.userPrice,
                 realUpdateData : select,
-                real_time_edit_price:select.userPrice,
+                // real_time_edit_price:select.userPrice,
                 real_time_data_points:select.dataPoints || [],
                 solValue:select.recommendation?100-select.recommendation:0
             })
@@ -1182,13 +1182,13 @@ class DashboardComponent extends React.PureComponent {
                                         <div className='margin_top_medium-2_rish'>   
                                         <Slider
                                             min={0}
-                                            // max={55}
-                                            max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):100}
+                                            max={100}
+                                            // max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):100}
                                             tooltip={true}
                                             format={(val)=>{
-                                                return <p>{this.state.solUpdatedPrice.toFixed(2)}</p>
+                                                return <p>{Math.floor(this.state.solUpdatedPrice)}</p>
                                             }}
-                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:this.state.realUpdateData.recommendation?parseInt((((this.state.realUpdatePrice) * ((this.state.realUpdateData.recommendation -10)/100))),10):0})}
+                                            labels={get_slider_labels({lower:this.state.realUpdateData.max, upper:this.state.realUpdateData.min})}
                                             value={this.state.solValue}
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
@@ -1349,7 +1349,11 @@ class DashboardComponent extends React.PureComponent {
                                         open={this.state.save_service_modal}
                                         toggle={this.save_service_toggle}
                                         
-                                        data= {this.state.save_service_insight}
+                                        data= {this.state.realUpdateData}
+                                        solUpdatedPrice = {this.state.solUpdatedPrice}
+                                        real_time_edit = {this.state.real_time_edit}
+                                        real_time_edit_price = {this.state.real_time_edit_price}
+                                    
                                         updateRealPrice = {this.props.updateRealPrice}
                                         // do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
                                         // do_not_notify_loading = {this.props.do_not_notify_loading}

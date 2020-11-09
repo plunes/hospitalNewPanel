@@ -2946,7 +2946,15 @@ export const updateRealPriceClr = () => dispatch =>{
 export const updateRealPrice = (uData) => async dispatch => {
 
  let token = localStorage.getItem('token');
- return await axios.put(baseUrl + '/solution', uData, { 'headers': { 'Authorization': token } })
+ let flag = uData.saveService 
+ if(flag){
+    delete uData.saveService
+ }
+ let url = baseUrl + '/solution'
+ if(flag==="YES"){
+   url = "/user/addServices"
+ }
+ return await axios.put(url, uData, { 'headers': { 'Authorization': token } })
    .then((res) => {
      if (res.status === 200 ) {
        dispatch({

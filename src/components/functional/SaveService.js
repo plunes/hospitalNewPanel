@@ -48,13 +48,10 @@ const SaveService = (props) => {
 
   console.log(props,"props in NotNotify")
     return (<React.Fragment>
-
                         <NewNotif 
                             ret ={ret}
                             retClr = {()=>{set_ret(false)}}
                         />
-
-
                        <Modal
                         // Real Time Insight Modal
                             isOpen={open}
@@ -76,11 +73,24 @@ const SaveService = (props) => {
                                           </span>
                                     </div>
                                     <div className="no_notif-buttons-wrapper">
-                                        <span onClick={close} className="no_notif_button-left">
+                                        <span onClick={()=>{
+                                          props.updateRealPrice({...props.data, saveService:"NO"})
+                                        }}  className="no_notif_button-left">
                                             Cancel
                                         </span>
                                         <span onClick={()=>{
-                                          props.updateRealPrice({...props.data})
+                                          props.updateRealPrice({
+                                            specialityId:props.data.specialityId,
+                                            saveService:true,
+                                            services:[{
+                                              specialityId:props.data.specialityId,
+                                              serviceId:props.data.serviceId,
+                                              service:props.data.serviceName,
+                                              category:"Basic",
+                                              price:props.real_time_edit?props.real_time_edit_price:props.updateRealPrice,
+                                              variance:0
+                                            }]
+                                          })
                                         }} className="no_notif_button-right">
                                             Yes
                                         </span>

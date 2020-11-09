@@ -119,9 +119,9 @@ export class DashboardPage extends React.PureComponent {
 
           let new_arr = arr.map(item=>{
             if(item.serviceId === this.state.selected_actionable.serviceId){
-              return { ...this.state.selected_actionable, userPrice:this.state.updated_price  }
+              return { ...this.state.selected_actionable, userPrice:this.state.updated_price, min:Math.floor(item.min),  max:Math.floor(item.max) }
             }else {
-              return {...item}
+              return {...item,  min:Math.floor(item.min),  max:Math.floor(item.max)}
             }
           })
          
@@ -147,7 +147,7 @@ export class DashboardPage extends React.PureComponent {
         if(!!nextProps.solInsights){
           console.log(nextProps.solInsights,"NextProps.solInsights")
           this.setState({
-              solInsights:nextProps.solInsights,
+              solInsights:nextProps.solInsights.map(item=>({...item,  min:Math.floor(item.min),  max:Math.floor(item.max)})),
               real_insight_loader:false
           },()=>{
               nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
@@ -183,10 +183,14 @@ export class DashboardPage extends React.PureComponent {
                if(item.recommendation){
                  return {
                    ...item,
-                   recommendation:100 - item.recommendation
+                   recommendation:100 - item.recommendation,
+                   min:Math.floor(item.min),  max:Math.floor(item.max)
                  }
                }else{
-                 return item
+                 return ({
+                  ...item,
+                  min:Math.floor(item.min),  max:Math.floor(item.max)
+                 })
                }
             })
           },()=>{
