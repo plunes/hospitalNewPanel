@@ -2944,7 +2944,7 @@ export const updateRealPriceClr = () => dispatch =>{
 }
 
 export const updateRealPrice = (uData) => async dispatch => {
-
+console.log(uData,"uData in Update Real Price")
  let token = localStorage.getItem('token');
  let flag = uData.saveService 
  if(flag){
@@ -2952,7 +2952,7 @@ export const updateRealPrice = (uData) => async dispatch => {
  }
  let url = baseUrl + '/solution'
  if(flag==="YES"){
-   url = "/user/addServices"
+   url = baseUrl +"/user/addServices"
  }
  return await axios.put(url, uData, { 'headers': { 'Authorization': token } })
    .then((res) => {
@@ -2978,14 +2978,26 @@ export const updateRealPrice = (uData) => async dispatch => {
        })
      }
    }).catch(e=>{
-    dispatch({
-      type : UPDATE_REAL_PRICE_RET,
-      payload :{
-        success:false,
-        data:[],
-        message: e.response.data.error  || 'Unable to proccess now try again later'
-      }
-    })
+     try {
+      dispatch({
+        type : UPDATE_REAL_PRICE_RET,
+        payload :{
+          success:false,
+          data:[],
+          message: e.response.data.error  || 'Unable to proccess now try again later'
+        }
+      })
+     } catch(e){
+      dispatch({
+        type : UPDATE_REAL_PRICE_RET,
+        payload :{
+          success:false,
+          data:[],
+          message: 'Unable to proccess now try again later'
+        }
+      })
+     }
+   
    })
 }
 

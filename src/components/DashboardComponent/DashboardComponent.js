@@ -543,7 +543,12 @@ class DashboardComponent extends React.PureComponent {
         console.log(this.state,"this.state in UpdateRealPriceClr")
         this.props.updateRealPriceClr()
         this.handleRealModal()
+        this.setState()
         this.save_service_toggle()
+        this.setState({
+            save_service_modal:false,
+            save_service_insight:false
+        })
         let insight = [...this.props.solInsights]
          let updated_insight =  insight.map((item,i)=>{
             if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
@@ -1348,7 +1353,7 @@ class DashboardComponent extends React.PureComponent {
                                      <SaveService
                                         open={this.state.save_service_modal}
                                         toggle={this.save_service_toggle}
-                                        
+                                        cancel_data= {this.state.save_service_insight}
                                         data= {this.state.realUpdateData}
                                         solUpdatedPrice = {this.state.solUpdatedPrice}
                                         real_time_edit = {this.state.real_time_edit}

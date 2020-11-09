@@ -74,20 +74,20 @@ const SaveService = (props) => {
                                     </div>
                                     <div className="no_notif-buttons-wrapper">
                                         <span onClick={()=>{
-                                          props.updateRealPrice({...props.data, saveService:"NO"})
+                                          props.updateRealPrice({...props.cancel_data, saveService:"NO"})
                                         }}  className="no_notif_button-left">
-                                            Cancel
+                                            No
                                         </span>
                                         <span onClick={()=>{
                                           props.updateRealPrice({
                                             specialityId:props.data.specialityId,
-                                            saveService:true,
+                                            saveService:"YES",
                                             services:[{
                                               specialityId:props.data.specialityId,
                                               serviceId:props.data.serviceId,
                                               service:props.data.serviceName,
                                               category:"Basic",
-                                              price:props.real_time_edit?props.real_time_edit_price:props.updateRealPrice,
+                                              price:props.real_time_edit?props.real_time_edit_price:props.solUpdatedPrice,
                                               variance:0
                                             }]
                                           })
