@@ -475,6 +475,9 @@ class DashboardComponent extends React.PureComponent {
                     obj.price =  Math.round(Number(this.state.real_time_edit_price))
                   }else{
                       obj.discount = this.state.solValue
+                      obj.min = this.state.realUpdateData.min
+                      obj.max = this.state.realUpdateData.max
+                      obj.price = this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice
                   }
               
                 if(!!this.state.realUpdateData.suggested){
