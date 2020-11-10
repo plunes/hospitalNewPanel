@@ -6,6 +6,8 @@ import { is_positive_whole_number, get_url_params } from "../../utils/common_uti
 import AnimatedMount from "../../HOC/AnimatedMount"
 import Button from "./Button"
 import DeletePopup from "./DeletePopup"
+import Timerow from "./Timerow"
+import WeekWidget from "./WeekWidget"
 
  const AddDoctorForm= (props) => {
   console.log(props,"props in AddDoctor form")
@@ -219,31 +221,57 @@ import DeletePopup from "./DeletePopup"
 
    <div className="time_she">
        <h3 className="abaily text-center">Availability</h3>
-       <div className="row text-center mb_1rem">
-         <div className="col-lg-2"><h4>All</h4></div>
-         <div className="col-lg-4"><h4>From - To</h4></div>
-         <div className="col-lg-4"><h4>From - To</h4></div>
-         <div className="col-lg-2"><h4>Closed</h4></div>
-       </div>
-     
-       {props.slots.map((item,i)=>(
-                      <div className="row text-center mb_1rem">
-                      <div className="col-lg-2"><p className="m">{item.day.charAt(0).toUpperCase()}</p></div>
-                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.morning,'morning','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.from) || "N/A"}</span><span onClick={()=>props.slotClicked(item.slots.morning,'morning','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.morning.to) || "N/A"}</span></p></div>
-                      <div className="col-lg-4"><p><span onClick={()=>props.slotClicked(item.slots.evening,'evening','from', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.from) || "N/A"}</span><span onClick={()=>props.slotClicked(item.slots.evening,'evening','to', item)} className="time_bor cursor-pointer">{props.timeToString(item.slots.evening.to) || "N/A"}</span></p></div>
-                      <div className="col-lg-2">
-                         <div 
-                      onClick = {(e)=>props.handleCloseDay(item,i,e)} 
-                      className='circul_rund'> 
-                    <label className={item.closed?'green-background ':''} for="checkbox"></label></div></div>
-                     
-                      {/* <div className="col-lg-2">
-                         <div 
-                      onClick = {(e)=>props.handleCloseDay(item,i,e)} 
-                      className='round'> 
-                    <label className={item.closed?'green-background ':''} for="checkbox"></label></div></div> */}
+       
+       <div className="u-margin-5-auto u-margin-top-small">
+                                 <WeekWidget
+                                   variant = {"box"}
+                                   data={props.selected_slot}
+                                   onClick={props.set_slot}
+                                 />
+                                
+                            </div>
+
+{props.selected_slot.slots.map((item, i)=>{
+                              console.log(i,"i in map")
+                              return   <div className="u-margin-top-small">
+                                    <Timerow 
+                                        data = {item}
+                                        remove_slot = {props.remove_slot}
+                                        key_prop={i}
+                                        timeToString = {props.timeToString}
+                                        time_selected = {props.time_selected}
+                                      />  
+                            </div>
+   })}
+
+                            <div className="u-margin-top-small">
+                                 <img onClick={props.add_slot}   src="/add_icon.svg" className="add-icon-time-row cursor-pointer" />
+                             </div>
+                             <div className="u-margin-top-mini">
+                                 <span className="add-more-slots">Add more slots</span>
+                             </div>
+                             {/* <div className='u-margin-top-mini text-center'>
+                                  <Button style={{fontSize:"3rem"}}  onClick={()=>props.handleSubmitAvail()}>Submit</Button>
+                             </div>  */}
+
+                             <div className=' u-margin-top-small text-center'>
+                  <span className="availability_heading_span">
+                      Apply this time slot to
+                  </span>
+                  <div className="u-margin-5-auto u-margin-top-small">
+                                 <WeekWidget
+                                   variant = {"circle"}
+                                   data={props.selected_slot}
+                                   selected_days={props.selected_days}
+                                   onClick={props.set_selected_days}
+                                   alternate = {true}
+                                 />
+                                
                     </div>
-                   ))}
+                    <div className='u-margin-top-small text-center'>
+                                  <Button style={{fontSize:"2rem"}}  onClick={()=>props.apply_to_all()}>Apply</Button>
+                      </div> 
+                 </div>
       
     {!!props.services_chosen &&     <div className="consul_fee">
                   <div className="cdcd_sfd">           

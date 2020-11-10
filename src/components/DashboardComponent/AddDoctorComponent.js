@@ -19,62 +19,62 @@ function MyError(message){
 
 MyError.prototype = new Error()
 
-const slots = [
+const slots =[
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "monday",
-      "closed" : 'false'
+      "day": "Monday",
+      "closed": false
   },
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "tuesday",
-      "closed" : 'false'
+      "day": "Tuesday",
+      "closed": false
   },
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "wednesday",
-      "closed" : 'false'
+      "day": "Wednesday",
+      "closed": false
   },
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "thursday",
-      "closed" : 'false'
+      "day": "Thursday",
+      "closed": false
   },
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "friday",
-      "closed" : 'false'
+      "day": "Friday",
+      "closed": false
   },
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "saturday",
-      "closed" : 'false'
+      "day": "Saturday",
+      "closed": false
   },
   {
-      "slots" : [
+      "slots": [
           "9:00 AM-1:00 PM",
-          "3:00 PM-8:00 PM"
+          "2:00 PM-8:00 PM"
       ],
-      "day" : "sunday",
-      "closed" : 'true'
+      "day": "Sunday",
+      "closed": false
   }
 ]
 
@@ -111,7 +111,12 @@ class AddDoctorComponent extends Component {
             getUserLoading:false,
             editConsultFlag:false,
             error:false,
-            delete_doctor_flag:false
+            delete_doctor_flag:false,
+            slots:[],
+            selected_days:[],
+            selected_slot:{
+            slots:[]
+          }
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -130,6 +135,12 @@ class AddDoctorComponent extends Component {
 
       }else{
         console.log("False case in DidMount")
+        let arr = this.transformData(slots)
+       this.setState({
+         slots:arr,
+         selected_slot:arr[0],
+         selected_days:[]
+       })
       }
     let center_id = get_url_params('center')
       if(!!center_id){
@@ -146,14 +157,16 @@ class AddDoctorComponent extends Component {
     transformData = (data) =>{
       let arr = []
       data.forEach((item,i)=>{
-            let obj = {}
-            obj.day =this.getDay(i)
-            obj.closed = item.closed==="false"?false:true
-            obj.slots = {
-            morning: this.stringToTime(item.slots[0]),
-            evening: this.stringToTime(item.slots[1])
-            }
-            arr.push(obj)
+        let time_slots = [...item.slots]
+        let slots_arr = []
+        time_slots.forEach(data=>{
+          slots_arr.push(this.stringToTime(data))
+        })
+          let obj = {}
+          obj.day =this.getDay(i)
+          obj.closed = item.closed==="false"?false:true
+          obj.slots = slots_arr
+          arr.push(obj)
       })
       return arr
     }
@@ -191,119 +204,102 @@ class AddDoctorComponent extends Component {
     };
 
     stringToTime =(str)=>{
-      let obj = {}
-      try {
-        let arr = str.split('-')
-        let fromMinute = arr[0].split(" ")[0].split(':')[1]
-        let fromHour = arr[0].split(" ")[0].split(':')[0]
-        let fromAmpm = arr[0].split(" ")[1]
-        let toMinutes = arr[1].split(" ")[0].split(':')[1]
-        let toHour = arr[1].split(" ")[0].split(':')[0]
-        let toAmPm = arr[1].split(" ")[1]
-       
-          obj =   {
-            from:{
-              hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
-              minutes:parseInt(fromMinute,10)
-            },
-            to:{
-              hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
-              minutes:parseInt(toMinutes,10)
-            }
-        }
-      } catch (error) {
-        
-         error_flag = true
+      let arr = str.split('-')
+      let fromMinute = arr[0].split(" ")[0].split(':')[1]
+      let fromHour = arr[0].split(" ")[0].split(':')[0]
+      let fromAmpm = arr[0].split(" ")[1]
+      let toMinutes = arr[1].split(" ")[0].split(':')[1]
+      let toHour = arr[1].split(" ")[0].split(':')[0]
+      let toAmPm = arr[1].split(" ")[1]
+      console.log(fromHour==='12',"fromHour")
+let obj =   {
+          from:{
+            hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
+            minutes:parseInt(fromMinute,10),
+            timestamp:new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime()?new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime():0
+          },
+          to:{
+            hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
+            minutes:parseInt(toMinutes,10),
+            timestamp:new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime()?new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime():0
+          }
       }
-
          return obj
       }
     
       timeToString = (time) =>{
-        let timeString = false
-        try {
-       
-          let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
-         
-          let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
-           timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
-        } catch (error) {
-         
-         error_flag = true
+        if(!time){
+          return 'N/A'
         }
-       
+        // console.log(hour,"hour in timetostring")
+         let  hour =  time.hour>12?time.hour-12:time.hour===0?12:time.hour
+         console.log(hour,time,"hour in timetostring")
+         let minutes = time.minutes<10?`0${time.minutes}`:time.minutes
+         let timeString = `${hour}:${minutes} ${time.hour>=12?time.hour===0?'AM':'PM':'AM'}`
          return timeString
       }
-     handleTimeSubmit = (data) =>{
-     
-        let slot = JSON.parse(JSON.stringify(this.state.slots))
-        let index  = ''
-        let newSlot  = slot.filter((item,i)=>{
-                  if(item.day === this.state.selectedDay.day){
-                    index = i
-                  }
-                return item.day !== this.state.selectedDay.day
-        })
-        let newObject = {
-          ...this.state.selectedDay,
-          slots: {...this.state.selectedDay.slots,
-                [this.state.selectedshift]:{
-                  ...this.state.selectedDay.slots[this.state.selectedshift],[this.state.selectedType]:{
-                    ...data
-                  }
-                }
-          }
-        }
-        newSlot.splice(index,0,newObject)
+
+      handleTimeSubmit = (data) =>{
+        console.log(data,"data in handleTimeSubmit")
       
-        this.setState({
-          slots:newSlot,
-          selectedSlot:{},
-          selectedType:{},
-          selectedshift:{},
-          selectedDay:{},
-          open:false
-        })
-    }
-   
-    handleCloseDay = (data,i,e) => {
-      e.stopPropagation()
-      let slot = JSON.parse(JSON.stringify(this.state.slots))
-      let index  = ''
-      let newSlot  = slot.filter((item,j)=>{
-                if(item.day === data.day){
-                  index = j
-                }
-              return  item.day !== data.day
-      })
-      let newObject = {
-        ...data,
-        closed:!data.closed
-      }
-      newSlot.splice(i,0,newObject)
-      this.setState({
-        slots:newSlot
-      })
-    }
+        let slots = this.state.slots
+         let updated_slots = slots.map(item=>{
+           if(item.day === data.day){
+             return {
+               ...item,
+               slots:data.slots,
+             }
+           }else{
+             return item
+           }
+         })
+      
+      
+         console.log(updated_slots,"updated_slots")
+      
+         this.setState({
+           slots:[...updated_slots],
+           selected_slot:data,
+           open:false
+         })
+      
+            }
+            handleCloseDay = (data,i,e) => {
+              e.stopPropagation()
+              let slot = JSON.parse(JSON.stringify(this.state.slots))
+              let index  = ''
+              let newSlot  = slot.filter((item,j)=>{
+                        if(item.day === data.day){
+                          index = j
+                        }
+                      return  item.day !== data.day
+              })
+              let newObject = {
+                ...data,
+                closed:!data.closed
+              }
+              newSlot.splice(i,0,newObject)
+              this.setState({
+                slots:newSlot
+              })
+            }
 
 
-    generateTimeSlot = () =>{
-      return(
-          <React.Fragment>
-              <TimeSlot
-               selectedSlot = {this.state.selectedSlot}
-               selectedType = {this.state.selectedType}
-               selectedshift = {this.state.selectedshift}
-               submit = {this.handleTimeSubmit}
-               setAvailabilityRet = {this.props.setAvailabilityRet}
-               selecteDaySlots = {this.state.selecteDaySlots}
-               setAvailabilityClr = {this.props.setAvailabilityClr}
-               selecteDaySlots = {this.state.selecteDaySlots}
-               loadingOff = {()=>this.setLoadingOff()}
-              />
-          </React.Fragment> 
-      )
-  }
+            generateTimeSlot = () =>{
+              return(
+                  <React.Fragment>
+                      <TimeSlot
+                       selected_time = {this.state.selected_time}
+                     
+                       submit = {this.handleTimeSubmit}
+                       setAvailabilityRet = {this.props.setAvailabilityRet}
+                       setAvailabilityClr = {this.props.setAvailabilityClr}
+                       loadingOff = {()=>this.setLoadingOff()}
+                       selected_slot = {this.state.selected_slot}
+                      />
+                  </React.Fragment> 
+              )
+          }
 
   generate_delete_doctor = () => {
     
@@ -339,23 +335,181 @@ class AddDoctorComponent extends Component {
   }
   
   generateSlotsFormat = () =>{
-      let slots = JSON.parse(JSON.stringify(this.state.slots))
-      let arr = []
+    let slots = [...this.state.slots]
+    let arr = []
+    console.log(slots,"slots in generateSlotsFormat")
+
+    try {
       slots.forEach((item,i)=>{
+        let push_flag = true
         let obj = {}
+        let slots = []
+        item.slots.forEach(slot=>{
+          console.log(slot,"slot")
+          if(!((!slot.from) || (!slot.to))){
+            slots.push(`${this.timeToString(slot.from)}-${this.timeToString(slot.to)}`)
+        } 
+        })
         obj = {
           closed:item.closed,
           day:item.day,
-          slots:[`${this.timeToString(item.slots.morning.from)}-${this.timeToString(item.slots.morning.to)}`,`${this.timeToString(item.slots.evening.from)}-${this.timeToString(item.slots.evening.to)}`]
+          slots:slots
+        }
+        if(obj.slots.length===0){
+          throw new Error("Invalid Time Slots")
         }
         arr.push(obj)
       })
      
-      
-      return arr
-  
      
+    } catch(e) {
+      console.log(e)
+      arr = false
+    }
+    return arr 
+}
+
+
+time_selected = (data) => {
+  console.log(data,"data in time_selected")
+  this.setState({
+    selected_time:data,
+    open:true,
+  })
+}
+
+set_slot = (day) => {
+  this.setState({
+    selected_slot:[...this.state.slots].filter(item=>{
+      return (item.day === day)
+    })[0]
+  })
+}
+
+sloct_checkbox = () => {
+  let updated_selected_slot = {...this.state.selected_slot, closed: !this.state.selected_slot.closed}
+  this.setState({
+    selected_slot:{
+      ...updated_selected_slot
+    },
+    slots:[...this.state.slots].map(item=>{
+         if(item.day===this.state.selected_slot.day){
+             return {...updated_selected_slot}
+         }else{
+           return item
+         }
+    })
+  })
+}
+
+remove_slot = (val) => {
+  console.log(val,"val in remove_slot")
+  let updated_selected_slot = [...this.state.selected_slot.slots].filter((item,key)=>{
+    return val!==key
+  })
+  console.log(updated_selected_slot,"updated_selected_slot")
+  this.setState({
+    selected_slot:{
+      ...this.state.selected_slot,
+      slots:updated_selected_slot
+    },
+    slots:[...this.state.slots].map(item=>{
+         if(item.day===this.state.selected_slot.day){
+           let arr =  [...item.slots].filter((item,key)=>{
+            return val!==key
+          })
+            return  {
+              ...item,
+              slots:arr
+            }
+         }else{
+           return item
+         }
+    })
+  })
+}
+
+set_selected_days =(day) => {
+  let arr = [...this.state.selected_days]
+  arr.push(day)
+      this.setState({
+        selected_days:arr
+      })
+}
+
+apply_to_all = () => {
+  console.log(this.state.selected_slot,this.state.selected_days, this.state.slots,"===============>>>")
+  this.setState({
+    slots:[...this.state.slots].map(item=>{
+        let slot = item
+        try {
+            this.state.selected_days.forEach(data=>{
+               if(data === item.day){
+                    slot = {
+                      ...this.state.selected_slot,
+                      day:item.day
+                     }
+                     throw new Error('Dummy error')
+               }
+            })
+        }catch (e) {
+          console.log(e)
+
+        }
+        return slot
+    }),
+    selected_days:[]
+    
+  })
+}
+
+
+add_slot = () => {
+  if(this.state.selected_slot.slots.length!==0){
+    if(!!this.state.selected_slot.slots[this.state.selected_slot.slots.length -1].from)
+    {
+     let updated_selected_slot = [...this.state.selected_slot.slots]
+     updated_selected_slot.push({
+       from: false,
+       to: false
+     })
+     console.log(updated_selected_slot,"updated_selected_slot")
+     this.setState({
+       selected_slot:{
+         ...this.state.selected_slot,
+         slots:updated_selected_slot
+       },
+       slots:[...this.state.slots].map(item=>{
+            if(item.day===this.state.selected_slot.day){
+              let arr =  [...item.slots]
+              arr.push({
+               from: false,
+               to: false
+             })
+               return  {
+                 ...item,
+                 slots:arr
+               }
+            }else{
+              return item
+            }
+       })
+     })
+    }
+  }else {
+    this.setState({
+      selected_slot:{
+        ...this.state.selected_slot,
+        slots:[{
+          from: false,
+          to: false,
+          timestamp:undefined
+        }]
+      }
+    })
   }
+  
+}
 
   
   slotClicked = (slot,a,b,item )  =>{
@@ -391,15 +545,18 @@ class AddDoctorComponent extends Component {
 
           let arr = []
           data.timeSlots.forEach((item,i)=>{
-                let obj = {}
-                obj.day =this.getDay(i)
-                obj.closed = item.closed
-                obj.slots = {
-                morning: this.stringToTime(item.slots[0]),
-                evening: this.stringToTime(item.slots[1])
-                }
-                arr.push(obj)
+            let time_slots = [...item.slots]
+            let slots_arr = []
+            time_slots.forEach(data=>{
+              slots_arr.push(this.stringToTime(data))
+            })
+              let obj = {}
+              obj.day =this.getDay(i)
+              obj.closed = item.closed==="false"?false:true
+              obj.slots = slots_arr
+              arr.push(obj)
           })
+          console.log(arr,"arr")
           try {
             this.setState({
               name:data.name,
@@ -411,7 +568,9 @@ class AddDoctorComponent extends Component {
               doctorProfileImage:data.imageUrl,
               doctorImageName:data.doctorImageName,
               specialitie_chosen:data.specialities.length!==0?data.specialities[0].specialityId:'',
-              slots:arr
+              slots:arr,
+              selected_slot:arr[0],
+              selected_days:[]
             },()=>{
               if(data.specialities.length!==0){
                 try{
@@ -630,7 +789,7 @@ class AddDoctorComponent extends Component {
     }
 
     render() {
-   
+   console.log(this.state.slots,"slots")
       let center_id = get_url_params('center')
       if(this.state.add_success){
         if(!!center_id){
@@ -657,107 +816,21 @@ class AddDoctorComponent extends Component {
                         })}
                       />
                       {this.state.doctorProfileFlag?<h4>Doctor</h4>:<h4>Add Doctor</h4>}
-          
-          {/* <p>Search for a doctor by name or email</p> */}
           </div>
-          {/* <div className="search_b">
-          <form action="#" method="get">
-              <label className="sech_b">Search</label>
-            <input list="browsers" name="browser" placeholder="Dr. Surbhi" className="cus_inp col-lg-12"/>
-            <img src="/search.jpg" className="pst_srch"/>
-             <div className="box_pnl">
-              <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_1.jpg"className="pixel" /></div>
-                  <div className="col-lg-6 sudha_a">
-                   <h6>Dr. Sudha Sethi</h6>
-                    <p>Anaesthesia, Fortis Hospital, Mohali</p>
-                  </div>
-             </div>
-             
-             <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_2.jpg"className="pixel" /></div>
-                  <div className="col-lg-6 sudha_a">
-                   <h6>Dr. Minal Sharma</h6>
-                    <p>Neurology, Fortis Hospital, Jaipur</p>
-                  </div>
-             </div>
-                
-                 <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_3.jpg"className="pixel" /></div>
-                  <div className="col-lg-6 sudha_a">
-                   <h6>Dr. Anita Gupta</h6>
-                    <p>Gynecology, Fortis Hospital, Jaipur</p>
-                  </div>
-             </div>
-                
-                  <div className="row">
-                  <div className="col-lg-2"><img src="/pixel_4.jpg"className="pixel" /></div>
-                  <div className="col-lg-6 sudha_a">
-                   <h6>Dr. Anita Joshi</h6>
-                    <p>Gynecology, Fortis Hospital, Jaipur</p>
-                  </div>
-             </div>
-               
-            </div>
-            </form>
-            </div>
-           
-              <div className="add_mnu">
-                  <div className="aero_dn">
-               <a href="#" className="A_nu">Add Manually</a>
-               <i class="fa fa-angle-up" aria-hidden="true"></i>
-               </div>
-
-               <div className="aero_up">
-               <a href="#" className="A_up">Add Manually</a>
-               <i class="fa fa-chevron-down" aria-hidden="true"></i>
-               </div>
-
-               <div className="manualy_pnl">
-              <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_1.jpg"className="pixel" /></div>
-                  <div className="col-lg-4 sudha_a">
-                   <h6>Dr. Sudha Sethi</h6>
-                    <p>MBBS, DGO HOD, Gynecology 10yrs experience Fortis Hospital, Ludhiana</p>
-                  </div>
-                  <div className="col-lg-2 offset-lg-4">
-                      <div className="fa_min">
-                  <i class="fa fa-minus" aria-hidden="true"></i>
-                  </div>
-                  </div>
-             </div>
-             
-             <div className="row botm_bud">
-                  <div className="col-lg-2"><img src="/pexel_2.jpg"className="pixel" /></div>
-                  <div className="col-lg-4 sudha_a">
-                   <h6>Dr. Minal Sharma</h6>
-                    <p>BDS, MDS Surgeon, Dentistry 17yrs experience Fortis Hospital, Jaipur</p>
-                  </div>
-                  <div className="col-lg-2 offset-lg-4">
-                      <div className="fa_min">
-                  <i class="fa fa-minus" aria-hidden="true"></i>
-                  </div>
-                  </div>
-             </div>
-                
-                 <div className="row">
-                  <div className="col-lg-2"><img src="/pexel_3.jpg"className="pixel" /></div>
-                  <div className="col-lg-4 sudha_a">
-                   <h6>Dr. Anita Gupta</h6>
-                    <p>BPTh, BPT Therapist, Physiotherapy 8yrs experience Fortis Hospital,Gurgaon</p>
-                  </div>
-                  <div className="col-lg-2 offset-lg-4">
-                      <div className="fa_min">
-                  <i class="fa fa-minus" aria-hidden="true"></i>
-                  </div>
-                  </div>
-             </div>
-               
-               
-            </div>
-          </div>
-           */}
-            <AddDoctorForm   
+        
+            <AddDoctorForm  
+              add_slot = {this.add_slot} 
+              handleSubmitAvail = {this.handleSubmitAvail}
+              set_selected_days = {this.set_selected_days}
+              apply_to_all = {this.apply_to_all}
+              addSlot = {this.addSlot}
+              set_slot = {this.set_slot}
+              remove_slot = {this.remove_slot}
+              timeToString = {this.timeToString}
+              time_selected = {this.time_selected}
+              selected_days = {this.state.selected_days}
+              selected_day = {this.state.selected_day}
+              selected_slot = {this.state.selected_slot}
               upload = {this.upload}
               set_user_info = {this.props.set_user_info}
               prof_data = {!!get_url_params('center')?this.props.center_data:this.props.prof_data}
@@ -857,3 +930,5 @@ const mapStateToProps = state => ({
   delete_profile_loading
   })(AddDoctorComponent)
 
+
+  

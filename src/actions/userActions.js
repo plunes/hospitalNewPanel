@@ -2952,7 +2952,7 @@ console.log(uData,"uData in Update Real Price")
  }
  let url = baseUrl + '/solution'
  if(flag==="YES"){
-   url = baseUrl +"/user/addServices"
+   url = baseUrl +"/user/addServiceToCatalogue"
  }
  return await axios.put(url, uData, { 'headers': { 'Authorization': token } })
    .then((res) => {
