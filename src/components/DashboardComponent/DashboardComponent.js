@@ -546,32 +546,33 @@ class DashboardComponent extends React.PureComponent {
         console.log(this.state,"this.state in UpdateRealPriceClr")
         this.props.updateRealPriceClr()
         this.handleRealModal()
-        this.setState()
+      
         this.save_service_toggle()
         this.setState({
             save_service_modal:false,
             save_service_insight:false
         })
         let insight = [...this.props.solInsights]
-         let updated_insight =  insight.map((item,i)=>{
-            if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
-                return this.state.realUpdateData
-            }else{
-                return item
-            }
-        })
-        if(this.state.no_notif_id){
-            let updated_arr = [...updated_arr].filter(item=>{
-               return   (item.solutionId !== this.state.no_notif_id)
-            })
-            console.log(updated_arr,"updated_arr in UpdateRealPRiceClr")
-            this.props.update_real_insights(updated_arr)
-            this.setState({
-                no_notif_id:false
-            })
-        }else{
-            this.props.update_real_insights(updated_insight)
-        }
+        //  let updated_insight =  insight.map((item,i)=>{
+        //     if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
+        //         return this.state.realUpdateData
+        //     }else{
+        //         return item
+        //     }
+        // })
+        // if(this.state.no_notif_id){
+        //     let updated_arr = [...updated_arr].filter(item=>{
+        //        return   (item.solutionId !== this.state.no_notif_id)
+        //     })
+        //     console.log(updated_arr,"updated_arr in UpdateRealPRiceClr")
+        //     this.props.update_real_insights(updated_arr)
+        //     this.setState({
+        //         no_notif_id:false
+        //     })
+        // }else{
+        //     this.props.update_real_insights(updated_insight)
+        // }
+        this.props.get_real_insight()
     }
 
     do_not_notify = (data) => {

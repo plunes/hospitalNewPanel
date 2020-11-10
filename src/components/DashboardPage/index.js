@@ -115,6 +115,7 @@ export class DashboardPage extends React.PureComponent {
     if(nextProps.updatePriceDataRet){
       console.log(nextProps.updatePriceDataRet,"nextProps.updatePriceDataRet")
       if(nextProps.updatePriceDataRet.success){
+        // window.location.reload()
           let arr = [...this.state.insight]
 
           let new_arr = arr.map(item=>{
@@ -762,6 +763,7 @@ update_real_insights = (data) => {
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=><DashboardComponent
+                    get_real_insight = {this.props.get_real_insight}
                     get_actionable_insight = {this.get_actionable_insight}
                     centers_name_list = {this.state.centers_name_list}
                     get_centers_loading = {this.state.get_centers_loading}
