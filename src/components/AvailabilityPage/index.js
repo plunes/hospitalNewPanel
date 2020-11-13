@@ -12,6 +12,7 @@ import AnimatedMount from "../../HOC/AnimatedMount"
 import Button from '../functional/Button';
 import WeekWidget from "../functional/WeekWidget"
 import Timerow from "../functional/Timerow"
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 class AvailabilityPage extends Component {
    constructor(props) {
@@ -393,28 +394,42 @@ set_selected_days =(day) => {
 
 apply_to_all = () => {
   console.log(this.state.selected_slot,this.state.selected_days, this.state.slots,"===============>>>")
-  this.setState({
-    slots:[...this.state.slots].map(item=>{
-        let slot = item
-        try {
-            this.state.selected_days.forEach(data=>{
-               if(data === item.day){
-                    slot = {
-                      ...this.state.selected_slot,
-                      day:item.day
-                     }
-                     throw new Error('Dummy error')
-               }
-            })
-        }catch (e) {
-          console.log(e)
+  if(this.state.selected_days.length !==0){
+    this.setState({
+      ret:{
+        success:true,
+        message:"Time slots applied to selected days."
+      },
+      slots:[...this.state.slots].map(item=>{
+          let slot = item
+          try {
+              this.state.selected_days.forEach(data=>{
+                 if(data === item.day){
+                      slot = {
+                        ...this.state.selected_slot,
+                        day:item.day
+                       }
+                       throw new Error('Dummy error')
+                 }
+              })
+          }catch (e) {
+            console.log(e)
+  
+          }
+          return slot
+      }),
+      selected_days:[]
+      
+    })
+  }else {
+    this.setState({
+      ret:{
+        success:false,
+        message:"Please select a day."
+      }
+    })
+  }
 
-        }
-        return slot
-    }),
-    selected_days:[]
-    
-  })
 }
 
 

@@ -346,17 +346,21 @@ class DashboardComponent extends React.PureComponent {
         }
        
         setTimeout(()=>{
-            console.log(parseInt(((select.userPrice) * (select.recommendation/100)),10),"parseInt(((select.userPrice) * (select.recommendation/100)),10)")
+            let slider_range =  Math.floor(parseInt(select.max) - parseInt(select.min))
+            let price_diff = Math.floor(parseInt(select.max) - parseInt(select.userPrice))
+            console.log(slider_range, price_diff,"slider_range")
+            let slider_value = parseInt((price_diff/slider_range) * 100)
+            console.log(slider_value,"slider_value")
             this.setState({
-                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.max,
-                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.max,
+                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.userPrice,
+                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.userPrice,
                 realModalIsOpen :  true,
                 realServiceName: select.serviceName,
                 realUpdatePrice : select.userPrice,
                 realUpdateData : select,
                 // real_time_edit_price:select.userPrice,
                 real_time_data_points:select.dataPoints || [],
-                solValue:select.recommendation?100-select.recommendation:0
+                solValue:select.recommendation?100-select.recommendation:slider_value
             })
         }, 300)
        
@@ -677,7 +681,7 @@ class DashboardComponent extends React.PureComponent {
 
     render() {
         console.log(this.state,"this.state in Dashboard component")
-        let   circular_progress_limit = this.state.realUpdateData.recommendation?100 - (this.state.realUpdateData.recommendation -10):100
+        let   circular_progress_limit = 100
         let update_solValue = 71 * (this.state.solValue/circular_progress_limit)
         console.log(update_solValue, circular_progress_limit,this.state.solValue,"update_solValue")
         console.log(this.state,"this.state.realUpdateData")
@@ -1172,7 +1176,7 @@ class DashboardComponent extends React.PureComponent {
                                             value={this.state.value}
                                         />
                                     </div>
-                                        <div className="text-center"><text style={{ fontSize: '17px', border: 'none' }}  onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                        <div className="text-center"><text style={{ fontSize: '1rem', border: 'none' }}  onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                     </Modal>
                                     <Modal
                                       // Real Time Insight Modal
@@ -1218,7 +1222,7 @@ class DashboardComponent extends React.PureComponent {
                                                 }
                                             </span>            
                                         </div>
-                                        <div className="text-center "><text style={{ fontSize: '.8rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                        <div className="text-center "><text style={{ fontSize: '1rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                         <div><text className="serv_ces ">Chances of Conversion increases by</text></div>
                                        
                                         <div className='text-center margin_top_mini_rish'><CircularProgress

@@ -35,6 +35,7 @@ class InsightComponent extends React.PureComponent {
     render(){
         // console.log(this.props,"this.props in Insight")
         let obj = this.getSecondsDifferent(this.props.s.createdAt)
+        console.log(obj,"obj")
         const index = this.props.index
       return (
           <React.Fragment>  
@@ -51,7 +52,7 @@ class InsightComponent extends React.PureComponent {
       <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
             </div>
             {
-             !this.props.s.booked?
+             ((!this.props.s.booked) && (obj.active))?
                     <text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u> <img className='arrow_class' src='/icon/green_arrow.svg' /> </text>
                     :this.props.s.professionalBooked?
                     <text className="InsightUpdate kindlyUpdate"><u>Booking Confirmed.</u></text>:<span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>}
