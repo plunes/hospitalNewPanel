@@ -482,7 +482,7 @@ apply_to_all = () => {
                                  <span className="add-more-slots">Add more slots</span>
                              </div>
                              <div className='u-margin-top-mini text-center'>
-                                  <Button style={{fontSize:"3rem"}}  onClick={()=>this.handleSubmitAvail()}>Submit</Button>
+                                  <Button style={{fontSize:"2rem"}}  onClick={()=>this.handleSubmitAvail()}>Submit</Button>
                              </div> 
                            
                  </div>
@@ -502,7 +502,7 @@ apply_to_all = () => {
                                 
                     </div>
                     <div className='u-margin-top-small text-center'>
-                                  <Button style={{fontSize:"3rem"}}  onClick={()=>this.apply_to_all()}>Apply</Button>
+                                  <Button style={{fontSize:"2rem"}}  onClick={()=>this.apply_to_all()}>Apply</Button>
                       </div> 
                  </div>
                    
