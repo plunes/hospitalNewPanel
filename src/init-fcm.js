@@ -1,6 +1,6 @@
-import * as firebase from "firebase/app";
+import app from '@firebase/app';
 import "firebase/messaging";
-const initializedFirebaseApp = firebase.initializeApp({
+const initializedFirebaseApp = app.initializeApp({
     // Project Settings => Add Firebase to your web app
     apiKey: "AIzaSyDHYmK4k6bPgHmYBCvQIlgF7gfZCC--Uao",
     authDomain: "plunesfirebase.firebaseapp.com",

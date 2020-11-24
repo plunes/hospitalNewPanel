@@ -12,6 +12,7 @@ class InsightComponent extends React.PureComponent {
             valid:true,
             toggler:false
         }
+         console.log(this.props.s,'DATA DATA DATA');
     }
 
     toggler = () =>{
@@ -21,7 +22,7 @@ class InsightComponent extends React.PureComponent {
     }
 
     getSecondsDifferent=(sec)=>{
-        let newSec = (new Date).getTime()
+        let newSec = (new Date()).getTime()
      //    console.log(newSec,"newSec in getSeconds Differnce")
         let seconds = (newSec-sec)/1000
         return {
@@ -36,6 +37,19 @@ class InsightComponent extends React.PureComponent {
         // console.log(this.props,"this.props in Insight")
         let obj = this.getSecondsDifferent(this.props.s.createdAt)
         const index = this.props.index
+        let result = (<text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u> <img className='arrow_class' src='/icon/green_arrow.svg' /> </text>)
+        if(this.props.s.booked){
+            if(this.props.s.professionalBooked){
+                result = (<text type="button" className="InsightUpdate kindlyUpdate"><u>Booking Confirmed</u> <img className='arrow_class' src='/icon/green_arrow.svg' /> </text>)
+            }
+            else{
+                result = (<span className="sorry_text">Sorry, user has booked another facility <i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>)
+            }
+        }
+        else if(this.props.s.expired){
+            result = (<span className="sorry_text"> Sorry! You lost the booking <i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>)
+        }
+
       return (
           <React.Fragment>  
                 <div className="action_insight_wrapper" key={index}>
@@ -50,11 +64,7 @@ class InsightComponent extends React.PureComponent {
             <div>
       <p style={{marginBottom:'.5rem'}} className="light_content"> is looking for {this.props.s.serviceName}{!!this.props.s.centerLocation?<text className="green_text_rish"> {this.props.s.centerLocation}</text>:''}</p>
             </div>
-            {
-             true>0?
-                    <text type="button" className="InsightUpdate kindlyUpdate" onClick={(e) => this.props.handleRealPrice(this.props.s)}><u>Kindly update your price</u> <img className='arrow_class' src='/icon/green_arrow.svg' /> </text>
-                    : <span className="sorry_text">Sorry! You lost the booking.<i style={{color:'DE7B56',top:'1px', position:'relative'}} className="far fa-frown"></i></span>
-            }
+            {result}
             </span>
                  <span className='insight_component_time_wrap vertical_align_rish'>
             {
