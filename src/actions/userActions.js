@@ -3428,12 +3428,23 @@ export const getBooking = () => async  dispatch => {
        let bookings = res.data.data.bookings;
        let userId = localStorage.getItem('userId')
        let businessBooking = []
+       console.log(bookings,"bookings beforefilter")
        bookings.filter((b) => userId === b.professionalId)
+       console.log(bookings,"bookings after filter")
        bookings.forEach((b) => {
-         let pos = b.solutionServiceId.split("|")[2]
+        let pos = ''
+        try {
+          pos = b.solutionServiceId.split("|")[2]
+        } catch (error) {
+          console.log(error)
+          pos = 0
+        }
+          
          let paidAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) * Number(b.paymentPercent) / 100;
          let totalAmount = Number(b.service.newPrice[pos]);
          let restAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) - paidAmount
+
+         console.log(paidAmount, totalAmount, restAmount,"============>>>>>>>>>========")
          let bookDet = {
            '_id': b._id,
            'userName': b.userName,
@@ -3458,6 +3469,7 @@ export const getBooking = () => async  dispatch => {
          }
          businessBooking.push(bookDet)
        })
+       console.log(businessBooking,"business booking")
        dispatch({
          type : GET_BOOKING_RET,
          payload :{
