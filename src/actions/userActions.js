@@ -3430,7 +3430,14 @@ export const getBooking = () => async  dispatch => {
        let businessBooking = []
        bookings.filter((b) => userId === b.professionalId)
        bookings.forEach((b) => {
-         let pos = b.solutionServiceId.split("|")[2]
+        let pos  = ""
+        try {
+          pos= b.solutionServiceId.split("|")[2]
+        } catch (error) {
+          console.log(error)
+          pos = 0
+        }
+         
          let paidAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) * Number(b.paymentPercent) / 100;
          let totalAmount = Number(b.service.newPrice[pos]);
          let restAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) - paidAmount
