@@ -387,12 +387,15 @@ class AppointmentComponent extends Component {
     }
 
     getProgressbar = (item) =>{
+        console.log(item.paidBookingAmount,item.totalAmount,"=======================>")
                   let totalAmount = item.totalAmount
                     let percent = 0
                     if(totalAmount===0){
                         percent = 100
+                    }else {
+                        percent = Math.floor((item.paidBookingAmount/item.totalAmount) * 100)
                     }
-                     percent = (item.paidBookingAmount/item.totalAmount) * 100
+                     
         return  (<React.Fragment>   <div className="appointment-progress-wrapper u-margin-top-medium"> <InsightProgressBar
                       progress = {percent}
                       version = "payment"
