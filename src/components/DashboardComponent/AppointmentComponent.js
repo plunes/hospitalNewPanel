@@ -17,6 +17,7 @@ import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/c
 import RescheduleComponent from '../RescheduleComponent';
 import NewNotif from '../functional/NewNotif';
 import AnimatedMount from "../../HOC/AnimatedMount"
+import InsightProgressBar from "../functional/InsightProgressBar"
 function MyError(message){
     this.message = message;
 }
@@ -386,17 +387,32 @@ class AppointmentComponent extends Component {
     }
 
     getProgressbar = (item) =>{
-    return <ul className="list-unstyled multi-steps">
-        {item.paymentProgress.map((payment,i)=>{
-            if(i===0){
-                return   <li className={!!payment.status?'active_ris ':'not_active_ris'}>Booked</li>
-            }else if(i===(item.paymentProgress.length-1)){
-                return <li className={!!payment.status?"not_active_ris":"not_active_ris not-paid_ris"} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
-            }else{
-                return  <li className={!!payment.status?'not_active_ris':'not_active_ris not-paid_ris'} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
-            }
-        })}
-        </ul>
+                  let totalAmount = item.totalAmount
+                    let percent = 0
+                    if(totalAmount===0){
+                        percent = 100
+                    }
+                     percent = (item.paidBookingAmount/item.totalAmount) * 100
+        return  (<React.Fragment>   <div className="appointment-progress-wrapper u-margin-top-medium"> <InsightProgressBar
+                      progress = {percent}
+                      version = "payment"
+                      data = {item}
+                        />
+                     </div>
+                     </React.Fragment>)
+
+
+    // return <ul className="list-unstyled multi-steps">
+    //     {item.paymentProgress.map((payment,i)=>{
+    //         if(i===0){
+    //             return   <li className={!!payment.status?'active_ris ':'not_active_ris'}>Booked</li>
+    //         }else if(i===(item.paymentProgress.length-1)){
+    //             return <li className={!!payment.status?"not_active_ris":"not_active_ris not-paid_ris"} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
+    //         }else{
+    //             return  <li className={!!payment.status?'not_active_ris':'not_active_ris not-paid_ris'} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
+    //         }
+    //     })}
+    //     </ul>
     }
 
     changeAppointClr = ()=>{

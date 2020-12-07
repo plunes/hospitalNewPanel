@@ -1433,3 +1433,6 @@ const mapStateToProps = state => ({
         do_not_notify,
         do_not_notify_loading,
         clearSolInsights, setMount })(DashboardComponent))
+
+
+        
