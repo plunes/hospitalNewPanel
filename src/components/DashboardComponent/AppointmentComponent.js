@@ -212,7 +212,7 @@ class AppointmentComponent extends Component {
                         confirmed_bookings.push(data)
                        }
                       
-                   }else if(data.bookingStatus==="Cancelled" || data.bookingStatus==="Cancellation Requested"){
+                   }else if(data.bookingStatus==="Cancelled"){
                     if(!!redirect_index){
                         if(appointments_arr[redirect_index]._id !== data._id){
                             console.log("cancelled_bookings")
