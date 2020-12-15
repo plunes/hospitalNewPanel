@@ -206,8 +206,8 @@ import { get_url_params, for_loop } from '../utils/common_utilities';
 
 
 
-let baseUrl = "https://devapi.plunes.com/v7"
-let base_url_without_v7 = "https://devapi.plunes.com"
+let baseUrl = "https://devapi.plunes.com/v8"
+let base_url_without_v8 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
 if(!!pathLocation) {
@@ -215,11 +215,11 @@ if(!!pathLocation) {
  if(pathLocation === 'analytics.plunes.com') {
    console.log('PROD');
    // Production baseUrl
-   baseUrl = 'https://api.plunes.com/v7'
-   base_url_without_v7 = 'https://api.plunes.com'
+   baseUrl = 'https://api.plunes.com/v8'
+   base_url_without_v8 = 'https://api.plunes.com'
  }else{
-   baseUrl = "https://devapi.plunes.com/v7"
-   base_url_without_v7 ="https://devapi.plunes.com"
+   baseUrl = "https://devapi.plunes.com/v"
+   base_url_without_v8 ="https://devapi.plunes.com"
    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
  }
 }
@@ -2043,7 +2043,7 @@ export const addDoctor = (obj) => async dispatch => {
  console.log("Inside addDoctor")
  const center_id = get_url_params('center')
  let token = localStorage.getItem('token');
- return await axios.patch(base_url_without_v7 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
+ return await axios.patch(base_url_without_v8 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res,"res in addDoctor")
      if (res.status === 200) {
@@ -2170,7 +2170,7 @@ export const getServClr = () => dispatch =>{
 export const getServ = (obj) => async dispatch => {
  console.log(obj,"Data in getServ Action")
  let token = localStorage.getItem('token');
- return await axios.get(base_url_without_v7 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.get(base_url_without_v8 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res,"res in getServ")
      if (res.status === 200) {
@@ -3137,7 +3137,7 @@ export const sendUpdateData = (uData) => async dispatch => {
  }
  //console.log(typeof obj.newPrice, obj.newPrice)
  let token = localStorage.getItem('token');
- return await axios.patch(base_url_without_v7 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.patch(base_url_without_v8 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
    .then((res) => {
      //console.log(res.data)
      console.log(res,"res in send Update")
