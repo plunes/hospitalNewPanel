@@ -6,13 +6,9 @@ import { connect } from 'react-redux';
 import  "./AvailabilityComponent.css";
 import "./appointment.css"
 import Modal from 'react-modal';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
-import DateTimePicker from 'react-widgets/lib/DateTimePicker'
-import MeasureTime from "../MeasureTime"
 
-import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/common_utilities"
+import  { dates } from "../../utils/common_utilities"
 
 import RescheduleComponent from '../RescheduleComponent';
 import NewNotif from '../functional/NewNotif';
@@ -202,8 +198,14 @@ class AppointmentComponent extends Component {
                let upcoming_bookings = []
                console.log(this.state,"this.state before sorting")
                nextProps.getBookingRet.data.forEach(data =>{
+
+                let flag = dates.compare(new Date(), new Date(data.appointmentTime/1000))
+
+                let time_now =  ((new Date()).getTime()) > data.appointmentTime
+                data.flag = flag
+                console.log(time_now, data, "======>>>>>>>>>>>>")
                    console.log(redirect_index,redirect_type,"redirect_index and redirect type")
-                   if((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true) ){
+                   if(((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true)) || time_now ){
                        if(!!redirect_index){
                          if(appointments_arr[redirect_index]._id !== data._id){
                             confirmed_bookings.push(data)
@@ -598,9 +600,17 @@ class AppointmentComponent extends Component {
                                                 </div>
                                             </div>
                                            <div className='appointment_card_data'>
+
+                                           {(((item.bookingStatus!=="Confirmed") || (item.doctorConfirmation!==true))) &&
+                                           <div className=" u-margin-top-small text-center">
+                                              <text className=" confrm_mar_sec bold-text"> No Action (Doctor confirmation pending)</text> </div>}
                                            {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
                                 <div className="col-lg-2">
-                                    <p className="gr_con "><text>Confirmed</text></p>
+                                    <p className="gr_con ">
+                                        {((item.bookingStatus !=="Confirmed") || (item.doctorConfirmation!==true))?
+                                              <text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm (Doctor confirmation pending)</text>
+                                        :<text>Confirmed</text>}
+                                       </p>
                                  </div>
                                  <div className="col-lg-8">
                                  <RescheduleComponent

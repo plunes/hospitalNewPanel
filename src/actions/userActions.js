@@ -206,7 +206,7 @@ import { get_url_params, for_loop } from '../utils/common_utilities';
 
 
 
-let baseUrl = "https://devapi.plunes.com/v8"
+let baseUrl = "https://devapi.plunes.com/v7"
 let base_url_without_v8 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
@@ -218,7 +218,7 @@ if(!!pathLocation) {
    baseUrl = 'https://api.plunes.com/v8'
    base_url_without_v8 = 'https://api.plunes.com'
  }else{
-   baseUrl = "https://devapi.plunes.com/v"
+   baseUrl = "https://devapi.plunes.com/v7"
    base_url_without_v8 ="https://devapi.plunes.com"
    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
  }
@@ -3452,7 +3452,6 @@ export const getBooking = () => async  dispatch => {
            'appointmentTime': b.appointmentTime,
            'serviceName': b.serviceName,
            'paidAmount': paidAmount,
-           'totalAmount': totalAmount,
            'restAmount': restAmount,
            'creditsUsed': b.creditsUsed,
            'bookingId': b.referenceId,

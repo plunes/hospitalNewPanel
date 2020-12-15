@@ -884,3 +884,6 @@ code {
 .container-fluid {
       height: 100vh !important;
 }
+.bold-text {
+    font-weight: bold;
+}
