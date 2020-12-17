@@ -267,14 +267,11 @@ class AppointmentComponent extends Component {
         if(((!!nextProps.timeSlot) && (this.state.firstRender))){
             let arr = []
             nextProps.timeSlot.forEach((item,i)=>{
-
                 let time_slots = [...item.slots]
                 let slots_arr = []
                 time_slots.forEach(data=>{
                   slots_arr.push(this.stringToTime(data))
                 })
-
-
                   let obj = {}
                   obj.day = getDay(i)
                   obj.closed = item.closed==="false"?false:true
