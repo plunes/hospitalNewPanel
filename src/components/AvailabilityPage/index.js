@@ -12,6 +12,7 @@ import AnimatedMount from "../../HOC/AnimatedMount"
 import Button from '../functional/Button';
 import WeekWidget from "../functional/WeekWidget"
 import Timerow from "../functional/Timerow"
+import UpdateSlot from '../functional/UpdateSlot'
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 class AvailabilityPage extends Component {
@@ -221,9 +222,12 @@ class AvailabilityPage extends Component {
           console.log("Succcess")
             this.setState({
                     loading:true
-                  },()=>this.props.setAvailability({
-                    timeSlots:this.generateSlotsFormat()
-                  }))
+                  },()=>{
+                    this.toggle_update_slot_modal_flag()
+                    // this.props.setAvailability({
+                    //   timeSlots:this.generateSlotsFormat()
+                    // })
+                  })
         }else {
           this.setState({
             ret:{
@@ -432,6 +436,30 @@ apply_to_all = () => {
 
 }
 
+toggle_update_slot_modal_flag = () =>{
+  this.setState({
+    update_slot_modal_flag:!this.state.update_slot_modal_flag
+  })
+}
+
+generate_update_slot_modal = () => {
+    return (<React.Fragment>
+         <UpdateSlot   
+            toggle_update_slot_modal_flag = {this.toggle_update_slot_modal_flag}
+            update_time_slots = {this.update_time_slots}
+         />
+    </React.Fragment>)
+}
+
+
+update_time_slots = (data)=>{
+       this.props.setAvailability({
+                      ...data,
+                      timeSlots:this.generateSlotsFormat(),
+           })
+           setTimeout(()=>this.toggle_update_slot_modal_flag(),1000)
+}
+
 
     render() {
        console.log(this.state,"this.state in availability")
@@ -511,6 +539,12 @@ apply_to_all = () => {
                 open = {this.state.open}
                 handleClose = {this.onCloseModal}
                 modalBody = {this.generateTimeSlot}
+                />  
+             <ModalComponent 
+                open = {this.state.update_slot_modal_flag}
+                handleClose = {this.toggle_update_slot_modal_flag}
+                modalBody = {this.generate_update_slot_modal}
+                no_cross= {true}
                 />  
      </React.Fragment>
         )
