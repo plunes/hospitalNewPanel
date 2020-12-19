@@ -11,7 +11,7 @@ console.log(props,"props in update price")
         <React.Fragment>
          <div className ='modal-wrapper-medium_ris'>
                 {props.update_procedure_loading_flag && <LoaderComponent />}
-             <div style={{fontWeight:'600'}} className="modal-heading_ris margin_top_small_rish update_price_heading">  { `Update price`}</div>
+             <div style={{fontWeight:'600'}} className="modal-heading_ris margin_top_small_rish update_price_heading">  { `Update Availability`}</div>
                  <div style={{height:'5rem'}}>
                     <span className="modal_content_description center_align_rish margin_top_small_rish">
                         {/* { `Are you sure you want remove ${[...props.specialities].filter(item=>!!(item.value === props.selected_speciality))[0].name} from catalogue?`} */}
