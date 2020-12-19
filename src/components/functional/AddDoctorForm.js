@@ -231,6 +231,13 @@ import WeekWidget from "./WeekWidget"
                                 
                             </div>
 
+                            <div className=" u-margin-top-small">
+                              <div className="checkbox-input checkbox-big u-display-flex">
+                                  <input checked={!props.selected_slot.closed} onClick={()=>props.sloct_checkbox()} type="checkbox" id="html"/>
+                                   <label  className="u-margin-auto" for="html">{!props.selected_slot.closed?'OPEN':'CLOSED'}</label>
+                              </div>
+                            </div>
+
 {props.selected_slot.slots.map((item, i)=>{
                               console.log(i,"i in map")
                               return   <div className="u-margin-top-small">

@@ -223,10 +223,13 @@ class AvailabilityPage extends Component {
             this.setState({
                     loading:true
                   },()=>{
-                    this.toggle_update_slot_modal_flag()
-                    // this.props.setAvailability({
-                    //   timeSlots:this.generateSlotsFormat()
-                    // })
+                    if(this.props.prof_data.isAdmin){
+                      this.toggle_update_slot_modal_flag()
+                    }else{
+                       this.props.setAvailability({
+                      timeSlots:this.generateSlotsFormat()
+                    })
+                    }
                   })
         }else {
           this.setState({
@@ -462,7 +465,7 @@ update_time_slots = (data)=>{
 
 
     render() {
-       console.log(this.state,"this.state in availability")
+       console.log(this.props,"this.props in availability")
         return (
            <React.Fragment> 
              <NewNotif
@@ -552,7 +555,8 @@ update_time_slots = (data)=>{
 }
 const mapStateToProps = state => ({
    timeSlot : state.user.timeSlot,
-   setAvailabilityRet:state.user.setAvailabilityRet
+   setAvailabilityRet:state.user.setAvailabilityRet,
+   prof_data:state.user.data.prof_data
  })
 
 

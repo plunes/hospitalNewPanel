@@ -1,3 +1,5 @@
+import { faCalendarDay } from "@fortawesome/free-solid-svg-icons"
+import { weekdays } from "moment"
 import React from "react"
 import Button from "./Button"
 import LoaderComponent from "./LoaderComponent"
@@ -44,3 +46,7 @@ console.log(props,"props in update price")
 }
 
 export default UpdateSlot
+
+
+
+
