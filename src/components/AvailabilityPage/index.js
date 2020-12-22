@@ -392,11 +392,24 @@ setAvailabilityClr = () =>{
 }
 
 set_selected_days =(day) => {
+  console.log(day, this.state.selected_days,"set_selected_days")
   let arr = [...this.state.selected_days]
-  arr.push(day)
+  if(!arr.includes(day)){
+    arr.push(day)
+    this.setState({
+      selected_days:arr
+    })
+  }else {
+    const index = arr.indexOf(day);
+      if (index > -1) {
+        arr.splice(index, 1);
+      }
+      console.log(arr,"arr after splice")
       this.setState({
         selected_days:arr
       })
+  }
+ 
 }
 
 apply_to_all = () => {
