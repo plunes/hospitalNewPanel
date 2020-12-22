@@ -1132,7 +1132,7 @@ export const edit_location = (data) => async dispatch => {
          type : EDIT_LOCATION_RET,
          payload :{
            success:true,
-           message:"Your location been successfully submited"
+           message:"Your location been successfully submitted"
          }
        })
    }else{
@@ -1189,7 +1189,7 @@ export const submit_query = (data) => async dispatch => {
          type : SUBMIT_QUERY_RET,
          payload :{
            success:true,
-           message:"Your query has been successfully submited"
+           message:"Your query has been successfully submitted"
          }
        })
    }else{
