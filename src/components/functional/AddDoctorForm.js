@@ -169,7 +169,7 @@ import WeekWidget from "./WeekWidget"
          </div>
         
          <div class="form-group label-floating">
-           <label class="control-label control_label_ris" for="education">Education Qualification</label>
+           <label class="control-label control_label_ris" for="education">Educational Qualification</label>
            <input class="form-control no_padding_ris btm_in_bdr" value= {props.education} onChange={props.handleChange} id="educationqua" type="education" name="education" required data-error="Please enter your education qulification" />
            <div class="help-block with-errors"></div>
          </div>
