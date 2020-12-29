@@ -1101,7 +1101,7 @@ class DashboardComponent extends React.PureComponent {
                             </div>
 
                            <div className="insigts_section_wrapper">
-                            <div style={{width:'100%'}} className='dashboardsection new_card_class'>
+                            <div style={{width:'100%'}} className='dashboardsection '>
                                     <span className='businessrow1col1 realtimewidth'>
                                         {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
                                         <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>

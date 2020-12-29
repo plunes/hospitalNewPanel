@@ -3,6 +3,7 @@ import {Line} from 'react-chartjs-2';
 
 import AnimatedMount from "../../HOC/AnimatedMount"
 const LineChart = (props) => {
+  console.log(props,"props in LineChart")
   let users = []
   console.log(props,"props in linechange")
   users = [...props.data]
@@ -12,7 +13,7 @@ const LineChart = (props) => {
           {
             label: 'Number of Users',
             fill: props.fill?true:false,
-            lineTension: 0.1,
+            lineTension: 0.3,
             backgroundColor: '#000',
             borderColor: 'rgba(75,192,192,1)',
             borderCapStyle: 'butt',

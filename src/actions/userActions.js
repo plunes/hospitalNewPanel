@@ -3267,7 +3267,7 @@ export const getTimeslot = () => async dispatch => {
  return await axios.get(baseUrl + '/user/' + userId + '/timeSlots', { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res, 'data');
-     if (res.status === 200) {
+     if (res.status === 200) {   
        // console.log(res.data.field, 'data');
        let field = res.data.field;
        let array = []
