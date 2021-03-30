@@ -290,3 +290,11 @@ export const REMOVE_SERVICE_LOADING = 'App/Catalogue/REMOVE_SERVICE_LOADING'
 export const DO_NOT_NOTIFY = 'App/Catalogue/DO_NOT_NOTIFY'
 export const DO_NOT_NOTIFY_RET = 'App/Catalogue/DO_NOT_NOTIFY_RET'
 export const DO_NOT_NOTIFY_LOADING = 'App/Catalogue/DO_NOT_NOTIFY_LOADING'
+
+export const GET_INSIGHT_INFO = 'App/Dashboard/GET_INSIGHT_INFO'
+export const GET_INSIGHT_INFO_RET = 'App/Dashboard/GET_INSIGHT_INFO_RET'
+export const GET_INSIGHT_INFO_LOADING = 'App/Dashboard/GET_INSIGHT_INFO_LOADING'
+
+export const UPDATE_INSIGHT = 'App/Dashboard/UPDATE_INSIGHT'
+export const UPDATE_INSIGHT_RET = 'App/Dashboard/UPDATE_INSIGHT_RET'
+export const UPDATE_INSIGHT_LOADING = 'App/Dashboard/UPDATE_INSIGHT_LOADING'

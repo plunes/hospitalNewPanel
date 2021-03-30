@@ -102,6 +102,25 @@ export default {
     
 
     dash_routes:{
+      get_insight_info:(data,  headers) =>
+      axios
+          .get(`${base_url}/solution/solutionId?id=${data.solutionId}&serviceId=${data.serviceId}`, headers)
+          .then(res => {
+               console.log(res,'res in get Insight Info')
+               return res
+          })
+          .catch(err => err.response),
+
+      update_insight:(data,  headers) =>
+      axios
+          .put(`${base_url}/solution/updateSolution`, data, headers)
+          .then(res => {
+                console.log(res,'res in get Insight Info')
+                return res
+          })
+          .catch(err => err.response),
+
+
       do_not_notify:(data,  headers) =>
       axios
           .put(`${base_url}/user/serviceNotificationException/${data.serviceId}`,{}, headers)

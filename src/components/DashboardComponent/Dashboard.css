@@ -479,8 +479,11 @@ hr
     width:14px !important;
     height: 14px !important;
     background-color: #CEFFE2 !important;
+    width: 90%;
 }
-
+.rangeslider-horizontal {
+    width: 90%;
+}
 .rangeslider .rangeslider__handle 
   {
   width: 1rem;
@@ -640,8 +643,11 @@ p {
 
 .RealtimeUsername
   {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    /* font-weight: 500; */
+    font-family: bold_proxima !important;
+    line-height: 1.5rem;
+    color: #555555;
 }
 
 .kindlyUpdate
@@ -697,19 +703,22 @@ p {
 /* 2nd modal */
 .secon_modal{padding: 0px 40px 0px 40px}
 .yout_ctl{
-      font-size: 1rem ;
+      font-size: 1.5rem ;
       text-align: center;
       color: #fff;
+      opacity: .8;
     }
 code {
     color: #F1F1F1 !important;
 }
 .serv_ces{
-    font-size: 1rem;
+    font-size: 1.5rem;
     text-align: center;
     display: block;
+    opacity: .8;
     color: #fff;
-    }
+    margin-top: 2rem;
+ }
 .valu_second{
     position: relative;
     /* right: 83px;
@@ -886,4 +895,10 @@ code {
 }
 .bold-text {
     font-weight: bold;
+}
+
+.is_looking {
+    display: block;
+    font-size: 1rem;
+    font-family:  bold_proxima !important;
 }
