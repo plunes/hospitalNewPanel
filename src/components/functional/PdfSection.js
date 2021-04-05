@@ -17,7 +17,10 @@ const PdfSection = (props) => {
              <div className="pdf-wrapper-videosection" >
              <PDFViewer
             document={{
-                url: data.reportUrl,
+                url:data.reportUrl,
+                headers:{
+                    'Access-Control-Allow-Credentials': true
+                }
             }}
              />
             </div>

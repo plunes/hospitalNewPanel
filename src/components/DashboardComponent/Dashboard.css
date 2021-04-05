@@ -645,7 +645,7 @@ p {
   {
     font-size: 1.5rem;
     /* font-weight: 500; */
-    font-family: bold_proxima !important;
+    font-family: regular_proxima !important;
     line-height: 1.5rem;
     color: #555555;
 }
@@ -676,6 +676,8 @@ p {
   margin-right: auto;
   font-size: 1.1rem;
   font-weight: 200;
+  min-width: 7rem;
+  text-align: center;
 }
 
 /* alka-css */
@@ -900,5 +902,5 @@ code {
 .is_looking {
     display: block;
     font-size: 1rem;
-    font-family:  bold_proxima !important;
+    font-family:  regular_proxima !important;
 }

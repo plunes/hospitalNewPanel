@@ -1363,4 +1363,5 @@ hr.comp_insight_hr {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
+  font-weight: bold;
 }

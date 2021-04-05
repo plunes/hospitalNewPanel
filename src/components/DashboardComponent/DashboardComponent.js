@@ -793,10 +793,10 @@ class DashboardComponent extends React.PureComponent {
 
                                        <div  className='collumn_flex_rish div_class_2 flex-end' >
                                             <div>
-                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 1 hour</span> 
                                             </div>
                                             <div>
-                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 1 hour</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 7 days</span> 
                                             </div>
                                        </div>
                                      </div>

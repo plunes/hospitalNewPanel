@@ -3464,7 +3464,9 @@ export const getBooking = () => async  dispatch => {
            'paymentProgress':b.paymentProgress,
            'centerLocation':b.centerLocation,
            totalAmount:b.totalAmount,
-           paidBookingAmount:b.paidBookingAmount
+           paidBookingAmount:b.paidBookingAmount,
+           haveInsurance:b.haveInsurance,
+           insuranceDetails:b.insuranceDetails
          }
          businessBooking.push(bookDet)
        })

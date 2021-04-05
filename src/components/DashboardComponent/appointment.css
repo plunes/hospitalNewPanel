@@ -24,17 +24,17 @@
 .nov_2 p{font-size: 14px;color: #343434;opacity: 0.5;}
 .loc_tab img{padding-left: 0px;position: relative;
   left: 40px;}
-.gr_con{color: #01D35A;font-weight: 500;font-size: 15px;}
+.gr_con{color: #01D35A;font-weight: 500;font-size: 15px; font-weight: bold;}
 .con_re{color: #D30101; font-weight: 500;text-align: right;font-size: 1.3rem;}
-.res_udle{text-align: center;font-size: 15px;}
+.res_udle{text-align: center;font-size: 15px; font-weight: bold;}
 .confrm_mar_sec{margin-top: 20px;margin-bottom: 10px;margin-left: 0px !important;}
 .dental_th{text-align: right;font-weight: 500;font-size: 1.3rem;}
-.brace_m{color: #474747;font-weight: 400;font-size: 15px;}
+.brace_m{color: #474747;font-weight: 400;font-size: 15px; font-weight: bold;}
 i.fa.fa-rupee-sign {
   font-size: 13px;
   padding-right: 3px;
 }
-.py_stu h2{text-align: center;text-decoration: underline;font-weight: 500;font-size: 16px;margin-bottom: 20px;}
+.py_stu h2{text-align: center;text-decoration: underline;font-weight: 500;font-size: 16px;margin-bottom: 20px; font-weight: bold !important;}
 .graph_cir{border-radius: 80px;background-color: #01D35A;width: 60px;height: 60px;}
 img.right_im {
     position: relative;
@@ -67,7 +67,7 @@ img.right_im {
         .thousent{font-size: 13px; font-weight: 400;position: relative;
             top: 59px;
             right: 13px;}
-.pay_ptint{text-align: center;font-size: 16px;color:#474747;font-weight: 400;padding: 20px 10px;margin-bottom: 0px;}
+.pay_ptint{text-align: center;font-size: 16px;color:#474747;font-weight: bold;padding: 20px 10px;margin-bottom: 0px;}
 .pay_green{text-decoration: underline;color: #01D35A;font-size: 16px;text-align: center;font-weight: 400;padding-bottom: 20px;}
 .bg_bulb{background: #FBFBFB;height: 4rem;width: 33rem;
   margin: 0 auto;}

@@ -191,5 +191,73 @@ flex:  1 1 11%;
     opacity: .8;
    margin: 2rem auto;
    text-align: center;
+}
 
+.insurance-wrap-new {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: .5rem;
+}
+.appointment-insurance-wrap {
+    flex: 1 1 45%;
+
+}
+.appointment-insurance-wrap >span {
+    margin-bottom: 1.1rem;
+    font-size: 1rem;
+    display: block;
+    font-weight: bold;
+}
+
+.insurance-details {
+    display: flex;
+    flex-direction: column;
+}
+.insurance-details > .child-2 {
+    font-size: 1.2rem;
+   text-align: left;
+   color: #656565;
+   font-weight: bold;
+}
+
+.insurance-details > .child-1 {
+    font-size: .9rem;
+    margin: .2rem 0rem;
+    text-align: left;
+    font-weight: bold;
+    color: #656565;
+}
+
+.insurance-details > hr {
+    width: 30%;
+    margin: 1rem 0rem !important;
+}
+
+.insurance-wrap-new-2 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.appointment_card_profile_profile {
+    display: flex;
+}
+.appointment_card_profile_profile > .child-1 {
+    flex: 1 1 25%;
+    display: flex;
+    align-items: center;
+}
+.appointment_card_profile_profile > .child-2 {
+    flex: 1 1 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.appointment_card_profile_profile > .child-2 > .child-1 {
+
+}
+
+.align-item-apart {
+    display: flex;
+    justify-content: space-between;
 }

@@ -169,7 +169,7 @@ const Solution = (props) => {
                                               Photos
                                       </div>
                                       <div className="photo-gallery-wrapper ">
-                                                <PhotoGallery data={data.imageUrl} />
+                                                <PhotoGallery  id={`solution-${data._id}`} data={data.imageUrl} />
                                       </div>
                                     </div>}
                                   {data.videoUrl.length !==0 &&   <div className="tile-small">
@@ -298,7 +298,7 @@ const Solution = (props) => {
                                             }} />
                                         </div>
                                </div>
-                               <div className="child-2">
+                               <div className={`child-2  ${data.specialOffers.length ==0?"align-items-center":''}`}>
                                {data.specialOffers.length !==0?  <React.Fragment>
                                              <div className="competitive-offers-wrap">
                                             <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/website-images/offer-image.svg" />

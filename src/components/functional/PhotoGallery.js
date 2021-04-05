@@ -28,12 +28,12 @@ const GROUP2 = [
         }
 ];
 
-const PhotoItem = ({ image, thumb, group, count, display }) => {
-    console.log(display,"display in Phoeto item")
+const PhotoItem = ({ image, thumb, group, count, display, id }) => {
+  
             return  (
                 <div className="image-gallery-div" style={{padding: "0rem", display:!!display?"inherit":'none' }}>
                   <LightgalleryItem group={group} src={image} thumb={thumb}>
-                    <img id={count===0?"light-gallery-first-image":''}  src={image} style={{ width: "100%", cursor:'pointer', borderRadius:'.5rem' , display:!!display?"inherit":'none'}} />
+                    <img id={count===0?"light-gallery-first-image":''}  className={!!display?id:'random_id'} src={image} style={{ width: "100%", cursor:'pointer', borderRadius:'.5rem' , display:!!display?"inherit":'none'}} />
                   </LightgalleryItem>
                 </div>
               )
@@ -47,7 +47,7 @@ const VideoItem = ({ video, thumb, group, count, display }) => {
         element.lightGallery()
     } 
    },[])
-  console.log(display,"display in Phoeto item")
+
           return  (
               <div className="image-gallery-div" style={{padding: "0rem", display:!!display?"inherit":'none' }}>
                  <div id="video-gallery">
@@ -102,11 +102,11 @@ function PhotoGallery(props) {
 
 React.useEffect(()=>{
   if(props.type==="video"){
-    let updated_arr  =   data.map((p, idx) =><VideoItem key={idx} count={idx} thumb={p.thumbnail} video={p.videoUrl} group="group2" display={get_display_prop(idx)} />)
+    let updated_arr  =   data.map((p, idx) =><VideoItem id={props.id} key={idx} count={idx} thumb={p.thumbnail} video={p.videoUrl} group="group2" display={get_display_prop(idx)} />)
     set_render_items([...updated_arr])
 
   }else {
-    let updated_arr  =   data.map((p, idx) =><PhotoItem key={idx} count={idx} image={p.imageUrl} group="group2" display={get_display_prop(idx)} />)
+    let updated_arr  =   data.map((p, idx) =><PhotoItem id={props.id} key={idx} count={idx} image={p.imageUrl} group="group2" display={get_display_prop(idx)} />)
     set_render_items([...updated_arr])
   }
        
@@ -116,7 +116,7 @@ React.useEffect(()=>{
 
 
 const get_display_prop = (key) => {
-    console.log(key,"key on get_display_prop")
+  
             // if(data.length >limit){
             //         if(key>=limit){
             //             return  false
@@ -159,6 +159,12 @@ const get_display_prop = (key) => {
   let group_2_item = GROUP2.map((p,idx)=>{
       return <PhotoItem key={idx} count={idx} image={p.imageUrl} group="group2" display="none" />
   })
+  const number_click = () => {
+      let element  = document.getElementsByClassName(props.id)
+      if(element){
+        element[0].click()
+      }
+  }
   return (
     <div className="content">
       <div>
@@ -180,6 +186,7 @@ const get_display_prop = (key) => {
             plugins = {["lg-fullscreen.js", "lg-thumbnail.js", "lg-video.js", "lg-zoom.js"]}
           >
             <div
+            
               style={{
                 display: "flex",
                 position:"relative",
@@ -189,7 +196,7 @@ const get_display_prop = (key) => {
               }}
             >
                 {render_items}
-                {render_items.length >1 && <div className="img-centered-centered">{`+${render_items.length -1}`}</div>}
+                {render_items.length >1 && <span onClick={number_click} className="img-centered-centered">{`+${render_items.length -1}`}</span>}
                 
             </div>
             {(data.length > limit)   &&  <OpenButtonWithHook data={data} limit={limit} />}

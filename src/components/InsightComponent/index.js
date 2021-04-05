@@ -28,8 +28,8 @@ class InsightComponent extends React.PureComponent {
      //    console.log(newSec,"newSec in getSeconds Differnce")
         let seconds = (newSec-sec)/1000
         return {
-            timer:seconds>3600?0:3600-seconds,
-            active:seconds>3600?0:3600-seconds
+            timer:seconds>604800?0:604800-seconds,
+            active:seconds>604800?0:604800-seconds
         }
  }
 
@@ -51,9 +51,7 @@ class InsightComponent extends React.PureComponent {
                 <div id={`${index}-insight-wrapper`} className={`${this.props.s.suggested?`action_insight_wrapper with_suggested ${this.state.view_more?"action_insight_wrapper_elongated":''}`:`action_insight_wrapper ${this.state.view_more?"action_insight_wrapper_elongated":''}`}`} key={index}>
                     <span className="action_insight_image_wrapper">
                         {/* <img src ="/icon/insight_image.svg" className="action_insight_image"/> */}
-                        <Link to={`/dashboard/solution?id=${this.props.s.solutionId}&serviceId=${this.props.s.serviceId}`}>
                         <ProfileAvatar name = {this.props.s.userName} />
-                        </Link>
                     </span>
                     <span className="insight_component_info_wrap">
                     <div  className="RealtimeUsername">
@@ -79,7 +77,7 @@ class InsightComponent extends React.PureComponent {
                             <div className="insight_location_wrapper">
                         <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/analytics-panel-images/insight_location_icon.svg"
                          className="insight_location_icon" />
-                         <span>20 Km</span>
+                         <span>{this.props.s.distance} Km</span>
                          </div>
                         {/* <TimerComponent 
                           seconds = {obj.timer}
@@ -94,16 +92,22 @@ class InsightComponent extends React.PureComponent {
             }
             {/* <span className='insight_time_span'>{getDateFormat(this.props.s.createdAt)}</span> */}
         </span>
-      <div onClick={()=>this.props.not_notify_toggle(this.props.s)} className="service_not_available_wrapper">
+        {/* onClick={()=>this.props.not_notify_toggle(this.props.s)}  */}
+      <div className="service_not_available_wrapper">
           <div className="action_insight_image_wrapper">
           </div>
         <div className="service_not_available_parent">
            <div className="service_not_available_wrap">  
-                <span className="service_not_available_text_wrap">
-                    <text className="service_not_available_text">
-                          Update your price
+           {!this.props.s.priceUpdated ?  <Link className="service_not_available_text_wrap" to={`/dashboard/solution?id=${this.props.s.solutionId}&serviceId=${this.props.s.serviceId}`}> 
+                 <text className="service_not_available_text">
+                         {this.props.s.priceUpdated?this.props.s.category==="Procedure"?"Price submitted":"Price updated":this.props.s.category==="Procedure"?"Submit price":"Update price"}
                     </text>
-                </span>
+            </Link>: <div className="service_not_available_text_wrap"><text className="service_not_available_text">
+                         {this.props.s.priceUpdated?this.props.s.category==="Procedure"?"Price submitted":"Price updated":this.props.s.category==="Procedure"?"Submit price":"Update price"}
+                    </text>
+                    </div>
+           }
+
             </div>
         </div>
         <div className="insight_time_wrapper">
@@ -133,16 +137,16 @@ class InsightComponent extends React.PureComponent {
                  <div className="insight_additional_info_content">
                      {userReport.description}
                  </div> </div>}
-
-
         </div>
+
+        {userReport.imageUrl.length !==0  && userReport.videoUrl.length !==0  && userReport.reportUrl.length !==0  &&
         <div className="flex-parent-3 u-margin-top-medium">
             {userReport.imageUrl.length !==0  &&  <div className="flex-child-3">
                 <div className="insight_additional_info_heading">
                    Photos
                 </div>
                 <div className="photo-gallery-wrapper">
-                    <PhotoGallery data={userReport.imageUrl} />
+                    <PhotoGallery data={userReport.imageUrl} id="photo-gallery-id" />
                 </div>
              </div>}
              {userReport.videoUrl.length !==0  &&  <div className="flex-child-3">
@@ -161,7 +165,7 @@ class InsightComponent extends React.PureComponent {
                     <PdfSection data={userReport.reportUrl}  />
                 </div>
              </div>}
-        </div>
+        </div>}
         <div className="view-less-wrapper">
             <span onClick={()=>this.setState({view_more: !this.state.view_more})} className="view_more_text">
                 {this.state.view_more?"View Less":"View More"}

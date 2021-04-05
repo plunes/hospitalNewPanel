@@ -320,7 +320,7 @@ class RegistrationContainer extends  React.Component {
                     <div className='col-md-6 sidetimgcol'>
                         <img className="sigun_imu"  src="signup.png" alt="SignUp" />
                     </div>
-                    <div className='col-md-6'>
+                    <div className='col-md-6 signup-wrap-new'>
                         <div className="signupHospitalForm" >
                             <div>
                                 <h4 className="signUpText">Sign up</h4>

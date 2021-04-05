@@ -466,7 +466,7 @@
 .display_block {
     display: block !important;
     transition:  flex .2s;
-    margin-left: .5rem;
+    /* margin-left: .5rem; */
 }
 
 .display_block_rish {
