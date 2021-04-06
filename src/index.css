@@ -1341,9 +1341,6 @@ hr.comp_insight_hr {
   margin-top: .5rem;
 }
 
-<<<<<<< HEAD
-=======
-
 #progressbar>div.payment {
   background-image: linear-gradient(to right, #74E6A5, #5AD45C);
   height: .6rem;
@@ -1367,4 +1364,3 @@ hr.comp_insight_hr {
   align-items: flex-start;
   font-weight: bold;
 }
->>>>>>> 322d71bd6632412ce644d7b68b3f80e30488666a
