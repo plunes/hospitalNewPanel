@@ -8,16 +8,28 @@ const InsightGraph = (props) => {
   let labels = []
   let data_points = []
   points.forEach(item=>{
-      if(!item.self){
+      if(true){
           labels.push(item.x)
           data_points.push(item.y)
       }
   })
- var ctx = document.getElementsByClassName('chartjs-render-monitor')[0].getContext('2d');
+
+  var ctx = false
+  try {
+    ctx = document.getElementsByClassName('chartjs-render-monitor')[0].getContext('2d');
+  } catch (error) {
+    
+  }
+  var gradient = {}
+
+  if(ctx){
+     gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, '#FF6C40');   
+    gradient.addColorStop(1, '#FFFFFF00');
+  }
+ 
  console.log(ctx,"ctx")
- var gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, '#FFFFFF00');   
-gradient.addColorStop(1, '#003B78');
+
 
   console.log(data_points,"props in InsightGraph")
     const data = {
@@ -28,7 +40,7 @@ gradient.addColorStop(1, '#003B78');
             fill: props.fill?true:false,
             lineTension: 0.1,
             backgroundColor: gradient,
-            borderColor: '#002448',
+            borderColor: '#FF6C40',
             borderCapStyle: 'butt',
             borderDash: [],
             borderDashOffset: 0.0,

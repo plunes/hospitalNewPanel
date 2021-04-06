@@ -13,6 +13,7 @@ import { getInsights, updateRealPriceClr, clearUpdatePriceData,
        set_location_toggler,
        set_open_map
     } from '../../actions/userActions'
+import { do_not_notify, do_not_notify_loading, get_insight_info, get_insight_info_loading } from "../../actions/dash_actions"
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
@@ -42,6 +43,9 @@ import LineChart from '../functional/LineChart'
 import Select from "../Select";
 import ToolTip from '../functional/Tooltip'
 import InsightProgressBar from '../functional/InsightProgressBar';
+import NoNotify from '../functional/NoNotify';
+import SaveService from '../functional/SaveService';
+
 
 const customStyles = {
     content: {
@@ -100,6 +104,10 @@ class DashboardComponent extends React.PureComponent {
             business_day:7,
             act_as_admin_flag:false,
             real_time_data_points:[],
+            not_notify_modal:false,
+            not_notify_insight:false,
+            save_service_modal:false,
+            save_service_insight:false,
             get_actionable:{
                 center:''
             },
@@ -146,6 +154,7 @@ class DashboardComponent extends React.PureComponent {
 
         if(((nextProps.actioanable_update_loading === false) && (this.props.actioanable_update_loading===true))){
             console.log(this.state.realUpdateData,"this.state.====>>>>")
+        
             this.handleModal()
         }
          
@@ -215,6 +224,23 @@ class DashboardComponent extends React.PureComponent {
         }
      }   
 
+     not_notify_toggle = (data) => {
+         console.log(data,"data in not_notify_toggle")
+         this.setState({
+             not_notify_modal:!this.state.not_notify_modal,
+             not_notify_insight:!!data?data:false
+         })
+
+     }
+
+     save_service_toggle = (data) => {
+        console.log(data,"data in save_service_toggle")
+        this.setState({
+            save_service_modal:!this.state.save_service_modal,
+            save_service_insight:!!data?data:false
+        })
+
+    }
     send_details = () =>{
         if(!isValidPhoneNumber(this.state.act_as_admin_data.phone)){
             this.setState({
@@ -262,9 +288,9 @@ class DashboardComponent extends React.PureComponent {
     }
 
     handleSolutionSliderChange(value){
-        console.log(value,"value in handleSolutionsSliderChage")
-        const { realUpdatePrice } = this.state
-        let newPrice =  (realUpdatePrice )- ((realUpdatePrice) *( value /100))
+
+        let margin = this.state.realUpdateData.max - this.state.realUpdateData.min 
+        let newPrice =  (this.state.realUpdateData.max )- ((margin) *( value /100))
        
         this.setState({
             solValue : value,
@@ -320,17 +346,21 @@ class DashboardComponent extends React.PureComponent {
         }
        
         setTimeout(()=>{
-            console.log(parseInt(((select.userPrice) * (select.recommendation/100)),10),"parseInt(((select.userPrice) * (select.recommendation/100)),10)")
+            let slider_range =  Math.floor(parseInt(select.max) - parseInt(select.min))
+            let price_diff = Math.floor(parseInt(select.max) - parseInt(select.userPrice))
+            console.log(slider_range, price_diff,"slider_range")
+            let slider_value = parseInt((price_diff/slider_range) * 100)
+            console.log(slider_value,"slider_value")
             this.setState({
-                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):0,
-                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):0,
+                real_time_edit_price:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.userPrice,
+                solUpdatedPrice:select.recommendation?parseInt(((select.userPrice) * (select.recommendation/100)),10):select.userPrice,
                 realModalIsOpen :  true,
                 realServiceName: select.serviceName,
                 realUpdatePrice : select.userPrice,
                 realUpdateData : select,
-                real_time_edit_price:select.userPrice,
+                // real_time_edit_price:select.userPrice,
                 real_time_data_points:select.dataPoints || [],
-                solValue:select.recommendation?100-select.recommendation:0
+                solValue:select.recommendation?100-select.recommendation:slider_value
             })
         }, 300)
        
@@ -449,13 +479,22 @@ class DashboardComponent extends React.PureComponent {
                     obj.price =  Math.round(Number(this.state.real_time_edit_price))
                   }else{
                       obj.discount = this.state.solValue
+                      obj.min = this.state.realUpdateData.min
+                      obj.max = this.state.realUpdateData.max
+                      obj.price = this.state.real_time_edit?this.state.real_time_edit_price:this.state.solUpdatedPrice
                   }
-                this.setState({
+              
+                if(!!this.state.realUpdateData.suggested){
+                    this.save_service_toggle(obj)
+                }else {
+                      this.setState({
                     realUpdatePriceLoading:true,
                     realUpdateData:{...this.state.realUpdateData, userPrice:Math.round(Number(this.state.real_time_edit_price))}
                 },()=>{
-                    this.props.updateRealPrice(obj);
+                   this.props.updateRealPrice({...obj})
                 }) 
+                }
+                
              }
         }
         } catch (error) {
@@ -508,18 +547,49 @@ class DashboardComponent extends React.PureComponent {
     }
 
     updateRealPriceClr = () =>{
+        console.log(this.state,"this.state in UpdateRealPriceClr")
         this.props.updateRealPriceClr()
         this.handleRealModal()
-        let insight = [...this.props.solInsights]
-         let updated_insight =  insight.map((item,i)=>{
-            if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
-                return this.state.realUpdateData
-            }else{
-                return item
-            }
-        })
-        this.props.update_real_insights(updated_insight)
       
+        this.save_service_toggle()
+        this.setState({
+            save_service_modal:false,
+            save_service_insight:false
+        })
+        let insight = [...this.props.solInsights]
+        //  let updated_insight =  insight.map((item,i)=>{
+        //     if(!!(item.solutionId===this.state.realUpdateData.solutionId)){
+        //         return this.state.realUpdateData
+        //     }else{
+        //         return item
+        //     }
+        // })
+        // if(this.state.no_notif_id){
+        //     let updated_arr = [...updated_arr].filter(item=>{
+        //        return   (item.solutionId !== this.state.no_notif_id)
+        //     })
+        //     console.log(updated_arr,"updated_arr in UpdateRealPRiceClr")
+        //     this.props.update_real_insights(updated_arr)
+        //     this.setState({
+        //         no_notif_id:false
+        //     })
+        // }else{
+        //     this.props.update_real_insights(updated_insight)
+        // }
+        this.props.get_real_insight()
+    }
+
+    do_not_notify = (data) => {
+        console.log(data,"data======>>>>>>")
+        // window.alert()
+        this.setState({
+            no_notif_id:data.solutionId
+        },()=>{
+            this.props.do_not_notify({
+                serviceId:data.serviceId,
+                solutionId:data.solutionId
+            })
+        })
     }
 
     clearUpdatePriceData = () =>{
@@ -610,8 +680,8 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-
-        let   circular_progress_limit = this.state.realUpdateData.recommendation?100 - (this.state.realUpdateData.recommendation -10):71
+        console.log(this.props,"this.props in Dashboard component")
+        let   circular_progress_limit = 100
         let update_solValue = 71 * (this.state.solValue/circular_progress_limit)
         console.log(update_solValue, circular_progress_limit,this.state.solValue,"update_solValue")
         console.log(this.state,"this.state.realUpdateData")
@@ -723,10 +793,10 @@ class DashboardComponent extends React.PureComponent {
 
                                        <div  className='collumn_flex_rish div_class_2 flex-end' >
                                             <div>
-                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 1 hour</span> 
                                             </div>
                                             <div>
-                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 1 hour</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 7 days</span> 
                                             </div>
                                        </div>
                                      </div>
@@ -744,6 +814,12 @@ class DashboardComponent extends React.PureComponent {
                                                         s = {s}
                                                         handleRealPrice = {this.handleRealPrice}
                                                         index = {index}
+                                                        not_notify_toggle = {this.not_notify_toggle}
+
+                                                        get_insight_info = {this.props.get_insight_info}
+                                                        get_insight_info_ret = {this.props.dash_store.get_insight_info_ret}
+                                                        get_insight_info_loading = {this.props.get_insight_info_loading}
+                                                        get_insight_info_loading_flag = {this.props.dash_store.get_insight_info_loading}
                                                         />
                                                         )
                                                     )
@@ -1030,7 +1106,7 @@ class DashboardComponent extends React.PureComponent {
                             </div>
 
                            <div className="insigts_section_wrapper">
-                            <div style={{width:'100%'}} className='dashboardsection new_card_class'>
+                            <div style={{width:'100%'}} className='dashboardsection '>
                                     <span className='businessrow1col1 realtimewidth'>
                                         {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
                                         <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
@@ -1105,7 +1181,7 @@ class DashboardComponent extends React.PureComponent {
                                             value={this.state.value}
                                         />
                                     </div>
-                                        <div className="text-center"><text style={{ fontSize: '17px', border: 'none' }}  onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                        <div className="text-center"><text style={{ fontSize: '1rem', border: 'none' }}  onClick={this.handleSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
                                     </Modal>
                                     <Modal
                                       // Real Time Insight Modal
@@ -1115,28 +1191,28 @@ class DashboardComponent extends React.PureComponent {
                                         style={customStyles}
                                         ariaHideApp={false}
                                         contentLabel="Example Modal" className='redeemModal secon_modal tech_background'>
-                                        <div className='text-right'>
-                                            {/* <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text> */}
+                                        <div style={{height:'0rem'}} className='text-right'>
+                                            <text  onClick={this.handleRealModal}><img className="modal_cross_icon" src="/icon/cross_icon_rish.png"  alt=""></img></text>
                                         </div>
                                         <span  className="modal_heading center_align_rish">Real Time Prediction</span>
                                         <div><text className="serv_ces">{this.state.realServiceName}</text></div>
-                                        <h2 className="yout_ctl margin_top_mini_rish" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update your best price for maximum bookings</b></h2>
+                                        <h2 className="yout_ctl" ref={subtitle => this.subtitle = subtitle}><b style={{color:'#fff'}}>Update your best price for maximum bookings</b></h2>
                                         <div className='margin_top_medium-2_rish'>   
                                         <Slider
                                             min={0}
-                                            // max={55}
-                                            max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):50}
+                                            max={100}
+                                            // max={!!this.state.realUpdateData.recommendation?(100 - (this.state.realUpdateData.recommendation - 10)):100}
                                             tooltip={true}
                                             format={(val)=>{
-                                                return <p>{this.state.solUpdatedPrice.toFixed(2)}</p>
+                                                return <p>{Math.floor(this.state.solUpdatedPrice)}</p>
                                             }}
-                                            labels={get_slider_labels({lower:this.state.realUpdatePrice, upper:this.state.realUpdateData.recommendation?parseInt((((this.state.realUpdatePrice) * ((this.state.realUpdateData.recommendation -10)/100))),10):0})}
+                                            labels={get_slider_labels({lower:this.state.realUpdateData.max, upper:this.state.realUpdateData.min})}
                                             value={this.state.solValue}
                                             onChange={this.handleSolutionSliderChange}
                                             onValueChange={solValue => this.setState({ solValue })} 
                                             />
 
-                                        <div className="SliderUpdatedPrice margin_top_mini_rish">&#8377;
+                                        <div className="SliderUpdatedPrice ">&#8377;
                                             <span style={{fontSize:'1rem'}}>
                                                 {((!!this.state.real_time_edit) && (!!this.state.realUpdateData.suggested))?
                                                 <React.Fragment>
@@ -1151,14 +1227,14 @@ class DashboardComponent extends React.PureComponent {
                                                 }
                                             </span>            
                                         </div>
-                                        <div className="text-center "><text style={{ fontSize: '.8rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
-                                        <div><text className="serv_ces margin_top_mini_rish">Chances of Conversion increases by</text></div>
+                                        <div className="text-center "><text style={{ fontSize: '1rem', fontWeight: 'bold' }}  onClick={this.handleRealSubmit} className="InsightUpdate"><u>Apply Here</u></text></div>
+                                        <div><text className="serv_ces ">Chances of Conversion increases by</text></div>
                                        
                                         <div className='text-center margin_top_mini_rish'><CircularProgress
-                                            data = {get_circular_progress_data(!!this.state.realUpdateData.recommendation?71:51)}
+                                            data = {get_circular_progress_data(!!this.state.realUpdateData.recommendation?71:71)}
                                             value={update_solValue}
                                         /></div>
-                                        {this.state.realUpdateData.competitionRate &&  <div className="insight_progress_wrapper margin_top_mini_rish">
+                                        {this.state.realUpdateData.competitionRate &&  <div className="insight_progress_wrapper margin_top_small_rish">
                                             <InsightProgressBar
                                              progress = {parseInt(this.state.realUpdateData.competitionRate, 10)}
                                             />
@@ -1273,6 +1349,35 @@ class DashboardComponent extends React.PureComponent {
                                         </div>
                                         </div>
                                     </Modal>
+
+                                    <NoNotify
+                                        open={this.state.not_notify_modal}
+                                        toggle={this.not_notify_toggle}
+                                        update_real_insights ={this.props.update_real_insights}
+                                        solInsights = {this.props.solInsights}
+                                        no_notif_id = {this.state.no_notif_id}
+                                        data= {this.state.not_notify_insight}
+                                        do_not_notify = {this.do_not_notify}
+                                        do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
+                                        do_not_notify_loading = {this.props.do_not_notify_loading}
+                                        do_not_notify_loading_flag = {this.props.dash_store.do_not_notify_loading}
+
+                                    />
+                                     <SaveService
+                                        open={this.state.save_service_modal}
+                                        toggle={this.save_service_toggle}
+                                        cancel_data= {this.state.save_service_insight}
+                                        data= {this.state.realUpdateData}
+                                        solUpdatedPrice = {this.state.solUpdatedPrice}
+                                        real_time_edit = {this.state.real_time_edit}
+                                        real_time_edit_price = {this.state.real_time_edit_price}
+                                    
+                                        updateRealPrice = {this.props.updateRealPrice}
+                                        // do_not_notify_ret  = {this.props.dash_store.do_not_notify_ret}
+                                        // do_not_notify_loading = {this.props.do_not_notify_loading}
+                                        // do_not_notify_loading_flag = {this.props.dash_store.do_not_notify_loading}
+
+                                    />
                   </React.Fragment>
             )
         }
@@ -1295,7 +1400,8 @@ const mapStateToProps = state => ({
     location_toggler:state.user.location_toggler,
     open_map:state.user.open_map,
     centers_data:state.user.data.centers_data,
-    insight_flag:state.user.insight_flag
+    insight_flag:state.user.insight_flag,
+    dash_store:state.dash_store
 })
      export default AnimatedMount({
         unmountedStyle: {
@@ -1310,6 +1416,8 @@ const mapStateToProps = state => ({
         },
       })(connect(mapStateToProps, {updateRealPriceClr, 
         clearUpdatePriceData, 
+        get_insight_info,
+        get_insight_info_loading,
         getAllBookings,
         getInsights,
         sendUpdateData, 
@@ -1329,4 +1437,9 @@ const mapStateToProps = state => ({
         get_centers,
         set_location_toggler,
         set_open_map,
+        do_not_notify,
+        do_not_notify_loading,
         clearSolInsights, setMount })(DashboardComponent))
+
+
+        

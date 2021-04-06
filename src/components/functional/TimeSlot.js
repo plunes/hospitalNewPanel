@@ -1,18 +1,44 @@
 import React, { useState , useEffect } from "react"
 import {  useToasts } from 'react-toast-notifications'
+import  NewNotif from "./NewNotif"
+
+
+function MyError(message){
+    this.message = message;
+}
+
+MyError.prototype = new Error()
 
 const TimeSlot = (props) => {
         console.log(props,"props in TimeSlot")
         const [ hour, setHour ] = useState()
         const [ minutes, setMinutes ] = useState()
+        const [ timestamps_arr, set_timestamps_arr ] = useState([])
+        const [ timestamp, set_timestamp ] = useState()
+        const [ error, set_error ] = useState(false)
+        const [ na, set_na ] = useState(false)
         const {addToast} = useToasts()
 
         useEffect(() => {
-            setHour((props.selectedSlot[props.selectedType])['hour'])
-            setMinutes((props.selectedSlot[props.selectedType])['minutes'])
+            console.log(props.selected_time.time,"props.selected_time.time")
+            setHour((props.selected_time.time.hour))
+            setMinutes((props.selected_time.time.minutes))
+          
+            if(!props.selected_time.time){
+                set_na(true)
+            }
+            let timestamps_arr = []
+            props.selected_slot.slots.map(item=>{
+                timestamps_arr.push(item.from.timestamp?item.from.timestamp:0)
+                timestamps_arr.push(item.to.timestamp?item.to.timestamp:0)
+            })
+            set_timestamps_arr(timestamps_arr)
+            set_timestamp(props.selected_time.timestamp?props.selected_time.timestamp:0)
+           
           }, [])
 
-          console.log(props,"props in TimeSlots Component")
+          console.log(props,na,"props in TimeSlots Component")
+          console.log(timestamp, timestamps_arr,"timestamp, timestamps")
       const  getTimeOptions = (shift) =>{
             if(shift==='morning'){
                 return (
@@ -144,84 +170,164 @@ const TimeSlot = (props) => {
         // }
 
         const submit = () =>{
-            let slot = props.selectedSlot
-            let type = props.selectedType
-            let shift = props.selectedshift
-            let selecteDaySlots = props.selecteDaySlots
-            let test = {}
-            let other_shift = shift==='morning'?selecteDaySlots.evening:selecteDaySlots.morning
-            console.log(other_shift,selecteDaySlots,"other_shift in Submit")
-            let error = false
-            let message = ""
-            console.log(hour, minutes," hour and minutes in TimeSlots")
-            if(type==="from"){
-                if(shift==='morning'){
-                      if((hour>selecteDaySlots.morning.to.hour||(hour>other_shift.from.hour)||(hour>other_shift.to.hour))){
-                          error=true
-                          message= "Invalid Time"
-                      }else if(hour===selecteDaySlots.morning.to.hour){
-                          if(minutes>=selecteDaySlots.morning.to.minutes){
-                            error=true
-                            message= "Invalid Time"
-                          }
-                      }
-                }else if(shift==='evening'){
-                    if(((hour<other_shift.to.hour) || (hour<other_shift.from.hour) || (hour>selecteDaySlots.evening.to.hour))){
-                        error=true
-                        message= "Invalid Time"
-                    }else if(hour===selecteDaySlots.evening.to.hour){
-                            if(minutes>=selecteDaySlots.evening.to.minutes){
-                                error=true
-                                message= "Invalid Time"
-                              }
-                    }else if(hour===selecteDaySlots.morning.to.hour){
-                        if(minutes<=selecteDaySlots.morning.to.minutes){
-                            error=true
-                            message= "Invalid Time"
-                          }
+          console.log(hour, minutes)
+            try {
+                let new_time = new Date(2020, 1, 1, parseInt(hour, 10) , parseInt(minutes, 10) , 0 , 0).getTime()
+             let index = ''
+             let timestamps = [...timestamps_arr]
+             timestamps.forEach((item,i)=>{
+                 if(item === timestamp){
+                     index = i
+                 }
+             })
+
+             if(na){
+                 console.log('1st ====>>>>>>')
+                 
+                if((new_time > (timestamps[timestamps.length -3]?timestamps[timestamps.length -3]:0)) ){
+
+                }else {
+                    throw new MyError('Please enter a valid time')
+                } 
+             }else if(index===0){
+                console.log('2nd ====>>>>>>')
+                    if((new_time < timestamps[1]) && (new_time < timestamps[timestamps.length -1]) ){
+
+                    }else {
+                        throw new MyError('Please enter a valid time')
                     }
-                }
-            }else{
-                if(shift==='morning'){
-                    if((hour<selecteDaySlots.morning.from.hour||(hour>other_shift.from.hour)||(hour>other_shift.to.hour))){
-                        error=true
-                        message= "Invalid Time"
-                    }else if(hour===selecteDaySlots.morning.from.hour){
-                        if(minutes>=selecteDaySlots.morning.from.minutes){
-                          error=true
-                          message= "Invalid Time"
-                        }
-                    }else if(hour===other_shift.from.hour){
-                        if(minutes>=other_shift.from.minutes){
-                          error=true
-                          message= "Invalid Time"
-                        }
-                    }
-                }else if(shift==='evening'){
-                    if((hour<selecteDaySlots.evening.from.hour||(hour===0?false:hour<other_shift.from.hour)||(hour<other_shift.to.hour))){
-                        error=true
-                        message= "Invalid Time"
-                    }else  if((hour===selecteDaySlots.evening.from.to)){
-                        if(minutes<=selecteDaySlots.evening.from.minutes){
-                            error=true
-                            message= "Invalid Time"
-                          }
-                    }
-                }
+             }else if((index===(timestamps.length-1))){
+                console.log('3rd ====>>>>>>')
+                if((new_time > timestamps[0]) && (new_time > timestamps[timestamps.length -2]) ){
+
+                }else {
+                    throw new MyError('Please enter a valid time')
+                } 
+             }else {
+                console.log('4th ====>>>>>>')
+                console.log(index,timestamps,new_time,"asdasdasdasdasdasdsadasd")
+                if((new_time > timestamps[index -1]) && (new_time < timestamps[index +1 ]) ){
+
+                }else {
+                    throw new MyError('Please enter a valid time')
+                } 
+             }
+
+             let selected_slots = [...props.selected_slot.slots]
+              let slots =  selected_slots.map((item,i)=>{
+                 if(i===props.selected_time.index){
+                            return {
+                                ...item,
+                                [props.selected_time.type]:{
+                                    hour, minutes, timestamp:new Date(2020, 1, 1, parseInt(hour, 10) , parseInt(minutes, 10) , 0 , 0).getTime()
+                                }
+                            }
+                 }else {
+                     return item
+                 }
+             })
+
+             let updated_slot = {
+                 ...props.selected_slot,
+                 slots:slots
+             }
+             console.log(updated_slot,"updated_slot in submit")
+                props.submit(updated_slot)
+                
+            } catch (e){
+               console.log(e)
+
+             set_error({
+         
+                    success:false,
+                    message:e.message
+                
+            })
             }
+
+
+            // let slot = props.selectedSlot
+            // let type = props.selectedType
+            // let shift = props.selectedshift
+            // let selecteDaySlots = props.selecteDaySlots
+            // let test = {}
+            // let other_shift = shift==='morning'?selecteDaySlots.evening:selecteDaySlots.morning
+            // console.log(other_shift,selecteDaySlots,"other_shift in Submit")
+            // let error = false
+            // let message = ""
+            // console.log(hour, minutes," hour and minutes in TimeSlots")
+            // if(type==="from"){
+            //     if(shift==='morning'){
+            //           if((hour>selecteDaySlots.morning.to.hour||(hour>other_shift.from.hour)||(hour>other_shift.to.hour))){
+            //               error=true
+            //               message= "Invalid Time"
+            //           }else if(hour===selecteDaySlots.morning.to.hour){
+            //               if(minutes>=selecteDaySlots.morning.to.minutes){
+            //                 error=true
+            //                 message= "Invalid Time"
+            //               }
+            //           }
+            //     }else if(shift==='evening'){
+            //         if(((hour<other_shift.to.hour) || (hour<other_shift.from.hour) || (hour>selecteDaySlots.evening.to.hour))){
+            //             error=true
+            //             message= "Invalid Time"
+            //         }else if(hour===selecteDaySlots.evening.to.hour){
+            //                 if(minutes>=selecteDaySlots.evening.to.minutes){
+            //                     error=true
+            //                     message= "Invalid Time"
+            //                   }
+            //         }else if(hour===selecteDaySlots.morning.to.hour){
+            //             if(minutes<=selecteDaySlots.morning.to.minutes){
+            //                 error=true
+            //                 message= "Invalid Time"
+            //               }
+            //         }
+            //     }
+            // }else{
+            //     if(shift==='morning'){
+            //         if((hour<selecteDaySlots.morning.from.hour||(hour>other_shift.from.hour)||(hour>other_shift.to.hour))){
+            //             error=true
+            //             message= "Invalid Time"
+            //         }else if(hour===selecteDaySlots.morning.from.hour){
+            //             if(minutes>=selecteDaySlots.morning.from.minutes){
+            //               error=true
+            //               message= "Invalid Time"
+            //             }
+            //         }else if(hour===other_shift.from.hour){
+            //             if(minutes>=other_shift.from.minutes){
+            //               error=true
+            //               message= "Invalid Time"
+            //             }
+            //         }
+            //     }else if(shift==='evening'){
+            //         if((hour<selecteDaySlots.evening.from.hour||(hour===0?false:hour<other_shift.from.hour)||(hour<other_shift.to.hour))){
+            //             error=true
+            //             message= "Invalid Time"
+            //         }else  if((hour===selecteDaySlots.evening.from.to)){
+            //             if(minutes<=selecteDaySlots.evening.from.minutes){
+            //                 error=true
+            //                 message= "Invalid Time"
+            //               }
+            //         }
+            //     }
+            // }
            
-            if(!!error){
-              addToast(message, {appearance: 'error', autoDismiss:true})
-            }else{
+            // if(!!error){
+            //   addToast(message, {appearance: 'error', autoDismiss:true})
+            // }else{
                
-                props.submit({
-                    hour, minutes
-                })
-            }
+            //     props.submit({
+            //         hour, minutes
+            //     })
+            // }
         }
     return (
         <div className ='modal-wrapper-small_ris'>
-        <div className="modal-heading_ris set_u_t">Set your Time</div>
+             <NewNotif 
+                            ret ={error}
+                            retClr = {()=>set_error(false)}
+             />
+        <div className="modal-heading_ris set_u_t">Select your Time</div>
         <div className="row modal-p_ris margin-top-small_ris text-center">
     <div className="modal-p_ris col-lg-12 time_s text-center"><h2>{hour>12?hour-12:hour===0?12:hour}:{minutes<10?'0'+minutes:minutes}<small>{hour>=12?hour===24?'AM':'PM':'AM'}</small></h2>
         </div>

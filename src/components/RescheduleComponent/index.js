@@ -65,57 +65,21 @@ class RescheduleComponent extends React.PureComponent {
         }
 
         valid_time = (data,minutes,hours) =>{
-            let slot = data.slots
-            console.log(slot,minutes,hours,"inside valid_time function")
-            if((hours>=slot.morning.from.hour) && (hours<=slot.morning.to.hour)){
-                if(slot.morning.from.hour === slot.morning.to.hour ){
-                        if(minutes<slot.morning.to.minutes){
-                            return `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
-                        }
-                            return false
-                        }
-                if(hours===slot.morning.from.hour){
-                        if(minutes<slot.morning.from.minutes){
-                            return false
-                        }else{
-                            return  `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
-                        }
-                  }else if(hours===slot.morning.to.hour){
-                         if(minutes>slot.morning.from.minutes){
-                        return false
-                    }else{
-                        return  `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
-                    }
-                 }else {
-                    return  `${timeToString(slot.morning.from)}-${timeToString(slot.morning.to)}`
-                }
-                }
-            // checking for evening case
-           else if((hours>=slot.evening.from.hour) && (hours<=slot.evening.to.hour)){
-                if(slot.evening.from.hour === slot.evening.to.hour ){
-                        if(minutes<slot.evening.to.minutes){
-                            return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
-                        }else{
-                            return false
-                        }
-                }
-                if(hours===slot.evening.from.hour){
-                    if(minutes<slot.evening.from.minutes){
-                        return  false
-                    }else{
-                        return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
-                    }
-              }else if(hours===slot.evening.to.hour){
-                     if(minutes>slot.evening.from.minutes){
-                    return  false
-                }else {
-                    return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
-                }
-             }else {
-                return `${timeToString(slot.evening.from)}-${timeToString(slot.evening.to)}`
-            }
-            }
-            return false
+           console.log(data, minutes, hours,"data, minutes, hours")
+           let current_timestamp = new Date(2020, 1, 1, hours , minutes , 0 , 0).getTime()
+           let  result = false
+           try {
+               data.slots.forEach(item=>{
+                   if(current_timestamp>item.from.timestamp && current_timestamp < item.to.timestamp){
+                       result = true
+                       throw new Error("Some error")
+                   }
+               })
+           } catch (e){
+                console.log(e)
+           }
+           return result
+          
         }
         
         save_changes = () =>{

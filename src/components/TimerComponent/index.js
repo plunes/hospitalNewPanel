@@ -24,6 +24,9 @@ class TimerComponent extends React.Component {
 
     secondsToTime(secs){
       let hours = Math.floor(secs / (60 * 60));
+
+      let days = Math.floor(secs / (60 * 60 * 24))
+      
   
       let divisor_for_minutes = secs % (60 * 60);
       let minutes = Math.floor(divisor_for_minutes / 60);
@@ -32,6 +35,7 @@ class TimerComponent extends React.Component {
       let seconds = Math.ceil(divisor_for_seconds);
   
       let obj = {
+        "d":days,
         "h": get2D(hours),
         "m": get2D(minutes),
         "s": get2D(seconds)
@@ -40,12 +44,24 @@ class TimerComponent extends React.Component {
     }
     componentDidMount() {
      
-      let timeLeftVar = this.secondsToTime(this.props.seconds);
-      // console.log(timeLeftVar,this.props.seconds(),"timeLeftVar in timeer")
-      this.setState(
-          { time: timeLeftVar,
-            seconds: this.props.seconds}
-          ,()=>this.startTimer());
+      if(this.props.data.booked){
+            this.setState({
+              time:{
+                "d":'00',
+                "h": '00',
+                "m": '00',
+                "s": '00'
+              },
+              seconds: 0
+            })
+      }else {
+        let timeLeftVar = this.secondsToTime(this.props.seconds);
+        this.setState(
+            { time: timeLeftVar,
+              seconds: this.props.seconds}
+            ,()=>this.startTimer())
+      }
+     
     }
   
     startTimer() {
@@ -60,6 +76,7 @@ class TimerComponent extends React.Component {
       if (seconds <= 0) { 
         this.setState({
           time:{
+            "d":'00',
             "h": '00',
             "m": '00',
             "s": '00'
@@ -78,13 +95,17 @@ class TimerComponent extends React.Component {
     }
   
     render() {
-     
+     console.log(this.state.time,"this.state.time.s")
+     let {time } = this.state
         if(true){
             return(
                <React.Fragment>
-                  <div  className="Timer vertical_align_rish">{this.state.time.m }:&nbsp;
+                 {(this.state.time.d === 0 || this.state.time.d === "00")? <div  className="Timer vertical_align_rish"> {this.state.time.d }:&nbsp; {this.state.time.m }:&nbsp;
                     {this.state.time.s}
-                </div><text style={{fontSize:'.9rem'}}>Mins</text>
+                </div>:
+                 <div  className="Timer vertical_align_rish">
+                     {`${time.d} ${time.d>1?'days':'day'} remaining`}
+             </div>}                
                 </React.Fragment>
               )
         }else{

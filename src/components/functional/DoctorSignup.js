@@ -9,9 +9,12 @@ import DateTimePicker from 'react-widgets/lib/DateTimePicker'
 import { only_alphabets, is_positive_real_number, getDateFormat } from "../../utils/common_utilities"
 import Map from "../MapComponent"
 
+import SuccessfullSignup from "./SuccessfullSignup"
+
 
 
  const DoctorSignup= (props) => {
+  const [open, set_open] = React.useState(false)
   const redirect = () =>{
     return <Redirect to="/signin" />
   }
@@ -303,6 +306,7 @@ import Map from "../MapComponent"
         <span className="signup_tos">Term of Services</span>
       </div>
     <br />
+    <SuccessfullSignup open={open} />
   </div>
 
      )

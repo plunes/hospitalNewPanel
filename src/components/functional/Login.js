@@ -20,9 +20,12 @@ import Select from "../Select"
     props.loadingOff()
 }
 
-   const submitdetails = () => {  
-    if(props.email === ''){
-        addToast("Please enter your id or Phonenumber",{ appearance: 'error', autoDismiss:true })
+   const submitdetails = (e) => {  
+     if(!!e){
+       e.preventDefault()
+     }
+    if(props.email === '' || props.email === undefined){
+        addToast("Please enter your Id or Phone number",{ appearance: 'error', autoDismiss:true })
     }else if(props.password===''){
       addToast("Please enter your password",{ appearance: 'error', autoDismiss:true })
     } else{
@@ -40,12 +43,12 @@ import Select from "../Select"
                 password:props.password
            })
         }else{
-            addToast(message,{ appearance: 'error', autoDismiss:true })
+            // addToast(message,{ appearance: 'error', autoDismiss:true })
         }        
     }
     }
 
-
+console.log(props.email,"email")
   return (
       <React.Fragment>
           <div className="sign_in_body_wrapper margin-top-medium_ris">
@@ -77,6 +80,7 @@ import Select from "../Select"
                            ]}
                       loading = {true}
                  /> */}
+                 <form onSubmit={(e)=>submitdetails(e)}>    
       <div className="form-group sign_in_form_group">
         <input
           autocomplete="off" 
@@ -85,7 +89,7 @@ import Select from "../Select"
           className="form-control customborder"
           name="email"
           // placeholder={`Enter ${props.type==="admin"?'Phonenumber':'Id'} `}
-          placeholder = "Enter Phonenumber or Center Id"
+          placeholder = "Enter Phone number or Center Id"
           // onChange={props.type==="admin"?props.handle_phone_change:props.handleChange}
           onChange={props.handleChange}
           required
@@ -110,10 +114,14 @@ import Select from "../Select"
     </div>
        
     <div className="form-group buttonSignUp">
-        <button style={{width:'100%'}} onClick={()=>submitdetails()}  className="common-button margin-top-medium_ris">
+        <button style={{width:'100%'}}
+        //  onClick={()=>submitdetails()} 
+          className="common-button margin-top-medium_ris">
           Login
         </button>
     </div>
+    </form>
+
     <div className="text-center sign_in_forgot_password">
         <Link className="sign_in_sign_up" to= "/forgotPassword">
            Forgot Passsword

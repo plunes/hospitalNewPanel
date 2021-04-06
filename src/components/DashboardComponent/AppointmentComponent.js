@@ -6,17 +6,17 @@ import { connect } from 'react-redux';
 import  "./AvailabilityComponent.css";
 import "./appointment.css"
 import Modal from 'react-modal';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import NotifFunc from '../functional/NotifFunc';
 import LoaderComponent from "../functional/LoaderComponent"
-import DateTimePicker from 'react-widgets/lib/DateTimePicker'
-import MeasureTime from "../MeasureTime"
 
-import  { generateSlotsFormat, timeToString , stringToTime } from "../../utils/common_utilities"
+import  { dates } from "../../utils/common_utilities"
 
 import RescheduleComponent from '../RescheduleComponent';
 import NewNotif from '../functional/NewNotif';
 import AnimatedMount from "../../HOC/AnimatedMount"
+import InsightProgressBar from "../functional/InsightProgressBar"
+import  PhotoGallery from "../functional/PhotoGallery"
+import PdfSection from "../functional/PdfSection"
+
 function MyError(message){
     this.message = message;
 }
@@ -201,8 +201,14 @@ class AppointmentComponent extends Component {
                let upcoming_bookings = []
                console.log(this.state,"this.state before sorting")
                nextProps.getBookingRet.data.forEach(data =>{
+
+                let flag = dates.compare(new Date(), new Date(data.appointmentTime/1000))
+
+                let time_now =  ((new Date()).getTime()) > data.appointmentTime
+                data.flag = flag
+                console.log(time_now, data, "======>>>>>>>>>>>>")
                    console.log(redirect_index,redirect_type,"redirect_index and redirect type")
-                   if((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true) ){
+                   if(((data.bookingStatus==="Confirmed") && (data.doctorConfirmation===true)) || time_now ){
                        if(!!redirect_index){
                          if(appointments_arr[redirect_index]._id !== data._id){
                             confirmed_bookings.push(data)
@@ -264,13 +270,15 @@ class AppointmentComponent extends Component {
         if(((!!nextProps.timeSlot) && (this.state.firstRender))){
             let arr = []
             nextProps.timeSlot.forEach((item,i)=>{
+                let time_slots = [...item.slots]
+                let slots_arr = []
+                time_slots.forEach(data=>{
+                  slots_arr.push(this.stringToTime(data))
+                })
                   let obj = {}
                   obj.day = getDay(i)
                   obj.closed = item.closed==="false"?false:true
-                  obj.slots = {
-                  morning: stringToTime(item.slots[0]),
-                  evening: stringToTime(item.slots[1])
-                  }
+                  obj.slots = slots_arr
                   arr.push(obj)
             })
             this.setState({
@@ -302,6 +310,30 @@ class AppointmentComponent extends Component {
               }
           }
     }
+
+    stringToTime =(str)=>{
+        let arr = str.split('-')
+        let fromMinute = arr[0].split(" ")[0].split(':')[1]
+        let fromHour = arr[0].split(" ")[0].split(':')[0]
+        let fromAmpm = arr[0].split(" ")[1]
+        let toMinutes = arr[1].split(" ")[0].split(':')[1]
+        let toHour = arr[1].split(" ")[0].split(':')[0]
+        let toAmPm = arr[1].split(" ")[1]
+        console.log(fromHour==='12',"fromHour")
+  let obj =   {
+            from:{
+              hour:fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10),
+              minutes:parseInt(fromMinute,10),
+              timestamp:new Date(2020, 1, 1, fromAmpm==="PM"?fromHour==='12'?12:12+parseInt(fromHour,10):fromHour==='12'?0:parseInt(fromHour,10) , parseInt(fromMinute,10) , 0 , 0).getTime()
+            },
+            to:{
+              hour:toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10),
+              minutes:parseInt(toMinutes,10),
+              timestamp:new Date(2020, 1, 1,toAmPm==="PM"?toHour==='12'?12:12+parseInt(toHour,10):toHour==='12'?0:parseInt(toHour,10) , parseInt(toMinutes,10) , 0 , 0).getTime()
+            }
+        }
+           return obj
+        }
 
     confirmBooking = (item,type) =>{
         if(item.bookingStatus==="Cancellation Requested"){
@@ -357,17 +389,35 @@ class AppointmentComponent extends Component {
     }
 
     getProgressbar = (item) =>{
-    return <ul className="list-unstyled multi-steps">
-        {item.paymentProgress.map((payment,i)=>{
-            if(i===0){
-                return   <li className={!!payment.status?'active_ris ':'not_active_ris'}>Booked</li>
-            }else if(i===(item.paymentProgress.length-1)){
-                return <li className={!!payment.status?"not_active_ris":"not_active_ris not-paid_ris"} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
-            }else{
-                return  <li className={!!payment.status?'not_active_ris':'not_active_ris not-paid_ris'} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
-            }
-        })}
-        </ul>
+        console.log(item.paidBookingAmount,item.totalAmount,"=======================>")
+                  let totalAmount = item.totalAmount
+                    let percent = 0
+                    if(totalAmount===0){
+                        percent = 100
+                    }else {
+                        percent = Math.floor((item.paidBookingAmount/item.totalAmount) * 100)
+                    }
+                     
+        return  (<React.Fragment>   <div className="appointment-progress-wrapper u-margin-top-medium"> <InsightProgressBar
+                      progress = {percent}
+                      version = "payment"
+                      data = {item}
+                        />
+                     </div>
+                     </React.Fragment>)
+
+
+    // return <ul className="list-unstyled multi-steps">
+    //     {item.paymentProgress.map((payment,i)=>{
+    //         if(i===0){
+    //             return   <li className={!!payment.status?'active_ris ':'not_active_ris'}>Booked</li>
+    //         }else if(i===(item.paymentProgress.length-1)){
+    //             return <li className={!!payment.status?"not_active_ris":"not_active_ris not-paid_ris"} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
+    //         }else{
+    //             return  <li className={!!payment.status?'not_active_ris':'not_active_ris not-paid_ris'} ><i className="fa fa-rupee-sign"></i>{payment.amount}</li>
+    //         }
+    //     })}
+    //     </ul>
     }
 
     changeAppointClr = ()=>{
@@ -464,21 +514,65 @@ class AppointmentComponent extends Component {
                                    return <React.Fragment>
                                        <div className='appointment_card_wrapper new_card_class'>
                                            <div className='appointment_card_profile'>
-                                              <div>
-                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                             <div className="appointment_card_profile_profile ">
+                                                <div className="child-1">
+                                                    <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                                </div>
+
+                                                <div  className=' child-2'>
+                                                    <text  className='appointment_text child-1 display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                    <text className='appointment_text child-2 display_block'>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                    <span className="align-item-apart">
+                                                    <text className='appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}</text>
+                                                    <text className='appointment_text' >{this.dateTimeObject(item.appointmentTime).time}</text>
+                                                    </span>
+                                                </div> 
                                               </div>
 
-                                              <div  className='text-center'>
-                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.userAddress}</text>
-                                              </div> 
-                                              <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
-                                                            <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
-                                                            <div className='flex_child_rish'>
-                                                            <text className='align_right appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</text>
-                                                            </div>
+                                          <div style={{width:'70%', opacity:'0.8'}}>
+                                                <text className='appointment_text' >{item.professionalAddress}</text>
+                                              </div>
+
+
+                                                {item.haveInsurance && <div className="insurance-wrap-new" >
+                                                    <div className="insurance-details">
+                                                        <span className="child-1">
+                                                            Please make sure policy is not expired
+                                                        </span>
+                                                        <span className="child-2">
+                                                              {item.insuranceDetails.insurancePartner}
+                                                        </span>
+                                                        <hr />
+                                                    </div>
+                                                    <div className="insurance-details">
+                                                        <span className="child-1">
+                                                            Policy Number
+                                                        </span>
+                                                        <span className="child-2">
+                                                              {item.insuranceDetails.policyNumber}
+                                                        </span>
+                                                        <hr />
+                                                    </div>
+                                                   <div className="insurance-wrap-new-2">
+                                                   <div className="appointment-insurance-wrap">
+                                                        <span>Insurance Card Photo</span>
+                                                      <div className="photo-gallery-wrapper">
+                                                          <PhotoGallery id={`upcomming_booking-${i}`} data={[{
+                                                              imageUrl:item.insuranceDetails.insuranceCard
+                                                          }]} />
+                                                      </div>
+                                                    </div>
+                                                    <div className="appointment-insurance-wrap">
+                                                        <span>Insurance Document</span>
+                                                      <div className="photo-gallery-wrapper">
+                                                          <PdfSection data={[{
+                                                              reportUrl:item.insuranceDetails.insurancePolicy
+                                                          }]} />
+                                                      </div>
+                                                    </div>
                                                 </div>
+
+                                                    </div>}
                                             </div>
                                            <div className='appointment_card_data'>
                                            { (time_now<item.appointmentTime )   &&  <div className="row confrm_mar_sec">
@@ -532,27 +626,79 @@ class AppointmentComponent extends Component {
                                     {this.state.confirmed_bookings.map((item,i)=>{
                                    return <React.Fragment>
                                        <div className='appointment_card_wrapper new_card_class'>
-                                           <div className='appointment_card_profile'>
-                                              <div>
-                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                       <div className='appointment_card_profile'>
+                                             <div className="appointment_card_profile_profile ">
+                                                <div className="child-1">
+                                                    <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                                </div>
+
+                                                <div  className=' child-2'>
+                                                    <text  className='appointment_text child-1 display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                    <text className='appointment_text child-2 display_block'>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                    <span className="align-item-apart">
+                                                    <text className='appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}</text>
+                                                    <text className='appointment_text' >{this.dateTimeObject(item.appointmentTime).time}</text>
+                                                    </span>
+                                                </div> 
                                               </div>
 
-                                              <div  className='text-center'>
-                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.userAddress}</text>
-                                              </div> 
-                                              <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
-                                                            <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
-                                                            <div className='flex_child_rish'>
-                                                            <text className='align_right appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</text>
-                                                            </div>
+                                          <div style={{width:'70%', opacity:'0.8'}}>
+                                                <text className='appointment_text' >{item.professionalAddress}</text>
+                                              </div>
+
+                                              
+                                                {item.haveInsurance && <div className="insurance-wrap-new" >
+                                                    <div className="insurance-details">
+                                                        <span className="child-1">
+                                                            Please make sure policy is not expired
+                                                        </span>
+                                                        <span className="child-2">
+                                                              {item.insuranceDetails.insurancePartner}
+                                                        </span>
+                                                        <hr />
+                                                    </div>
+                                                    <div className="insurance-details">
+                                                        <span className="child-1">
+                                                            Policy Number
+                                                        </span>
+                                                        <span className="child-2">
+                                                        {item.insuranceDetails.policyNumber}
+                                                        </span>
+                                                        <hr />
+                                                    </div>
+                                                   <div className="insurance-wrap-new-2">
+                                                   <div className="appointment-insurance-wrap">
+                                                        <span>Insurance Card Photo</span>
+                                                      <div className="photo-gallery-wrapper">
+                                                          <PhotoGallery  id={`confirmed_booking-${i}`} data={[{
+                                                              imageUrl:item.insuranceDetails.insuranceCard
+                                                          }]} />
+                                                      </div>
+                                                    </div>
+                                                    <div className="appointment-insurance-wrap">
+                                                        <span>Insurance Document</span>
+                                                      <div className="photo-gallery-wrapper">
+                                                          <PdfSection data={[{
+                                                              reportUrl:item.insuranceDetails.insurancePolicy
+                                                          }]} />
+                                                      </div>
+                                                    </div>
                                                 </div>
+
+                                                    </div>}
                                             </div>
                                            <div className='appointment_card_data'>
+
+                                           {(((item.bookingStatus!=="Confirmed") || (item.doctorConfirmation!==true))) &&
+                                           <div className=" u-margin-top-small text-center">
+                                              <text className=" confrm_mar_sec bold-text"> No Action (Doctor confirmation pending)</text> </div>}
                                            {  (time_now < item.appointmentTime) && <div className="row confrm_mar_sec">
                                 <div className="col-lg-2">
-                                    <p className="gr_con "><text>Confirmed</text></p>
+                                    <p className="gr_con ">
+                                        {((item.bookingStatus !=="Confirmed") || (item.doctorConfirmation!==true))?
+                                              <text onClick={()=>this.confirmBooking(item,"upcoming_bookings","confirmed_bookings")}>Confirm (Doctor confirmation pending)</text>
+                                        :<text>Confirmed</text>}
+                                       </p>
                                  </div>
                                  <div className="col-lg-8">
                                  <RescheduleComponent
@@ -604,21 +750,64 @@ class AppointmentComponent extends Component {
                                    return <React.Fragment>
                                        <div className='appointment_card_wrapper new_card_class'>
                                            <div className='appointment_card_profile'>
-                                              <div>
-                                                  <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                             <div className="appointment_card_profile_profile ">
+                                                <div className="child-1">
+                                                    <img  src={item.userImageUrl} className="appointment_user_img img-loading-small_rish" />
+                                                </div>
+
+                                                <div  className=' child-2'>
+                                                    <text  className='appointment_text child-1 display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
+                                                    <text className='appointment_text child-2 display_block'>{`Phone no: ${item.userMobileNumber}`}</text>
+                                                    <span className="align-item-apart">
+                                                    <text className='appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}</text>
+                                                    <text className='appointment_text' >{this.dateTimeObject(item.appointmentTime).time}</text>
+                                                    </span>
+                                                </div> 
                                               </div>
 
-                                              <div  className='text-center'>
-                                                  <text style={{marginTop:'.5rem'}} className='appointment_text display_block'>{item.userName} {!!item.centerLocation?<text className="green_text_rish">{` ${item.centerLocation}`}</text>:''}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{`Phone no: ${item.userMobileNumber}`}</text>
-                                                  <text className='appointment_text display_block' style={{marginTop:'.5rem'}}>{item.userAddress}</text>
-                                              </div> 
-                                              <div style={{marginTop:'2rem'}} className='flex_parent_rish'>
-                                                            <text style = {{ fontSize :'1.2rem' }} className='flex_child_rish'>{this.dateTimeObject(item.appointmentTime).monthAndDate}</text>
-                                                            <div className='flex_child_rish'>
-                                                            <text className='align_right appointment_text'>{this.dateTimeObject(item.appointmentTime).fullDate}<br/>{this.dateTimeObject(item.appointmentTime).time}</text>
-                                                            </div>
+                                              <div style={{width:'70%', opacity:'0.8'}}>
+                                                <text className='appointment_text' >{item.professionalAddress}</text>
+                                              </div>
+
+                                                {item.haveInsurance && <div className="insurance-wrap-new" >
+                                                    <div className="insurance-details">
+                                                        <span className="child-1">
+                                                            Please make sure policy is not expired
+                                                        </span>
+                                                        <span className="child-2">
+                                                              {item.insuranceDetails.insurancePartner}
+                                                        </span>
+                                                        <hr />
+                                                    </div>
+                                                    <div className="insurance-details">
+                                                        <span className="child-1">
+                                                            Policy Number
+                                                        </span>
+                                                        <span className="child-2">
+                                                              {item.insuranceDetails.policyNumber}
+                                                        </span>
+                                                        <hr />
+                                                    </div>
+                                                   <div className="insurance-wrap-new-2">
+                                                   <div className="appointment-insurance-wrap">
+                                                        <span>Insurance Card Photo</span>
+                                                      <div className="photo-gallery-wrapper">
+                                                          <PhotoGallery  id={`cancelled_booking-${i}`} data={[{
+                                                              imageUrl:item.insuranceDetails.insuranceCard
+                                                          }]} />
+                                                      </div>
+                                                    </div>
+                                                    <div className="appointment-insurance-wrap">
+                                                        <span>Insurance Document</span>
+                                                      <div className="photo-gallery-wrapper">
+                                                          <PdfSection data={[{
+                                                              reportUrl:item.insuranceDetails.insurancePolicy
+                                                          }]} />
+                                                      </div>
+                                                    </div>
                                                 </div>
+
+                                                    </div>}
                                             </div>
                                            <div className='appointment_card_data'>
                                            { (time_now<item.appointmentTime)   &&  <div className="row confrm_mar_sec">

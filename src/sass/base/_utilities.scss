@@ -5,7 +5,7 @@
     margin-top: 8rem;
 }
 .u-margin-top-medium {
-    margin-top: 4rem;
+    margin-top: 3rem;
 }
 .u-margin-top-small {
     margin-top: 1.5rem;
@@ -24,7 +24,24 @@
     margin-top: .5rem;
 }
 .margin_top_medium-2_rish {
-    margin-top: 3rem;
+    margin-top: 2.2rem;
+}
+
+.u-margin-5-auto {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.u-align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.u-margin-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+.u-display-flex {
+    display: flex;
 }
 .download_margin {
     display: block;
@@ -59,4 +76,12 @@ section {
         font-size: .9rem;
         font-family: light_proxima;
     }
+}
+
+.appointment-progress-wrapper {
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
 }

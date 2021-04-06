@@ -17,6 +17,11 @@ ul
     margin-top: 100px;
     position: relative;}
 
+.signup-wrap-new {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
 .sidetimgcol 
     {background: #EBEBEB 0% 0% no-repeat padding-box;
      background: #F9F9F9 0% 0% no-repeat padding-box;

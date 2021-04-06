@@ -14,6 +14,7 @@ import AboutUsComponent from '../DashboardComponent/AboutUsComponent';
 import MyCatalogueComponent from '../DashboardComponent/MyCatalogueComponent';
 import AddDoctorComponent from '../DashboardComponent/AddDoctorComponent';
 import NotificationComponent from '../DashboardComponent/NotificationComponent';
+import AvailabilityPage from "../AvailabilityPage"
 import { getEntity, getEntityClr, clearSolInsights,
    getInsights, set_dash_data, clr_act_insght, getSolutionInsights,
    getNotifications, clr_get_notif, setMount, set_notif_data, remove_notif_count,
@@ -21,7 +22,8 @@ import { getEntity, getEntityClr, clearSolInsights,
    get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url,
    get_centers, get_centers_clr , set_centers_data, set_location_toggler, clearUpdatePriceData} from "../../actions/userActions"
 
-import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading } from "../../actions/dash_actions"
+import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading ,
+   get_insight_info , get_insight_info_loading, update_insight_loading, update_insight} from "../../actions/dash_actions"
 import  { get_user_specialities } from "../../actions/catalogue_actions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
@@ -37,6 +39,7 @@ import NewNotif from '../functional/NewNotif';
 import FullPageLoader from '../functional/FullPageLoader';
 import { withRouter } from "react-router"
 import './index.css'
+import Solution from '../Solution';
 
 
 const initialState = {
@@ -114,13 +117,14 @@ export class DashboardPage extends React.PureComponent {
     if(nextProps.updatePriceDataRet){
       console.log(nextProps.updatePriceDataRet,"nextProps.updatePriceDataRet")
       if(nextProps.updatePriceDataRet.success){
+        // window.location.reload()
           let arr = [...this.state.insight]
 
           let new_arr = arr.map(item=>{
             if(item.serviceId === this.state.selected_actionable.serviceId){
-              return { ...this.state.selected_actionable, userPrice:this.state.updated_price  }
+              return { ...this.state.selected_actionable, userPrice:this.state.updated_price, min:Math.floor(item.min),  max:Math.floor(item.max) }
             }else {
-              return {...item}
+              return {...item,  min:Math.floor(item.min),  max:Math.floor(item.max)}
             }
           })
          
@@ -146,7 +150,7 @@ export class DashboardPage extends React.PureComponent {
         if(!!nextProps.solInsights){
           console.log(nextProps.solInsights,"NextProps.solInsights")
           this.setState({
-              solInsights:nextProps.solInsights,
+              solInsights:nextProps.solInsights.map(item=>({...item,  min:Math.floor(item.min),  max:Math.floor(item.max)})),
               real_insight_loader:false
           },()=>{
               nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.solInsights})
@@ -176,8 +180,22 @@ export class DashboardPage extends React.PureComponent {
       if(nextProps.get_real_insight_ret){
       
         if(nextProps.get_real_insight_ret.success){
+          console.log(nextProps.get_real_insight_ret.data,"nextProps.get_real_insight_ret.data")
           this.setState({
-            solInsights:nextProps.get_real_insight_ret.data
+            solInsights:nextProps.get_real_insight_ret.data.map(item=>{
+               if(item.recommendation){
+                 return {
+                   ...item,
+                   recommendation:100 - item.recommendation,
+                   min:Math.floor(item.min),  max:Math.floor(item.max)
+                 }
+               }else{
+                 return ({
+                  ...item,
+                  min:Math.floor(item.min),  max:Math.floor(item.max)
+                 })
+               }
+            })
           },()=>{
             nextProps.set_dash_data({...nextProps.dash_data, solInsights:nextProps.get_real_insight_ret.data})
             // nextProps.clr_act_insght()
@@ -590,7 +608,14 @@ export class DashboardPage extends React.PureComponent {
     socket.on('realtimeInsight',(data)=>{
         console.log("RealTimeInsights event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         console.log(data, "data in realTimeInsight Event")
-        this.add_insight(data)
+        if(data.recommendation){
+          this.add_insight({
+            ...data,
+            recommendation:100 - data.recommendation
+          })
+        }else {
+          this.add_insight(data)
+        }
     })
     socket.on('notification',(data)=>{
         console.log("Notification event trigerred >>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -735,11 +760,29 @@ update_real_insights = (data) => {
                               pathname ={window.location.pathname}
                             />
                   <div id="content" className="main_body_flex_content">
-                  {(window.location.pathname === '/dashboard')?
+                  {(window.location.pathname === '/dashboard/solution')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=><Solution
+                  
+                  get_insight_info = {this.props.get_insight_info}
+                  get_insight_info_loading = {this.props.get_insight_info_loading}
+                  get_insight_info_ret = {this.props.dash_store.get_insight_info_ret}
+                  get_insight_info_loading_flag = {this.props.dash_store.get_insight_info_loading}
+
+                  update_insight = {this.props.update_insight}
+                  update_insight_loading = {this.props.update_insight_loading}
+                  update_insight_ret = {this.props.dash_store.update_insight_ret}
+                  update_insight_loading_flag = {this.props.dash_store.update_insight_loading}
+
+                    />):
+                  (window.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
                   })(()=><DashboardComponent
+                    get_real_insight = {this.props.get_real_insight}
                     get_actionable_insight = {this.get_actionable_insight}
                     centers_name_list = {this.state.centers_name_list}
                     get_centers_loading = {this.state.get_centers_loading}
@@ -772,7 +815,7 @@ update_real_insights = (data) => {
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
-                  })(()=><AvailabilityComponent />)
+                  })(()=><AvailabilityPage />)
                   :(window.location.pathname === '/dashboard/settings')?
                   protected_route({
                     authObject:this.authObject,
@@ -859,6 +902,7 @@ update_real_insights = (data) => {
 const mapStateToProps = state => ({
     user: state.user,
     dash_data:state.user.data.dash_data,
+    dash_store:state.dash_store,
     mount:state.user.mount,
     solInsights:state.user.solInsights,
     insight: state.user.insightData,
@@ -910,6 +954,10 @@ get_real_insight_loading,
 get_act_insight,
 get_act_insight_loading,
 get_user_specialities,
-clearUpdatePriceData
+clearUpdatePriceData,
+get_insight_info,
+get_insight_info_loading,
+update_insight,
+update_insight_loading
 })(DashboardPage);
 
