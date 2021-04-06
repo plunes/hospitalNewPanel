@@ -266,8 +266,8 @@ import SuccessfullSignup from "./SuccessfullSignup"
         <p className="Plzenter">Please enter at least 8 character Password</p>
       </div>
       <div className="form-group buttonSignUp">
-        <button  onClick={()=>set_open(true)} className="btn btn-success text-center signupHosbtn">
-        {/* onClick={()=>submitdetails()} */}
+        <button  onClick={()=>submitdetails()}   className="btn btn-success text-center signupHosbtn">
+        {/* onClick={()=>set_open(true)} */}
           Submit
         </button>
       </div>
