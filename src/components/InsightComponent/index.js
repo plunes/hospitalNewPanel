@@ -75,7 +75,7 @@ class InsightComponent extends React.PureComponent {
                     <div style={{height:'100%'}} className="text-center">
                         <React.Fragment>
                             <div className="insight_location_wrapper">
-                        <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/analytics-panel-images/insight_location_icon.svg"
+                        <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/analytics-panel-images/insight_location_icon.png"
                          className="insight_location_icon" />
                          <span>{this.props.s.distance} Km</span>
                          </div>
