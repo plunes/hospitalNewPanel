@@ -320,17 +320,24 @@
   // Insight component css
 .service_not_available_wrapper {
   width: 100%;
+  display: flex;
+  margin-top: .5rem;
+}
+.service_not_available_wrap {
+  height: 1.5rem;
+  background-color: #fff;
+  border: 3px solid #A7F0C6;
+  border-radius: 1rem;
+  padding: .8rem .8rem;
+  display: flex;
+  cursor: pointer;
 }
   .service_not_available_parent {
      display: flex;
-     width: 27%;
-     height: 1.5rem;
-     background-color: #C5E2FC;
-     border: 1px solid #72B2FF;
-     border-radius: .2rem;
-     padding: .2rem;
-     margin-left: 8rem;
-     cursor: pointer;
+     flex: 1 1 50%;
+  }
+  .insight_time_wrapper {
+    flex: 1 1 15%;
   }
   .service_not_available_img {
     height: 95%;
@@ -353,9 +360,11 @@
   }
 
   .service_not_available_text {
-      font-family: alt_thin_proxima;
-      font-size: .8rem;
-      color: #3084E9;
+    font-family: bold_proxima;
+    font-size: .9rem;
+    font-family: 'bold_proxima';
+    color: #A7F0C6;
+    font-weight: bold;
   }
 
 
@@ -407,6 +416,83 @@
     cursor: pointer;
   }
 
-  // .no_notif-modal {
-  //   width: 30%;
-  // }
+  .insight_location_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .insight_location_icon {
+    height: auto;
+    width: 3rem;
+    margin: auto;
+  }
+
+  .insight_view_more_details {
+    box-shadow: 0px 2px 5px #00000029;
+    text-align: center;
+    padding: .5rem auto;
+    width: 95%;
+    height: auto;
+    margin: auto;
+    border-radius: 0rem 0rem .5rem .5rem;
+    transition: all 1s ease;
+    text-align: center;
+    background-color: #fff !important;
+  }
+
+  .display-true {
+    display: block;
+  }
+
+  .display-false {
+    display: none;
+  }
+  .view_more_text {
+    margin: .2rem;
+    font-family: bold_proxima;
+    font-size: .9rem;
+    font-family: 'bold_proxima';
+    color: #A7F0C6;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .insight_view_more_details-elongate {
+    transition:  all 1s ease;
+  }
+
+  .insight_additional_wrapper {
+    display: flex;
+    // margin: 1rem;
+    flex-wrap: wrap;
+    min-width: 45rem;
+  }
+
+  .insight_additional_wrapper_child {
+      flex: 1 1 45%;
+      flex-direction: column;
+      background-color: linear-gradient(0deg,#F7F7F7, #ffff );
+      height: auto;
+  }
+
+  .insight_additional_info_heading {
+      flex: 1 1 10%;
+      font-weight: bold;
+  }
+
+  .insight_additional_info_content {
+    flex: 1 1 80%;
+    background: transparent linear-gradient(180deg, #FEFEFE 0%, #F6F6F6 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    margin: 1rem 1rem 1rem 0rem;
+    padding: .5rem;
+    min-height: 8rem;
+}
+
+.additional_info_23 {
+  padding: 1rem 1rem 0rem 1rem;
+}
+.view-less-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+

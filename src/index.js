@@ -15,6 +15,9 @@ import { ToastProvider } from 'react-toast-notifications'
 import "react-widgets/dist/css/react-widgets.css";
 import Moment from 'moment'
 import momentLocalizer from 'react-widgets-moment';
+
+import "./new_css_file.css";
+
 import "./proxima.otf"
 Moment.locale('en')
 momentLocalizer()

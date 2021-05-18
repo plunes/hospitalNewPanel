@@ -169,7 +169,7 @@ import WeekWidget from "./WeekWidget"
          </div>
         
          <div class="form-group label-floating">
-           <label class="control-label control_label_ris" for="education">Education Qualification</label>
+           <label class="control-label control_label_ris" for="education">Educational Qualification</label>
            <input class="form-control no_padding_ris btm_in_bdr" value= {props.education} onChange={props.handleChange} id="educationqua" type="education" name="education" required data-error="Please enter your education qulification" />
            <div class="help-block with-errors"></div>
          </div>
@@ -229,6 +229,13 @@ import WeekWidget from "./WeekWidget"
                                    onClick={props.set_slot}
                                  />
                                 
+                            </div>
+
+                            <div className=" u-margin-top-small">
+                              <div className="checkbox-input checkbox-big u-display-flex">
+                                  <input checked={!props.selected_slot.closed} onClick={()=>props.sloct_checkbox()} type="checkbox" id="html"/>
+                                   <label  className="u-margin-auto" for="html">{!props.selected_slot.closed?'OPEN':'CLOSED'}</label>
+                              </div>
                             </div>
 
 {props.selected_slot.slots.map((item, i)=>{

@@ -143,7 +143,7 @@ class PaymentComponent extends Component {
                                          
                                    </div>
                                    <div className='payment_flex_requested'>
-                                       <div className='PaymentUN'>&#x20b9;{p.totalAmount}</div><br></br>
+                                       <div className='PaymentUN'>&#x20b9;{p.paidAmount}</div><br></br>
                                        {
                                            p.redeemStatus === null ? <button type='button' onClick={() => this.handleClick(p)} className='redeemBtn'><u>Redeem</u></button> : <div><p className="ser_nme">{p.redeemStatus}</p></div>
                                        }

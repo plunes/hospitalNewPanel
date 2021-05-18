@@ -206,8 +206,8 @@ import { get_url_params, for_loop } from '../utils/common_utilities';
 
 
 
-let baseUrl = "https://devapi.plunes.com/v7"
-let base_url_without_v7 = "https://devapi.plunes.com"
+let baseUrl = "https://devapi.plunes.com/v9"
+let base_url_without_v8 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
 if(!!pathLocation) {
@@ -215,11 +215,11 @@ if(!!pathLocation) {
  if(pathLocation === 'analytics.plunes.com') {
    console.log('PROD');
    // Production baseUrl
-   baseUrl = 'https://api.plunes.com/v7'
-   base_url_without_v7 = 'https://api.plunes.com'
+   baseUrl = 'https://api.plunes.com/v9'
+   base_url_without_v8 = 'https://api.plunes.com'
  }else{
-   baseUrl = "https://devapi.plunes.com/v7"
-   base_url_without_v7 ="https://devapi.plunes.com"
+   baseUrl = "https://devapi.plunes.com/v9"
+   base_url_without_v8 ="https://devapi.plunes.com"
    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
  }
 }
@@ -1132,7 +1132,7 @@ export const edit_location = (data) => async dispatch => {
          type : EDIT_LOCATION_RET,
          payload :{
            success:true,
-           message:"Your location been successfully submited"
+           message:"Your location been successfully submitted"
          }
        })
    }else{
@@ -1189,7 +1189,7 @@ export const submit_query = (data) => async dispatch => {
          type : SUBMIT_QUERY_RET,
          payload :{
            success:true,
-           message:"Your query has been successfully submited"
+           message:"Your query has been successfully submitted"
          }
        })
    }else{
@@ -2043,7 +2043,7 @@ export const addDoctor = (obj) => async dispatch => {
  console.log("Inside addDoctor")
  const center_id = get_url_params('center')
  let token = localStorage.getItem('token');
- return await axios.patch(base_url_without_v7 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
+ return await axios.patch(base_url_without_v8 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res,"res in addDoctor")
      if (res.status === 200) {
@@ -2170,7 +2170,7 @@ export const getServClr = () => dispatch =>{
 export const getServ = (obj) => async dispatch => {
  console.log(obj,"Data in getServ Action")
  let token = localStorage.getItem('token');
- return await axios.get(base_url_without_v7 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.get(base_url_without_v8 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res,"res in getServ")
      if (res.status === 200) {
@@ -3137,7 +3137,7 @@ export const sendUpdateData = (uData) => async dispatch => {
  }
  //console.log(typeof obj.newPrice, obj.newPrice)
  let token = localStorage.getItem('token');
- return await axios.patch(base_url_without_v7 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.patch(base_url_without_v8 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
    .then((res) => {
      //console.log(res.data)
      console.log(res,"res in send Update")
@@ -3267,7 +3267,7 @@ export const getTimeslot = () => async dispatch => {
  return await axios.get(baseUrl + '/user/' + userId + '/timeSlots', { 'headers': { 'Authorization': token } })
    .then((res) => {
      console.log(res, 'data');
-     if (res.status === 200) {
+     if (res.status === 200) {   
        // console.log(res.data.field, 'data');
        let field = res.data.field;
        let array = []
@@ -3430,18 +3430,20 @@ export const getBooking = () => async  dispatch => {
        let businessBooking = []
        console.log(bookings,"bookings beforefilter")
        bookings.filter((b) => userId === b.professionalId)
-       console.log(bookings,"bookings after filter")
-       bookings.forEach((b) => {
-        let pos = ''
+       bookings.forEach((b,i) => {
+        let pos  = ""
         try {
-          pos = b.solutionServiceId.split("|")[2]
+          pos= b.solutionServiceId.split("|")[2]
         } catch (error) {
           console.log(error)
           pos = 0
         }
-          
+         
          let paidAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) * Number(b.paymentPercent) / 100;
-         let totalAmount = Number(b.service.newPrice[pos]);
+         if(i===3){
+          console.log(paidAmount,"PaidAmount")
+         }
+         let totalAmount = Number(b.service.newPrice[pos])
          let restAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) - paidAmount
 
          console.log(paidAmount, totalAmount, restAmount,"============>>>>>>>>>========")
@@ -3453,7 +3455,6 @@ export const getBooking = () => async  dispatch => {
            'appointmentTime': b.appointmentTime,
            'serviceName': b.serviceName,
            'paidAmount': paidAmount,
-           'totalAmount': totalAmount,
            'restAmount': restAmount,
            'creditsUsed': b.creditsUsed,
            'bookingId': b.referenceId,
@@ -3464,8 +3465,11 @@ export const getBooking = () => async  dispatch => {
            'doctorConfirmation':b.doctorConfirmation,
            'userMobileNumber':b.userMobileNumber,
            'paymentProgress':b.paymentProgress,
-           'centerLocation':b.centerLocation
-
+           'centerLocation':b.centerLocation,
+           totalAmount:b.totalAmount,
+           paidBookingAmount:b.paidBookingAmount,
+           haveInsurance:b.haveInsurance,
+           insuranceDetails:b.insuranceDetails
          }
          businessBooking.push(bookDet)
        })

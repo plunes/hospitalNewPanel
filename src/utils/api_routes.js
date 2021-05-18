@@ -4,8 +4,8 @@ import { get_url_params } from '../utils/common_utilities';
 
 
 
-let base_url = "https://devapi.plunes.com/v7"
-let base_url_without_v7 = "https://devapi.plunes.com"
+let base_url = "https://devapi.plunes.com/v9"
+let base_url_without_v8 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
 if(!!pathLocation) {
@@ -13,11 +13,11 @@ if(!!pathLocation) {
   if(pathLocation === 'analytics.plunes.com') {
     console.log('PROD');
     // Production baseUrl
-    base_url = 'https://api.plunes.com/v7'
-    base_url_without_v7 = 'https://api.plunes.com'
+    base_url = 'https://api.plunes.com/v9'
+    base_url_without_v8 = 'https://api.plunes.com'
   }else{
-    base_url = "https://devapi.plunes.com/v7"
-    base_url_without_v7 ="https://devapi.plunes.com"
+    base_url = "https://devapi.plunes.com/v9"
+    base_url_without_v8 ="https://devapi.plunes.com"
     // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
   }
 }
@@ -102,6 +102,25 @@ export default {
     
 
     dash_routes:{
+      get_insight_info:(data,  headers) =>
+      axios
+          .get(`${base_url}/solution/solutionId?id=${data.solutionId}&serviceId=${data.serviceId}`, headers)
+          .then(res => {
+               console.log(res,'res in get Insight Info')
+               return res
+          })
+          .catch(err => err.response),
+
+      update_insight:(data,  headers) =>
+      axios
+          .put(`${base_url}/solution/updateSolution`, data, headers)
+          .then(res => {
+                console.log(res,'res in get Insight Info')
+                return res
+          })
+          .catch(err => err.response),
+
+
       do_not_notify:(data,  headers) =>
       axios
           .put(`${base_url}/user/serviceNotificationException/${data.serviceId}`,{}, headers)

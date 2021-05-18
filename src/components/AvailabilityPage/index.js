@@ -12,6 +12,7 @@ import AnimatedMount from "../../HOC/AnimatedMount"
 import Button from '../functional/Button';
 import WeekWidget from "../functional/WeekWidget"
 import Timerow from "../functional/Timerow"
+import UpdateSlot from '../functional/UpdateSlot'
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 class AvailabilityPage extends Component {
@@ -221,9 +222,15 @@ class AvailabilityPage extends Component {
           console.log("Succcess")
             this.setState({
                     loading:true
-                  },()=>this.props.setAvailability({
-                    timeSlots:this.generateSlotsFormat()
-                  }))
+                  },()=>{
+                    if(this.props.prof_data.isAdmin){
+                      this.toggle_update_slot_modal_flag()
+                    }else{
+                       this.props.setAvailability({
+                      timeSlots:this.generateSlotsFormat()
+                    })
+                    }
+                  })
         }else {
           this.setState({
             ret:{
@@ -385,11 +392,24 @@ setAvailabilityClr = () =>{
 }
 
 set_selected_days =(day) => {
+  console.log(day, this.state.selected_days,"set_selected_days")
   let arr = [...this.state.selected_days]
-  arr.push(day)
+  if(!arr.includes(day)){
+    arr.push(day)
+    this.setState({
+      selected_days:arr
+    })
+  }else {
+    const index = arr.indexOf(day);
+      if (index > -1) {
+        arr.splice(index, 1);
+      }
+      console.log(arr,"arr after splice")
       this.setState({
         selected_days:arr
       })
+  }
+ 
 }
 
 apply_to_all = () => {
@@ -432,9 +452,33 @@ apply_to_all = () => {
 
 }
 
+toggle_update_slot_modal_flag = () =>{
+  this.setState({
+    update_slot_modal_flag:!this.state.update_slot_modal_flag
+  })
+}
+
+generate_update_slot_modal = () => {
+    return (<React.Fragment>
+         <UpdateSlot   
+            toggle_update_slot_modal_flag = {this.toggle_update_slot_modal_flag}
+            update_time_slots = {this.update_time_slots}
+         />
+    </React.Fragment>)
+}
+
+
+update_time_slots = (data)=>{
+       this.props.setAvailability({
+                      ...data,
+                      timeSlots:this.generateSlotsFormat(),
+           })
+           setTimeout(()=>this.toggle_update_slot_modal_flag(),1000)
+}
+
 
     render() {
-       console.log(this.state,"this.state in availability")
+       console.log(this.props,"this.props in availability")
         return (
            <React.Fragment> 
              <NewNotif
@@ -482,7 +526,7 @@ apply_to_all = () => {
                                  <span className="add-more-slots">Add more slots</span>
                              </div>
                              <div className='u-margin-top-mini text-center'>
-                                  <Button style={{fontSize:"3rem"}}  onClick={()=>this.handleSubmitAvail()}>Submit</Button>
+                                  <Button style={{fontSize:"2rem"}}  onClick={()=>this.handleSubmitAvail()}>Submit</Button>
                              </div> 
                            
                  </div>
@@ -502,7 +546,7 @@ apply_to_all = () => {
                                 
                     </div>
                     <div className='u-margin-top-small text-center'>
-                                  <Button style={{fontSize:"3rem"}}  onClick={()=>this.apply_to_all()}>Apply</Button>
+                                  <Button style={{fontSize:"2rem"}}  onClick={()=>this.apply_to_all()}>Apply</Button>
                       </div> 
                  </div>
                    
@@ -512,13 +556,20 @@ apply_to_all = () => {
                 handleClose = {this.onCloseModal}
                 modalBody = {this.generateTimeSlot}
                 />  
+             <ModalComponent 
+                open = {this.state.update_slot_modal_flag}
+                handleClose = {this.toggle_update_slot_modal_flag}
+                modalBody = {this.generate_update_slot_modal}
+                no_cross= {true}
+                />  
      </React.Fragment>
         )
     }
 }
 const mapStateToProps = state => ({
    timeSlot : state.user.timeSlot,
-   setAvailabilityRet:state.user.setAvailabilityRet
+   setAvailabilityRet:state.user.setAvailabilityRet,
+   prof_data:state.user.data.prof_data
  })
 
 

@@ -7,6 +7,7 @@ import validator from 'validator'
 import Select from "../Select"
 import { only_alphabets } from  "../../utils/common_utilities"
 import Map from "../MapComponent"
+import SuccessfullSignup from "./SuccessfullSignup"
 
 // let { DateTimePicker } = ReactWidgets;
 
@@ -22,7 +23,8 @@ import Map from "../MapComponent"
 
 
  const HospitalSignup= (props) => {
-   console.log(props,"props in HospitalSignup")
+
+  const [open, set_open] = React.useState(false)
   const { addToast } = useToasts()
   const [ password, setPassword ] = useState(false)
   if(!!props.registerUserRet){
@@ -264,12 +266,15 @@ import Map from "../MapComponent"
         <p className="Plzenter">Please enter at least 8 character Password</p>
       </div>
       <div className="form-group buttonSignUp">
-        <button onClick={()=>submitdetails()} className="btn btn-success text-center signupHosbtn">
+        <button  onClick={()=>submitdetails()}   className="btn btn-success text-center signupHosbtn">
+        {/* onClick={()=>set_open(true)} */}
           Submit
         </button>
       </div>
    
     <br />
+
+    <SuccessfullSignup open={open} />
   </div>
 
      )

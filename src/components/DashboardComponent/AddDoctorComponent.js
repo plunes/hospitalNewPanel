@@ -162,9 +162,11 @@ class AddDoctorComponent extends Component {
         time_slots.forEach(data=>{
           slots_arr.push(this.stringToTime(data))
         })
+        console.log(item,"item in transformData")
+        console.log(item.closed==="false" || item.closed===false,'item.closed==="false" || item.closed===false')
           let obj = {}
           obj.day =this.getDay(i)
-          obj.closed = item.closed==="false"?false:true
+          obj.closed = (item.closed==="false" || item.closed===false) ? false :true
           obj.slots = slots_arr
           arr.push(obj)
       })
@@ -552,7 +554,7 @@ add_slot = () => {
             })
               let obj = {}
               obj.day =this.getDay(i)
-              obj.closed = item.closed==="false"?false:true
+              obj.closed = (item.closed==="false" || item.closed===false)?false:true
               obj.slots = slots_arr
               arr.push(obj)
           })
@@ -789,7 +791,7 @@ add_slot = () => {
     }
 
     render() {
-   console.log(this.state.slots,"slots")
+   console.log(this.state.selected_slot,"this.state.selected_slot")
       let center_id = get_url_params('center')
       if(this.state.add_success){
         if(!!center_id){
@@ -819,6 +821,8 @@ add_slot = () => {
           </div>
         
             <AddDoctorForm  
+              selected_slot = {this.state.selected_slot}
+              sloct_checkbox = {this.sloct_checkbox}
               add_slot = {this.add_slot} 
               handleSubmitAvail = {this.handleSubmitAvail}
               set_selected_days = {this.set_selected_days}

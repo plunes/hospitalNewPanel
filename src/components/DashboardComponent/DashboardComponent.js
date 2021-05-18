@@ -13,7 +13,7 @@ import { getInsights, updateRealPriceClr, clearUpdatePriceData,
        set_location_toggler,
        set_open_map
     } from '../../actions/userActions'
-import { do_not_notify, do_not_notify_loading } from "../../actions/dash_actions"
+import { do_not_notify, do_not_notify_loading, get_insight_info, get_insight_info_loading } from "../../actions/dash_actions"
 import { sendUpdateData } from '../../actions/userActions'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
@@ -680,7 +680,7 @@ class DashboardComponent extends React.PureComponent {
     }
 
     render() {
-        console.log(this.state,"this.state in Dashboard component")
+        console.log(this.props,"this.props in Dashboard component")
         let   circular_progress_limit = 100
         let update_solValue = 71 * (this.state.solValue/circular_progress_limit)
         console.log(update_solValue, circular_progress_limit,this.state.solValue,"update_solValue")
@@ -793,10 +793,10 @@ class DashboardComponent extends React.PureComponent {
 
                                        <div  className='collumn_flex_rish div_class_2 flex-end' >
                                             <div>
-                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 15 mins</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Preferred Time : 1 hour</span> 
                                             </div>
                                             <div>
-                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 1 hour</span> 
+                                                <span style={{fontSize:'.9rem'}} className="maximum_time vertical_align_rish">Maximum Time : 7 days</span> 
                                             </div>
                                        </div>
                                      </div>
@@ -815,6 +815,11 @@ class DashboardComponent extends React.PureComponent {
                                                         handleRealPrice = {this.handleRealPrice}
                                                         index = {index}
                                                         not_notify_toggle = {this.not_notify_toggle}
+
+                                                        get_insight_info = {this.props.get_insight_info}
+                                                        get_insight_info_ret = {this.props.dash_store.get_insight_info_ret}
+                                                        get_insight_info_loading = {this.props.get_insight_info_loading}
+                                                        get_insight_info_loading_flag = {this.props.dash_store.get_insight_info_loading}
                                                         />
                                                         )
                                                     )
@@ -1101,7 +1106,7 @@ class DashboardComponent extends React.PureComponent {
                             </div>
 
                            <div className="insigts_section_wrapper">
-                            <div style={{width:'100%'}} className='dashboardsection new_card_class'>
+                            <div style={{width:'100%'}} className='dashboardsection '>
                                     <span className='businessrow1col1 realtimewidth'>
                                         {/* <img src="/nouser.svg" alt="no of users" className="businessicon vertical_align_rish" alt=""/> */}
                                         <p className='business vertical_align_rish cursor-pointer'>No. of Users</p>
@@ -1411,6 +1416,8 @@ const mapStateToProps = state => ({
         },
       })(connect(mapStateToProps, {updateRealPriceClr, 
         clearUpdatePriceData, 
+        get_insight_info,
+        get_insight_info_loading,
         getAllBookings,
         getInsights,
         sendUpdateData, 
@@ -1433,3 +1440,6 @@ const mapStateToProps = state => ({
         do_not_notify,
         do_not_notify_loading,
         clearSolInsights, setMount })(DashboardComponent))
+
+
+        

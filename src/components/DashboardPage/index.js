@@ -22,7 +22,8 @@ import { getEntity, getEntityClr, clearSolInsights,
    get_user_info_clr, set_user_info,  get_business, get_business_clr, set_business_data, base_url,
    get_centers, get_centers_clr , set_centers_data, set_location_toggler, clearUpdatePriceData} from "../../actions/userActions"
 
-import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading } from "../../actions/dash_actions"
+import { get_real_insight, get_act_insight_loading, get_act_insight, get_real_insight_loading ,
+   get_insight_info , get_insight_info_loading, update_insight_loading, update_insight} from "../../actions/dash_actions"
 import  { get_user_specialities } from "../../actions/catalogue_actions"
 import EditProfileComponent from '../DashboardComponent/EditProfileComponent';
 import ChangePassword from '../ChangePassword';
@@ -38,6 +39,7 @@ import NewNotif from '../functional/NewNotif';
 import FullPageLoader from '../functional/FullPageLoader';
 import { withRouter } from "react-router"
 import './index.css'
+import Solution from '../Solution';
 
 
 const initialState = {
@@ -758,7 +760,24 @@ update_real_insights = (data) => {
                               pathname ={window.location.pathname}
                             />
                   <div id="content" className="main_body_flex_content">
-                  {(window.location.pathname === '/dashboard')?
+                  {(window.location.pathname === '/dashboard/solution')?
+                  protected_route({
+                    authObject:this.authObject,
+                    logout:this.props.logout
+                  })(()=><Solution
+                  
+                  get_insight_info = {this.props.get_insight_info}
+                  get_insight_info_loading = {this.props.get_insight_info_loading}
+                  get_insight_info_ret = {this.props.dash_store.get_insight_info_ret}
+                  get_insight_info_loading_flag = {this.props.dash_store.get_insight_info_loading}
+
+                  update_insight = {this.props.update_insight}
+                  update_insight_loading = {this.props.update_insight_loading}
+                  update_insight_ret = {this.props.dash_store.update_insight_ret}
+                  update_insight_loading_flag = {this.props.dash_store.update_insight_loading}
+
+                    />):
+                  (window.location.pathname === '/dashboard')?
                   protected_route({
                     authObject:this.authObject,
                     logout:this.props.logout
@@ -883,6 +902,7 @@ update_real_insights = (data) => {
 const mapStateToProps = state => ({
     user: state.user,
     dash_data:state.user.data.dash_data,
+    dash_store:state.dash_store,
     mount:state.user.mount,
     solInsights:state.user.solInsights,
     insight: state.user.insightData,
@@ -934,6 +954,10 @@ get_real_insight_loading,
 get_act_insight,
 get_act_insight_loading,
 get_user_specialities,
-clearUpdatePriceData
+clearUpdatePriceData,
+get_insight_info,
+get_insight_info_loading,
+update_insight,
+update_insight_loading
 })(DashboardPage);
 

@@ -1274,28 +1274,17 @@ hr.comp_insight_hr {
 #progressbar {
   background-color: #EAEAEA;
   border-radius: 13px;
-  /* (height of inner div) / 2 + padding */
   padding: 0px;
 }
 
 #progressbar>div {
-  /* background-color: orange; */
   background-image: linear-gradient(to right, #FFF1B7, #F3CF3D);
-  /* width: 40%; */
-  /* Adjust with JavaScript */
   height: .6rem;
   border-radius: 10px;
 }
 .insight_progress_handle{
-  /* left: 25%; */
-  /* background: red; */
-  /* position: absolute; */
-  /* width: 175px; */
-  /* width: 1rem;
-  height: 1rem; */
   border-radius: 50%;
   position: relative;
-  /* background-color: blueviolet; */
 }
 
 .insight_progress_toottip {
@@ -1321,8 +1310,6 @@ hr.comp_insight_hr {
   position: relative;
   left: 1rem;
   text-align: right;
-  /* display: flex;
-  align-items: center; */
   display: block;
   top: -2rem;
   position: relative;
@@ -1354,3 +1341,26 @@ hr.comp_insight_hr {
   margin-top: .5rem;
 }
 
+#progressbar>div.payment {
+  background-image: linear-gradient(to right, #74E6A5, #5AD45C);
+  height: .6rem;
+  border-radius: 10px;
+}
+.insight_progress_tooltip > span.payment_span {
+  color:#000;
+}
+.insight_progress_tooltip > span.payment_span::after {
+  color:#000;
+}
+.payment-funnel-wrapper{
+   display: flex;
+   justify-content: space-between;
+} 
+.payment-funned-span {
+  display: flex;
+  font-size: 1rem;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-weight: bold;
+}
