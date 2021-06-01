@@ -46,7 +46,7 @@ class InsightComponent extends React.PureComponent {
         let obj = this.getSecondsDifferent(this.props.s.createdAt)
 
          let today_date = new Date()
-         let expired_date = new Date(1620460374627)
+         let expired_date = new Date(this.props.s.expiredAt)
          console.log(today_date >= expired_date, "today_date and Expired Date")
          let flag = today_date >= expired_date
        
