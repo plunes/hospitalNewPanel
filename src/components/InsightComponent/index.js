@@ -44,6 +44,11 @@ class InsightComponent extends React.PureComponent {
         const { userReport } = this.props.s
         console.log(this.props.s,"this.props.s in Insight")
         let obj = this.getSecondsDifferent(this.props.s.createdAt)
+
+         let today_date = new Date()
+         let expired_date = new Date(this.props.s.expiredAt)
+         console.log(today_date >= expired_date, "today_date and Expired Date")
+         let flag = today_date >= expired_date
        
         const index = this.props.index
       return (
@@ -100,9 +105,13 @@ class InsightComponent extends React.PureComponent {
            <div className="service_not_available_wrap">  
            {!this.props.s.priceUpdated ?  <Link className="service_not_available_text_wrap" to={`/dashboard/solution?id=${this.props.s.solutionId}&serviceId=${this.props.s.serviceId}`}> 
                  <text className="service_not_available_text">
+
                          {this.props.s.priceUpdated?this.props.s.category==="Procedure"?"Price submitted":"Price updated":this.props.s.category==="Procedure"?"Submit price":"Update price"}
                     </text>
-            </Link>: <div className="service_not_available_text_wrap"><text className="service_not_available_text">
+            </Link>:flag?<div className="service_not_available_text_wrap"><text className="service_not_available_text">
+                        Insight Expired
+                    </text>
+                    </div> : <div className="service_not_available_text_wrap"><text className="service_not_available_text">
                          {this.props.s.priceUpdated?this.props.s.category==="Procedure"?"Price submitted":"Price updated":this.props.s.category==="Procedure"?"Submit price":"Update price"}
                     </text>
                     </div>
