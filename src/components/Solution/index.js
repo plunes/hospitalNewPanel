@@ -157,7 +157,7 @@ const Solution = (props) => {
                     <div className="solution-outer-wrapper">
                             <div  className="heading">
                                 <span className="user-name">{data.userName}</span>
-                                <span> is loogking for {data.serviceName} </span>
+                                <span> is looking for {data.serviceName} </span>
                                 <span className="have-insurance">Have Insurance</span>
                             <div className="user-details">
                                     <span className="child-1" id="1">User Details</span> 
