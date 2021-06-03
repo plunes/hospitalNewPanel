@@ -109,7 +109,7 @@ class InsightComponent extends React.PureComponent {
                          {this.props.s.priceUpdated?this.props.s.category==="Procedure"?"Price submitted":"Price updated":this.props.s.category==="Procedure"?"Submit price":"Update price"}
                     </text>
             </Link>:flag?<div className="service_not_available_text_wrap"><text className="service_not_available_text">
-                        Insight Expired
+                       {this.props.s.expirationMessage}
                     </text>
                     </div> : <div className="service_not_available_text_wrap"><text className="service_not_available_text">
                          {this.props.s.priceUpdated?this.props.s.category==="Procedure"?"Price submitted":"Price updated":this.props.s.category==="Procedure"?"Submit price":"Update price"}

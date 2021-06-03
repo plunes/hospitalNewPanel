@@ -225,7 +225,7 @@ const Solution = (props) => {
                                                 max={100}
                                                 tooltip={true}
                                                 format={(val)=>{
-                                                    return <p>{Math.floor(this.state.solUpdatedPrice)}</p>
+                                                    return <p>{Math.floor(props.solUpdatedPrice)}</p>
                                                 }}
                                                 labels={get_slider_labels({lower:data.max, upper:data.min})}
                                                 value={2}
