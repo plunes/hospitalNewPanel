@@ -451,7 +451,7 @@ export class DashboardPage extends React.PureComponent {
     // this.props.getInsights({center:''})
     this.props.getNotifications({page:1})
     this.props.get_business({days:7, center:''})
-    this.props.get_user_info({from_dash_page:true})
+    this.props.get_user_info({from_dash_page:true, userId: localStorage.getItem('userId')})
 
     // To Establish socket connection
     this.socketEmit()

@@ -14,7 +14,7 @@ function* get_insight_info_saga() {
         let center_id = get_url_params('center')
         const  data = yield store.getState().dash_store.get_insight_info
         
-        const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+        const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
         console.log("Just before api call")
         const api_data = yield call(api.dash_routes.get_insight_info, data, headers)
         console.log(api_data,"api_data in get_user_specs_saga")
@@ -62,7 +62,7 @@ function* update_insight_saga() {
         let center_id = get_url_params('center')
         const  data = yield store.getState().dash_store.update_insight
         
-        const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+        const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
         console.log("Just before api call")
         const api_data = yield call(api.dash_routes.update_insight, data, headers)
         console.log(api_data,"api_data in get_user_specs_saga")
@@ -109,7 +109,7 @@ function* do_not_notify_saga() {
         let center_id = get_url_params('center')
         const  data = yield store.getState().dash_store.do_not_notify
         
-        const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+        const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
         console.log("Just before api call")
         const api_data = yield call(api.dash_routes.do_not_notify, data, headers)
         console.log(api_data,"api_data in get_user_specs_saga")
@@ -156,7 +156,7 @@ function* delete_profile_saga() {
         let center_id = get_url_params('center')
         const  get_real_insight = yield store.getState().dash_store.delete_profile
         const data = get_real_insight
-        const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+        const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
         console.log("Just before api call")
         const api_data = yield call(api.dash_routes.delete_profile, data, center_id, headers)
         console.log(api_data,"api_data in get_user_specs_saga")
@@ -201,7 +201,7 @@ function* get_real_insight_saga() {
       let center_id = get_url_params('center')
       const  get_real_insight = yield store.getState().dash_store.get_real_insight
       const data = get_real_insight
-      const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+      const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
       console.log("Just before api call")
       const api_data = yield call(api.dash_routes.get_real_insight, data, center_id, headers)
       console.log(api_data,"api_data in get_user_specs_saga")
@@ -247,7 +247,7 @@ function* get_act_insight_saga() {
     const  get_act_insight = yield store.getState().dash_store.get_act_insight
     console.log(get_act_insight,"get_act_inisgight")
     const data = get_act_insight
-    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     console.log(data,"Just before api call")
     const api_data = yield call(api.dash_routes.get_act_insight, data, center_id, headers)
     console.log(api_data,"api_data in get_user_specs_saga")
