@@ -308,7 +308,8 @@ import WeekWidget from "./WeekWidget"
               <Button onClick = {submitdetails}>Submit</Button>
             {/* <button onClick={()=>submitdetails()} className="common-button">Submit</button> */}
             </div>
-            {!!get_url_params('id') &&  <div className='text-center'>
+         </div>}
+         {!!get_url_params('id') &&  <div className='text-center'>
               <DeletePopup 
               yesClick = {(e)=>props.delete_profile({doctor_id:get_url_params('id')})}
               title="Are you sure you want to remove this profile?"
@@ -318,7 +319,6 @@ import WeekWidget from "./WeekWidget"
               </DeletePopup>
               
              </div>} 
-         </div>}
    </div>
   
   </React.Fragment>

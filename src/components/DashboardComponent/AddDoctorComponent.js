@@ -540,13 +540,13 @@ add_slot = () => {
 
      componentWillReceiveProps(nextProps){
 
-      if(nextProps.getEntityRet){
+      if(nextProps.getEntityRet && nextProps.getEntityRet.data){
         if(nextProps.getEntityRet.success){
        
           let data = nextProps.getEntityRet.data
 
           let arr = []
-          data.timeSlots.forEach((item,i)=>{
+          data && data.timeSlots.forEach((item,i)=>{
             let time_slots = [...item.slots]
             let slots_arr = []
             time_slots.forEach(data=>{
@@ -639,19 +639,19 @@ add_slot = () => {
 
 
       
-    if(nextProps.get_center_profile_ret){
-      if(nextProps.get_center_profile_ret.success){
-        nextProps.set_center_data({...nextProps.get_center_profile_ret.data})
-      }else{
-          this.setState({
-            ret:{
-              success:false,
-              message:nextProps.get_center_profile_ret.message
-            }
-          })
+      if(nextProps.get_center_profile_ret){
+        if(nextProps.get_center_profile_ret.success){
+          nextProps.set_center_data({...nextProps.get_center_profile_ret.data})
+        }else{
+            this.setState({
+              ret:{
+                success:false,
+                message:nextProps.get_center_profile_ret.message
+              }
+            })
+        }
+        nextProps.get_center_profile_clr()
       }
-      nextProps.get_center_profile_clr()
-    }
 
     }
 
@@ -821,7 +821,6 @@ add_slot = () => {
           </div>
         
             <AddDoctorForm  
-              selected_slot = {this.state.selected_slot}
               sloct_checkbox = {this.sloct_checkbox}
               add_slot = {this.add_slot} 
               handleSubmitAvail = {this.handleSubmitAvail}
@@ -830,7 +829,6 @@ add_slot = () => {
               addSlot = {this.addSlot}
               set_slot = {this.set_slot}
               remove_slot = {this.remove_slot}
-              timeToString = {this.timeToString}
               time_selected = {this.time_selected}
               selected_days = {this.state.selected_days}
               selected_day = {this.state.selected_day}
