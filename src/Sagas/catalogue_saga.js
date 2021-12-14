@@ -79,7 +79,7 @@ function* remove_speciality_saga(action) {
   try {
  let center_id = get_url_params('center')
    const  data = yield store.getState().catalogue_store.remove_speciality
-   const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+   const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
   //  console.log(data,"data in remove_speciality saga")
    const api_data = yield call(api.catalogue_routes.remove_speciality, data, center_id, headers)
    if(!!api_data){
@@ -119,7 +119,7 @@ function* get_user_specs_saga(action) {
     let center_id = get_url_params('center')
       const  get_user_specs = yield store.getState().catalogue_store.get_user_specs
       const data = get_user_specs
-      const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+      const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
       const api_data = yield call(api.catalogue_routes.get_user_specialities, data, center_id, headers)
       if(!!api_data){
         if (api_data.status === 200) {
@@ -159,7 +159,7 @@ function* update_procedure_saga(action) {
   let center_id = get_url_params('center')
     const  update_procedure = yield store.getState().catalogue_store.update_procedure
     const data = update_procedure
-    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     const api_data = yield call(api.catalogue_routes.update_procedures, data, center_id, headers)
     if(!!api_data){
       if (api_data.status === 200) {
@@ -200,7 +200,7 @@ function* add_procedure_saga(action) {
   let center_id = get_url_params('center')
     const  add_procedure = yield store.getState().catalogue_store.add_procedure
     const data = add_procedure
-    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     const api_data = yield call(api.catalogue_routes.add_procedure,{ ...data.obj,addToAllCenters:data.addToAllCenters, selectedCenter:data.selectedCenter }, center_id, headers)
     if(!!api_data){
       if (api_data.status === 200) {
@@ -249,7 +249,7 @@ function* add_procedure_saga(action) {
   let center_id = get_url_params('center')
     const  search_procedures = yield store.getState().catalogue_store.search_procedures
     const data = search_procedures
-    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     let dataObject = {
       page:data.page,
       searchQuery:data.searchQuery,
@@ -307,7 +307,7 @@ function* to_add_services_saga(action) {
   let center_id = get_url_params('center')
     const  search_procedures = yield store.getState().catalogue_store.to_add_services
     const data = search_procedures
-    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     let dataObject = {
       limit:data.limit,
       page:data.page,
@@ -369,7 +369,7 @@ function* set_variance_saga(action) {
  try {
   let center_id = get_url_params('center')
     const  data = yield store.getState().catalogue_store.set_variance
-    const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+    const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
     const api_data = yield call(api.catalogue_routes.set_variance, data, center_id, headers)
     if(!!api_data){
       if (api_data.status === 200) {
@@ -418,7 +418,7 @@ function* remove_service_saga(action) {
    let center_id = get_url_params('center')
      const  data = yield store.getState().catalogue_store.remove_service
     //  console.log(data,"data in remove_service")
-     const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+     const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
      const api_data = yield call(api.catalogue_routes.remove_service, data, center_id, headers)
      if(!!api_data){
        if (api_data.status === 200) {

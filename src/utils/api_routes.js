@@ -4,7 +4,7 @@ import { get_url_params } from '../utils/common_utilities';
 
 
 
-let base_url = "https://devapi.plunes.com/v9"
+let base_url = "https://devapi.plunes.com/v10"
 let base_url_without_v8 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
@@ -13,10 +13,10 @@ if(!!pathLocation) {
   if(pathLocation === 'analytics.plunes.com') {
     console.log('PROD');
     // Production baseUrl
-    base_url = 'https://api.plunes.com/v9'
+    base_url = 'https://api.plunes.com/v10'
     base_url_without_v8 = 'https://api.plunes.com'
   }else{
-    base_url = "https://devapi.plunes.com/v9"
+    base_url = "https://devapi.plunes.com/v10"
     base_url_without_v8 ="https://devapi.plunes.com"
     // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
   }
@@ -26,7 +26,7 @@ export default {
    profile_routes:{
     change_address: (data, center_id, headers) =>
     axios
-        .put(`${base_url}/user${!!center_id?'?userId='+center_id:''}`, data, headers)
+        .put(`${base_url}/professional${!!center_id?'?userId='+center_id:''}`, data, headers)
         .then(res => {
               console.log(res,'res in change_address')
               return res
@@ -36,7 +36,7 @@ export default {
     catalogue_routes:{
       remove_service: (data, center_id, headers) =>
       axios
-          .delete(`${base_url}/user/deleteService/${data.specialityId}/${data.serviceId}${!!center_id?'?userId='+center_id:''}`, headers)
+          .delete(`${base_url}/professional/deleteService/${data.specialityId}/${data.serviceId}${!!center_id?'?userId='+center_id:''}`, headers)
           .then(res => {
                 console.log(res,'res in update_procedure')
                 return res
@@ -44,7 +44,7 @@ export default {
           .catch(err => err.response),
       remove_speciality: (data, center_id, headers) =>
       axios
-          .delete(`${base_url}/user/deleteSpeciality/${data}${!!center_id?'?userId='+center_id:''}`, headers)
+          .delete(`${base_url}/professional/deleteSpeciality/${data}${!!center_id?'?userId='+center_id:''}`, headers)
           .then(res => {
                 console.log(res,'res in update_procedure')
                 return res
@@ -52,7 +52,7 @@ export default {
           .catch(err => err.response),
         get_user_specialities: (data, center_id, headers) =>
         axios
-            .get(`${base_url}/user/getUserSpecialities${!!center_id?'?userId='+center_id:''}`, headers)
+            .get(`${base_url}/professional/getUserSpecialities${!!center_id?'?userId='+center_id:''}`, headers)
             .then(res => {
                  console.log(res,'res in get_user_specialities')
                  return res
@@ -68,7 +68,7 @@ export default {
             .catch(err => err.response),
        add_procedure: (data, center_id, headers) =>
        axios
-           .put(`${base_url}/user/addServices${!!center_id?'?userId='+center_id:''}`, data, headers)
+           .put(`${base_url}/professional/addServices${!!center_id?'?userId='+center_id:''}`, data, headers)
            .then(res => {
                  console.log(res,'res in add_procedure')
                  return res
@@ -92,7 +92,7 @@ export default {
           .catch(err => err.response),
       set_variance: (data, center_id, headers) =>
       axios
-          .post(`${base_url}/user/setGlobalVariance${!!center_id?'?userId='+center_id:''}`, data, headers)
+          .post(`${base_url}/professional/setGlobalVariance${!!center_id?'?userId='+center_id:''}`, data, headers)
           .then(res => {
                 console.log(res,'res in add_procedure')
                 return res
@@ -123,7 +123,7 @@ export default {
 
       do_not_notify:(data,  headers) =>
       axios
-          .put(`${base_url}/user/serviceNotificationException/${data.serviceId}`,{}, headers)
+          .put(`${base_url}/professional/serviceNotificationException/${data.serviceId}`,{}, headers)
           .then(res => {
                console.log(res,'res delete doctor')
                return res
@@ -131,7 +131,7 @@ export default {
           .catch(err => err.response),
       delete_profile:(data, center_id,  headers) =>
       axios
-          .delete(`${base_url}/user/deleteDoctor/${data.doctor_id}${!!center_id?'?userId='+center_id:''}`, headers)
+          .delete(`${base_url}/professional/deleteDoctor/${data.doctor_id}${!!center_id?'?userId='+center_id:''}`, headers)
           .then(res => {
                console.log(res,'res delete doctor')
                return res
