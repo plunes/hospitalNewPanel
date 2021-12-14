@@ -14,7 +14,7 @@ function* change_address_saga() {
     try {
         let center_id = get_url_params('center')
         const  data  = yield store.getState().profile_store.change_address
-        const headers  = { 'headers': { 'Authorization': localStorage.getItem('token') } }
+        const headers  = { 'headers': { 'Authorization': `Bearer ${localStorage.getItem('token') }`} }
         console.log("Just before api call")
         const api_data = yield call(api.profile_routes.change_address, data, center_id, headers)
         console.log(api_data,"api_data change_address_saga")

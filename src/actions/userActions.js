@@ -206,7 +206,7 @@ import { get_url_params, for_loop } from '../utils/common_utilities';
 
 
 
-let baseUrl = "https://devapi.plunes.com/v9"
+let baseUrl = "https://devapi.plunes.com/v10"
 let base_url_without_v8 = "https://devapi.plunes.com"
 
 const pathLocation = window.location.host;
@@ -215,10 +215,10 @@ if(!!pathLocation) {
  if(pathLocation === 'analytics.plunes.com') {
    console.log('PROD');
    // Production baseUrl
-   baseUrl = 'https://api.plunes.com/v9'
+   baseUrl = 'https://api.plunes.com/v10'
    base_url_without_v8 = 'https://api.plunes.com'
  }else{
-   baseUrl = "https://devapi.plunes.com/v9"
+   baseUrl = "https://devapi.plunes.com/v10"
    base_url_without_v8 ="https://devapi.plunes.com"
    // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
  }
@@ -372,7 +372,7 @@ export const get_center_cred = (data) => async dispatch => {
  let center_id = get_url_params('center')
  console.log(center_id,"center_id")
  let token = localStorage.getItem('token')
- return await axios.put(baseUrl + `/user/getCenterCred?location=${data.centerLocation}`, {},  { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/professional/getCenterCred?location=${data.centerLocation}`, {},  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in get_remaining_specs");
      if (res.status === 200) {
@@ -433,7 +433,7 @@ export const get_center_profile = () => async dispatch => {
  let center_id = get_url_params('center')
  console.log(center_id,"center_id")
  let token = localStorage.getItem('token')
- return await axios.get(baseUrl + `/user?userId=${center_id}`,  { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/professional?userId=${center_id}`,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in get_remaining_specs");
      if (res.status === 200) {
@@ -493,7 +493,7 @@ export const add_specs = (data) => async dispatch => {
  let center_id = get_url_params('center')
  console.log(center_id,"center_id")
  let token = localStorage.getItem('token')
- return await axios.post(baseUrl + '/catalogue/addSpecialities'+`${!!center_id?'?userId='+center_id:''}`, data,  { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + '/catalogue/addSpecialities'+`${!!center_id?'?userId='+center_id:''}`, data,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in get_remaining_specs");
      if (res.status === 200) {
@@ -551,7 +551,7 @@ export const get_remaining_specs_clr = (data) => dispatch =>{
 export const get_remaining_specs = (data) => async dispatch => {
  let token = localStorage.getItem('token')
  let center_id = get_url_params('center')
- return await axios.post(baseUrl + `/catalogue/getSpecialitiesForDoctor`+`${!!center_id?'?userId='+center_id:''}`, {limit:100, page:'1', searchQuery:''},  { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + `/catalogue/getSpecialitiesForDoctor`+`${!!center_id?'?userId='+center_id:''}`, {limit:100, page:'1', searchQuery:''},  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in get_remaining_specs");
      if (res.status === 200) {
@@ -630,7 +630,7 @@ export const get_centers_clr = (data) => dispatch =>{
 
 export const get_centers = (data) => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.get(baseUrl + `/user/getAllCenters?days=7`,  { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/professional/getAllCenters?days=7`,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in get_Center");
      if (res.status === 200) {  
@@ -688,7 +688,7 @@ export const add_center_clr = (data) => dispatch =>{
 
 export const add_center = (data) => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.post(baseUrl + `/admin/addCenter`, data, { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + `/admin/addCenter`, data, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in add_center")
      if (res.status === 200) {
@@ -745,7 +745,7 @@ export const admin_details_clr = (data) => dispatch =>{
 
 export const admin_details = (data) => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.put(baseUrl + `/user/RequestForAdmin`, data, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/professional/RequestForAdmin`, data, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        console.log(res,"res in act_as_admin");
@@ -801,7 +801,7 @@ export const admin_otp_clr = (data) => dispatch =>{
 
 export const admin_otp = (data) => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.put(baseUrl + `/user/verifyAndAddAdmin`, data, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/professional/verifyAndAddAdmin`, data, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        console.log(res,"res in admin_otp");
@@ -858,7 +858,7 @@ export const act_as_admin_clr = (data) => dispatch =>{
 
 export const act_as_admin = (data) => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.put(baseUrl + `/user/RequestForAdmin`, {}, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/professional/RequestForAdmin`, {}, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        console.log(res,"res in act_as_admin");
@@ -921,7 +921,7 @@ export const reschedule_appointment_clr = (data) => dispatch =>{
 export const reschedule_appointment = (data) => async dispatch => {
  let token = localStorage.getItem('token')
  let body =  data.body 
- return await axios.put(baseUrl + `/booking/${data.params.bookingId}/${data.params.bookingStatus}`, body, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/booking/${data.params.bookingId}/${data.params.bookingStatus}`, body, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in reschedule_appointment");
      if (res.status === 200) {
@@ -989,7 +989,7 @@ export const get_business_clr = (data) => dispatch =>{
 export const get_business = (data) => async dispatch => {
  console.log(data,"data in get_business_ action")
  let token = localStorage.getItem('token')
- return await axios.get(baseUrl + `/analytics/totalBusiness?days=${data.days}&userId=${data.center}`, { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/analytics/totalBusiness?days=${data.days}&userId=${data.center}`, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in get_business');
      if (res.status === 200) {
@@ -1060,7 +1060,7 @@ export const get_user_info = (data) => async dispatch => {
    
  }
  let from_dash_page = data.from_dash_page
- return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + '/professional/whoami', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      // console.log(res, 'data');
      if (res.status === 200) {
@@ -1124,7 +1124,7 @@ export const edit_location_clr = (data) => dispatch =>{
 export const edit_location = (data) => async dispatch => {
  let token = localStorage.getItem('token')
  let center_id = get_url_params('center')
- return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': `Bearer ${token}` } })
  .then((res) => {
    console.log(res, 'res in submit_enquiry')
    if (res.status === 200) {
@@ -1181,7 +1181,7 @@ export const submit_query_clr = (data) => dispatch =>{
 
 export const submit_query = (data) => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.post(baseUrl + '/user/enquiry', data, { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + '/professional/enquiry', data, { 'headers': { 'Authorization': `Bearer ${token}` } })
  .then((res) => {
    console.log(res, 'res in submit_enquiry')
    if (res.status === 200) {
@@ -1239,7 +1239,7 @@ export const get_profile_clr = (data) => dispatch =>{
 
 export const get_user_profile = () => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + '/professional/whoami', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      // console.log(res, 'data');
      if (res.status === 200) {
@@ -1304,7 +1304,7 @@ export const set_notif_count = (data) => dispatch =>{
 
 export const remove_notif_count = (data) => async dispatch =>{
  let token = localStorage.getItem('token')
- return await axios.put(baseUrl + `/notification/`, {} , { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/notification/professional`, {} , { 'headers': { 'Authorization': `Bearer ${token}` } })
     .then((res) => {
       console.log(res, 'res in getOTP')
       if (res.status === 200) {
@@ -1393,7 +1393,7 @@ export const submitOtpClr = () => dispatch =>{
 export const submitOtp = (data) => async dispatch => {
  let token = localStorage.getItem('token');
 console.log(data,"data in getEntity")
- return await axios.put(baseUrl + `/user/updatePassword`, data , { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + `/professional/updatePassword`, data , { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in submitOtp')
      if (res.status === 200) {
@@ -1455,7 +1455,7 @@ export const getOtpClr = () => dispatch =>{
 export const getOtp = (data) => async dispatch => {
  let token = localStorage.getItem('token');
 console.log(data,"data in getEntity")
- return await axios.get(baseUrl + `/user/forgotPassword?userId=${data.email}`,  { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/professional/forgotPassword?userId=${data.email}`,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in getOTP')
      if (res.status === 200) {
@@ -1526,7 +1526,7 @@ export const changeAppoint = (data) => async dispatch => {
  }
 console.log(data,"data in getEntity")
 if(type==='confirming'){
- return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': `Bearer ${token}` } })
  .then((res) => {
    console.log(res, 'res in changeAppoint')
    if (res.status === 200) {
@@ -1580,7 +1580,7 @@ if(type==='confirming'){
      }
 });
 }else{
- return await axios.put(baseUrl + requestUrl, {}  ,{ 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + requestUrl, {}  ,{ 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in changeAppoint')
      if (res.status === 200) {
@@ -1649,7 +1649,7 @@ export const getEntityClr = () => dispatch =>{
 export const getEntity = (data) => async dispatch => {
  let token = localStorage.getItem('token');
 console.log(data,"data in getEntity")
- return await axios.get(baseUrl + `/user/hospitalDoctor?doctorId=${data.userId}`,  { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/professional/hospitalDoctor?doctorId=${data.userId}`,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in getEntity')
      if (res.status === 200) {
@@ -1713,7 +1713,7 @@ export const addServicesClr = () => dispatch =>{
 export const addServices = (data) => async dispatch => {
  let token = localStorage.getItem('token');
  let center_id = get_url_params('center')
- return await axios.put(baseUrl + '/user/addServices'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional/addServices'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in addServices')
    
@@ -1787,7 +1787,7 @@ export const toAddServices = (data) => async dispatch => {
  }
  
 
- return await axios.post(baseUrl + '/catalogue/getServicesForDoctor'+`${!!center_id?'?userId='+center_id:''}`, dataObject, { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + '/catalogue/getServicesForDoctor'+`${!!center_id?'?userId='+center_id:''}`, dataObject, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in searchProcedures')
    
@@ -1852,7 +1852,7 @@ export const setAvailability = (obj) => async dispatch => {
  console.log("Inside setAvailability")
 let type = obj.userType
  let token = localStorage.getItem('token');
- return await axios.put(baseUrl + '/user', obj,  { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional', obj,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in setResposnibikity")
      if (res.status === 200) {
@@ -1915,7 +1915,7 @@ export const registerUser = (obj) => async dispatch => {
  console.log("Inside registerUser")
 let type = obj.userType
  let token = localStorage.getItem('token');
- return await axios.post(baseUrl + '/user/register', obj,  { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + '/professional/register', obj,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
     console.log(res,"res in register User")
      if (res.status === 200) {
@@ -1982,7 +1982,7 @@ export const editProcedure = (obj) => async dispatch => {
  //   newVariance:obj.variance
  // }
  let token = localStorage.getItem('token');
- return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
+ return await axios.patch(baseUrl + '/analytics/cataloguePriceUpdate'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in editProcedure")
      if (res.status === 200) {
@@ -2043,7 +2043,7 @@ export const addDoctor = (obj) => async dispatch => {
  console.log("Inside addDoctor")
  const center_id = get_url_params('center')
  let token = localStorage.getItem('token');
- return await axios.patch(base_url_without_v8 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': token } })
+ return await axios.patch(base_url_without_v8 + '/admin/addHospitalDoctor'+`${!!center_id?'?userId='+center_id:''}`, obj,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in addDoctor")
      if (res.status === 200) {
@@ -2111,7 +2111,7 @@ export const getSpecs = (obj) => async dispatch => {
  }
  
  let token = localStorage.getItem('token');
- return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + requestUrl,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in GetSpecs")
      
@@ -2170,7 +2170,7 @@ export const getServClr = () => dispatch =>{
 export const getServ = (obj) => async dispatch => {
  console.log(obj,"Data in getServ Action")
  let token = localStorage.getItem('token');
- return await axios.get(base_url_without_v8 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.get(base_url_without_v8 + `/admin/specialityConsultation/${obj.name}`, obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in getServ")
      if (res.status === 200) {
@@ -2236,7 +2236,7 @@ export const editBioClr = () => dispatch =>{
 export const editBio = (obj) => async dispatch => {
  let token = localStorage.getItem('token');
  let center_id = get_url_params('center')
- return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        dispatch({
@@ -2293,7 +2293,7 @@ export const updateAchievement = (obj) => async dispatch => {
  let type = obj.type
  delete obj.type
  let token = localStorage.getItem('token');
- return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        dispatch({
@@ -2358,7 +2358,7 @@ let obj = {
 let center_id = get_url_params('center')
  console.log()
  let token = localStorage.getItem('token');
- return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional'+`${!!center_id?'?userId='+center_id:''}`, obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        dispatch({
@@ -2424,9 +2424,9 @@ export const downloadCatalogue = (data) => async dispatch => {
      payload : "no-data-required"
    })
 
- return await axios.get(baseUrl + `/user/downloadCatalogue${!!data?'?id='+data.value:''}`, 
+ return await axios.get(baseUrl + `/professional/downloadCatalogue${!!data?'?id='+data.value:''}`, 
   { 'headers': {
-     'Authorization': token,
+     'Authorization': `Bearer ${token}`,
      type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
    } ,
    'responseType': 'blob'
@@ -2508,7 +2508,7 @@ export const uploadProcedures = (data) => async dispatch => {
    const body = new FormData();
    body.append(data.field, data.file)
 
- return await axios.post(baseUrl + `/upload/catalogue${!!data.id?'?id='+data.id:''}`, body, { 'headers': { 'Authorization': token },'content-type':'multipart/form-data' })
+ return await axios.post(baseUrl + `/upload/catalogue${!!data.id?'?id='+data.id:''}`, body, { 'headers': { 'Authorization': `Bearer ${token}` },'content-type':'multipart/form-data' })
    .then((res) => {
      console.log(res, 'res in searchProcedures')
      if (res.status === 201) {
@@ -2581,7 +2581,7 @@ export const searchProcedures = (data) => async dispatch => {
 
  let center_id = get_url_params('center')
 
- return await axios.post(baseUrl + '/analytics/getServices'+`${!!center_id?'?userId='+center_id:''}`, dataObject, { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + '/analytics/getServices'+`${!!center_id?'?userId='+center_id:''}`, dataObject, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in searchProcedures')
      if (res.status === 201) {
@@ -2650,7 +2650,7 @@ export const updateImage = (data) => async dispatch => {
      payload : "no-data-required"
    })
 let center_id = get_url_params('center')
- return await axios.put(baseUrl + '/user'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional'+`${!!center_id?'?userId='+center_id:''}`, data, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in Upload')
    
@@ -2709,7 +2709,7 @@ export const upload = (data) => async dispatch => {
  console.log(body);
  
  
- return await axios.post(baseUrl + '/upload/image', body, { 'headers': { 'Authorization': token } })
+ return await axios.post(baseUrl + '/upload/professional/image', body, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in Upload')
      if (res.status === 200) {
@@ -2764,7 +2764,7 @@ export const logoutOtherDevices = (data) => async dispatch => {
  })
  return await axios.post(baseUrl + '/user/logout_all', {
    deviceId:data.deviceId
- }, { 'headers': { 'Authorization': token } })
+ }, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 201) {
        //dispatch(getSolutionInsights())
@@ -2812,7 +2812,7 @@ export const getUserCatalogue = () => async dispatch => {
    page:1,
    searchQuery:'',
    limit:50
- },{ 'headers': { 'Authorization': token } })
+ },{ 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 201) {
        //dispatch(getSolutionInsights())
@@ -2831,7 +2831,7 @@ export const getUserCatalogue = () => async dispatch => {
 
 export const getProfileDetails = () => async dispatch => {
  let token = localStorage.getItem('token');
- return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + '/professional/whoami', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        //dispatch(getSolutionInsights())
@@ -2852,11 +2852,12 @@ export const getProfileDetails = () => async dispatch => {
 export const submitResetDetails = (uData) => async dispatch => {
  console.log(uData,"Data in submitResetDetails Action")
  let obj = {
-   "newPassword": uData.newPassword,
-   "oldPassword": uData.oldPassword
+   "password": uData.newPassword,
+   "passwordConfirm": uData.newPassword,
+   "currentPassword": uData.oldPassword
  }
  let token = localStorage.getItem('token');
- return await axios.patch(baseUrl + '/user/changePassword', obj, { 'headers': { 'Authorization': token } })
+ return await axios.patch(baseUrl + '/professional/updatePassword', obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in submitResetDetails")
      if (res.data.success === true) {
@@ -2910,7 +2911,7 @@ export const submitProfileDetails = (uData) => async dispatch => {
  console.log()
  
  let token = localStorage.getItem('token');
- return await axios.put(baseUrl + '/user/', obj, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/professional/', obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200) {
        dispatch({
@@ -2952,9 +2953,9 @@ console.log(uData,"uData in Update Real Price")
  }
  let url = baseUrl + '/solution'
  if(flag==="YES"){
-   url = baseUrl +"/user/addServiceToCatalogue"
+   url = baseUrl +"/professional/addServiceToCatalogue"
  }
- return await axios.put(url, uData, { 'headers': { 'Authorization': token } })
+ return await axios.put(url, uData, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 200 ) {
        dispatch({
@@ -3005,7 +3006,7 @@ console.log(uData,"uData in Update Real Price")
 export const getMonthWiseUsers = (days) => async dispatch => {
    let token = localStorage.getItem('token');
    //console.log(token, 'monthWise')
-   return await axios.get(baseUrl + '/analytics/solutionUsers', { 'headers': { 'Authorization': token } })
+   return await axios.get(baseUrl + '/analytics/solutionUsers', { 'headers': { 'Authorization': `Bearer ${token}` } })
              .then((res) => {
                console.log(res.data, 'data')
                //[0, 54, 62, null,null, null, null, null, null, null, null, null]
@@ -3086,7 +3087,7 @@ export const getSolutionInsights = () => async dispatch => {
  let token = localStorage.getItem('token');
  //let token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODUxMjE3Mzh9.NzWdxrlVF3Q5DMp_4_4yYP7D0HblbMG9M1G_18e0ILE"
  //console.log(token)
- return await axios.get(baseUrl+ '/analytics/solutionSearch', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl+ '/analytics/solutionSearch', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,'res in getSolutionInsigts')
      if (res.status === 201) {
@@ -3137,7 +3138,7 @@ export const sendUpdateData = (uData) => async dispatch => {
  }
  //console.log(typeof obj.newPrice, obj.newPrice)
  let token = localStorage.getItem('token');
- return await axios.patch(base_url_without_v8 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': token } })
+ return await axios.patch(base_url_without_v8 + `/admin/updatePrice${uData.center!==''?'?userId='+uData.center:''}`, obj, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      //console.log(res.data)
      console.log(res,"res in send Update")
@@ -3206,7 +3207,7 @@ export const clr_get_notif = () => async dispatch => {
 export const getNotifications = (data) => async dispatch => {
  //  let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODA4MjM5ODZ9.r01FAXk1mEdnsi0aMsmTfHxRTNtthl9oIv0D9_4_0-o'
  let token = localStorage.getItem('token');
- return await axios.get(baseUrl + `/notification/0/${data.page}`, { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/notification/professional/0/${data.page}`, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in getNotifications")
      if (res.status === 200) {
@@ -3245,7 +3246,7 @@ export const getNotifications = (data) => async dispatch => {
 export const sendCounterZero = (unreadData) => async dispatch => {
  //let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGY3OGQ5ZGUzNjY4YTI4MWVjZWUyYmQiLCJpYXQiOjE1ODA4MjM5ODZ9.r01FAXk1mEdnsi0aMsmTfHxRTNtthl9oIv0D9_4_0-o'
  let token = localStorage.getItem('token');
- return await axios.put(baseUrl + '/notification/', unreadData, { 'headers': { 'Authorization': token } })
+ return await axios.put(baseUrl + '/notification/professional/', unreadData, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      if (res.status === 201) {
        dispatch({
@@ -3264,7 +3265,7 @@ export const getTimeslot = () => async dispatch => {
  // console.log('asdfasf')
  let token = localStorage.getItem('token');
  let userId = localStorage.getItem('userId')
- return await axios.get(baseUrl + '/user/' + userId + '/timeSlots', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + '/professional/' + userId + '/timeSlots', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'data');
      if (res.status === 200) {   
@@ -3292,7 +3293,7 @@ export const getTimeslot = () => async dispatch => {
 
 export const getUserDetails = () => async dispatch => {
  let token = localStorage.getItem('token')
- return await axios.get(baseUrl + '/user/whoami', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + '/professional/whoami', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'data');
      if (res.status === 200) {
@@ -3309,7 +3310,7 @@ export const getUserDetails = () => async dispatch => {
 }
 
  export const createUser = userData => dispatch => {
-   fetch(baseUrl + '/user/register', {
+   fetch(baseUrl + '/professional/register', {
      method: 'POST',
      headers: {
        'content-type': 'application/json'
@@ -3350,30 +3351,40 @@ export const getUserDetails = () => async dispatch => {
 export const createLogin = loginData => async dispatch => {
  let type = loginData.type
  delete loginData.type
- let new_url = ""
-  switch (type) {
-    case 'admin':
-       new_url = baseUrl +'/admin/login'
-      break;
-    case 'center':
-     new_url = baseUrl +'/user/login'
-    break;
-    default:
+ let new_url = baseUrl + "/professional/login"
+  // switch (type) {
+  //   case 'admin':
+  //      new_url = baseUrl +'/admin/login'
+  //     break;
+  //   case 'center':
+  //    new_url = baseUrl +'/user/login'
+  //   break;
+  //   default:
       
-      break;
-  }
+  //     break;
+  // }
  return await axios.post(new_url, loginData)
    .then(res => {
-     console.log(res , 'res in create Login')
+     console.log("res in create Login",res)
      console.log(res.status === 200)
      if(res.status === 200){
+       if(!res.data.data)
+          dispatch({
+            type : NEW_USER_RET,
+            payload :{
+              success:false,
+              data:[],
+              message: res.data.message || "Invalid Credentials"
+            }
+          })
+        else
        if(!!(res.data.data.userType === "User")){
          dispatch({
            type : NEW_USER_RET,
            payload :{
              success:false,
              data:[],
-             message:"Invalid Credentials"
+             message: res.data.message || "Invalid Credentials"
            }
          })
         }else{
@@ -3392,13 +3403,13 @@ export const createLogin = loginData => async dispatch => {
          payload :{
            success:false,
            data:[],
-           message:"Unable to Login"
+           message:res.data.message || "Unable to Login"
          }
        })
      }
    }
    ).catch((e) => {
-     console.log(e,"e in Error")
+     console.log("e in Login",e)
      dispatch({
        type : NEW_USER_RET,
        payload :{
@@ -3421,7 +3432,7 @@ export const getBookingClr = () => dispatch =>{
 
 export const getBooking = () => async  dispatch => {
  let token = localStorage.getItem('token');
- return await axios.get(baseUrl + '/booking', { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + '/booking', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then(res => {
      console.log(res,'res in getBooking')
      if (res.status === 200 ) {
@@ -3518,7 +3529,7 @@ export const bankDetails = bankData => dispatch => {
  var body = {
    "bankDetails": bankData
  };
- fetch(baseUrl + '/user', {
+ fetch(baseUrl + '/professional', {
    method: 'PUT',
    headers: {
      'content-type': 'application/json',
@@ -3553,9 +3564,9 @@ export const bankDetails = bankData => dispatch => {
 };
 
 export const getInsights = (data) => async dispatch => {
- console.log(data,"data in getInsight")
+ console.log("WTF",`Bearer ${token}`)
  let token = localStorage.getItem('token');
- return await axios.get(baseUrl + `/analytics/actionableInsight${!!data?'?userId='+data.center:''}`, { 'headers': { 'Authorization': token } })
+ return await axios.get(baseUrl + `/analytics/actionableInsight${!!data?'?userId='+data.center:''}`, { 'headers': { 'Authorization': `Bearer ${token}` } })
  .then(res => {
    console.log(res , 'res in getInsights')
    if (res.status=== 200) {
@@ -3608,7 +3619,7 @@ export const expertDetails = expertData => dispatch => {
  let body = {
    "doctors": array
  }
- fetch(baseUrl + '/user', {
+ fetch(baseUrl + '/professional', {
    method: 'PUT',
    headers: {
      'content-type': 'application/json',
@@ -3634,7 +3645,7 @@ export const expertDetails = expertData => dispatch => {
 export const logout = () => dispatch => {
  let token = localStorage.getItem('token');
  console.log(token, 'token')
- axios.post(baseUrl + '/user/logout', {
+ axios.post(baseUrl + '/professional/logout', {
    deviceId:localStorage.getItem('deviceId')
  }, { headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" } })
    .then((response) => {

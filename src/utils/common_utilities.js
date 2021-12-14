@@ -256,16 +256,16 @@ export const get_slider_labels = (data) => {
 }
 
 export const get_url = () =>{
-  let baseUrl = "https://devapi.plunes.com/v9"
+  let baseUrl = "https://devapi.plunes.com/v10"
   const pathLocation = window.location.host;
     if(!!pathLocation) {
           
         if(pathLocation === 'analytics.plunes.com') {
           
     // Production baseUrl
-          baseUrl = 'https://api.plunes.com/v9'
+          baseUrl = 'https://api.plunes.com/v10'
               }else{
-        baseUrl = "https://devapi.plunes.com/v9"
+        baseUrl = "https://devapi.plunes.com/v10"
     // BaseUrl = 'http://10.5.48.232:3000/api/v1/'
       }
   }
