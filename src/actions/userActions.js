@@ -921,7 +921,7 @@ export const reschedule_appointment_clr = (data) => dispatch =>{
 export const reschedule_appointment = (data) => async dispatch => {
  let token = localStorage.getItem('token')
  let body =  data.body 
- return await axios.put(baseUrl + `/booking/${data.params.bookingId}/${data.params.bookingStatus}`, body, { 'headers': { 'Authorization': `Bearer ${token}` } })
+ return await axios.put(baseUrl + `/professionalBooking/${data.params.bookingId}/${data.params.bookingStatus}`, body, { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res,"res in reschedule_appointment");
      if (res.status === 200) {
@@ -1520,9 +1520,9 @@ export const changeAppoint = (data) => async dispatch => {
 
  let  requestUrl =``
  if(type==="confirming"){
-       requestUrl = `/booking/confirmBooking?bookingId=${data._id}`
+       requestUrl = `/booprofessionalBookingking/confirmBooking?bookingId=${data._id}`
  }else{
-        requestUrl =`/booking/${data._id}/${type}`
+        requestUrl =`/professionalBooking/${data._id}/${type}`
  }
 console.log(data,"data in getEntity")
 if(type==='confirming'){
@@ -3041,7 +3041,7 @@ export const getAllBookings = (days) => async dispatch => {
  //let token = localStorage.getItem('token');
  let userId = localStorage.getItem('userId')
  //console.log(days, 'user id')
- return await axios.get(baseUrl + '/booking/all/' + days)
+ return await axios.get(baseUrl + '/professionalBooking/all/' + days)
    .then((res) => {
      console.log(res.data, 'res in business api')
      if (res.status === 201) {
@@ -3182,7 +3182,7 @@ export const initiatePayment = (pData) => async dispatch => {
  }
  let token = localStorage.getItem('token');
  return new Promise(async function (resolve, reject) {
-   await axios.patch(baseUrl+'/booking/redeem', body, { headers: { "Authorization": `Bearer ${token}` } })
+   await axios.patch(baseUrl+'/professionalBooking/redeem', body, { headers: { "Authorization": `Bearer ${token}` } })
      .then((res) => {
        //console.log('data', res.status)
        if (res.status === 200) {
@@ -3432,7 +3432,7 @@ export const getBookingClr = () => dispatch =>{
 
 export const getBooking = () => async  dispatch => {
  let token = localStorage.getItem('token');
- return await axios.get(baseUrl + '/booking', { 'headers': { 'Authorization': `Bearer ${token}` } })
+ return await axios.get(baseUrl + '/professionalBooking', { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then(res => {
      console.log(res,'res in getBooking')
      if (res.status === 200 ) {
