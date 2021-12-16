@@ -16,7 +16,7 @@ const ProcedureView = (props) => {
         <div className='catalogue_section_2'>
         <div className="catalogue_section_2_wrapper new_card_class">
             <span className='display_block_rish margin_bottom_medium_rish'><text className='catalogue_heading_text'>Details</text></span>
-            <span className='display_block_rish '><text className='catalogue_secondary_heading_text'>Test Name</text></span>
+            <span className='display_block_rish '><text className='catalogue_secondary_heading_text'>Name</text></span>
             <span className='display_block_rish margin_bottom_small_rish '>  <text className='catalogue_test_name'>{procedure?procedure.service:'------'}</text></span>
             <div className="location_edit_parent">
                 <text className="catalogue_secondary_heading_text">Price</text>

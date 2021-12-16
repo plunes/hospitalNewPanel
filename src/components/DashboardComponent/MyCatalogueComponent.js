@@ -1545,7 +1545,6 @@ class MyCatalogueComponent extends Component {
                                 options = {this.props.catalogue_data.remaining_specs}
                                 handleChange = {this.handle_change_selected_remain_specs}
                                 placeholder= "Speciality"
-                                placeholder= "Speciality"
                                 input_text_class = "catalogue_dropdown"
                                 wrapper_class = "catalogue_dropdown_wrapper"
                                 value = {this.state.selected_remain_specs[0]}
@@ -1583,7 +1582,7 @@ class MyCatalogueComponent extends Component {
 
                                 <div className='catalogue_head_tabs margin_top_small_rish'>
                                     <span className=' display_block_rish catalogue_circle_wrap'> <span onClick = {(e)=>this.select_all(e)} className={`catalogue_circle ${this.state.addProcedureFlag?this.state.all_selected_avail?'green_background active_catalogue_circle':'':this.state.all_selected_catalogue?'green_background active_catalogue_circle':''}`}></span> </span>
-                                    <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Test Name</text></span>
+                                    <span className='head_tabs_name display_block_rish'> <text className='catalogue_test_name '>Name</text></span>
                                     <span className='head_tabs_price display_block_rish text-center'> <text className='catalogue_test_name '>Price</text></span>
                                     <span className='head_tabs_variance display_block_rish text-center'><text className='catalogue_test_name '>Variance</text></span>
                                     <span className='head_tabs_actions display_block_rish text-center'><text className='catalogue_test_name '>Actions</text></span>
@@ -1679,7 +1678,6 @@ class MyCatalogueComponent extends Component {
                             clr = {this.props.addServicesClr}
                             loadingOff = {()=>this.console.log()}
                             // selected_procedures = {this.state.selected_procedures}
-                            disabled={false}
                             isSelected = {this.isSelected(c)}
                             getVariance ={this.getVariance(c)}
                             getValue = {this.getValue(c)}
