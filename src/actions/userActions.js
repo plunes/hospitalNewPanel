@@ -1649,7 +1649,7 @@ export const getEntityClr = () => dispatch =>{
 export const getEntity = (data) => async dispatch => {
  let token = localStorage.getItem('token');
 console.log(data,"data in getEntity")
- return await axios.get(baseUrl + `/professional/hospitalDoctor?doctorId=${data.userId}`,  { 'headers': { 'Authorization': `Bearer ${token}` } })
+ return await axios.get(baseUrl + `/professional/gethospitalDoctor?doctorId=${data.userId}`,  { 'headers': { 'Authorization': `Bearer ${token}` } })
    .then((res) => {
      console.log(res, 'res in getEntity')
      if (res.status === 200) {
