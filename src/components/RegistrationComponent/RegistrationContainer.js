@@ -361,7 +361,6 @@ class RegistrationContainer extends  React.Component {
                                 // label="React Select"
                                 placeholder = "Select user type"
                                 variant="no_border"
-                                value={this.state.type}
                                 options = {[{
                                     value:'Doctors',
                                     name:'Doctors'
@@ -415,7 +414,6 @@ class RegistrationContainer extends  React.Component {
                                 addFlag = {this.state.addFlag}
                                 addFlagToggle = {()=>this.setState({addFlag:!this.state.addFlag})}
                                 handleChange = {this.handleChangeDoctor}
-                                specialities_selected = {this.state.doctor.specialities_selected}
                                 registerUser = {this.registerUser}
                                 loading = {this.state.loading}
                                 successRegister = {this.successRegister}

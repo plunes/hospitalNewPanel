@@ -91,6 +91,7 @@ import WeekWidget from "./WeekWidget"
             services_chosen:props.services_chosen,
             specialitie_chosen:props.specialitie_chosen,
             doctorProfileImage:!!props.doctorProfileImage?props.doctorProfileImage:'',
+            refUserId:!!props.refUserId?props.refUserId:'',
             doctorId:get_url_params('id')?get_url_params('id'):undefined
           }
 
