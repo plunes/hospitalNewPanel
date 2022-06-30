@@ -3450,12 +3450,21 @@ export const getBooking = () => async  dispatch => {
           pos = 0
         }
          
-         let paidAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) * Number(b.paymentPercent) / 100;
-         if(i===3){
-          console.log(paidAmount,"PaidAmount")
-         }
-         let totalAmount = Number(b.service.newPrice[pos])
-         let restAmount = (Number(b.service.newPrice[pos]) - Number(b.creditsUsed)) - paidAmount
+        b["paymentProgress"].forEach(element => {
+          if (element.title == "Book in 100" && element.status) {
+              b["bookIn100"] = 'Yes'
+          }
+          if(element["amountPaidCash"] || element["amountPaidCredits"]) {
+            b["amountPaid"] += element.amountPaidCash
+            b["amountPaidCredits"] += element.amountPaidCredits
+            if (element.status) b["paymentPercent"] = element.title
+          }
+        })
+        b["amountDue"] = parseInt(b["service"]["newPrice"][0]) - (b["amountPaid"] + b["amountPaidCredits"])
+
+        let paidAmount = b["amountPaid"]
+        let restAmount = b["amountDue"]
+        let totalAmount = b["service"]["newPrice"][0]
 
          console.log(paidAmount, totalAmount, restAmount,"============>>>>>>>>>========")
          let bookDet = {
@@ -3478,7 +3487,7 @@ export const getBooking = () => async  dispatch => {
            'paymentProgress':b.paymentProgress,
            'centerLocation':b.centerLocation,
            totalAmount:b.totalAmount,
-           paidBookingAmount:b.paidBookingAmount,
+           paidBookingAmount:paidAmount,
            haveInsurance:b.haveInsurance,
            insuranceDetails:b.insuranceDetails
          }
