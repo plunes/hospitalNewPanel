@@ -610,6 +610,7 @@ class AppointmentComponent extends Component {
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
+                                        {item.haveInsurance && <p>Paid Via Insurance</p>}
                                  <p className="pay_ptint">Payments done by patient</p>
                                  </div>
                                            </div>
@@ -730,6 +731,7 @@ class AppointmentComponent extends Component {
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
+                                    {item.haveInsurance && <p>Paid Via Insurance</p>}
                                  <p className="pay_ptint">Payments done by patient</p>
                                  </div>
                                            </div>
@@ -845,6 +847,7 @@ class AppointmentComponent extends Component {
                                 <div className="col-lg-12 py_stu"><h2>Payment Status</h2></div>
                                 {this.getProgressbar(item)}                        
                                     <div className="two_chil">
+                                    {item.haveInsurance && <p>Paid Via Insurance</p>}
                                  <p className="pay_ptint">Payments done by patient</p>
                                  </div>
                                            </div>
