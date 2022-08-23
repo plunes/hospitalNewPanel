@@ -261,3 +261,16 @@ flex:  1 1 11%;
     display: flex;
     justify-content: space-between;
 }
+
+.bid-dropdown__control, .bid-dropdown__menu {
+    font-size: .9rem;
+    padding: 0.25rem;
+    border: 1px solid #D2D3D3 !important;
+    border-radius: 2px;
+    background: #545264 !important;
+    box-shadow: none !important;
+}
+
+.bid-dropdown__menu {
+    background: #ADADAD !important;
+}
