@@ -8,6 +8,7 @@ import InsightProgressBar from '../functional/InsightProgressBar';
 import InsightGraph from "../functional/InsightGraph"
 import Button from "../functional/Button"
 import NewNotif from "../functional/NewNotif"
+import Select from "react-select"
 
 import { get_circular_progress_data, get_slider_labels, is_positive_number } from "../../utils/common_utilities"
 
@@ -123,7 +124,7 @@ const Solution = (props) => {
 
     const submit_price = () => {
         console.log(data,"data in submit_price")
-        if(is_positive_number(data.updated_price) && data.updated_price.length !== 0){
+        if(data.updated_price && is_positive_number(data.updated_price) && data.updated_price.length !== 0){
             props.update_insight({
                 solutionId:get_url_params('id'),
                 serviceId:get_url_params('serviceId'),
@@ -281,21 +282,84 @@ const Solution = (props) => {
                                         </div>
                                         <div className="new-input-label-wrapper">
                                             <label>Add on's</label>
-                                            <input type="text" className="new-input-type"  value={data.addon} onChange={(e)=>{
+                                            <Select
+                                            options = {[
+                                                {
+                                                    value:'1',
+                                                    label:'Home delivery of medicines'
+                                                },
+                                                {
+                                                    value:'2',
+                                                    label:'Pre-surgical tests at home'
+                                                    
+                                                },
+                                                {
+                                                    value:'3',
+                                                    label:'RT-PCR at home'
+                                                },
+                                                {
+                                                    value:'4',
+                                                    label:'Post surgery diet plan'
+                                                },
+                                                {
+                                                    value:'5',
+                                                    label:'Free follow up consultations post IPD'
+                                                    
+                                                },
+                                                {
+                                                    value:'6',
+                                                    label:'Nursing services-24x7'
+                                                },
+                                            ]}
+                                            onChange = {(e) => {
+                                                let addOns = ""
+                                                e.map((tech) => addOns += tech.label + ",")
                                                 set_data({
                                                     ...data,
-                                                    addon:e.target.value
+                                                    addon:addOns
                                                 })
-                                            }} />
+                                            }}
+                                            isMulti ={true}
+                                            blurInputOnSelect={false}
+                                            closeMenuOnSelect={false}
+                                            className="bid-dropdown-container"
+                                            classNamePrefix="bid-dropdown"
+                                            // value = {data.addon}
+                                            label = "Add on's" />
                                         </div>
                                         <div className="new-input-label-wrapper">
                                             <label>Special offers</label>
-                                            <input type="text" className="new-input-type" value={data.specialOffer} onChange={(e)=>{
+                                            <Select
+                                            options = {[
+                                                {
+                                                    value:'1',
+                                                    label:'Pick-up & Drop Facility'
+                                                },
+                                                {
+                                                    value:'2',
+                                                    label:'Free OPD'
+                                                    
+                                                },
+                                                {
+                                                    value:'3',
+                                                    label:'Free ward upgrade'
+                                                }
+                                            ]}
+                                            onChange = {(e) => {
+                                                let specialOffer = ""
+                                                e.map((tech) => specialOffer += tech.label + ",")
                                                 set_data({
                                                     ...data,
-                                                    specialOffer:e.target.value
+                                                    specialOffer:specialOffer
                                                 })
-                                            }} />
+                                            }}
+                                            isMulti ={true}
+                                            blurInputOnSelect={false}
+                                            closeMenuOnSelect={false}
+                                            className="bid-dropdown-container"
+                                            classNamePrefix="bid-dropdown"
+                                            // value = {data.addon}
+                                            label = "Special Offers" />
                                         </div>
                                </div>
                                <div className={`child-2  ${data.specialOffers.length ==0?"align-items-center":''}`}>
