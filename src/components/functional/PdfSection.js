@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import PDFViewer from 'pdf-viewer-reactjs'
+// import PDFViewer from 'pdf-viewer-reactjs'
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
  
@@ -15,14 +15,14 @@ const PdfSection = (props) => {
 				setOpen(false)
 	        	 }}>
              <div className="pdf-wrapper-videosection" >
-             <PDFViewer
+             {/* <PDFViewer
             document={{
                 url:data.reportUrl,
                 headers:{
                     'Access-Control-Allow-Credentials': true
                 }
             }}
-             />
+             /> */}
             </div>
         </Modal>
 
