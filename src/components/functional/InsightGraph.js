@@ -36,7 +36,7 @@ const InsightGraph = (props) => {
         labels: labels,
         datasets: [
           {
-            label: 'Users',
+            label: props.label ? props.label : 'Users',
             fill: props.fill?true:false,
             lineTension: 0.1,
             backgroundColor: gradient,

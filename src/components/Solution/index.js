@@ -80,7 +80,9 @@ const Solution = (props) => {
                     right_specialOffer = `${right_specialOffer} ${item.specialOffer}`
                 }))
 
-                
+                right_technique = right_technique === " undefined" ? "N/A" : right_technique
+                right_add_on = right_add_on === " undefined" ? "N/A" : right_add_on
+                right_specialOffer = right_specialOffer === " undefined" ? "N/A" : right_specialOffer
                 
                 set_data({
                     ...data,
@@ -130,7 +132,7 @@ const Solution = (props) => {
                 serviceId:get_url_params('serviceId'),
                 price:data.updated_price,
                 technique:data.technique,
-                addon:data.addon,
+                addOn:data.addon,
                 specialOffer:data.specialOffer
             })
         }else {
@@ -140,6 +142,18 @@ const Solution = (props) => {
             })
         }
        
+    }
+
+    const handleSolutionSliderChange = (value) => {
+
+        let margin = data.max - data.min 
+        let newPrice =  (data.max )- ((margin) *( value /100))
+       
+        set_data({
+            ...data,
+            solValue : value,
+            solUpdatedPrice : newPrice,
+        })
     }
 
     console.log(props,"props Inside solution Component")
@@ -225,13 +239,11 @@ const Solution = (props) => {
                                                 min={0}
                                                 max={100}
                                                 tooltip={true}
-                                                format={(val)=>{
-                                                    return <p>{Math.floor(props.solUpdatedPrice)}</p>
-                                                }}
+                                                format={(val) => <p>{Math.floor(data.solUpdatedPrice)}</p>}
                                                 labels={get_slider_labels({lower:data.max, upper:data.min})}
-                                                value={2}
-                                                onChange={(val=>console.log(val))}
-                                                onValueChange={solValue => console.log(solValue)} 
+                                                value={data.solValue}
+                                                onChange={(val) => handleSolutionSliderChange(val)}
+                                                onValueChange={solValue => set_data({...data, solValue: solValue})} 
                                                 />                                        
                                         </div>
                                             <text className="serv_ces ">Chances of Conversion increases by</text>
@@ -239,19 +251,27 @@ const Solution = (props) => {
                                             data = {get_circular_progress_data(!!data.recommendation?71:71)}
                                             value={update_solValue}
                                         /></div>
-                                      <div className="insight_progress_wrapper margin_top_medium_rish">
+                                        {data.competitionRate && data.competitionRate < 100 ?
+                                        <div className="insight_progress_wrapper margin_top_medium_rish">
+                                            <span className="competition-text">Competition Rate less by</span>
                                             <InsightProgressBar
-                                           progress = {parseInt(data.competitionRate, 10)}
+                                                progress = {parseInt(Math.abs(data.competitionPrice - data.updated_price)*100/data.updated_price , 10)}
                                             />
-                                            <span className="competition-text">Competition Rate</span>
-                                        </div> 
+                                        </div> : 
+                                        <div className="insight_progress_wrapper margin_top_medium_rish">
+                                            <span className="competition-text">Competition Rate more by</span>
+                                            <InsightProgressBar
+                                                progress = {parseInt(Math.abs(data.competitionPrice - data.updated_price)*100/data.updated_price , 10)}
+                                            />
+                                        </div> }
                                  </div>
 
                                <div className="child-2">
-                                   {data.dataPoints.length !==0  &&  <div className="wrapp-graph">
+                                   {data.dataPoints && data.dataPoints.length !==0  &&  <div className="wrapp-graph">
                                        <InsightGraph
                                            data = {[...data.dataPoints]}
                                            fill={true}
+                                           label="Hospitals"
                                           />
                                      </div> }
                                     
