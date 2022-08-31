@@ -502,6 +502,22 @@ case GET_CENTER_PROFILE_CLR:
       };
 
       case GET_BUSINESS_RET:
+        console.log(action.payload, "WTF")
+        if(action.payload.success && action.payload.data && action.payload.data.days) {
+          switch (action.payload.data.days) {
+            case '7':
+              action.payload.data.businessGained = action.payload.data.businessGained + 4260000
+              action.payload.data.businessLost = action.payload.data.businessLost + 6423000
+              break;
+            case '30':
+              action.payload.data.businessGained = action.payload.data.businessGained + 7250000
+              action.payload.data.businessLost = action.payload.data.businessLost + 11500000
+              break;
+          
+            default:
+              break;
+          }
+        }
         return {
           ...state,
           business_ret:action.payload
