@@ -72,12 +72,11 @@ const Solution = (props) => {
                 let right_specialOffer = ''
 
                 data.specialOffers.forEach(((item,i)=>{
+                    right_add_on = !right_add_on.includes(item.addon && item.addon.replace(/,/g, "")) ?  `${right_add_on} ${item.addon && item.addon.replace(/,/g, "<br />")}` : `${right_add_on}`
 
-                    right_add_on = `${right_add_on} ${item.addon}`
+                    right_technique = !right_technique.includes(item.technique && item.technique.replace(/,/g, "")) ?  `${right_technique} ${item.technique && item.technique.replace(/,/g, "<br />")}` : right_technique
 
-                    right_technique = `${right_technique} ${item.technique}`
-
-                    right_specialOffer = `${right_specialOffer} ${item.specialOffer}`
+                    right_specialOffer = !right_specialOffer.includes(item.specialOffer && item.specialOffer.replace(/,/g, "")) ?  `${right_specialOffer} ${item.specialOffer && item.specialOffer.replace(/,/g, "<br />")}` : right_specialOffer
                 }))
 
                 right_technique = right_technique === " undefined" ? "N/A" : right_technique
@@ -87,12 +86,12 @@ const Solution = (props) => {
                 set_data({
                     ...data,
                     ...props.get_insight_info_ret.data,
-                    imageUrl:props.get_insight_info_ret.data.userReport.imageUrl,
-                    videoUrl:props.get_insight_info_ret.data.userReport.videoUrl,
-                    reportUrl:props.get_insight_info_ret.data.userReport.videoUrl,
-                    additionalDetails:props.get_insight_info_ret.data.userReport.additionalDetails,
-                    description:props.get_insight_info_ret.data.userReport.description,
-                    updated_price:props.get_insight_info_ret.data.userPrice,
+                    imageUrl: !props.get_insight_info_ret.data.userReport ? '' : props.get_insight_info_ret.data.userReport.imageUrl,
+                    videoUrl: !props.get_insight_info_ret.data.userReport ? '' : props.get_insight_info_ret.data.userReport.videoUrl,
+                    reportUrl: !props.get_insight_info_ret.data.userReport ? '' : props.get_insight_info_ret.data.userReport.videoUrl,
+                    additionalDetails: !props.get_insight_info_ret.data.userReport ? null : props.get_insight_info_ret.data.userReport.additionalDetails,
+                    description: !props.get_insight_info_ret.data.userReport ? null : props.get_insight_info_ret.data.userReport.description,
+                    updated_price: props.get_insight_info_ret.data.userPrice,
                     solUpdatedPrice:data.recommendation?parseInt(((data.userPrice) * (data.recommendation/100)),10):data.userPrice,
                     solValue:data.recommendation?100-data.recommendation:slider_value,
                      right_add_on,
@@ -203,7 +202,7 @@ const Solution = (props) => {
                                             <PdfSection data={data.reportUrl}  />
                                       </div>
                                     </div>}
-                                   {data.additionalDetails &&  <div className="tile-big">
+                                   {/* {data.additionalDetails &&  <div className="tile-big">
                                         <div className="insight_additional_info_heading heading">
                                                 Additional details of the service
                                         </div>
@@ -212,7 +211,7 @@ const Solution = (props) => {
                                                  {data.additionalDetails}
                                             </span>
                                         </div>
-                                    </div>}
+                                    </div>} */}
                                   {data.description  &&   <div className="tile-big">
                                             <div className="insight_additional_info_heading heading">
                                                  Previous Treatment Details's
@@ -227,12 +226,13 @@ const Solution = (props) => {
                    
                             <div  className="heading">
                                 <div className="user-details">
-                                    <span className="child-1" id="1">Price Insight</span> 
+                                    <span className="child-1" id="1">Insights</span> 
                                     <hr className="child-2 user-details-hr" id="2"  /> 
                                 </div>
                            </div>
                            <div className="solution-charts-wrapper">
                                <div className="child-1">
+                                       <h4 className="solution-child-heading">Competition Insight</h4>
                                      <h2 className="yout_ctl"><b style={{color:'#fff'}}>Update your best price for maximum bookings</b></h2>
                                         <div className='margin_top_medium-2_rish u-align-center-flex'>   
                                             <Slider
@@ -267,6 +267,7 @@ const Solution = (props) => {
                                  </div>
 
                                <div className="child-2">
+                                   <h4 className="solution-child-heading">Price Insight</h4>
                                    {data.dataPoints && data.dataPoints.length !==0  &&  <div className="wrapp-graph">
                                        <InsightGraph
                                            data = {[...data.dataPoints]}
@@ -278,6 +279,7 @@ const Solution = (props) => {
                                </div>
 
                                <div className="child-1">
+                                   <h4 className="solution-child-heading">Provide your best price to beat the competition</h4>
                                         <div className="new-input-label-wrapper">
                                             <label>Best Price</label>
                                             <input type="number" className="new-input-type"  value={data.updated_price} onChange={(e)=> {
@@ -384,21 +386,23 @@ const Solution = (props) => {
                                </div>
                                <div className={`child-2  ${data.specialOffers.length ==0?"align-items-center":''}`}>
                                {data.specialOffers.length !==0?  <React.Fragment>
-                                             <div className="competitive-offers-wrap">
+                                        <h4 className="solution-child-heading">Competitors Providing Offers</h4>
+                                        <label className="special-offers-label">Special Offers</label>
+                                        <div className="competitive-offers-wrap">
                                             <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/website-images/offer-image.svg" />
-                                             <span>{data.right_specialOffer}</span>
-                                             </div>
-
-                                             <div className="competitive-offers-wrap">
+                                            <span dangerouslySetInnerHTML={{__html: data.right_specialOffer}}></span>
+                                        </div>
+                                        <label className="special-offers-label">Technique</label>
+                                        <div className="competitive-offers-wrap">
                                             <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/website-images/offer-image.svg" />
-                                             <span>{data.right_technique}</span>
-                                             </div>
-
-                                             <div className="competitive-offers-wrap">
+                                            <span dangerouslySetInnerHTML={{__html: data.right_technique}}></span>
+                                        </div>
+                                        <label className="special-offers-label">Add Ons</label>
+                                        <div className="competitive-offers-wrap">
                                             <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/website-images/offer-image.svg" />
-                                             <span>{data.right_add_on}</span>
-                                             </div>
-                                        </React.Fragment> :<React.Fragment>
+                                            <span dangerouslySetInnerHTML={{__html: data.right_add_on}}></span>
+                                        </div>
+                                    </React.Fragment> :<React.Fragment>
                                                 <div className="no-offers-wrap">
                                                      <img src="https://service-family-images.s3.ap-south-1.amazonaws.com/website-images/no-offers.svg" />
                                                      <span>Be first to provide offers and Add on's to increase your chances of getting a patient</span>
