@@ -1520,7 +1520,7 @@ export const changeAppoint = (data) => async dispatch => {
 
  let  requestUrl =``
  if(type==="confirming"){
-       requestUrl = `/booprofessionalBookingking/confirmBooking?bookingId=${data._id}`
+       requestUrl = `/professionalBooking/confirmBooking?bookingId=${data._id}`
  }else{
         requestUrl =`/professionalBooking/${data._id}/${type}`
  }
@@ -3573,7 +3573,6 @@ export const bankDetails = bankData => dispatch => {
 };
 
 export const getInsights = (data) => async dispatch => {
- console.log("WTF",`Bearer ${token}`)
  let token = localStorage.getItem('token');
  return await axios.get(baseUrl + `/analytics/actionableInsight${!!data?'?userId='+data.center:''}`, { 'headers': { 'Authorization': `Bearer ${token}` } })
  .then(res => {

@@ -24,6 +24,7 @@ class AddCenter extends React.PureComponent{
             centerLocation:'',
             location:'',
             phone:'',
+            password: '',
             email:''
         }
     }
@@ -84,6 +85,9 @@ class AddCenter extends React.PureComponent{
             if(!!!this.state.location){
                 throw new MyError("Please enter center's location")
             }
+            if(!!!this.state.password){
+                throw new MyError("Please enter center's Password")
+            }
             this.setState({
                 loading:true
             })
@@ -97,6 +101,7 @@ class AddCenter extends React.PureComponent{
                 centerMobileNumber:this.state.phone==='+91'?"":this.state.phone,
                 location:this.state.location,
                 address:this.state.address,
+                password:this.state.password,
                 googleAddress:this.state.googleAddress
             })
         }catch(e){
@@ -151,6 +156,9 @@ render(){
                         {/* <div className="col-md-6">
                         <input type="tel" placeholder="Location"  value={this.state.location} onChange={(e)=>this.setState({[e.target.name]:e.target.value})}  name="location" className="input_typt_ris form-control editbankdetailfield input-field-common" />
                         </div> */}
+                        <div className="col-md-12">
+                        <input type="password" placeholder="Password" value={this.state.password}  onChange={(e)=>this.setState({[e.target.name]:e.target.value})} name="password" className="input_typt_ris form-control editbankdetailfield input-field-common" />
+                        </div>  
                     </div>
                     <div style={{display:'block'}}>
                         <Map
