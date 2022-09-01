@@ -247,6 +247,44 @@ class AppointmentComponent extends Component {
                     upcoming_bookings.unshift(appointments_arr[redirect_index])
                    }          
                }
+
+               confirmed_bookings.map((item, index) => {
+                    let insImages = []
+                    if(item.insuranceDetails && Array.isArray(item.insuranceDetails.insuranceCard)) {
+                        item.insuranceDetails.insuranceCard.map((insuranceCard) => {
+                            insImages.push({
+                            imageUrl: insuranceCard
+                            })
+                        })
+                    }
+                    if(item.insuranceDetails)
+                        item.insuranceDetails.insuranceCard = insImages
+               })
+               upcoming_bookings.map((item, index) => {
+                    let insImages = []
+                    if(item.insuranceDetails && Array.isArray(item.insuranceDetails.insuranceCard)) {
+                        item.insuranceDetails.insuranceCard.map((insuranceCard) => {
+                            insImages.push({
+                            imageUrl: insuranceCard
+                            })
+                        })
+                    }
+                    if(item.insuranceDetails)
+                        item.insuranceDetails.insuranceCard = insImages
+               })
+               cancelled_bookings.map((item, index) => {
+                    let insImages = []
+                    if(item.insuranceDetails && Array.isArray(item.insuranceDetails.insuranceCard)) {
+                        item.insuranceDetails.insuranceCard.map((insuranceCard) => {
+                            insImages.push({
+                            imageUrl: insuranceCard
+                            })
+                        })
+                    }
+                    if(item.insuranceDetails)
+                        item.insuranceDetails.insuranceCard = insImages
+               })
+
                this.setState({
                 confirmed_bookings:confirmed_bookings,
                 cancelled_bookings:cancelled_bookings,
@@ -555,19 +593,22 @@ class AppointmentComponent extends Component {
                                                     </div>
                                                    <div className="insurance-wrap-new-2">
                                                    <div className="appointment-insurance-wrap">
-                                                        <span>Insurance Card Photo</span>
+                                                        <span>Insurance Card</span>
                                                       <div className="photo-gallery-wrapper">
-                                                          <PhotoGallery id={`upcomming_booking-${i}`} data={[{
-                                                              imageUrl:item.insuranceDetails.insuranceCard
-                                                          }]} />
+                                                        {console.log(item.insuranceDetails, "WTF")}
+                                                          <PhotoGallery id={`upcomming_booking-${i}`} data={item.insuranceDetails.insuranceCard} />
                                                       </div>
                                                     </div>
                                                     <div className="appointment-insurance-wrap">
                                                         <span>Insurance Document</span>
                                                       <div className="photo-gallery-wrapper">
-                                                          <PdfSection data={[{
+                                                          {/* <PdfSection data={[{
                                                               reportUrl:item.insuranceDetails.insurancePolicy
-                                                          }]} />
+                                                          }]} /> */}
+                                                         <a
+                                                            href={item.insuranceDetails.insurancePolicy}
+                                                            target="_blank"
+                                                        ><img src='https://cdn-icons-png.flaticon.com/512/32/32329.png' className="insurance-document" /></a>
                                                       </div>
                                                     </div>
                                                 </div>
@@ -668,19 +709,21 @@ class AppointmentComponent extends Component {
                                                     </div>
                                                    <div className="insurance-wrap-new-2">
                                                    <div className="appointment-insurance-wrap">
-                                                        <span>Insurance Card Photo</span>
+                                                        <span>Insurance Card</span>
                                                       <div className="photo-gallery-wrapper">
-                                                          <PhotoGallery  id={`confirmed_booking-${i}`} data={[{
-                                                              imageUrl:item.insuranceDetails.insuranceCard
-                                                          }]} />
+                                                          <PhotoGallery  id={`confirmed_booking-${i}`} data={item.insuranceDetails.insuranceCard} />
                                                       </div>
                                                     </div>
                                                     <div className="appointment-insurance-wrap">
                                                         <span>Insurance Document</span>
                                                       <div className="photo-gallery-wrapper">
-                                                          <PdfSection data={[{
+                                                          {/* <PdfSection data={[{
                                                               reportUrl:item.insuranceDetails.insurancePolicy
-                                                          }]} />
+                                                          }]} /> */}
+                                                         <a
+                                                            href={item.insuranceDetails.insurancePolicy}
+                                                            target="_blank"
+                                                        ><img src='https://cdn-icons-png.flaticon.com/512/32/32329.png' className="insurance-document" /></a>
                                                       </div>
                                                     </div>
                                                 </div>
@@ -790,19 +833,21 @@ class AppointmentComponent extends Component {
                                                     </div>
                                                    <div className="insurance-wrap-new-2">
                                                    <div className="appointment-insurance-wrap">
-                                                        <span>Insurance Card Photo</span>
+                                                        <span>Insurance Card</span>
                                                       <div className="photo-gallery-wrapper">
-                                                          <PhotoGallery  id={`cancelled_booking-${i}`} data={[{
-                                                              imageUrl:item.insuranceDetails.insuranceCard
-                                                          }]} />
+                                                          <PhotoGallery  id={`cancelled_booking-${i}`} data={item.insuranceDetails.insuranceCard} />
                                                       </div>
                                                     </div>
                                                     <div className="appointment-insurance-wrap">
                                                         <span>Insurance Document</span>
                                                       <div className="photo-gallery-wrapper">
-                                                          <PdfSection data={[{
+                                                          {/* <PdfSection data={[{
                                                               reportUrl:item.insuranceDetails.insurancePolicy
-                                                          }]} />
+                                                          }]} /> */}
+                                                         <a
+                                                            href={item.insuranceDetails.insurancePolicy}
+                                                            target="_blank"
+                                                        ><img src='https://cdn-icons-png.flaticon.com/512/32/32329.png' className="insurance-document" /></a>
                                                       </div>
                                                     </div>
                                                 </div>
