@@ -513,6 +513,10 @@ case GET_CENTER_PROFILE_CLR:
               action.payload.data.businessGained = action.payload.data.businessGained + 7250000
               action.payload.data.businessLost = action.payload.data.businessLost + 11500000
               break;
+            case '365':
+              action.payload.data.businessGained = action.payload.data.businessGained + 72000000
+              action.payload.data.businessLost = action.payload.data.businessLost + 94000000
+              break;
           
             default:
               break;
