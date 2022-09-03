@@ -568,7 +568,7 @@ class AppointmentComponent extends Component {
                                               </div>
 
                                           <div style={{width:'70%', opacity:'0.8'}}>
-                                                <text className='appointment_text' >{item.professionalAddress}</text>
+                                                <text className='appointment_text' >{item.userAddress}</text>
                                               </div>
 
 
@@ -685,7 +685,7 @@ class AppointmentComponent extends Component {
                                               </div>
 
                                           <div style={{width:'70%', opacity:'0.8'}}>
-                                                <text className='appointment_text' >{item.professionalAddress}</text>
+                                                <text className='appointment_text' >{item.userAddress}</text>
                                               </div>
 
                                               
@@ -811,7 +811,7 @@ class AppointmentComponent extends Component {
                                               </div>
 
                                               <div style={{width:'70%', opacity:'0.8'}}>
-                                                <text className='appointment_text' >{item.professionalAddress}</text>
+                                                <text className='appointment_text' >{item.userAddress}</text>
                                               </div>
 
                                                 {item.haveInsurance && <div className="insurance-wrap-new" >
