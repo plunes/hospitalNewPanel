@@ -73,10 +73,12 @@ const Solution = (props) => {
 
                 data.specialOffers.forEach(((item,i)=>{
                     right_add_on = !right_add_on.includes(item.addon && item.addon.replace(/,/g, "")) ?  `${right_add_on} ${item.addon && item.addon.replace(/,/g, "<br />")}` : `${right_add_on}`
+                    right_add_on = right_add_on + "<br/ >"
 
                     right_technique = !right_technique.includes(item.technique && item.technique.replace(/,/g, "")) ?  `${right_technique} ${item.technique && item.technique.replace(/,/g, "<br />")}` : right_technique
 
                     right_specialOffer = !right_specialOffer.includes(item.specialOffer && item.specialOffer.replace(/,/g, "")) ?  `${right_specialOffer} ${item.specialOffer && item.specialOffer.replace(/,/g, "<br />")}` : right_specialOffer
+                    right_specialOffer = right_specialOffer + "<br/ >"
                 }))
 
                 right_technique = right_technique === " undefined" ? "N/A" : right_technique
@@ -253,13 +255,13 @@ const Solution = (props) => {
                                         /></div>
                                         {data.competitionRate && data.competitionRate < 100 ?
                                         <div className="insight_progress_wrapper margin_top_medium_rish">
-                                            <span className="competition-text">Competition Rate less by</span>
+                                            <span className="competition-text">Competition Rate</span>
                                             <InsightProgressBar
                                                 progress = {parseInt(Math.abs(data.competitionPrice - data.updated_price)*100/data.updated_price , 10)}
                                             />
                                         </div> : 
                                         <div className="insight_progress_wrapper margin_top_medium_rish">
-                                            <span className="competition-text">Competition Rate more by</span>
+                                            <span className="competition-text">Competition Rate</span>
                                             <InsightProgressBar
                                                 progress = {parseInt(Math.abs(data.competitionPrice - data.updated_price)*100/data.updated_price , 10)}
                                             />
