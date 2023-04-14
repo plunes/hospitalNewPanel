@@ -7,14 +7,10 @@ const LineChart = (props) => {
   let users = []
   console.log(props,"props in linechange")
   users = [...props.data]
-  users[0] = 550
-  users[1] = 1050
-  users[2] = 1253
-  users[3] = 1768
-  users[4] = 1923
-  users[5] = 1845
-  users[6] = 2042
-  users[7] = 2123
+  users[0] = 1253
+  users[1] = 1768
+  users[2] = 1923
+  users[3] = 1845
     const data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', "November",'December'],
         datasets: [
