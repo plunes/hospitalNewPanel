@@ -13,6 +13,7 @@ class EditProfileComponent extends React.PureComponent {
         this.state = {
             valid:true,
             phone:'',
+            city: '',
             email:'',
             fullname:'',
             location:'',
@@ -42,6 +43,7 @@ class EditProfileComponent extends React.PureComponent {
             console.log(nextProps.user,'NextProps.user')
             this.setState({
                 fullname:nextProps.user.name,
+                city: nextProps.user.city,
                 email:nextProps.user.isCenter?nextProps.user.centerEmail===''?nextProps.user.adminEmail:nextProps.user.centerEmail:nextProps.user.email,
                 phone:nextProps.user.isCenter?nextProps.user.centerMobileNumber===''?nextProps.user.adminMobileNumber:nextProps.user.centerMobileNumber:nextProps.user.mobileNumber,
                 location:nextProps.user.address,
@@ -93,6 +95,7 @@ class EditProfileComponent extends React.PureComponent {
                                 fullname = {this.state.fullname}
                                 email = {this.state.email}
                                 phone = {this.state.phone}
+                                city={this.state.city}
                                 location = {this.state.location}
                                 handleChange = {this.handleChange}
                                 errorText = {this.state.errorText}

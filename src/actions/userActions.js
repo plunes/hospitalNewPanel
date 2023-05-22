@@ -2900,7 +2900,8 @@ export const submitProfileDetails = (uData) => async dispatch => {
    "name": uData.fullname,
    "email": uData.email,
    "address": uData.location,
-   "mobileNumber":uData.phone
+   "mobileNumber":uData.phone,
+   "city":uData.city
  }
 
  dispatch({
