@@ -58,3 +58,13 @@
     height: 40rem !important;
     width: 50rem !important;
 }
+
+.city-selector-wrapper {
+    width: 200px;
+    display: block;
+    cursor: pointer;
+
+    .options {
+        color: black;
+    }
+}

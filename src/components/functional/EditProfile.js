@@ -3,6 +3,8 @@ import LoaderComponent from "./LoaderComponent"
 import React from "react"
 import AnimatedMount from "../../HOC/AnimatedMount"
 import Button from './Button'
+import Select from "../Select";
+import { Label } from 'reactstrap'
 
  const EditProfileForm= (props) => {
    console.log(props.loadingState,"props in EditProfileForm")
@@ -25,7 +27,8 @@ import Button from './Button'
                  fullname:props.fullname,
                  [!!props.isCenter?'centerMobileNumber':'phone']:props.phone,
                  [!!props.isCenter?'centerEmail':'email']:props.email,
-                 location:props.location
+                 location:props.location,
+                 city: props.city
             })
             props.loading()
         }
@@ -69,9 +72,20 @@ console.log(props.isCenter,"props.iscenter")
     disabled={true}
     onChange={props.handleChange} 
     value = {props.location}/>  
-     
+    <Label>
+      Select City
+    </Label>
+    <Select
+      options = {[{name: "Delhi", value: "Delhi"},{name: "Mumbai", value: "Mumbai"},{name: "Bangalore", value: "Banglore"},{name: "Hyderabad", value: "Hyderabad"},{name: "Rajasthan", value: "Rajasthan"},{name: "Kolkata", value: "Kolkata"},{name: "Pune", value: "Pune"}]}
+      handleChange = {props.handleChange}
+      input_text_class = "city-selector "
+      wrapper_class = "city-selector-wrapper"
+      placeholder= {props.city}
+      value = {props.city}
+      styl
+      name = "city" /> 
      <div className='text-center'>
-     <Button onClick={()=>submitdetails()} >Submit</Button>
+       <Button onClick={()=>submitdetails()} >Submit</Button>
      </div>
     </div>
   )
