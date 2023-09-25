@@ -552,7 +552,7 @@ Confirm appointments
 
 
 
-<section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
+{/* <section id="how_we_do_section" className="contact_us_form_section_wrapper oversize_wrap_rish">
                         <div className="what_we_do_wrapper">
                         <div className="section-title">
                            <h2 style={{color:'#000'}}>See How we Work?</h2>
@@ -568,7 +568,7 @@ Confirm appointments
                          </iframe>
                         </div>   
                         </div>
-             </section>
+             </section> */}
 
 
 
